@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */; };
-		F4AEAB051DAD3F2C007DEB80 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB041DAD3F2C007DEB80 /* ViewController.swift */; };
-		F4AEAB081DAD3F2C007DEB80 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4AEAB061DAD3F2C007DEB80 /* Main.storyboard */; };
 		F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */; };
 		F4AEAB0D1DAD3F2C007DEB80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4AEAB0B1DAD3F2C007DEB80 /* LaunchScreen.storyboard */; };
 		F4AEAB181DAD3F2D007DEB80 /* mittyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB171DAD3F2D007DEB80 /* mittyTests.swift */; };
 		F4AEAB231DAD3F2D007DEB80 /* mittyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB221DAD3F2D007DEB80 /* mittyUITests.swift */; };
+		F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB801D1DAE577300055D48 /* MainTabBarController.swift */; };
+		F4BB80201DAE57A300055D48 /* Tab1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB801F1DAE57A300055D48 /* Tab1ViewController.swift */; };
+		F4BB80221DAE58E000055D48 /* Tab2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80211DAE58E000055D48 /* Tab2ViewController.swift */; };
+		F4BB80241DAE58F300055D48 /* Tab3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80231DAE58F300055D48 /* Tab3ViewController.swift */; };
+		F4BB80261DAE58FE00055D48 /* Tab4ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* Tab4ViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,8 +39,6 @@
 /* Begin PBXFileReference section */
 		F4AEAAFF1DAD3F2C007DEB80 /* mitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F4AEAB041DAD3F2C007DEB80 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		F4AEAB071DAD3F2C007DEB80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F4AEAB0C1DAD3F2C007DEB80 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F4AEAB0E1DAD3F2C007DEB80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -47,6 +48,11 @@
 		F4AEAB1E1DAD3F2D007DEB80 /* mittyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = mittyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AEAB221DAD3F2D007DEB80 /* mittyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = mittyUITests.swift; sourceTree = "<group>"; };
 		F4AEAB241DAD3F2D007DEB80 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F4BB801D1DAE577300055D48 /* MainTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		F4BB801F1DAE57A300055D48 /* Tab1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab1ViewController.swift; sourceTree = "<group>"; };
+		F4BB80211DAE58E000055D48 /* Tab2ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab2ViewController.swift; sourceTree = "<group>"; };
+		F4BB80231DAE58F300055D48 /* Tab3ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab3ViewController.swift; sourceTree = "<group>"; };
+		F4BB80251DAE58FE00055D48 /* Tab4ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tab4ViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,11 +104,14 @@
 			isa = PBXGroup;
 			children = (
 				F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */,
-				F4AEAB041DAD3F2C007DEB80 /* ViewController.swift */,
-				F4AEAB061DAD3F2C007DEB80 /* Main.storyboard */,
 				F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */,
 				F4AEAB0B1DAD3F2C007DEB80 /* LaunchScreen.storyboard */,
 				F4AEAB0E1DAD3F2C007DEB80 /* Info.plist */,
+				F4BB801D1DAE577300055D48 /* MainTabBarController.swift */,
+				F4BB801F1DAE57A300055D48 /* Tab1ViewController.swift */,
+				F4BB80211DAE58E000055D48 /* Tab2ViewController.swift */,
+				F4BB80231DAE58F300055D48 /* Tab3ViewController.swift */,
+				F4BB80251DAE58FE00055D48 /* Tab4ViewController.swift */,
 			);
 			path = mitty;
 			sourceTree = "<group>";
@@ -234,7 +243,6 @@
 			files = (
 				F4AEAB0D1DAD3F2C007DEB80 /* LaunchScreen.storyboard in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
-				F4AEAB081DAD3F2C007DEB80 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -259,8 +267,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F4AEAB051DAD3F2C007DEB80 /* ViewController.swift in Sources */,
+				F4BB80241DAE58F300055D48 /* Tab3ViewController.swift in Sources */,
+				F4BB80261DAE58FE00055D48 /* Tab4ViewController.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
+				F4BB80201DAE57A300055D48 /* Tab1ViewController.swift in Sources */,
+				F4BB80221DAE58E000055D48 /* Tab2ViewController.swift in Sources */,
+				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -296,14 +308,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		F4AEAB061DAD3F2C007DEB80 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F4AEAB071DAD3F2C007DEB80 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		F4AEAB0B1DAD3F2C007DEB80 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -505,6 +509,7 @@
 				F4AEAB291DAD3F2D007DEB80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4AEAB2A1DAD3F2D007DEB80 /* Build configuration list for PBXNativeTarget "mittyTests" */ = {
 			isa = XCConfigurationList;
@@ -513,6 +518,7 @@
 				F4AEAB2C1DAD3F2D007DEB80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		F4AEAB2D1DAD3F2D007DEB80 /* Build configuration list for PBXNativeTarget "mittyUITests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +527,7 @@
 				F4AEAB2F1DAD3F2D007DEB80 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
