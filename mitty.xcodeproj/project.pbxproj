@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
 		F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */; };
 		F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */; };
 		F4AEAB0D1DAD3F2C007DEB80 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F4AEAB0B1DAD3F2C007DEB80 /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F41D4E391DAE7FDF003A96AA /* hoge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hoge.png; path = images/hoge.png; sourceTree = "<group>"; };
 		F4AEAAFF1DAD3F2C007DEB80 /* mitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -80,6 +82,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F41D4E381DAE7FD1003A96AA /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				F41D4E391DAE7FDF003A96AA /* hoge.png */,
+			);
+			name = Images;
+			sourceTree = "<group>";
+		};
 		F4AEAAF61DAD3F2C007DEB80 = {
 			isa = PBXGroup;
 			children = (
@@ -112,6 +122,7 @@
 				F4BB80211DAE58E000055D48 /* Tab2ViewController.swift */,
 				F4BB80231DAE58F300055D48 /* Tab3ViewController.swift */,
 				F4BB80251DAE58FE00055D48 /* Tab4ViewController.swift */,
+				F41D4E381DAE7FD1003A96AA /* Images */,
 			);
 			path = mitty;
 			sourceTree = "<group>";
@@ -242,6 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4AEAB0D1DAD3F2C007DEB80 /* LaunchScreen.storyboard in Resources */,
+				F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
