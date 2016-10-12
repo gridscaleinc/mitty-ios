@@ -12,6 +12,8 @@ import UIKit
 class Tab2ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Mitty Tab2"
+
         self.view.backgroundColor = UIColor.gray
         let label = UILabel()
         label.frame = CGRect(x: 200, y: 100, width: 100, height: 100)

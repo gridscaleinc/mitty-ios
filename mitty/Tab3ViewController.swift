@@ -12,6 +12,8 @@ import UIKit
 class Tab3ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationItem.title = "Mitty Tab3"
+        
         self.view.backgroundColor = UIColor.yellow
         let label = UILabel()
         label.frame = CGRect(x: 200, y: 100, width: 100, height: 100)
