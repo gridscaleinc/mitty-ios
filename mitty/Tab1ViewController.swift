@@ -16,8 +16,8 @@ class Tab1ViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
         let label = UILabel()
-        label.frame = CGRect(x: 200, y: 100, width: 100, height: 100)
-        label.text = "Tab1"
+        label.frame = CGRect(x: 30, y: 100, width: 400, height: 100)
+        label.text = "ここはWelcome画面で @ti さんに残します。"
         self.view.addSubview(label)
     }
     
