@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		202B18F41DB24B66009CC980 /* MittyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202B18F21DB24B66009CC980 /* MittyViewController.swift */; };
+		202B18F51DB24B66009CC980 /* MittyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 202B18F31DB24B66009CC980 /* MittyViewController.xib */; };
+		202B18FB1DB34522009CC980 /* welcome.png in Resources */ = {isa = PBXBuildFile; fileRef = 202B18FA1DB34522009CC980 /* welcome.png */; };
+		202B18FE1DB34B57009CC980 /* RegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202B18FC1DB34B57009CC980 /* RegistViewController.swift */; };
+		202B18FF1DB34B57009CC980 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 202B18FD1DB34B57009CC980 /* RegistViewController.xib */; };
+		202B19021DB355F7009CC980 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202B19001DB355F7009CC980 /* LoginViewController.swift */; };
+		202B19031DB355F7009CC980 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 202B19011DB355F7009CC980 /* LoginViewController.xib */; };
+		202B19051DB35A8F009CC980 /* Sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 202B19041DB35A8F009CC980 /* Sample.png */; };
 		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
 		F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */; };
 		F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */; };
@@ -38,6 +46,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		202B18F21DB24B66009CC980 /* MittyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyViewController.swift; sourceTree = "<group>"; };
+		202B18F31DB24B66009CC980 /* MittyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MittyViewController.xib; sourceTree = "<group>"; };
+		202B18FA1DB34522009CC980 /* welcome.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcome.png; path = ../../../Downloads/welcome.png; sourceTree = "<group>"; };
+		202B18FC1DB34B57009CC980 /* RegistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistViewController.swift; sourceTree = "<group>"; };
+		202B18FD1DB34B57009CC980 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
+		202B19001DB355F7009CC980 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		202B19011DB355F7009CC980 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		202B19041DB35A8F009CC980 /* Sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sample.png; path = ../../../Downloads/Sample.png; sourceTree = "<group>"; };
 		F41D4E391DAE7FDF003A96AA /* hoge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hoge.png; path = images/hoge.png; sourceTree = "<group>"; };
 		F4AEAAFF1DAD3F2C007DEB80 /* mitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +101,8 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				202B19041DB35A8F009CC980 /* Sample.png */,
+				202B18FA1DB34522009CC980 /* welcome.png */,
 				F41D4E391DAE7FDF003A96AA /* hoge.png */,
 			);
 			name = Images;
@@ -114,6 +132,12 @@
 			isa = PBXGroup;
 			children = (
 				F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */,
+				202B18F21DB24B66009CC980 /* MittyViewController.swift */,
+				202B18F31DB24B66009CC980 /* MittyViewController.xib */,
+				202B18FC1DB34B57009CC980 /* RegistViewController.swift */,
+				202B18FD1DB34B57009CC980 /* RegistViewController.xib */,
+				202B19001DB355F7009CC980 /* LoginViewController.swift */,
+				202B19011DB355F7009CC980 /* LoginViewController.xib */,
 				F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */,
 				F4AEAB0B1DAD3F2C007DEB80 /* LaunchScreen.storyboard */,
 				F4AEAB0E1DAD3F2C007DEB80 /* Info.plist */,
@@ -253,8 +277,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202B19051DB35A8F009CC980 /* Sample.png in Resources */,
 				F4AEAB0D1DAD3F2C007DEB80 /* LaunchScreen.storyboard in Resources */,
+				202B18FB1DB34522009CC980 /* welcome.png in Resources */,
 				F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */,
+				202B18F51DB24B66009CC980 /* MittyViewController.xib in Resources */,
+				202B18FF1DB34B57009CC980 /* RegistViewController.xib in Resources */,
+				202B19031DB355F7009CC980 /* LoginViewController.xib in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -280,10 +309,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				202B19021DB355F7009CC980 /* LoginViewController.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* Tab3ViewController.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* Tab4ViewController.swift in Sources */,
+				202B18FE1DB34B57009CC980 /* RegistViewController.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* Tab1ViewController.swift in Sources */,
+				202B18F41DB24B66009CC980 /* MittyViewController.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* Tab2ViewController.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 			);
