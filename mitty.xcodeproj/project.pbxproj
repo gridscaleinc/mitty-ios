@@ -7,12 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		062DEF3FE70021E7CF17EEF5 /* Pods_mittyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */; };
 		202B18F41DB24B66009CC980 /* MittyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202B18F21DB24B66009CC980 /* MittyViewController.swift */; };
 		202B18F51DB24B66009CC980 /* MittyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 202B18F31DB24B66009CC980 /* MittyViewController.xib */; };
 		202B18FE1DB34B57009CC980 /* RegistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202B18FC1DB34B57009CC980 /* RegistViewController.swift */; };
 		202B18FF1DB34B57009CC980 /* RegistViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 202B18FD1DB34B57009CC980 /* RegistViewController.xib */; };
 		202B19021DB355F7009CC980 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202B19001DB355F7009CC980 /* LoginViewController.swift */; };
 		202B19031DB355F7009CC980 /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 202B19011DB355F7009CC980 /* LoginViewController.xib */; };
+		29588B077CD53C553381DDA6 /* Pods_mitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F362287AC99640C55568B9 /* Pods_mitty.framework */; };
+		4EF66DA6274B45BE5D4399D8 /* Pods_mittyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */; };
 		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
 		F46601ED1DB372760012D898 /* Sample.png in Resources */ = {isa = PBXBuildFile; fileRef = F46601EB1DB372760012D898 /* Sample.png */; };
 		F46601EE1DB372760012D898 /* welcom.png in Resources */ = {isa = PBXBuildFile; fileRef = F46601EC1DB372760012D898 /* welcom.png */; };
@@ -46,12 +49,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1EB95DE3B7D0E951A7ECB29A /* Pods-mittyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests.release.xcconfig"; sourceTree = "<group>"; };
 		202B18F21DB24B66009CC980 /* MittyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyViewController.swift; sourceTree = "<group>"; };
 		202B18F31DB24B66009CC980 /* MittyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MittyViewController.xib; sourceTree = "<group>"; };
 		202B18FC1DB34B57009CC980 /* RegistViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistViewController.swift; sourceTree = "<group>"; };
 		202B18FD1DB34B57009CC980 /* RegistViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistViewController.xib; sourceTree = "<group>"; };
 		202B19001DB355F7009CC980 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		202B19011DB355F7009CC980 /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mittyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2E3D19B86FC21418F9DD2F3F /* Pods-mittyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mittyUITests/Pods-mittyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mittyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49E68BA6F432E5ECF64B5380 /* Pods-mitty.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mitty.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mitty/Pods-mitty.debug.xcconfig"; sourceTree = "<group>"; };
+		58191E3D216F1D2D35C946F0 /* Pods-mittyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mittyUITests/Pods-mittyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		61F362287AC99640C55568B9 /* Pods_mitty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mitty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB944AF4113670B4F0CAFB2F /* Pods-mitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-mitty/Pods-mitty.release.xcconfig"; sourceTree = "<group>"; };
+		EBBC4AEDFE4CFDC20643BDFA /* Pods-mittyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F41D4E391DAE7FDF003A96AA /* hoge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hoge.png; path = images/hoge.png; sourceTree = "<group>"; };
 		F46601EB1DB372760012D898 /* Sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sample.png; path = images/Sample.png; sourceTree = "<group>"; };
 		F46601EC1DB372760012D898 /* welcom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcom.png; path = images/welcom.png; sourceTree = "<group>"; };
@@ -78,6 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				29588B077CD53C553381DDA6 /* Pods_mitty.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,6 +98,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				062DEF3FE70021E7CF17EEF5 /* Pods_mittyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -92,12 +106,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4EF66DA6274B45BE5D4399D8 /* Pods_mittyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7DA76871C5D0FD57BEF43B0B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				49E68BA6F432E5ECF64B5380 /* Pods-mitty.debug.xcconfig */,
+				BB944AF4113670B4F0CAFB2F /* Pods-mitty.release.xcconfig */,
+				EBBC4AEDFE4CFDC20643BDFA /* Pods-mittyTests.debug.xcconfig */,
+				1EB95DE3B7D0E951A7ECB29A /* Pods-mittyTests.release.xcconfig */,
+				2E3D19B86FC21418F9DD2F3F /* Pods-mittyUITests.debug.xcconfig */,
+				58191E3D216F1D2D35C946F0 /* Pods-mittyUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		CBA35AD0F61EBE52BBFFF268 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				61F362287AC99640C55568B9 /* Pods_mitty.framework */,
+				2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */,
+				27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +153,8 @@
 				F4AEAB161DAD3F2D007DEB80 /* mittyTests */,
 				F4AEAB211DAD3F2D007DEB80 /* mittyUITests */,
 				F4AEAB001DAD3F2C007DEB80 /* Products */,
+				7DA76871C5D0FD57BEF43B0B /* Pods */,
+				CBA35AD0F61EBE52BBFFF268 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,9 +216,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4AEAB271DAD3F2D007DEB80 /* Build configuration list for PBXNativeTarget "mitty" */;
 			buildPhases = (
+				A9598A58467858DAB0802E0F /* [CP] Check Pods Manifest.lock */,
 				F4AEAAFB1DAD3F2C007DEB80 /* Sources */,
 				F4AEAAFC1DAD3F2C007DEB80 /* Frameworks */,
 				F4AEAAFD1DAD3F2C007DEB80 /* Resources */,
+				2749AC7B789FC2C68C3EA9D3 /* [CP] Embed Pods Frameworks */,
+				C6DD22C571057D117108D9EC /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -193,9 +236,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4AEAB2A1DAD3F2D007DEB80 /* Build configuration list for PBXNativeTarget "mittyTests" */;
 			buildPhases = (
+				53A618E72EDE6B81FDAB8889 /* [CP] Check Pods Manifest.lock */,
 				F4AEAB0F1DAD3F2C007DEB80 /* Sources */,
 				F4AEAB101DAD3F2C007DEB80 /* Frameworks */,
 				F4AEAB111DAD3F2C007DEB80 /* Resources */,
+				90690DCFA0973EBF8B142CFC /* [CP] Embed Pods Frameworks */,
+				B8A07D6657EA44DB0E53D323 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,9 +257,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F4AEAB2D1DAD3F2D007DEB80 /* Build configuration list for PBXNativeTarget "mittyUITests" */;
 			buildPhases = (
+				9CE78C68FF7522F814EC3C14 /* [CP] Check Pods Manifest.lock */,
 				F4AEAB1A1DAD3F2D007DEB80 /* Sources */,
 				F4AEAB1B1DAD3F2D007DEB80 /* Frameworks */,
 				F4AEAB1C1DAD3F2D007DEB80 /* Resources */,
+				FF5637ED5F893A5C129F052E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -303,6 +351,129 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		2749AC7B789FC2C68C3EA9D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mitty/Pods-mitty-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		53A618E72EDE6B81FDAB8889 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		90690DCFA0973EBF8B142CFC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9CE78C68FF7522F814EC3C14 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A9598A58467858DAB0802E0F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B8A07D6657EA44DB0E53D323 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6DD22C571057D117108D9EC /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mitty/Pods-mitty-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FF5637ED5F893A5C129F052E /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mittyUITests/Pods-mittyUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F4AEAAFB1DAD3F2C007DEB80 /* Sources */ = {
@@ -410,6 +581,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -452,6 +624,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -459,6 +632,7 @@
 		};
 		F4AEAB281DAD3F2D007DEB80 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49E68BA6F432E5ECF64B5380 /* Pods-mitty.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6SRWK494FT;
@@ -473,6 +647,7 @@
 		};
 		F4AEAB291DAD3F2D007DEB80 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB944AF4113670B4F0CAFB2F /* Pods-mitty.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 6SRWK494FT;
@@ -487,6 +662,7 @@
 		};
 		F4AEAB2B1DAD3F2D007DEB80 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = EBBC4AEDFE4CFDC20643BDFA /* Pods-mittyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -501,6 +677,7 @@
 		};
 		F4AEAB2C1DAD3F2D007DEB80 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 1EB95DE3B7D0E951A7ECB29A /* Pods-mittyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -515,6 +692,7 @@
 		};
 		F4AEAB2E1DAD3F2D007DEB80 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2E3D19B86FC21418F9DD2F3F /* Pods-mittyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = mittyUITests/Info.plist;
@@ -528,6 +706,7 @@
 		};
 		F4AEAB2F1DAD3F2D007DEB80 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 58191E3D216F1D2D35C946F0 /* Pods-mittyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				INFOPLIST_FILE = mittyUITests/Info.plist;

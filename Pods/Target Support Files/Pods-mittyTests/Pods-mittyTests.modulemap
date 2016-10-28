@@ -1,0 +1,6 @@
+framework module Pods_mittyTests {
+  umbrella header "Pods-mittyTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
