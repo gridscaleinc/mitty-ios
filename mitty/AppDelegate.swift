@@ -14,16 +14,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //Class for view Mitty
-    let mittyViewController: MittyViewController = MittyViewController()
+    // let mittyViewController: MittyViewController = MittyViewController()
     //Tab bar
-    //let mainTabBarController: MainTabBarController = MainTabBarController()
+    
+    let mainTabBarController: MainTabBarController = MainTabBarController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
 
-        self.window?.rootViewController = mittyViewController
+        self.window?.rootViewController = mainTabBarController
         self.window?.makeKeyAndVisible()
 
         return true

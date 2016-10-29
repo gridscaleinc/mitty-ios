@@ -1,5 +1,6 @@
 //
-//  Tab4ViewControoler.swift
+//  MyselfViewController.swift
+//
 //  mitty
 //
 //  Created by Dongri Jin on 2016/10/12.
@@ -9,10 +10,12 @@
 import Foundation
 import UIKit
 
-class Tab4ViewController: UIViewController {
+// 個人情報を管理するView
+//
+class MyselfViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Mitty Tab4"
+        self.navigationItem.title = "個人情報を管理"
         
         self.view.backgroundColor = UIColor.red
         let label = UILabel()

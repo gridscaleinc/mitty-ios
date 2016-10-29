@@ -1,5 +1,5 @@
 //
-//  Tab3ViewController.swift
+//  Tab1ViewController.swift
 //  mitty
 //
 //  Created by Dongri Jin on 2016/10/12.
@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-class Tab3ViewController: UIViewController {
+class ActivityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Mitty Tab3"
+        self.navigationItem.title = "Mitty"
         
-        self.view.backgroundColor = UIColor.yellow
+        self.view.backgroundColor = UIColor.white
         let label = UILabel()
-        label.frame = CGRect(x: 200, y: 100, width: 100, height: 100)
-        label.text = "Tab3"
+        label.frame = CGRect(x: 30, y: 100, width: 400, height: 100)
+        label.text = "活動予定管理"
         self.view.addSubview(label)
     }
     

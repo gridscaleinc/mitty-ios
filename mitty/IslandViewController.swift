@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class Tab2ViewController: UIViewController {
+class IslandViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Mitty Tab2"
@@ -20,7 +20,7 @@ class Tab2ViewController: UIViewController {
         lineButton.tintColor = UIColor.blue
         lineButton.setTitle("Start LINE!", for: UIControlState.normal)
         lineButton.setTitleColor(UIColor.blue, for: UIControlState.normal)
-        lineButton.addTarget(self, action: #selector(Tab2ViewController.postToLine), for: .touchUpInside)
+        lineButton.addTarget(self, action: #selector(IslandViewController.postToLine), for: .touchUpInside)
         self.view.addSubview(lineButton)
     }
     

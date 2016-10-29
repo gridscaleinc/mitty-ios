@@ -1,5 +1,5 @@
 //
-//  Tab1ViewController.swift
+//  Tab3ViewController.swift
 //  mitty
 //
 //  Created by Dongri Jin on 2016/10/12.
@@ -9,15 +9,15 @@
 import Foundation
 import UIKit
 
-class Tab1ViewController: UIViewController {
+class SocialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "Mitty"
+        self.navigationItem.title = "ソーシャルリソース管理"
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor.yellow
         let label = UILabel()
-        label.frame = CGRect(x: 30, y: 100, width: 400, height: 100)
-        label.text = "ここはWelcome画面で @ti さんに残します。"
+        label.frame = CGRect(x: 200, y: 100, width: 100, height: 100)
+        label.text = "ソーシャルリソース管理"
         self.view.addSubview(label)
     }
     
