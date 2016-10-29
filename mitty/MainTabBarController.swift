@@ -24,10 +24,11 @@ class MainTabBarController: UITabBarController {
         tab3 = UINavigationController(rootViewController: SocialViewController())
         tab4 = UINavigationController(rootViewController: MyselfViewController())
         
-        tab1.tabBarItem = UITabBarItem(title: "Activity", image: UIImage(named: "hoge"), tag: 1)
-        tab2.tabBarItem = UITabBarItem(title: "Island", image: UIImage(named: "hoge"), tag: 2)
-        tab3.tabBarItem = UITabBarItem(title: "Social", image: UIImage(named: "hoge"), tag: 3)
-        tab4.tabBarItem = UITabBarItem(title: "Myself", image: UIImage(named: "hoge"), tag: 4)
+        tab1.tabBarItem = UITabBarItem(title: "Activity", image: UIImage(named: "activity"), tag: 1)
+        
+        tab2.tabBarItem = UITabBarItem(title: "Island", image: UIImage(named: "island"), tag: 2)
+        tab3.tabBarItem = UITabBarItem(title: "Social", image: UIImage(named: "social"), tag: 3)
+        tab4.tabBarItem = UITabBarItem(title: "Myself", image: UIImage(named: "myself"), tag: 4)
         
         let tabs = NSArray(objects: tab1!, tab2!, tab3!, tab4!)
         
