@@ -7,3 +7,12 @@
 //
 
 import Foundation
+import UIKit
+
+///
+/// アプリケーションの各機能間にデータを容易に引き渡すための機構。
+///
+class ApplicationContext {
+    static var uiApplication:UIApplication? = nil;
+    
+}

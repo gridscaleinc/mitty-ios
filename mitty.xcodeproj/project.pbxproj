@@ -30,6 +30,10 @@
 		FC0AF1FD1DC5088400C76408 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FC1DC5088400C76408 /* activity.png */; };
 		FC0AF1FF1DC5089C00C76408 /* island.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FE1DC5089C00C76408 /* island.png */; };
 		FC0AF2011DC508A700C76408 /* myself.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF2001DC508A700C76408 /* myself.png */; };
+		FCF0BBF31DC7934E009C5C1F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF0BBF21DC7934E009C5C1F /* home.png */; };
+		FCF7770B1DC56508006D2ECA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7770A1DC56508006D2ECA /* HomeViewController.swift */; };
+		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
+		FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +89,10 @@
 		FC0AF1FC1DC5088400C76408 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = images/activity.png; sourceTree = "<group>"; };
 		FC0AF1FE1DC5089C00C76408 /* island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = island.png; path = images/island.png; sourceTree = "<group>"; };
 		FC0AF2001DC508A700C76408 /* myself.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myself.png; path = images/myself.png; sourceTree = "<group>"; };
+		FCF0BBF21DC7934E009C5C1F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = images/home.png; sourceTree = "<group>"; };
+		FCF7770A1DC56508006D2ECA /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
+		FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +149,7 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FCF0BBF21DC7934E009C5C1F /* home.png */,
 				FC0AF1FE1DC5089C00C76408 /* island.png */,
 				FC0AF2001DC508A700C76408 /* myself.png */,
 				FC0AF1FC1DC5088400C76408 /* activity.png */,
@@ -177,6 +186,7 @@
 		F4AEAB011DAD3F2C007DEB80 /* mitty */ = {
 			isa = PBXGroup;
 			children = (
+				FCF957591DC613A100A52125 /* util */,
 				FC0AF1E11DC4F24000C76408 /* service */,
 				FC0AF1E01DC4F23000C76408 /* datastore */,
 				FC0AF1DF1DC4F22600C76408 /* model */,
@@ -219,6 +229,8 @@
 		FC0AF1DE1DC4F21100C76408 /* view */ = {
 			isa = PBXGroup;
 			children = (
+				FCF9575A1DC6142000A52125 /* util */,
+				FCF777091DC5649B006D2ECA /* home */,
 				FC0AF1EB1DC4F57E00C76408 /* myself */,
 				FC0AF1EA1DC4F56E00C76408 /* social */,
 				FC0AF1E91DC4F56400C76408 /* Island */,
@@ -296,8 +308,32 @@
 			isa = PBXGroup;
 			children = (
 				F4BB80251DAE58FE00055D48 /* MyselfViewController.swift */,
+				FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */,
 			);
 			name = myself;
+			sourceTree = "<group>";
+		};
+		FCF777091DC5649B006D2ECA /* home */ = {
+			isa = PBXGroup;
+			children = (
+				FCF7770A1DC56508006D2ECA /* HomeViewController.swift */,
+			);
+			name = home;
+			sourceTree = "<group>";
+		};
+		FCF957591DC613A100A52125 /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = util;
+			sourceTree = "<group>";
+		};
+		FCF9575A1DC6142000A52125 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
+			);
+			name = util;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -418,6 +454,7 @@
 			files = (
 				F46601ED1DB372760012D898 /* Sample.png in Resources */,
 				FC0AF1FB1DC5087A00C76408 /* social.png in Resources */,
+				FCF0BBF31DC7934E009C5C1F /* home.png in Resources */,
 				F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */,
 				F46601EE1DB372760012D898 /* welcom.png in Resources */,
 				FC0AF1FD1DC5088400C76408 /* activity.png in Resources */,
@@ -578,7 +615,10 @@
 				F4BB80201DAE57A300055D48 /* ActivityViewController.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* Model.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
+				FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */,
+				FCF7770B1DC56508006D2ECA /* HomeViewController.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
+				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 			);
