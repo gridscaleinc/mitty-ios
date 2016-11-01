@@ -30,6 +30,9 @@
 		FC0AF1FD1DC5088400C76408 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FC1DC5088400C76408 /* activity.png */; };
 		FC0AF1FF1DC5089C00C76408 /* island.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FE1DC5089C00C76408 /* island.png */; };
 		FC0AF2011DC508A700C76408 /* myself.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF2001DC508A700C76408 /* myself.png */; };
+		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
+		FC8D70161DC8DCA80083E8E4 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70151DC8DCA80083E8E4 /* button.png */; };
+		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FCF0BBF31DC7934E009C5C1F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF0BBF21DC7934E009C5C1F /* home.png */; };
 		FCF7770B1DC56508006D2ECA /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7770A1DC56508006D2ECA /* HomeViewController.swift */; };
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
@@ -89,6 +92,9 @@
 		FC0AF1FC1DC5088400C76408 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = images/activity.png; sourceTree = "<group>"; };
 		FC0AF1FE1DC5089C00C76408 /* island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = island.png; path = images/island.png; sourceTree = "<group>"; };
 		FC0AF2001DC508A700C76408 /* myself.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myself.png; path = images/myself.png; sourceTree = "<group>"; };
+		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
+		FC8D70151DC8DCA80083E8E4 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
+		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCF0BBF21DC7934E009C5C1F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = images/home.png; sourceTree = "<group>"; };
 		FCF7770A1DC56508006D2ECA /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
@@ -149,6 +155,9 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FC8D70171DC8F4FF0083E8E4 /* search.png */,
+				FC8D70151DC8DCA80083E8E4 /* button.png */,
+				FC8D70131DC8D9CD0083E8E4 /* write.png */,
 				FCF0BBF21DC7934E009C5C1F /* home.png */,
 				FC0AF1FE1DC5089C00C76408 /* island.png */,
 				FC0AF2001DC508A700C76408 /* myself.png */,
@@ -452,15 +461,18 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC8D70161DC8DCA80083E8E4 /* button.png in Resources */,
 				F46601ED1DB372760012D898 /* Sample.png in Resources */,
 				FC0AF1FB1DC5087A00C76408 /* social.png in Resources */,
 				FCF0BBF31DC7934E009C5C1F /* home.png in Resources */,
 				F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */,
 				F46601EE1DB372760012D898 /* welcom.png in Resources */,
 				FC0AF1FD1DC5088400C76408 /* activity.png in Resources */,
+				FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */,
 				FC0AF2011DC508A700C76408 /* myself.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
+				FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

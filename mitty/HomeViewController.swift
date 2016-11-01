@@ -26,13 +26,29 @@ class HomeViewController: UIViewController {
     let scrollView  = UIScrollView.newAutoLayout()
     let contentView = UIView.newAutoLayout()
     
+    //
+    let queryTextBox : UITextField = {
+        let textBox = UITextField.newAutoLayout()
+        textBox.borderStyle = UITextBorderStyle.roundedRect
+        return textBox;
+    } ()
+    
+    //
+    let queryButton : UIButton = {
+        let button = UIButton.newAutoLayout()
+        let im = UIImage(named: "search")
+        button.setImage(im, for: UIControlState.normal)
+        return button;
+    } ()
+    
+    // Label
     let blueLabel: UILabel = {
         let label = UILabel.newAutoLayout()
-        label.backgroundColor = .gray
+        label.backgroundColor = UIColor(red: 0.5, green: 0.8, blue: 0.2, alpha: 0.9)
         label.numberOfLines = 0
         label.lineBreakMode = .byClipping
         label.textColor = .white
-        label.text = NSLocalizedString("このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。¥n繰り返し、このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。¥nこのビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。このビューはPureLayout フレームワークにより画面を整列しています。上には一つのスクロールビューを設定し、スクロールビューにコンテンツビューを入れる。コンテンツビューにはこのラベルを表示している構造となっている。", comment: "何かがコメントがありましたら、どうぞ")
+        label.text = NSLocalizedString("検索結果：", comment: "何かがコメントがありましたら、どうぞ")
         return label
     }()
     
@@ -50,6 +66,9 @@ class HomeViewController: UIViewController {
         view.backgroundColor = .white
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
+        contentView.addSubview(queryTextBox)
+        contentView.addSubview(queryButton)
+
         contentView.addSubview(blueLabel)
 
         self.navigationItem.title = "これはホームビューです"
@@ -71,10 +90,21 @@ class HomeViewController: UIViewController {
             contentView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero)
             contentView.autoMatch(.width, to: .width, of: view)
             
-            blueLabel.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
+            queryTextBox.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
+            queryTextBox.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)
+            queryTextBox.autoPinEdge(toSuperviewEdge: .trailing, withInset: 90)
+            queryTextBox.autoSetDimension(.height, toSize:30)
+
+            queryButton.autoPinEdge(.bottom, to: .bottom, of: queryTextBox)
+            queryButton.autoPinEdge(.left, to: .right, of: queryTextBox, withOffset: 10)
+            queryButton.autoSetDimension(.width, toSize:32)
+            queryButton.autoSetDimension(.height, toSize:32)
+            
+            
+            blueLabel.autoPinEdge(.top, to: .bottom, of: queryTextBox, withOffset: 10)
             blueLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)
             blueLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 10)
-            blueLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 10)
+            blueLabel.autoSetDimension(.height, toSize:30)
             
             didSetupConstraints = true
         }

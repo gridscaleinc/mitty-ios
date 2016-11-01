@@ -68,12 +68,15 @@ class MyselfViewController: UIViewController {
 
         // buttonを生成
         let button = UIButton()
-        button.frame = CGRect(x: 50, y: 100, width: 300, height: 100)
+        button.frame = CGRect(x: 150, y: 100, width: 100, height: 60)
         button.setTitle("登録する", for: .normal)
+        // let image = UIImage(named: "button")
+        button.layer.cornerRadius = 10
+        button.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.9)
+        
         button.addTarget(self, action: #selector(MyselfViewController.editPersonalInfo), for: .touchUpInside)
         self.view.addSubview(button)
         self.view.addSubview(label)
-
         
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。

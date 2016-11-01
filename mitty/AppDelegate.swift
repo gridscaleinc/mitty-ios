@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-
+        let themeColor = UIColor(red: 0.3, green: 0.21, blue: 0.50, alpha: 1.0)
+        self.window?.tintColor = themeColor;
         self.window?.rootViewController = mainTabBarController
         self.window?.makeKeyAndVisible()
 
