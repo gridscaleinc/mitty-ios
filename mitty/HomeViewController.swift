@@ -161,7 +161,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let screenSize:CGSize = UIScreen.main.bounds.size
-        let width = ( screenSize.width - (10 * 3) ) / 2
+        let width = ( screenSize.width - (10 * 3) ) 
         let cellSize: CGSize = CGSize( width: width, height:width * 1.2 )
         return cellSize
     }
