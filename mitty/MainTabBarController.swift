@@ -30,7 +30,10 @@ class MainTabBarController: UITabBarController {
         
         // 各タブの生成
         //　ホームタブ
-        tab1HomeController = UINavigationController(rootViewController: HomeViewController())
+//        let layout = UICollectionViewLayout()
+//        let showWinodowController = ShowWindowViewController(collectionViewLayout:layout)
+
+        tab1HomeController = UINavigationController(rootViewController: HomeViewController ())
         tab1HomeController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home"), tag: 1)
 
         // 活動予定タブ

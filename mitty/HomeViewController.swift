@@ -1,118 +1,161 @@
-//
-//  HomeViewController.swift
-//  mitty
-//
-//  Created by gridscale on 2016/10/30.
-//  Copyright © 2016年 GridScale Inc. All rights reserved.
-//
-
-import Foundation
-
 import UIKit
-
-//Auto layout kit
 import PureLayout
 
-// 個人情報を管理するView
-//
+struct Event {
+    var eventId: String = ""
+    var title: String = ""
+    var price: Int = 0
+    var imageUrl: String = ""
+    var image: UIImage = UIImage()
+    var bidCount: Int = 0
+    var endTime: String = ""
+}
 
 @objc(HomeViewController)
 class HomeViewController: UIViewController {
-
-    //
-    // Purelayout流の画面パーツ作り方、必ずnewAutoLayoutを一度呼び出す。
-    // 画面を構成するパーツだから、methoの中ではなく、インスタンス変数として持つ。
-    //
-    let scrollView  = UIScrollView.newAutoLayout()
-    let contentView = UIView.newAutoLayout()
     
-    //
-    let queryTextBox : UITextField = {
-        let textBox = UITextField.newAutoLayout()
-        textBox.borderStyle = UITextBorderStyle.roundedRect
-        return textBox;
-    } ()
     
-    //
-    let queryButton : UIButton = {
-        let button = UIButton.newAutoLayout()
-        let im = UIImage(named: "search")
-        button.setImage(im, for: UIControlState.normal)
-        return button;
-    } ()
+    // MARK: - Properties
+    var events: [Event]
     
-    // Label
-    let blueLabel: UILabel = {
-        let label = UILabel.newAutoLayout()
-        label.backgroundColor = UIColor(red: 0.5, green: 0.8, blue: 0.2, alpha: 0.9)
-        label.numberOfLines = 0
-        label.lineBreakMode = .byClipping
-        label.textColor = .white
-        label.text = NSLocalizedString("検索結果：", comment: "何かがコメントがありましたら、どうぞ")
-        return label
-    }()
+    // MARK: - View Elements
+    let searchBar: UISearchBar
+    let collectionView: UICollectionView
     
-    // Autolayout済みフラグ
-    var didSetupConstraints = false
-    
-    // ここまではメンバー変数定義
-    
-    // ビューがよもこまれた際に実行するメソッド。
-    // ：Purelayoutの拡張ではない。
-    override func loadView() {
+    // MARK: - Initializers
+    init() {
+        events = [Event]()
+        self.searchBar = UISearchBar.newAutoLayout()
+        self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+        self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        view = UIView()
-        
-        view.backgroundColor = .white
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
-        contentView.addSubview(queryTextBox)
-        contentView.addSubview(queryButton)
-
-        contentView.addSubview(blueLabel)
-
-        self.navigationItem.title = "これはホームビューです"
-
-        // ここでビューの整列をする。
-        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
-        view.setNeedsUpdateConstraints()
+        super.init(nibName: nil, bundle: nil)
     }
     
-    //
-    // ビュー整列メソッド。PureLayoutの処理はここで存分に活躍。
-    //
-    override func updateViewConstraints() {
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    // MARK: - View Controller Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        if (!didSetupConstraints) {
-            
-            scrollView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero)
-            
-            contentView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero)
-            contentView.autoMatch(.width, to: .width, of: view)
-            
-            queryTextBox.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
-            queryTextBox.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)
-            queryTextBox.autoPinEdge(toSuperviewEdge: .trailing, withInset: 90)
-            queryTextBox.autoSetDimension(.height, toSize:30)
+        view.backgroundColor = UIColor.white
+        self.searchBar.becomeFirstResponder()
+        
+        configureNavigationBar()
+        addSubviews()
+        addConstraints()
+        configureSubviews()
+    }
+    
+    // MARK: - View Setup
+    private func configureNavigationBar() {}
+    
+    private func addSubviews() {
+        view.addSubview(searchBar)
+        view.addSubview(collectionView)
+    }
+    
+    private func configureSubviews() {
+        searchBar.delegate = self
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(EventCell.self, forCellWithReuseIdentifier:EventCell.id)
+        
+        collectionView.backgroundColor = UIColor.white
+    }
+    
+    private func addConstraints() {
+        searchBar.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+        searchBar.autoPinEdge(toSuperviewEdge: .left)
+        searchBar.autoPinEdge(toSuperviewEdge: .right)
+        
+        collectionView.autoPinEdge(.top, to: .bottom, of: searchBar)
+        collectionView.autoPinEdge(toSuperviewEdge: .left)
+        collectionView.autoPinEdge(toSuperviewEdge: .right)
+        collectionView.autoPinEdge(toSuperviewEdge: .bottom)
+    }
+    
+}
 
-            queryButton.autoPinEdge(.bottom, to: .bottom, of: queryTextBox)
-            queryButton.autoPinEdge(.left, to: .right, of: queryTextBox, withOffset: 10)
-            queryButton.autoSetDimension(.width, toSize:32)
-            queryButton.autoSetDimension(.height, toSize:32)
-            
-            
-            blueLabel.autoPinEdge(.top, to: .bottom, of: queryTextBox, withOffset: 10)
-            blueLabel.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)
-            blueLabel.autoPinEdge(toSuperviewEdge: .trailing, withInset: 10)
-            blueLabel.autoSetDimension(.height, toSize:30)
-            
-            didSetupConstraints = true
+
+// MARK: - UISearchBarDelegate
+extension HomeViewController: UISearchBarDelegate
+{
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if searchBar.text == nil || searchBar.text?.lengthOfBytes(using: String.Encoding.utf8 ) == 0 {
+            events = []
+            collectionView.reloadData()
+            return
         }
         
-        super.updateViewConstraints()
+        events = []
+        events.append(buildEvent(1))
+        events.append(buildEvent(2))
+        events.append(buildEvent(3))
+        events.append(buildEvent(4))
+        events.append(buildEvent(5))
+            
+        collectionView.reloadData()
+        
+    }
+}
+
+func buildEvent(_ n:Int) ->Event! {
+    
+    let imagenames: [String] = ["event1","event2","event3","event4","event5","event6"]
+    
+    var a = Event ()
+    
+    a.eventId = "id" + String(n)
+    a.title = "title" + String(n)
+    a.price  = 10 * n
+    a.imageUrl = "url" + String(n)
+    
+    a.image = UIImage(named: imagenames[n-1])!
+    a.bidCount = 10+n
+    a.endTime = "12:34:56"
+    
+    return a;
+}
+
+// MARK: - UITableViewDataSource
+extension HomeViewController: UICollectionViewDataSource {
+   
+    ///
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 3
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return events.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.id, for: indexPath ) as? EventCell
+        {
+            cell.configureView(auction: events[indexPath.row])
+            cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
+
+            return cell
+        }
+        return EventCell()
+    }
+        
+}
+
+extension HomeViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let screenSize:CGSize = UIScreen.main.bounds.size
+        let width = ( screenSize.width - (10 * 3) ) / 2
+        let cellSize: CGSize = CGSize( width: width, height:width * 1.2 )
+        return cellSize
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     }
 }
