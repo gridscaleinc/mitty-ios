@@ -75,21 +75,19 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text == nil || searchBar.text?.lengthOfBytes(using: String.Encoding.utf8 ) == 0 {
-            events = []
-            collectionView.reloadData()
-            return
+        
+        events.removeAll()
+        
+        if searchBar.text != nil || (searchBar.text?.lengthOfBytes(using: String.Encoding.utf8 ))! >= 0 {
+            events.append(buildEvent(1))
+            events.append(buildEvent(2))
+            events.append(buildEvent(3))
+            events.append(buildEvent(4))
+            events.append(buildEvent(5))
         }
         
-        events = []
-        events.append(buildEvent(1))
-        events.append(buildEvent(2))
-        events.append(buildEvent(3))
-        events.append(buildEvent(4))
-        events.append(buildEvent(5))
-            
         collectionView.reloadData()
-        
+
     }
 }
 
