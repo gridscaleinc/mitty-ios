@@ -3,21 +3,27 @@ import PureLayout
 
 class EventCell: UICollectionViewCell {
     static let id = "journey-search-result-cell"
+    
     // MARK: - View Elements
+    var event : Event?
+    
     let itemImageView: UIImageView
     let titleLabel: UILabel
     let priceLabel: UILabel
-    let bidLabel: UILabel
+    let likesLabel: UILabel
     let endTimeLabel: UILabel
     
     // MARK: - Initializers
     override init(frame: CGRect) {
         itemImageView = UIImageView.newAutoLayout()
-
+        itemImageView.clipsToBounds=true
+        itemImageView.contentMode = UIViewContentMode.scaleAspectFit
+        
         titleLabel = UILabel.newAutoLayout()
         priceLabel = UILabel.newAutoLayout()
-        bidLabel = UILabel.newAutoLayout()
+        likesLabel = UILabel.newAutoLayout()
         endTimeLabel = UILabel.newAutoLayout()
+        endTimeLabel.numberOfLines = 0
         
         super.init(frame: frame)
         
@@ -35,7 +41,7 @@ class EventCell: UICollectionViewCell {
         contentView.addSubview(itemImageView)
         contentView.addSubview(titleLabel)
         contentView.addSubview(priceLabel)
-        contentView.addSubview(bidLabel)
+        contentView.addSubview(likesLabel)
         contentView.addSubview(endTimeLabel)
     }
     
@@ -46,7 +52,8 @@ class EventCell: UICollectionViewCell {
         itemImageView.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
         itemImageView.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
         
-        itemImageView.autoMatch(.height, to: .width, of: itemImageView)
+        itemImageView.autoMatch(.width, to: .width, of: itemImageView)
+        
         
         titleLabel.autoPinEdge(.top, to: .bottom, of: itemImageView, withOffset: 3.0)
         titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
@@ -60,26 +67,32 @@ class EventCell: UICollectionViewCell {
         endTimeLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
         endTimeLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5)
 
-        bidLabel.autoPinEdge(.top, to: .bottom, of: priceLabel, withOffset: 3.0)
-        bidLabel.autoPinEdge(.left, to: .right, of: endTimeLabel, withOffset: 10.0)
-        bidLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5)
+        likesLabel.autoPinEdge(.top, to: .bottom, of: priceLabel, withOffset: 3.0)
+        likesLabel.autoPinEdge(.left, to: .right, of: endTimeLabel, withOffset: 10.0)
+        likesLabel.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5)
 
     }
     
-    func configureView(auction: Event) {
-        itemImageView.image = auction.image
+    func configureView(event: Event) {
+        
+        self.event = event
+        
+        itemImageView.image = UIImage(named: event.imageUrl)
 
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        titleLabel.text = auction.title
+        titleLabel.text = event.title
 
         priceLabel.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-        priceLabel.text = "現在 " + String(auction.price) + "円"
+        priceLabel.text = "現在 " + String(event.price) + "円"
 
         endTimeLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
-        endTimeLabel.text = "🕒" + auction.endTime
+        endTimeLabel.text = "🕒" + event.startDate + " " + event.startTime + " - " + event.endDate + " " + event.endTime
+        
 
-        bidLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
-        bidLabel.text = "🔨" + String(auction.bidCount)
+        likesLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
+        likesLabel.text = "🔨" + String(event.likes)
+        
+        
     }
 }

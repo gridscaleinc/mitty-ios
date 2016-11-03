@@ -1,15 +1,6 @@
 import UIKit
 import PureLayout
 
-struct Event {
-    var eventId: String = ""
-    var title: String = ""
-    var price: Int = 0
-    var imageUrl: String = ""
-    var image: UIImage = UIImage()
-    var bidCount: Int = 0
-    var endTime: String = ""
-}
 
 @objc(HomeViewController)
 class HomeViewController: UIViewController {
@@ -106,15 +97,19 @@ func buildEvent(_ n:Int) ->Event! {
     
     let imagenames: [String] = ["event1","event2","event3","event4","event5","event6"]
     
-    var a = Event ()
+    let a = Event()
     
     a.eventId = "id" + String(n)
     a.title = "title" + String(n)
     a.price  = 10 * n
-    a.imageUrl = "url" + String(n)
+    a.imageUrl = imagenames[n-1]
+    a.startDate = "2016-09-09"
+    a.endDate = "2016-10-10"
+    a.startTime = "12:30"
+    a.endTime = "16:30"
     
-    a.image = UIImage(named: imagenames[n-1])!
-    a.bidCount = 10+n
+    a.likes = 10+n
+    
     a.endTime = "12:34:56"
     
     return a;
@@ -135,14 +130,32 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.id, for: indexPath ) as? EventCell
         {
-            cell.configureView(auction: events[indexPath.row])
+            cell.configureView(event: events[indexPath.row])
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
+            let tapGestureRecognizer = CellTagHandler(cell: cell, target:self, action:#selector(HomeViewController.cellTapped(handler:)))
+            cell.addGestureRecognizer(tapGestureRecognizer)
 
             return cell
         }
         return EventCell()
     }
+    
+    func cellTapped(handler: CellTagHandler) {
         
+        print (handler.cell.event)
+        let ev = EventDetailViewController(event: handler.cell.event!)
+        self.navigationItem.title = "..."
+        self.navigationController?.pushViewController(ev, animated: true)
+    }
+}
+
+class CellTagHandler : UITapGestureRecognizer {
+    var cell : EventCell
+    
+    init(cell: EventCell, target:Any?, action: Selector? ) {
+        self.cell = cell
+        super.init(target:target, action:action)
+    }
 }
 
 extension HomeViewController: UICollectionViewDelegateFlowLayout {

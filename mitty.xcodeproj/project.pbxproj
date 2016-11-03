@@ -38,6 +38,7 @@
 		FC427B911DCAFDE1009F43AE /* event4.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8B1DCAFDE1009F43AE /* event4.png */; };
 		FC427B921DCAFDE1009F43AE /* event5.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8C1DCAFDE1009F43AE /* event5.png */; };
 		FC427B931DCAFDE1009F43AE /* event6.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8D1DCAFDE1009F43AE /* event6.png */; };
+		FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
 		FC8D70161DC8DCA80083E8E4 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70151DC8DCA80083E8E4 /* button.png */; };
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
@@ -107,6 +108,7 @@
 		FC427B8B1DCAFDE1009F43AE /* event4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event4.png; path = images/event4.png; sourceTree = "<group>"; };
 		FC427B8C1DCAFDE1009F43AE /* event5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event5.png; path = images/event5.png; sourceTree = "<group>"; };
 		FC427B8D1DCAFDE1009F43AE /* event6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event6.png; path = images/event6.png; sourceTree = "<group>"; };
+		FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		FC8D70151DC8DCA80083E8E4 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -347,6 +349,7 @@
 			children = (
 				FC427B801DCACB43009F43AE /* EventCell.swift */,
 				FC427B811DCACB43009F43AE /* HomeViewController.swift */,
+				FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */,
 			);
 			name = home;
 			sourceTree = "<group>";
@@ -653,6 +656,7 @@
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityViewController.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* Model.swift in Sources */,
+				FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */,
 				FC427B831DCACB43009F43AE /* HomeViewController.swift in Sources */,
