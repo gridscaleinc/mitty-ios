@@ -120,7 +120,7 @@ class EventDetailViewController : UIViewController {
         // ① UIAlertControllerクラスのインスタンスを生成
         // タイトル, メッセージ, Alertのスタイルを指定する
         // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
-        let alert: UIAlertController = UIAlertController(title: "アラート表示", message: "保存してもいいですか？", preferredStyle:  UIAlertControllerStyle.alert)
+        let alert: UIAlertController = UIAlertController(title: "確認", message: "このイベントに参加しますか？", preferredStyle:  UIAlertControllerStyle.alert)
         
         // ② Actionの設定
         // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
@@ -130,6 +130,9 @@ class EventDetailViewController : UIViewController {
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
             print("OK," + self.event.eventId + " に参加します。")
+            
+            self.confirmCalendarRegister()
+            
         })
         // キャンセルボタン
         let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
@@ -144,6 +147,37 @@ class EventDetailViewController : UIViewController {
         
         // ④ Alertを表示
         present(alert, animated: true, completion: nil)
+    }
+    
+    func confirmCalendarRegister () {
+        // ① UIAlertControllerクラスのインスタンスを生成
+        // タイトル, メッセージ, Alertのスタイルを指定する
+        // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
+        let alert: UIAlertController = UIAlertController(title: "確認", message: "イベントの予定をカレンダーに登録しますか？", preferredStyle:  UIAlertControllerStyle.alert)
+        
+        // ② Actionの設定
+        // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
+        // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
+        // OKボタン
+        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("OK," + self.event.eventId + " をカレンダーに登録しました。")
+        })
+        // キャンセルボタン
+        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
+            // ボタンが押された時の処理を書く（クロージャ実装）
+            (action: UIAlertAction!) -> Void in
+            print("Cancel" + self.event.eventId + " をイベントに登録しません。")
+        })
+        
+        // ③ UIAlertControllerにActionを追加
+        alert.addAction(cancelAction)
+        alert.addAction(defaultAction)
+        
+        // ④ Alertを表示
+        present(alert, animated: true, completion: nil)
+
     }
 
 
