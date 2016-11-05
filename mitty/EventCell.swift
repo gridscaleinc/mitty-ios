@@ -84,7 +84,7 @@ class EventCell: UICollectionViewCell {
         titleLabel.text = event.title
 
         priceLabel.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-        priceLabel.text = "現在 " + String(event.price) + "円"
+        priceLabel.text = LS(key: "now") + String(event.price) + LS(key: "yen")
 
         endTimeLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
         endTimeLabel.text = "🕒" + event.startDate + " " + event.startTime + " - " + event.endDate + " " + event.endTime

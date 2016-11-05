@@ -11,6 +11,8 @@
 		29588B077CD53C553381DDA6 /* Pods_mitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F362287AC99640C55568B9 /* Pods_mitty.framework */; };
 		4EF66DA6274B45BE5D4399D8 /* Pods_mittyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */; };
 		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
+		F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F42CDE501DCD74A8001CAFBE /* Localizable.strings */; };
+		F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42CDE521DCD7525001CAFBE /* Strings.swift */; };
 		F46601ED1DB372760012D898 /* Sample.png in Resources */ = {isa = PBXBuildFile; fileRef = F46601EB1DB372760012D898 /* Sample.png */; };
 		F46601EE1DB372760012D898 /* welcom.png in Resources */ = {isa = PBXBuildFile; fileRef = F46601EC1DB372760012D898 /* welcom.png */; };
 		F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */; };
@@ -75,6 +77,9 @@
 		BB944AF4113670B4F0CAFB2F /* Pods-mitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-mitty/Pods-mitty.release.xcconfig"; sourceTree = "<group>"; };
 		EBBC4AEDFE4CFDC20643BDFA /* Pods-mittyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F41D4E391DAE7FDF003A96AA /* hoge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hoge.png; path = images/hoge.png; sourceTree = "<group>"; };
+		F42CDE4F1DCD74A8001CAFBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F42CDE511DCD74D0001CAFBE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		F42CDE521DCD7525001CAFBE /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
 		F46601EB1DB372760012D898 /* Sample.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Sample.png; path = images/Sample.png; sourceTree = "<group>"; };
 		F46601EC1DB372760012D898 /* welcom.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = welcom.png; path = images/welcom.png; sourceTree = "<group>"; };
 		F4AEAAFF1DAD3F2C007DEB80 /* mitty.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = mitty.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +197,14 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		F42CDE4B1DCD745D001CAFBE /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F42CDE501DCD74A8001CAFBE /* Localizable.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		F4AEAAF61DAD3F2C007DEB80 = {
 			isa = PBXGroup;
 			children = (
@@ -226,6 +239,7 @@
 				F4AEAB091DAD3F2C007DEB80 /* Assets.xcassets */,
 				F4AEAB0E1DAD3F2C007DEB80 /* Info.plist */,
 				F41D4E381DAE7FD1003A96AA /* Images */,
+				F42CDE4B1DCD745D001CAFBE /* Supporting Files */,
 			);
 			path = mitty;
 			sourceTree = "<group>";
@@ -357,6 +371,7 @@
 		FCF957591DC613A100A52125 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				F42CDE521DCD7525001CAFBE /* Strings.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -468,6 +483,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ja,
 			);
 			mainGroup = F4AEAAF61DAD3F2C007DEB80;
 			productRefGroup = F4AEAB001DAD3F2C007DEB80 /* Products */;
@@ -502,6 +518,7 @@
 				FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */,
 				FC0AF2011DC508A700C76408 /* myself.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
+				F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
 				FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */,
 			);
@@ -668,6 +685,7 @@
 			files = (
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
+				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* MyselfViewController.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityViewController.swift in Sources */,
@@ -715,11 +733,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		F42CDE501DCD74A8001CAFBE /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F42CDE4F1DCD74A8001CAFBE /* en */,
+				F42CDE511DCD74D0001CAFBE /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		F4AEAB251DAD3F2D007DEB80 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -771,6 +802,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";

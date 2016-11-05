@@ -75,21 +75,19 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        if searchBar.text == nil || searchBar.text?.lengthOfBytes(using: String.Encoding.utf8 ) == 0 {
-            events = []
-            collectionView.reloadData()
-            return
+        
+        events.removeAll()
+        
+        if searchBar.text != nil || (searchBar.text?.lengthOfBytes(using: String.Encoding.utf8 ))! >= 0 {
+            events.append(buildEvent(1))
+            events.append(buildEvent(2))
+            events.append(buildEvent(3))
+            events.append(buildEvent(4))
+            events.append(buildEvent(5))
         }
         
-        events = []
-        events.append(buildEvent(1))
-        events.append(buildEvent(2))
-        events.append(buildEvent(3))
-        events.append(buildEvent(4))
-        events.append(buildEvent(5))
-            
         collectionView.reloadData()
-        
+
     }
 }
 
@@ -163,7 +161,7 @@ extension HomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let screenSize:CGSize = UIScreen.main.bounds.size
-        let width = ( screenSize.width - (10 * 3) ) / 2
+        let width = ( screenSize.width - (10 * 3) ) 
         let cellSize: CGSize = CGSize( width: width, height:width * 1.2 )
         return cellSize
     }
