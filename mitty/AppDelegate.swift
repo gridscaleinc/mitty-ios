@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //Class for view Mitty
-    // let mittyViewController: MittyViewController = MittyViewController()
+    //let guideViewController: GuideViewController = GuideViewController()
     //Tab bar
     
     let mainTabBarController: MainTabBarController = MainTabBarController()

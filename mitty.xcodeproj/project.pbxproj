@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		062DEF3FE70021E7CF17EEF5 /* Pods_mittyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */; };
+		20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E508F31DCD8C5400696E29 /* GuideViewController.swift */; };
 		29588B077CD53C553381DDA6 /* Pods_mitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F362287AC99640C55568B9 /* Pods_mitty.framework */; };
 		4EF66DA6274B45BE5D4399D8 /* Pods_mittyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */; };
 		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
@@ -69,6 +70,7 @@
 
 /* Begin PBXFileReference section */
 		1EB95DE3B7D0E951A7ECB29A /* Pods-mittyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests.release.xcconfig"; sourceTree = "<group>"; };
+		20E508F31DCD8C5400696E29 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mittyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E3D19B86FC21418F9DD2F3F /* Pods-mittyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mittyUITests/Pods-mittyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mittyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -324,6 +326,7 @@
 		FC0AF1E31DC4F2D800C76408 /* tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				20E508F31DCD8C5400696E29 /* GuideViewController.swift */,
 			);
 			name = tutorial;
 			sourceTree = "<group>";
@@ -440,6 +443,7 @@
 				F4AEAB1B1DAD3F2D007DEB80 /* Frameworks */,
 				F4AEAB1C1DAD3F2D007DEB80 /* Resources */,
 				FF5637ED5F893A5C129F052E /* [CP] Copy Pods Resources */,
+				0193C57877E4252AC741E6D3 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -543,6 +547,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0193C57877E4252AC741E6D3 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-mittyUITests/Pods-mittyUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		2749AC7B789FC2C68C3EA9D3 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -570,7 +589,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		90690DCFA0973EBF8B142CFC /* [CP] Embed Pods Frameworks */ = {
@@ -600,7 +619,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		A9598A58467858DAB0802E0F /* [CP] Check Pods Manifest.lock */ = {
@@ -615,7 +634,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		B8A07D6657EA44DB0E53D323 /* [CP] Copy Pods Resources */ = {
@@ -671,6 +690,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
+				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
