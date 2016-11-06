@@ -19,7 +19,7 @@ class ViewControllerFactory {
     static func createPersonalInfoNaviController() -> UINavigationController {
         let naviController = UINavigationController(rootViewController: createSelfViewController())
         
-        naviController.tabBarItem = UITabBarItem(title: "Myself", image: UIImage(named: "myself"), tag: 5)
+        naviController.tabBarItem = UITabBarItem(title: LS(key: "myself"), image: UIImage(named: "myself"), tag: 5)
         
         return naviController
         

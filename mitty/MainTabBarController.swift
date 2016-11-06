@@ -34,19 +34,19 @@ class MainTabBarController: UITabBarController {
 //        let showWinodowController = ShowWindowViewController(collectionViewLayout:layout)
 
         tab1HomeController = UINavigationController(rootViewController: HomeViewController ())
-        tab1HomeController.tabBarItem = UITabBarItem(title: "Home", image: UIImage(named: "home"), tag: 1)
+        tab1HomeController.tabBarItem = UITabBarItem(title: LS(key: "home"), image: UIImage(named: "home"), tag: 1)
 
         // 活動予定タブ
         tab2ActivityController = UINavigationController(rootViewController: ActivityViewController())
-        tab2ActivityController.tabBarItem = UITabBarItem(title: "Activity", image: UIImage(named: "activity"), tag: 2)
+        tab2ActivityController.tabBarItem = UITabBarItem(title: LS(key: "activity"), image: UIImage(named: "activity"), tag: 2)
         
         // 島会議タブ
         tab3IslandController = UINavigationController(rootViewController: IslandViewController())
-        tab3IslandController.tabBarItem = UITabBarItem(title: "Island", image: UIImage(named: "island"), tag: 3)
+        tab3IslandController.tabBarItem = UITabBarItem(title: LS(key: "island"), image: UIImage(named: "island"), tag: 3)
         
         //　ソーシャルタブ
         tab4SocialController = UINavigationController(rootViewController:SocialViewController())
-        tab4SocialController.tabBarItem = UITabBarItem(title: "Social", image: UIImage(named:
+        tab4SocialController.tabBarItem = UITabBarItem(title: LS(key: "social"), image: UIImage(named:
             "social"), tag: 4)
     
         // 個人情報管理タブ

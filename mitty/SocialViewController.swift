@@ -12,12 +12,12 @@ import UIKit
 class SocialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationItem.title = "ソーシャルリソース管理"
+        self.navigationItem.title = LS(key: "social_resource_manage")
         
         self.view.backgroundColor = UIColor.yellow
         let label = UILabel()
         label.frame = CGRect(x: 200, y: 100, width: 100, height: 100)
-        label.text = "ソーシャルリソース管理"
+        label.text = LS(key: "social_resource_manage")
         self.view.addSubview(label)
     }
     

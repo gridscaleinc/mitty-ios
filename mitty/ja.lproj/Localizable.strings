@@ -1,0 +1,23 @@
+/* 
+  Localizable.strings
+  mitty
+
+  Created by Dongri Jin on 2016/11/05.
+  Copyright © 2016 GridScale Inc. All rights reserved.
+*/
+
+"home" = "ホーム";
+
+"activity" = "活動";
+
+"island" = "島";
+
+"social" = "ソーシャル";
+
+"myself" = "自分";
+
+"now" = "現在";
+
+"yen" = "円";
+
+"social_resource_manage" = "ソーシャルリソース管理";
