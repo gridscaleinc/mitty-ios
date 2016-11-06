@@ -123,7 +123,7 @@ extension HomeViewController: UICollectionViewDataSource {
         {
             cell.configureView(event: events[indexPath.row])
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
-            let tapGestureRecognizer = CellTagHandler(cell: cell, target:self, action:#selector(HomeViewController.cellTapped(handler:)))
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(HomeViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
 
             return cell
@@ -131,13 +131,13 @@ extension HomeViewController: UICollectionViewDataSource {
         return EventCell()
     }
     
-    func cellTapped(handler: CellTagHandler) {
-        
-        print (handler.cell.event)
-        let ev = EventDetailViewController(event: handler.cell.event!)
+    ///
+    func cellTapped(handler: UITapGestureRecognizer) {
+        print (handler.view)
+        let eventViewController = EventDetailViewController(event: ((handler.view) as! EventCell).event!)
         self.navigationItem.title = "..."
         self.tabBarController?.tabBar.isHidden = true
-        self.navigationController?.pushViewController(ev, animated: true)
+        self.navigationController?.pushViewController(eventViewController, animated: true)
     }
 }
 
