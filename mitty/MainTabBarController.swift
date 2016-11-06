@@ -24,6 +24,13 @@ class MainTabBarController: UITabBarController {
     var tab4SocialController: UINavigationController!
     var tab5MyselfController: UINavigationController!
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (animated) {
+            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = appDelegate.mainTabBarController
+        }
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
