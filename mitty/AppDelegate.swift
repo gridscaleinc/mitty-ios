@@ -14,7 +14,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     
     //Class for view Mitty
-    let guideViewController: GuideViewController = GuideViewController()
+    //let guideViewController: GuideViewController = GuideViewController()
     //Tab bar
     
     let mainTabBarController: MainTabBarController = MainTabBarController()
@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let themeColor = UIColor(red: 0.3, green: 0.21, blue: 0.50, alpha: 1.0)
         self.window?.tintColor = themeColor;
-        self.window?.rootViewController = guideViewController
+        self.window?.rootViewController = mainTabBarController
         self.window?.makeKeyAndVisible()
 
         return true
