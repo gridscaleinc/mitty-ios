@@ -33,6 +33,7 @@ class HomeViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()
+        self.navigationItem.title = "ホーム"
         
         configureNavigationBar()
         addSubviews()
@@ -68,6 +69,12 @@ class HomeViewController: UIViewController {
         collectionView.autoPinEdge(toSuperviewEdge: .bottom)
     }
     
+    /// 子画面からモドたら、tabバーを戻す。
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationItem.title = "ホーム"
+    }
+    
 }
 
 
@@ -76,42 +83,28 @@ extension HomeViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
-        events.removeAll()
+        // 非同期方式で処理を呼び出す。
+        let queue = OperationQueue()
+        let key = searchBar.text
         
-        if searchBar.text != nil || (searchBar.text?.lengthOfBytes(using: String.Encoding.utf8 ))! >= 0 {
-            events.append(buildEvent(1))
-            events.append(buildEvent(2))
-            events.append(buildEvent(3))
-            events.append(buildEvent(4))
-            events.append(buildEvent(5))
+        if key != nil || (key?.lengthOfBytes(using: String.Encoding.utf8 ))! >= 0 {
+            queue.addOperation() {
+                // 非同期処理
+                let service = EventService.instance
+                let keys = [key]
+                
+                self.events = service.search(keys: keys as! [String])
+                // 非同期処理のコールバック
+                OperationQueue.main.addOperation() {
+                    self.collectionView.reloadData()
+                }
+            }
         }
-        
-        collectionView.reloadData()
-
     }
 }
 
-func buildEvent(_ n:Int) ->Event! {
-    
-    let imagenames: [String] = ["event1","event2","event3","event4","event5","event6"]
-    
-    let a = Event()
-    
-    a.eventId = "id" + String(n)
-    a.title = "title" + String(n)
-    a.price  = 10 * n
-    a.imageUrl = imagenames[n-1]
-    a.startDate = "2016-09-09"
-    a.endDate = "2016-10-10"
-    a.startTime = "12:30"
-    a.endTime = "16:30"
-    
-    a.likes = 10+n
-    
-    a.endTime = "12:34:56"
-    
-    return a;
-}
+
+
 
 // MARK: - UITableViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
@@ -143,6 +136,7 @@ extension HomeViewController: UICollectionViewDataSource {
         print (handler.cell.event)
         let ev = EventDetailViewController(event: handler.cell.event!)
         self.navigationItem.title = "..."
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(ev, animated: true)
     }
 }
