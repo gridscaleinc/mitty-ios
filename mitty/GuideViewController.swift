@@ -33,12 +33,17 @@ class GuideViewController: UIViewController {
     //Viewの表示処理
     override func viewDidLoad() {
         super.viewDidLoad()
-         let frame = self.view.bounds
-        guideView.frame = CGRect(x: 0, y: 600, width: 375,height: 80)
+        pageContol.numberOfPages = numOfPages
+        let frame = self.view.bounds
+        guideView.frame = CGRect(x: 0, y: 600, width: frame.size.width, height: 80)
         guideView.backgroundColor = .red
-        startButton.frame = CGRect(x: 0, y: 0, width:100, height: 20)
-        //startButton.backgroundColor = UIColor.white
+        guideView.isUserInteractionEnabled = true
+        startButton.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 80)
+        startButton.backgroundColor = UIColor.clear
         startButton.setTitle("START", for: UIControlState.normal)
+        startButton.isUserInteractionEnabled = true
+        startButton.addTarget(self, action: #selector(GuideViewController.start), for: .touchUpInside)
+        guideView.addSubview(startButton)
 
         scrollView = UIScrollView(frame: frame)
         scrollView.isPagingEnabled = true
@@ -46,20 +51,22 @@ class GuideViewController: UIViewController {
         scrollView.showsVerticalScrollIndicator = false
         scrollView.scrollsToTop = false
         scrollView.bounces = false
+        scrollView.delegate = self
         scrollView.contentOffset = CGPoint.zero
         //将 scrollView 的 contentSize 设为屏幕宽度的3倍(根据实际情况改变)
         scrollView.contentSize = CGSize(width: frame.size.width * CGFloat(numOfPages), height: frame.size.height)
         for index  in 0..<numOfPages {
             let imageView = UIImageView(image: UIImage(named: "Guide\(index + 1)"))
             imageView.frame = CGRect(x: frame.size.width * CGFloat(index), y: 0, width: frame.size.width, height: frame.size.height)
+            if index == numOfPages - 1 {
+                imageView.isUserInteractionEnabled = true
+                imageView.addSubview(guideView)
+            }
             scrollView.addSubview(imageView)
         }
        
         self.view.insertSubview(scrollView, at: 0)
         
-        scrollView.addSubview(guideView)
-        guideView.addSubview(startButton)
-
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         //self.view.setNeedsUpdateConstraints()
@@ -88,6 +95,11 @@ class GuideViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    func start() {
+        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = appDelegate.mainTabBarController
+    }
 
 }
 
@@ -99,13 +111,13 @@ extension GuideViewController: UIScrollViewDelegate {
         pageContol.currentPage = Int(offset.x / self.view.bounds.width)
         
         // 因为currentPage是从0开始，所以numOfPages减1
-        if pageContol.currentPage == numOfPages - 1 {
+        if pageContol.currentPage == numOfPages - 1{
             UIView.animate(withDuration: 0.5, animations: {
-                self.startButton.alpha = 1.0
+                self.guideView.alpha = 1.0
             })
         } else {
             UIView.animate(withDuration: 0.2, animations: {
-                self.startButton.alpha = 0.0
+                self.guideView.alpha = 0.0
             })
         }
     }
