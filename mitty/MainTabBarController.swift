@@ -24,15 +24,19 @@ class MainTabBarController: UITabBarController {
     var tab4SocialController: UINavigationController!
     var tab5MyselfController: UINavigationController!
     
+    override func viewDidAppear(_ animated: Bool) {
+        if (animated) {
+            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = appDelegate.mainTabBarController
+        }
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
         
         // 各タブの生成
         //　ホームタブ
-//        let layout = UICollectionViewLayout()
-//        let showWinodowController = ShowWindowViewController(collectionViewLayout:layout)
-
         tab1HomeController = UINavigationController(rootViewController: HomeViewController ())
         tab1HomeController.tabBarItem = UITabBarItem(title: LS(key: "home"), image: UIImage(named: "home"), tag: 1)
 
