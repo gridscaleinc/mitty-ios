@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		062DEF3FE70021E7CF17EEF5 /* Pods_mittyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */; };
+		20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E508F31DCD8C5400696E29 /* GuideViewController.swift */; };
 		29588B077CD53C553381DDA6 /* Pods_mitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F362287AC99640C55568B9 /* Pods_mitty.framework */; };
 		4EF66DA6274B45BE5D4399D8 /* Pods_mittyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */; };
 		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
@@ -66,6 +67,7 @@
 
 /* Begin PBXFileReference section */
 		1EB95DE3B7D0E951A7ECB29A /* Pods-mittyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests.release.xcconfig"; sourceTree = "<group>"; };
+		20E508F31DCD8C5400696E29 /* GuideViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuideViewController.swift; sourceTree = "<group>"; };
 		27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mittyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2E3D19B86FC21418F9DD2F3F /* Pods-mittyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mittyUITests/Pods-mittyUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		2E525DDBBAAAD702F2F3A28B /* Pods_mittyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mittyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -307,6 +309,7 @@
 		FC0AF1E31DC4F2D800C76408 /* tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				20E508F31DCD8C5400696E29 /* GuideViewController.swift */,
 			);
 			name = tutorial;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
+				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* MyselfViewController.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
