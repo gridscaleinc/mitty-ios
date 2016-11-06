@@ -14,7 +14,7 @@ import Alamofire
 // Serverとの通信を使う
 
 func SignUp(username: String, password: String) {
-    Alamofire.request("http://mitty.co/api/signup").responseJSON { response in
+    Alamofire.request("http://dev.mitty.co/api/signup").responseJSON { response in
         debugPrint(response)
         if let json = response.result.value {
             print("JSON: \(json)")
@@ -23,7 +23,7 @@ func SignUp(username: String, password: String) {
 }
 
 func SignIn(username: String, password: String) {
-    Alamofire.request("http://mitty.co/api/signin").responseJSON { response in
+    Alamofire.request("http://dev.mitty.co/api/signin").responseJSON { response in
         debugPrint(response)
         if let json = response.result.value {
             print("JSON: \(json)")
