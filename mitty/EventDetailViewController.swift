@@ -13,6 +13,7 @@ import PureLayout
 
 @objc (EventDetailViewController)
 class EventDetailViewController : UIViewController {
+    
     var event : Event
     
     //
@@ -117,6 +118,7 @@ class EventDetailViewController : UIViewController {
     
     
     func pressSubscribe(sender:UIButton){
+        
         // ① UIAlertControllerクラスのインスタンスを生成
         // タイトル, メッセージ, Alertのスタイルを指定する
         // 第3引数のpreferredStyleでアラートの表示スタイルを指定する

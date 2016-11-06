@@ -50,6 +50,7 @@ class MyselfViewController: UIViewController {
         imageView.image = image
         // 5
         navigationItem.titleView = imageView
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
@@ -111,6 +112,7 @@ class MyselfViewController: UIViewController {
     func editPersonalInfo() {
         let eidtorView = RegisterPersonalInfoViewController()
         self.navigationItem.title = "..."
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(eidtorView, animated: true)
     }
 }
