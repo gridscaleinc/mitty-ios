@@ -30,9 +30,6 @@ class MainTabBarController: UITabBarController {
         
         // 各タブの生成
         //　ホームタブ
-//        let layout = UICollectionViewLayout()
-//        let showWinodowController = ShowWindowViewController(collectionViewLayout:layout)
-
         tab1HomeController = UINavigationController(rootViewController: HomeViewController ())
         tab1HomeController.tabBarItem = UITabBarItem(title: LS(key: "home"), image: UIImage(named: "home"), tag: 1)
 
