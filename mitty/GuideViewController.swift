@@ -97,9 +97,9 @@ class GuideViewController: UIViewController {
     }
     
     func start() {
-        let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        appDelegate.mainTabBarController.modalTransitionStyle = UIModalTransitionStyle.partialCurl
-        self.present(appDelegate.mainTabBarController, animated: true, completion: nil)
+        let vc = MainTabBarController()
+        vc.modalTransitionStyle = UIModalTransitionStyle.partialCurl
+        self.present(vc, animated: true, completion: nil)
     }
 
 }
