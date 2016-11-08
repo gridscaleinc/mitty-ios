@@ -66,6 +66,9 @@ class SchedulePlan {
 
 /// 島（グループ）
 class Island {
+    public var islandId = ""
+    public var islandName = ""
+    public var type = "private"
     
 }
 

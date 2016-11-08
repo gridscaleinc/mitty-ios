@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var skipGuideView = false;
 
     // Class for view Mitty
-    // let guideViewController: TutorialViewController = TutorialViewController()
-    let guideViewController: GuideViewController = GuideViewController()
+    let guideViewController: TutorialViewController = TutorialViewController()
+    //let guideViewController: GuideViewController = GuideViewController()
     //Tab bar
     
     let mainTabBarController: MainTabBarController = MainTabBarController()

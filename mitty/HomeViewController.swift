@@ -145,15 +145,6 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
-class CellTagHandler : UITapGestureRecognizer {
-    var cell : EventCell
-    
-    init(cell: EventCell, target:Any?, action: Selector? ) {
-        self.cell = cell
-        super.init(target:target, action:action)
-    }
-}
-
 extension HomeViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

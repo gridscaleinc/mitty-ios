@@ -51,6 +51,9 @@
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
 		FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */; };
+		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
+		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
+		FCFC7F821DD2237400CA0045 /* penginland.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC7F811DD2237400CA0045 /* penginland.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +131,9 @@
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
+		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
+		FCFC7F811DD2237400CA0045 /* penginland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penginland.png; path = images/penginland.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +190,7 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FCFC7F811DD2237400CA0045 /* penginland.png */,
 				FC427B881DCAFDE1009F43AE /* event1.png */,
 				FC427B891DCAFDE1009F43AE /* event2.png */,
 				FC427B8A1DCAFDE1009F43AE /* event3.png */,
@@ -315,6 +322,7 @@
 			children = (
 				FC0AF1EC1DC4F61B00C76408 /* Service.swift */,
 				FC2862AA1DCEAFA6000854D9 /* EventService.swift */,
+				FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -349,6 +357,7 @@
 			isa = PBXGroup;
 			children = (
 				F4BB80211DAE58E000055D48 /* IslandViewController.swift */,
+				FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */,
 			);
 			name = Island;
 			sourceTree = "<group>";
@@ -519,6 +528,7 @@
 				FC427B901DCAFDE1009F43AE /* event3.png in Resources */,
 				FC0AF1FB1DC5087A00C76408 /* social.png in Resources */,
 				FCF0BBF31DC7934E009C5C1F /* home.png in Resources */,
+				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
 				FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */,
 				FC427B911DCAFDE1009F43AE /* event4.png in Resources */,
 				FC427B8F1DCAFDE1009F43AE /* event2.png in Resources */,
@@ -705,10 +715,12 @@
 				F4BB80201DAE57A300055D48 /* ActivityViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
+				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* Model.swift in Sources */,
 				FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */,
+				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FC427B831DCACB43009F43AE /* HomeViewController.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
@@ -869,7 +881,7 @@
 				INFOPLIST_FILE = mitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
+				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journeyWay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -885,7 +897,7 @@
 				INFOPLIST_FILE = mitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
+				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journeyWay;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
