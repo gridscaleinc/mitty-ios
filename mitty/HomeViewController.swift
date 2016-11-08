@@ -33,6 +33,8 @@ class HomeViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()
+        self.searchBar.resignFirstResponder()
+        
         self.navigationItem.title = "ホーム"
         
         configureNavigationBar()
@@ -82,6 +84,8 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
         
         // 非同期方式で処理を呼び出す。
         let queue = OperationQueue()
