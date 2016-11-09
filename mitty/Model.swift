@@ -196,6 +196,11 @@ class SeatInfo {
 /// 発言
 class Talk {
     
+    public var mittyId = ""
+    public var avatarIcon = ""
+    public var familyName = ""
+    public var speaking = ""
+    
 }
 
 /// 会話
