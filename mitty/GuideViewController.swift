@@ -58,8 +58,8 @@ class GuideViewController: UIViewController {
         startButton.setTitle("使用開始", for: UIControlState.normal)
         startButton.setTitleColor(.blue, for: UIControlState.normal)
         startButton.addTarget(self, action: #selector(self.startBtnDo), for: .touchUpInside)
-        baselabel.text = "                                         "
-        baselabel.backgroundColor = .blue
+        baselabel.text = "----------------------------------------"
+        baselabel.textColor = .blue
 
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         self.view.setNeedsUpdateConstraints()
