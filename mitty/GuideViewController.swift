@@ -13,64 +13,75 @@ import PureLayout
 @objc (GuideViewController)
 class GuideViewController: UIViewController {
     
-    var guideView = UIView.newAutoLayout()
+    var mittyImage = UIImageView.newAutoLayout()
+    var firLabel = UILabel.newAutoLayout()
+    var baselabel = UILabel.newAutoLayout()
     var scrollView: UIScrollView!
-    
-    var pageContol = UIPageControl.init()
+    var imageView = UIImageView()
+    var secLabel = UILabel.newAutoLayout()
+    var thirLabel = UILabel.newAutoLayout()
+    var startButton = UIButton.newAutoLayout()
+    var pageContol = UIPageControl.newAutoLayout()
+
     let numOfPages = 3
-    
-    //開始ボータン
-    var startButton : UIButton = UIButton.init()
     
     // Autolayout済みフラグ
     var didSetupConstraints = false
     
     override func loadView() {
         super.loadView()
-       
-    
-    }
-    //Viewの表示処理
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        pageContol.numberOfPages = numOfPages
-        let frame = self.view.bounds
-        guideView.frame = CGRect(x: 0, y: 600, width: frame.size.width, height: 80)
-        guideView.backgroundColor = .red
-        guideView.isUserInteractionEnabled = true
-        startButton.frame = CGRect(x: 0, y: 0, width: frame.size.width, height: 80)
-        startButton.backgroundColor = UIColor.clear
-        startButton.setTitle("START", for: UIControlState.normal)
-        startButton.isUserInteractionEnabled = true
-        startButton.addTarget(self, action: #selector(GuideViewController.start), for: .touchUpInside)
-        guideView.addSubview(startButton)
-
-        scrollView = UIScrollView(frame: frame)
+        
+        self.view.backgroundColor = UIColor.white
+        
+        mittyImage = UIImageView(image: UIImage(named: "Guide1"))
+        
+        firLabel.text = "Mitty - May I talk to you ?"
+        firLabel.textColor = .red
+        
+        scrollView = UIScrollView(frame: self.view.bounds)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         scrollView.scrollsToTop = false
         scrollView.bounces = false
-        scrollView.delegate = self
         scrollView.contentOffset = CGPoint.zero
-        //将 scrollView 的 contentSize 设为屏幕宽度的3倍(根据实际情况改变)
-        scrollView.contentSize = CGSize(width: frame.size.width * CGFloat(numOfPages), height: frame.size.height)
+        scrollView.contentSize = CGSize(width: self.view.bounds.size.width * 3, height: self.view.bounds.size.height)
         for index  in 0..<numOfPages {
-            let imageView = UIImageView(image: UIImage(named: "Guide\(index + 1)"))
-            imageView.frame = CGRect(x: frame.size.width * CGFloat(index), y: 0, width: frame.size.width, height: frame.size.height)
-            if index == numOfPages - 1 {
-                imageView.isUserInteractionEnabled = true
-                imageView.addSubview(guideView)
-            }
+            imageView = UIImageView(image: UIImage(named: "Guide\(index + 1)"))
+            imageView.frame = CGRect(x: self.view.bounds.size.width * CGFloat(index), y: self.view.bounds.size.height * 0.2, width: self.view.bounds.size.width, height: self.view.bounds.size.height * 0.5)
             scrollView.addSubview(imageView)
         }
-       
-        self.view.insertSubview(scrollView, at: 0)
         
-        // ここでビューの整列をする。
-        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
-        //self.view.setNeedsUpdateConstraints()
+        secLabel.text = "活動情報をシェアしよう！"
+        secLabel.textColor = .red
+        thirLabel.text = "Mittyはプライバシーを守ります。"
+        startButton.setTitle("使用開始", for: UIControlState.normal)
+        startButton.setTitleColor(.blue, for: UIControlState.normal)
+        startButton.addTarget(self, action: #selector(self.startBtnDo), for: .touchUpInside)
+        baselabel.text = "                                         "
+        baselabel.backgroundColor = .blue
 
+        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
+        self.view.setNeedsUpdateConstraints()
+    }
+    //Viewの表示処理
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.view.addSubview(scrollView)
+        self.view.addSubview(mittyImage)
+        self.view.addSubview(firLabel)
+        self.view.addSubview(baselabel)
+        self.view.addSubview(secLabel)
+        self.view.addSubview(thirLabel)
+        self.view.addSubview(startButton)
+        self.view.addSubview(pageContol)
+    }
+    
+    //Go to the mainbar 
+    func startBtnDo() {
+        let mainTabBarController: MainTabBarController = MainTabBarController()
+        present(mainTabBarController, animated:true, completion:nil)
     }
     
     //
@@ -79,12 +90,40 @@ class GuideViewController: UIViewController {
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
             
-            //guideView.autoPinEdgesToSuperviewEdges(with: self.view.widthAnchor)
-            //guideView.autoMatch(.width, to: .width, of: self.view)
-            startButton.autoPinEdge(.bottom, to: .bottom, of: guideView)
-            startButton.autoPinEdge(.left, to: .right, of: guideView, withOffset: 10)
-            startButton.autoSetDimension(.width, toSize:50)
-            startButton.autoSetDimension(.height, toSize:50)
+            mittyImage.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 30)
+            mittyImage.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 30)
+            mittyImage.autoSetDimension(.width, toSize:self.view.bounds.size.width * 0.3)
+            mittyImage.autoSetDimension(.height, toSize:self.view.bounds.size.height * 0.1)
+            
+            firLabel.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
+            firLabel.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 65)
+            firLabel.autoSetDimension(.width, toSize: 200)
+            firLabel.autoSetDimension(.height, toSize: 30)
+
+            baselabel.autoPinEdge(.top, to: .bottom, of: mittyImage, withOffset: 10)
+            baselabel.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
+            baselabel.autoSetDimension(.width, toSize: 320)
+            baselabel.autoSetDimension(.height, toSize: 30)
+
+            secLabel.autoPinEdge(.top, to: .bottom, of: baselabel, withOffset: self.view.bounds.size.height * 0.5)
+            secLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 10)
+            secLabel.autoSetDimension(.width, toSize:250)
+            secLabel.autoSetDimension(.height, toSize:30)
+            
+            thirLabel.autoPinEdge(.top, to: .bottom, of: secLabel, withOffset: 20)
+            thirLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
+            thirLabel.autoSetDimension(.width, toSize:300)
+            thirLabel.autoSetDimension(.height, toSize:30)
+            
+            startButton.autoPinEdge(.top, to: .bottom, of: thirLabel, withOffset: 20)
+            startButton.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
+            startButton.autoSetDimension(.width, toSize:80)
+            startButton.autoSetDimension(.height, toSize:30)
+            
+            pageContol.autoPinEdge(.top, to: .bottom, of: startButton, withOffset: 10)
+            pageContol.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
+            pageContol.autoSetDimension(.width, toSize: 80)
+            pageContol.autoSetDimension(.height, toSize: 30)
             
             didSetupConstraints = true
         }
@@ -95,31 +134,5 @@ class GuideViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-    
-    func start() {
-        let vc = MainTabBarController()
-        vc.modalTransitionStyle = UIModalTransitionStyle.partialCurl
-        self.present(vc, animated: true, completion: nil)
-    }
 
-}
-
-// MARK: - UIScrollViewDelegate
-extension GuideViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let offset = scrollView.contentOffset
-        // 随着滑动改变pageControl的状态
-        pageContol.currentPage = Int(offset.x / self.view.bounds.width)
-        
-        // 因为currentPage是从0开始，所以numOfPages减1
-        if pageContol.currentPage == numOfPages - 1{
-            UIView.animate(withDuration: 0.5, animations: {
-                self.guideView.alpha = 1.0
-            })
-        } else {
-            UIView.animate(withDuration: 0.2, animations: {
-                self.guideView.alpha = 0.0
-            })
-        }
-    }
 }
