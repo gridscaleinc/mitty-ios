@@ -51,6 +51,22 @@ class TalkListViewController: UIViewController {
     
     let collectionView: UICollectionView
     
+    let arSwitch : UISwitch = {
+        let arswitch = UISwitch.newAutoLayout()
+        return arswitch
+    } ()
+    
+    
+    let navLabel : UILabel = {
+        let l = UILabel.newAutoLayout()
+        l.text = "AR"
+        l.textColor = UIColor.red
+        l.font = l.font.withSize(12.0)
+        return l
+    } ()
+    
+    
+    
     // MARK: - Initializers
     init(island: Island) {
         
@@ -98,7 +114,30 @@ class TalkListViewController: UIViewController {
     }
     
     // MARK: - View Setup
-    private func configureNavigationBar() {}
+    private func configureNavigationBar() {
+//        let rect = CGRect(x:0, y:0, width:40, height:32)
+//        let rightButton = RightButton(frame: rect)
+        
+        navLabel.autoSetDimension(.height, toSize:15)
+        navLabel.autoSetDimension(.width, toSize: 10)
+        
+//        arSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
+//        let rightItems = [UIBarButtonItem(customView: navLabel), UIBarButtonItem(customView: arSwitch)]
+        let action = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target:self, action:#selector(action1))
+        let camera = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.camera, target:self, action:#selector(action1))
+        let b1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target:self, action:#selector(action1))
+        let b2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target:self, action:#selector(action1))
+        let b3 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target:self, action:#selector(action1))
+        
+        let rightItems = [action, camera, b1, b2, b3]
+        
+        navigationItem.setRightBarButtonItems(rightItems, animated: true)
+        
+    }
+    
+    func action1() {
+        
+    }
     
     private func addSubviews() {
         view.addSubview(topLabel)

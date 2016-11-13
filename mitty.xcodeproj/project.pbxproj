@@ -51,12 +51,19 @@
 		FC427B921DCAFDE1009F43AE /* event5.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8C1DCAFDE1009F43AE /* event5.png */; };
 		FC427B931DCAFDE1009F43AE /* event6.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8D1DCAFDE1009F43AE /* event6.png */; };
 		FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */; };
+		FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC448D3C1DD5EA730032F0D4 /* RightButton.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
 		FC8D70161DC8DCA80083E8E4 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70151DC8DCA80083E8E4 /* button.png */; };
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FCF0BBF31DC7934E009C5C1F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF0BBF21DC7934E009C5C1F /* home.png */; };
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
+		FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D6401DD762020059B270 /* ImageEdit.swift */; };
+		FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D6441DD7F6960059B270 /* MittyStyles.swift */; };
+		FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */; };
+		FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */; };
+		FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */; };
+		FCF8D6511DD8B7630059B270 /* connect.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8D6501DD8B7630059B270 /* connect.png */; };
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
 		FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
@@ -139,12 +146,19 @@
 		FC427B8C1DCAFDE1009F43AE /* event5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event5.png; path = images/event5.png; sourceTree = "<group>"; };
 		FC427B8D1DCAFDE1009F43AE /* event6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event6.png; path = images/event6.png; sourceTree = "<group>"; };
 		FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
+		FC448D3C1DD5EA730032F0D4 /* RightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightButton.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		FC8D70151DC8DCA80083E8E4 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCF0BBF21DC7934E009C5C1F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = images/home.png; sourceTree = "<group>"; };
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
+		FCF8D6401DD762020059B270 /* ImageEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEdit.swift; sourceTree = "<group>"; };
+		FCF8D6441DD7F6960059B270 /* MittyStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyles.swift; sourceTree = "<group>"; };
+		FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
+		FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInfoCell.swift; sourceTree = "<group>"; };
+		FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialContactService.swift; sourceTree = "<group>"; };
+		FCF8D6501DD8B7630059B270 /* connect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = connect.png; path = images/connect.png; sourceTree = "<group>"; };
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
@@ -206,6 +220,7 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FCF8D6501DD8B7630059B270 /* connect.png */,
 				FC0081921DD39B0300C1F970 /* pengin4.png */,
 				FC0081901DD3955300C1F970 /* pengin.png */,
 				FC0081891DD394D300C1F970 /* pengin1.png */,
@@ -345,6 +360,7 @@
 				FC2862AA1DCEAFA6000854D9 /* EventService.swift */,
 				FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */,
 				FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */,
+				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -382,6 +398,7 @@
 				FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */,
 				FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */,
 				FC0081861DD3890A00C1F970 /* TalkingCell.swift */,
+				FC448D3C1DD5EA730032F0D4 /* RightButton.swift */,
 			);
 			name = Island;
 			sourceTree = "<group>";
@@ -390,6 +407,8 @@
 			isa = PBXGroup;
 			children = (
 				F4BB80231DAE58F300055D48 /* SocialViewController.swift */,
+				FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */,
+				FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */,
 			);
 			name = social;
 			sourceTree = "<group>";
@@ -425,6 +444,8 @@
 			isa = PBXGroup;
 			children = (
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
+				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
+				FCF8D6441DD7F6960059B270 /* MittyStyles.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -570,6 +591,7 @@
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
 				F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
+				FCF8D6511DD8B7630059B270 /* connect.png in Resources */,
 				FC0081911DD3955300C1F970 /* pengin.png in Resources */,
 				FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */,
 			);
@@ -737,7 +759,10 @@
 				FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
+				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
+				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
+				FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* MyselfViewController.swift in Sources */,
@@ -756,8 +781,11 @@
 				FC427B831DCACB43009F43AE /* HomeViewController.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
+				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,
+				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
+				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
