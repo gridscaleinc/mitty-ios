@@ -84,13 +84,13 @@ class IslandViewController: UIViewController {
         
         buttonPublic.autoPinEdge(.top, to: .bottom, of: topImage )
         buttonPublic.autoPinEdge(.left, to: .left, of: topImage )
-        buttonPublic.autoSetDimension(.height, toSize: 40)
+        buttonPublic.autoSetDimension(.height, toSize: 25)
         buttonPublic.autoSetDimension(.width, toSize: UIScreen.main.bounds.size.width / 2)
         
         buttonPrivate.autoPinEdge(.top, to: .top, of: buttonPublic )
         buttonPrivate.autoPinEdge(.left, to: .right, of: buttonPublic )
         buttonPrivate.autoPinEdge(.right, to: .right, of: topImage )
-        buttonPrivate.autoSetDimension(.height, toSize: 40)
+        buttonPrivate.autoPinEdge(.bottom, to: .bottom, of: buttonPublic )
         
         collectionView.autoPinEdge(.top, to: .bottom, of: buttonPublic)
         collectionView.autoPinEdge(toSuperviewEdge: .left)

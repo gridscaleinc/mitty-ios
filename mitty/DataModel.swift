@@ -15,7 +15,7 @@ class Activity {
 
 ///
 /// イベント情報
-class Event : Activity {
+class Event {
     
     public var eventId: String! = ""
     public var title: String = ""

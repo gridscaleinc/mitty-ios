@@ -116,8 +116,34 @@ class EventDetailViewController : UIViewController {
         super.updateViewConstraints()
     }
     
+    func pressSubscribe2 (sender: UIButton) {
+        // 共有する項目
+        let shareText = "Apple - Apple Watch"
+        let shareWebsite = NSURL(string: "https://www.apple.com/jp/watch/")!
+        let shareImage = UIImage(named: "penginland")!
+        
+        let activityItems = [shareText, shareWebsite, shareImage] as [Any]
+        
+        // 初期化処理
+        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        
+        // 使用しないアクティビティタイプ
+        let excludedActivityTypes = [
+            UIActivityType.postToFacebook,
+            UIActivityType.postToTwitter,
+            UIActivityType.message,
+            UIActivityType.saveToCameraRoll,
+            UIActivityType.print
+        ]
+        
+        activityVC.excludedActivityTypes = excludedActivityTypes
+        
+        // UIActivityViewControllerを表示
+        self.present(activityVC, animated: true, completion: nil)
+        
+    }
     
-    func pressSubscribe(sender:UIButton){
+    func pressSubscribe (sender:UIButton){
         
         // ① UIAlertControllerクラスのインスタンスを生成
         // タイトル, メッセージ, Alertのスタイルを指定する

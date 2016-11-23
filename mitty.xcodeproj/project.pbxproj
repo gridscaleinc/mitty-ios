@@ -36,7 +36,7 @@
 		FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1E61DC4F3F200C76408 /* ApplicationContext.swift */; };
 		FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1EC1DC4F61B00C76408 /* Service.swift */; };
 		FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1EE1DC4F63300C76408 /* Datastore.swift */; };
-		FC0AF1F11DC4F65100C76408 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1F01DC4F65100C76408 /* Model.swift */; };
+		FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1F01DC4F65100C76408 /* DataModel.swift */; };
 		FC0AF1FB1DC5087A00C76408 /* social.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FA1DC5087A00C76408 /* social.png */; };
 		FC0AF1FD1DC5088400C76408 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FC1DC5088400C76408 /* activity.png */; };
 		FC0AF1FF1DC5089C00C76408 /* island.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FE1DC5089C00C76408 /* island.png */; };
@@ -69,6 +69,15 @@
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
 		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
 		FCFC7F821DD2237400CA0045 /* penginland.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC7F811DD2237400CA0045 /* penginland.png */; };
+		FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */; };
+		FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67B61DE50FA1007203EF /* bagua_1.png */; };
+		FCFE67BF1DE50FA1007203EF /* bagua_2.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67B71DE50FA1007203EF /* bagua_2.png */; };
+		FCFE67C01DE50FA1007203EF /* bagua_3.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67B81DE50FA1007203EF /* bagua_3.png */; };
+		FCFE67C11DE50FA1007203EF /* bagua_4.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67B91DE50FA1007203EF /* bagua_4.png */; };
+		FCFE67C21DE50FA1007203EF /* bagua_5.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67BA1DE50FA1007203EF /* bagua_5.png */; };
+		FCFE67C31DE50FA1007203EF /* bagua_6.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67BB1DE50FA1007203EF /* bagua_6.png */; };
+		FCFE67C41DE50FA1007203EF /* bagua_7.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67BC1DE50FA1007203EF /* bagua_7.png */; };
+		FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67BD1DE50FA1007203EF /* bagua_8.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -131,7 +140,7 @@
 		FC0AF1E61DC4F3F200C76408 /* ApplicationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContext.swift; sourceTree = "<group>"; };
 		FC0AF1EC1DC4F61B00C76408 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		FC0AF1EE1DC4F63300C76408 /* Datastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datastore.swift; sourceTree = "<group>"; };
-		FC0AF1F01DC4F65100C76408 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		FC0AF1F01DC4F65100C76408 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
 		FC0AF1FA1DC5087A00C76408 /* social.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = social.png; path = images/social.png; sourceTree = "<group>"; };
 		FC0AF1FC1DC5088400C76408 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = images/activity.png; sourceTree = "<group>"; };
 		FC0AF1FE1DC5089C00C76408 /* island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = island.png; path = images/island.png; sourceTree = "<group>"; };
@@ -164,6 +173,15 @@
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
 		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
 		FCFC7F811DD2237400CA0045 /* penginland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penginland.png; path = images/penginland.png; sourceTree = "<group>"; };
+		FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaguaIndicator.swift; sourceTree = "<group>"; };
+		FCFE67B61DE50FA1007203EF /* bagua_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_1.png; path = images/bagua_1.png; sourceTree = "<group>"; };
+		FCFE67B71DE50FA1007203EF /* bagua_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_2.png; path = images/bagua_2.png; sourceTree = "<group>"; };
+		FCFE67B81DE50FA1007203EF /* bagua_3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_3.png; path = images/bagua_3.png; sourceTree = "<group>"; };
+		FCFE67B91DE50FA1007203EF /* bagua_4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_4.png; path = images/bagua_4.png; sourceTree = "<group>"; };
+		FCFE67BA1DE50FA1007203EF /* bagua_5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_5.png; path = images/bagua_5.png; sourceTree = "<group>"; };
+		FCFE67BB1DE50FA1007203EF /* bagua_6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_6.png; path = images/bagua_6.png; sourceTree = "<group>"; };
+		FCFE67BC1DE50FA1007203EF /* bagua_7.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_7.png; path = images/bagua_7.png; sourceTree = "<group>"; };
+		FCFE67BD1DE50FA1007203EF /* bagua_8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_8.png; path = images/bagua_8.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,6 +238,14 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE67B61DE50FA1007203EF /* bagua_1.png */,
+				FCFE67B71DE50FA1007203EF /* bagua_2.png */,
+				FCFE67B81DE50FA1007203EF /* bagua_3.png */,
+				FCFE67B91DE50FA1007203EF /* bagua_4.png */,
+				FCFE67BA1DE50FA1007203EF /* bagua_5.png */,
+				FCFE67BB1DE50FA1007203EF /* bagua_6.png */,
+				FCFE67BC1DE50FA1007203EF /* bagua_7.png */,
+				FCFE67BD1DE50FA1007203EF /* bagua_8.png */,
 				FCF8D6501DD8B7630059B270 /* connect.png */,
 				FC0081921DD39B0300C1F970 /* pengin4.png */,
 				FC0081901DD3955300C1F970 /* pengin.png */,
@@ -340,7 +366,7 @@
 		FC0AF1DF1DC4F22600C76408 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				FC0AF1F01DC4F65100C76408 /* Model.swift */,
+				FC0AF1F01DC4F65100C76408 /* DataModel.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -443,6 +469,7 @@
 		FCF9575A1DC6142000A52125 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */,
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
 				FCF8D6441DD7F6960059B270 /* MittyStyles.swift */,
@@ -569,6 +596,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC8D70161DC8DCA80083E8E4 /* button.png in Resources */,
+				FCFE67C21DE50FA1007203EF /* bagua_5.png in Resources */,
 				F46601ED1DB372760012D898 /* Sample.png in Resources */,
 				FC427B901DCAFDE1009F43AE /* event3.png in Resources */,
 				FC0AF1FB1DC5087A00C76408 /* social.png in Resources */,
@@ -584,15 +612,22 @@
 				F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */,
 				FC427B931DCAFDE1009F43AE /* event6.png in Resources */,
 				F46601EE1DB372760012D898 /* welcom.png in Resources */,
+				FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */,
 				FC0AF1FD1DC5088400C76408 /* activity.png in Resources */,
+				FCFE67C31DE50FA1007203EF /* bagua_6.png in Resources */,
 				FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */,
+				FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */,
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,
 				FC0AF2011DC508A700C76408 /* myself.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
 				F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */,
+				FCFE67BF1DE50FA1007203EF /* bagua_2.png in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
+				FCFE67C11DE50FA1007203EF /* bagua_4.png in Resources */,
 				FCF8D6511DD8B7630059B270 /* connect.png in Resources */,
+				FCFE67C01DE50FA1007203EF /* bagua_3.png in Resources */,
 				FC0081911DD3955300C1F970 /* pengin.png in Resources */,
+				FCFE67C41DE50FA1007203EF /* bagua_7.png in Resources */,
 				FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -768,11 +803,12 @@
 				F4BB80261DAE58FE00055D48 /* MyselfViewController.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
+				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
-				FC0AF1F11DC4F65100C76408 /* Model.swift in Sources */,
+				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
 				FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,

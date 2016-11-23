@@ -9,9 +9,8 @@
 import Foundation
 
 func LS(key : String!) -> String {
-    var s:String! = Bundle.main.localizedString(forKey: key, value: "", table: nil)
-    if nil == s {
-        s = ""
-    }
-    return s
+    let s:String? = Bundle.main.localizedString(forKey: key, value: "", table: nil)
+
+    return s ?? ""
+    
 }
