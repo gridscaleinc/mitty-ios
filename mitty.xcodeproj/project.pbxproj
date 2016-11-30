@@ -24,7 +24,7 @@
 		F4BB80201DAE57A300055D48 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB801F1DAE57A300055D48 /* ActivityViewController.swift */; };
 		F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80211DAE58E000055D48 /* IslandViewController.swift */; };
 		F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80231DAE58F300055D48 /* SocialViewController.swift */; };
-		F4BB80261DAE58FE00055D48 /* MyselfViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* MyselfViewController.swift */; };
+		F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* CenterViewController.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
 		FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */; };
 		FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081861DD3890A00C1F970 /* TalkingCell.swift */; };
@@ -130,7 +130,7 @@
 		F4BB801F1DAE57A300055D48 /* ActivityViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
 		F4BB80211DAE58E000055D48 /* IslandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandViewController.swift; sourceTree = "<group>"; };
 		F4BB80231DAE58F300055D48 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
-		F4BB80251DAE58FE00055D48 /* MyselfViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyselfViewController.swift; sourceTree = "<group>"; };
+		F4BB80251DAE58FE00055D48 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
 		FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkFetchService.swift; sourceTree = "<group>"; };
 		FC0081861DD3890A00C1F970 /* TalkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingCell.swift; sourceTree = "<group>"; };
@@ -448,7 +448,7 @@
 		FC0AF1EB1DC4F57E00C76408 /* myself */ = {
 			isa = PBXGroup;
 			children = (
-				F4BB80251DAE58FE00055D48 /* MyselfViewController.swift */,
+				F4BB80251DAE58FE00055D48 /* CenterViewController.swift */,
 				FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */,
 			);
 			name = myself;
@@ -808,7 +808,7 @@
 				FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
-				F4BB80261DAE58FE00055D48 /* MyselfViewController.swift in Sources */,
+				F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,

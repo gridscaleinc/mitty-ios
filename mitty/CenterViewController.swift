@@ -1,5 +1,5 @@
 //
-//  MyselfViewController.swift
+//  CenterViewController.swift
 //
 //  mitty
 //
@@ -13,8 +13,8 @@ import UIKit
 //
 // 個人情報を管理するView
 //
-@objc(MyselfViewController)
-class MyselfViewController: UIViewController {
+@objc(CenterViewController)
+class CenterViewController: UIViewController {
    
     
     // Autolayout済みフラグ
@@ -22,22 +22,7 @@ class MyselfViewController: UIViewController {
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewWillAppear(_ animated: Bool) {
-        self.navigationItem.title = "個人情報を管理"
-        
-        // 1
-        let nav = self.navigationController?.navigationBar
-        // 2
-        nav?.barStyle = UIBarStyle.blackTranslucent
-        nav?.tintColor = UIColor.white
-        // 3
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        imageView.contentMode = .scaleAspectFit
-        // 4
-        let image = UIImage(named: "myself")
-        imageView.image = image
-        // 5
-        navigationItem.titleView = imageView
-        self.tabBarController?.tabBar.isHidden = false
+        self.navigationItem.title = LS(key: "operation_center")
         
     }
     
@@ -50,6 +35,8 @@ class MyselfViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.navigationItem.title = LS(key: "operation_center")
+        
         // 色のビュルド仕方
         let swiftColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1)
         self.view.backgroundColor = swiftColor
@@ -64,7 +51,7 @@ class MyselfViewController: UIViewController {
         button.layer.cornerRadius = 10
         button.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.9)
         
-        button.addTarget(self, action: #selector(MyselfViewController.editPersonalInfo), for: .touchUpInside)
+        button.addTarget(self, action: #selector(CenterViewController.editPersonalInfo), for: .touchUpInside)
         self.view.addSubview(button)
 
         

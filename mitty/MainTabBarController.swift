@@ -59,10 +59,7 @@ class MainTabBarController: UITabBarController {
         // タブグループ登録
         let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3MyselfController, tab4IslandController!, tab5SocialController!)
         self.setViewControllers(tabs as? [UIViewController], animated: true)
-        if freshLaunch {
-            self.tabBarController?.selectedViewController = tab3MyselfController
-            freshLaunch = false
-        }
+        self.selectedIndex = 2
         
     }
 }

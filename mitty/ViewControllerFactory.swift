@@ -19,7 +19,7 @@ class ViewControllerFactory {
     static func createPersonalInfoNaviController() -> UINavigationController {
         let naviController = UINavigationController(rootViewController: createSelfViewController())
         
-        naviController.tabBarItem = UITabBarItem(title: LS(key: "myself"), image: UIImage(named: "myself"), tag: 5)
+        naviController.tabBarItem = UITabBarItem(title: LS(key: "center"), image: UIImage(named: "myself"), tag: 5)
         
         return naviController
         
@@ -27,9 +27,9 @@ class ViewControllerFactory {
     
     ///
     ///
-    static func createSelfViewController() -> MyselfViewController {
+    static func createSelfViewController() -> CenterViewController {
         
-        let vc = MyselfViewController()
+        let vc = CenterViewController()
         return vc;
         
     }
