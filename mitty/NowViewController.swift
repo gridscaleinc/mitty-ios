@@ -3,7 +3,7 @@ import PureLayout
 
 
 @objc(HomeViewController)
-class HomeViewController: UIViewController {
+class NowViewController: UIViewController {
     
     
     // MARK: - Properties
@@ -81,7 +81,7 @@ class HomeViewController: UIViewController {
 
 
 // MARK: - UISearchBarDelegate
-extension HomeViewController: UISearchBarDelegate
+extension NowViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -111,7 +111,7 @@ extension HomeViewController: UISearchBarDelegate
 
 
 // MARK: - UITableViewDataSource
-extension HomeViewController: UICollectionViewDataSource {
+extension NowViewController: UICollectionViewDataSource {
    
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -127,7 +127,7 @@ extension HomeViewController: UICollectionViewDataSource {
         {
             cell.configureView(event: events[indexPath.row])
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
-            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(HomeViewController.cellTapped(handler:)))
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(NowViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
 
             return cell
@@ -145,7 +145,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 
-extension HomeViewController: UICollectionViewDelegateFlowLayout {
+extension NowViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

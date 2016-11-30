@@ -43,7 +43,7 @@
 		FC0AF2011DC508A700C76408 /* myself.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF2001DC508A700C76408 /* myself.png */; };
 		FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2862AA1DCEAFA6000854D9 /* EventService.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
-		FC427B831DCACB43009F43AE /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* HomeViewController.swift */; };
+		FC427B831DCACB43009F43AE /* NowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* NowViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
 		FC427B8F1DCAFDE1009F43AE /* event2.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B891DCAFDE1009F43AE /* event2.png */; };
 		FC427B901DCAFDE1009F43AE /* event3.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8A1DCAFDE1009F43AE /* event3.png */; };
@@ -55,6 +55,8 @@
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
 		FC8D70161DC8DCA80083E8E4 /* button.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70151DC8DCA80083E8E4 /* button.png */; };
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
+		FCC9CB9F1DE9B3CB00F2582C /* now.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* now.png */; };
+		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
 		FCF0BBF31DC7934E009C5C1F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF0BBF21DC7934E009C5C1F /* home.png */; };
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
@@ -147,7 +149,7 @@
 		FC0AF2001DC508A700C76408 /* myself.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myself.png; path = images/myself.png; sourceTree = "<group>"; };
 		FC2862AA1DCEAFA6000854D9 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
-		FC427B811DCACB43009F43AE /* HomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		FC427B811DCACB43009F43AE /* NowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NowViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
 		FC427B891DCAFDE1009F43AE /* event2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event2.png; path = images/event2.png; sourceTree = "<group>"; };
 		FC427B8A1DCAFDE1009F43AE /* event3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event3.png; path = images/event3.png; sourceTree = "<group>"; };
@@ -159,6 +161,8 @@
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		FC8D70151DC8DCA80083E8E4 /* button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = button.png; sourceTree = "<group>"; };
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		FCC9CB9E1DE9B3CB00F2582C /* now.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = now.png; path = images/now.png; sourceTree = "<group>"; };
+		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
 		FCF0BBF21DC7934E009C5C1F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = images/home.png; sourceTree = "<group>"; };
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -238,6 +242,8 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FCC9CBA01DE9B3DA00F2582C /* we.png */,
+				FCC9CB9E1DE9B3CB00F2582C /* now.png */,
 				FCFE67B61DE50FA1007203EF /* bagua_1.png */,
 				FCFE67B71DE50FA1007203EF /* bagua_2.png */,
 				FCFE67B81DE50FA1007203EF /* bagua_3.png */,
@@ -452,7 +458,7 @@
 			isa = PBXGroup;
 			children = (
 				FC427B801DCACB43009F43AE /* EventCell.swift */,
-				FC427B811DCACB43009F43AE /* HomeViewController.swift */,
+				FC427B811DCACB43009F43AE /* NowViewController.swift */,
 				FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */,
 			);
 			name = home;
@@ -595,6 +601,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCC9CB9F1DE9B3CB00F2582C /* now.png in Resources */,
 				FC8D70161DC8DCA80083E8E4 /* button.png in Resources */,
 				FCFE67C21DE50FA1007203EF /* bagua_5.png in Resources */,
 				F46601ED1DB372760012D898 /* Sample.png in Resources */,
@@ -619,6 +626,7 @@
 				FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */,
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,
 				FC0AF2011DC508A700C76408 /* myself.png in Resources */,
+				FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
 				F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */,
 				FCFE67BF1DE50FA1007203EF /* bagua_2.png in Resources */,
@@ -814,7 +822,7 @@
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,
 				FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
-				FC427B831DCACB43009F43AE /* HomeViewController.swift in Sources */,
+				FC427B831DCACB43009F43AE /* NowViewController.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,

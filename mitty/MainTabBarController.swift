@@ -20,15 +20,14 @@ class MainTabBarController: UITabBarController {
     
     var tab1HomeController: UINavigationController!
     var tab2ActivityController: UINavigationController!
-    var tab3IslandController: UINavigationController!
-    var tab4SocialController: UINavigationController!
-    var tab5MyselfController: UINavigationController!
+    var tab3MyselfController: UINavigationController!
+    var tab4IslandController: UINavigationController!
+    var tab5SocialController: UINavigationController!
+    var freshLaunch = true
     
-    override func viewDidAppear(_ animated: Bool) {
-        if (animated) {
-            let appDelegate: AppDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = appDelegate.mainTabBarController
-        }
+    override func viewWillAppear(_ animated: Bool) {
+ 
+
     }
     
     override func viewDidLoad() {
@@ -37,29 +36,33 @@ class MainTabBarController: UITabBarController {
         
         // 各タブの生成
         //　ホームタブ
-        tab1HomeController = UINavigationController(rootViewController: HomeViewController ())
-        tab1HomeController.tabBarItem = UITabBarItem(title: LS(key: "home"), image: UIImage(named: "home"), tag: 1)
+        tab1HomeController = UINavigationController(rootViewController: NowViewController ())
+        tab1HomeController.tabBarItem = UITabBarItem(title: LS(key: "now"), image: UIImage(named: "now"), tag: 1)
 
         // 活動予定タブ
         tab2ActivityController = UINavigationController(rootViewController: ActivityViewController())
         tab2ActivityController.tabBarItem = UITabBarItem(title: LS(key: "activity"), image: UIImage(named: "activity"), tag: 2)
+
+        // 個人情報管理タブ
+        tab3MyselfController = ViewControllerFactory.createPersonalInfoNaviController()
         
         // 島会議タブ
-        tab3IslandController = UINavigationController(rootViewController: IslandViewController())
-        tab3IslandController.tabBarItem = UITabBarItem(title: LS(key: "island"), image: UIImage(named: "island"), tag: 3)
+        tab4IslandController = UINavigationController(rootViewController: IslandViewController())
+        tab4IslandController.tabBarItem = UITabBarItem(title: LS(key: "island"), image: UIImage(named: "island"), tag: 3)
         
         //　ソーシャルタブ
-        tab4SocialController = UINavigationController(rootViewController:SocialViewController())
-        tab4SocialController.tabBarItem = UITabBarItem(title: LS(key: "social"), image: UIImage(named:
-            "social"), tag: 4)
+        tab5SocialController = UINavigationController(rootViewController:SocialViewController())
+        tab5SocialController.tabBarItem = UITabBarItem(title: LS(key: "we"), image: UIImage(named:
+            "we"), tag: 4)
     
-        // 個人情報管理タブ
-        tab5MyselfController = ViewControllerFactory.createPersonalInfoNaviController()
         
         // タブグループ登録
-        let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3IslandController!, tab4SocialController!, tab5MyselfController!)
+        let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3MyselfController, tab4IslandController!, tab5SocialController!)
         self.setViewControllers(tabs as? [UIViewController], animated: true)
-        
+        if freshLaunch {
+            self.tabBarController?.selectedViewController = tab3MyselfController
+            freshLaunch = false
+        }
         
     }
 }

@@ -68,14 +68,14 @@ class MyselfViewController: UIViewController {
         self.view.addSubview(button)
 
         
-        let rect = CGRect(x:100, y:100, width:UIScreen.main.bounds.width * 0.512, height: UIScreen.main.bounds.width * 0.512)
+        let rect = CGRect(x:100, y:100, width:UIScreen.main.bounds.width * 0.512, height: UIScreen.main.bounds.width * 0.512 / 1.414)
         
         let indicator = BaguaIndicator(frame: rect)
         indicator.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
         self.view.addSubview(indicator)
         indicator.startAnimating()
         
-        let rect1 = CGRect(x:100, y:100, width:300, height: 150)
+        let rect1 = CGRect(x:indicator.frame.minX, y:100, width:300, height: 150)
         let bagua = UILabel(frame: rect1)
         bagua.text = "To be programmed......"
         bagua.textColor = UIColor.white
