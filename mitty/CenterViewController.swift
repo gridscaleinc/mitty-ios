@@ -21,8 +21,10 @@ class CenterViewController: UIViewController {
     var didSetupConstraints = false
     
     // ビューが表に戻ったらタイトルを設定。
-    override func viewWillAppear(_ animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
+  
         self.navigationItem.title = LS(key: "operation_center")
+        self.tabBarController?.tabBar.isHidden = false
         
     }
     
