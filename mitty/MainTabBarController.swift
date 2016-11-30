@@ -60,6 +60,8 @@ class MainTabBarController: UITabBarController {
         let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3IslandController!, tab4SocialController!, tab5MyselfController!)
         self.setViewControllers(tabs as? [UIViewController], animated: true)
         
+        // select center tab
+        self.selectedIndex = 2
         
     }
 }
