@@ -9,6 +9,7 @@
 
 import Foundation
 import UIKit
+import MapKit
 
 //
 // 個人情報を管理するView
@@ -48,6 +49,10 @@ class CenterViewController: UIViewController {
         button.frame = CGRect(x: 150, y: 100, width: 100, height: 55)
         button.setTitle("登録する", for: .normal)
         button.center = CGPoint(x: UIScreen.main.bounds.width/2, y: 95)
+        
+        let myMapView = MKMapView()
+        myMapView.frame = self.view.frame
+        self.view.addSubview(myMapView)
         
         // let image = UIImage(named: "button")
         button.layer.cornerRadius = 10

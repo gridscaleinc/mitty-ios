@@ -11,7 +11,6 @@
 		20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E508F31DCD8C5400696E29 /* GuideViewController.swift */; };
 		29588B077CD53C553381DDA6 /* Pods_mitty.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 61F362287AC99640C55568B9 /* Pods_mitty.framework */; };
 		4EF66DA6274B45BE5D4399D8 /* Pods_mittyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 27EA11B20924EA0230A00C2C /* Pods_mittyUITests.framework */; };
-		F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */ = {isa = PBXBuildFile; fileRef = F41D4E391DAE7FDF003A96AA /* hoge.png */; };
 		F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = F42CDE501DCD74A8001CAFBE /* Localizable.strings */; };
 		F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = F42CDE521DCD7525001CAFBE /* Strings.swift */; };
 		F46601ED1DB372760012D898 /* Sample.png in Resources */ = {isa = PBXBuildFile; fileRef = F46601EB1DB372760012D898 /* Sample.png */; };
@@ -37,7 +36,6 @@
 		FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1EC1DC4F61B00C76408 /* Service.swift */; };
 		FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1EE1DC4F63300C76408 /* Datastore.swift */; };
 		FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1F01DC4F65100C76408 /* DataModel.swift */; };
-		FC0AF1FB1DC5087A00C76408 /* social.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FA1DC5087A00C76408 /* social.png */; };
 		FC0AF1FD1DC5088400C76408 /* activity.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FC1DC5088400C76408 /* activity.png */; };
 		FC0AF1FF1DC5089C00C76408 /* island.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF1FE1DC5089C00C76408 /* island.png */; };
 		FC0AF2011DC508A700C76408 /* myself.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF2001DC508A700C76408 /* myself.png */; };
@@ -57,7 +55,6 @@
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FCC9CB9F1DE9B3CB00F2582C /* now.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* now.png */; };
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
-		FCF0BBF31DC7934E009C5C1F /* home.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF0BBF21DC7934E009C5C1F /* home.png */; };
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
 		FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D6401DD762020059B270 /* ImageEdit.swift */; };
@@ -110,7 +107,6 @@
 		61F362287AC99640C55568B9 /* Pods_mitty.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_mitty.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB944AF4113670B4F0CAFB2F /* Pods-mitty.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mitty.release.xcconfig"; path = "Pods/Target Support Files/Pods-mitty/Pods-mitty.release.xcconfig"; sourceTree = "<group>"; };
 		EBBC4AEDFE4CFDC20643BDFA /* Pods-mittyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-mittyTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-mittyTests/Pods-mittyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F41D4E391DAE7FDF003A96AA /* hoge.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = hoge.png; path = images/hoge.png; sourceTree = "<group>"; };
 		F42CDE4F1DCD74A8001CAFBE /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F42CDE511DCD74D0001CAFBE /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		F42CDE521DCD7525001CAFBE /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
@@ -143,7 +139,6 @@
 		FC0AF1EC1DC4F61B00C76408 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		FC0AF1EE1DC4F63300C76408 /* Datastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datastore.swift; sourceTree = "<group>"; };
 		FC0AF1F01DC4F65100C76408 /* DataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataModel.swift; sourceTree = "<group>"; };
-		FC0AF1FA1DC5087A00C76408 /* social.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = social.png; path = images/social.png; sourceTree = "<group>"; };
 		FC0AF1FC1DC5088400C76408 /* activity.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = activity.png; path = images/activity.png; sourceTree = "<group>"; };
 		FC0AF1FE1DC5089C00C76408 /* island.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = island.png; path = images/island.png; sourceTree = "<group>"; };
 		FC0AF2001DC508A700C76408 /* myself.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myself.png; path = images/myself.png; sourceTree = "<group>"; };
@@ -163,7 +158,6 @@
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* now.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = now.png; path = images/now.png; sourceTree = "<group>"; };
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
-		FCF0BBF21DC7934E009C5C1F /* home.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = home.png; path = images/home.png; sourceTree = "<group>"; };
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		FCF8D6401DD762020059B270 /* ImageEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEdit.swift; sourceTree = "<group>"; };
@@ -268,14 +262,11 @@
 				FC8D70171DC8F4FF0083E8E4 /* search.png */,
 				FC8D70151DC8DCA80083E8E4 /* button.png */,
 				FC8D70131DC8D9CD0083E8E4 /* write.png */,
-				FCF0BBF21DC7934E009C5C1F /* home.png */,
 				FC0AF1FE1DC5089C00C76408 /* island.png */,
 				FC0AF2001DC508A700C76408 /* myself.png */,
 				FC0AF1FC1DC5088400C76408 /* activity.png */,
-				FC0AF1FA1DC5087A00C76408 /* social.png */,
 				F46601EB1DB372760012D898 /* Sample.png */,
 				F46601EC1DB372760012D898 /* welcom.png */,
-				F41D4E391DAE7FDF003A96AA /* hoge.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -358,8 +349,8 @@
 			isa = PBXGroup;
 			children = (
 				FCF9575A1DC6142000A52125 /* util */,
-				FCF777091DC5649B006D2ECA /* home */,
-				FC0AF1EB1DC4F57E00C76408 /* myself */,
+				FCF777091DC5649B006D2ECA /* explore */,
+				FC0AF1EB1DC4F57E00C76408 /* center */,
 				FC0AF1EA1DC4F56E00C76408 /* social */,
 				FC0AF1E91DC4F56400C76408 /* Island */,
 				FC0AF1E81DC4F55400C76408 /* activity */,
@@ -445,23 +436,23 @@
 			name = social;
 			sourceTree = "<group>";
 		};
-		FC0AF1EB1DC4F57E00C76408 /* myself */ = {
+		FC0AF1EB1DC4F57E00C76408 /* center */ = {
 			isa = PBXGroup;
 			children = (
 				F4BB80251DAE58FE00055D48 /* CenterViewController.swift */,
 				FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */,
 			);
-			name = myself;
+			name = center;
 			sourceTree = "<group>";
 		};
-		FCF777091DC5649B006D2ECA /* home */ = {
+		FCF777091DC5649B006D2ECA /* explore */ = {
 			isa = PBXGroup;
 			children = (
 				FC427B801DCACB43009F43AE /* EventCell.swift */,
 				FC427B811DCACB43009F43AE /* NowViewController.swift */,
 				FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */,
 			);
-			name = home;
+			name = explore;
 			sourceTree = "<group>";
 		};
 		FCF957591DC613A100A52125 /* util */ = {
@@ -555,12 +546,12 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0800;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "GridScale Inc.";
 				TargetAttributes = {
 					F4AEAAFE1DAD3F2C007DEB80 = {
 						CreatedOnToolsVersion = 8.0;
-						DevelopmentTeam = 58C95FHL5U;
+						DevelopmentTeam = LZQ2354CBZ;
 						ProvisioningStyle = Automatic;
 					};
 					F4AEAB121DAD3F2C007DEB80 = {
@@ -606,17 +597,14 @@
 				FCFE67C21DE50FA1007203EF /* bagua_5.png in Resources */,
 				F46601ED1DB372760012D898 /* Sample.png in Resources */,
 				FC427B901DCAFDE1009F43AE /* event3.png in Resources */,
-				FC0AF1FB1DC5087A00C76408 /* social.png in Resources */,
 				FC0081931DD39B0300C1F970 /* pengin4.png in Resources */,
 				FC00818E1DD394D300C1F970 /* pengin2.png in Resources */,
-				FCF0BBF31DC7934E009C5C1F /* home.png in Resources */,
 				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
 				FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */,
 				FC427B911DCAFDE1009F43AE /* event4.png in Resources */,
 				FC00818D1DD394D300C1F970 /* pengin1.png in Resources */,
 				FC427B8F1DCAFDE1009F43AE /* event2.png in Resources */,
 				FC427B921DCAFDE1009F43AE /* event5.png in Resources */,
-				F41D4E3A1DAE7FDF003A96AA /* hoge.png in Resources */,
 				FC427B931DCAFDE1009F43AE /* event6.png in Resources */,
 				F46601EE1DB372760012D898 /* welcom.png in Resources */,
 				FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */,
@@ -897,6 +885,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -949,6 +938,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -979,13 +969,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 49E68BA6F432E5ECF64B5380 /* Pods-mitty.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 58C95FHL5U;
+				DEVELOPMENT_TEAM = LZQ2354CBZ;
 				INFOPLIST_FILE = mitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journeyWay;
+				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
@@ -995,13 +986,14 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BB944AF4113670B4F0CAFB2F /* Pods-mitty.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = 58C95FHL5U;
+				DEVELOPMENT_TEAM = LZQ2354CBZ;
 				INFOPLIST_FILE = mitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journeyWay;
+				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 			};
