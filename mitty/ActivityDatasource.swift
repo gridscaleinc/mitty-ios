@@ -54,9 +54,19 @@ class ActivitySelectionDatasource : NSObject, UICollectionViewDataSource {
         return ActivityListHeaderCell()
     }
     
-    ///
+    // Tapイベントハンドラー
+    var opTapHandler : ((_ cell: ActivitySelectionCell) -> Void)? = nil
+    
+    /// CellがTapされたら、ハンドラーを呼び出し。
     func cellTapped(handler: UITapGestureRecognizer) {
-        print("Heeey")
+        let cell = handler.view as! ActivitySelectionCell
+        print(cell.activity?.label ?? "")
+        opTapHandler?(cell)
+    }
+    
+    /// ViewControllerよりイベントハンドラーを登録。
+    func onCellTapped(handler: @escaping (_ cell: ActivitySelectionCell) -> Void) {
+        self.opTapHandler = handler
     }
 }
 

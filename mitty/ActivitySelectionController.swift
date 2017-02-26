@@ -38,6 +38,14 @@ class ActivitySelectionViewController : UIViewController {
         configConstraints()
         form.configLayout()
         
+        // Closure を利用して、イベント処理をする。
+        dataSource.onCellTapped () {  (cell) in
+            print(cell.activity?.label ?? "")
+            let vc = ActivityPlanViewController()
+            self.navigationItem.title = "戻る"
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         form.collectionView.dataSource = self.dataSource
         form.collectionView.delegate = self.delegate
         

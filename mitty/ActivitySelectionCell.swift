@@ -14,6 +14,8 @@ class ActivitySelectionCell: UICollectionViewCell {
     static let id = "activity-selection-cell"
     
     var activitySelection : (label:UILabel, icon:UIImageView)? = nil
+    var activity : (label:String, icon:String)? = nil
+    
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -66,6 +68,8 @@ class ActivitySelectionCell: UICollectionViewCell {
     }
     
     func configureView(activity: (label:String, icon:String)) {
+        
+        self.activity = activity
         
         let l : UILabel = {
             return UILabel.newAutoLayout()
