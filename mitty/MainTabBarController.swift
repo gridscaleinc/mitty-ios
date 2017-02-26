@@ -36,11 +36,11 @@ class MainTabBarController: UITabBarController {
         
         // 各タブの生成
         //　ホームタブ
-        tab1HomeController = UINavigationController(rootViewController: ExplorerViewController ())
+        tab1HomeController = UINavigationController(rootViewController: ExplorerTopViewController ())
         tab1HomeController.tabBarItem = UITabBarItem(title: LS(key: "explorer"), image: UIImage(named: "explorer"), tag: 1)
 
         // 活動予定タブ
-        tab2ActivityController = UINavigationController(rootViewController: ActivityViewController())
+        tab2ActivityController = UINavigationController(rootViewController: ActivityTopViewController())
         tab2ActivityController.tabBarItem = UITabBarItem(title: LS(key: "activity"), image: UIImage(named: "activity"), tag: 2)
 
         // 個人情報管理タブ

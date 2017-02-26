@@ -16,12 +16,12 @@ class MittyStyles {
     static let button = initButtonStyles()
     static let label = initLabelStyles()
     
-    static func initButtonStyles() {
-        
+    static func initButtonStyles() -> StyleSet {
+        return StyleContext().button
     }
     
-    static func initLabelStyles() {
-        
+    static func initLabelStyles() -> StyleSet {
+        return StyleContext().label
     }
 }
 

@@ -17,11 +17,12 @@ class Activity {
 /// イベント情報
 class Event {
     
-    public var eventId: String! = ""
-    public var title: String = ""
-    public var price: Int = 0
-    public var imageUrl: String = ""
-    public var place : String = ""
+    var eventId: String!
+    
+    var title: String = ""
+    var price: Int = 0
+    var imageUrl: String = ""
+    var place : String = ""
     
     
     // YYYY-MM-DD

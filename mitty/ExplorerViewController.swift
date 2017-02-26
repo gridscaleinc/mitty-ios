@@ -2,7 +2,7 @@ import UIKit
 import PureLayout
 
 
-@objc(HomeViewController)
+@objc(ExplorerViewController)
 class ExplorerViewController: UIViewController {
     
     
@@ -35,9 +35,13 @@ class ExplorerViewController: UIViewController {
         self.searchBar.becomeFirstResponder()
         self.searchBar.resignFirstResponder()
         
-        self.navigationItem.title = "ホーム"
+        self.navigationItem.title = "島探"
         
         configureNavigationBar()
+//        let uiimage = UIImageView()
+//        uiimage.image = UIImage(named: "event1")
+//        uiimage.frame = self.view.frame
+//        self.view.addSubview(uiimage)
         addSubviews()
         addConstraints()
         configureSubviews()

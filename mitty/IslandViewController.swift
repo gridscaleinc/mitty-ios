@@ -152,7 +152,7 @@ extension IslandViewController: UICollectionViewDataSource {
     func cellTapped(handler: UITapGestureRecognizer) {
         print (handler.view)
         let controller = TalkListViewController(island: ((handler.view) as! IslandCell).island!)
-        self.navigationItem.title = "..."
+        self.navigationItem.title = "戻る"
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(controller, animated: true)
 
