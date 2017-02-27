@@ -22,7 +22,7 @@ class ActivitySelectionForm : UIView {
     
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = false
+        layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionFootersPinToVisibleBounds = false
         
         let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)

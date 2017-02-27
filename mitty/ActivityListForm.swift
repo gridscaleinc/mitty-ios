@@ -11,7 +11,7 @@ import UIKit
 import PureLayout
 
 @objc(ActivityListForm)
-class ActivityListForm : UIView {
+class ActivityListForm : Form {
     let dummyLabel : UILabel = {
         let l = UILabel.newAutoLayout()
         l.backgroundColor = .clear
@@ -20,7 +20,7 @@ class ActivityListForm : UIView {
     
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = false
+        layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionFootersPinToVisibleBounds = false
 
         let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -128,17 +128,16 @@ class ActivityListForm : UIView {
         indicator.autoPinEdge(toSuperviewEdge: .left)
         indicator.autoPinEdge(toSuperviewEdge: .right)
         
-        stepper.addTarget(self, action: #selector(ActivityListForm.stepperOneChanged(stepper:)), for: UIControlEvents.valueChanged)
+//        stepper.addTarget(self, action: #selector(ActivityListForm.stepperOneChanged(stepper:)), for: UIControlEvents.valueChanged)
+        
+        registerHandler(stepper, .onChanged) {(v) in
+            self.indicator.setTitle("\(Int((v as! UIStepper).value))年", for: UIControlState())
+        }
+        
         indicator.setTitle("\(Int(stepper.value))年", for: UIControlState())
     }
     
     func load () {
         collectionView.reloadData()
     }
-    
-    func stepperOneChanged(stepper: UIStepper) {
-        indicator.setTitle("\(Int(stepper.value))年", for: UIControlState())
-    }
-    
-    
 }

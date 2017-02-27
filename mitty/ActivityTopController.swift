@@ -73,6 +73,21 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
         self.form.load()
         
         self.view.setNeedsLayout()
+        
+        self.form.registerHandler(form.thisYear, FormEvent.onTap) {(view) in
+            view.backgroundColor = .red
+            print("This Year taped")
+        }
+        
+        self.form.registerHandler(form.nextYear, FormEvent.onTap) {(view) in
+            view.backgroundColor = .yellow
+            print("Next Year taped")
+        }
+        
+        self.form.registerHandler(form.indicator, FormEvent.onTap) {(view) in
+            view.backgroundColor = .blue
+            print("Indicator Button taped")
+        }
     }
     
     //

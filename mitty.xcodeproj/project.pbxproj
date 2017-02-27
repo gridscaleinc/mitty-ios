@@ -93,6 +93,7 @@
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
 		FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5871E594F3200B861F4 /* event10.jpeg */; };
+		FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
 		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
 		FCFC7F821DD2237400CA0045 /* penginland.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC7F811DD2237400CA0045 /* penginland.png */; };
@@ -236,6 +237,7 @@
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
 		FCFBA5871E594F3200B861F4 /* event10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event10.jpeg; path = images/event10.jpeg; sourceTree = "<group>"; };
+		FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInputForm.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
 		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
 		FCFC7F811DD2237400CA0045 /* penginland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penginland.png; path = images/penginland.png; sourceTree = "<group>"; };
@@ -623,6 +625,7 @@
 				FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */,
 				FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */,
 				FC17850E1E627DB500CAC38B /* ActivityCell.swift */,
+				FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */,
 				FC1785061E627A3C00CAC38B /* Cells.swift in Sources */,
+				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 				FCF265ED1E3B4F5B001F3F96 /* Meeting.swift in Sources */,
 				FCFEBF431E38F6BD00DC989B /* HotelEntryController.swift in Sources */,

@@ -23,7 +23,7 @@ class ActivityPlanViewController : UIViewController {
         super.viewDidLoad()
         self.navigationItem.title = "活動内容入力画面"
         
-        self.view.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)
+        self.view.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1.0)
         let label = UILabel()
         label.frame = CGRect(x: 30, y: 100, width: 300, height: 100)
         label.text = "工事中。。。。。誰かがやってよ。"
