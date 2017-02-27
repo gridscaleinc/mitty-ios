@@ -94,6 +94,9 @@
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
 		FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5871E594F3200B861F4 /* event10.jpeg */; };
 		FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */; };
+		FCFBC67B1E63EC7C00AEF869 /* ScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67A1E63EC7C00AEF869 /* ScrollViewController.swift */; };
+		FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */; };
+		FCFBC67F1E6414F000AEF869 /* SmartForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67E1E6414F000AEF869 /* SmartForm.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
 		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
 		FCFC7F821DD2237400CA0045 /* penginland.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC7F811DD2237400CA0045 /* penginland.png */; };
@@ -238,6 +241,9 @@
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
 		FCFBA5871E594F3200B861F4 /* event10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event10.jpeg; path = images/event10.jpeg; sourceTree = "<group>"; };
 		FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInputForm.swift; sourceTree = "<group>"; };
+		FCFBC67A1E63EC7C00AEF869 /* ScrollViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewController.swift; sourceTree = "<group>"; };
+		FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePageForm.swift; sourceTree = "<group>"; };
+		FCFBC67E1E6414F000AEF869 /* SmartForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SmartForm.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
 		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
 		FCFC7F811DD2237400CA0045 /* penginland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penginland.png; path = images/penginland.png; sourceTree = "<group>"; };
@@ -620,12 +626,15 @@
 			children = (
 				FC427B801DCACB43009F43AE /* EventCell.swift */,
 				FC4986741E61016400C098D3 /* Form.swift */,
+				FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */,
+				FCFBC67E1E6414F000AEF869 /* SmartForm.swift */,
 				FC1785051E627A3C00CAC38B /* Cells.swift */,
 				FC4986761E61019E00C098D3 /* ActivityListForm.swift */,
 				FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */,
 				FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */,
 				FC17850E1E627DB500CAC38B /* ActivityCell.swift */,
 				FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */,
+				FCFBC67A1E63EC7C00AEF869 /* ScrollViewController.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -981,6 +990,7 @@
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FC4986771E61019E00C098D3 /* ActivityListForm.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
+				FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */,
 				FCFEBF3B1E38F52D00DC989B /* ProposalController.swift in Sources */,
 				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
 				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
@@ -992,6 +1002,7 @@
 				FCF265EB1E3B4F41001F3F96 /* Island.swift in Sources */,
 				FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */,
 				FC93216E1E4A1CF400C21056 /* EnventListViewController.swift in Sources */,
+				FCFBC67F1E6414F000AEF869 /* SmartForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
 				FCFEBF3D1E38F54800DC989B /* RequestController.swift in Sources */,
 				FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */,
@@ -1000,6 +1011,7 @@
 				F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */,
 				FCFEBF371E38F4B100DC989B /* IslandConstructViewController.swift in Sources */,
 				FCFA32C91E3F89AE007F115A /* Campaign.swift in Sources */,
+				FCFBC67B1E63EC7C00AEF869 /* ScrollViewController.swift in Sources */,
 				FC4986751E61016400C098D3 /* Form.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,

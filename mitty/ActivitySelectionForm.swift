@@ -12,7 +12,7 @@ import UIKit
 import PureLayout
 
 @objc(ActivitySelectionForm)
-class ActivitySelectionForm : UIView {
+class ActivitySelectionForm : Form {
     
     let dummyLabel : UILabel = {
         let l = UILabel.newAutoLayout()
@@ -30,6 +30,23 @@ class ActivitySelectionForm : UIView {
         return v
     } ()
     
+    let addButton : UIButton = {
+        let button = UIButton.newAutoLayout()
+        button.setTitle("+", for: UIControlState())
+        Form.setButtonStyle(button: button)
+        button.backgroundColor = .red
+        return button
+    } ()
+    
+    let loadFromCalButton:UIButton = {
+        let button = UIButton.newAutoLayout()
+        button.setTitle("カレンダーから", for: UIControlState())
+        Form.setButtonStyle(button: button)
+        button.backgroundColor = .orange
+        
+        return button
+    } ()
+    
     func configLayout () {
         
         self.addSubview(dummyLabel)
@@ -45,15 +62,19 @@ class ActivitySelectionForm : UIView {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 120)
         
-        let footerView = UIView()
-        footerView.backgroundColor = .red
+        let redLine = Form.HL(parent:self, bottomOf: collectionView, UIColor.red)
         
-        self.addSubview(footerView)
-        footerView.autoPinEdge(.top, to: .bottom, of:collectionView)
+        self.addSubview(addButton)
+        addButton.autoPinEdge(.top, to: .bottom, of:redLine, withOffset:10)
+        addButton.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
+        addButton.autoSetDimension(.height, toSize: 50)
+        addButton.autoSetDimension(.width, toSize: 60)
         
-        footerView.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-        footerView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        footerView.autoSetDimension(.height, toSize: 1)
+        self.addSubview(loadFromCalButton)
+        loadFromCalButton.autoPinEdge(.top, to: .bottom, of:redLine, withOffset:10)
+        loadFromCalButton.autoPinEdge(.left, to: .right, of: addButton, withOffset: 10)
+        loadFromCalButton.autoSetDimension(.height, toSize: 50)
+        loadFromCalButton.autoSetDimension(.width, toSize: 140)
     }
     
     func load () {

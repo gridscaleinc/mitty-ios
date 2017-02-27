@@ -14,16 +14,34 @@ typealias  EventHandler = (_ view: UIView) -> Void
 enum FormEvent {
     case onTap
     case onChanged
+    case onEditEnded
 }
 
+typealias LayoutCoder = () ->Void
 class Control : NSObject {
     let field: UIView
+    var name: String = "NO-NAME"
+    
     var handlers : [FormEvent: EventHandler] = [:]
     
     init(_ view: UIView) {
         field = view
         super.init()
     }
+    
+    init(_ name: String, _ view: UIView) {
+        self.name = name
+        field = view
+        super.init()
+    }
+    
+    var layoutCode : (LayoutCoder)? = nil
+    
+    func layout(_ coder: @escaping LayoutCoder) -> Control {
+        self.layoutCode = coder
+        return self
+    }
+
 }
 
 @objc(Form)
@@ -56,6 +74,7 @@ class Form : UIView, UIGestureRecognizerDelegate {
     
     // Event Registeration
     func registerHandler (_ view: UIView, _ event: FormEvent, _ handler: @escaping EventHandler) {
+        
         var c = controls[view]
         if (c == nil) {
             c = Control(view)
@@ -70,19 +89,25 @@ class Form : UIView, UIGestureRecognizerDelegate {
             tap.delegate = self
             view.addGestureRecognizer(tap)
             
+        //
+        // TODO: また限られた種類しかできない。
         case .onChanged:
             let t = view.self
             switch t {
-            case is UITextField:
-                let tf = view as! UITextField
-                tf.addTarget(self, action: #selector(Form.textFieldDidChange(field:)), for: UIControlEvents.editingChanged)
-            case is UIStepper:
-                let stepper = view as! UIStepper
-                stepper.addTarget(self, action: #selector(Form.textFieldDidChange(field:)), for: UIControlEvents.valueChanged)
+            case is UIControl :
+                let tf = view as! UIControl
+                tf.addTarget(self, action: #selector(Form.fieldDidChange(field:)), for: UIControlEvents.valueChanged)
             default:
                 print("This filed dont support changed event")
 
             }
+        case .onEditEnded:
+            let t = view.self
+            if t is UIControl {
+                let tf = view as! UIControl
+                tf.addTarget(self, action: #selector(Form.fieldDidEdit(field:)), for: UIControlEvents.editingDidEnd)
+            }
+            
         }
     }
     
@@ -98,7 +123,36 @@ class Form : UIView, UIGestureRecognizerDelegate {
     }
     
     // 値の変化を処理
-    func textFieldDidChange(field: UIView) {
+    func fieldDidChange(field: UIView) {
         dispatchEvent(field, .onChanged)
+    }
+    
+    // 値の編集を処理
+    func fieldDidEdit(field: UIView) {
+        dispatchEvent(field, .onEditEnded)
+    }
+    
+    static func setButtonStyle (button: UIButton) {
+        
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(.white, for: UIControlState.normal)
+        button.setTitleColor(.gray, for: .disabled)
+        button.backgroundColor = UIColor.lightGray
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    static func HL (parent: UIView, bottomOf: UIView, _ color: UIColor? = UIColor.black, _ width: Int = 1) -> UIView {
+        let hl = UIView.newAutoLayout()
+        hl.backgroundColor = color
+        hl.autoSetDimension(.height, toSize: CGFloat(width))
+        
+        parent.addSubview(hl)
+        hl.autoPinEdge(.top, to: .bottom, of:bottomOf)
+        hl.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
+        hl.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
+        
+        return hl
     }
 }

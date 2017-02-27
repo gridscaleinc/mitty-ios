@@ -11,6 +11,9 @@ import UIKit
 
 class ActivityPlanViewController : UIViewController {
     
+    var activityTitle = "活動"
+    var form = ActivityInputForm()
+    
     override func viewDidLoad() {
         
         
@@ -21,15 +24,19 @@ class ActivityPlanViewController : UIViewController {
         // 線を引いて、対象年のフィルタボタンを設定する
         
         super.viewDidLoad()
-        self.navigationItem.title = "活動内容入力画面"
+        
+        self.form.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(form)
+        form.autoPin(toTopLayoutGuideOf: self, withInset:0)
+        form.autoPinEdge(toSuperviewEdge: .left)
+        form.autoPinEdge(toSuperviewEdge: .right)
+        form.autoPinEdge(toSuperviewEdge: .bottom)
+        
+        form.loadPage()
+        
+        self.navigationItem.title = activityTitle
         
         self.view.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1.0)
-        let label = UILabel()
-        label.frame = CGRect(x: 30, y: 100, width: 300, height: 100)
-        label.text = "工事中。。。。。誰かがやってよ。"
-        label.textColor = .white
-        
-        self.view.addSubview(label)
         
         self.view.setNeedsLayout()
         

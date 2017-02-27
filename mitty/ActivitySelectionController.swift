@@ -31,7 +31,7 @@ class ActivitySelectionViewController : UIViewController {
         super.viewDidLoad()
         
         super.viewDidLoad()
-        self.navigationItem.title = "活動追加"
+        self.navigationItem.title = "活動種類選択"
         self.view.backgroundColor = UIColor.white
         
         self.view.addSubview(form)
@@ -42,6 +42,8 @@ class ActivitySelectionViewController : UIViewController {
         dataSource.onCellTapped () {  (cell) in
             print(cell.activity?.label ?? "")
             let vc = ActivityPlanViewController()
+            vc.activityTitle = (cell.activity?.label)!
+            
             self.navigationItem.title = "戻る"
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -66,6 +68,10 @@ class ActivitySelectionViewController : UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    /// 子画面からモドたら、tabバーを戻す。
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "活動種類選択"
+    }
     
     func configConstraints() {
         form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
