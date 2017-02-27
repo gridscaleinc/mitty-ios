@@ -38,160 +38,34 @@ class ActivityInputForm : SmartForm {
             +++ Section(name: "Remarks")
         
         let mainSection = page["Main-Event"]
-        var row = Row() +++ {
-                return buildTitle("Title", fieldTitle: "タイトル")
-            }
-            +++ {
-                return buildTextField(name: "Title-Text", placeHolder: "タイトルを入力", left:90, width:150)
-        }
-        mainSection! +++ row
         
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "日程")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        
-        row = Row() +++ { return buildTitle("Date-To-Title", fieldTitle: "      ~")}
-            +++ {
-                return buildTextField(name: "To-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "To-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−２")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−３")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−４")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−５")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−６")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−７")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−８")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−９")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
-        
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１０")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
+        var row = Row() +++ buildTitle("Title", fieldTitle: "タイトル")
+            +++ buildTextField(name: "Title-Text", placeHolder: "タイトルを入力", left:90, width:150)
     
         mainSection! +++ row
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１１")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
+        
+        row = Row() +++ buildTitle("Date-Title", fieldTitle: "日程")
+            +++ buildTextField(name: "From-Date", placeHolder: "", left:90, width:100)
+            +++ buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
+
         
         mainSection! +++ row
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１２")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
+        
+        
+        row = Row() +++ buildTitle("Date-To-Title", fieldTitle: "      ~")
+            +++ buildTextField(name: "To-Date", placeHolder: "", left:90, width:100)
+            +++ buildTextField(name: "To-Time", placeHolder: "", left:200, width:60)
         
         mainSection! +++ row
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１３")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
+        for i in 2  ..< 30  {
+            row = Row() +++ buildTitle("Date-Title-" + String(i), fieldTitle: "項目−" + String(i))
+                +++ buildTextField(name: "From-Date-" + String(i), placeHolder: "", left:90, width:100)
+                +++ buildTextField(name: "From-Time-" + String(i), placeHolder: "", left:200, width:60)
+                
+            mainSection! +++ row
         }
         
-        mainSection! +++ row
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１４")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
         
-        mainSection! +++ row
-        row = Row() +++ { return buildTitle("Date-Title", fieldTitle: "項目−１５")}
-            +++ {
-                return buildTextField(name: "From-Date", placeHolder: "", left:90, width:100) }
-            +++ {
-                return buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-        }
-        
-        mainSection! +++ row
         
         self.addSubview(dummyLabel)
         dummyLabel.autoPinEdge(toSuperviewEdge: .top, withInset:1)
