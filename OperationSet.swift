@@ -20,7 +20,7 @@ open class OperationSet :NSObject, Selectable, Operatable {
     }
     
     //
-    subscript (_ named: String)-> OperationSet {
+    open subscript (_ named: String)-> OperationSet {
         return select() {
             $0.name == named
         }

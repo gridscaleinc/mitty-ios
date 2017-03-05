@@ -67,6 +67,7 @@
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
 		FCEDA29E1E6B8B5E006FBF20 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA29D1E6B8B5E006FBF20 /* OperationSet.swift */; };
 		FCEDA2A01E6BDC6B006FBF20 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA29F1E6BDC6B006FBF20 /* Layout.swift */; };
+		FCEDA2A21E6C24E2006FBF20 /* Traveler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2A11E6C24E2006FBF20 /* Traveler.swift */; };
 		FCF265DB1E3B4C02001F3F96 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */; };
 		FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DC1E3B4CEC001F3F96 /* Request.swift */; };
 		FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DE1E3B4D00001F3F96 /* Proposal.swift */; };
@@ -221,6 +222,7 @@
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
 		FCEDA29D1E6B8B5E006FBF20 /* OperationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
 		FCEDA29F1E6BDC6B006FBF20 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
+		FCEDA2A11E6C24E2006FBF20 /* Traveler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Traveler.swift; sourceTree = "<group>"; };
 		FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		FCF265DC1E3B4CEC001F3F96 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FCF265DE1E3B4D00001F3F96 /* Proposal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposal.swift; sourceTree = "<group>"; };
@@ -676,6 +678,7 @@
 				FCF94A8A1E6B01F300941D96 /* Controls.swift */,
 				FCF94A8C1E6B04D900941D96 /* Structures.swift */,
 				FCEDA29D1E6B8B5E006FBF20 /* OperationSet.swift */,
+				FCEDA2A11E6C24E2006FBF20 /* Traveler.swift */,
 			);
 			name = somitty;
 			sourceTree = "<group>";
@@ -1019,6 +1022,7 @@
 				FCF265EF1E3B4F69001F3F96 /* Conversation.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FC4986771E61019E00C098D3 /* ActivityListForm.swift in Sources */,
+				FCEDA2A21E6C24E2006FBF20 /* Traveler.swift in Sources */,
 				FCF94A951E6B182000941D96 /* CustomPoint.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */,

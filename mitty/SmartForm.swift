@@ -60,13 +60,13 @@ extension CollectionForm : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let screenSize:CGSize = UIScreen.main.bounds.size
-        let width = ( screenSize.width - (10 * 3) )
+        let width = ( screenSize.width - 20 )
         let cellSize: CGSize = CGSize( width: width, height:30 )
         return cellSize
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
+        return UIEdgeInsets(top: 3, left: 3, bottom: 3, right: 3)
     }
     
     

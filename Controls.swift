@@ -27,18 +27,20 @@ protocol Operatable {
     func future(_ operation: @escaping (Operatable) -> Void, _ completion: (()->Void)?) -> Self
 }
 
+typealias ControlSelector = (Control1) -> Bool
 
 // name, tag, path
 protocol Selectable {
     
     subscript (_ named: String)-> OperationSet { get }
     
-    func select(_ selector: (Control1) -> Bool) -> OperationSet
+    func select(_ selector: ControlSelector ) -> OperationSet
 }
 
 typealias  EventHandler = (_ view: UIView) -> Void
 
 typealias LayoutCoder = (_ c: Control1) ->Void
+
 
 enum FormEvent {
     case onTap
@@ -84,12 +86,18 @@ open class Control1 : NSObject, Node, Operatable {
     // construct a default named control
     public init(view: UIView) {
         self._view = view
+        if (view.tag == 0) {
+            view.tag = nextTag()
+        }
         _name = "Node#" + String(view.tag)
     }
     
     //
     public init(name: String, view v: UIView) {
         _name = name
+        if (v.tag == 0) {
+            v.tag = nextTag()
+        }
         self._view = v
     }
     
@@ -125,7 +133,7 @@ open class Control1 : NSObject, Node, Operatable {
     }
     
     var handlers : [FormEvent: EventHandler] = [:]
-    private var layoutCode : (LayoutCoder)? = nil
+    private var layoutCoders : [LayoutCoder] = []
     
     static public func ==(lhs: Control1, rhs: Control1) -> Bool {
         return lhs._name == rhs._name
@@ -143,7 +151,8 @@ open class Control1 : NSObject, Node, Operatable {
      */
     @discardableResult
     func layout(_ coder: @escaping LayoutCoder) -> Self {
-        self.layoutCode = coder
+        // not duplicatedly
+        self.layoutCoders.append(coder)
         return self
     }
     
@@ -179,11 +188,10 @@ open class Control1 : NSObject, Node, Operatable {
         return self
     }
     
+    //
     func configLayout () {
-        do {
-            try layoutCode?(self)
-        } catch {
-            print(error)
+        for code in layoutCoders {
+            code(self)
         }
     }
 }
