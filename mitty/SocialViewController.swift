@@ -126,7 +126,7 @@ extension SocialViewController: UICollectionViewDataSource {
     
     ///
     func cellTapped(handler: UITapGestureRecognizer) {
-        print (handler.view)
+        print (handler.view ?? "")
         
     }
 }

@@ -40,7 +40,6 @@
 		FC0AF2011DC508A700C76408 /* myself.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0AF2001DC508A700C76408 /* myself.png */; };
 		FC16A5361E549A8A00C49F5F /* ExplorerTopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC16A5351E549A8A00C49F5F /* ExplorerTopViewController.swift */; };
 		FC1766491E5C6D52000A4BAE /* event11.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1766481E5C6D52000A4BAE /* event11.png */; };
-		FC1785061E627A3C00CAC38B /* Cells.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1785051E627A3C00CAC38B /* Cells.swift */; };
 		FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850A1E627CD200CAC38B /* ActivityDatasource.swift */; };
 		FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */; };
 		FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850E1E627DB500CAC38B /* ActivityCell.swift */; };
@@ -66,6 +65,8 @@
 		FC93216E1E4A1CF400C21056 /* EnventListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC93216D1E4A1CF400C21056 /* EnventListViewController.swift */; };
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
+		FCEDA29E1E6B8B5E006FBF20 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA29D1E6B8B5E006FBF20 /* OperationSet.swift */; };
+		FCEDA2A01E6BDC6B006FBF20 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA29F1E6BDC6B006FBF20 /* Layout.swift */; };
 		FCF265DB1E3B4C02001F3F96 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */; };
 		FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DC1E3B4CEC001F3F96 /* Request.swift */; };
 		FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DE1E3B4D00001F3F96 /* Proposal.swift */; };
@@ -87,6 +88,12 @@
 		FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */; };
 		FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */; };
 		FCF8D6511DD8B7630059B270 /* connect.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8D6501DD8B7630059B270 /* connect.png */; };
+		FCF94A871E6A2F0200941D96 /* Mitty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF94A861E6A2F0200941D96 /* Mitty.swift */; };
+		FCF94A8B1E6B01F300941D96 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF94A8A1E6B01F300941D96 /* Controls.swift */; };
+		FCF94A8D1E6B04D900941D96 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF94A8C1E6B04D900941D96 /* Structures.swift */; };
+		FCF94A951E6B182000941D96 /* CustomPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF94A941E6B182000941D96 /* CustomPoint.swift */; };
+		FCF94AA11E6B192D00941D96 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF94A9F1E6B192D00941D96 /* Extensions.swift */; };
+		FCF94AA51E6B195800941D96 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF94AA31E6B195800941D96 /* Selectable.swift */; };
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
 		FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */; };
 		FCFA32C91E3F89AE007F115A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA32C81E3F89AE007F115A /* Campaign.swift */; };
@@ -187,7 +194,6 @@
 		FC0AF2001DC508A700C76408 /* myself.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = myself.png; path = images/myself.png; sourceTree = "<group>"; };
 		FC16A5351E549A8A00C49F5F /* ExplorerTopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerTopViewController.swift; sourceTree = "<group>"; };
 		FC1766481E5C6D52000A4BAE /* event11.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event11.png; path = images/event11.png; sourceTree = "<group>"; };
-		FC1785051E627A3C00CAC38B /* Cells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cells.swift; sourceTree = "<group>"; };
 		FC17850A1E627CD200CAC38B /* ActivityDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDatasource.swift; sourceTree = "<group>"; };
 		FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionCell.swift; sourceTree = "<group>"; };
 		FC17850E1E627DB500CAC38B /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
@@ -213,6 +219,8 @@
 		FC93216D1E4A1CF400C21056 /* EnventListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnventListViewController.swift; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
+		FCEDA29D1E6B8B5E006FBF20 /* OperationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
+		FCEDA29F1E6BDC6B006FBF20 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		FCF265DC1E3B4CEC001F3F96 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FCF265DE1E3B4D00001F3F96 /* Proposal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposal.swift; sourceTree = "<group>"; };
@@ -234,6 +242,12 @@
 		FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInfoCell.swift; sourceTree = "<group>"; };
 		FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialContactService.swift; sourceTree = "<group>"; };
 		FCF8D6501DD8B7630059B270 /* connect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = connect.png; path = images/connect.png; sourceTree = "<group>"; };
+		FCF94A861E6A2F0200941D96 /* Mitty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mitty.swift; sourceTree = "<group>"; };
+		FCF94A8A1E6B01F300941D96 /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
+		FCF94A8C1E6B04D900941D96 /* Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
+		FCF94A941E6B182000941D96 /* CustomPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPoint.swift; sourceTree = "<group>"; };
+		FCF94A9F1E6B192D00941D96 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		FCF94AA31E6B195800941D96 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
 		FCFA32C81E3F89AE007F115A /* Campaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
@@ -342,6 +356,7 @@
 		F4AEAAF61DAD3F2C007DEB80 = {
 			isa = PBXGroup;
 			children = (
+				FCF94A851E6A2E9A00941D96 /* somitty */,
 				F4AEAB011DAD3F2C007DEB80 /* mitty */,
 				F4AEAB161DAD3F2D007DEB80 /* mittyTests */,
 				F4AEAB211DAD3F2D007DEB80 /* mittyUITests */,
@@ -628,7 +643,6 @@
 				FC4986741E61016400C098D3 /* Form.swift */,
 				FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */,
 				FCFBC67E1E6414F000AEF869 /* SmartForm.swift */,
-				FC1785051E627A3C00CAC38B /* Cells.swift */,
 				FC4986761E61019E00C098D3 /* ActivityListForm.swift */,
 				FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */,
 				FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */,
@@ -649,6 +663,21 @@
 				FC16A5351E549A8A00C49F5F /* ExplorerTopViewController.swift */,
 			);
 			name = explore;
+			sourceTree = "<group>";
+		};
+		FCF94A851E6A2E9A00941D96 /* somitty */ = {
+			isa = PBXGroup;
+			children = (
+				FCEDA29F1E6BDC6B006FBF20 /* Layout.swift */,
+				FCF94AA31E6B195800941D96 /* Selectable.swift */,
+				FCF94A9F1E6B192D00941D96 /* Extensions.swift */,
+				FCF94A941E6B182000941D96 /* CustomPoint.swift */,
+				FCF94A861E6A2F0200941D96 /* Mitty.swift */,
+				FCF94A8A1E6B01F300941D96 /* Controls.swift */,
+				FCF94A8C1E6B04D900941D96 /* Structures.swift */,
+				FCEDA29D1E6B8B5E006FBF20 /* OperationSet.swift */,
+			);
+			name = somitty;
 			sourceTree = "<group>";
 		};
 		FCF957591DC613A100A52125 /* util */ = {
@@ -986,9 +1015,11 @@
 			files = (
 				FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */,
 				FCF265DB1E3B4C02001F3F96 /* RequestProtocol.swift in Sources */,
+				FCF94A8B1E6B01F300941D96 /* Controls.swift in Sources */,
 				FCF265EF1E3B4F69001F3F96 /* Conversation.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FC4986771E61019E00C098D3 /* ActivityListForm.swift in Sources */,
+				FCF94A951E6B182000941D96 /* CustomPoint.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */,
 				FCFEBF3B1E38F52D00DC989B /* ProposalController.swift in Sources */,
@@ -1015,13 +1046,16 @@
 				FC4986751E61016400C098D3 /* Form.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
+				FCEDA2A01E6BDC6B006FBF20 /* Layout.swift in Sources */,
 				FCFEBF471E38F70C00DC989B /* ShipEntryController.swift in Sources */,
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
+				FCF94A8D1E6B04D900941D96 /* Structures.swift in Sources */,
 				FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */,
 				FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
 				FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */,
 				FCF265E31E3B4D7E001F3F96 /* Reservation.swift in Sources */,
+				FCEDA29E1E6B8B5E006FBF20 /* OperationSet.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCF265E71E3B4EFB001F3F96 /* Activity.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
@@ -1043,8 +1077,11 @@
 				FC93216C1E4A1B9F00C21056 /* EnventSearchViewController.swift in Sources */,
 				FCFEBF491E38F73400DC989B /* TaxiEntryController.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
+				FCF94AA11E6B192D00941D96 /* Extensions.swift in Sources */,
+				FCF94A871E6A2F0200941D96 /* Mitty.swift in Sources */,
 				FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */,
 				FCF265E51E3B4E29001F3F96 /* Invitation.swift in Sources */,
+				FCF94AA51E6B195800941D96 /* Selectable.swift in Sources */,
 				FCFEBF451E38F6EE00DC989B /* EatEntryController.swift in Sources */,
 				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
@@ -1053,7 +1090,6 @@
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */,
-				FC1785061E627A3C00CAC38B /* Cells.swift in Sources */,
 				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 				FCF265ED1E3B4F5B001F3F96 /* Meeting.swift in Sources */,

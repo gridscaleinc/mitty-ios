@@ -10,14 +10,7 @@ import Foundation
 import UIKit
 
 
-typealias  EventHandler = (_ view: UIView) -> Void
-enum FormEvent {
-    case onTap
-    case onChanged
-    case onEditEnded
-}
 
-typealias LayoutCoder = () ->Void
 class Control : NSObject {
     let field: UIView
     var name: String = "NO-NAME"
@@ -37,10 +30,16 @@ class Control : NSObject {
     
     var layoutCode : (LayoutCoder)? = nil
     
-    func layout(_ coder: @escaping LayoutCoder) -> Control {
+    func layout(_ coder: @escaping LayoutCoder) -> Self {
         self.layoutCode = coder
         return self
     }
+    
+    // 非同期実行
+    func future(_ operation: (Operatable) -> Void, _ completion: ()->Void) -> Self {
+        return self
+    }
+    
 
 }
 

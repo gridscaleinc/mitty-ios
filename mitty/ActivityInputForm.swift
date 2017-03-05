@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import PureLayout
 
-class ActivityInputForm : SmartForm {
+class ActivityInputForm : CollectionForm {
     
     let dummyLabel : UILabel = {
         let l = UILabel.newAutoLayout()
@@ -30,42 +30,48 @@ class ActivityInputForm : SmartForm {
     
     func loadPage() {
         
-        var page :Page = self
-        page = page +++ Section(name: "Main-Event")
-            +++ Section(name: "Location")
-            +++ Section(name: "Contact-Info")
-            +++ Section(name: "Price-Info")
-            +++ Section(name: "Remarks")
+        var page :MittyForm = self
+        +++ Section1(name: "Main-Event")
+        page += Section1(name: "Location")
+        page += Section1(name: "Contact-Info")
+        page += Section1(name: "Price-Info")
+        page += Section1(name: "Remarks")
         
-        let mainSection = page["Main-Event"]
+        var mainSection = page["Main-Event"]
         
-        var row = Row() +++ buildTitle("Title", fieldTitle: "タイトル")
+        var row = Row1.LeftAlignedRow()
+            +++ buildTitle("Title", fieldTitle: "タイトル")
             +++ buildTextField(name: "Title-Text", placeHolder: "タイトルを入力", left:90, width:150)
     
+        mainSection! += row
+        
+        row = Row1.LeftAlignedRow()
+           +++ buildTitle("Date-Title", fieldTitle: "日程")
+           +++ buildTextField(name: "From-Date", placeHolder: "", left:90, width:100)
+           +++ buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
+        
         mainSection! +++ row
         
-        row = Row() +++ buildTitle("Date-Title", fieldTitle: "日程")
-            +++ buildTextField(name: "From-Date", placeHolder: "", left:90, width:100)
-            +++ buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
-
         
-        mainSection! +++ row
-        
-        
-        row = Row() +++ buildTitle("Date-To-Title", fieldTitle: "      ~")
-            +++ buildTextField(name: "To-Date", placeHolder: "", left:90, width:100)
-            +++ buildTextField(name: "To-Time", placeHolder: "", left:200, width:60)
+        row = Row1.LeftAlignedRow()
+           +++ buildTitle("Date-To-Title", fieldTitle: "      ~")
+           +++ buildTextField(name: "To-Date", placeHolder: "", left:90, width:100)
+           +++ buildTextField(name: "To-Time", placeHolder: "", left:200, width:60)
         
         mainSection! +++ row
         for i in 2  ..< 30  {
-            row = Row() +++ buildTitle("Date-Title-" + String(i), fieldTitle: "項目−" + String(i))
-                +++ buildTextField(name: "From-Date-" + String(i), placeHolder: "", left:90, width:100)
-                +++ buildTextField(name: "From-Time-" + String(i), placeHolder: "", left:200, width:60)
-                
+            row = Row1.LeftAlignedRow()
+                +++ buildTitle("Date-Title-" + String(i), fieldTitle: "項目−" + String(i))
+            let subRow = Row1.RightAlignedRow()
+                +++ buildTextField(name: "From-Date-" + String(i), placeHolder: "", left:90, width:120)
+                +++ buildTextField(name: "From-Time-" + String(i), placeHolder: "", left:200, width:40)
+                +++ buildTitle("Anchor" + String(i), fieldTitle: "    >" )
+            
+            subRow.size(w:250, h:30)
+            row +++ subRow
+            
             mainSection! +++ row
         }
-        
-        
         
         self.addSubview(dummyLabel)
         dummyLabel.autoPinEdge(toSuperviewEdge: .top, withInset:1)
@@ -84,29 +90,23 @@ class ActivityInputForm : SmartForm {
         
     }
     
-    func  buildTitle (_ fieldName: String, fieldTitle: String) -> Control {
+    func  buildTitle (_ fieldName: String, fieldTitle: String) -> Control1 {
         let l = UILabel.newAutoLayout()
         l.text = fieldTitle
-        return Control(fieldName, l).layout {
-            l.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-            l.autoPinEdge(toSuperviewEdge: .top)
-            l.autoSetDimension(.height, toSize: 30)
-            l.autoSetDimension(.width, toSize: 70)
+        return Control1(name: fieldName, view: l).layout { (control) in
+            control.size(w:70, h:30)
         }
     }
     
     ///
-    func buildTextField(name: String, placeHolder: String, left: CGFloat, width: CGFloat) -> Control {
+    func buildTextField(name: String, placeHolder: String, left: CGFloat, width: CGFloat) -> Control1 {
         let t = UITextField.newAutoLayout()
         t.placeholder = placeHolder
         t.layer.borderColor = UIColor.lightGray.cgColor
         t.layer.borderWidth = 0.5
         t.backgroundColor = .white
-        return Control(name, t).layout {
-            t.autoPinEdge(toSuperviewEdge: .left, withInset: left)
-            t.autoPinEdge(toSuperviewEdge: .top)
-            t.autoSetDimension(.height, toSize: 30)
-            t.autoSetDimension(.width, toSize: width)
+        return Control1(name: name, view: t).layout { (control) in
+            control.size(w:width, h: 30).leftMargin(10).rightMargin(10)
         }
     }
 

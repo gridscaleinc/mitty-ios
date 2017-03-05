@@ -27,8 +27,8 @@ infix operator +++ : FormPrecedence
 infix operator <<< : SectionPrecedence
 prefix operator +=
 
-@objc(SmartForm)
-class SmartForm : Page {
+@objc(CollectionForm)
+class CollectionForm : MittyForm {
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
@@ -56,7 +56,7 @@ class SmartForm : Page {
     }
 }
 
-extension SmartForm : UICollectionViewDelegateFlowLayout {
+extension CollectionForm : UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let screenSize:CGSize = UIScreen.main.bounds.size
@@ -78,6 +78,31 @@ extension SmartForm : UICollectionViewDelegateFlowLayout {
         default:
             return CGSize(width: 300, height: 20)
         }
+    }
+    
+}
+
+extension CollectionForm: UICollectionViewDataSource {
+    ///
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return sections.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return sections[section].count
+    }
+    
+    // あるセクションから行を取得。
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: RowCell.id, for: indexPath)
+        var cell = collectionViewCell as! RowCell
+        
+        let s = indexPath.section
+        let r = indexPath.row
+        let row = sections[s][r]
+        
+        return cell <<< row
     }
     
 }
@@ -136,29 +161,7 @@ class Page: Form {
     }
 }
 
-extension Page: UICollectionViewDataSource {
-    ///
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].count
-    }
-    
-    // あるセクションから行を取得。
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        var cell = (collectionView.dequeueReusableCell(withReuseIdentifier: RowCell.id, for: indexPath ) as! RowCell)
-        
-        let s = indexPath.section
-        let r = indexPath.row
-        let row = sections[s][r]
-        
-        return cell <<< row
-    }
-    
-}
+
 
 // Collection of rows
 @objc(Section)
@@ -222,11 +225,11 @@ class RowCell : UICollectionViewCell {
     }
     
     @discardableResult
-    static func <<< (left: inout RowCell, right: Row) -> RowCell {
-        for (_ , control) in right.controlDic {
-            left.addSubview(control.field)
-            control.layoutCode?()
+    static func <<< (left: inout RowCell, right: Container1) -> RowCell {
+        for (control) in right.children {
+            left.addSubview(control.view)
         }
+        right.configLayout()
         left.backgroundColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
         return left
     }

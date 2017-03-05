@@ -55,6 +55,7 @@ class ActivitySelectionViewController : UIViewController {
         self.form.collectionView.register(ActivityListHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ActivityListHeaderCell.id)
         self.form.load()
         
+        
         self.view.setNeedsLayout()
         
     }
