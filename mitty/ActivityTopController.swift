@@ -88,6 +88,18 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
             view.backgroundColor = .blue
             print("Indicator Button taped")
         }
+//        let m = mitty(self.view).forEach({ (c) -> Bool in
+//            let t = type(of: c.view)
+//            if (t is UIButton.Type) {
+//                return true
+//            }
+//            return false
+//        }) { (c) in
+//            (c.view as! UIButton).setTitle("T#" + String(c.view.tag), for: .normal)
+//            return
+//        }
+//        self.view.setNeedsLayout()
+//        print(m.controls.count)
     }
     
     //

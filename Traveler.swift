@@ -7,41 +7,32 @@
 //
 
 import Foundation
+import UIKit
 
-var Tagnizer : () -> Int = ViewTagnizer.tagNizer.initTagnizer()
 
-
-class ViewTagnizer {
-    static var tagNizer = ViewTagnizer()
+class ViewTraveler {
     
-    let lock = NSLock()
-    var initialized = false
-    var tagNizer : (() -> Int)? = nil
-    
-    func initTagnizer () -> () -> Int {
-//        lock.lock()
-//        defer {lock.unlock()}
-        if initialized {
-            return tagNizer!
+    func travel(_ v: UIView) -> Mitty {
+        let m = Mitty()
+        let c = Control1(view: v)
+        m.controls.insert(c)
+        
+        for vx in v.subviews {
+            travel(vx, m)
         }
-        var currentTag : Int = 1000000000
-        let f = { () -> Int in
-            currentTag += 1
-            return currentTag
-        }
-        tagNizer = f
-        initialized = true
-        return f
+        return m
     }
     
-    func next() -> Int {
-        lock.lock()
-        defer {lock.unlock()}
-        return Tagnizer()
+    @discardableResult
+    func travel(_ v: UIView, _ mitty: Mitty) -> Mitty {
+        let c = Control1(view: v)
+        mitty.controls.insert(c)
+        
+        for vx in v.subviews {
+            travel(vx, mitty)
+        }
+        
+        return mitty
+        
     }
 }
-
-public func nextTag () -> Int {
-    return ViewTagnizer.tagNizer.next()
-}
-

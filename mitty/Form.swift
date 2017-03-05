@@ -106,7 +106,10 @@ class Form : UIView, UIGestureRecognizerDelegate {
                 let tf = view as! UIControl
                 tf.addTarget(self, action: #selector(Form.fieldDidEdit(field:)), for: UIControlEvents.editingDidEnd)
             }
-            
+        case .onFocus:
+            // TODO
+            print("This filed dont support changed event")
+            break
         }
     }
     

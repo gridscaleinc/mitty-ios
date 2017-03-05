@@ -41,11 +41,17 @@ typealias  EventHandler = (_ view: UIView) -> Void
 
 typealias LayoutCoder = (_ c: Control1) ->Void
 
+typealias Validator = (_ c: Control1 ) -> Void
+
+typealias Conditionor = (_ c: Control1 ) -> Bool
+
+typealias ControlOperation = (_ c: Control1 ) -> Void
 
 enum FormEvent {
     case onTap
     case onChanged
     case onEditEnded
+    case onFocus
 }
 
 // Abstract class that modeling a tree structure

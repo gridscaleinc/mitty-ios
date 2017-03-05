@@ -88,17 +88,17 @@ class ActivityInputForm : CollectionForm {
         
         collectionView.reloadData()
         
-        let m = mitty(self).forEach({ (c) -> Bool in
-            let t = type(of: c.view)
-            if (t is UITextField.Type) {
-                return true
-            }
-            return false
-        }) { (c) in
-            (c.view as! UITextField).text = "T#" + String(c.view.tag)
-            return
-        }
-        print(m.controls.count)
+//        let m = mitty(self).forEach({ (c) -> Bool in
+//            let t = type(of: c.view)
+//            if (t is UITextField.Type) {
+//                return true
+//            }
+//            return false
+//        }) { (c) in
+//            (c.view as! UITextField).text = "T#" + String(c.view.tag)
+//            return
+//        }
+//        print(m.controls.count)
         
     }
     
