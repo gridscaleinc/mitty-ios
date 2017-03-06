@@ -15,10 +15,6 @@ protocol Bindable1 {
     
 }
 
-protocol EventHandler1 {
-    
-}
-
 // Protocol of object that Operateable
 // by layout, event registeration, and Async excution
 protocol Operatable {
