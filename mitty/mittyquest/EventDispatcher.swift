@@ -9,45 +9,41 @@
 import Foundation
 import UIKit
 
-
-// MittyEventDispatcherはViewControllerごとに生成し、
-// 一つの画面(Formの集まり）を範囲とした画面系イベント及びモーション、リモートコントロラーイベントを対応。
-// ライフサイクルはViewControllerのライフサイクルと整合性をとる。
-// 複数のイベント源があることを考慮し、マルチスレッドの対応を備える。
 //
-class MittyEventDispatcher {
-    
-    // View<->Cotnrollマッピングデータ
-    // Mittyフォームへのリファレンス
-    //　RawイベントとFormEventのマッピング
-    
-    func dispatchRemoteControllerEvent() {
-         // configに応じて、処理する
-    }
-    
-    func dispatchGestureEvent () {
-        
-        
-        
-    }
-    
-    func dispatchTouchEvent () {
-        
-        
-    }
-    
-    
-    func dispatchMotionEvent() {
-        
-    }
+//
+//
+protocol EventDelegator {
+    func saveHandler(_ handler :@escaping EventHandler)
+    func startDelegate (_ event: UIControlEvents , _ control: Control1, _ handler: @escaping EventHandler)
 }
 
-extension MittyEventDispatcher  {
-    // map Raw Event to Form Event 
-    // using Form Event to dispach event to the Closure Event Hook
+class ControlEventDelegator : EventDelegator {
+    func startDelegate(_ event: UIControlEvents , _ control: Control1, _ handler: @escaping EventHandler) {
+     
+        let delegator: EventDelegator = ControlEventDelegator()
+        delegator.saveHandler(handler)
+        
+        let t = control.view.self
+        switch t {
+        case is UIControl :
+            let tf = control.view as! UIControl
+            tf.addTarget(self, action: #selector(dispatchEvent(_ :)), for: event)
+        default:
+            print("This filed dont support changed event")
+        }
+    }
     
-    // if no FormEvent (It shoud not be occure)
-    // cance this event handle
+    var handler : EventHandler? = nil
     
+    func saveHandler(_ handler : @escaping EventHandler) {
+        self.handler = handler
+    }
+
+    // Event Dispatching
+    @objc
+    func dispatchEvent (_ view: UIView) {
+        handler?(view)
+    }
     
 }
+

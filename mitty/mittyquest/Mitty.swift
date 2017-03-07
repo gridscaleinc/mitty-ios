@@ -36,7 +36,7 @@ open class Mitty : OperationSet {
     }
     
     // event bind
-    func bind (_ selector: ControlSelector, _ event: FormEvent, _ handler: @escaping EventHandler ) -> Mitty {
+    func bind (_ selector: ControlSelector, _ event: UIControlEvents, _ handler: @escaping EventHandler ) -> Mitty {
         let m = Mitty()
         for c in controls {
             if (selector(c)) {
@@ -57,7 +57,7 @@ open class Mitty : OperationSet {
                 continue
             }
             if (selector(c)) {
-                c.event(FormEvent.onTap, onTap)
+                c.event(.touchUpInside, onTap)
                 m.controls.insert(c)
             }
         }
@@ -72,7 +72,7 @@ open class Mitty : OperationSet {
                 continue
             }
             if (selector(c)) {
-                c.event(FormEvent.onFocus, onFocus)
+                c.event(.editingDidBegin, onFocus)
                 m.controls.insert(c)
             }
         }

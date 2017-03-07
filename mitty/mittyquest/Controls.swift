@@ -19,7 +19,7 @@ protocol Bindable1 {
 // by layout, event registeration, and Async excution
 protocol Operatable {
     func layout(_ coder: @escaping LayoutCoder) -> Self
-    func event(_ id: FormEvent, _ handler: @escaping EventHandler) -> Self
+    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self
     func future(_ operation: @escaping (Operatable) -> Void, _ completion: (()->Void)?) -> Self
 }
 
@@ -134,7 +134,6 @@ open class Control1 : NSObject, Node, Operatable {
         return nil
     }
     
-    var handlers : [FormEvent: EventHandler] = [:]
     private var layoutCoders : [LayoutCoder] = []
     
     static public func ==(lhs: Control1, rhs: Control1) -> Bool {
@@ -185,8 +184,11 @@ open class Control1 : NSObject, Node, Operatable {
      register event handler here
      */
     @discardableResult
-    func event(_ id: FormEvent, _ handler: @escaping EventHandler) -> Self {
-        handlers[id] = handler
+    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self {
+
+        let delegator = ControlEventDelegator()
+        delegator.startDelegate(event, self, handler)
+        
         return self
     }
     
