@@ -36,15 +36,12 @@ open class Mitty : OperationSet {
     }
     
     // event bind
-    func bind (_ selector: ControlSelector, _ event: UIControlEvents, _ handler: @escaping EventHandler ) -> Mitty {
-        let m = Mitty()
+    @discardableResult
+    func bindEvent (for event: UIControlEvents, _ handler: @escaping EventHandler ) -> Mitty {
         for c in controls {
-            if (selector(c)) {
-                c.event(event, handler)
-                m.controls.insert(c)
-            }
+            c.event(event, handler)
         }
-        return m
+        return self
         
     }
     
@@ -159,5 +156,9 @@ public func mitty(_ col: Col) -> Mitty {
 }
 
 public func mitty(_ view: UIView) -> Mitty {
-    return ViewTraveler().travel(view)
+    let c = Control1(view:view)
+    let m = Mitty()
+    m.controls.insert(c)
+    return m
+    
 }

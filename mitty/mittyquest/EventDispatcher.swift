@@ -18,10 +18,12 @@ protocol EventDelegator {
 }
 
 class ControlEventDelegator : EventDelegator {
+    static var delegators : [EventDelegator] = []
+    
     func startDelegate(_ event: UIControlEvents , _ control: Control1, _ handler: @escaping EventHandler) {
      
-        let delegator: EventDelegator = ControlEventDelegator()
-        delegator.saveHandler(handler)
+        saveHandler(handler)
+        ControlEventDelegator.delegators.append (self)
         
         let t = control.view.self
         switch t {

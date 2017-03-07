@@ -7,11 +7,13 @@
 //
 
 import Foundation
+import UIKit
 
 /*
  A model of operatable control set
  */
 open class OperationSet :NSObject, Selectable, Operatable {
+   
     
     var controls = Set<Control1>()
     
@@ -88,9 +90,9 @@ open class OperationSet :NSObject, Selectable, Operatable {
      Make it conform to Operatable protocol
      register event handler here
      */
-    func event(_ id: FormEvent, _ handler: @escaping EventHandler) -> Self {
+    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self {
         for c in controls {
-            c.event(id, handler)
+            c.event(event, handler)
         }
         return self
     }
