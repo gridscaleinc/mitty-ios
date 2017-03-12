@@ -9,21 +9,38 @@
 import Foundation
 import UIKit
 
-//
-//
-//
-protocol EventDelegator {
-    func saveHandler(_ handler :@escaping EventHandler)
-    func startDelegate (_ event: UIControlEvents , _ control: Control1, _ handler: @escaping EventHandler)
+enum FormEvent {
+    case onTap
+    case onChanged
+    case onEditEnded
+    case onFocus
 }
 
-class ControlEventDelegator : EventDelegator {
-    static var delegators : [EventDelegator] = []
-    
-    func startDelegate(_ event: UIControlEvents , _ control: Control1, _ handler: @escaping EventHandler) {
+
+//
+//
+//
+protocol EventDispatcher {
+    func dispatch(_ id: FormEvent, view: UIView)
+}
+
+protocol UIControlEventsDispatcher {
+    func dispatch(_ event: UIControlEvents, view: UIView)
+}
+
+
+//
+//
+//
+protocol EventDelegator: StrongReference   {
+    func saveHandler(_ handler :@escaping EventHandler)
+    func startDelegate (_ event: UIControlEvents , _ control: Control, _ handler: @escaping EventHandler)
+}
+
+class ControlEventDelegator :SRCObject, EventDelegator {
+    func startDelegate(_ event: UIControlEvents , _ control: Control, _ handler: @escaping EventHandler) {
      
         saveHandler(handler)
-        ControlEventDelegator.delegators.append (self)
         
         let t = control.view.self
         switch t {

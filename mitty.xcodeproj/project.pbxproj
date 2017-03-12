@@ -72,7 +72,6 @@
 		FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B51E6D7946006FBF20 /* Layout.swift */; };
 		FCEDA2C11E6D7946006FBF20 /* Mitty.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B61E6D7946006FBF20 /* Mitty.swift */; };
 		FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */; };
-		FCEDA2C31E6D7946006FBF20 /* Selectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B81E6D7946006FBF20 /* Selectable.swift */; };
 		FCEDA2C41E6D7946006FBF20 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B91E6D7946006FBF20 /* Structures.swift */; };
 		FCEDA2C51E6D7946006FBF20 /* Tagnizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */; };
 		FCEDA2C61E6D7946006FBF20 /* Traveler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2BB1E6D7946006FBF20 /* Traveler.swift */; };
@@ -88,6 +87,7 @@
 		FCF265ED1E3B4F5B001F3F96 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265EC1E3B4F5B001F3F96 /* Meeting.swift */; };
 		FCF265EF1E3B4F69001F3F96 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265EE1E3B4F69001F3F96 /* Conversation.swift */; };
 		FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265F01E3B4F90001F3F96 /* Checkin.swift */; };
+		FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0CD1E73DCDF00536D32 /* Selection.swift */; };
 		FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */; };
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
@@ -100,6 +100,7 @@
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
 		FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */; };
 		FCFA32C91E3F89AE007F115A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA32C81E3F89AE007F115A /* Campaign.swift */; };
+		FCFB07D91E719C6600E435BE /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB07D81E719C6600E435BE /* Core.swift */; };
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
 		FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5871E594F3200B861F4 /* event10.jpeg */; };
@@ -229,7 +230,6 @@
 		FCEDA2B51E6D7946006FBF20 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		FCEDA2B61E6D7946006FBF20 /* Mitty.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mitty.swift; sourceTree = "<group>"; };
 		FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
-		FCEDA2B81E6D7946006FBF20 /* Selectable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selectable.swift; sourceTree = "<group>"; };
 		FCEDA2B91E6D7946006FBF20 /* Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
 		FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tagnizer.swift; sourceTree = "<group>"; };
 		FCEDA2BB1E6D7946006FBF20 /* Traveler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Traveler.swift; sourceTree = "<group>"; };
@@ -245,6 +245,7 @@
 		FCF265EC1E3B4F5B001F3F96 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		FCF265EE1E3B4F69001F3F96 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
 		FCF265F01E3B4F90001F3F96 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
+		FCF2A0CD1E73DCDF00536D32 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionForm.swift; sourceTree = "<group>"; };
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -257,6 +258,7 @@
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
 		FCFA32C81E3F89AE007F115A /* Campaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
+		FCFB07D81E719C6600E435BE /* Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
 		FCFBA5871E594F3200B861F4 /* event10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event10.jpeg; path = images/event10.jpeg; sourceTree = "<group>"; };
@@ -635,10 +637,11 @@
 				FCEDA2B51E6D7946006FBF20 /* Layout.swift */,
 				FCEDA2B61E6D7946006FBF20 /* Mitty.swift */,
 				FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */,
-				FCEDA2B81E6D7946006FBF20 /* Selectable.swift */,
 				FCEDA2B91E6D7946006FBF20 /* Structures.swift */,
 				FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */,
 				FCEDA2BB1E6D7946006FBF20 /* Traveler.swift */,
+				FCFB07D81E719C6600E435BE /* Core.swift */,
+				FCF2A0CD1E73DCDF00536D32 /* Selection.swift */,
 			);
 			path = mittyquest;
 			sourceTree = "<group>";
@@ -1056,7 +1059,6 @@
 				FCFBC67B1E63EC7C00AEF869 /* ScrollViewController.swift in Sources */,
 				FC4986751E61016400C098D3 /* Form.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,
-				FCEDA2C31E6D7946006FBF20 /* Selectable.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				FCFEBF471E38F70C00DC989B /* ShipEntryController.swift in Sources */,
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
@@ -1069,6 +1071,7 @@
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCF265E71E3B4EFB001F3F96 /* Activity.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
+				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
 				FCF265E11E3B4D68001F3F96 /* CampaignProtocol.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
@@ -1106,6 +1109,7 @@
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 				FCF265ED1E3B4F5B001F3F96 /* Meeting.swift in Sources */,
 				FCFEBF431E38F6BD00DC989B /* HotelEntryController.swift in Sources */,
+				FCFB07D91E719C6600E435BE /* Core.swift in Sources */,
 				FC16A5361E549A8A00C49F5F /* ExplorerTopViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1262,7 +1266,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LZQ2354CBZ;
 				INFOPLIST_FILE = mitty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1279,7 +1283,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LZQ2354CBZ;
 				INFOPLIST_FILE = mitty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";

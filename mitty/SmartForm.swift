@@ -44,7 +44,7 @@ class CollectionForm : MittyForm {
         super.init(frame: CGRect.zero)
         collectionView.delegate = self
         collectionView.dataSource = self
-        collectionView.register(RowCell.self, forCellWithReuseIdentifier: RowCell.id)
+        collectionView.register(RowCell2.self, forCellWithReuseIdentifier: RowCell2.id)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -95,8 +95,8 @@ extension CollectionForm: UICollectionViewDataSource {
     // あるセクションから行を取得。
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: RowCell.id, for: indexPath)
-        var cell = collectionViewCell as! RowCell
+        let collectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: RowCell2.id, for: indexPath)
+        var cell = collectionViewCell as! RowCell2
         
         let s = indexPath.section
         let r = indexPath.row
@@ -108,46 +108,46 @@ extension CollectionForm: UICollectionViewDataSource {
 }
 
 @objc(Page)
-class Page: Form {
+class Page2: Form2 {
     
-    internal var sections : [Section] = []
-    internal var secDic : [String: Section] = [:]
+    internal var sections : [Section2] = []
+    internal var secDic : [String: Section2] = [:]
     
-    func append(_ section: Section) {
+    func append(_ section: Section2) {
         sections.append(section)
         secDic[section.name] = section
     }
     
-    subscript (_ index: Int) -> Section {
+    subscript (_ index: Int) -> Section2 {
         return sections[index]
     }
     
-    subscript (_ secName: String) -> Section? {
+    subscript (_ secName: String) -> Section2? {
         return secDic[secName]
     }
     
-    subscript (_ s: Int, _ r: Int) -> Row {
+    subscript (_ s: Int, _ r: Int) -> Row2 {
         return sections[s][r]
     }
     
-    subscript (_ secName: String, _ fieldName: String ) -> Control? {
+    subscript (_ secName: String, _ fieldName: String ) -> Control2? {
         return secDic[secName]?[fieldName]
     }
     
     @discardableResult
-    static func +++ (left: Page, right: Section) -> Page {
+    static func +++ (left: Page2, right: Section2) -> Page2 {
         left.append(right)
         return left
     }
     
-    static func <<< (left: Page, right: Row) -> Page {
+    static func <<< (left: Page2, right: Row2) -> Page2 {
         let s = left.sections
         if (s.count > 0) {
             let section = s[s.count - 1];
             section +++ right
             return left
         } else {
-            let section = Section() // 名前なしセクションを作成
+            let section = Section2() // 名前なしセクションを作成
             left +++ section
             section +++ right
             return left
@@ -156,7 +156,7 @@ class Page: Form {
     }
     
     
-    static func  += (left : inout Page, section: Section) {
+    static func  += (left : inout Page2, section: Section2) {
         left.append(section)
     }
 }
@@ -165,8 +165,8 @@ class Page: Form {
 
 // Collection of rows
 @objc(Section)
-class Section:NSObject  {
-    private var rows : [Row] = []
+class Section2:NSObject  {
+    private var rows : [Row2] = []
     private var _name : String = ""
     var name : String {
         get {
@@ -185,7 +185,7 @@ class Section:NSObject  {
         self._name = name
     }
     
-    func append(_ r: Row) {
+    func append(_ r: Row2) {
         rows.append(r)
     }
     
@@ -193,11 +193,11 @@ class Section:NSObject  {
         return rows.count
     }
     
-    subscript (_ index: Int) -> Row {
+    subscript (_ index: Int) -> Row2 {
         return rows[index]
     }
     
-    subscript (_ fieldName: String) -> Control? {
+    subscript (_ fieldName: String) -> Control2? {
         for r in rows {
             let f = r[fieldName]
             if ( f != nil ) {
@@ -208,7 +208,7 @@ class Section:NSObject  {
     }
     
     @discardableResult
-    static func +++ (left: Section, right: Row) -> Section {
+    static func +++ (left: Section2, right: Row2) -> Section2 {
         left.append(right)
         return left
     }
@@ -216,7 +216,7 @@ class Section:NSObject  {
 }
 
 @objc(RowCell)
-class RowCell : UICollectionViewCell {
+class RowCell2 : UICollectionViewCell {
     static let id : String = "SMART-CELL"
     override func prepareForReuse() {
         for f in subviews {
@@ -225,7 +225,7 @@ class RowCell : UICollectionViewCell {
     }
     
     @discardableResult
-    static func <<< (left: inout RowCell, right: Container1) -> RowCell {
+    static func <<< (left: inout RowCell2, right: Container) -> RowCell2 {
         for (control) in right.children {
             left.addSubview(control.view)
         }
@@ -237,10 +237,10 @@ class RowCell : UICollectionViewCell {
 }
 
 @objc(Row)
-class Row:NSObject {
-    internal var controlDic : [String: Control] = [:]
+class Row2:NSObject {
+    internal var controlDic : [String: Control2] = [:]
     
-    subscript (_ fieldName:String) -> Control? {
+    subscript (_ fieldName:String) -> Control2? {
         return controlDic[fieldName]
     }
     
@@ -249,19 +249,19 @@ class Row:NSObject {
     }
     
     @discardableResult
-    static func <<< (left: Row, right: Row) -> Row {
+    static func <<< (left: Row2, right: Row2) -> Row2 {
         left.controlDic = right.controlDic
         return left
     }
     
     @discardableResult
-    static func +++ (left: Row, right: Control) -> Row {
+    static func +++ (left: Row2, right: Control2) -> Row2 {
         left.controlDic[right.name] = right
         return left
     }
     
     @discardableResult
-    static func +++ (left: Row, right: ()->Control) -> Row {
+    static func +++ (left: Row2, right: ()->Control2) -> Row2 {
         let c = right()
         return left+++c
     }

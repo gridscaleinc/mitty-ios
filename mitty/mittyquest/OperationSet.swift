@@ -15,26 +15,20 @@ import UIKit
 open class OperationSet :NSObject, Selectable, Operatable {
    
     
-    var controls = Set<Control1>()
+    var controls = Set<Control>()
     
     static var empty = {
         return OperationSet()
     }
     
-    //
-    open subscript (_ named: String)-> OperationSet {
-        return select() {
-            $0.name == named
-        }
-    }
-    
+
     @nonobjc
-    func select(_ selector: (Control1) -> Bool) -> OperationSet {
+    func select(_ selector: ControlSelector) -> OperationSet {
         var set = OperationSet.empty()
         
         for c in controls {
-            if type(of: c) is Container1.Type {
-                let result = (c as! Container1).select(selector)
+            if type(of: c) is Container.Type {
+                let result = (c as! Container).select(selector)
                 set += result
             }
         }
@@ -59,7 +53,7 @@ open class OperationSet :NSObject, Selectable, Operatable {
     //
     //
     //
-    static func += (left: inout OperationSet, right: Control1) {
+    static func += (left: inout OperationSet, right: Control) {
         left.controls.insert(right)
     }
     

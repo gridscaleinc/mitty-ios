@@ -10,51 +10,11 @@ import Foundation
 import UIKit
 
 
-
-protocol Bindable1 {
-    
-}
-
-// Protocol of object that Operateable
-// by layout, event registeration, and Async excution
-protocol Operatable {
-    func layout(_ coder: @escaping LayoutCoder) -> Self
-    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self
-    func future(_ operation: @escaping (Operatable) -> Void, _ completion: (()->Void)?) -> Self
-}
-
-typealias ControlSelector = (Control1) -> Bool
-
-// name, tag, path
-protocol Selectable {
-    
-    subscript (_ named: String)-> OperationSet { get }
-    
-    func select(_ selector: ControlSelector ) -> OperationSet
-}
-
-typealias  EventHandler = (_ view: UIView) -> Void
-
-typealias LayoutCoder = (_ c: Control1) ->Void
-
-typealias Validator = (_ c: Control1 ) -> Void
-
-typealias Conditionor = (_ c: Control1 ) -> Bool
-
-typealias ControlOperation = (_ c: Control1 ) -> Void
-
-enum FormEvent {
-    case onTap
-    case onChanged
-    case onEditEnded
-    case onFocus
-}
-
 // Abstract class that modeling a tree structure
 protocol Node : class {
     var name : String {get}
     var view : UIView {get}
-    var children : [Control1] { get }
+    var children : [Control] { get }
     var parent : Node? { get set}
     var elderSibling : Node? {get}
     var youngerSibling : Node? {get}
@@ -62,8 +22,8 @@ protocol Node : class {
 
 //
 //
-open class Control1 : NSObject, Node, Operatable {
-    
+open class Control : NSObject, Node, Operatable {
+
     private var _name : String = ""
     internal var _parent: Node?
     
@@ -83,7 +43,7 @@ open class Control1 : NSObject, Node, Operatable {
         }
     }
     
-    internal var children : [Control1] = []
+    internal var children : [Control] = []
     
     // construct a default named control
     public init(view: UIView) {
@@ -101,6 +61,8 @@ open class Control1 : NSObject, Node, Operatable {
             v.tag = nextTag()
         }
         self._view = v
+        super.init()
+        ControlManager.append(self)
     }
     
     public convenience init(name: String) {
@@ -134,9 +96,11 @@ open class Control1 : NSObject, Node, Operatable {
         return nil
     }
     
+    private var delegators : [EventDelegator] = []
+    
     private var layoutCoders : [LayoutCoder] = []
     
-    static public func ==(lhs: Control1, rhs: Control1) -> Bool {
+    static public func ==(lhs: Control, rhs: Control) -> Bool {
         return lhs._name == rhs._name
         
     }
@@ -179,6 +143,8 @@ open class Control1 : NSObject, Node, Operatable {
         
     }
     
+    var src = SRC()
+    
     /*
      Make it conform to Operatable protocol
      register event handler here
@@ -187,7 +153,10 @@ open class Control1 : NSObject, Node, Operatable {
     func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self {
 
         let delegator = ControlEventDelegator()
+        delegators.append(delegator)
+        
         delegator.startDelegate(event, self, handler)
+        src.add(o: delegator)
         
         return self
     }
@@ -198,18 +167,88 @@ open class Control1 : NSObject, Node, Operatable {
             code(self)
         }
     }
+    
 }
 
-
-
-//
-//
-//
-protocol EventDispatcher {
-    func dispatch(_ id: FormEvent, view: UIView)
+class ControlSRC: SRC  {
+    weak var cached: Control?
+    
+    init(c: Control) {
+        cached = c
+    }
+    
+    func isEmpty() -> Bool {
+        return cached == nil
+    }
 }
 
-protocol UIControlEventsDispatcher {
-    func dispatch(_ event: UIControlEvents, view: UIView)
-}
+class ControlManager {
+ 
+    static var instance = ControlManager()
+    
+    //
+    subscript (view:UIView) -> Control? {
+        return controlViewMap[view.tag]?.cached
+    }
+    
+    static func lookup(_ view: UIView) -> Control? {
+        if (instance.controlViewMap.count>1000)  {
+            future() {
+                instance.cleaning()
+            }
+        }
+        return instance[view]
+    }
+    
+    static func append(_ control: Control) {
+        let src = instance.controlViewMap[control.view.tag]
+        if (src == nil) {
+            instance.newControlSRC(control)
+        }
+        if (instance.controlViewMap.count>1000)  {
+            future() {
+                instance.cleaning()
+            }
+        }
+    }
+    
+    var controlViewMap : [Int:ControlSRC] = [:]
+    
+    func newControlSRC(_ c: Control) {
+        let newSrc = ControlSRC(c: c)
+        c.src = newSrc
+        controlViewMap[c.view.tag] = newSrc
+    }
+    var busy = false
+    func cleaning () {
+        if busy {
+            return
+        }
+        print(controlViewMap.count)
+        busy = true
+        for key in controlViewMap.keys {
+            let src = controlViewMap[key]
+            if src!.isEmpty() {
+                controlViewMap.removeValue(forKey: key)
+            }
+        }
+        busy = false
+    }
+    
+    static func retrieveOrCreateControl (linkedTo view: UIView) -> Control {
+        let control = lookup(view)
+        if (control != nil) {
+            return control!
+        }
+        return Control(view: view)
+    }
+    
+    static func future(_ operation: @escaping () -> Void) -> Void {
+        // Call by async
+        let queue = OperationQueue()
+        queue.addOperation() {
+            operation()
 
+        }
+    }
+}

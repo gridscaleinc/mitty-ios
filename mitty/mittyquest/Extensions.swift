@@ -12,13 +12,14 @@ import UIKit
 extension UIView {
     
     @discardableResult
-    func addControl(_ control: Control) -> Self {
+    func addControl(_ control: Control2) -> Self {
         self.addSubview(control.field)
         return self
     }
     
     // assignment
-    static func += (left : inout UIView, right: Control) {
+    static func += (left : inout UIView, right: Control2) {
         left.addControl(right)
     }
+    
 }

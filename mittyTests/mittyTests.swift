@@ -7,7 +7,7 @@
 //
 
 import XCTest
-@testable import mitty
+//@testable import mitty
 
 class mittyTests: XCTestCase {
     

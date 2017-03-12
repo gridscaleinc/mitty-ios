@@ -13,13 +13,20 @@ import UIKit
 //
 //
 open class Mitty : OperationSet {
-    
-    open func named(_ name: String) -> Control1? {
-        return super[name].controls.first
+
+    open subscript(_ selector: String) -> Mitty {
+        let isTarget = compile(selector)
+        let m = Mitty()
+        for c in controls {
+            if (isTarget(c)) {
+                m.controls.insert(c)
+            }
+        }
+        return self
     }
     
     // define a protocol that can
-    func forEach (_ selector: ControlSelector, _ operation: (_ selected: Control1) -> Void) -> Mitty {
+    func forEach (_ selector: ControlSelector, _ operation: (_ selected: Control) -> Void) -> Mitty {
         let m = Mitty()
         for c in controls {
             if (selector(c)) {
@@ -115,14 +122,31 @@ open class Mitty : OperationSet {
         return m
     }
     
-    private func isButton(_ c: Control1) -> Bool {
+    private func isButton(_ c: Control) -> Bool {
         return type(of: c._view) is UIButton.Type
     }
     
-    private func isTextField(_ c: Control1) -> Bool {
+    private func isTextField(_ c: Control) -> Bool {
         return type(of: c._view) is UITextField.Type
     }
 
+}
+
+extension Mitty {
+    func compile(_ selection: String) -> ControlSelector {
+        var pattern = selection.trimmingCharacters(in: NSCharacterSet.whitespaces)
+        func f ( _ control : Control) -> Bool {
+            
+            if (pattern == "") {
+                return true
+            }
+            
+            let m = Matching(pattern)
+            return m.matches(control)
+        }
+        
+        return f
+    }
 }
 
 public func mitty(_ form: MittyForm) -> Mitty {
@@ -134,14 +158,14 @@ public func mitty(_ form: MittyForm) -> Mitty {
     return mitty
 }
 
-public func mitty(_ section: Section1) -> Mitty {
+public func mitty(_ section: Section) -> Mitty {
     let mitty = Mitty()
     var opSet = mitty as OperationSet
     opSet += section.selectAll()
     return mitty
 }
 
-public func mitty(_ row: Row1) -> Mitty {
+public func mitty(_ row: Row) -> Mitty {
     let mitty = Mitty()
     var opSet = mitty as OperationSet
     opSet += row.selectAll()
@@ -156,9 +180,8 @@ public func mitty(_ col: Col) -> Mitty {
 }
 
 public func mitty(_ view: UIView) -> Mitty {
-    let c = Control1(view:view)
+    let c = Control(view:view)
     let m = Mitty()
     m.controls.insert(c)
     return m
-    
 }

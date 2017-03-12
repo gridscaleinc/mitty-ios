@@ -12,7 +12,7 @@ import UIKit
 import PureLayout
 
 @objc(ActivitySelectionForm)
-class ActivitySelectionForm : Form {
+class ActivitySelectionForm : UIView {
     
     let dummyLabel : UILabel = {
         let l = UILabel.newAutoLayout()
@@ -33,7 +33,7 @@ class ActivitySelectionForm : Form {
     let addButton : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("+", for: UIControlState())
-        Form.setButtonStyle(button: button)
+        Form2.setButtonStyle(button: button)
         button.backgroundColor = .red
         return button
     } ()
@@ -41,7 +41,7 @@ class ActivitySelectionForm : Form {
     let loadFromCalButton:UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("カレンダーから", for: UIControlState())
-        Form.setButtonStyle(button: button)
+        Form2.setButtonStyle(button: button)
         button.backgroundColor = .orange
         
         return button
@@ -62,7 +62,7 @@ class ActivitySelectionForm : Form {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 120)
         
-        let redLine = Form.HL(parent:self, bottomOf: collectionView, UIColor.red)
+        let redLine = Form2.HL(parent:self, bottomOf: collectionView, UIColor.red)
         
         self.addSubview(addButton)
         addButton.autoPinEdge(.top, to: .bottom, of:redLine, withOffset:10)

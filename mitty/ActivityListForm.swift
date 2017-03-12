@@ -11,7 +11,7 @@ import UIKit
 import PureLayout
 
 @objc(ActivityListForm)
-class ActivityListForm : Form {
+class ActivityListForm : UIView {
     let dummyLabel : UILabel = {
         let l = UILabel.newAutoLayout()
         l.backgroundColor = .clear
@@ -31,14 +31,14 @@ class ActivityListForm : Form {
     let thisYear : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("今年", for: UIControlState())
-        Form.setButtonStyle(button: button)
+        Form2.setButtonStyle(button: button)
         return button
     } ()
     
     let nextYear:UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("来年", for: UIControlState())
-        Form.setButtonStyle(button: button)
+        Form2.setButtonStyle(button: button)
         return button
     } ()
     
@@ -56,7 +56,7 @@ class ActivityListForm : Form {
     let indicator : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("2019", for: UIControlState())
-        Form.setButtonStyle(button: button)
+        Form2.setButtonStyle(button: button)
         return button
     } ()
     
@@ -83,7 +83,7 @@ class ActivityListForm : Form {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
         
-        let hl = Form.HL(parent:self, bottomOf: collectionView, UIColor.red)
+        let hl = Form2.HL(parent:self, bottomOf: collectionView, UIColor.red)
         
         self.addSubview(thisYear)
         self.addSubview(nextYear)
@@ -110,8 +110,8 @@ class ActivityListForm : Form {
         
 //        stepper.addTarget(self, action: #selector(ActivityListForm.stepperOneChanged(stepper:)), for: UIControlEvents.valueChanged)
         
-        registerHandler(stepper, .onChanged) {(v) in
-            self.indicator.setTitle("\(Int((v as! UIStepper).value))年", for: UIControlState())
+        mitty(stepper).bindEvent(for: .valueChanged) {(v) in
+            self.indicator.setTitle("\(self.stepper.value))年", for: UIControlState())
         }
         
         indicator.setTitle("\(Int(stepper.value))年", for: UIControlState())

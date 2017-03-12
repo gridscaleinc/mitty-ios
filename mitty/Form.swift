@@ -11,7 +11,7 @@ import UIKit
 
 
 
-class Control : NSObject {
+class Control2 : NSObject {
     let field: UIView
     var name: String = "NO-NAME"
     
@@ -43,8 +43,8 @@ class Control : NSObject {
 
 }
 
-@objc(Form)
-class Form : UIView, UIGestureRecognizerDelegate {
+@objc(Form2)
+class Form2 : UIView, UIGestureRecognizerDelegate {
     
     // 画面のヘッダー部
     var header : UIView? {
@@ -69,14 +69,14 @@ class Form : UIView, UIGestureRecognizerDelegate {
         get{ return self.footer != nil}
     }
     
-    var controls : [UIView : Control] = [:]
+    var controls : [UIView : Control2] = [:]
     
     // Event Registeration
     func registerHandler (_ view: UIView, _ event: FormEvent, _ handler: @escaping EventHandler) {
         
         var c = controls[view]
         if (c == nil) {
-            c = Control(view)
+            c = Control2(view)
             controls[view] = c
         }
     
@@ -84,7 +84,7 @@ class Form : UIView, UIGestureRecognizerDelegate {
         
         switch event {
         case .onTap:
-            let tap = UITapGestureRecognizer(target: self, action: #selector(Form.handleTap(_:)))
+            let tap = UITapGestureRecognizer(target: self, action: #selector(Form2.handleTap(_:)))
             tap.delegate = self
             view.addGestureRecognizer(tap)
             
@@ -95,7 +95,7 @@ class Form : UIView, UIGestureRecognizerDelegate {
             switch t {
             case is UIControl :
                 let tf = view as! UIControl
-                tf.addTarget(self, action: #selector(Form.fieldDidChange(field:)), for: UIControlEvents.valueChanged)
+                tf.addTarget(self, action: #selector(Form2.fieldDidChange(field:)), for: UIControlEvents.valueChanged)
             default:
                 print("This filed dont support changed event")
 
@@ -104,7 +104,7 @@ class Form : UIView, UIGestureRecognizerDelegate {
             let t = view.self
             if t is UIControl {
                 let tf = view as! UIControl
-                tf.addTarget(self, action: #selector(Form.fieldDidEdit(field:)), for: UIControlEvents.editingDidEnd)
+                tf.addTarget(self, action: #selector(Form2.fieldDidEdit(field:)), for: UIControlEvents.editingDidEnd)
             }
         case .onFocus:
             // TODO

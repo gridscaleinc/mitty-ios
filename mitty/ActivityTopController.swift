@@ -30,7 +30,6 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
     
     let activityListDS = ActivityListDataSource()
     let activityListDelegate = ActivityListDelegate()
-    var m : Mitty? = nil
     
     // Search Box
     let searchBox : UISearchBar = {
@@ -75,17 +74,17 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
         
         self.view.setNeedsLayout()
         
-        m = mitty(form.thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
+        let m = mitty(form.thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
             thisYearButton.backgroundColor = .red
             print("This Year taped")
         }
         
-        self.form.registerHandler(form.nextYear, FormEvent.onTap) {(view) in
+        mitty(form.nextYear).bindEvent(for: .valueChanged) {(view) in
             view.backgroundColor = .yellow
             print("Next Year taped")
         }
         
-        self.form.registerHandler(form.indicator, FormEvent.onTap) {(view) in
+        mitty(form.nextYear).bindEvent(for: .touchDragInside) {(view) in
             view.backgroundColor = .blue
             print("Indicator Button taped")
         }

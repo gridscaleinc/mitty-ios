@@ -24,7 +24,7 @@ enum UpBottom {
 
 // The extension using PureLayout to layout forms
 // Layout related extensions
-extension Control1 {
+extension Control {
     
     // set the height dimension
     @discardableResult
@@ -50,84 +50,84 @@ extension Control1 {
     // top alignment
     //
     @discardableResult
-    open func topAlign(with control: Control1, withOffset points: CGFloat? = 0) -> Self {
+    open func topAlign(with control: Control, withOffset points: CGFloat? = 0) -> Self {
         self.view.autoPinEdge(.top, to: .top, of: control.view, withOffset: points!)
         return self
     }
     
     // bottom alignment
     @discardableResult
-    open func bottomAlign(with control: Control1, withOffset points: CGFloat? = 0) -> Self {
+    open func bottomAlign(with control: Control, withOffset points: CGFloat? = 0) -> Self {
         self.view.autoPinEdge(.bottom, to: .bottom, of: control.view, withOffset: points!)
         return self
     }
     
     // left alignment
     @discardableResult
-    open func leftAlign(with control: Control1, withOffset points: CGFloat? = 0 ) -> Self {
+    open func leftAlign(with control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.left, to: .left, of: control.view, withOffset: points!)
         return self
     }
     
     // right aligment
     @discardableResult
-    open func rightAlign(with control: Control1, withOffset points: CGFloat? = 0 ) -> Self {
+    open func rightAlign(with control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.right, to: .right, of: control.view, withOffset: points!)
         return self
     }
     
     // put a little bit above
     @discardableResult
-    open func putAbove(Of control: Control1, withOffset points: CGFloat? = 0 ) -> Self {
+    open func putAbove(Of control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.bottom, to: .top, of: control.view, withOffset: -points!)
         return self
     }
     
     // put a little bit under
     @discardableResult
-    open func putUnder(of control: Control1, withOffset points: CGFloat? = 0 ) -> Self {
+    open func putUnder(of control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.top, to: .bottom, of: control.view, withOffset: points!)
         return self
     }
     
     // put a little lefter than
     @discardableResult
-    open func lefter(than control: Control1, withOffset points: CGFloat? = 0 ) -> Self {
+    open func lefter(than control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.right, to: .left, of: control.view, withOffset: -points!)
         return self
     }
     
     // put a litter righter
     @discardableResult
-    open func righter(than control: Control1, withOffset points: CGFloat? = 0 ) -> Self {
+    open func righter(than control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.left, to: .right, of: control.view, withOffset: points!)
         return self
     }
     
     // top alignment, put lefter
     @discardableResult
-    open func topAlign(lefterThan control: Control1, withOffset points: (lower: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
+    open func topAlign(lefterThan control: Control, withOffset points: (lower: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
         return self.topAlign(with:control, withOffset: points?.lower)
             .lefter(than: control, withOffset: points?.spacing)
     }
     
     // top alignment, put righter
     @discardableResult
-    open func topAlign(righterThan control: Control1, withOffset points: (lower: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
+    open func topAlign(righterThan control: Control, withOffset points: (lower: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
         return self.topAlign(with:control, withOffset: points?.lower)
             .righter(than: control, withOffset: points?.spacing)
     }
     
     // bottom alignment, put lefter
     @discardableResult
-    open func bottomLefter(aignWith control: Control1, withOffset points: (higher: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
+    open func bottomLefter(aignWith control: Control, withOffset points: (higher: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
         return self.bottomAlign(with: control, withOffset: points?.higher)
             .lefter(than: control, withOffset: points?.spacing)
     }
     
     // bottom alignment, put righter
     @discardableResult
-    open func bottomRighter(to control: Control1, withOffset points: (higher: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
+    open func bottomRighter(to control: Control, withOffset points: (higher: CGFloat, spacing:CGFloat)?=(0,0)) -> Self {
         return self
             .bottomAlign(with:control, withOffset: points?.higher)
             .righter(than: control, withOffset: points?.spacing)

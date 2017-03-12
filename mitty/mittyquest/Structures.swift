@@ -11,15 +11,15 @@ import UIKit
 
 @objc(MittyForm)
 open class MittyForm : UIView {
-    var sections: [Section1] = []
-    var sectionDictionary : [String: Section1] = [:]
+    var sections: [Section] = []
+    var sectionDictionary : [String: Section] = [:]
     
-    static func += (left: inout MittyForm, section: Section1) {
+    static func += (left: inout MittyForm, section: Section) {
         left.append(section)
     }
     
     @discardableResult
-    static func +++ (left: MittyForm, right: Section1) -> MittyForm {
+    static func +++ (left: MittyForm, right: Section) -> MittyForm {
         var f = left
         f += right
         return left
@@ -28,34 +28,34 @@ open class MittyForm : UIView {
     var sectionCount : Int { return sections.count }
     
     
-    func append(_ section: Section1) {
+    func append(_ section: Section) {
         sections.append(section)
         sectionDictionary[section.name] = section
     }
     
-    subscript(_ name: String) -> Section1? {
+    subscript(_ name: String) -> Section? {
         return sectionDictionary[name]
     }
     
     // Section
-    subscript (_ index: Int) -> Section1 {
+    subscript (_ index: Int) -> Section {
         return sections[index]
     }
     
     // Section/Row
-    subscript (_ s: Int, _ r: Int) -> Container1 {
+    subscript (_ s: Int, _ r: Int) -> Container {
         return sections[s][r]
     }
     
     // TODO:いるかな？
-    private static func <<< (left: inout MittyForm, right: Container1) -> MittyForm {
+    private static func <<< (left: inout MittyForm, right: Container) -> MittyForm {
         let s = left.sections
         if (s.count > 0) {
             let section = s[s.count - 1];
             section +++ right
             return left
         } else {
-            let section = Section1(view: UIView()) // 名前なしセクションを作成
+            let section = Section(view: UIView()) // 名前なしセクションを作成
             left +++ section
             section +++ right
             return left
@@ -66,7 +66,7 @@ open class MittyForm : UIView {
 }
 
 
-open class Container1 : Control1, Selectable {
+open class Container : Control, Selectable {
     
     enum Distribution {
         case leftAligned
@@ -87,13 +87,13 @@ open class Container1 : Control1, Selectable {
     }
     
     subscript (named: String) -> OperationSet {
-        return select() { (c: Control1) in
+        return select() { (c: Control) in
             return c.name == named
         }
     }
     
     func select(_ selector: String) -> OperationSet {
-        return select() { (c: Control1) in
+        return select() { (c: Control) in
             return c.name == selector
         }
     }
@@ -106,15 +106,15 @@ open class Container1 : Control1, Selectable {
     }
     
     @nonobjc
-    func select(_ selector: (Control1) -> Bool) -> OperationSet {
+    func select(_ selector: (Control) -> Bool) -> OperationSet {
         var set = OperationSet.empty()
         if (selector(self)) {
             set.controls.insert(self)
         }
         for c in children {
             let t = type(of: c)
-            if t is Container1.Type {
-                let s = (c as! Container1).select(selector)
+            if t is Container.Type {
+                let s = (c as! Container).select(selector)
                 if (!s.controls.isEmpty) {
                     set += s
                 }
@@ -128,7 +128,7 @@ open class Container1 : Control1, Selectable {
     }
     
     // asssignment operator
-    static func +=(left: inout Container1, right: Control1) {
+    static func +=(left: inout Container, right: Control) {
         left.view.addSubview(right.view)
         left.children.append(right)
         right.parent = left
@@ -136,7 +136,7 @@ open class Container1 : Control1, Selectable {
     
     // asssignment operator
     @discardableResult
-    static func +++ (left: Container1, right: Control1) -> Container1 {
+    static func +++ (left: Container, right: Control) -> Container {
         left.view.addSubview(right.view)
         left.children.append(right)
         right.parent = left
@@ -144,7 +144,7 @@ open class Container1 : Control1, Selectable {
     }
     
     // asssignment operator
-    static func -=(left: inout Container1, right: Control1) {
+    static func -=(left: inout Container, right: Control) {
         if (left.children.contains(right)) {
             if (left.view.subviews.contains(right.view)) {
                 right.view.removeFromSuperview()
@@ -198,7 +198,7 @@ open class Container1 : Control1, Selectable {
             let last = children.last
             var previous = last
             
-            for c in Array<Control1>(children.reversed()) {
+            for c in Array<Control>(children.reversed()) {
                 if (c === last) {
                     _ = (distribution == .bottomAligned) ? c.down() : c.rightMost()
                 } else {
@@ -211,11 +211,11 @@ open class Container1 : Control1, Selectable {
     }
 }
 
-open class Row1 : Container1 {
+open class Row : Container {
     
     //
-    static func GEN(_ align: LeftRight) -> Row1 {
-        let row = Row1()
+    static func GEN(_ align: LeftRight) -> Row {
+        let row = Row()
 
         switch (align) {
         case LeftRight.rightAligned:
@@ -229,17 +229,17 @@ open class Row1 : Container1 {
     }
     
     //
-    static func LeftAlignedRow () -> Row1 {
+    static func LeftAlignedRow () -> Row {
         return GEN(.leftAligned)
     }
     
     //
-    static func RightAlignedRow () -> Row1 {
+    static func RightAlignedRow () -> Row {
         return GEN(.rightAligned)
     }
 }
 
-open class Col : Container1 {
+open class Col : Container {
     
     //
     static func GEN(_ align: UpBottom) -> Col {
@@ -267,10 +267,10 @@ open class Col : Container1 {
     }
 }
 
-open class Section1 : Container1 {
+open class Section : Container {
     private var _title = ""
-    private var _titleControl :Control1? = nil
-    private var contents : [Container1] = []
+    private var _titleControl :Control? = nil
+    private var contents : [Container] = []
     
     var title : String {
         get { return _title }
@@ -279,7 +279,7 @@ open class Section1 : Container1 {
         }
     }
     
-    var titleConrol : Control1? {
+    var titleConrol : Control? {
         get { return _titleControl }
         set(newValue) {
             self._titleControl = newValue
@@ -293,7 +293,7 @@ open class Section1 : Container1 {
         configTitleLayout()
     }
     
-    subscript (_ index: Int) -> Container1 {
+    subscript (_ index: Int) -> Container {
         return contents[index]
     }
     
@@ -313,30 +313,30 @@ open class Section1 : Container1 {
         titleLayoutCode?()
     }
     
-    static func += (left: inout Section1, right: Container1) {
+    static func += (left: inout Section, right: Container) {
         left.children.append(right)
         left.contents.append(right)
     }
-    static func += (left: inout Section1, right: Row1) {
+    static func += (left: inout Section, right: Row) {
         left.children.append(right)
         left.contents.append(right)
     }
     
     @discardableResult
-    static func +++ (left: Section1, right: Container1) -> Section1 {
+    static func +++ (left: Section, right: Container) -> Section {
         var section = left
         section += right
         return left
     }
     
     @discardableResult
-    static func +++ (left: Section1, right: Row1) -> Section1 {
+    static func +++ (left: Section, right: Row) -> Section {
         var section = left
         section += right
         return left
     }
     
-    func add(row: Container1, alignment align: LeftRight = .leftAligned) {
+    func add(row: Container, alignment align: LeftRight = .leftAligned) {
         switch align {
         case LeftRight.leftAligned:
             row.distribution = .leftAligned
@@ -350,7 +350,7 @@ open class Section1 : Container1 {
         contents.append(row)
     }
     
-    func add(col: Container1, alignment align: UpBottom) {
+    func add(col: Container, alignment align: UpBottom) {
         
     }
 }
