@@ -20,6 +20,14 @@ class Matching {
     
     var selectors : [Selector] = []
     
+    // 
+    func matches (_ c: Control) -> Bool {
+        for s in selectors {
+            if s.matches(c) {return true}
+        }
+        return false
+    }
+    
     func scanMatchers(_ p: String) {
         let tokenizer = SelectorTokenizer(pattern)
         stack = Stack<Matcher>()
