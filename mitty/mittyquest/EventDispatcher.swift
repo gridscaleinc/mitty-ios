@@ -32,12 +32,12 @@ protocol UIControlEventsDispatcher {
 //
 //
 //
-protocol EventDelegator: StrongReference   {
+protocol EventDelegator  {
     func saveHandler(_ handler :@escaping EventHandler)
     func startDelegate (_ event: UIControlEvents , _ control: Control, _ handler: @escaping EventHandler)
 }
 
-class ControlEventDelegator :SRCObject, EventDelegator {
+class ControlEventDelegator :EventDelegator {
     func startDelegate(_ event: UIControlEvents , _ control: Control, _ handler: @escaping EventHandler) {
      
         saveHandler(handler)

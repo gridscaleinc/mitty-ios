@@ -17,6 +17,10 @@ open class OperationSet :NSObject, Selectable, Operatable {
     
     var controls = Set<Control>()
     
+    internal override init() {
+        super.init()
+    }
+    
     static var empty = {
         return OperationSet()
     }

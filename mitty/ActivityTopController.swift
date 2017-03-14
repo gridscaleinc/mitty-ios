@@ -26,7 +26,7 @@ import PureLayout
  *
  */
 @objc(ActivityTopViewController)
-class ActivityTopViewController: UIViewController, UISearchBarDelegate {
+class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     
     let activityListDS = ActivityListDataSource()
     let activityListDelegate = ActivityListDelegate()
@@ -42,9 +42,9 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
     // activityList を作成する
      let form : ActivityListForm
     
-    init () {
+    override init () {
         self.form = ActivityListForm.newAutoLayout()
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -74,17 +74,21 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
         
         self.view.setNeedsLayout()
         
-        let m = mitty(form.thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
+        mitty(form.thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
             thisYearButton.backgroundColor = .red
             print("This Year taped")
         }
         
-        mitty(form.nextYear).bindEvent(for: .valueChanged) {(view) in
+        mitty(form.stepper).bindEvent(for: .valueChanged) {(v) in
+            self.form.indicator.setTitle("\(Int(self.form.stepper.value))年", for: UIControlState())
+        }
+        
+        mitty(form.nextYear).bindEvent(for: .touchUpInside) {(view) in
             view.backgroundColor = .yellow
             print("Next Year taped")
         }
         
-        mitty(form.nextYear).bindEvent(for: .touchDragInside) {(view) in
+        mitty(form.indicator).bindEvent(for: .touchUpInside) {(view) in
             view.backgroundColor = .blue
             print("Indicator Button taped")
         }
@@ -161,6 +165,7 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
         let vc = ActivitySelectionViewController()
         self.navigationItem.title = "戻る"
         self.tabBarController?.tabBar.isHidden = true
+        
         self.navigationController?.pushViewController(vc, animated: true)
 
     }
@@ -174,6 +179,7 @@ class ActivityTopViewController: UIViewController, UISearchBarDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
 }
 
 

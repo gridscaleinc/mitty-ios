@@ -11,6 +11,7 @@ import UIKit
 
 @objc(MittyForm)
 open class MittyForm : UIView {
+    var rootMitty = MittyQuest()
     var sections: [Section] = []
     var sectionDictionary : [String: Section] = [:]
     
@@ -31,6 +32,7 @@ open class MittyForm : UIView {
     func append(_ section: Section) {
         sections.append(section)
         sectionDictionary[section.name] = section
+        addSubview(section.view)
     }
     
     subscript(_ name: String) -> Section? {
@@ -60,9 +62,40 @@ open class MittyForm : UIView {
             section +++ right
             return left
         }
-        
     }
     
+    func mitty() -> MittyQuest {
+        let rootMitty = MittyQuest()
+        var opSet = rootMitty as OperationSet
+        for s in sections {
+            opSet += s.selectAll()
+        }
+        return rootMitty
+    }
+    
+    static func setButtonStyle (button: UIButton) {
+        
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        button.setTitleColor(.white, for: UIControlState.normal)
+        button.setTitleColor(.gray, for: .disabled)
+        button.backgroundColor = UIColor.lightGray
+        button.layer.cornerRadius = 5
+        button.layer.borderWidth = 0.5
+        button.layer.borderColor = UIColor.gray.cgColor
+    }
+    
+    static func HL (parent: UIView, bottomOf: UIView, _ color: UIColor? = UIColor.black, _ width: Int = 1) -> UIView {
+        let hl = UIView.newAutoLayout()
+        hl.backgroundColor = color
+        hl.autoSetDimension(.height, toSize: CGFloat(width))
+        
+        parent.addSubview(hl)
+        hl.autoPinEdge(.top, to: .bottom, of:bottomOf)
+        hl.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
+        hl.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
+        
+        return hl
+    }
 }
 
 
@@ -314,12 +347,15 @@ open class Section : Container {
     }
     
     static func += (left: inout Section, right: Container) {
-        left.children.append(right)
-        left.contents.append(right)
+        left.append(right)
     }
+    
     static func += (left: inout Section, right: Row) {
-        left.children.append(right)
-        left.contents.append(right)
+        left += right as Container
+    }
+    
+    static func += (left: inout Section, right: Col) {
+        left += right as Container
     }
     
     @discardableResult
@@ -331,12 +367,15 @@ open class Section : Container {
     
     @discardableResult
     static func +++ (left: Section, right: Row) -> Section {
-        var section = left
-        section += right
-        return left
+        return left +++ (right as Container)
     }
     
-    func add(row: Container, alignment align: LeftRight = .leftAligned) {
+    @discardableResult
+    static func +++ (left: Section, right: Col) -> Section {
+        return left +++ (right as Container)
+    }
+    
+    func add(row: Row, alignment align: LeftRight = .leftAligned) {
         switch align {
         case LeftRight.leftAligned:
             row.distribution = .leftAligned
@@ -345,12 +384,26 @@ open class Section : Container {
         default: return
         }
         
-        children.append(row)
-        
-        contents.append(row)
+        append(row)
     }
     
-    func add(col: Container, alignment align: UpBottom) {
+    func add(col: Col, alignment align: UpBottom) {
+        switch align {
+        case UpBottom.up:
+            col.distribution = .upAligned
+        case UpBottom.bottom:
+            col.distribution = .bottomAligned
+        default: return
+        }
         
+        append(col)
     }
+    
+    func append(_ c: Container) {
+        children.append(c)
+        contents.append(c)
+        c.parent = self
+    }
+    
+
 }

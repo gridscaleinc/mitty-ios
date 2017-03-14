@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import PureLayout
 
-class ActivitySelectionViewController : UIViewController {
+class ActivitySelectionViewController : MittyUIViewController {
     
     // activityList を作成する
     let form : ActivitySelectionForm
@@ -58,11 +58,13 @@ class ActivitySelectionViewController : UIViewController {
         
         self.view.setNeedsLayout()
         
+        let _ = mitty()
+        
     }
     
-    init () {
+    override init () {
         form = ActivitySelectionForm.newAutoLayout()
-        super.init(nibName: nil, bundle: nil)
+        super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {

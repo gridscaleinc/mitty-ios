@@ -31,14 +31,14 @@ class ActivityListForm : UIView {
     let thisYear : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("今年", for: UIControlState())
-        Form2.setButtonStyle(button: button)
+        MittyForm.setButtonStyle(button: button)
         return button
     } ()
     
     let nextYear:UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("来年", for: UIControlState())
-        Form2.setButtonStyle(button: button)
+        MittyForm.setButtonStyle(button: button)
         return button
     } ()
     
@@ -56,7 +56,7 @@ class ActivityListForm : UIView {
     let indicator : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("2019", for: UIControlState())
-        Form2.setButtonStyle(button: button)
+        MittyForm.setButtonStyle(button: button)
         return button
     } ()
     
@@ -83,7 +83,7 @@ class ActivityListForm : UIView {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
         
-        let hl = Form2.HL(parent:self, bottomOf: collectionView, UIColor.red)
+        let hl = MittyForm.HL(parent:self, bottomOf: collectionView, UIColor.red)
         
         self.addSubview(thisYear)
         self.addSubview(nextYear)
@@ -107,12 +107,6 @@ class ActivityListForm : UIView {
         stepper.autoPinEdge(toSuperviewEdge: .right)
         indicator.autoPinEdge(toSuperviewEdge: .left)
         indicator.autoPinEdge(toSuperviewEdge: .right)
-        
-//        stepper.addTarget(self, action: #selector(ActivityListForm.stepperOneChanged(stepper:)), for: UIControlEvents.valueChanged)
-        
-        mitty(stepper).bindEvent(for: .valueChanged) {(v) in
-            self.indicator.setTitle("\(self.stepper.value))年", for: UIControlState())
-        }
         
         indicator.setTitle("\(Int(stepper.value))年", for: UIControlState())
     }

@@ -62,7 +62,6 @@ open class Control : NSObject, Node, Operatable {
         }
         self._view = v
         super.init()
-        ControlManager.append(self)
     }
     
     public convenience init(name: String) {
@@ -143,8 +142,6 @@ open class Control : NSObject, Node, Operatable {
         
     }
     
-    var src = SRC()
-    
     /*
      Make it conform to Operatable protocol
      register event handler here
@@ -156,7 +153,6 @@ open class Control : NSObject, Node, Operatable {
         delegators.append(delegator)
         
         delegator.startDelegate(event, self, handler)
-        src.add(o: delegator)
         
         return self
     }
@@ -168,87 +164,4 @@ open class Control : NSObject, Node, Operatable {
         }
     }
     
-}
-
-class ControlSRC: SRC  {
-    weak var cached: Control?
-    
-    init(c: Control) {
-        cached = c
-    }
-    
-    func isEmpty() -> Bool {
-        return cached == nil
-    }
-}
-
-class ControlManager {
- 
-    static var instance = ControlManager()
-    
-    //
-    subscript (view:UIView) -> Control? {
-        return controlViewMap[view.tag]?.cached
-    }
-    
-    static func lookup(_ view: UIView) -> Control? {
-        if (instance.controlViewMap.count>1000)  {
-            future() {
-                instance.cleaning()
-            }
-        }
-        return instance[view]
-    }
-    
-    static func append(_ control: Control) {
-        let src = instance.controlViewMap[control.view.tag]
-        if (src == nil) {
-            instance.newControlSRC(control)
-        }
-        if (instance.controlViewMap.count>1000)  {
-            future() {
-                instance.cleaning()
-            }
-        }
-    }
-    
-    var controlViewMap : [Int:ControlSRC] = [:]
-    
-    func newControlSRC(_ c: Control) {
-        let newSrc = ControlSRC(c: c)
-        c.src = newSrc
-        controlViewMap[c.view.tag] = newSrc
-    }
-    var busy = false
-    func cleaning () {
-        if busy {
-            return
-        }
-        print(controlViewMap.count)
-        busy = true
-        for key in controlViewMap.keys {
-            let src = controlViewMap[key]
-            if src!.isEmpty() {
-                controlViewMap.removeValue(forKey: key)
-            }
-        }
-        busy = false
-    }
-    
-    static func retrieveOrCreateControl (linkedTo view: UIView) -> Control {
-        let control = lookup(view)
-        if (control != nil) {
-            return control!
-        }
-        return Control(view: view)
-    }
-    
-    static func future(_ operation: @escaping () -> Void) -> Void {
-        // Call by async
-        let queue = OperationQueue()
-        queue.addOperation() {
-            operation()
-
-        }
-    }
 }

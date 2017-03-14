@@ -40,41 +40,6 @@ typealias Conditionor = (_ c: Control ) -> Bool
 
 typealias ControlOperation = (_ c: Control ) -> Void
 
-
-//
-public protocol StrongReference {
-    
-    var linkedOut : StrongReference? {get set}
-    
-}
-
-public class SRCObject : StrongReference {
-    public var linkedOut: StrongReference? = nil
-}
-
-class SRC {
-    var head: StrongReference
-    var tail: StrongReference
-    
-    init () {
-        head = SRCObject()
-        tail = SRCObject()
-        head.linkedOut = tail
-        tail.linkedOut = head
-    }
-    
-    func add (o: SRCObject) {
-        o.linkedOut = head.linkedOut
-        head.linkedOut = o
-    }
-    
-    
-    func release() {
-        head.linkedOut = tail
-        tail.linkedOut = head
-    }
-}
-
 struct Stack<E> {
     var values : [E] = []
     
@@ -91,4 +56,19 @@ struct Stack<E> {
     }
 }
 
+// MARK: Operators
+
+precedencegroup FormPrecedence {
+    associativity: left
+    higherThan: LogicalConjunctionPrecedence
+}
+
+precedencegroup SectionPrecedence {
+    associativity: left
+    higherThan: FormPrecedence
+}
+
+infix operator +++ : FormPrecedence
+infix operator <<< : SectionPrecedence
+prefix operator +=
 
