@@ -1,9 +1,31 @@
 //
-//  Somitty.swift
-//  mitty
+//  MittyQuest.swift
+//
+//  MittyQuest
+//
 //
 //  Created by gridscale on 2017/03/04.
-//  Copyright © 2017年 GridScale Inc. All rights reserved.
+//  Copyright © 2017 GridScale Inc. All rights reserved.
+//
+//  This code is distributed under the terms and conditions of the MIT license.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to
+//  deal in the Software without restriction, including without limitation the
+//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+//  IN THE SOFTWARE.
 //
 
 import Foundation
@@ -45,16 +67,13 @@ open class MittyQuest : OperationSet {
         return m
     }
     
+    
     // define a protocol that can
-    func forEach (_ selector: ControlSelector, _ operation: (_ selected: Control) -> Void) -> MittyQuest {
-        let m = MittyQuest()
+    func forEach (_ operation: (_ selected: Control) -> Void) -> MittyQuest {
         for c in controls {
-            if (selector(c)) {
-                operation(c)
-                m.controls.insert(c)
-            }
+            operation(c)
         }
-        return m
+        return self
     }
     
     // define a function that access all the values in selectable
@@ -71,56 +90,21 @@ open class MittyQuest : OperationSet {
         return self
         
     }
-    
-    // Special for button
-    func button(_ selector: ControlSelector, onTap: @escaping EventHandler) -> MittyQuest {
+
+    /*
+     Make it conform to Operatable protocol
+     registration Layout coder
+     */
+    func layout(_ coder: @escaping LayoutCoder) -> Self {
         
-        let m = MittyQuest()
         for c in controls {
-            if (!(isButton(c))) {
-                continue
-            }
-            if (selector(c)) {
-                c.event(.touchUpInside, onTap)
-                m.controls.insert(c)
-            }
+            c.layout(coder)
         }
-        return m
+        return self
     }
-    
-    // Special for button
-    func textField(_ selector: ControlSelector, onFocus: @escaping EventHandler) -> MittyQuest {
-        let m = MittyQuest()
-        for c in controls {
-            if (!(isTextField(c))) {
-                continue
-            }
-            if (selector(c)) {
-                c.event(.editingDidBegin, onFocus)
-                m.controls.insert(c)
-            }
-        }
-        
-        return m
-    }
-    
-    // Special for button
-    func textField(_ selector: ControlSelector, validator: Validator) -> MittyQuest {
-        let m = MittyQuest()
-        for c in controls {
-            if (!isTextField(c)) {
-                continue
-            }
-            if (selector(c)) {
-                validator(c)
-                m.controls.insert(c)
-            }
-        }
-        return m
-    }
-    
+
     //
-    func animate(_ selector: ControlSelector, animator: () -> Void, duration: Int) -> MittyQuest {
+    func animate(animator: () -> Void, duration: Int) -> MittyQuest {
         return self
     }
     
@@ -129,27 +113,15 @@ open class MittyQuest : OperationSet {
     // hide
     // remove
     
-    func ifThen(_ selector: ControlSelector, ifTrue: Conditionor, thenDo: ControlOperation) -> MittyQuest {
-        let m = MittyQuest()
+    func ifThen(ifTrue: Conditionor, thenDo: ControlOperation) -> MittyQuest {
         for c in controls {
-            if (selector(c)) {
-                if (ifTrue(c)) {
-                    thenDo(c)
-                }
-                m.controls.insert(c)
+            if (ifTrue(c)) {
+                thenDo(c)
             }
         }
-        return m
+        return self
     }
     
-    private func isButton(_ c: Control) -> Bool {
-        return type(of: c._view) is UIButton.Type
-    }
-    
-    private func isTextField(_ c: Control) -> Bool {
-        return type(of: c._view) is UITextField.Type
-    }
-
 }
 
 extension MittyQuest {
@@ -169,7 +141,7 @@ extension MittyQuest {
     }
 }
 
-public func MQ(_ form: MittyForm) -> MittyQuest {
+public func MQ(_ form: MQForm) -> MittyQuest {
     return form.mitty()
 }
 

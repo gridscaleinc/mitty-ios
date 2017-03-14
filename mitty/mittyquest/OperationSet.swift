@@ -1,9 +1,31 @@
 //
 //  OperationSet.swift
-//  mitty
 //
-//  Created by gridscale on 2017/03/05.
-//  Copyright © 2017年 GridScale Inc. All rights reserved.
+//  MittyQuest
+//
+//
+//  Created by gridscale on 2017/03/04.
+//  Copyright © 2017 GridScale Inc. All rights reserved.
+//
+//  This code is distributed under the terms and conditions of the MIT license.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to
+//  deal in the Software without restriction, including without limitation the
+//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+//  IN THE SOFTWARE.
 //
 
 import Foundation
@@ -12,9 +34,8 @@ import UIKit
 /*
  A model of operatable control set
  */
-open class OperationSet :NSObject, Selectable, Operatable {
+open class OperationSet :NSObject, Selectable {
    
-    
     var controls = Set<Control>()
     
     internal override init() {
@@ -25,7 +46,6 @@ open class OperationSet :NSObject, Selectable, Operatable {
         return OperationSet()
     }
     
-
     @nonobjc
     func select(_ selector: ControlSelector) -> OperationSet {
         var set = OperationSet.empty()
@@ -61,37 +81,4 @@ open class OperationSet :NSObject, Selectable, Operatable {
         left.controls.insert(right)
     }
     
-    
-    /*
-     Make it conform to Operatable protocol
-     registration Layout coder
-     */
-    func layout(_ coder: @escaping LayoutCoder) -> Self {
-        
-        for c in controls {
-            c.layout(coder)
-        }
-        return self
-    }
-    
-    /*
-     Make it conform to Operatable protocol
-     call operation future in background thread
-     */
-    func future(_ operation: @escaping (Operatable) -> Void, _ completion: (()->Void)?) -> Self {
-        
-        
-        return self
-    }
-    
-    /*
-     Make it conform to Operatable protocol
-     register event handler here
-     */
-    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self {
-        for c in controls {
-            c.event(event, handler)
-        }
-        return self
-    }
 }

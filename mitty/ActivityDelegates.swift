@@ -13,8 +13,8 @@ class ActivitySelectionDelegate: NSObject, UICollectionViewDelegateFlowLayout {
     // Layout に関する実装
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let screenSize:CGSize = UIScreen.main.bounds.size
-        let width = ( screenSize.width - (25 * 3) ) / 3
+        let screenSize:CGSize = collectionView.frame.size
+        let width = ( screenSize.width - (20 * 3) ) / 3
         let cellSize: CGSize = CGSize( width: width, height:width )
         return cellSize
     }

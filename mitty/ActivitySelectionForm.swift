@@ -33,7 +33,7 @@ class ActivitySelectionForm : UIView {
     let addButton : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("+", for: UIControlState())
-        MittyForm.setButtonStyle(button: button)
+        MQForm.setButtonStyle(button: button)
         button.backgroundColor = .red
         return button
     } ()
@@ -41,7 +41,7 @@ class ActivitySelectionForm : UIView {
     let loadFromCalButton:UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("カレンダーから", for: UIControlState())
-        MittyForm.setButtonStyle(button: button)
+        MQForm.setButtonStyle(button: button)
         button.backgroundColor = .orange
         
         return button
@@ -62,7 +62,7 @@ class ActivitySelectionForm : UIView {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 120)
         
-        let redLine = MittyForm.HL(parent:self, bottomOf: collectionView, UIColor.red)
+        let redLine = MQForm.HL(parent:self, bottomOf: collectionView, UIColor.red)
         
         self.addSubview(addButton)
         addButton.autoPinEdge(.top, to: .bottom, of:redLine, withOffset:10)

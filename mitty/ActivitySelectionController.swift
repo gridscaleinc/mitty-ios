@@ -16,8 +16,18 @@ class ActivitySelectionViewController : MittyUIViewController {
     // activityList を作成する
     let form : ActivitySelectionForm
     
-    let dataSource = ActivitySelectionDatasource()
+    var dataSource : ActivitySelectionDatasource? = nil
     let delegate = ActivitySelectionDelegate()
+    
+    override init () {
+        form = ActivitySelectionForm.newAutoLayout()
+        super.init()
+        dataSource = ActivitySelectionDatasource(controller: self)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     override func viewDidLoad() {
@@ -39,7 +49,7 @@ class ActivitySelectionViewController : MittyUIViewController {
         form.configLayout()
         
         // Closure を利用して、イベント処理をする。
-        dataSource.onCellTapped () {  (cell) in
+        dataSource?.onCellTapped () {  (cell) in
             print(cell.activity?.label ?? "")
             let vc = ActivityPlanViewController()
             vc.activityTitle = (cell.activity?.label)!
@@ -61,16 +71,7 @@ class ActivitySelectionViewController : MittyUIViewController {
         let _ = mitty()
         
     }
-    
-    override init () {
-        form = ActivitySelectionForm.newAutoLayout()
-        super.init()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     /// 子画面からモドたら、tabバーを戻す。
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "活動種類選択"

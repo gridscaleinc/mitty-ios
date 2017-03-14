@@ -10,6 +10,11 @@ import Foundation
 import UIKit
 
 class ActivitySelectionDatasource : NSObject, UICollectionViewDataSource {
+    var controller : UIViewController
+    
+    init(controller : UIViewController) {
+        self.controller = controller
+    }
     
     let selectionList : [(label:String, icon:String)] = [
         ("空の旅", "pengin1"), ("電車で出張", "pengin1"),("飲み会", "pengin1"),
@@ -72,6 +77,12 @@ class ActivitySelectionDatasource : NSObject, UICollectionViewDataSource {
 
 // MARK: - UITableViewDataSource
 class ActivityListDataSource:NSObject, UICollectionViewDataSource {
+    var controller : UIViewController
+    
+    init(controller : UIViewController) {
+        self.controller = controller
+    }
+    
     let activityList : [(label:String, imgName:String)] = [
         (label: "2/18 平和島公園", imgName: "timesquare"),
         (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
@@ -124,7 +135,11 @@ class ActivityListDataSource:NSObject, UICollectionViewDataSource {
     
     ///
     func cellTapped(handler: UITapGestureRecognizer) {
-        print("Heeey")
+        let event = EventService.instance.buildEvent(1)
+        let eventViewController = EventDetailViewController(event:event!)
+        controller.navigationItem.title = "..."
+        controller.tabBarController?.tabBar.isHidden = true
+        controller.navigationController?.pushViewController(eventViewController, animated: true)
     }
     
     //TODO セクションのヘッダーをつける

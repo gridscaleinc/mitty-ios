@@ -31,14 +31,14 @@ class ActivityListForm : UIView {
     let thisYear : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("今年", for: UIControlState())
-        MittyForm.setButtonStyle(button: button)
+        MQForm.setButtonStyle(button: button)
         return button
     } ()
     
     let nextYear:UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("来年", for: UIControlState())
-        MittyForm.setButtonStyle(button: button)
+        MQForm.setButtonStyle(button: button)
         return button
     } ()
     
@@ -56,7 +56,7 @@ class ActivityListForm : UIView {
     let indicator : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("2019", for: UIControlState())
-        MittyForm.setButtonStyle(button: button)
+        MQForm.setButtonStyle(button: button)
         return button
     } ()
     
@@ -83,7 +83,7 @@ class ActivityListForm : UIView {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
         
-        let hl = MittyForm.HL(parent:self, bottomOf: collectionView, UIColor.red)
+        let hl = MQForm.HL(parent:self, bottomOf: collectionView, UIColor.red)
         
         self.addSubview(thisYear)
         self.addSubview(nextYear)

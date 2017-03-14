@@ -13,7 +13,7 @@ import PureLayout
 
 
 @objc(CollectionForm)
-class CollectionForm : MittyForm {
+class CollectionForm : MQForm {
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true

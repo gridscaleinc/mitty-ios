@@ -30,7 +30,7 @@ class ActivityInputForm : CollectionForm {
     
     func loadPage() {
         
-        var page :MittyForm = self
+        var page : MQForm = self
         +++ Section(name: "Main-Event")
         page += Section(name: "Location")
         page += Section(name: "Contact-Info")

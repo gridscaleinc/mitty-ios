@@ -1,9 +1,31 @@
 //
 //  Extensions.swift
-//  mitty
 //
-//  Created by gridscale on 2017/03/01.
-//  Copyright © 2017年 GridScale Inc. All rights reserved.
+//  MittyQuest
+//
+//
+//  Created by gridscale on 2017/03/04.
+//  Copyright © 2017 GridScale Inc. All rights reserved.
+//
+//  This code is distributed under the terms and conditions of the MIT license.
+//
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to
+//  deal in the Software without restriction, including without limitation the
+//  rights to use, copy, modify, merge, publish, distribute, sublicense, and/or
+//  sell copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in
+//  all copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+//  FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+//  IN THE SOFTWARE.
 //
 
 import Foundation
@@ -12,14 +34,13 @@ import UIKit
 extension UIView {
     
     @discardableResult
-    func addControl(_ control: Control2) -> Self {
-        self.addSubview(control.field)
+    func addControl(_ control: Control) -> Self {
+        self.addSubview(control.view)
         return self
     }
     
     // assignment
-    static func += (left : inout UIView, right: Control2) {
+    static func += (left : inout UIView, right: Control) {
         left.addControl(right)
     }
-    
 }
