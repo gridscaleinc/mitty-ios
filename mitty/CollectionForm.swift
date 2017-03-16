@@ -36,9 +36,6 @@ class CollectionForm : MQForm {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configLayout() {
-        
-    }
 }
 
 extension CollectionForm : UICollectionViewDelegateFlowLayout {

@@ -12,11 +12,6 @@ import PureLayout
 
 @objc(ActivityListForm)
 class ActivityListForm : MQForm {
-    let dummyLabel : UILabel = {
-        let l = UILabel.newAutoLayout()
-        l.backgroundColor = .clear
-        return l
-    } ()
     
     let collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -68,17 +63,23 @@ class ActivityListForm : MQForm {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configLayout () {
+    func loadForm () {
         
-        self.addSubview(dummyLabel)
-        dummyLabel.autoPinEdge(toSuperviewEdge: .top, withInset:10)
-        dummyLabel.autoSetDimension(.height, toSize: 0)
+        var page = self as MQForm
+        
+        let header = Header()
+        page += header
+        
+        header.layout() { (v) in
+            v.view.autoPinEdge(toSuperviewEdge: .top, withInset:10)
+            v.view.autoSetDimension(.height, toSize: 0)
+        }
         
         collectionView.backgroundColor = .white
         
         self.addSubview(collectionView)
         
-        collectionView.autoPinEdge(.top, to: .top, of:dummyLabel)
+        collectionView.autoPinEdge(.top, to: .top, of:header.view)
         collectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
@@ -117,6 +118,7 @@ class ActivityListForm : MQForm {
     }
     
     func load () {
+        
         collectionView.reloadData()
     }
 }

@@ -113,6 +113,8 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     //
     func loadActivityList () {
         
+        form.loadForm()
+        
         form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
         form.autoPinEdge(toSuperviewEdge: .left)
         form.autoPinEdge(toSuperviewEdge: .right)

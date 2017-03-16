@@ -40,32 +40,32 @@ class ActivityInputForm : CollectionForm {
         var mainSection = page["Main-Event"]
         
         var row = Row.LeftAligned()
-            +++ buildTitle("Title", fieldTitle: "タイトル")
-            +++ buildTextField(name: "Title-Text", placeHolder: "タイトルを入力", left:90, width:150)
+            +++ label("Title", fieldTitle: "タイトル")
+            +++ textField(name: "Title-Text", placeHolder: "タイトルを入力", left:90, width:150)
     
         mainSection! += row
         
         row = Row.LeftAligned()
-           +++ buildTitle("Date-Title", fieldTitle: "日程")
-           +++ buildTextField(name: "From-Date", placeHolder: "", left:90, width:100)
-           +++ buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
+           +++ label("Date-Title", fieldTitle: "日程")
+           +++ textField(name: "From-Date", placeHolder: "", left:90, width:100)
+           +++ textField(name: "From-Time", placeHolder: "", left:200, width:60)
         
         mainSection! +++ row
         
         
         row = Row.LeftAligned()
-           +++ buildTitle("Date-To-Title", fieldTitle: "      ~")
-           +++ buildTextField(name: "To-Date", placeHolder: "", left:90, width:100)
-           +++ buildTextField(name: "To-Time", placeHolder: "", left:200, width:60)
+           +++ label("Date-To-Title", fieldTitle: "      ~")
+           +++ textField(name: "To-Date", placeHolder: "", left:90, width:100)
+           +++ textField(name: "To-Time", placeHolder: "", left:200, width:60)
         
         mainSection! +++ row
         for i in 2  ..< 30  {
             row = Row.LeftAligned()
-                +++ buildTitle("Date-Title-" + String(i), fieldTitle: "項目−" + String(i))
+                +++ label("Date-Title-" + String(i), fieldTitle: "項目−" + String(i))
             let subRow = Row.RightAligned()
-                +++ buildTextField(name: "From-Date-" + String(i), placeHolder: "", left:90, width:120)
-                +++ buildTextField(name: "From-Time-" + String(i), placeHolder: "", left:200, width:40)
-                +++ buildTitle("Anchor" + String(i), fieldTitle: "    >" )
+                +++ textField(name: "From-Date-" + String(i), placeHolder: "", left:90, width:120)
+                +++ textField(name: "From-Time-" + String(i), placeHolder: "", left:200, width:40)
+                +++ label("Anchor" + String(i), fieldTitle: "    >" )
             
             subRow.size(w:250, h:30)
             row +++ subRow
@@ -100,26 +100,6 @@ class ActivityInputForm : CollectionForm {
 //        }
 //        print(m.controls.count)
         
-    }
-    
-    func  buildTitle (_ fieldName: String, fieldTitle: String) -> Control {
-        let l = UILabel.newAutoLayout()
-        l.text = fieldTitle
-        return Control(name: fieldName, view: l).layout { (control) in
-            control.size(w:70, h:30)
-        }
-    }
-    
-    ///
-    func buildTextField(name: String, placeHolder: String, left: CGFloat, width: CGFloat) -> Control {
-        let t = UITextField.newAutoLayout()
-        t.placeholder = placeHolder
-        t.layer.borderColor = UIColor.lightGray.cgColor
-        t.layer.borderWidth = 0.5
-        t.backgroundColor = .white
-        return Control(name: name, view: t).layout { (control) in
-            control.size(w:width, h: 30).leftMargin(10).rightMargin(10)
-        }
     }
 
 }

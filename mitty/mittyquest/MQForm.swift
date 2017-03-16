@@ -85,6 +85,26 @@ open class MQForm : UIView {
         }
     }
     
+    func  label (_ fieldName: String, fieldTitle: String) -> Control {
+        let l = UILabel.newAutoLayout()
+        l.text = fieldTitle
+        return Control(name: fieldName, view: l).layout { (control) in
+            control.size(w:70, h:30)
+        }
+    }
+    
+    ///
+    func textField(name: String, placeHolder: String, left: CGFloat, width: CGFloat) -> Control {
+        let t = UITextField.newAutoLayout()
+        t.placeholder = placeHolder
+        t.layer.borderColor = UIColor.lightGray.cgColor
+        t.layer.borderWidth = 0.5
+        t.backgroundColor = .white
+        return Control(name: name, view: t).layout { (control) in
+            control.size(w:width, h: 30).leftMargin(10).rightMargin(10)
+        }
+    }
+    
     func mitty() -> MittyQuest {
         let rootMitty = MittyQuest()
         var opSet = rootMitty as OperationSet
@@ -94,6 +114,11 @@ open class MQForm : UIView {
         return rootMitty
     }
     
+    func configLayout() {
+        for s in sections {
+            s.configLayout()
+        }
+    }
     
     static func setButtonStyle (button: UIButton) {
         
@@ -105,4 +130,6 @@ open class MQForm : UIView {
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.gray.cgColor
     }
+    
+    
 }
