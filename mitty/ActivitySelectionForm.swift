@@ -62,7 +62,12 @@ class ActivitySelectionForm : UIView {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 120)
         
-        let redLine = MQForm.HL(parent:self, bottomOf: collectionView, UIColor.red)
+        let redLine = HL(UIColor.red)
+        self.addSubview(redLine)
+        redLine.autoPinEdge(.top, to: .bottom, of: collectionView)
+        
+        redLine.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
+        redLine.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
         
         self.addSubview(addButton)
         addButton.autoPinEdge(.top, to: .bottom, of:redLine, withOffset:10)

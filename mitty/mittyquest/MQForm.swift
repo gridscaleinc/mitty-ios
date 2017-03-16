@@ -94,6 +94,7 @@ open class MQForm : UIView {
         return rootMitty
     }
     
+    
     static func setButtonStyle (button: UIButton) {
         
         button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
@@ -103,18 +104,5 @@ open class MQForm : UIView {
         button.layer.cornerRadius = 5
         button.layer.borderWidth = 0.5
         button.layer.borderColor = UIColor.gray.cgColor
-    }
-    
-    static func HL (parent: UIView, bottomOf: UIView, _ color: UIColor? = UIColor.black, _ width: Int = 1) -> UIView {
-        let hl = UIView.newAutoLayout()
-        hl.backgroundColor = color
-        hl.autoSetDimension(.height, toSize: CGFloat(width))
-        
-        parent.addSubview(hl)
-        hl.autoPinEdge(.top, to: .bottom, of:bottomOf)
-        hl.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-        hl.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        
-        return hl
     }
 }

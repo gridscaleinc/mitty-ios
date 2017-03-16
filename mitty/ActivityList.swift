@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import PureLayout
 
-@objc(ActivityListForm1)
-class ActivityListForm1 : UIView {
+@objc(ActivityListForm)
+class ActivityListForm : MQForm {
     let dummyLabel : UILabel = {
         let l = UILabel.newAutoLayout()
         l.backgroundColor = .clear
@@ -22,7 +22,7 @@ class ActivityListForm1 : UIView {
         let layout = UICollectionViewFlowLayout()
         layout.sectionHeadersPinToVisibleBounds = true
         layout.sectionFootersPinToVisibleBounds = false
-
+        
         let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         v.translatesAutoresizingMaskIntoConstraints = false
         return v
@@ -73,7 +73,7 @@ class ActivityListForm1 : UIView {
         self.addSubview(dummyLabel)
         dummyLabel.autoPinEdge(toSuperviewEdge: .top, withInset:10)
         dummyLabel.autoSetDimension(.height, toSize: 0)
-
+        
         collectionView.backgroundColor = .white
         
         self.addSubview(collectionView)

@@ -29,27 +29,11 @@
 //
 
 import Foundation
+import UIKit
 
 open class Container : Control, Selectable {
     
-    enum Distribution {
-        case leftAligned
-        case rightAligned
-        case upAligned
-        case bottomAligned
-    }
-    
-    private var _distributionMode : Distribution = .leftAligned
-    
-    var distribution : Distribution {
-        get {
-            return _distributionMode
-        }
-        set (newValue) {
-            _distributionMode = newValue
-        }
-    }
-    
+
     subscript (named: String) -> OperationSet {
         return select() { (c: Control) in
             return c.name == named
@@ -135,98 +119,145 @@ open class Container : Control, Selectable {
         
     }
     
+    func distribute () {
+        
+    }
+    
+}
+
+open class Row : Container {
+    
+    private var _distributionMode : LeftRight = .left
+    
+    var distribution : LeftRight {
+        get {
+            return _distributionMode
+        }
+        set (newValue) {
+            _distributionMode = newValue
+        }
+    }
+    
     /*
      * distribute children controls by alignment mode
      */
-    func distribute () {
+    override func distribute () {
         
         if children.count == 0 {
             return
         }
         
         switch distribution {
-        case .leftAligned, .upAligned:
+        case .left:
             let first = children.first
             var previous = first
             
             for c in children {
                 if (c === first) {
-                    _ = (distribution == .upAligned) ? c.upper() : c.leftMost()
+                    c.leftMost()
                 } else {
-                    _ = distribution == .upAligned ? c.putUnder(of: previous!, withOffset: (c.margin.up))
-                        : c.righter(than: previous!, withOffset: c.margin.left)
+                     c.righter(than: previous!, withOffset: c.margin.left)
                 }
                 previous = c
             }
-        case .rightAligned, .bottomAligned:
+        case .right:
             let last = children.last
             var previous = last
             
             for c in Array<Control>(children.reversed()) {
                 if (c === last) {
-                    _ = (distribution == .bottomAligned) ? c.down() : c.rightMost()
+                    c.rightMost()
                 } else {
-                    _ = (distribution == .bottomAligned) ? c.putAbove(Of: previous!, withOffset: c.margin.bottom)
-                        : c.lefter(than: previous!, withOffset: c.margin.right)
+                    c.lefter(than: previous!, withOffset: c.margin.right)
                 }
                 previous = c
             }
         }
     }
-}
-
-open class Row : Container {
     
     //
     static func GEN(_ align: LeftRight) -> Row {
         let row = Row()
-
-        switch (align) {
-        case LeftRight.rightAligned:
-            row.distribution = .rightAligned
-        default:
-            row.distribution = .leftAligned
-            return row
-        }
-        
+        row.distribution = align
         return row
     }
     
     //
-    static func LeftAlignedRow () -> Row {
-        return GEN(.leftAligned)
+    static func LeftAligned () -> Row {
+        return GEN(.left)
     }
     
     //
-    static func RightAlignedRow () -> Row {
-        return GEN(.rightAligned)
+    static func RightAligned() -> Row {
+        return GEN(.right)
     }
 }
 
 open class Col : Container {
     
+    private var _distributionMode : UpBottom = .up
+    
+    var distribution : UpBottom {
+        get {
+            return _distributionMode
+        }
+        set (newValue) {
+            _distributionMode = newValue
+        }
+    }
+    
+    
+    /*
+     * distribute children controls by alignment mode
+     */
+    override func distribute () {
+        
+        if children.count == 0 {
+            return
+        }
+        
+        switch distribution {
+        case .up:
+            let first = children.first
+            var previous = first
+            
+            for c in children {
+                if (c === first) {
+                    c.upper()
+                } else {
+                    c.putUnder(of: previous!, withOffset: (c.margin.up))
+                }
+                previous = c
+            }
+        case .bottom:
+            let last = children.last
+            var previous = last
+            
+            for c in Array<Control>(children.reversed()) {
+                if (c === last) {
+                    c.down()
+                } else {
+                    c.putAbove(Of: previous!, withOffset: c.margin.bottom)
+                }
+                previous = c
+            }
+        }
+    }
+
     //
     static func GEN(_ align: UpBottom) -> Col {
         let col = Col()
-        
-        switch (align) {
-        case UpBottom.bottom:
-            col.distribution = .bottomAligned
-        default:
-            col.distribution = .upAligned
-            return col
-        }
-        
+        col.distribution = align
         return col
     }
     
     //
-    static func UpDownAlignedCol () -> Col {
+    static func UpDownAligned () -> Col {
         return GEN(.up)
     }
     
     //
-    static func BottomUpAlignedCol () -> Col {
+    static func BottomUpAligned () -> Col {
         return GEN(.bottom)
     }
 }
@@ -306,27 +337,13 @@ open class Section : Container {
         return left +++ (right as Container)
     }
     
-    func add(row: Row, alignment align: LeftRight = .leftAligned) {
-        switch align {
-        case LeftRight.leftAligned:
-            row.distribution = .leftAligned
-        case LeftRight.rightAligned:
-            row.distribution = .leftAligned
-        default: return
-        }
-        
+    func add(row: Row, alignment align: LeftRight = .left) {
+        row.distribution = align
         append(row)
     }
     
     func add(col: Col, alignment align: UpBottom) {
-        switch align {
-        case UpBottom.up:
-            col.distribution = .upAligned
-        case UpBottom.bottom:
-            col.distribution = .bottomAligned
-        default: return
-        }
-        
+        col.distribution = align
         append(col)
     }
     
@@ -335,6 +352,21 @@ open class Section : Container {
         contents.append(c)
         c.parent = self
     }
-    
+}
 
+func HL (_ color: UIColor? = UIColor.black, _ width: Int? = 1) -> UIView {
+    let hl = UIView.newAutoLayout()
+    hl.backgroundColor = color
+    hl.autoSetDimension(.height, toSize: CGFloat(width!))
+    
+    return hl
+}
+
+class Header: Section {
+    init(_ title: String ) {
+        super.init(name: "Header-Section", view: UIView())
+        super.title = title
+        super.titleConrol = Control(view :HL())
+        self.view.addSubview((titleConrol?.view)!)
+    }
 }

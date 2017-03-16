@@ -87,6 +87,7 @@
 		FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265F01E3B4F90001F3F96 /* Checkin.swift */; };
 		FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0CD1E73DCDF00536D32 /* Selection.swift */; };
 		FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D11E777C3600536D32 /* MQForm.swift */; };
+		FCF2A0D41E7A85F200536D32 /* ActivityList.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D31E7A85F200536D32 /* ActivityList.swift */; };
 		FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */; };
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
@@ -244,6 +245,7 @@
 		FCF265F01E3B4F90001F3F96 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
 		FCF2A0CD1E73DCDF00536D32 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		FCF2A0D11E777C3600536D32 /* MQForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQForm.swift; sourceTree = "<group>"; };
+		FCF2A0D31E7A85F200536D32 /* ActivityList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityList.swift; sourceTree = "<group>"; };
 		FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionForm.swift; sourceTree = "<group>"; };
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -673,6 +675,7 @@
 				FC17850E1E627DB500CAC38B /* ActivityCell.swift */,
 				FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */,
 				FCFBC67A1E63EC7C00AEF869 /* ScrollViewController.swift */,
+				FCF2A0D31E7A85F200536D32 /* ActivityList.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1059,6 +1062,7 @@
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				FCFEBF471E38F70C00DC989B /* ShipEntryController.swift in Sources */,
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
+				FCF2A0D41E7A85F200536D32 /* ActivityList.swift in Sources */,
 				FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */,
 				FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,

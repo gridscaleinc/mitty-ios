@@ -32,15 +32,22 @@ import Foundation
 import PureLayout
 
 enum LeftRight {
-    case leftAligned
-    case rightAligned
-    case centerAligned
+    case left
+    case right
 }
 
 enum UpBottom {
     case up
-    case center
     case bottom
+}
+
+enum Alignment {
+    case up
+    case bottom
+    case left
+    case horizontalCenter
+    case verticalCenter
+    case center
 }
 
 

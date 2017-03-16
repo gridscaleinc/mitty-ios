@@ -3,7 +3,6 @@
 //
 //  MittyQuest
 //
-//
 //  Created by gridscale on 2017/03/04.
 //  Copyright © 2017 GridScale Inc. All rights reserved.
 //
@@ -32,8 +31,10 @@ import Foundation
 import UIKit
 
 class Matching {
+    
     var pattern : String
     var stack = Stack<Matcher>()
+    var hasError: Bool = false
     
     init (_ s: String) {
         pattern = s.trimmingCharacters(in: CharacterSet.whitespaces)
@@ -44,6 +45,9 @@ class Matching {
     
     // 
     func matches (_ c: Control) -> Bool {
+        if (hasError) {
+            return false
+        }
         for s in selectors {
             if s.matches(c) {return true}
         }
@@ -59,14 +63,24 @@ class Matching {
     func scanMatchers (_ tokenizer: SelectorTokenizer) {
         while (!tokenizer.EOF()) {
             let token = tokenizer.next()
+            
             switch (token) {
-            case let t where t!.isStartOfFilter() :
+            case let t where t!.isNameOrId() :
+                let s = Selector()
+                s.tagOrName = (t?.token)!
+                newSelector(s)
+
+                break
+            case let t where t!.isCommar():
+                prepareUnion()
+                
+            case let t where t!.isColon() :
                 let m = FilterMatch()
                 stack.push(m)
                 scanFilter(m, tokenizer)
                 break
                 
-            case let t where t!.isStartOfAttribute():
+            case let t where t!.isLeftBracket():
                 let m = AttributeMatch()
                 stack.push(m)
                 scanAttribute(m, tokenizer)
@@ -75,10 +89,10 @@ class Matching {
             case let t where t!.isWhitespaces():
                 break
                 
-            case let t where t!.isEndOfAttribute():
+            case let t where t!.isRightParentheses():
                 onEndOfAttribute()
                 
-                
+            
             default:
                 break
             }
@@ -87,11 +101,36 @@ class Matching {
         }
     }
     
+    func newSelector(_ s: Selector) {
+        if (stack.isEmpty) {
+            stack.push(s)
+        } else {
+            let e = stack.peek()
+            if (e is JointSelector) {
+                (e as! JointSelector).add(s)
+            } else {
+                // error
+                hasError = true
+            }
+        }
+    }
+    
+    func prepareUnion() {
+        if (stack.isEmpty) {
+            return
+        } else {
+            let e = stack.pop()
+            let jointSelector = JointSelector()
+            jointSelector.leftSelector = (e as! Selector)
+            jointSelector.selectOp = .Union
+        }
+
+    }
+    
     func onEndOfSelector() {
         
     }
-    
-    
+
     func onEndOfAttribute() {
         
     }
@@ -115,7 +154,7 @@ class Matching {
         if (name == nil) {
             return
         } else {
-            matcher.op = (compareOp?.token)!
+            matcher.attOp = (compareOp?.token)!
         }
         
     }
@@ -142,7 +181,7 @@ protocol Matcher {
 }
 
 class Selector : Matcher {
-    var container: String = ""
+    var tagOrName: String = ""
     var attributeMatchers : [AttributeMatch] = []
     var filterMatchers : [FilterMatch] = []
     
@@ -151,10 +190,34 @@ class Selector : Matcher {
     }
 }
 
+enum SelectorOp {
+    case Decent
+    case Children
+    case Union
+}
+
+// TODO
+class JointSelector : Selector {
+
+
+    var leftSelector : Selector? = nil
+    var selectOp : SelectorOp = .Union
+    var rightSelector : Selector? = nil
+    
+    override func matches(_ c: Control) -> Bool {
+        return true
+    }
+    
+    func add(_ s: Selector) {
+        rightSelector = s
+    }
+}
+
+
 class AttributeMatch: Matcher {
     
     var name : String = ""
-    var op : String = ""
+    var attOp : String = ""
     var value : String = ""
     
     func matches (_ c: Control) -> Bool {
@@ -162,8 +225,15 @@ class AttributeMatch: Matcher {
     }
 }
 
+
 class FilterMatch : Matcher {
+    
     var _name : String = ""
+    
+    var parmater : String = ""
+    
+    var selector : Selector? = nil
+    
     var name : String {
         get{
             return _name
@@ -193,24 +263,10 @@ class FilterMatch : Matcher {
             return type(of: c._view) is UITextView.Type
         case "switch":
             return type(of: c._view) is UISwitch.Type
-
+            
         default:
             return false
         }
-    }
-
-}
-
-class SectionMatch: Matcher {
-    
-    var name : String
-    
-    init (_ pattern: String) {
-        name = ""
-    }
-    
-    func matches (_ c: Control) -> Bool {
-        return c.name == name
     }
 }
 
@@ -236,7 +292,7 @@ class SelectorTokenizer {
             advance()
             skipWhiteSpaces()
             return Token(" ")
-        case "*", "[", ".", ":", "]":
+        case "*", "[", ".", "=", ":", "]":
             advance()
             return Token(ch)
         case "'":
@@ -258,7 +314,7 @@ class SelectorTokenizer {
         while (!endOfString) {
             advance()
             let ch1 = char()
-            if "*[.:]'".contains(ch1) {
+            if "[.:],='".contains(ch1) {
                 break
             }
         }
@@ -323,11 +379,6 @@ struct Token {
     }
     
     // Is as Tag token
-    func isStartOfTag() -> Bool {
-        return token.hasPrefix("#")
-    }
-    
-    // Is as Tag token
     func isNameOrId() -> Bool {
         let letters = CharacterSet.letters
 
@@ -340,26 +391,38 @@ struct Token {
     }
     
     // is Start of a filter?
-    func isStartOfFilter() -> Bool {
-        return token.hasPrefix(":")
+    func isColon() -> Bool {
+        return token == ":"
     }
     
     // is Start of an Attribute?
-    func isStartOfAttribute() -> Bool {
-        return token.hasPrefix("[")
+    func isLeftBracket() -> Bool {
+        return token == "["
     }
     
     // is End of an Attribute?
-    func isEndOfAttribute() -> Bool {
-        return token.hasPrefix("]")
+    func isRightBracket() -> Bool {
+        return token == "]"
     }
+    
     // is End of an Attribute?
-    func isStartOfClass() -> Bool {
-        return token.hasPrefix(".")
+    func isDot() -> Bool {
+        return token == "."
     }
     
     func isWhitespaces() -> Bool {
-        return token.hasPrefix(" ")
-
+        return token == " "
+    }
+    
+    func isCommar() -> Bool {
+        return token == ","
+    }
+    
+    func isLeftParentheses() -> Bool {
+        return token == "("
+    }
+    
+    func isRightParentheses() -> Bool {
+        return token == ")"
     }
 }

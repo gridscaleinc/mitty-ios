@@ -39,13 +39,13 @@ class ActivityInputForm : CollectionForm {
         
         var mainSection = page["Main-Event"]
         
-        var row = Row.LeftAlignedRow()
+        var row = Row.LeftAligned()
             +++ buildTitle("Title", fieldTitle: "タイトル")
             +++ buildTextField(name: "Title-Text", placeHolder: "タイトルを入力", left:90, width:150)
     
         mainSection! += row
         
-        row = Row.LeftAlignedRow()
+        row = Row.LeftAligned()
            +++ buildTitle("Date-Title", fieldTitle: "日程")
            +++ buildTextField(name: "From-Date", placeHolder: "", left:90, width:100)
            +++ buildTextField(name: "From-Time", placeHolder: "", left:200, width:60)
@@ -53,16 +53,16 @@ class ActivityInputForm : CollectionForm {
         mainSection! +++ row
         
         
-        row = Row.LeftAlignedRow()
+        row = Row.LeftAligned()
            +++ buildTitle("Date-To-Title", fieldTitle: "      ~")
            +++ buildTextField(name: "To-Date", placeHolder: "", left:90, width:100)
            +++ buildTextField(name: "To-Time", placeHolder: "", left:200, width:60)
         
         mainSection! +++ row
         for i in 2  ..< 30  {
-            row = Row.LeftAlignedRow()
+            row = Row.LeftAligned()
                 +++ buildTitle("Date-Title-" + String(i), fieldTitle: "項目−" + String(i))
-            let subRow = Row.RightAlignedRow()
+            let subRow = Row.RightAligned()
                 +++ buildTextField(name: "From-Date-" + String(i), placeHolder: "", left:90, width:120)
                 +++ buildTextField(name: "From-Time-" + String(i), placeHolder: "", left:200, width:40)
                 +++ buildTitle("Anchor" + String(i), fieldTitle: "    >" )

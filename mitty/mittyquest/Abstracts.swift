@@ -76,6 +76,11 @@ struct Stack<E> {
     func peek() -> E? {
         return values.last
     }
+    
+    //
+    var isEmpty : Bool {
+        return values.isEmpty
+    }
 }
 
 // MARK: Operators
