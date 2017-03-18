@@ -33,56 +33,31 @@ import UIKit
 @objc(MQForm)
 open class MQForm : UIView {
     var rootMitty = MittyQuest()
-    var sections: [Section] = []
-    var sectionDictionary : [String: Section] = [:]
+    var controls: [Control] = []
+    var controlDictionary : [String: Control] = [:]
     
-    static func += (left: inout MQForm, section: Section) {
-        left.append(section)
+    static func += (left: inout MQForm, control: Control) {
+        left.append(control)
     }
     
     @discardableResult
-    static func +++ (left: MQForm, right: Section) -> MQForm {
+    static func +++ (left: MQForm, right: Control) -> MQForm {
         var f = left
         f += right
         return left
     }
     
-    var sectionCount : Int { return sections.count }
+    var controlCount : Int { return controls.count }
     
     
-    func append(_ section: Section) {
-        sections.append(section)
-        sectionDictionary[section.name] = section
-        addSubview(section.view)
+    func append(_ control: Control) {
+        controls.append(control)
+        controlDictionary[control.name] = control
+        addSubview(control.view)
     }
     
-    subscript(_ name: String) -> Section? {
-        return sectionDictionary[name]
-    }
-    
-    // Section
-    subscript (_ index: Int) -> Section {
-        return sections[index]
-    }
-    
-    // Section/Row
-    subscript (_ s: Int, _ r: Int) -> Container {
-        return sections[s][r]
-    }
-    
-    // TODO:いるかな？
-    private static func <<< (left: inout MQForm, right: Container) -> MQForm {
-        let s = left.sections
-        if (s.count > 0) {
-            let section = s[s.count - 1];
-            section +++ right
-            return left
-        } else {
-            let section = Section(view: UIView()) // 名前なしセクションを作成
-            left +++ section
-            section +++ right
-            return left
-        }
+    subscript(_ name: String) -> Control? {
+        return controlDictionary[name]
     }
     
     func  label (_ fieldName: String, fieldTitle: String) -> Control {
@@ -94,29 +69,49 @@ open class MQForm : UIView {
     }
     
     ///
-    func textField(name: String, placeHolder: String, left: CGFloat, width: CGFloat) -> Control {
+    func textField(name: String, placeHolder: String, width: CGFloat) -> Control {
         let t = UITextField.newAutoLayout()
         t.placeholder = placeHolder
         t.layer.borderColor = UIColor.lightGray.cgColor
         t.layer.borderWidth = 0.5
         t.backgroundColor = .white
-        return Control(name: name, view: t).layout { (control) in
-            control.size(w:width, h: 30).leftMargin(10).rightMargin(10)
-        }
+        return Control(name: name, view: t).width(width)
     }
     
+    func button(name: String, _ title: String ) -> Control {
+        let button = UIButton.newAutoLayout()
+        button.setTitle(title, for: UIControlState())
+        MQForm.setButtonStyle(button: button)
+        return Control(name: name, view:button)
+    }
+    
+    func stepper (name: String, _ min: Double, _ max: Double) -> Control {
+        let stepper = UIStepper.newAutoLayout()
+        stepper.minimumValue = min
+        stepper.maximumValue = max
+        stepper.stepValue = 1
+        stepper.tintColor = .lightGray
+        stepper.value = 2019
+        return Control(name: name , view:stepper)
+    }
+ 
+
     func mitty() -> MittyQuest {
         let rootMitty = MittyQuest()
         var opSet = rootMitty as OperationSet
-        for s in sections {
-            opSet += s.selectAll()
+        for c in controls {
+            if (c is Container) {
+                opSet += (c as! Container).selectAll()
+            } else {
+                opSet.controls.insert(c)
+            }
         }
         return rootMitty
     }
     
     func configLayout() {
-        for s in sections {
-            s.configLayout()
+        for c in controls {
+            c.configLayout()
         }
     }
     

@@ -20,40 +20,11 @@ class ActivityListForm : MQForm {
         
         let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         v.translatesAutoresizingMaskIntoConstraints = false
+        v.backgroundColor = .white
         return v
     } ()
     
-    let thisYear : UIButton = {
-        let button = UIButton.newAutoLayout()
-        button.setTitle("今年", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
-        return button
-    } ()
     
-    let nextYear:UIButton = {
-        let button = UIButton.newAutoLayout()
-        button.setTitle("来年", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
-        return button
-    } ()
-    
-    let stepper:UIStepper = {
-        let button = UIStepper.newAutoLayout()
-        button.minimumValue = 2019
-        button.maximumValue = 2049
-        button.stepValue = 1
-        button.tintColor = .lightGray
-        button.value = 2019
-        return button
-    } ()
-    
-    
-    let indicator : UIButton = {
-        let button = UIButton.newAutoLayout()
-        button.setTitle("2019", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
-        return button
-    } ()
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -75,46 +46,63 @@ class ActivityListForm : MQForm {
             v.view.autoSetDimension(.height, toSize: 0)
         }
         
-        collectionView.backgroundColor = .white
+        let data = Control(name:"activity-data", view:collectionView)
+        page +++ data
+        data.layout() { (main) in
+            main.putUnder(of: header).fillWidth().down(withInset: 125)
+        }
         
-        self.addSubview(collectionView)
+        let redLine = Control(view:HL(UIColor.red))
+        page +++ redLine
         
-        collectionView.autoPinEdge(.top, to: .top, of:header.view)
-        collectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-        collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
-        
-        let redLine = HL(UIColor.red)
-        self.addSubview(redLine)
-        redLine.autoPinEdge(.top, to: .bottom, of: collectionView)
-        
-        redLine.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
-        redLine.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
-        
-        self.addSubview(thisYear)
-        self.addSubview(nextYear)
-        
-        let indicateYear = UIView()
-        indicateYear.addSubview(stepper)
-        indicateYear.addSubview(indicator)
-        self.addSubview(indicateYear)
+        redLine.layout() { (hl) in
+            hl.leftMost().rightMost()
+            hl.putUnder(of: data)
+        }
         
         
-        let buttons = [thisYear, nextYear, indicateYear] as NSArray
+        let buttons = Row()
+        buttons.distribution = .atIntervals
         
-        buttons.autoSetViewsDimension(.height, toSize: 70)
-        buttons.autoDistributeViews(along: .horizontal, alignedTo: .horizontal, withFixedSpacing: 10.0, insetSpacing: true, matchedSizes: true)
-        thisYear.autoPinEdge(.top, to: .bottom, of:redLine, withOffset: 10)
+//        let buttons = Row.LeftAligned()
+        let thisYearButton :Control = button (name: "thisYear", "今年").layout() { (button) in
+            button.width(80).height(50)
+        }
         
-        let indicators = [indicator, stepper] as NSArray
-        indicators.autoDistributeViews(along: .vertical, alignedTo: .vertical, withFixedSpacing: 5, insetSpacing: true, matchedSizes: true)
+        buttons +++ thisYearButton
+    
+        let nextYearButton : Control = button (name: "nextYear", "来年").layout() { (button) in
+            button.width(80).height(50)
+        }
+        nextYearButton.margin.left = 10
+        buttons +++ nextYearButton
         
-        stepper.autoPinEdge(toSuperviewEdge: .left)
-        stepper.autoPinEdge(toSuperviewEdge: .right)
-        indicator.autoPinEdge(toSuperviewEdge: .left)
-        indicator.autoPinEdge(toSuperviewEdge: .right)
+        let stepperCtl :Control = stepper(name: "stepper", 2019, 2049).layout() { (stepper) in
+            stepper.width(40).height(28)
+        }
         
-        indicator.setTitle("\(Int(stepper.value))年", for: UIControlState())
+        let indicatorCtl : Control = button (name: "indicator", "2019").layout() { (button) in
+            button.width(80).height(28)
+        }
+        indicatorCtl.margin.bottom = 10
+        
+        let indicateYear = Col.UpDownAligned().width(80).height(60)
+        indicateYear.margin.left = 10
+        indicateYear +++ indicatorCtl
+        indicateYear +++ stepperCtl
+        
+        
+        buttons +++ indicateYear
+   
+        buttons.layout() { (buttons) in
+            buttons.height(65)
+            //buttons.view.backgroundColor = UIColor.gray
+            buttons.leftMost().rightMost().putUnder(of: redLine, withOffset: 2)
+        }
+        
+        page +++ buttons
+        
+        
     }
     
     func load () {

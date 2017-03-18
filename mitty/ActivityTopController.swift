@@ -76,24 +76,24 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         self.view.setNeedsLayout()
         
-        mitty(form.thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
-            thisYearButton.backgroundColor = .red
-            print("This Year taped")
-        }
+//        mitty(thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
+//            thisYearButton.backgroundColor = .red
+//            print("This Year taped")
+//        }
         
-        mitty(form.stepper).bindEvent(for: .valueChanged) {(v) in
-            self.form.indicator.setTitle("\(Int(self.form.stepper.value))年", for: UIControlState())
-        }
-        
-        mitty(form.nextYear).bindEvent(for: .touchUpInside) {(view) in
-            view.backgroundColor = .yellow
-            print("Next Year taped")
-        }
-        
-        mitty(form.indicator).bindEvent(for: .touchUpInside) {(view) in
-            view.backgroundColor = .blue
-            print("Indicator Button taped")
-        }
+//        mitty(form.stepper).bindEvent(for: .valueChanged) {(v) in
+//            self.form.indicator.setTitle("\(Int(self.form.stepper.value))年", for: UIControlState())
+//        }
+//        
+//        mitty(form.nextYear).bindEvent(for: .touchUpInside) {(view) in
+//            view.backgroundColor = .yellow
+//            print("Next Year taped")
+//        }
+//        
+//        mitty(form.indicator).bindEvent(for: .touchUpInside) {(view) in
+//            view.backgroundColor = .blue
+//            print("Indicator Button taped")
+//        }
 //        let m = mitty(self.view).forEach({ (c) -> Bool in
 //            let t = type(of: c.view)
 //            if (t is UIButton.Type) {

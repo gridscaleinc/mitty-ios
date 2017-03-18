@@ -128,6 +128,7 @@ open class Container : Control, Selectable {
 open class Row : Container {
     
     private var _distributionMode : LeftRight = .left
+    private var _spacing :CGFloat = 10.0
     
     var distribution : LeftRight {
         get {
@@ -135,6 +136,16 @@ open class Row : Container {
         }
         set (newValue) {
             _distributionMode = newValue
+        }
+    }
+    
+    
+    var spacing : CGFloat {
+        get {
+            return _spacing
+        }
+        set (newValue) {
+            _spacing = newValue
         }
     }
     
@@ -154,11 +165,12 @@ open class Row : Container {
             
             for c in children {
                 if (c === first) {
-                    c.leftMost()
+                    c.leftMost(withInset: 10)
                 } else {
                      c.righter(than: previous!, withOffset: c.margin.left)
                 }
                 previous = c
+                c.upper()
             }
         case .right:
             let last = children.last
@@ -166,12 +178,22 @@ open class Row : Container {
             
             for c in Array<Control>(children.reversed()) {
                 if (c === last) {
-                    c.rightMost()
+                    c.rightMost(withInset: 10)
                 } else {
                     c.lefter(than: previous!, withOffset: c.margin.right)
                 }
                 previous = c
+                c.upper()
             }
+        case .atIntervals:
+            let views = self.view.subviews as NSArray
+            let first = children.first
+            let horizontalLayoutConstraints = NSLayoutConstraint.autoCreateAndInstallConstraints {
+//                views.autoSetViewsDimension(.height, toSize: 40.0)
+                views.autoDistributeViews(along: .horizontal, alignedTo: .horizontal, withFixedSpacing: spacing, insetSpacing: true, matchedSizes: true)
+                first?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4)
+            } as NSArray?
+            horizontalLayoutConstraints?.autoInstallConstraints()
         }
     }
     
@@ -196,6 +218,7 @@ open class Row : Container {
 open class Col : Container {
     
     private var _distributionMode : UpBottom = .up
+    private var  _spacing : CGFloat = 10.0
     
     var distribution : UpBottom {
         get {
@@ -206,6 +229,14 @@ open class Col : Container {
         }
     }
     
+    var spacing : CGFloat {
+        get {
+            return _spacing
+        }
+        set (newValue) {
+            _spacing = newValue
+        }
+    }
     
     /*
      * distribute children controls by alignment mode
@@ -228,6 +259,7 @@ open class Col : Container {
                     c.putUnder(of: previous!, withOffset: (c.margin.up))
                 }
                 previous = c
+                c.leftMost()
             }
         case .bottom:
             let last = children.last
@@ -240,7 +272,17 @@ open class Col : Container {
                     c.putAbove(Of: previous!, withOffset: c.margin.bottom)
                 }
                 previous = c
+                c.leftMost()
             }
+        case .atIntervals:
+            let views = self.view.subviews as NSArray
+            let first = children.first
+            let verticalLayoutConstraints = NSLayoutConstraint.autoCreateConstraintsWithoutInstalling {
+//                views.autoSetViewsDimension(.width, toSize: 60.0)
+                views.autoDistributeViews(along: .vertical, alignedTo: .vertical, withFixedSpacing: spacing, insetSpacing: true, matchedSizes: true)
+                first?.view.autoAlignAxis(toSuperviewAxis: .vertical)
+                } as NSArray?
+            verticalLayoutConstraints?.autoInstallConstraints()
         }
     }
 
@@ -308,33 +350,38 @@ open class Section : Container {
         titleLayoutCode?()
     }
     
+    
+    override func distribute() {
+        if (contents.count == 0) {
+            return
+        }
+        
+        let first = contents.first
+        let previous = first
+        for r in contents {
+            if (r === first) {
+                if (titleConrol != nil) {
+                    r.putUnder(of: _titleControl!)
+                } else {
+                    r.upper()
+                }
+            } else {
+                r.putUnder(of: previous!)
+            }
+            
+            r.leftMost().rightMost()
+        }
+    }
+    
     static func += (left: inout Section, right: Container) {
         left.append(right)
     }
     
-    static func += (left: inout Section, right: Row) {
-        left += right as Container
-    }
-    
-    static func += (left: inout Section, right: Col) {
-        left += right as Container
-    }
-    
     @discardableResult
-    static func +++ (left: Section, right: Container) -> Section {
+    static func <<< (left: Section, right: Container) -> Section {
         var section = left
         section += right
         return left
-    }
-    
-    @discardableResult
-    static func +++ (left: Section, right: Row) -> Section {
-        return left +++ (right as Container)
-    }
-    
-    @discardableResult
-    static func +++ (left: Section, right: Col) -> Section {
-        return left +++ (right as Container)
     }
     
     func add(row: Row, alignment align: LeftRight = .left) {
@@ -342,16 +389,12 @@ open class Section : Container {
         append(row)
     }
     
-    func add(col: Col, alignment align: UpBottom) {
-        col.distribution = align
-        append(col)
+    func append(_ r: Container) {
+        children.append(r)
+        contents.append(r)
+        r.parent = self
     }
     
-    func append(_ c: Container) {
-        children.append(c)
-        contents.append(c)
-        c.parent = self
-    }
 }
 
 func HL (_ color: UIColor? = UIColor.black, _ width: Int? = 1) -> UIView {

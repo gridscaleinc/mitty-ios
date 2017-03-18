@@ -34,11 +34,13 @@ import PureLayout
 enum LeftRight {
     case left
     case right
+    case atIntervals
 }
 
 enum UpBottom {
     case up
     case bottom
+    case atIntervals
 }
 
 enum Alignment {
@@ -188,6 +190,26 @@ extension Control {
     @discardableResult
     open func rightMost(withInset inset: CGFloat? = 0) -> Self {
         self.view.autoPinEdge(toSuperviewEdge: .right, withInset: inset!)
+        return self
+    }
+    
+    
+    @discardableResult
+    open func fillParent() -> Self {
+        self.view.autoPinEdgesToSuperviewEdges()
+        return self
+    }
+
+    @discardableResult
+    open func fillWidth() -> Self {
+        leftMost().rightMost()
+        return self
+    }
+
+    
+    @discardableResult
+    open func fillHeight() -> Self {
+        upper().down()
         return self
     }
     

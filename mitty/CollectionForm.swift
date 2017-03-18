@@ -36,6 +36,49 @@ class CollectionForm : MQForm {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override subscript(_ name: String) -> Section? {
+        return controlDictionary[name] as! Section?
+    }
+    
+    // Section
+    subscript (_ index: Int) -> Section {
+        return controls[index] as! Section
+    }
+    
+    static func += (left: inout CollectionForm, section: Section) {
+        left.append(section)
+    }
+    
+    
+    @discardableResult
+    static func +++ (left: CollectionForm, right: Section) -> MQForm {
+        var f = left
+        f += right
+        return left
+    }
+    
+    
+    // TODO:いるかな？
+    private static func <<< (left: inout CollectionForm, right: Container) -> MQForm {
+        let s = left.controls
+        if (s.count > 0) {
+            let section = s[s.count - 1] as! Section;
+            section +++ right
+            return left
+        } else {
+            let section = Section(view: UIView()) // 名前なしセクションを作成
+            left +++ section
+            section +++ right
+            return left
+        }
+    }
+    
+    // Section/Row
+    subscript (_ s: Int, _ r: Int) -> Container {
+        return self[s][r]
+    }
+    
+    
 }
 
 extension CollectionForm : UICollectionViewDelegateFlowLayout {
@@ -67,11 +110,11 @@ extension CollectionForm : UICollectionViewDelegateFlowLayout {
 extension CollectionForm: UICollectionViewDataSource {
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return sections.count
+        return controls.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return sections[section].count
+        return (controls[section] as! Section) .count
     }
     
     // あるセクションから行を取得。
@@ -82,7 +125,7 @@ extension CollectionForm: UICollectionViewDataSource {
         
         let s = indexPath.section
         let r = indexPath.row
-        let row = sections[s][r]
+        let row = (controls[s] as! Section)[r]
         
         return cell <<< row
     }
