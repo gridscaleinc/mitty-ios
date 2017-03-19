@@ -76,36 +76,32 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         self.view.setNeedsLayout()
         
-//        mitty(thisYear).bindEvent(for: .touchUpInside ) {thisYearButton in
-//            thisYearButton.backgroundColor = .red
-//            print("This Year taped")
-//        }
+        let mitty = form.mitty()
         
-//        mitty(form.stepper).bindEvent(for: .valueChanged) {(v) in
-//            self.form.indicator.setTitle("\(Int(self.form.stepper.value))年", for: UIControlState())
-//        }
-//        
-//        mitty(form.nextYear).bindEvent(for: .touchUpInside) {(view) in
-//            view.backgroundColor = .yellow
-//            print("Next Year taped")
-//        }
-//        
-//        mitty(form.indicator).bindEvent(for: .touchUpInside) {(view) in
-//            view.backgroundColor = .blue
-//            print("Indicator Button taped")
-//        }
-//        let m = mitty(self.view).forEach({ (c) -> Bool in
-//            let t = type(of: c.view)
-//            if (t is UIButton.Type) {
-//                return true
-//            }
-//            return false
-//        }) { (c) in
-//            (c.view as! UIButton).setTitle("T#" + String(c.view.tag), for: .normal)
-//            return
-//        }
-//        self.view.setNeedsLayout()
-//        print(m.controls.count)
+        mitty["[name=thisYear]"].bindEvent( for: .touchUpInside ) {thisYearButton in
+            thisYearButton.backgroundColor = .red
+            print("This Year taped")
+        }
+
+        mitty["[name =nextYear]"].bindEvent(for: .touchUpInside) {(view) in
+            view.backgroundColor = .yellow
+            print("Next Year taped")
+        }
+        let indicator = mitty["[name=indicator]"]
+        indicator.bindEvent(for: .touchUpInside) {(view) in
+            view.backgroundColor = .blue
+            print("Indicator Button taped")
+        }
+        
+        mitty["[name=stepper]"].bindEvent(for: .valueChanged) {(view) in
+            view.backgroundColor = .blue
+            let stepper = (view as! UIStepper).value
+            indicator.forEach() {(c) in
+                (c.view as! UIButton).setTitle("\(Int(stepper))" + "年", for: .normal)
+            }
+            print("stepper changed")
+        }
+        
     }
     
     //

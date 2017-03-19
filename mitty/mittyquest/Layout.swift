@@ -201,15 +201,15 @@ extension Control {
     }
 
     @discardableResult
-    open func fillWidth() -> Self {
-        leftMost().rightMost()
+    open func fillHolizon(_ withInset: CGFloat = 0.0) -> Self {
+        leftMost(withInset: withInset).rightMost(withInset: withInset)
         return self
     }
 
     
     @discardableResult
-    open func fillHeight() -> Self {
-        upper().down()
+    open func fillVertical(_ withInset: CGFloat = 0.0) -> Self {
+        upper(withInset: withInset).down(withInset: withInset)
         return self
     }
     

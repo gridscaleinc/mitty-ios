@@ -49,14 +49,14 @@ class ActivityListForm : MQForm {
         let data = Control(name:"activity-data", view:collectionView)
         page +++ data
         data.layout() { (main) in
-            main.putUnder(of: header).fillWidth().down(withInset: 125)
+            main.putUnder(of: header).fillHolizon().down(withInset: 125)
         }
         
         let redLine = Control(view:HL(UIColor.red))
         page +++ redLine
         
         redLine.layout() { (hl) in
-            hl.leftMost().rightMost()
+            hl.fillHolizon()
             hl.putUnder(of: data)
         }
         

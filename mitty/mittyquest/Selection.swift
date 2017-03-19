@@ -41,17 +41,14 @@ class Matching {
         scanMatchers(pattern)
     }
     
-    var selectors : [Selector] = []
+    var selector : Selector = Selector()
     
     // 
     func matches (_ c: Control) -> Bool {
         if (hasError) {
             return false
         }
-        for s in selectors {
-            if s.matches(c) {return true}
-        }
-        return false
+        return selector.matches(c)
     }
     
     func scanMatchers(_ p: String) {
@@ -97,8 +94,9 @@ class Matching {
                 break
             }
             
-            onEndOfSelector()
         }
+        
+        onEndOfSelector()
     }
     
     func newSelector(_ s: Selector) {
@@ -128,11 +126,22 @@ class Matching {
     }
     
     func onEndOfSelector() {
-        
+        if !stack.isEmpty {
+            selector = stack.pop() as! Selector
+        }
     }
 
     func onEndOfAttribute() {
-        
+        let matcher = stack.pop()
+        if let selector = stack.peek() {
+            if selector is Selector {
+                (selector as! Selector).attributeMatchers.append(matcher as! AttributeMatch)
+                return
+            }
+        }
+        let selector = Selector()
+        selector.attributeMatchers.append(matcher as! AttributeMatch)
+        newSelector(selector)
     }
     
     func scanFilter(_ matcher: FilterMatch, _ tokenizer : SelectorTokenizer) {
@@ -146,17 +155,35 @@ class Matching {
     func scanAttribute(_ matcher: AttributeMatch, _ tokenizer : SelectorTokenizer) {
         let name = nextNonWhitespace(tokenizer)
         if (name == nil) {
+            hasError = true
             return
         }
         matcher.name = (name?.token)!
         
         let compareOp = nextNonWhitespace(tokenizer)
         if (name == nil) {
+            hasError = true
             return
         } else {
             matcher.attOp = (compareOp?.token)!
         }
-        
+        let value = nextNonWhitespace(tokenizer)
+        if (value == nil) {
+            hasError = true
+            return
+        } else {
+            matcher.value = (value?.token)!
+        }
+        let end = nextNonWhitespace(tokenizer)
+        if (end == nil) {
+            hasError = true
+            return
+        } else {
+            if (!(end?.isRightBracket())!) {
+                hasError = true
+            }
+            onEndOfAttribute()
+        }
     }
     
     func nextNonWhitespace(_ tokenizer: SelectorTokenizer) -> Token? {
@@ -172,7 +199,6 @@ class Matching {
             return tokenizer.next()
         }
         return t
-
     }
 }
 
@@ -186,6 +212,37 @@ class Selector : Matcher {
     var filterMatchers : [FilterMatch] = []
     
     func matches (_ c: Control) -> Bool {
+        if checkTagOrName(c) {
+            if checkAttribute(c) {
+                return checkFilter(c)
+            }
+            return false
+        }
+        return false
+    }
+    
+    func checkTagOrName(_ c: Control) -> Bool {
+        if (tagOrName == "") {
+            return true
+        }
+        return false
+    }
+    
+    func checkAttribute(_ c: Control) -> Bool {
+        for a in attributeMatchers {
+            if (!a.matches(c)) {
+                return false
+            }
+        }
+        return true
+    }
+    
+    func checkFilter(_ c: Control) -> Bool {
+        for a in filterMatchers {
+            if (!a.matches(c)) {
+                return false
+            }
+        }
         return true
     }
 }
@@ -221,7 +278,11 @@ class AttributeMatch: Matcher {
     var value : String = ""
     
     func matches (_ c: Control) -> Bool {
-        return c.name == name
+        if (name == "name") {
+            return c.name == value
+        } else {
+            return false
+        }
     }
 }
 
@@ -314,13 +375,16 @@ class SelectorTokenizer {
         while (!endOfString) {
             advance()
             let ch1 = char()
-            if "[.:],='".contains(ch1) {
+            if " [.:],='".contains(ch1) {
                 break
             }
         }
         var str = patternString as NSString
-        str = str.substring(from: start) as NSString
-        str = str.substring(to: position) as NSString
+        if (start < position) {
+            str = str.substring(with:NSRange(location: start, length:position-start)) as NSString
+        } else {
+            return nil
+        }
         return Token(str as String)
 
     }
@@ -353,8 +417,8 @@ class SelectorTokenizer {
     
     func char() -> String {
         let ns = patternString as NSString
-        if (ns.length>0) {
-           return ns.substring(to: 1)
+        if (ns.length > position) {
+            return ns.substring(with: NSRange(location: position, length: 1))
         }
         return ""
     }

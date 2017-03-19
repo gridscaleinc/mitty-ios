@@ -69,6 +69,7 @@ open class MittyQuest : OperationSet {
     
     
     // define a protocol that can
+    @discardableResult
     func forEach (_ operation: (_ selected: Control) -> Void) -> MittyQuest {
         for c in controls {
             operation(c)
@@ -95,6 +96,7 @@ open class MittyQuest : OperationSet {
      Make it conform to Operatable protocol
      registration Layout coder
      */
+    @discardableResult
     func layout(_ coder: @escaping LayoutCoder) -> Self {
         
         for c in controls {
@@ -104,6 +106,7 @@ open class MittyQuest : OperationSet {
     }
 
     //
+    @discardableResult
     func animate(animator: () -> Void, duration: Int) -> MittyQuest {
         return self
     }
@@ -127,13 +130,12 @@ open class MittyQuest : OperationSet {
 extension MittyQuest {
     func compile(_ selection: String) -> ControlSelector {
         var pattern = selection.trimmingCharacters(in: NSCharacterSet.whitespaces)
+        let m = Matching(pattern)
         func f ( _ control : Control) -> Bool {
             
             if (pattern == "") {
                 return true
             }
-            
-            let m = Matching(pattern)
             return m.matches(control)
         }
         
@@ -187,6 +189,10 @@ class MittyUIViewController : UIViewController {
     func mitty() -> MittyQuest {
         now("Start Travel.....")
         let rootView = self.view
+        if (rootView is MQForm) {
+            rootMitty = (rootView as! MQForm).mitty()
+            return rootMitty
+        }
         
         let m = MittyQuest()
         rootMitty = m
@@ -198,7 +204,7 @@ class MittyUIViewController : UIViewController {
         let c = Control(view: rootView!)
         
         m.controls.insert(c)
-        
+
         for vx in rootView!.subviews {
             travel(vx, m)
         }
@@ -208,12 +214,12 @@ class MittyUIViewController : UIViewController {
     
     //
     func mity(_ selector: String) -> MittyQuest {
-        return MittyQuest()[selector]
+        return mitty()[selector]
     }
     
     @discardableResult
     internal func travel(_ v: UIView, _ mitty: MittyQuest) -> MittyQuest {
-        
+
         //let c = ControlManager.retrieveControl(vc: self, view: rootView!)
         let c = Control(view: v)
         
