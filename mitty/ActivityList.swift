@@ -13,17 +13,17 @@ import PureLayout
 @objc(ActivityListForm)
 class ActivityListForm : MQForm {
     
-    let collectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = true
-        layout.sectionFootersPinToVisibleBounds = false
-        
-        let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        v.translatesAutoresizingMaskIntoConstraints = false
-        v.backgroundColor = .white
-        return v
-    } ()
-    
+//    let collectionView : UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.sectionHeadersPinToVisibleBounds = true
+//        layout.sectionFootersPinToVisibleBounds = false
+//        
+//        let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+//        v.translatesAutoresizingMaskIntoConstraints = false
+//        v.backgroundColor = .white
+//        return v
+//    } ()
+//    
     
     
     override public init(frame: CGRect) {
@@ -33,6 +33,28 @@ class ActivityListForm : MQForm {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    let activityList : [(label:String, imgName:String)] = [
+        (label: "2/18 平和島公園", imgName: "timesquare"),
+        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 Iot どこかで", imgName: "pengin3"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 平和島公園", imgName: "timesquare"),
+        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 Iot どこかで", imgName: "pengin3"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 Iot どこかで", imgName: "pengin3"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 島祭り", imgName: "pengin")
+    ]
     
     func loadForm () {
         
@@ -46,7 +68,8 @@ class ActivityListForm : MQForm {
             v.view.autoSetDimension(.height, toSize: 0)
         }
         
-        let data = Control(name:"activity-data", view:collectionView)
+        
+        let data = buildActivityData()
         page +++ data
         data.layout() { (main) in
             main.putUnder(of: header).fillHolizon().down(withInset: 125)
@@ -107,6 +130,35 @@ class ActivityListForm : MQForm {
     
     func load () {
         
-        collectionView.reloadData()
+        //collectionView.reloadData()
+    }
+    
+    func buildActivityData() -> Control {
+        
+        let scrollView = UIScrollView()
+        scrollView.contentSize = UIScreen.main.bounds.size
+        scrollView.isScrollEnabled = true
+        scrollView.flashScrollIndicators()
+
+        
+        let section = Section(name: "activity-data", view: scrollView)
+        
+        for t in activityList {
+            let row = Row.LeftAligned()
+            section <<< row
+            
+            row +++ label("label", fieldTitle: t.label).width(250).height(30)
+                +++ img(name:"icon", t.imgName).width(30).height(20)
+            
+            row.layout(){ r in
+                let w = UIScreen.main.bounds.size.width - 20
+                r.leftMost().rightMost().height(40).width(w)
+            }
+        }
+
+        section.layout() { c in
+            c.view.autoPinEdgesToSuperviewEdges()
+         }
+        return section
     }
 }

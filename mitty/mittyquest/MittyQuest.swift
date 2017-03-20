@@ -67,11 +67,45 @@ open class MittyQuest : OperationSet {
         return m
     }
     
+    // return the first control in current set
+    func control() -> Control? {
+        return controls.first
+    }
+    
+    // return the first control's view in currenct set
+    func view() -> UIView? {
+        return controls.first?.view
+    }
+    
+    // return the first textField view in currenct set
+    func first<V>() -> V? {
+        for c in controls {
+            if c.view is V {
+                return c.view as? V
+            }
+        }
+        return nil
+    }
+    
+    // return the first textField view in currenct set
+    func controlOf<V:UIView>(_ v: V) -> Control? {
+        for c in controls {
+            if c.view is V {
+                return c
+            }
+        }
+        return nil
+    }
     
     // define a protocol that can
     @discardableResult
-    func forEach (_ operation: (_ selected: Control) -> Void) -> MittyQuest {
-        for c in controls {
+    func forEach (_ selector: String? = nil, _ operation: (_ selected: Control) -> Void) -> MittyQuest {
+        var target = controls
+        if selector != nil {
+            target = self[selector!].controls
+        }
+        
+        for c in target {
             operation(c)
         }
         return self
@@ -84,8 +118,13 @@ open class MittyQuest : OperationSet {
     
     // event bind
     @discardableResult
-    func bindEvent (for event: UIControlEvents, _ handler: @escaping EventHandler ) -> MittyQuest {
-        for c in controls {
+    func bindEvent (_ selector: String? = nil, for event: UIControlEvents, _ handler: @escaping EventHandler ) -> MittyQuest {
+        var target = controls
+        if selector != nil {
+            target = self[selector!].controls
+        }
+        
+        for c in target {
             c.event(event, handler)
         }
         return self
@@ -97,9 +136,14 @@ open class MittyQuest : OperationSet {
      registration Layout coder
      */
     @discardableResult
-    func layout(_ coder: @escaping LayoutCoder) -> Self {
+    func layout(_ selector: String? = nil, _ coder: @escaping LayoutCoder) -> Self {
         
-        for c in controls {
+        var target = controls
+        if selector != nil {
+            target = self[selector!].controls
+        }
+        
+        for c in target {
             c.layout(coder)
         }
         return self
@@ -107,7 +151,7 @@ open class MittyQuest : OperationSet {
 
     //
     @discardableResult
-    func animate(animator: () -> Void, duration: Int) -> MittyQuest {
+    func animate(_ selector: String? = nil, animator: () -> Void, duration: Int) -> MittyQuest {
         return self
     }
     
@@ -116,8 +160,13 @@ open class MittyQuest : OperationSet {
     // hide
     // remove
     
-    func ifThen(ifTrue: Conditionor, thenDo: ControlOperation) -> MittyQuest {
-        for c in controls {
+    func ifThen(_ selector: String? = nil, ifTrue: Conditionor, thenDo: ControlOperation) -> MittyQuest {
+        var target = controls
+        if selector != nil {
+            target = self[selector!].controls
+        }
+        
+        for c in target {
             if (ifTrue(c)) {
                 thenDo(c)
             }
@@ -144,7 +193,7 @@ extension MittyQuest {
 }
 
 public func MQ(_ form: MQForm) -> MittyQuest {
-    return form.mitty()
+    return form.quest()
 }
 
 public func MQ(_ section: Section) -> MittyQuest {
@@ -182,15 +231,15 @@ class MittyUIViewController : UIViewController {
     }
     
     //
-    public func mitty(_ view: UIView) -> MittyQuest {
+    public func MQ(_ view: UIView) -> MittyQuest {
         return rootMitty[view]
     }
     
-    func mitty() -> MittyQuest {
+    func MQ() -> MittyQuest {
         now("Start Travel.....")
         let rootView = self.view
         if (rootView is MQForm) {
-            rootMitty = (rootView as! MQForm).mitty()
+            rootMitty = (rootView as! MQForm).quest()
             return rootMitty
         }
         
@@ -213,8 +262,8 @@ class MittyUIViewController : UIViewController {
     }
     
     //
-    func mity(_ selector: String) -> MittyQuest {
-        return mitty()[selector]
+    func MQ(selector: String) -> MittyQuest {
+        return MQ()[selector]
     }
     
     @discardableResult

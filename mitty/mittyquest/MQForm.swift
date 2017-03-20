@@ -57,15 +57,13 @@ open class MQForm : UIView {
     }
     
     subscript(_ name: String) -> Control? {
-        return controlDictionary[name]
+        return quest("[name=\(name)]").control()
     }
     
     func  label (_ fieldName: String, fieldTitle: String) -> Control {
         let l = UILabel.newAutoLayout()
         l.text = fieldTitle
-        return Control(name: fieldName, view: l).layout { (control) in
-            control.size(w:70, h:30)
-        }
+        return Control(name: fieldName, view: l)
     }
     
     ///
@@ -85,6 +83,18 @@ open class MQForm : UIView {
         return Control(name: name, view:button)
     }
     
+    func img(name: String, _ url: String ) -> Control {
+ 
+        let img = UIImageView.newAutoLayout()
+        img.contentMode = UIViewContentMode.scaleAspectFit
+        
+        img.image = UIImage(named: url)
+        
+        return Control(name: name, view: img)
+
+    }
+    
+    
     func stepper (name: String, _ min: Double, _ max: Double) -> Control {
         let stepper = UIStepper.newAutoLayout()
         stepper.minimumValue = min
@@ -95,9 +105,14 @@ open class MQForm : UIView {
         return Control(name: name , view:stepper)
     }
  
+    
+    //
+    func quest(_ selector: String) -> MittyQuest {
+        return quest()[selector]
+    }
 
-    func mitty() -> MittyQuest {
-        let rootMitty = MittyQuest()
+    func quest() -> MittyQuest {
+        rootMitty = MittyQuest()
         var opSet = rootMitty as OperationSet
         for c in controls {
             if (c is Container) {

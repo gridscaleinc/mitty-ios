@@ -68,8 +68,6 @@ class ActivitySelectionViewController : MittyUIViewController {
         
         self.view.setNeedsLayout()
         
-        let _ = mitty()
-        
     }
 
     /// 子画面からモドたら、tabバーを戻す。

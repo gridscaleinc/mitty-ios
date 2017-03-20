@@ -357,7 +357,7 @@ open class Section : Container {
         }
         
         let first = contents.first
-        let previous = first
+        var previous = first
         for r in contents {
             if (r === first) {
                 if (titleConrol != nil) {
@@ -368,8 +368,8 @@ open class Section : Container {
             } else {
                 r.putUnder(of: previous!)
             }
-            
             r.leftMost().rightMost()
+            previous = r
         }
     }
     
@@ -393,6 +393,7 @@ open class Section : Container {
         children.append(r)
         contents.append(r)
         r.parent = self
+        view.addSubview(r.view)
     }
     
 }
