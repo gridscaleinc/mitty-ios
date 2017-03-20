@@ -60,7 +60,6 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         super.loadView()
         self.navigationItem.title = "活動予定"
-//        self.view = UIScrollView()
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(form)
         
@@ -68,15 +67,8 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         loadActivityList()
 
-//        self.form.collectionView.dataSource = self.activityListDS
-//        self.form.collectionView.delegate = self.activityListDelegate
-//        self.form.collectionView.register(ActivityCell.self, forCellWithReuseIdentifier:ActivityCell.id)
-//        self.form.collectionView.register(ActivityListHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: ActivityListHeaderCell.id)
-        
         self.form.load()
         
-//        self.view.setNeedsLayout()
-//        
         let mitty = form.quest()
         
         form["thisYear"]?.event(.touchUpInside ) {thisYearButton in
@@ -88,31 +80,46 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             view.backgroundColor = .yellow
             print("Next Year taped")
         }
+        
         let indicator = mitty["[name=indicator]"]
         indicator.bindEvent(for: .touchUpInside) {(view) in
             view.backgroundColor = .blue
             print("Indicator Button taped")
         }
         var showOrHide = true
-//        form.quest().forEach() { c in
-//            c.view.layer.borderColor = UIColor.blue.cgColor
-//            c.view.layer.borderWidth = 3
-//        }
         
         mitty["[name=stepper]"].bindEvent(for: .valueChanged) {(view) in
             view.backgroundColor = .blue
             let stepper = (view as! UIStepper).value
-            indicator.forEach() {(c) in
-                (c.view as! UIButton).setTitle("\(Int(stepper))" + "年", for: .normal)
-                (c.view as! UIButton).isHidden = !showOrHide
-                showOrHide = !showOrHide
-            }
+            let indicatorButton = indicator.control()?.view as! UIButton
+            indicatorButton.setTitle("\(Int(stepper))" + "年", for: .normal)
+            indicatorButton.isHidden = !showOrHide
+            showOrHide = !showOrHide
             print("stepper changed")
+        }
+        
+//        form.quest().forEach { (c) in
+//            c.view.layer.borderWidth=1
+//        }
+        
+        form.quest("[name=activitylabel]").forEach() { c in
+            let l = c.view as! UILabel
+            l.textColor = UIColor(red: 0.3, green: 0.6, blue: 0.4, alpha: 0.9)
+            l.font = UIFont(name:"AppleGothic", size: 12)
+        }
+        
+        form.quest("[name=abc]").bindEvent(for: .touchUpInside) {[weak self] button in
+            let e = EventService.instance.buildEvent(1)
+            let eventViewController = EventDetailViewController(event: e!)
+            self?.navigationItem.title = "..."
+            self?.tabBarController?.tabBar.isHidden = true
+            self?.navigationController?.pushViewController(eventViewController, animated: true)
         }
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
 
     }
+
     var didSetupConstraints = false
     //
     // 活動予定一覧の読み込み
@@ -121,9 +128,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         form.loadForm()
   
-
-        // 線を引いて、対象年のフィルタボタンを設定する
-        
+    
     }
     
     override func updateViewConstraints() {

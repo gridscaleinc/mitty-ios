@@ -45,7 +45,7 @@ class CenterViewController: UIViewController {
         self.view.backgroundColor = swiftColor
 
         // buttonを生成
-        let button = UIButton()
+        let button = UIButton.newAutoLayout()
         button.frame = CGRect(x: 150, y: 100, width: 100, height: 55)
         button.setTitle("登録する", for: .normal)
         button.center = CGPoint(x: UIScreen.main.bounds.width/2, y: 95)

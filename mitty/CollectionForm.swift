@@ -66,7 +66,7 @@ class CollectionForm : MQForm {
             section +++ right
             return left
         } else {
-            let section = Section(view: UIView()) // 名前なしセクションを作成
+            let section = Section(view: UIView.newAutoLayout()) // 名前なしセクションを作成
             left +++ section
             section +++ right
             return left

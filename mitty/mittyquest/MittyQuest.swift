@@ -100,15 +100,12 @@ open class MittyQuest : OperationSet {
     // define a protocol that can
     @discardableResult
     func forEach (_ selector: String? = nil, _ operation: (_ selected: Control) -> Void) -> MittyQuest {
-        var target = controls
-        if selector != nil {
-            target = self[selector!].controls
-        }
+        let mitty = (selector != nil) ? self[selector!] : self
         
-        for c in target {
+        for c in mitty.controls {
             operation(c)
         }
-        return self
+        return mitty
     }
     
     // define a function that access all the values in selectable
@@ -119,15 +116,13 @@ open class MittyQuest : OperationSet {
     // event bind
     @discardableResult
     func bindEvent (_ selector: String? = nil, for event: UIControlEvents, _ handler: @escaping EventHandler ) -> MittyQuest {
-        var target = controls
-        if selector != nil {
-            target = self[selector!].controls
-        }
         
-        for c in target {
+        let mitty = (selector != nil) ? self[selector!] : self
+        
+        for c in mitty.controls {
             c.event(event, handler)
         }
-        return self
+        return mitty
         
     }
 
@@ -136,17 +131,15 @@ open class MittyQuest : OperationSet {
      registration Layout coder
      */
     @discardableResult
-    func layout(_ selector: String? = nil, _ coder: @escaping LayoutCoder) -> Self {
+    func layout(_ selector: String? = nil, _ coder: @escaping LayoutCoder) -> MittyQuest {
         
-        var target = controls
-        if selector != nil {
-            target = self[selector!].controls
-        }
+ 
+        let mitty = (selector != nil) ? self[selector!] : self
         
-        for c in target {
+        for c in mitty.controls {
             c.layout(coder)
         }
-        return self
+        return mitty
     }
 
     //
@@ -161,17 +154,15 @@ open class MittyQuest : OperationSet {
     // remove
     
     func ifThen(_ selector: String? = nil, ifTrue: Conditionor, thenDo: ControlOperation) -> MittyQuest {
-        var target = controls
-        if selector != nil {
-            target = self[selector!].controls
-        }
         
-        for c in target {
+        let mitty = (selector != nil) ? self[selector!] : self
+        
+        for c in mitty.controls {
             if (ifTrue(c)) {
                 thenDo(c)
             }
         }
-        return self
+        return mitty
     }
     
 }

@@ -58,7 +58,7 @@ class EventDetailViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view = UIView()
+        view = UIView.newAutoLayout()
         
         view.backgroundColor = .white
         view.addSubview(scrollView)

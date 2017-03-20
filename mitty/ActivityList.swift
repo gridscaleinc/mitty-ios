@@ -105,7 +105,7 @@ class ActivityListForm : MQForm {
         }
         
         let indicatorCtl : Control = button (name: "indicator", "2019").layout() { (button) in
-            button.width(80).height(28)
+            button.width(50).height(28)
         }
         indicatorCtl.margin.bottom = 10
         
@@ -135,30 +135,40 @@ class ActivityListForm : MQForm {
     
     func buildActivityData() -> Control {
         
-        let scrollView = UIScrollView()
+        let scrollView = UIScrollView.newAutoLayout()
         scrollView.contentSize = UIScreen.main.bounds.size
         scrollView.isScrollEnabled = true
         scrollView.flashScrollIndicators()
+        scrollView.canCancelContentTouches = false
 
-        
-        let section = Section(name: "activity-data", view: scrollView)
+//        scrollView.backgroundColor = UIColor.blue
+
+        var container = Container(view:scrollView)
+        let section = Section(name: "activity-data", view: UIView.newAutoLayout())
+        container += section
         
         for t in activityList {
             let row = Row.LeftAligned()
             section <<< row
             
-            row +++ label("label", fieldTitle: t.label).width(250).height(30)
+            row +++ label("activitylabel", fieldTitle: t.label).width(210).height(30)
                 +++ img(name:"icon", t.imgName).width(30).height(20)
-            
+                +++ button(name:"abc", "開く").width(40).height(30)
+                
             row.layout(){ r in
                 let w = UIScreen.main.bounds.size.width - 20
                 r.leftMost().rightMost().height(40).width(w)
             }
         }
 
-        section.layout() { c in
-            c.view.autoPinEdgesToSuperviewEdges()
-         }
-        return section
+        section.layout() { [weak self]s in
+            let height = 25.0*(CGFloat((self?.activityList.count)!))
+            s.view.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: height)
+//            s.view.backgroundColor = UIColor.brown
+            s.upper()
+        }
+        
+        
+        return container
     }
 }

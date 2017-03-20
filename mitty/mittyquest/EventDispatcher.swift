@@ -69,7 +69,12 @@ class ControlEventDelegator :EventDelegator {
             let tf = control.view as! UIControl
             tf.addTarget(self, action: #selector(dispatchEvent(_ :)), for: event)
         default:
-            print("This filed dont support changed event")
+            if event == .touchUpInside {
+                let g = MyUITapGestureRecognizer(target:self, action:#selector(handleTap(sender :)))
+                control.view.addGestureRecognizer(g)
+            } else {
+                print("The event is not supported.")
+            }
         }
     }
     
@@ -85,5 +90,18 @@ class ControlEventDelegator :EventDelegator {
         handler?(view)
     }
     
+    @objc
+    func handleTap(sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            handler?(sender.view!)
+        }
+    }
+    
 }
+
+class MyUITapGestureRecognizer : UITapGestureRecognizer {
+    
+}
+
+
 

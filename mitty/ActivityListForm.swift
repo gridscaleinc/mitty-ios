@@ -93,7 +93,7 @@ class ActivityListForm1 : UIView {
         self.addSubview(thisYear)
         self.addSubview(nextYear)
         
-        let indicateYear = UIView()
+        let indicateYear = UIView.newAutoLayout()
         indicateYear.addSubview(stepper)
         indicateYear.addSubview(indicator)
         self.addSubview(indicateYear)

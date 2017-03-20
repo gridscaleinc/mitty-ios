@@ -408,7 +408,7 @@ func HL (_ color: UIColor? = UIColor.black, _ width: Int? = 1) -> UIView {
 
 class Header: Section {
     init(_ title: String? = "") {
-        super.init(name: "Header-Section", view: UIView())
+        super.init(name: "Header-Section", view: UIView.newAutoLayout())
         super.title = title!
         super.titleConrol = Control(view :HL())
         self.view.addSubview((titleConrol?.view)!)
