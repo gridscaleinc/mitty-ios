@@ -76,9 +76,10 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             print("This Year taped")
         }
 
-        form.quest("[name=nextYear]").bindEvent(for: .touchUpInside) {(view) in
+        form.quest("[name=nextYear]").bindEvent(for: .touchUpInside) {[weak self](view) in
             view.backgroundColor = .yellow
             print("Next Year taped")
+            self?.printFrames()
         }
         
         let indicator = mitty["[name=indicator]"]
@@ -102,10 +103,19 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
 //            c.view.layer.borderWidth=1
 //        }
         
-        form.quest("[name=activitylabel]").forEach() { c in
+        let labels = form.quest("[name=activitylabel]")
+        labels.forEach() { c in
             let l = c.view as! UILabel
             l.textColor = UIColor(red: 0.3, green: 0.6, blue: 0.4, alpha: 0.9)
             l.font = UIFont(name:"AppleGothic", size: 12)
+        }
+        
+        labels.bindEvent(for: .touchUpInside) { [weak self] label in
+            let e = EventService.instance.buildEvent(1)
+            let eventViewController = EventDetailViewController(event: e!)
+            self?.navigationItem.title = "..."
+            self?.tabBarController?.tabBar.isHidden = true
+            self?.navigationController?.pushViewController(eventViewController, animated: true)
         }
         
         form.quest("[name=abc]").bindEvent(for: .touchUpInside) {[weak self] button in
@@ -115,11 +125,26 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             self?.tabBarController?.tabBar.isHidden = true
             self?.navigationController?.pushViewController(eventViewController, animated: true)
         }
+
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
 
     }
-
+    
+    var firstTime = true
+    
+    func printFrames() {
+        if (!firstTime) {
+            return
+        }
+        form.quest().forEach() { c in
+            print("---------")
+            print(c.name + ":")
+            print(c.view.bounds)
+        }
+        firstTime = true
+    }
+    
     var didSetupConstraints = false
     //
     // 活動予定一覧の読み込み
@@ -142,8 +167,9 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             form.configLayout()
             didSetupConstraints = true
         }
-        
+
         super.updateViewConstraints()
+
     }
     
     // navigation bar の初期化をする

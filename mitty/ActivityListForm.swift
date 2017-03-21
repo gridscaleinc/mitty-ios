@@ -10,55 +10,21 @@ import Foundation
 import UIKit
 import PureLayout
 
-@objc(ActivityListForm1)
-class ActivityListForm1 : UIView {
-    let dummyLabel : UILabel = {
-        let l = UILabel.newAutoLayout()
-        l.backgroundColor = .clear
-        return l
-    } ()
+@objc(ActivityListForm)
+class ActivityListForm : MQForm {
     
-    let collectionView : UICollectionView = {
-        let layout = UICollectionViewFlowLayout()
-        layout.sectionHeadersPinToVisibleBounds = true
-        layout.sectionFootersPinToVisibleBounds = false
-
-        let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        v.translatesAutoresizingMaskIntoConstraints = false
-        return v
-    } ()
+//    let collectionView : UICollectionView = {
+//        let layout = UICollectionViewFlowLayout()
+//        layout.sectionHeadersPinToVisibleBounds = true
+//        layout.sectionFootersPinToVisibleBounds = false
+//        
+//        let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+//        v.translatesAutoresizingMaskIntoConstraints = false
+//        v.backgroundColor = .white
+//        return v
+//    } ()
+//    
     
-    let thisYear : UIButton = {
-        let button = UIButton.newAutoLayout()
-        button.setTitle("今年", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
-        return button
-    } ()
-    
-    let nextYear:UIButton = {
-        let button = UIButton.newAutoLayout()
-        button.setTitle("来年", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
-        return button
-    } ()
-    
-    let stepper:UIStepper = {
-        let button = UIStepper.newAutoLayout()
-        button.minimumValue = 2019
-        button.maximumValue = 2049
-        button.stepValue = 1
-        button.tintColor = .lightGray
-        button.value = 2019
-        return button
-    } ()
-    
-    
-    let indicator : UIButton = {
-        let button = UIButton.newAutoLayout()
-        button.setTitle("2019", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
-        return button
-    } ()
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -68,55 +34,141 @@ class ActivityListForm1 : UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configLayout () {
+    let activityList : [(label:String, imgName:String)] = [
+        (label: "2/18 平和島公園", imgName: "timesquare"),
+        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 Iot どこかで", imgName: "pengin3"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 平和島公園", imgName: "timesquare"),
+        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 Iot どこかで", imgName: "pengin3"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 Iot どこかで", imgName: "pengin3"),
+        (label: "2/18 島祭り", imgName: "pengin"),
+        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
+        (label: "2/18 島祭り", imgName: "pengin")
+    ]
+    
+    func loadForm () {
         
-        self.addSubview(dummyLabel)
-        dummyLabel.autoPinEdge(toSuperviewEdge: .top, withInset:10)
-        dummyLabel.autoSetDimension(.height, toSize: 0)
-
-        collectionView.backgroundColor = .white
+        var page = self as MQForm
         
-        self.addSubview(collectionView)
+        let header = Header()
+        page += header
         
-        collectionView.autoPinEdge(.top, to: .top, of:dummyLabel)
-        collectionView.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-        collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 200)
-        
-        let redLine = HL(UIColor.red)
-        self.addSubview(redLine)
-        redLine.autoPinEdge(.top, to: .bottom, of: collectionView)
-        
-        redLine.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
-        redLine.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
-        
-        self.addSubview(thisYear)
-        self.addSubview(nextYear)
-        
-        let indicateYear = UIView.newAutoLayout()
-        indicateYear.addSubview(stepper)
-        indicateYear.addSubview(indicator)
-        self.addSubview(indicateYear)
+        header.layout() { (v) in
+            v.view.autoPinEdge(toSuperviewEdge: .top, withInset:10)
+            v.view.autoSetDimension(.height, toSize: 0)
+        }
         
         
-        let buttons = [thisYear, nextYear, indicateYear] as NSArray
+        let data = buildActivityData()
+        page +++ data
+        data.layout() { (main) in
+            main.putUnder(of: header).fillHolizon().down(withInset: 125)
+        }
         
-        buttons.autoSetViewsDimension(.height, toSize: 70)
-        buttons.autoDistributeViews(along: .horizontal, alignedTo: .horizontal, withFixedSpacing: 10.0, insetSpacing: true, matchedSizes: true)
-        thisYear.autoPinEdge(.top, to: .bottom, of:redLine, withOffset: 10)
+        let redLine = Control(view:HL(UIColor.red))
+        page +++ redLine
         
-        let indicators = [indicator, stepper] as NSArray
-        indicators.autoDistributeViews(along: .vertical, alignedTo: .vertical, withFixedSpacing: 5, insetSpacing: true, matchedSizes: true)
+        redLine.layout() { (hl) in
+            hl.fillHolizon()
+            hl.putUnder(of: data)
+        }
         
-        stepper.autoPinEdge(toSuperviewEdge: .left)
-        stepper.autoPinEdge(toSuperviewEdge: .right)
-        indicator.autoPinEdge(toSuperviewEdge: .left)
-        indicator.autoPinEdge(toSuperviewEdge: .right)
         
-        indicator.setTitle("\(Int(stepper.value))年", for: UIControlState())
+        let buttons = Row()
+        buttons.distribution = .atIntervals
+        
+//        let buttons = Row.LeftAligned()
+        let thisYearButton :Control = button (name: "thisYear", "今年").layout() { (button) in
+            button.width(80).height(50)
+        }
+        
+        buttons +++ thisYearButton
+    
+        let nextYearButton : Control = button (name: "nextYear", "来年").layout() { (button) in
+            button.width(80).height(50)
+        }
+        nextYearButton.margin.left = 10
+        buttons +++ nextYearButton
+        
+        let stepperCtl :Control = stepper(name: "stepper", 2019, 2049).layout() { (stepper) in
+            stepper.width(40).height(28)
+        }
+        
+        let indicatorCtl : Control = button (name: "indicator", "2019").layout() { (button) in
+            button.width(50).height(28)
+        }
+        indicatorCtl.margin.bottom = 10
+        
+        let indicateYear = Col.UpDownAligned().width(80).height(60)
+        indicateYear.margin.left = 10
+        indicateYear +++ indicatorCtl
+        indicateYear +++ stepperCtl
+        
+        
+        buttons +++ indicateYear
+   
+        buttons.layout() { (buttons) in
+            buttons.height(65)
+            //buttons.view.backgroundColor = UIColor.gray
+            buttons.leftMost().rightMost().putUnder(of: redLine, withOffset: 2)
+        }
+        
+        page +++ buttons
+        
+        
     }
     
     func load () {
-        collectionView.reloadData()
+        
+        //collectionView.reloadData()
+    }
+    
+    func buildActivityData() -> Control {
+        
+        let scrollView = UIScrollView.newAutoLayout()
+        scrollView.contentSize = UIScreen.main.bounds.size
+        scrollView.isScrollEnabled = true
+        scrollView.flashScrollIndicators()
+        scrollView.canCancelContentTouches = false
+
+
+//        scrollView.backgroundColor = UIColor.blue
+
+        var container = Container(name:"Scroll-View", view:scrollView)
+        let section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
+        container += section
+        
+        for t in activityList {
+            let row = Row.LeftAligned()
+            section <<< row
+            
+            row +++ label("activitylabel", fieldTitle: t.label).width(210).height(30)
+                +++ img(name:"icon", t.imgName).width(30).height(20)
+                +++ button(name:"abc", "開く").width(40).height(30)
+                
+            row.layout(){ r in
+                let w = UIScreen.main.bounds.size.width - 20
+                r.leftMost().rightMost().height(40).width(w)
+            }
+        }
+
+        section.layout() { [weak self]s in
+            let height = 40.0*(CGFloat((self?.activityList.count)!))
+//            s.view.backgroundColor = UIColor.brown
+            s.upper().width(UIScreen.main.bounds.size.width).height(height)
+        }
+        
+        
+        return container
     }
 }

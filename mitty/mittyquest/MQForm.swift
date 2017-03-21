@@ -49,7 +49,6 @@ open class MQForm : UIView {
     
     var controlCount : Int { return controls.count }
     
-    
     func append(_ control: Control) {
         controls.append(control)
         controlDictionary[control.name] = control
@@ -61,7 +60,7 @@ open class MQForm : UIView {
     }
     
     func  label (_ fieldName: String, fieldTitle: String) -> Control {
-        let l = UILabel.newAutoLayout()
+        let l = TapableLabel.newAutoLayout()
         l.text = fieldTitle
         return Control(name: fieldName, view: l)
     }
