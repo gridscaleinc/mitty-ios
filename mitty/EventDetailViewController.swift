@@ -20,8 +20,6 @@ class EventDetailViewController : UIViewController {
     // Purelayout流の画面パーツ作り方、必ずnewAutoLayoutを一度呼び出す。
     // 画面を構成するパーツだから、methoの中ではなく、インスタンス変数として持つ。
     //
-    let scrollView  = UIScrollView.newAutoLayout()
-    let contentView = UIView.newAutoLayout()
     
     let imageView : UIImageView = {
         
@@ -58,11 +56,7 @@ class EventDetailViewController : UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view = UIView.newAutoLayout()
-        
         view.backgroundColor = .white
-        view.addSubview(scrollView)
-        scrollView.addSubview(contentView)
         
         self.navigationItem.title = "Event Detail"
         
@@ -73,11 +67,9 @@ class EventDetailViewController : UIViewController {
         
         subscribeButton.addTarget(self, action: #selector(EventDetailViewController.pressSubscribe), for: .touchUpInside)
         
-        self.view.addSubview(scrollView)
-        
-        contentView.addSubview(label)
-        contentView.addSubview(imageView)
-        contentView.addSubview(subscribeButton)
+        view.addSubview(label)
+        view.addSubview(imageView)
+        view.addSubview(subscribeButton)
 
 
         view.setNeedsUpdateConstraints()
@@ -90,11 +82,7 @@ class EventDetailViewController : UIViewController {
         
         if (!didSetupConstraints) {
 
-            scrollView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero)
-            
-            contentView.autoPinEdgesToSuperviewEdges(with: UIEdgeInsets.zero)
-            contentView.autoMatch(.width, to: .width, of: view)
-            
+
             imageView.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
             imageView.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)
             imageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 10)

@@ -118,14 +118,6 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             self?.navigationController?.pushViewController(eventViewController, animated: true)
         }
         
-        form.quest("[name=abc]").bindEvent(for: .touchUpInside) {[weak self] button in
-            let e = EventService.instance.buildEvent(1)
-            let eventViewController = EventDetailViewController(event: e!)
-            self?.navigationItem.title = "..."
-            self?.tabBarController?.tabBar.isHidden = true
-            self?.navigationController?.pushViewController(eventViewController, animated: true)
-        }
-
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
 
@@ -232,6 +224,13 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         super.didReceiveMemoryWarning()
     }
     
+    override func viewDidLoad() {
+        form.quest().forEach() {
+            c in
+            print(c.name)
+            print(c.view.bounds)
+        }
+    }
 }
 
 

@@ -167,7 +167,7 @@ open class Row : Container {
                 if (c === first) {
                     c.leftMost(withInset: 10)
                 } else {
-                     c.righter(than: previous!, withOffset: c.margin.left)
+                     c.righter(than: previous!, withOffset: spacing + c.margin.left)
                 }
                 previous = c
                 c.upper()
@@ -180,7 +180,7 @@ open class Row : Container {
                 if (c === last) {
                     c.rightMost(withInset: 10)
                 } else {
-                    c.lefter(than: previous!, withOffset: c.margin.right)
+                    c.lefter(than: previous!, withOffset: spacing + c.margin.right)
                 }
                 previous = c
                 c.upper()
@@ -212,6 +212,11 @@ open class Row : Container {
     //
     static func RightAligned() -> Row {
         return GEN(.right)
+    }
+    
+    //
+    static func Intervaled() -> Row {
+        return GEN(.atIntervals)
     }
 }
 

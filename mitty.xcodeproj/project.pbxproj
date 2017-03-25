@@ -44,6 +44,7 @@
 		FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */; };
 		FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850E1E627DB500CAC38B /* ActivityCell.swift */; };
 		FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1785101E627F0500CAC38B /* ActivityDelegates.swift */; };
+		FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D991E86B5400089140B /* StyledTextField.swift */; };
 		FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2862AA1DCEAFA6000854D9 /* EventService.swift */; };
 		FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31D7C91E80103F00F79E07 /* TapableLabel.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
@@ -202,6 +203,7 @@
 		FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionCell.swift; sourceTree = "<group>"; };
 		FC17850E1E627DB500CAC38B /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		FC1785101E627F0500CAC38B /* ActivityDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDelegates.swift; sourceTree = "<group>"; };
+		FC276D991E86B5400089140B /* StyledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		FC2862AA1DCEAFA6000854D9 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		FC31D7C91E80103F00F79E07 /* TapableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapableLabel.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
@@ -643,6 +645,7 @@
 				FCF2A0CD1E73DCDF00536D32 /* Selection.swift */,
 				FCF2A0D11E777C3600536D32 /* MQForm.swift */,
 				FC31D7C91E80103F00F79E07 /* TapableLabel.swift */,
+				FC276D991E86B5400089140B /* StyledTextField.swift */,
 			);
 			path = mittyquest;
 			sourceTree = "<group>";
@@ -1101,6 +1104,7 @@
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
+				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */,

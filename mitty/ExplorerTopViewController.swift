@@ -27,13 +27,15 @@ class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
     // Recommendation
     // Title
     let eventTitle : UILabel = {
-        let l = UILabel.newAutoLayout()
-        l.text = "島祭り、楽しもう"
-        l.textColor = UIColor.white
-        l.shadowColor = UIColor.black
-        l.shadowOffset = CGSize(width:0, height:1)
-        l.font = UIFont(name:"Zapfino", size:UIFont.labelFontSize)
-        return l
+        let label = UILabel.newAutoLayout()
+        label.numberOfLines=0
+        label.text = "ようこそ沖縄へ、島祭り、楽しもう。ようこそ美しい島へ"
+        label.textColor = UIColor.white
+        label.shadowColor = UIColor.black
+        label.shadowOffset = CGSize(width:0, height:1)
+        let pointSize = UIFont.systemFontSize*2.2
+        label.font = UIFont.systemFont(ofSize: pointSize)
+        return label
     }()
 
     
@@ -109,8 +111,9 @@ class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
         self.navigationItem.title = "島たん"
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationItem.titleView = searchBox
-        
+//        self.navigationController?.navigationBar.isHidden = true
         searchBox.delegate = self
+//        self.tabBarController?.tabBar.isHidden = true
 
     }
     
@@ -155,13 +158,13 @@ class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
 //        searchBox.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
 //        searchBox.autoSetDimension(.height, toSize: 30)
 
-        eventTitle.autoPin(toTopLayoutGuideOf: self,  withInset: 10)
-        eventTitle.autoPinEdge(toSuperviewEdge: .left, withInset: 30)
-        eventTitle.autoSetDimension(.height, toSize: 30)
-        eventTitle.autoSetDimension(.width, toSize: 150)
-        
-        eventIcon.autoPinEdge(.top, to: .top, of: eventTitle)
-        eventIcon.autoPinEdge(toSuperviewEdge: .right, withInset: 30)
+        eventTitle.autoPin(toTopLayoutGuideOf: self,  withInset: 130)
+        eventTitle.autoPinEdge(toSuperviewEdge: .left, withInset: 20)
+//        eventTitle.autoSetDimension(.height, toSize: 70)
+        eventTitle.autoSetDimension(.width, toSize: 250)
+
+        eventIcon.autoPinEdge(.top, to: .top, of: eventTitle, withOffset: 0)
+        eventIcon.autoPinEdge(toSuperviewEdge: .right, withInset: 20)
         eventIcon.autoSetDimension(.height, toSize: 35)
         eventIcon.autoSetDimension(.width, toSize: 50)
         

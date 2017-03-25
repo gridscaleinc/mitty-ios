@@ -59,30 +59,28 @@ open class MQForm : UIView {
         return quest("[name=\(name)]").control()
     }
     
-    func  label (_ fieldName: String, fieldTitle: String) -> Control {
+    func  label (name: String, title: String) -> Control {
         let l = TapableLabel.newAutoLayout()
-        l.text = fieldTitle
-        return Control(name: fieldName, view: l)
+        l.text = title
+        return Control(name: name, view: l)
     }
     
     ///
-    func textField(name: String, placeHolder: String, width: CGFloat) -> Control {
-        let t = UITextField.newAutoLayout()
+    func text(name: String, placeHolder: String, width: CGFloat) -> Control {
+        let t = StyledTextField.newAutoLayout()
         t.placeholder = placeHolder
-        t.layer.borderColor = UIColor.lightGray.cgColor
-        t.layer.borderWidth = 0.5
         t.backgroundColor = .white
         return Control(name: name, view: t).width(width)
     }
     
-    func button(name: String, _ title: String ) -> Control {
+    func button(name: String, title: String ) -> Control {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
         MQForm.setButtonStyle(button: button)
         return Control(name: name, view:button)
     }
     
-    func img(name: String, _ url: String ) -> Control {
+    func img(name: String, url: String ) -> Control {
  
         let img = UIImageView.newAutoLayout()
         img.contentMode = UIViewContentMode.scaleAspectFit
@@ -93,8 +91,7 @@ open class MQForm : UIView {
 
     }
     
-    
-    func stepper (name: String, _ min: Double, _ max: Double) -> Control {
+    func stepper (name: String, min: Double, max: Double) -> Control {
         let stepper = UIStepper.newAutoLayout()
         stepper.minimumValue = min
         stepper.maximumValue = max

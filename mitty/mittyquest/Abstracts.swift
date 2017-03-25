@@ -85,17 +85,17 @@ struct Stack<E> {
 
 // MARK: Operators
 
-precedencegroup FormPrecedence {
+precedencegroup AddPrecedence {
     associativity: left
     higherThan: LogicalConjunctionPrecedence
 }
 
-precedencegroup SectionPrecedence {
+precedencegroup JoinPrecedence {
     associativity: left
-    higherThan: FormPrecedence
+    higherThan: AddPrecedence
 }
 
-infix operator +++ : FormPrecedence
-infix operator <<< : SectionPrecedence
+infix operator +++ : AddPrecedence
+infix operator <<< : JoinPrecedence
 prefix operator +=
 

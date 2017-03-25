@@ -88,31 +88,32 @@ class ActivityListForm : MQForm {
         buttons.distribution = .atIntervals
         
 //        let buttons = Row.LeftAligned()
-        let thisYearButton :Control = button (name: "thisYear", "今年").layout() { (button) in
+        let thisYearButton :Control = button (name: "thisYear", title: "今年").layout() { (button) in
             button.width(80).height(50)
         }
         
         buttons +++ thisYearButton
     
-        let nextYearButton : Control = button (name: "nextYear", "来年").layout() { (button) in
+        let nextYearButton : Control = button (name: "nextYear", title: "来年").layout() { (button) in
             button.width(80).height(50)
         }
+        
         nextYearButton.margin.left = 10
         buttons +++ nextYearButton
         
-        let stepperCtl :Control = stepper(name: "stepper", 2019, 2049).layout() { (stepper) in
-            stepper.width(40).height(28)
+        let stepperCtl :Control = stepper(name: "stepper", min: 2019, max: 2049).layout() { (stepper) in
+            stepper.width(50).height(28)
         }
         
-        let indicatorCtl : Control = button (name: "indicator", "2019").layout() { (button) in
-            button.width(50).height(28)
+        let indicatorCtl : Control = button (name: "indicator", title: "2019").layout() { (button) in
+            button.width(80).height(28)
         }
         indicatorCtl.margin.bottom = 10
         
         let indicateYear = Col.UpDownAligned().width(80).height(60)
         indicateYear.margin.left = 10
         indicateYear +++ indicatorCtl
-        indicateYear +++ stepperCtl
+            +++ stepperCtl
         
         
         buttons +++ indicateYear
@@ -152,9 +153,9 @@ class ActivityListForm : MQForm {
             let row = Row.LeftAligned()
             section <<< row
             
-            row +++ label("activitylabel", fieldTitle: t.label).width(210).height(30)
-                +++ img(name:"icon", t.imgName).width(30).height(20)
-                +++ button(name:"abc", "開く").width(40).height(30)
+            row +++ label(name: "activitylabel", title: t.label).width(250).height(30)
+                +++ img(name:"icon", url: t.imgName).width(30).height(20)
+
                 
             row.layout(){ r in
                 let w = UIScreen.main.bounds.size.width - 20
