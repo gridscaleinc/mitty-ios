@@ -13,7 +13,6 @@ import PureLayout
 
 class ActivityInputForm : MQForm {
     
-    
     func loadForm() {
         
         var page = self as MQForm
@@ -27,7 +26,7 @@ class ActivityInputForm : MQForm {
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:2000)
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:600)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -44,7 +43,7 @@ class ActivityInputForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(2000)
+            c.upper().width(UIScreen.main.bounds.size.width).height(600)
         }
         
         var row = Row.LeftAligned()
@@ -60,19 +59,18 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-start", title: "開始")
-        row +++ text(name: "fromDate" , placeHolder: "日付"  , width: 150).height(35)
-        row +++ text(name: "fromTime" , placeHolder: "時刻"  , width: 50).height(35)
+        row +++ text(name: "fromDateTime" , placeHolder: "開始日時"  , width: 200).height(35)
         
         row.layout() {
             r in
             r.height(40).fillHolizon()
         }
+        
         inputForm <<< row
 
         row = Row.LeftAligned()
         row +++ label(name: "label-End", title: "終了")
-        row +++ text(name: "toDate" , placeHolder: "日付"  , width: 150).height(35)
-        row +++ text(name: "toTime" , placeHolder: "時刻"  , width: 50).height(35)
+        row +++ text(name: "toDateTime" , placeHolder: "終了日時"  , width: 200).height(35)
         
         row.layout() {
             r in

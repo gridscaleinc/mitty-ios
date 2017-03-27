@@ -68,6 +68,7 @@ open class MQForm : UIView {
     ///
     func text(name: String, placeHolder: String, width: CGFloat) -> Control {
         let t = StyledTextField.newAutoLayout()
+        t.hilightedLineColor = UIColor.blue.cgColor
         t.placeholder = placeHolder
         t.backgroundColor = .white
         return Control(name: name, view: t).width(width)

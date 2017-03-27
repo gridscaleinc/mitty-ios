@@ -12,6 +12,9 @@ import UIKit
 class StyledTextField : UITextField {
     var hairlineLayer : CALayer = CALayer()
 
+    var hilightedLineColor = UIColor.red.cgColor
+    
+    var lineWidth : CGFloat = 1.2
     
     override func layoutSubviews () {
         super.layoutSubviews()
@@ -23,7 +26,7 @@ class StyledTextField : UITextField {
         var hairlineHeight:CGFloat = 0.0;
         if (self.isFirstResponder) {
             self.hairlineLayer.backgroundColor = UIColor.blue.cgColor
-            hairlineHeight = 1.2
+            hairlineHeight = lineWidth
         } else {
             self.hairlineLayer.backgroundColor = UIColor.gray.cgColor
             hairlineHeight = CGFloat(1).divided(by: UIScreen.main.scale)
