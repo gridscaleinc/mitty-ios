@@ -41,13 +41,13 @@ open class MittyQuest : OperationSet {
     }
     
     open subscript(_ selector: String) -> MittyQuest {
-        let isTarget = compile(selector)
+        let matching = compile(selector)
         let m = MittyQuest()
-        for c in controls {
-            if (isTarget(c)) {
-                m.controls.insert(c)
-            }
+        if (matching.hasError) {
+            return m
         }
+        let matched = matching.selector.matchAll(self.controls)
+        m.controls = m.controls.union(matched)
         return m
     }
     
@@ -168,18 +168,10 @@ open class MittyQuest : OperationSet {
 }
 
 extension MittyQuest {
-    func compile(_ selection: String) -> ControlSelector {
-        var pattern = selection.trimmingCharacters(in: NSCharacterSet.whitespaces)
+    func compile(_ selection: String) -> Matching {
+        let pattern = selection.trimmingCharacters(in: NSCharacterSet.whitespaces)
         let m = Matching(pattern)
-        func f ( _ control : Control) -> Bool {
-            
-            if (pattern == "") {
-                return true
-            }
-            return m.matches(control)
-        }
-        
-        return f
+        return m
     }
 }
 

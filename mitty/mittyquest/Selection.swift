@@ -38,20 +38,13 @@ class Matching {
     
     init (_ s: String) {
         pattern = s.trimmingCharacters(in: CharacterSet.whitespaces)
-        scanMatchers(pattern)
+        scanMatchers()
     }
     
     var selector : Selector = Selector()
+
     
-    // 
-    func matches (_ c: Control) -> Bool {
-        if (hasError) {
-            return false
-        }
-        return selector.matches(c)
-    }
-    
-    func scanMatchers(_ p: String) {
+    func scanMatchers() {
         let tokenizer = SelectorTokenizer(pattern)
         stack = Stack<Matcher>()
         scanMatchers(tokenizer)
@@ -147,6 +140,7 @@ class Matching {
     func scanFilter(_ matcher: FilterMatch, _ tokenizer : SelectorTokenizer) {
         let name = nextNonWhitespace(tokenizer)
         if (name == nil) {
+            hasError = true
             return
         }
         matcher.name = (name?.token)!
@@ -203,7 +197,7 @@ class Matching {
 }
 
 protocol Matcher {
-    func matches (_ c: Control) -> Bool
+    func matchAll (_ controlSet: Set<Control>) -> Set<Control>
 }
 
 class Selector : Matcher {
@@ -211,14 +205,20 @@ class Selector : Matcher {
     var attributeMatchers : [AttributeMatch] = []
     var filterMatchers : [FilterMatch] = []
     
-    func matches (_ c: Control) -> Bool {
-        if checkTagOrName(c) {
-            if checkAttribute(c) {
-                return checkFilter(c)
+    func matchAll(_ controlSet: Set<Control>) -> Set<Control> {
+        var matched = Set<Control> ()
+        
+        for  c in controlSet {
+            if (checkTagOrName(c)) {
+                matched.insert(c)
             }
-            return false
         }
-        return false
+        
+        matched = filterAttribute(matched)
+        
+        matched = filter(matched)
+        
+        return matched
     }
     
     func checkTagOrName(_ c: Control) -> Bool {
@@ -228,22 +228,20 @@ class Selector : Matcher {
         return false
     }
     
-    func checkAttribute(_ c: Control) -> Bool {
+    func filterAttribute(_ matched: Set<Control>)  -> Set<Control> {
+        var result = matched
         for a in attributeMatchers {
-            if (!a.matches(c)) {
-                return false
-            }
+            result = a.matchAll(result)
         }
-        return true
+        return result
     }
     
-    func checkFilter(_ c: Control) -> Bool {
+    func filter(_ matched: Set<Control>) -> Set<Control> {
+        var result = matched
         for a in filterMatchers {
-            if (!a.matches(c)) {
-                return false
-            }
+            result = a.matchAll(result)
         }
-        return true
+        return result
     }
 }
 
@@ -261,8 +259,8 @@ class JointSelector : Selector {
     var selectOp : SelectorOp = .Union
     var rightSelector : Selector? = nil
     
-    override func matches(_ c: Control) -> Bool {
-        return true
+    override func matchAll(_ controlSet: Set<Control>) -> Set<Control> {
+        return Set<Control>()
     }
     
     func add(_ s: Selector) {
@@ -276,6 +274,16 @@ class AttributeMatch: Matcher {
     var name : String = ""
     var attOp : String = ""
     var value : String = ""
+    
+    func matchAll(_ controlSet: Set<Control>) -> Set<Control> {
+        var matched = Set<Control>()
+        for c in controlSet {
+            if (matches(c)) {
+                matched.insert(c)
+            }
+        }
+        return matched
+    }
     
     func matches (_ c: Control) -> Bool {
         if (name == "name") {
@@ -302,6 +310,16 @@ class FilterMatch : Matcher {
         set(n) {
             _name = n
         }
+    }
+    
+    func matchAll(_ controlSet: Set<Control>) -> Set<Control> {
+        var matched = Set<Control>()
+        for c in controlSet {
+            if (matches(c)) {
+                matched.insert(c)
+            }
+        }
+        return matched
     }
     
     func matches (_ c: Control) -> Bool {
