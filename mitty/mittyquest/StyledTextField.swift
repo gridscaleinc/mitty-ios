@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class StyledTextField : UITextField {
+class StyledTextField : UITextField , UITextFieldDelegate {
     var hairlineLayer : CALayer = CALayer()
 
     var hilightedLineColor = UIColor.red.cgColor
@@ -34,5 +34,12 @@ class StyledTextField : UITextField {
         
         self.hairlineLayer.frame = CGRect(x:0, y: self.bounds.height.subtracting(hairlineHeight)
             , width:self.bounds.width, height:hairlineHeight)
+        
+        delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.resignFirstResponder()
+        return true
     }
 }

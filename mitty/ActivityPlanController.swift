@@ -59,9 +59,11 @@ class ActivityPlanViewController : UIViewController {
         }
         
         form.quest("[name=toDateTime]").forEach() { (c) in
+            
             let textField = c.view as! UITextField
             let picker = UIDatePicker()
             textField.inputView = picker
+        
         }
         
         form.quest("[name=contact-Tel]").forEach() { (c) in

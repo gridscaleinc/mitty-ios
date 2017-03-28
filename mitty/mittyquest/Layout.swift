@@ -282,4 +282,8 @@ public struct ControlMargin {
         _bottom = b!
     }
     
+    init(_ m: CGFloat) {
+        self.init(l:m, r:m, u:m, b:m)
+    }
+    
 }
