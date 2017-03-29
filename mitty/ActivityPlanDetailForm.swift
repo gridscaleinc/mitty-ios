@@ -127,6 +127,7 @@ class ActivityPlanDetailsForm : MQForm {
             let line : Control = {
                 let l = TapableLabel.newAutoLayout()
                 l.text = "2017/8/19 12:34 イベント名          🚗"
+                l.font = UIFont.systemFont(ofSize: 14)
                 l.backgroundColor = UIColor.white
                 return Control(name: "line", view: l).height(30)
             }()

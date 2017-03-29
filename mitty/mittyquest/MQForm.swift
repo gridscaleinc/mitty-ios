@@ -62,6 +62,7 @@ open class MQForm : UIView {
     func  label (name: String, title: String) -> Control {
         let l = TapableLabel.newAutoLayout()
         l.text = title
+        l.font = UIFont.systemFont(ofSize: 14)
         return Control(name: name, view: l)
     }
     

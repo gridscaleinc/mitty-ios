@@ -12,7 +12,7 @@ import UIKit
 
 class ActivityPlanDetailsController : UIViewController {
     
-    var activityTitle = "活動"
+    var activityTitle = "活動計画詳細"
     var form = ActivityPlanDetailsForm()
     
     override func loadView() {

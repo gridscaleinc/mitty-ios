@@ -36,6 +36,9 @@ class StyledTextField : UITextField , UITextFieldDelegate {
             , width:self.bounds.width, height:hairlineHeight)
         
         delegate = self
+        
+
+        
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

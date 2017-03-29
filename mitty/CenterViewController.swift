@@ -69,10 +69,23 @@ class CenterViewController: UIViewController {
         self.view.addSubview(indicator)
         indicator.startAnimating()
         
-        let rect1 = CGRect(x:indicator.frame.minX, y:100, width:300, height: 150)
-        let bagua = UILabel(frame: rect1)
-        bagua.text = "To be programmed......"
-        bagua.textColor = UIColor.white
+        let rect1 = CGRect(x:20, y:10, width:280, height: 150)
+        let bagua = MarqueeLabel(frame: rect1)
+        bagua.numberOfLines = 2
+        
+        bagua.type = .continuous
+        bagua.speed = .duration(50)
+        bagua.animationCurve = .linear
+        bagua.fadeLength = 10.0
+        bagua.leadingBuffer = 10.0
+        
+        bagua.font = UIFont.systemFont(ofSize: 20)
+        
+        let strings = ["May I talk to you?  MittyはSNSではない。SNSを築くツールです。Mittyのコセプトは人と人がバーチャルな空間ではなく、リアルな空間での出会いをサポートします。Mittyがあれば、人と人の新たな関係を良い形で容易に作れる。"]
+        
+        bagua.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
+        
+        bagua.textColor = UIColor.red
         
         self.view.addSubview(bagua)
 
