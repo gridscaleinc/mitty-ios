@@ -17,6 +17,7 @@ import MapKit
 @objc(CenterViewController)
 class CenterViewController: UIViewController {
    
+    let form = MQForm.newAutoLayout()
     
     // Autolayout済みフラグ
     var didSetupConstraints = false
@@ -43,29 +44,16 @@ class CenterViewController: UIViewController {
         // 色のビュルド仕方
         let swiftColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1)
         self.view.backgroundColor = swiftColor
-
-        // buttonを生成
-        let button = UIButton.newAutoLayout()
-        button.frame = CGRect(x: 150, y: 100, width: 100, height: 55)
-        button.setTitle("登録する", for: .normal)
-        button.center = CGPoint(x: UIScreen.main.bounds.width/2, y: 95)
         
         let myMapView = MKMapView()
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
         
-        // let image = UIImage(named: "button")
-        button.layer.cornerRadius = 10
-        button.backgroundColor = UIColor(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.9)
         
-        button.addTarget(self, action: #selector(CenterViewController.editPersonalInfo), for: .touchUpInside)
-        self.view.addSubview(button)
-
-        
-        let rect = CGRect(x:100, y:100, width:UIScreen.main.bounds.width * 0.512, height: UIScreen.main.bounds.width * 0.512 / 1.414)
+        let rect = CGRect(x:0, y:0, width:40, height: 40/1.414)
         
         let indicator = BaguaIndicator(frame: rect)
-        indicator.center = CGPoint(x: UIScreen.main.bounds.width/2, y: UIScreen.main.bounds.height/2)
+        indicator.center = CGPoint(x: 50, y: 120)
         self.view.addSubview(indicator)
         indicator.startAnimating()
         
@@ -89,6 +77,50 @@ class CenterViewController: UIViewController {
         
         self.view.addSubview(bagua)
 
+        
+        let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(190).layout() {
+            s in
+            s.upper(withInset: 10).fillHolizon()
+            s.view.backgroundColor = swiftColor
+        }
+        form +++ section
+        
+        var row = Row.Intervaled().layout() {
+            r in
+            r.fillHolizon().height(35)
+        }
+        
+        row +++ form.button(name: "Taxi", title: "タクシー乗場").height(35)
+        row +++ form.button(name: "PeopleNearby", title: "近くの人").height(35)
+        row +++ form.button(name: "PeopleNearby", title: "近くの島").height(35)
+        
+        section <<< row
+        
+        row = Row.Intervaled().layout() {
+            r in
+            r.fillHolizon().height(40)
+        }
+
+        row +++ form.label(name: "Taxi", title: "現在地:東京タワー🗼").height(35)
+        row +++ form.button(name: "checkIn", title: "チェックイン").height(35)
+        
+        section <<< row
+        
+        row = Row.Intervaled().layout() {
+            r in
+            r.fillHolizon().height(40)
+        }
+
+        row +++ form.button(name: "Transperent", title: "透明").height(35)
+        row +++ form.button(name: "Unopen", title: "📌非公開").height(35)
+        row +++ form.button(name: "settings", title: "＋設定").height(35)
+        
+        section <<< row
+        
+        form.configLayout()
+        
+        view.addSubview(form)
+        
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         view.setNeedsUpdateConstraints()
@@ -101,6 +133,13 @@ class CenterViewController: UIViewController {
     override func updateViewConstraints() {
         
         if (!didSetupConstraints) {
+            let swiftColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1)
+            form.autoPinEdge(toSuperviewEdge: .bottom)
+            form.autoPinEdge(toSuperviewEdge: .left)
+            form.autoPinEdge(toSuperviewEdge: .right)
+            form.autoSetDimension(.height, toSize: 190)
+            form.backgroundColor = swiftColor
+            
             
             didSetupConstraints = true
         }

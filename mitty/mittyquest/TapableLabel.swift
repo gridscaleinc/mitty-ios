@@ -23,10 +23,10 @@ class TapableLabel : UILabel {
     override func layoutSubviews () {
         super.layoutSubviews()
         
-        let layer = CAShapeLayer()
-        layer.path = UIBezierPath(ovalIn: CGRect(x:0, y:0, width:20, height:20)).cgPath
-        layer.fillColor = UIColor.red.cgColor
-        self.layer.addSublayer(layer)
+        //let layer = CAShapeLayer()
+        //layer.path = UIBezierPath(ovalIn: CGRect(x:0, y:0, width:20, height:20)).cgPath
+        //layer.fillColor = UIColor.red.cgColor
+        // self.layer.addSublayer(layer)
         
         
     }
