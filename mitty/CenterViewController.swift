@@ -53,11 +53,11 @@ class CenterViewController: UIViewController {
         let rect = CGRect(x:0, y:0, width:40, height: 40/1.414)
         
         let indicator = BaguaIndicator(frame: rect)
-        indicator.center = CGPoint(x: 50, y: 120)
+        indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
         
-        let rect1 = CGRect(x:20, y:10, width:280, height: 150)
+        let rect1 = CGRect(x:3, y:3, width:220, height: 150)
         let bagua = MarqueeLabel(frame: rect1)
         bagua.numberOfLines = 2
         
@@ -67,16 +67,16 @@ class CenterViewController: UIViewController {
         bagua.fadeLength = 10.0
         bagua.leadingBuffer = 10.0
         
-        bagua.font = UIFont.systemFont(ofSize: 20)
+        bagua.font = UIFont.systemFont(ofSize: 16)
         
         let strings = ["May I talk to you?  MittyはSNSではない。SNSを築くツールです。Mittyのコセプトは人と人がバーチャルな空間ではなく、リアルな空間での出会いをサポートします。Mittyがあれば、人と人の新たな関係を良い形で容易に作れる。"]
         
         bagua.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
         
-        bagua.textColor = UIColor.red
+        bagua.textColor = swiftColor
         
-        self.view.addSubview(bagua)
-
+        //self.view.addSubview(bagua)
+        self.navigationItem.titleView = bagua
         
         let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(190).layout() {
             s in
