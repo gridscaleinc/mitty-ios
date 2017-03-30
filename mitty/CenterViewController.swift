@@ -236,7 +236,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         print(error)
     }
     
-    //認証状態を確認するだけなので、ここの処理はなくてもOK
+    //認証状態が変わったことをハンドリングする。
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         // 認証のステータスをログで表示.
         var statusStr = ""
