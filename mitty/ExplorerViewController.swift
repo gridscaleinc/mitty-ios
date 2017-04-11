@@ -11,6 +11,12 @@ class ExplorerViewController: UIViewController {
     
     // MARK: - View Elements
     let searchBar: UISearchBar
+    let titleView : UILabel = {
+        let l = UILabel.newAutoLayout()
+        l.text = ""
+        return l
+    } ()
+    
     let collectionView: UICollectionView
     
     // MARK: - Initializers
@@ -48,10 +54,12 @@ class ExplorerViewController: UIViewController {
     }
     
     // MARK: - View Setup
-    private func configureNavigationBar() {}
+    private func configureNavigationBar() {
+        self.navigationItem.titleView = searchBar
+    }
     
     private func addSubviews() {
-        view.addSubview(searchBar)
+        view.addSubview(titleView)
         view.addSubview(collectionView)
     }
     
@@ -65,11 +73,8 @@ class ExplorerViewController: UIViewController {
     }
     
     private func addConstraints() {
-        searchBar.autoPin(toTopLayoutGuideOf: self, withInset: 0)
-        searchBar.autoPinEdge(toSuperviewEdge: .left)
-        searchBar.autoPinEdge(toSuperviewEdge: .right)
-        
-        collectionView.autoPinEdge(.top, to: .bottom, of: searchBar)
+        titleView.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+        collectionView.autoPinEdge(.top, to: .bottom, of: titleView)
         collectionView.autoPinEdge(toSuperviewEdge: .left)
         collectionView.autoPinEdge(toSuperviewEdge: .right)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom)
@@ -90,7 +95,7 @@ extension ExplorerViewController: UISearchBarDelegate
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.resignFirstResponder()
-        
+        searchBar.showsCancelButton = false
         // 非同期方式で処理を呼び出す。
         let queue = OperationQueue()
         let key = searchBar.text
@@ -108,6 +113,15 @@ extension ExplorerViewController: UISearchBarDelegate
                 }
             }
         }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
     }
 }
 
