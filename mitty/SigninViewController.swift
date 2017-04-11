@@ -14,8 +14,8 @@ import SwiftyJSON
 class SigninViewController: UIViewController, UITextFieldDelegate {
     
     var welcomeLabel = UILabel()
-    var usernameField = UITextField()
-    var passwordField = UITextField()
+    var usernameField = StyledTextField()
+    var passwordField = StyledTextField()
     var signupButton = UIButton()
     var linkButton = UIButton()
 
@@ -31,13 +31,14 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         usernameField.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         usernameField.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 - 20)
-        usernameField.placeholder = "ユーザーID"
+        usernameField.placeholder = "👩 ユーザーID"
         usernameField.delegate = self
         self.view.addSubview(usernameField)
         
         passwordField.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         passwordField.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 + 20)
-        passwordField.placeholder = "パスワード"
+        passwordField.placeholder = "🔐 パスワード"
+        passwordField.isSecureTextEntry = true
         passwordField.delegate = self
         self.view.addSubview(passwordField)
         
