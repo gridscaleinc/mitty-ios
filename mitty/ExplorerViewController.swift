@@ -151,9 +151,13 @@ extension ExplorerViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let e = events[indexPath.row]
+        let image = UIImage(named: e.imageUrl)
+        let ratio = image == nil ? 1: (image?.size.height)!/(image?.size.width)!
+        
         let screenSize:CGSize = UIScreen.main.bounds.size
         let width = ( screenSize.width - (10 * 3) ) 
-        let cellSize: CGSize = CGSize( width: width, height:width * 1.2 )
+        let cellSize: CGSize = CGSize( width: width, height:width * ratio + 30 )
         return cellSize
     }
     

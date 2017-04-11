@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import Alamofire
 
-class SignupViewController: UIViewController {
+class SignupViewController: UIViewController, UITextFieldDelegate {
     
     var welcomeLabel = UILabel()
     var usernameField = UITextField()
@@ -31,11 +31,14 @@ class SignupViewController: UIViewController {
         usernameField.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         usernameField.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 - 20)
         usernameField.placeholder = "ユーザーID"
+        usernameField.delegate = self
         self.view.addSubview(usernameField)
 
         passwordField.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
         passwordField.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 + 20)
         passwordField.placeholder = "パスワード"
+        passwordField.delegate = self
+        
         self.view.addSubview(passwordField)
         
         signupButton.frame = CGRect(x: 0, y: 0, width: 140, height: 40)
@@ -83,5 +86,10 @@ class SignupViewController: UIViewController {
     func onClickLinkButton(_ sender: UIButton){
         let vc = SigninViewController()
         self.present(vc, animated:true, completion:nil)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 }

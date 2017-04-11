@@ -23,7 +23,6 @@
 		F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80231DAE58F300055D48 /* SocialViewController.swift */; };
 		F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* CenterViewController.swift */; };
 		F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */; };
-		F4C62EAD1E9CE6A50003C7FC /* LoadingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAC1E9CE6A50003C7FC /* LoadingProxy.swift */; };
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
 		FC002FFA1E3A450C001CB6EF /* ActivityPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
@@ -71,6 +70,7 @@
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
 		FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC70941E8A8F75003034B3 /* ActivityPlanDetailController.swift */; };
 		FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC70961E8A9011003034B3 /* ActivityPlanDetailForm.swift */; };
+		FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB696F1E9D0C2800A32C4F /* LoadingProxy.swift */; };
 		FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B11E6D7946006FBF20 /* Controls.swift */; };
 		FCEDA2BD1E6D7946006FBF20 /* CustomPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B21E6D7946006FBF20 /* CustomPoint.swift */; };
 		FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B31E6D7946006FBF20 /* EventDispatcher.swift */; };
@@ -187,7 +187,6 @@
 		F4BB80231DAE58F300055D48 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		F4BB80251DAE58FE00055D48 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
-		F4C62EAC1E9CE6A50003C7FC /* LoadingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingProxy.swift; sourceTree = "<group>"; };
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlan.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
@@ -235,6 +234,7 @@
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
 		FCDC70941E8A8F75003034B3 /* ActivityPlanDetailController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanDetailController.swift; sourceTree = "<group>"; };
 		FCDC70961E8A9011003034B3 /* ActivityPlanDetailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanDetailForm.swift; sourceTree = "<group>"; };
+		FCEB696F1E9D0C2800A32C4F /* LoadingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingProxy.swift; sourceTree = "<group>"; };
 		FCEDA2B11E6D7946006FBF20 /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
 		FCEDA2B21E6D7946006FBF20 /* CustomPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPoint.swift; sourceTree = "<group>"; };
 		FCEDA2B31E6D7946006FBF20 /* EventDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDispatcher.swift; sourceTree = "<group>"; };
@@ -720,11 +720,11 @@
 		FCF9575A1DC6142000A52125 /* util */ = {
 			isa = PBXGroup;
 			children = (
+				FCEB696F1E9D0C2800A32C4F /* LoadingProxy.swift */,
 				FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */,
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
 				FCF8D6441DD7F6960059B270 /* MittyStyles.swift */,
-				F4C62EAC1E9CE6A50003C7FC /* LoadingProxy.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1121,6 +1121,7 @@
 				FC276D9F1E8775360089140B /* DateCollectionViewCell.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
 				FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */,
+				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,
 				FCF265E51E3B4E29001F3F96 /* Invitation.swift in Sources */,
 				FCFEBF451E38F6EE00DC989B /* EatEntryController.swift in Sources */,
 				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,
