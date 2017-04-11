@@ -80,8 +80,10 @@ class GuideViewController: UIViewController {
     
     //Go to the mainbar 
     func startBtnDo() {
-        let mainTabBarController: MainTabBarController = MainTabBarController()
-        present(mainTabBarController, animated:true, completion:nil)
+        // let mainTabBarController: MainTabBarController = MainTabBarController()
+        // present(mainTabBarController, animated:true, completion:nil)
+         let signinViewController = SigninViewController()
+         present(signinViewController, animated:true, completion:nil)
     }
     
     //

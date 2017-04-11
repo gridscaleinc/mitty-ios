@@ -22,6 +22,9 @@
 		F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80211DAE58E000055D48 /* IslandViewController.swift */; };
 		F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80231DAE58F300055D48 /* SocialViewController.swift */; };
 		F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* CenterViewController.swift */; };
+		F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */; };
+		F4C62EAD1E9CE6A50003C7FC /* LoadingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAC1E9CE6A50003C7FC /* LoadingProxy.swift */; };
+		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
 		FC002FFA1E3A450C001CB6EF /* ActivityPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
 		FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */; };
@@ -183,6 +186,9 @@
 		F4BB80211DAE58E000055D48 /* IslandViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandViewController.swift; sourceTree = "<group>"; };
 		F4BB80231DAE58F300055D48 /* SocialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialViewController.swift; sourceTree = "<group>"; };
 		F4BB80251DAE58FE00055D48 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
+		F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
+		F4C62EAC1E9CE6A50003C7FC /* LoadingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingProxy.swift; sourceTree = "<group>"; };
+		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlan.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
 		FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkFetchService.swift; sourceTree = "<group>"; };
@@ -484,6 +490,8 @@
 			isa = PBXGroup;
 			children = (
 				F4BB801D1DAE577300055D48 /* MainTabBarController.swift */,
+				F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */,
+				F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -716,6 +724,7 @@
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
 				FCF8D6441DD7F6960059B270 /* MittyStyles.swift */,
+				F4C62EAC1E9CE6A50003C7FC /* LoadingProxy.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1079,6 +1088,7 @@
 				FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */,
 				FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
+				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */,
 				FC276DA01E8775360089140B /* DateTimePicker.swift in Sources */,
 				FCF265E31E3B4D7E001F3F96 /* Reservation.swift in Sources */,
@@ -1120,6 +1130,7 @@
 				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
+				F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */,
 				FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */,
 				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
 				FCEDA2BF1E6D7946006FBF20 /* Extensions.swift in Sources */,

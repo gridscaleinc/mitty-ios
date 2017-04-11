@@ -8,6 +8,7 @@ target 'mitty' do
   # Pods for mitty
   pod 'Alamofire', '4.0.0'
   pod 'PureLayout', '3.0.2'
+  pod 'SwiftyJSON', '3.1.1'
 
   target 'mittyTests' do
     inherit! :search_paths
