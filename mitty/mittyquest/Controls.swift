@@ -159,7 +159,7 @@ open class Control : NSObject, Node, Operatable {
         // Call by async
         let queue = OperationQueue()
         queue.addOperation() {
-            operation(self as! Operatable)
+            operation(self)
             // Async callback
             let callback = completion
             if callback != nil {

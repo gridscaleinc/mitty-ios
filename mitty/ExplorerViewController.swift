@@ -112,8 +112,6 @@ extension ExplorerViewController: UISearchBarDelegate
 }
 
 
-
-
 // MARK: - UITableViewDataSource
 extension ExplorerViewController: UICollectionViewDataSource {
    
@@ -141,7 +139,7 @@ extension ExplorerViewController: UICollectionViewDataSource {
     
     ///
     func cellTapped(handler: UITapGestureRecognizer) {
-        print (handler.view)
+        print (handler.view?.description ?? "")
         let eventViewController = EventDetailViewController(event: ((handler.view) as! EventCell).event!)
         self.navigationItem.title = "..."
         self.tabBarController?.tabBar.isHidden = true

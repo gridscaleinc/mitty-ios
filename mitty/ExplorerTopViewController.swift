@@ -45,7 +45,7 @@ class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
         img.image = UIImage(named: "timesquare")
         
         return img
-    }()
+    } ()
     
     // image
     let eventImage : UIImageView = {
