@@ -15,7 +15,7 @@ import PureLayout
 class EventDetailViewController : UIViewController {
     
     var event : Event
-    
+    var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     //
     // Purelayout流の画面パーツ作り方、必ずnewAutoLayoutを一度呼び出す。
     // 画面を構成するパーツだから、methoの中ではなく、インスタンス変数として持つ。
@@ -62,8 +62,10 @@ class EventDetailViewController : UIViewController {
         
         self.view.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)
         
-        label.text = "イベントの詳細を表示します。ID:" + event.eventId
-        imageView.image = UIImage(named: event.imageUrl)
+        label.text = "イベントの詳細を表示します。ID:\(event.id)"
+        
+        // TODO
+        imageView.image = UIImage(named: images[Int(event.id)])
         
         subscribeButton.addTarget(self, action: #selector(EventDetailViewController.pressSubscribe), for: .touchUpInside)
         
@@ -145,7 +147,7 @@ class EventDetailViewController : UIViewController {
         let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("OK," + self.event.eventId + " に参加します。")
+            print("OK,\(self.event.id)に参加します。")
             
             self.confirmCalendarRegister()
             
@@ -154,7 +156,7 @@ class EventDetailViewController : UIViewController {
         let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("Cancel" + self.event.eventId + " に参加しません。")
+            print("Cancel\(self.event.id)に参加しません。")
         })
         
         // ③ UIAlertControllerにActionを追加
@@ -178,19 +180,19 @@ class EventDetailViewController : UIViewController {
         let openAction: UIAlertAction = UIAlertAction(title: "実名でネットで公開します。", style: UIAlertActionStyle.destructive, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("実名公開," + self.event.eventId + " 。")
+            print("実名公開,\(self.event.id) 。")
         })
         // OKボタン
         let defaultAction: UIAlertAction = UIAlertAction(title: "プライベート予定なのでやめます。", style: UIAlertActionStyle.cancel, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("やめる," + self.event.eventId + " を公開にしません。")
+            print("やめる,\(self.event.id) を公開にしません。")
         })
         // キャンセルボタン
         let anonymousAction: UIAlertAction = UIAlertAction(title: "名前を出さないで公開します。", style: UIAlertActionStyle.default, handler:{
             // ボタンが押された時の処理を書く（クロージャ実装）
             (action: UIAlertAction!) -> Void in
-            print("匿名公開" + self.event.eventId + "。")
+            print("匿名公開\(self.event.id)。")
         })
         
         // ③ UIAlertControllerにActionを追加

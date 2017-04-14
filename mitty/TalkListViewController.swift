@@ -99,7 +99,7 @@ class TalkListViewController: UIViewController {
         
         view.backgroundColor = UIColor.white
         self.topLabel.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)        
-        self.navigationItem.title = "# " + talkingIsLand.islandName
+        self.navigationItem.title = "# " + (talkingIsLand.name ?? "")
         
         talkInputField.layer.borderWidth = 1
         let leftPadding = UIView(frame: CGRect(x:0, y:0, width:15, height:40))

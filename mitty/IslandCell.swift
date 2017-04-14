@@ -44,7 +44,7 @@ class IslandCell: UICollectionViewCell {
         
         name.numberOfLines = 2
         name.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        name.text = "#" + island.islandName
+        name.text = "#" + (island.name ?? "")
         
     }
 }

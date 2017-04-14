@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 // シングルトンサービスクラス。
@@ -15,6 +16,8 @@ class EventService {
         let instance = EventService()
         return instance
     }()
+    
+    var images = ["event1", "event6", "event4","event10","event5"]
     
     private init() {
         
@@ -38,22 +41,19 @@ class EventService {
     // イベントを生成する
     func buildEvent(_ n:Int) ->Event! {
         
-        let imagenames: [String] = ["event1","event2","event3","event4","event5","event6"]
-        
-        let a = Event()
-        
-        a.eventId = "id" + String(n)
+        let a = Event(Int8(n))
         a.title = "title" + String(n)
-        a.price  = 10 * n
-        a.imageUrl = imagenames[n-1]
-        a.startDate = "2016-09-09"
-        a.endDate = "2016-10-10"
-        a.startTime = "12:30"
-        a.endTime = "16:30"
+        a.priceInfo  = "\(10 * n)"
+
+        a.startDateTime = "2016-09-09"
+        a.endDateTime = "2016-10-10"
+        let gallery = Gallery(1,1)
+        let content = Content(1)
+//        content.data = UIImagePNGRepresentation(UIImage(named: images[n]))
+        gallery.content = content
+        a.gallery.append(gallery)
         
         a.likes = 10+n
-        
-        a.endTime = "12:34:56"
         
         return a;
     }

@@ -165,7 +165,7 @@ open class Row : Container {
             
             for c in children {
                 if (c === first) {
-                    c.leftMost(withInset: 10)
+                    c.leftMost(withInset: spacing + c.margin.left)
                 } else {
                      c.righter(than: previous!, withOffset: spacing + c.margin.left)
                 }
@@ -178,7 +178,7 @@ open class Row : Container {
             
             for c in Array<Control>(children.reversed()) {
                 if (c === last) {
-                    c.rightMost(withInset: 10)
+                    c.rightMost(withInset: spacing + c.margin.right)
                 } else {
                     c.lefter(than: previous!, withOffset: spacing + c.margin.right)
                 }

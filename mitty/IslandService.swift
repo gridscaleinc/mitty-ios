@@ -41,8 +41,8 @@ class IslandService {
         
         let a = Island()
         
-        a.islandId = "id" + String(n)
-        a.islandName = names[n]
+        a.id = n
+        a.name = names[n]
         return a;
     }
     

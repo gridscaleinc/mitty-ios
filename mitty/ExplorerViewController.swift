@@ -5,7 +5,7 @@ import PureLayout
 @objc(ExplorerViewController)
 class ExplorerViewController: UIViewController {
     
-    
+    var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     // MARK: - Properties
     var events: [Event]
     
@@ -40,6 +40,7 @@ class ExplorerViewController: UIViewController {
         view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()
         self.searchBar.resignFirstResponder()
+        self.searchBar.placeholder = "Fun for life!"
         
         self.navigationItem.title = "島探"
         
@@ -166,7 +167,8 @@ extension ExplorerViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let e = events[indexPath.row]
-        let image = UIImage(named: e.imageUrl)
+        // TODO
+        let image = UIImage(named: images[Int(e.id)])
         let ratio = image == nil ? 1: (image?.size.height)!/(image?.size.width)!
         
         let screenSize:CGSize = UIScreen.main.bounds.size

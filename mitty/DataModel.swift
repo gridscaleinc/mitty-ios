@@ -8,194 +8,124 @@
 
 import Foundation
 
-/// 活動
-class Activity {
-    
-}
-
 ///
 /// イベント情報
 class Event {
+    var    id : Int8 = 0
+    var    type : String? = nil
+    var    category : String? = nil
+    var    theme : String? = nil
+    var    title : String? = nil
+    var    description : String? = nil
+    var    tel : String? = nil
+    var    fax : String? = nil
+    var    mailaddress : String? = nil
+    var    webpage : String? = nil
+    var    startDateTime : String? = nil
+    var    endDateTime : String? = nil
+    var    alldayFlag : String? = nil
+    var    limitOfApplications : String? = nil
+    var    galleryId: Int? = nil
+    var    gallery : [Gallery] = []
+    var    startPlace : String? = nil
+    var    startAddress : String? = nil
+    var    terminatePlace : String? = nil
+    var    terminateAddress : String? = nil
+    var    viaPlace : String? = nil
+    var    viaAddress : String? = nil
+    var    islandId : Int? = nil
+    var    island : Island? = nil
+    var    meetingId : String? = nil
+    var    priceName1 : String? = nil
+    var    price1 : String? = nil
+    var    priceName2 : String? = nil
+    var    price2 : String? = nil
+    var    priceCurrence : String? = nil
+    var    priceInfo : String? = nil
+    var    logoId : Int8? = nil
+    var    logo : Content? = nil
+    var    publisherId : String? = nil
+    var    orgnizationId : String? = nil
+    var    sourceName : String? = nil
+    var    sourceUrl : String? = nil
+    var    anticipants : String? = nil
+    var    likes : Int? = 0
+    var    status : String? = nil
     
-    var eventId: String!
-    
-    var title: String = ""
-    var price: Int = 0
-    var imageUrl: String = ""
-    var place : String = ""
-    
-    
-    // YYYY-MM-DD
-    public var startDate: String = ""
-    public var startTime: String = ""
-    
-    // YYYY-MM-DD
-    public var endDate : String = ""
-    public var endTime : String = ""
-    
-    public var likes : Int = 10
+    init (_ id : Int8) {
+        self.id = id
+    }
     
 }
 
-
-/// 連絡先
-class SocialContactInfo {
-    public var mittyId = ""
-    public var imageUrl = ""
-    public var name = ""
-    
-    
-    
-}
-
-class LineId : SocialContactInfo {
-    
-}
-
-class WeChat : SocialContactInfo {
-    
-}
-
-class TwitterId : SocialContactInfo {
-    
-}
-
-class MailAddress : SocialContactInfo {
-    
-}
-
-/// 予定
-class SchedulePlan {
-    
-}
 
 /// 島（グループ）
 class Island {
-    public var islandId = ""
-    public var islandName = ""
-    public var type = "private"
-    
+    var     id : Int? = nil
+    var     nickname : String? = nil
+    var     name : String? = nil
+    var     logoId : String? = nil
+    var     description : String? = nil
+    var     category : String? = nil
+    var     mobilityType : String? = nil
+    var     realityType : String? = nil
+    var     ownershipType : String? = nil
+    var     ownerName : String? = nil
+    var     ownerId : String? = nil
+    var     creatorId : String? = nil
+    var     meetingId : String? = nil
+    var     galleryId : String? = nil
+    var     tel : String? = nil
+    var     fax : String? = nil
+    var     mailaddress : String? = nil
+    var     webpage : String? = nil
+    var     likes : String? = nil
+    var     countryCode : String? = nil
+    var     countryName : String? = nil
+    var     state : String? = nil
+    var     city : String? = nil
+    var     postcode : String? = nil
+    var     thoroghfare : String? = nil
+    var     subthroghfare : String? = nil
+    var     buildingName : String? = nil
+    var     floorNumber : String? = nil
+    var     roomNumber : String? = nil
+    var     address1 : String? = nil
+    var     address2 : String? = nil
+    var     address3 : String? = nil
+    var     latitude : String? = nil
+    var     longitude : String? = nil
 }
 
-// セッション
-class Session {
+class Gallery {
+    var id : Int8
+    var seq : Int
+    var caption : String? = nil
+    var briefInfo : String? = nil
+    var url : String? = nil
+    var contentId: Int8? = nil
+    var content : Content? = nil
+    var freeText : String? = nil
     
+    init(_ id: Int8, _ seq: Int) {
+        self.id = id
+        self.seq = seq
+    }
 }
 
-/// 面会
-class Meetup : Activity {
+class Content {
+    var id : Int8
+    var mime : String? = nil
+    var title : String? = nil
+    var linkUrl : String? = nil
+    var width : Int? = nil
+    var height : Int? = nil
+    var data : [UInt8] = []
+    var size : Int? = nil
     
-}
-
-/// 会議、集まり
-class Meeting : Activity {
-    
-}
-
-/// 展示会
-class Exhibition : Event {
-    
-}
-
-/// 飲み会
-class DrinkingParty : Event {
-    
-}
-
-/// 旅程
-class Journey : Activity {
-    
-}
-
-///移動
-class Moving : Activity {
-    
-}
-
-/// 交通機関
-class TransportationFacility {
-    
-}
-
-// 住民、生活者
-class Inhabitant {
-    
-}
-
-///個人情報
-class PersonalInfo {
-    
-    
-}
-
-/// 名刺
-class NameCard : PersonalInfo {
-    
-}
-
-/// パスポート
-class Passport : PersonalInfo {
-    
-}
-
-/// 運転免許証
-class DrivingLicense : PersonalInfo {
-    
-}
-
-/// 健康保険証
-class HealthInsuranceCertificate : PersonalInfo {
-    
-}
-
-/// 出現情報
-class Presence {
-    
-}
-
-/// ブース
-class Buss {
-    
-}
-
-/// 宣伝
-class Promotion {
-    
-}
-
-/// 業者
-class BusinessPartner {
-    
-}
-
-/// 宣伝者
-class Promoter : BusinessPartner {
-    
-}
-
-/// 会社
-class Company {
-    
-}
-
-/// 旅行代理店
-class TravelAgent : BusinessPartner {
-    
-}
-
-/// リソース
-class Resource {
-    
-}
-
-/// 便
-class Flight : Resource {
-    
-}
-
-/// 席情報
-class SeatInfo {
-    
+    init(_ id: Int8) {
+        self.id = id
+    }
 }
 
 /// 発言
@@ -208,22 +138,13 @@ class Talk {
     
 }
 
-/// 会話
-class Conversation {
+/// 連絡先
+class SocialContactInfo {
+    public var mittyId = ""
+    public var imageUrl = ""
+    public var name = ""
+    
+    
     
 }
 
-/// 島住民会議
-class IslandConversation : Conversation {
-    
-}
-
-/// 招待
-class Invitation {
-    
-}
-
-/// 紹介
-class Intruduce {
-    
-}

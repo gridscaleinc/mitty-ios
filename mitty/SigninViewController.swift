@@ -19,57 +19,207 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     var signupButton = UIButton()
     var linkButton = UIButton()
 
+    var loginForm = MQForm.newAutoLayout()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
         
-        welcomeLabel.frame = CGRect(x: 0, y: 0, width: 300, height: 50)
-        welcomeLabel.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 - 100)
-        welcomeLabel.text = "Mittyへようこそ / ユーザーログイン"
-        self.view.addSubview(welcomeLabel)
+        buildLoginForm()
+        self.view.addSubview(loginForm)
         
+        loginForm.autoPin(toTopLayoutGuideOf: self, withInset:0)
+        loginForm.autoPinEdge(toSuperviewEdge: .left)
+        loginForm.autoPinEdge(toSuperviewEdge: .right)
+        loginForm.autoPinEdge(toSuperviewEdge: .bottom)
         
-        usernameField.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
-        usernameField.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 - 20)
-        usernameField.placeholder = "👩 ユーザーID"
-        usernameField.delegate = self
-        self.view.addSubview(usernameField)
-        
-        passwordField.frame = CGRect(x: 0, y: 0, width: 200, height: 50)
-        passwordField.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2 + 20)
-        passwordField.placeholder = "🔐 パスワード"
-        passwordField.isSecureTextEntry = true
-        passwordField.delegate = self
-        self.view.addSubview(passwordField)
-        
-        signupButton.frame = CGRect(x: 0, y: 0, width: 140, height: 40)
-        signupButton.setTitle("Login", for: UIControlState.normal)
-        signupButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        signupButton.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2+100)
-        signupButton.addTarget(self, action: #selector(self.onClickSignupButton(_:)), for: .touchUpInside)
-        signupButton.layer.borderWidth = 1
-        signupButton.layer.cornerRadius = 10
-        self.view.addSubview(signupButton)
-        
-        linkButton.frame = CGRect(x: 0, y: 0, width: 140, height: 40)
-        linkButton.setTitle("SignUp", for: UIControlState.normal)
-        linkButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        linkButton.layer.position = CGPoint(x: self.view.frame.width/2, y:self.view.frame.height/2+150)
-        linkButton.addTarget(self, action: #selector(self.onClickLinkButton(_:)), for: .touchUpInside)
-        linkButton.layer.borderWidth = 1
-        linkButton.layer.cornerRadius = 10
-        self.view.addSubview(linkButton)
+        loginForm.configLayout()
 
         LoadingProxy.set(self)
         
     }
     
-    func onClickSignupButton(_ sender: UIButton){
+    func buildLoginForm () {
+        
+        let header = Header()
+        header.title = "Title"
+        loginForm += header
+        
+        header.layout() { (v) in
+            v.upper().height(30)
+        }
+        
+        let scroll = UIScrollView.newAutoLayout()
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:600)
+        scroll.isScrollEnabled = true
+        scroll.flashScrollIndicators()
+        scroll.canCancelContentTouches = false
+        
+        let loginContainer = Container(name: "Login-form", view: scroll)
+        
+        loginForm +++ loginContainer
+        
+        loginContainer.layout() { (container) in
+            container.putUnder(of: header).fillHolizon().down(withInset: 10)
+        }
+
+        let inputForm = Section(name: "Input-Form", view: UIView.newAutoLayout())
+        loginContainer +++ inputForm
+        
+        inputForm.layout() { c in
+            c.upper().width(UIScreen.main.bounds.size.width).height(600)
+        }
+        
+        var row = Row.LeftAligned()
+        
+        row +++ loginForm.img(name: "icon" , url:"pengin4").layout() { c in
+            c.height(50).width(50).leftMargin(30)
+        }
+        row +++ loginForm.label(name:"welcome-message", title: "Mittyへようこそ" ).layout() {
+            c in
+            let l = c.view as! UILabel
+            l.font = UIFont.boldSystemFont(ofSize: 22)
+            c.width(350).height(50).leftMargin(20)
+        }
+
+        row.layout() {
+            r in
+            r.height(70).fillHolizon(40)
+        }
+        inputForm <<< row
+        
+        
+        row = Row.LeftAligned()
+        row +++ loginForm.text(name: "userId" , placeHolder: "👩 ユーザーID"  , width: 200).layout() {
+            c in
+            c.height(50).leftMargin(30)
+        }
+        
+        row.layout() {
+            r in
+            r.height(70).fillHolizon()
+        }
+        inputForm <<< row
+        
+        row = Row.LeftAligned()
+        row +++ loginForm.text(name: "password" , placeHolder: "🔐 パスワード"  , width: 200).layout() {
+            c in
+            c.height(50).leftMargin(30)
+        }
+        
+        row.layout() {
+            r in
+            r.height(70).fillHolizon()
+        }
+        inputForm <<< row
+        
+        
+        row = Row.LeftAligned()
+        let loginButton = loginForm.button(name: "Login" , title: "Login").layout() {
+            c in
+            c.height(30).width(140).leftMargin(30)
+        }
+        row +++ loginButton
+        
+        row.layout() {
+            r in
+            r.height(50).fillHolizon()
+        }
+        
+        inputForm <<< row
+        
+        row = Row.LeftAligned()
+        let signUpButton = loginForm.button(name: "SignUp" , title: "SignUp").layout() {
+            c in
+            c.height(30).width(140).leftMargin(30)
+        }
+        
+        row +++ signUpButton
+        row.layout() {
+            r in
+            r.height(50).fillHolizon()
+        }
+        
+        inputForm <<< row
+        
+        row = Row.LeftAligned()
+        row +++ loginForm.label(name:"errormessage", title: "ユーザーIDまたはパスワードが正しくない。" ).layout() {
+            c in
+            let l = c.view as! UILabel
+            l.font = UIFont.systemFont(ofSize: 12)
+            l.textColor = UIColor.red
+            
+            c.width(350).height(50).leftMargin(35)
+        }
+        row.layout() {
+            r in
+            r.height(50).fillHolizon(40)
+        }
+        
+        inputForm <<< row
+        
+        row = Row.LeftAligned()
+        row +++ loginForm.label(name:"forget-password", title: ".Passwordを忘れば場合" ).layout() {
+            c in
+            let l = c.view as! UILabel
+            l.font = UIFont.systemFont(ofSize: 15)
+            l.textColor = UIColor.blue
+            
+            c.width(350).height(50).leftMargin(35)
+        }
+        row.layout() {
+            r in
+            r.height(80).fillHolizon(40)
+        }
+        
+        inputForm <<< row
+        
+        
+        row = Row.RightAligned()
+        
+        let instantUse = loginForm.label(name:"using-withoudid", title: "ログインなしで利用へ" ).layout() {
+            c in
+            let l = c.view as! UILabel
+            l.font = UIFont.systemFont(ofSize: 15)
+            l.textColor = UIColor.brown
+            l.textAlignment = .right
+            
+            c.width(350).height(50).rightMargin(-35)
+        }
+
+        row +++ instantUse
+        row.layout() {
+            r in
+            r.height(100).fillHolizon(40)
+        }
+        
+        inputForm <<< row
+        
+        loginButton.event(.touchUpInside) { [weak self] b in
+            self!.onClickSigninButton(b as! UIButton)
+        }
+        
+        signUpButton.event(.touchUpInside) {[weak self]  b in
+            self!.onClickLinkButton(b as! UIButton)
+        }
+        
+        instantUse.event(.touchUpInside) { v in
+            let mainTabBarController: MainTabBarController = MainTabBarController()
+            self.present(mainTabBarController, animated:true, completion:nil)
+        }
+    }
+    
+    func onClickSigninButton(_ sender: UIButton){
         let urlString = "http://dev.mitty.co/api/signin"
+        
+        let usernameField = loginForm.quest("[name=userId]").control()?.view as! UITextField
+        let passwordField = loginForm.quest("[name=password]").control()?.view as! UITextField
+        
         let parameters: Parameters = [
             "user_name": usernameField.text!,
             "password": passwordField.text!
         ]
+        
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:

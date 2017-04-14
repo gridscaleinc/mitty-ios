@@ -6,7 +6,8 @@ class EventCell: UICollectionViewCell {
     
     // MARK: - View Elements
     var event : Event?
-    
+    var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
+
     let itemImageView: UIImageView
     let titleLabel: UILabel
     let priceLabel: UILabel
@@ -77,21 +78,41 @@ class EventCell: UICollectionViewCell {
         
         self.event = event
         
-        itemImageView.image = UIImage(named: event.imageUrl)
-
+        
+        // タイトルを表示
+        
+        // logoがある場合ロゴを表示
+        
+        // imageがある場合、イメージを表示
+        
+        // 日付情報を設定
+        
+        // 価格情報を設定
+        
+        
+        // 説明があれば、説明をつける。
+        
+        // like数
+        
+        // 登録者
+        
+        // TODO
+//        itemImageView.image = UIImage(data: Data(bytes: (event.gallery[0].content?.data)!))
+        itemImageView.image = UIImage(named: images[Int(event.id)])
+        
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         titleLabel.text = event.title
 
         priceLabel.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-        priceLabel.text = LS(key: "now") + String(event.price) + LS(key: "yen")
+        priceLabel.text = LS(key: "now") + String(describing: event.price1) + LS(key: "yen")
 
         endTimeLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
-        endTimeLabel.text = "🕒" + event.startDate + " " + event.startTime + " - " + event.endDate + " " + event.endTime
+        endTimeLabel.text = "🕒" + event.startDateTime! + " - " + event.endDateTime!
         
 
         likesLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
-        likesLabel.text = "🔨" + String(event.likes)
+        likesLabel.text = "🔨" + String(describing: event.likes)
         
         
     }
