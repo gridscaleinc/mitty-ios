@@ -13,12 +13,6 @@ import SwiftyJSON
 
 class SigninViewController: UIViewController, UITextFieldDelegate {
     
-    var welcomeLabel = UILabel()
-    var usernameField = StyledTextField()
-    var passwordField = StyledTextField()
-    var signupButton = UIButton()
-    var linkButton = UIButton()
-
     var loginForm = MQForm.newAutoLayout()
     
     override func viewDidLoad() {
@@ -129,20 +123,6 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        let signUpButton = loginForm.button(name: "SignUp" , title: "SignUp").layout() {
-            c in
-            c.height(30).width(140).leftMargin(30)
-        }
-        
-        row +++ signUpButton
-        row.layout() {
-            r in
-            r.height(50).fillHolizon()
-        }
-        
-        inputForm <<< row
-        
-        row = Row.LeftAligned()
         row +++ loginForm.label(name:"errormessage", title: "ユーザーIDまたはパスワードが正しくない。" ).layout() {
             c in
             let l = c.view as! UILabel
@@ -169,11 +149,28 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         }
         row.layout() {
             r in
-            r.height(80).fillHolizon(40)
+            r.height(50).fillHolizon(40)
         }
         
         inputForm <<< row
         
+        row = Row.LeftAligned()
+        let signUpLabel = loginForm.label(name:"forget-password", title: ".初めて利用の方へ" ).layout() {
+            c in
+            let l = c.view as! UILabel
+            l.font = UIFont.systemFont(ofSize: 15)
+            l.textColor = UIColor.blue
+            
+            c.width(350).height(40).leftMargin(35)
+        }
+        row +++ signUpLabel
+        row.layout() {
+            r in
+            r.height(40).fillHolizon(40)
+        }
+        
+        inputForm <<< row
+
         
         row = Row.RightAligned()
         
@@ -199,9 +196,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             self!.onClickSigninButton(b as! UIButton)
         }
         
-        signUpButton.event(.touchUpInside) {[weak self]  b in
-            self!.onClickLinkButton(b as! UIButton)
+        signUpLabel.event(.touchUpInside) {[weak self] v in
+            self!.onClickLinkButton(v as! UILabel)
         }
+
         
         instantUse.event(.touchUpInside) { v in
             let mainTabBarController: MainTabBarController = MainTabBarController()
@@ -244,7 +242,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func onClickLinkButton(_ sender: UIButton){
+    func onClickLinkButton(_ sender: UILabel){
         let vc = SignupViewController()
         self.present(vc, animated:true, completion:nil)
     }
