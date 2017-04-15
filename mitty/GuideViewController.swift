@@ -13,13 +13,12 @@ import PureLayout
 @objc (GuideViewController)
 class GuideViewController: UIViewController {
     
-    var mittyImage = UIImageView.newAutoLayout()
-    var firLabel = UILabel.newAutoLayout()
-    var baselabel = UILabel.newAutoLayout()
+    var mittyLogo = UIImageView.newAutoLayout()
+    var slogan = UILabel.newAutoLayout()
     var scrollView: UIScrollView!
     var imageView = UIImageView()
-    var secLabel = UILabel.newAutoLayout()
-    var thirLabel = UILabel.newAutoLayout()
+    var usageLabel = UILabel.newAutoLayout()
+    var message = UILabel.newAutoLayout()
     var startButton = UIButton.newAutoLayout()
     var pageContol = UIPageControl.newAutoLayout()
 
@@ -33,10 +32,14 @@ class GuideViewController: UIViewController {
         
         self.view.backgroundColor = UIColor.white
         
-        mittyImage = UIImageView(image: UIImage(named: "Guide1"))
+        mittyLogo = UIImageView(image: UIImage(named: "applogo"))
+        mittyLogo.alpha = 0.7
         
-        firLabel.text = "Mitty - May I talk to you ?"
-        firLabel.textColor = .red
+        slogan.text = "Mitty-May I talk to you?"
+        slogan.textColor = .white
+        slogan.font=UIFont.boldSystemFont(ofSize: 25)
+        slogan.layer.shadowColor = UIColor.black.cgColor
+        
         
         scrollView = UIScrollView(frame: self.view.bounds)
         scrollView.isPagingEnabled = true
@@ -48,18 +51,27 @@ class GuideViewController: UIViewController {
         scrollView.contentSize = CGSize(width: self.view.bounds.size.width * 3, height: self.view.bounds.size.height)
         for index  in 0..<numOfPages {
             imageView = UIImageView(image: UIImage(named: "Guide\(index + 1)"))
-            imageView.frame = CGRect(x: self.view.bounds.size.width * CGFloat(index), y: self.view.bounds.size.height * 0.2, width: self.view.bounds.size.width, height: self.view.bounds.size.height * 0.5)
+            imageView.frame = CGRect(x: self.view.bounds.size.width * CGFloat(index), y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height )
             scrollView.addSubview(imageView)
         }
         
-        secLabel.text = "活動情報をシェアしよう！"
-        secLabel.textColor = .red
-        thirLabel.text = "Mittyはプライバシーを守ります。"
-        startButton.setTitle("使用開始", for: UIControlState.normal)
-        startButton.setTitleColor(.blue, for: UIControlState.normal)
+        usageLabel.text = "生活の知恵をシェアしましょう"
+        usageLabel.textColor = .white
+        usageLabel.font=UIFont.systemFont(ofSize: 20)
+        usageLabel.layer.shadowColor = UIColor.black.cgColor
+        
+        startButton.setTitle("開始", for: UIControlState.normal)
+        startButton.backgroundColor = .orange
+        startButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
+        startButton.setTitleColor(.white, for: UIControlState.normal)
+        startButton.layer.cornerRadius = 5
+        
+        message.text = "Mitty.co, Produced by Gridscale Inc."
+        message.textColor = .lightGray
+        message.layer.shadowColor = UIColor.black.cgColor
+        
         startButton.addTarget(self, action: #selector(self.startBtnDo), for: .touchUpInside)
-        baselabel.text = "----------------------------------------"
-        baselabel.textColor = .blue
+
 
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         self.view.setNeedsUpdateConstraints()
@@ -69,11 +81,10 @@ class GuideViewController: UIViewController {
         super.viewDidLoad()
         
         self.view.addSubview(scrollView)
-        self.view.addSubview(mittyImage)
-        self.view.addSubview(firLabel)
-        self.view.addSubview(baselabel)
-        self.view.addSubview(secLabel)
-        self.view.addSubview(thirLabel)
+        self.view.addSubview(mittyLogo)
+        self.view.addSubview(slogan)
+        self.view.addSubview(usageLabel)
+        self.view.addSubview(message)
         self.view.addSubview(startButton)
         self.view.addSubview(pageContol)
     }
@@ -92,35 +103,34 @@ class GuideViewController: UIViewController {
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
             
-            mittyImage.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 30)
-            mittyImage.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 30)
-            mittyImage.autoSetDimension(.width, toSize:self.view.bounds.size.width * 0.3)
-            mittyImage.autoSetDimension(.height, toSize:self.view.bounds.size.height * 0.1)
+            mittyLogo.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
+            mittyLogo.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 40)
+            mittyLogo.autoSetDimension(.width, toSize:80)
+            mittyLogo.autoSetDimension(.height, toSize:80)
             
-            firLabel.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
-            firLabel.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 65)
-            firLabel.autoSetDimension(.width, toSize: 200)
-            firLabel.autoSetDimension(.height, toSize: 30)
+            slogan.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
+            slogan.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
+            slogan.autoPinEdge(.top, to: .bottom, of: mittyLogo, withOffset: 5)
+            
+            slogan.autoSetDimension(.width, toSize: 200)
+            slogan.autoSetDimension(.height, toSize: 30)
 
-            baselabel.autoPinEdge(.top, to: .bottom, of: mittyImage, withOffset: 10)
-            baselabel.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
-            baselabel.autoSetDimension(.width, toSize: 320)
-            baselabel.autoSetDimension(.height, toSize: 30)
+            usageLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
+            usageLabel.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
+            usageLabel.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 120)
+            usageLabel.autoSetDimension(.height, toSize:30)
 
-            secLabel.autoPinEdge(.top, to: .bottom, of: baselabel, withOffset: self.view.bounds.size.height * 0.5)
-            secLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 10)
-            secLabel.autoSetDimension(.width, toSize:250)
-            secLabel.autoSetDimension(.height, toSize:30)
             
-            thirLabel.autoPinEdge(.top, to: .bottom, of: secLabel, withOffset: 20)
-            thirLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
-            thirLabel.autoSetDimension(.width, toSize:300)
-            thirLabel.autoSetDimension(.height, toSize:30)
-            
-            startButton.autoPinEdge(.top, to: .bottom, of: thirLabel, withOffset: 20)
+            startButton.autoPinEdge(.top, to: .bottom, of: usageLabel, withOffset: 20)
             startButton.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
-            startButton.autoSetDimension(.width, toSize:80)
-            startButton.autoSetDimension(.height, toSize:30)
+            startButton.autoSetDimension(.width, toSize:90)
+            startButton.autoSetDimension(.height, toSize:40)
+            
+            message.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 10)
+            message.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
+            message.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
+            message.autoSetDimension(.height, toSize:30)
+
             
             pageContol.autoPinEdge(.top, to: .bottom, of: startButton, withOffset: 10)
             pageContol.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)

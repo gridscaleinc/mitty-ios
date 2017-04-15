@@ -100,11 +100,11 @@ class ActivityPlanViewController : UIViewController {
         //キーボードの大きさを取得
         let keyboardRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         
-        let kbdLimit = keyboardRect.size.height
+        let keyboardHeight = keyboardRect.size.height
         
         let scroll = form.quest("[name=Input-Container]").control()
         scrollConstraints?.autoRemove()
-        scrollConstraints = scroll?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: kbdLimit)
+        scrollConstraints = scroll?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: keyboardHeight)
         self.view.setNeedsUpdateConstraints()
 
     }

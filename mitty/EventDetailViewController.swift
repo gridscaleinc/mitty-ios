@@ -84,8 +84,7 @@ class EventDetailViewController : UIViewController {
         
         if (!didSetupConstraints) {
 
-
-            imageView.autoPinEdge(toSuperviewEdge: .top, withInset: 10)
+            imageView.autoPin(toTopLayoutGuideOf: self, withInset: 10)
             imageView.autoPinEdge(toSuperviewEdge: .leading, withInset: 10)
             imageView.autoPinEdge(toSuperviewEdge: .trailing, withInset: 10)
             
