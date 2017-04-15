@@ -18,8 +18,10 @@ class GuideViewController: UIViewController {
     var scrollView: UIScrollView!
     var imageView = UIImageView()
     var usageLabel = UILabel.newAutoLayout()
-    var message = UILabel.newAutoLayout()
     var startButton = UIButton.newAutoLayout()
+    
+    var messageBoard = UIView.newAutoLayout()
+    var message = UILabel.newAutoLayout()
     var pageContol = UIPageControl.newAutoLayout()
 
     let numOfPages = 3
@@ -61,13 +63,16 @@ class GuideViewController: UIViewController {
         usageLabel.layer.shadowColor = UIColor.black.cgColor
         
         startButton.setTitle("開始", for: UIControlState.normal)
-        startButton.backgroundColor = .orange
+        startButton.backgroundColor = .red
         startButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         startButton.setTitleColor(.white, for: UIControlState.normal)
         startButton.layer.cornerRadius = 5
         
+        messageBoard.backgroundColor = UIColor.black
+        messageBoard.alpha = 0.8
+        
         message.text = "Mitty.co, Produced by Gridscale Inc."
-        message.textColor = .lightGray
+        message.textColor = .white
         message.layer.shadowColor = UIColor.black.cgColor
         
         startButton.addTarget(self, action: #selector(self.startBtnDo), for: .touchUpInside)
@@ -84,7 +89,8 @@ class GuideViewController: UIViewController {
         self.view.addSubview(mittyLogo)
         self.view.addSubview(slogan)
         self.view.addSubview(usageLabel)
-        self.view.addSubview(message)
+        messageBoard.addSubview(message)
+        self.view.addSubview(messageBoard)
         self.view.addSubview(startButton)
         self.view.addSubview(pageContol)
     }
@@ -126,12 +132,13 @@ class GuideViewController: UIViewController {
             startButton.autoSetDimension(.width, toSize:90)
             startButton.autoSetDimension(.height, toSize:40)
             
-            message.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 10)
-            message.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
-            message.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
-            message.autoSetDimension(.height, toSize:30)
-
             
+            messageBoard.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 0)
+            messageBoard.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 0)
+            messageBoard.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 0)
+            messageBoard.autoSetDimension(.height, toSize:30)
+            message.autoPinEdgesToSuperviewEdges(with: UIEdgeInsetsMake(2, 10, 2, 10))
+
             pageContol.autoPinEdge(.top, to: .bottom, of: startButton, withOffset: 10)
             pageContol.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
             pageContol.autoSetDimension(.width, toSize: 80)
