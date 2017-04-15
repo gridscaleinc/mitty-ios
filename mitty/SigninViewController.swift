@@ -98,6 +98,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         row = Row.LeftAligned()
         row +++ loginForm.text(name: "password" , placeHolder: "🔐 パスワード"  , width: 200).layout() {
             c in
+            (c.view as! UITextField).isSecureTextEntry = true
             c.height(50).leftMargin(30)
         }
         
@@ -123,7 +124,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ loginForm.label(name:"errormessage", title: "ユーザーIDまたはパスワードが正しくない。" ).layout() {
+        let errorMessage = loginForm.label(name:"errormessage", title: "" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 12)
@@ -131,6 +132,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             
             c.width(350).height(50).leftMargin(35)
         }
+        
+        row +++ errorMessage
         row.layout() {
             r in
             r.height(50).fillHolizon(40)
@@ -139,7 +142,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ loginForm.label(name:"forget-password", title: ".Passwordを忘れば場合" ).layout() {
+        row +++ loginForm.label(name:"forget-password", title: ".Passwordを忘れた場合" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 15)
@@ -235,8 +238,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
                 }
             case .failure(let error):
                 LoadingProxy.off()
-                let av = UIAlertView(title: "Error", message:error.localizedDescription, delegate: nil, cancelButtonTitle: "Cancel", otherButtonTitles: "OK")
-                av.show()
+                let errorMessage = self.loginForm.quest("[name=errormessage]").control()?.view as! UILabel
+                errorMessage.text = "ユーザーIDまたはパスワードが正しくない。"
                 print(error)
             }
         }

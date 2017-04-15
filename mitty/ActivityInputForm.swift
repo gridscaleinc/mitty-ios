@@ -26,7 +26,7 @@ class ActivityInputForm : MQForm {
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:600)
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:810)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -43,17 +43,17 @@ class ActivityInputForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(600)
+            c.upper().width(UIScreen.main.bounds.size.width).height(810)
         }
         
         var row = Row.LeftAligned()
         
         row +++ text(name: "title" , placeHolder: "タイトル"  , width: 250).height(35)
-        row +++ img(name: "icon" , url:"timesquare").height(35).width(35)
+        row +++ img(name: "icon" , url:"noicon").height(45).width(45)
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(45).fillHolizon()
         }
         inputForm <<< row
         
@@ -88,16 +88,28 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
 
+        row = Row.LeftAligned()
+        row +++ img(name: "picture", url: "nolargeimg").layout() {
+            c in
+            c.fillHolizon().height(200)
+        }
+        
+        row.layout() {
+            r in
+            r.height(210).fillHolizon()
+        }
+        inputForm <<< row
+
         
         row = Row.LeftAligned()
         row +++ label(name: "label-Location", title: "場所")
-        row +++ text(name: "location" , placeHolder: "場所名を入力"  , width: 220).height(35)
-        row +++ img(name: "icon" , url:"timesquare").height(35).width(35)
+        row +++ text(name: "location" , placeHolder: "場所名を入力"  , width: 210).height(35)
+        row +++ img(name: "icon" , url:"noicon").height(45).width(45)
         
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(45).fillHolizon()
         }
         inputForm <<< row
         

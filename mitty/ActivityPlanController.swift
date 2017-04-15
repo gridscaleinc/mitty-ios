@@ -80,6 +80,42 @@ class ActivityPlanViewController : UIViewController {
             let textField = c.view as! UITextField
             textField.keyboardType = .URL
         }
+        
+        manageKeyboard()
+    }
+    
+    func manageKeyboard() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    var scrollConstraints : NSLayoutConstraint?
+    
+    @objc
+    func onKeyboardShow(_ notification: NSNotification) {
+        //郵便入れみたいなもの
+        let userInfo = notification.userInfo!
+        //キーボードの大きさを取得
+        let keyboardRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let kbdLimit = keyboardRect.size.height
+        
+        let scroll = form.quest("[name=Input-Container]").control()
+        scrollConstraints?.autoRemove()
+        scrollConstraints = scroll?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: kbdLimit)
+        self.view.setNeedsUpdateConstraints()
+
+    }
+    
+    
+    @objc
+    func onKeyboardHide(_ notification: NSNotification) {
+        scrollConstraints?.autoRemove()
+        scrollConstraints = nil
+        
+        self.view.setNeedsUpdateConstraints()
     }
     
     func pickDate (_ v: UIView) {
