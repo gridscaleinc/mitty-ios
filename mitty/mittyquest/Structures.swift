@@ -34,10 +34,14 @@ import UIKit
 open class Container : Control, Selectable {
     
 
-    subscript (named: String) -> OperationSet {
-        return select() { (c: Control) in
+    subscript (named: String) -> Control? {
+        let set = select() { (c: Control) in
             return c.name == named
         }
+        if set.controls.isEmpty {
+            return nil
+        }
+        return set.controls.first
     }
     
     func select(_ selector: String) -> OperationSet {

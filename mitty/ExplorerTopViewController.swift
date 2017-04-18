@@ -14,7 +14,7 @@ import PureLayout
 class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
     
     var id = 1
-    let explorerViewController = ExplorerViewController()
+    let explorerViewController = EventViewController()
     
     // Search Box
     let searchBox : UISearchBar = {

@@ -2,8 +2,8 @@ import UIKit
 import PureLayout
 
 
-@objc(ExplorerViewController)
-class ExplorerViewController: UIViewController {
+@objc(EventViewController)
+class EventViewController: UIViewController {
     
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     // MARK: - Properties
@@ -54,6 +54,11 @@ class ExplorerViewController: UIViewController {
         configureSubviews()
     }
     
+
+    override func viewDidAppear(_ animated: Bool) {
+        searchBarSearchButtonClicked(searchBar)
+    }
+    
     // MARK: - View Setup
     private func configureNavigationBar() {
         self.navigationItem.titleView = searchBar
@@ -80,18 +85,11 @@ class ExplorerViewController: UIViewController {
         collectionView.autoPinEdge(toSuperviewEdge: .right)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom)
     }
-    
-    /// 子画面からモドたら、tabバーを戻す。
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationItem.title = "ホーム"
-    }
-    
 }
 
 
 // MARK: - UISearchBarDelegate
-extension ExplorerViewController: UISearchBarDelegate
+extension EventViewController: UISearchBarDelegate
 {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
@@ -122,13 +120,13 @@ extension ExplorerViewController: UISearchBarDelegate
     }
     
     func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
 
 // MARK: - UITableViewDataSource
-extension ExplorerViewController: UICollectionViewDataSource {
+extension EventViewController: UICollectionViewDataSource {
    
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -144,7 +142,7 @@ extension ExplorerViewController: UICollectionViewDataSource {
         {
             cell.configureView(event: events[indexPath.row])
             cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
-            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(ExplorerViewController.cellTapped(handler:)))
+            let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(EventViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
 
             return cell
@@ -162,7 +160,7 @@ extension ExplorerViewController: UICollectionViewDataSource {
     }
 }
 
-extension ExplorerViewController: UICollectionViewDelegateFlowLayout {
+extension EventViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         

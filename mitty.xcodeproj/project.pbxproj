@@ -51,6 +51,8 @@
 		FC276D9F1E8775360089140B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D9D1E8775360089140B /* DateCollectionViewCell.swift */; };
 		FC276DA01E8775360089140B /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D9E1E8775360089140B /* DateTimePicker.swift */; };
 		FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2862AA1DCEAFA6000854D9 /* EventService.swift */; };
+		FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30EB501EA32B7A00829E52 /* QuestViewController.swift */; };
+		FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30EB521EA575A700829E52 /* RequestViewController.swift */; };
 		FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31D7C91E80103F00F79E07 /* TapableLabel.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
@@ -218,6 +220,8 @@
 		FC276D9D1E8775360089140B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
 		FC276D9E1E8775360089140B /* DateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
 		FC2862AA1DCEAFA6000854D9 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
+		FC30EB501EA32B7A00829E52 /* QuestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
+		FC30EB521EA575A700829E52 /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
 		FC31D7C91E80103F00F79E07 /* TapableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapableLabel.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
@@ -711,6 +715,8 @@
 				FC427B811DCACB43009F43AE /* ExplorerViewController.swift */,
 				FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */,
 				FC16A5351E549A8A00C49F5F /* ExplorerTopViewController.swift */,
+				FC30EB501EA32B7A00829E52 /* QuestViewController.swift */,
+				FC30EB521EA575A700829E52 /* RequestViewController.swift */,
 			);
 			name = explore;
 			sourceTree = "<group>";
@@ -1070,6 +1076,7 @@
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */,
 				FCFEBF3B1E38F52D00DC989B /* ProposalController.swift in Sources */,
+				FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */,
 				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
 				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
 				FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */,
@@ -1119,6 +1126,7 @@
 				FC002FFA1E3A450C001CB6EF /* ActivityPlan.swift in Sources */,
 				FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */,
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,
+				FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */,
 				FCF265E91E3B4F07001F3F96 /* Event.swift in Sources */,
 				FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
