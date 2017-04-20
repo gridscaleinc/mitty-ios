@@ -53,7 +53,7 @@ class EventService {
         gallery.content = content
         a.gallery.append(gallery)
         
-        a.likes = 10+n
+        a.likes = 10 + n
         
         return a;
     }

@@ -196,7 +196,10 @@ extension Control {
     
     @discardableResult
     open func fillParent() -> Self {
-        self.view.autoPinEdgesToSuperviewEdges()
+        self.view.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
+        self.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
+        self.view.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
+        self.view.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
         return self
     }
 

@@ -13,10 +13,10 @@ import Foundation
 class Event {
     var    id : Int8 = 0
     var    type : String? = nil
-    var    category : String? = nil
-    var    theme : String? = nil
+    var    iconId: Int? = nil
+    var    tag : String = ""
     var    title : String? = nil
-    var    description : String? = nil
+    var    action : String? = nil
     var    tel : String? = nil
     var    fax : String? = nil
     var    mailaddress : String? = nil
@@ -27,12 +27,6 @@ class Event {
     var    limitOfApplications : String? = nil
     var    galleryId: Int? = nil
     var    gallery : [Gallery] = []
-    var    startPlace : String? = nil
-    var    startAddress : String? = nil
-    var    terminatePlace : String? = nil
-    var    terminateAddress : String? = nil
-    var    viaPlace : String? = nil
-    var    viaAddress : String? = nil
     var    islandId : Int? = nil
     var    island : Island? = nil
     var    meetingId : String? = nil
@@ -42,8 +36,6 @@ class Event {
     var    price2 : String? = nil
     var    priceCurrence : String? = nil
     var    priceInfo : String? = nil
-    var    logoId : Int8? = nil
-    var    logo : Content? = nil
     var    publisherId : String? = nil
     var    orgnizationId : String? = nil
     var    sourceName : String? = nil
@@ -51,6 +43,8 @@ class Event {
     var    anticipants : String? = nil
     var    likes : Int? = 0
     var    status : String? = nil
+    var    lastUpdated : String? = nil
+    var    amenderId : Int? = nil
     
     init (_ id : Int8) {
         self.id = id

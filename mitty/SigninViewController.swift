@@ -38,6 +38,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         let header = Header()
         header.title = "Title"
         loginForm += header
+        loginForm.layer.borderWidth = 1
+        loginForm.layer.borderColor = UIColor.red.cgColor
         
         header.layout() { (v) in
             v.upper().height(30)

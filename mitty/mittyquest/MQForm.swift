@@ -67,12 +67,28 @@ open class MQForm : UIView {
     }
     
     ///
-    func text(name: String, placeHolder: String, width: CGFloat) -> Control {
+    func text(name: String, placeHolder: String, width: CGFloat?) -> Control {
         let t = StyledTextField.newAutoLayout()
         t.hilightedLineColor = UIColor.blue.cgColor
         t.placeholder = placeHolder
         t.backgroundColor = .white
-        return Control(name: name, view: t).width(width)
+        let c = Control(name: name, view: t)
+        if width != nil {
+            c.width(width!)
+        }
+        
+        return c
+    }
+    
+    func textView(name: String, width: CGFloat?) -> Control {
+        let t = StyledTextView.newAutoLayout()
+        t.hilightedLineColor = UIColor.blue.cgColor
+        t.backgroundColor = .white
+        let c = Control(name: name, view: t)
+        if width != nil {
+            c.width(width!)
+        }
+        return c
     }
     
     func button(name: String, title: String ) -> Control {
@@ -102,7 +118,6 @@ open class MQForm : UIView {
         stepper.value = 2019
         return Control(name: name , view:stepper)
     }
- 
     
     //
     func quest(_ selector: String) -> MittyQuest {

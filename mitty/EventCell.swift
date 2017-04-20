@@ -112,8 +112,7 @@ class EventCell: UICollectionViewCell {
         
 
         likesLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
-        likesLabel.text = "🔨" + String(describing: event.likes)
-        
+        likesLabel.text = "🔨"         
         
     }
 }

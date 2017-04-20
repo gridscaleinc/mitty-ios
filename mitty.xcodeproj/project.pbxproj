@@ -62,7 +62,6 @@
 		FC427B911DCAFDE1009F43AE /* event4.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8B1DCAFDE1009F43AE /* event4.png */; };
 		FC427B921DCAFDE1009F43AE /* event5.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8C1DCAFDE1009F43AE /* event5.png */; };
 		FC427B931DCAFDE1009F43AE /* event6.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8D1DCAFDE1009F43AE /* event6.png */; };
-		FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */; };
 		FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC448D3C1DD5EA730032F0D4 /* RightButton.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
 		FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */; };
@@ -100,6 +99,7 @@
 		FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0CD1E73DCDF00536D32 /* Selection.swift */; };
 		FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D11E777C3600536D32 /* MQForm.swift */; };
 		FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */; };
+		FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */; };
 		FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */; };
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
@@ -231,7 +231,6 @@
 		FC427B8B1DCAFDE1009F43AE /* event4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event4.png; path = images/event4.png; sourceTree = "<group>"; };
 		FC427B8C1DCAFDE1009F43AE /* event5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event5.png; path = images/event5.png; sourceTree = "<group>"; };
 		FC427B8D1DCAFDE1009F43AE /* event6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event6.png; path = images/event6.png; sourceTree = "<group>"; };
-		FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		FC448D3C1DD5EA730032F0D4 /* RightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightButton.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
 		FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionController.swift; sourceTree = "<group>"; };
@@ -269,6 +268,7 @@
 		FCF2A0CD1E73DCDF00536D32 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		FCF2A0D11E777C3600536D32 /* MQForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQForm.swift; sourceTree = "<group>"; };
 		FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityListForm.swift; sourceTree = "<group>"; };
+		FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailViewController.swift; sourceTree = "<group>"; };
 		FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionForm.swift; sourceTree = "<group>"; };
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
@@ -713,10 +713,10 @@
 			isa = PBXGroup;
 			children = (
 				FC427B811DCACB43009F43AE /* ExplorerViewController.swift */,
-				FC427B941DCB5BA9009F43AE /* EventDetailViewController.swift */,
 				FC16A5351E549A8A00C49F5F /* ExplorerTopViewController.swift */,
 				FC30EB501EA32B7A00829E52 /* QuestViewController.swift */,
 				FC30EB521EA575A700829E52 /* RequestViewController.swift */,
+				FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */,
 			);
 			name = explore;
 			sourceTree = "<group>";
@@ -1074,6 +1074,7 @@
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
+				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,
 				FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */,
 				FCFEBF3B1E38F52D00DC989B /* ProposalController.swift in Sources */,
 				FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */,
@@ -1120,7 +1121,6 @@
 				FCF265E11E3B4D68001F3F96 /* CampaignProtocol.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
-				FC427B951DCB5BA9009F43AE /* EventDetailViewController.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FC276D9C1E8775280089140B /* StepCollectionViewFlowLayout.swift in Sources */,
 				FC002FFA1E3A450C001CB6EF /* ActivityPlan.swift in Sources */,
