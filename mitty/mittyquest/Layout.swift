@@ -193,6 +193,19 @@ extension Control {
         return self
     }
     
+    @discardableResult
+    open func holizontalCenter() -> Self {
+        self.view.autoAlignAxis(toSuperviewMarginAxis: .vertical)
+        return self
+    }
+    
+    
+    @discardableResult
+    open func verticalCenter() -> Self {
+        self.view.autoAlignAxis(toSuperviewMarginAxis: .horizontal)
+        return self
+    }
+    
     
     @discardableResult
     open func fillParent() -> Self {

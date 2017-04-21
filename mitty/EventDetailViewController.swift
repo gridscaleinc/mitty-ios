@@ -126,7 +126,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             //            c.view.layer.borderWidth = 1
             //            c.view.layer.borderColor = UIColor.yellow.cgColor
             c.upper()
-            c.width(UIScreen.main.bounds.size.width).height(500)
+            c.width(UIScreen.main.bounds.size.width).height(900)
         }
         
         scrollContainer +++ detailForm
@@ -158,23 +158,50 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         }
         detailForm +++ imageIcon
         
-        var row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().putUnder(of: img, withOffset: 5)
+
+        let actionLabel = form.label(name: "action", title: (event.action ?? "")).layout {
+            c in
+            c.putUnder(of: img, withOffset: 5).fillHolizon(10)
+            let l = c.view as! UILabel
+            //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
+            l.numberOfLines = 0
+            l.textColor = .black
+            l.font = .boldSystemFont(ofSize: 12)
+//            l.layer.cornerRadius = 5
+//            l.layer.borderWidth = 1
+            l.layer.borderColor = UIColor.black.cgColor
         }
         
-        let likes = form.label(name: "heart", title: "❤️ 134 👁 430 Like率: 35%　　　価格:¥1000.").layout { l in
-            l.height(20).width(300)
+        detailForm +++ actionLabel
+        
+        var row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: actionLabel, withOffset: 5)
+        }
+        
+        let likes = form.label(name: "heart", title: "❤️ 134 👁 430 Like率: 35%　  価格:¥1000.").layout { l in
+            l.height(20).width(330)
         }
         
         row +++ likes
         
         detailForm +++ row
         
-        
         row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
+        }
+        
+        let dates = form.label(name: "sheduledData", title: "⏰　2018/1/1 〜　2018/1/3").layout { l in
+            l.height(20).width(250)
+        }
+        
+        row +++ dates
+        detailForm +++ row
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
         }
         
         let location = form.label(name: "isLand", title: "📍　ビッグサイト").layout { l in
@@ -191,24 +218,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         detailForm +++ row
         
-        let actionLabel = form.label(name: "action", title: (event.action ?? "")).layout {
-            c in
-            c.putUnder(of: location, withOffset: 5).fillHolizon(10)
-            let l = c.view as! UILabel
-//            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
-            l.numberOfLines = 0
-            l.textColor = .black
-            l.font = .systemFont(ofSize: 12)
-            l.layer.cornerRadius = 5
-            l.layer.borderWidth = 1
-            l.layer.borderColor = UIColor.black.cgColor
-        }
         
-        detailForm +++ actionLabel
         
         let contact = Row.Intervaled().layout {
             r in
-            r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(20)
+            r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(20)
         }
         contact +++ form.label(name: "tel", title: "☎️　03-3733-0987").layout {
             l in
@@ -219,6 +233,8 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             l.height(20)
         }
         detailForm +++ contact
+        
+        // TODO: Mail address
         
         let infoSource = Row.Intervaled().layout {
             r in
@@ -239,20 +255,55 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(20)
         }
-        url +++ form.label(name: "URL", title: "URL").layout {
+        url +++ form.label(name: "URL", title: "情報源").layout {
             l in
             l.height(20)
         }
-        url +++ form.label(name: "URL-value", title: "http://abc.com").layout {
+        
+        let link = UIButton.newAutoLayout()
+        link.setTitleColor(.blue, for: .normal)
+        link.setTitle("Webページ", for: .normal)
+        url +++ Control(name:"URL", view:link).layout {
             l in
             l.height(20)
+        }.event(.touchUpInside) {
+            b in
+            
+            let urlString : String = "http://qiita.com/senseiswift/items/70825c8dd4b8dd9d73f9"
+            
+            if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url){
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(url, options: [:])
+                } else {
+                    UIApplication.shared.openURL(url)
+                }
+            }
         }
         detailForm +++ url
         
+        
+        let description = "フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。"
+        
+        let descriptionLabel = form.label(name: "detailDescription", title: description).layout {
+            c in
+            c.putUnder(of: url, withOffset: 5).fillHolizon(10)
+            let l = c.view as! UILabel
+            //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
+            l.numberOfLines = 0
+            l.textColor = .black
+            l.font = .systemFont(ofSize: 12)
+            l.layer.cornerRadius = 2
+            l.layer.borderWidth = 1
+            l.layer.borderColor = UIColor.black.cgColor
+        }
+        
+        detailForm +++ descriptionLabel
+        
         let subscribe = Control(name: "scbscribe", view: subscribeButton).layout {
             c in
-            c.height(45).leftMost(withInset: 60).width(140).putUnder(of: url, withOffset: 30)
+            c.height(45).holizontalCenter().width(140).putUnder(of: descriptionLabel, withOffset: 30)
         }
+        
         detailForm +++ subscribe
         
         subscribe.event(.touchUpInside) {
@@ -364,7 +415,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func buildDummyEvent(e : Event) {
-        e.action = "専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。"
+        e.action = "専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。"
         e.title = "フィンテックの話"
         e.iconId = 1
     }
