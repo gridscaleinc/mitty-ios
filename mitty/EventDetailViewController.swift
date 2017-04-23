@@ -141,7 +141,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let titleLabel = form.label(name: "Title", title: event.title!).layout {
             l in
-            l.leftMost(withInset: 25).upper(withInset: 30).height(20)
+            l.leftMost(withInset: 25).upper(withInset: 50).height(20)
 
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 16)
             (l.view as! UILabel).textColor = .white
@@ -163,12 +163,9 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             c in
             c.putUnder(of: img, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel
-            //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
             l.numberOfLines = 0
             l.textColor = .black
-            l.font = .boldSystemFont(ofSize: 12)
-//            l.layer.cornerRadius = 5
-//            l.layer.borderWidth = 1
+            l.font = .boldSystemFont(ofSize: 15)
             l.layer.borderColor = UIColor.black.cgColor
         }
         
@@ -176,11 +173,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         var row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: actionLabel, withOffset: 5)
+            r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(35)
         }
         
-        let likes = form.label(name: "heart", title: "❤️ 134 👁 430 Like率: 35%　  価格:¥1000.").layout { l in
-            l.height(20).width(330)
+        let likes = form.label(name: "heart", title: "❤️ 134  価格:¥1000.").layout { l in
+            l.height(35).width(330)
         }
         
         row +++ likes
@@ -193,7 +190,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         }
         
         let dates = form.label(name: "sheduledData", title: "⏰　2018/1/1 〜　2018/1/3").layout { l in
-            l.height(20).width(250)
+            l.height(35).width(250)
         }
         
         row +++ dates
@@ -205,14 +202,14 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         }
         
         let location = form.label(name: "isLand", title: "📍　ビッグサイト").layout { l in
-            l.height(20).width(250)
+            l.height(35).width(250)
         }
         
         row +++ location
         
         let lacationIcon = form.img(name: "locationIocn", url: "timesquare").layout {
             icon in
-            icon.height(20).width(20).topAlign(with: location)
+            icon.height(35).width(20).topAlign(with: location)
         }
         row +++ lacationIcon
         
@@ -222,15 +219,15 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let contact = Row.Intervaled().layout {
             r in
-            r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(20)
+            r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(35)
         }
         contact +++ form.label(name: "tel", title: "☎️　03-3733-0987").layout {
             l in
-            l.height(20)
+            l.height(35)
         }
         contact +++ form.label(name: "fax", title: "📠　03-3733-0989").layout {
             l in
-            l.height(20)
+            l.height(35)
         }
         detailForm +++ contact
         
@@ -238,26 +235,26 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let infoSource = Row.Intervaled().layout {
             r in
-            r.fillHolizon().putUnder(of: contact, withOffset: 5).height(20)
+            r.fillHolizon().putUnder(of: contact, withOffset: 5).height(35)
         }
         infoSource +++ form.label(name: "sponsor", title: "主催者").layout {
             l in
-            l.height(20)
+            l.height(35)
         }
         infoSource +++ form.label(name: "name", title: "先端金融情報研究会").layout {
             l in
-            l.height(20)
+            l.height(35)
         }
         detailForm +++ infoSource
         
         
         let url = Row.Intervaled().layout {
             r in
-            r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(20)
+            r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(35)
         }
         url +++ form.label(name: "URL", title: "情報源").layout {
             l in
-            l.height(20)
+            l.height(35)
         }
         
         let link = UIButton.newAutoLayout()
@@ -265,7 +262,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         link.setTitle("Webページ", for: .normal)
         url +++ Control(name:"URL", view:link).layout {
             l in
-            l.height(20)
+            l.height(35)
         }.event(.touchUpInside) {
             b in
             
@@ -291,7 +288,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
             l.numberOfLines = 0
             l.textColor = .black
-            l.font = .systemFont(ofSize: 12)
+            l.font = .systemFont(ofSize: 15)
             l.layer.cornerRadius = 2
             l.layer.borderWidth = 1
             l.layer.borderColor = UIColor.black.cgColor

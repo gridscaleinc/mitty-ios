@@ -81,6 +81,13 @@ class ActivityPlanViewController : UIViewController {
             textField.keyboardType = .URL
         }
         
+        form.quest("[name=location]").bindEvent(for: .editingDidBegin) {
+            c in
+            c.resignFirstResponder()
+            let controller = IslandPicker()
+            self.navigationController?.pushViewController(controller, animated: true)
+        }
+        
         manageKeyboard()
     }
     

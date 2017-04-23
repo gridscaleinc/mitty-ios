@@ -111,6 +111,9 @@
 		FCF8D6511DD8B7630059B270 /* connect.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8D6501DD8B7630059B270 /* connect.png */; };
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
 		FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */; };
+		FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */; };
+		FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */; };
+		FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5251EAB399B00F4A265 /* IslandForm.swift */; };
 		FCFA32C91E3F89AE007F115A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA32C81E3F89AE007F115A /* Campaign.swift */; };
 		FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB07D81E719C6600E435BE /* Abstracts.swift */; };
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
@@ -280,6 +283,9 @@
 		FCF8D6501DD8B7630059B270 /* connect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = connect.png; path = images/connect.png; sourceTree = "<group>"; };
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		FCF9575F1DC6471D00A52125 /* RegisterPersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterPersonalInfoViewController.swift; sourceTree = "<group>"; };
+		FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandPicker.swift; sourceTree = "<group>"; };
+		FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandInfo.swift; sourceTree = "<group>"; };
+		FCF9E5251EAB399B00F4A265 /* IslandForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandForm.swift; sourceTree = "<group>"; };
 		FCFA32C81E3F89AE007F115A /* Campaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		FCFB07D81E719C6600E435BE /* Abstracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Abstracts.swift; sourceTree = "<group>"; };
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
@@ -472,6 +478,7 @@
 				FCF265DC1E3B4CEC001F3F96 /* Request.swift */,
 				FCF265DE1E3B4D00001F3F96 /* Proposal.swift */,
 				FCFA32C81E3F89AE007F115A /* Campaign.swift */,
+				FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -705,6 +712,7 @@
 				FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */,
 				FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */,
 				FCDC70961E8A9011003034B3 /* ActivityPlanDetailForm.swift */,
+				FCF9E5251EAB399B00F4A265 /* IslandForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -740,6 +748,7 @@
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
 				FCF8D6441DD7F6960059B270 /* MittyStyles.swift */,
+				FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1084,6 +1093,7 @@
 				FCFEBF3F1E38F57400DC989B /* PlaceEntryController.swift in Sources */,
 				FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */,
 				FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */,
+				FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */,
 				FCFEBF411E38F6A100DC989B /* FlightEnventEntryController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
@@ -1108,11 +1118,13 @@
 				FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */,
 				FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
+				FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */,
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */,
 				FC276DA01E8775360089140B /* DateTimePicker.swift in Sources */,
 				FCF265E31E3B4D7E001F3F96 /* Reservation.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
+				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCF265E71E3B4EFB001F3F96 /* Activity.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
@@ -1315,11 +1327,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LZQ2354CBZ;
 				INFOPLIST_FILE = mitty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1332,11 +1345,12 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = LZQ2354CBZ;
 				INFOPLIST_FILE = mitty/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

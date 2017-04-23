@@ -208,11 +208,11 @@ extension Control {
     
     
     @discardableResult
-    open func fillParent() -> Self {
-        self.view.autoPinEdge(toSuperviewEdge: .top, withInset: 0)
-        self.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: 0)
-        self.view.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
-        self.view.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
+    open func fillParent(withInset inset: CGFloat? = 0) -> Self {
+        self.view.autoPinEdge(toSuperviewEdge: .top, withInset: inset!)
+        self.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: inset!)
+        self.view.autoPinEdge(toSuperviewEdge: .left, withInset: inset!)
+        self.view.autoPinEdge(toSuperviewEdge: .right, withInset: inset!)
         return self
     }
 

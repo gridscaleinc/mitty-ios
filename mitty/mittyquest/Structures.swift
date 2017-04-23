@@ -174,7 +174,7 @@ open class Row : Container {
                      c.righter(than: previous!, withOffset: spacing + c.margin.left)
                 }
                 previous = c
-                c.upper()
+                c.upper(withInset: c.margin.up)
             }
         case .right:
             let last = children.last
@@ -187,7 +187,7 @@ open class Row : Container {
                     c.lefter(than: previous!, withOffset: spacing + c.margin.right)
                 }
                 previous = c
-                c.upper()
+                c.upper(withInset: c.margin.up)
             }
         case .atIntervals:
             let views = self.view.subviews as NSArray

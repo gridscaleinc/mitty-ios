@@ -198,7 +198,7 @@ class RequestViewController : UIViewController {
             r.fillHolizon(20).height(height_middle)
         }
         row +++ form.button(name: "Post", title: "Post Request").layout { button in
-            button.width(120).height(height_normal).margin.up = 60
+            button.width(90).height(height_normal).holizontalCenter()
             let b = button.view as! UIButton
             b.backgroundColor = .orange
         }
@@ -210,4 +210,6 @@ class RequestViewController : UIViewController {
         inputForm <<< row
         
     }
+    
+    
 }
