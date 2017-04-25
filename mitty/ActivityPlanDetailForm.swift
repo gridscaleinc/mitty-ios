@@ -95,7 +95,7 @@ class ActivityPlanDetailsForm : MQForm {
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:1200)
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:1230)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -112,7 +112,7 @@ class ActivityPlanDetailsForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(1200)
+            c.upper().width(UIScreen.main.bounds.size.width).height(1230)
         }
         
         // title
@@ -213,36 +213,21 @@ class ActivityPlanDetailsForm : MQForm {
             r in
             r.height(30).fillHolizon()
         }
-        let plus : Control = {
+
+        let planlistHeader : Control = {
             let l = TapableLabel.newAutoLayout()
-            l.text = "　 ➕ 関連計画"
-            l.backgroundColor = UIColor.white
-            return Control(name: "line", view: l).height(20)
-        }()
-        plus.layout() {
-            plus in
-            plus.height(20).width(200)
-        }
-        row +++ plus
-        inputForm <<< row
-        
-        row = Row.LeftAligned()
-        row.layout() {
-            r in
-            r.height(1).fillHolizon(10)
-        }
-        
-        let line : Control = {
-            let l = HL()
-            l.backgroundColor = UIColor.red
-            return Control(name: "line", view: l).height(1)
+            l.text = "活動プラン"
+            l.textColor = UIColor.white
+            l.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0, alpha: 1)
+            return Control(name: "sectionTitle", view: l)
+            
         }()
         
-        line.layout() {
-            line in
-            line.height(1).fillHolizon(10)
+        row +++ planlistHeader.layout() { t in
+            t.margin = ControlMargin(10)
+            t.height(20).fillHolizon(10)
         }
-        row +++ line
+
         inputForm <<< row
         
         row = Row.LeftAligned()

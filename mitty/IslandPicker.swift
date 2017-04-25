@@ -39,7 +39,7 @@ class IslandPicker : UIViewController {
         islandForm.buildForm(islandInfo: IslandInfo())
         islandForm.configLayout()
 
-        self.navigationItem.title = "島選択"
+        self.navigationItem.title = "場所選択"
         
     }
 }

@@ -85,7 +85,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     }
     
     func configNavigationBar() {
-        
+        // TODO: 他の画面への影響をなくす。この画面から出たら、モドに戻す。
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true

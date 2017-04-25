@@ -56,6 +56,7 @@ class ActivityPlanViewController : UIViewController {
             let textField = c.view as! UITextField
             let picker = UIDatePicker()
             textField.inputView = picker
+            picker.addTarget(self, action: #selector(setFromDateTime(_:)), for: .valueChanged)
         }
         
         form.quest("[name=toDateTime]").forEach() { (c) in
@@ -63,6 +64,7 @@ class ActivityPlanViewController : UIViewController {
             let textField = c.view as! UITextField
             let picker = UIDatePicker()
             textField.inputView = picker
+            picker.addTarget(self, action: #selector(setToDateTime(_:)), for: .valueChanged)
         
         }
         
@@ -89,6 +91,25 @@ class ActivityPlanViewController : UIViewController {
         }
         
         manageKeyboard()
+    }
+    
+    func setFromDateTime(_ picker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm:ss";
+        form.quest("[name=fromDateTime]").forEach() { (c) in
+            let textField = c.view as! UITextField
+            textField.text = dateFormatter.string(from: picker.date)
+        }
+    }
+    
+    
+    func setToDateTime(_ picker: UIDatePicker) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm:ss";
+        form.quest("[name=toDateTime]").forEach() { (c) in
+            let textField = c.view as! UITextField
+            textField.text = dateFormatter.string(from: picker.date)
+        }
     }
     
     func manageKeyboard() {
@@ -125,26 +146,8 @@ class ActivityPlanViewController : UIViewController {
         self.view.setNeedsUpdateConstraints()
     }
     
-    func pickDate (_ v: UIView) {
-        
-        let dateTime = v as! StyledTextField
-        dateTime.resignFirstResponder()
-        UIApplication.shared.keyWindow?.endEditing(true)
-        let min = Date().addingTimeInterval(-60 * 60 * 24 * 4)
-        let max = Date().addingTimeInterval(60 * 60 * 24 * 4)
-        let picker = DateTimePicker.show(selected: Date(), minimumDate: min, maximumDate: max)
-        picker.highlightColor = UIColor(red: 255.0/255.0, green: 138.0/255.0, blue: 138.0/255.0, alpha: 1)
-        picker.doneButtonTitle = "DONE"
-        picker.todayButtonTitle = "Today"
-        picker.completionHandler = { date in
-            let formatter = DateFormatter()
-            formatter.dateFormat = "YYYY年MM月dd日 HH:mm"
-            // let fromDate = self?.quest("name=fromDate").control()?.view as! StyledTextField
-            // let fromTime = self?.quest("name=fromTime").control()?.view as! StyledTextField
-            
-            print(formatter.string(from:date))
-            dateTime.text = formatter.string(from:date)
-        }
-    }
+    
     
 }
+
+
