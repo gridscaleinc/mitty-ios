@@ -223,10 +223,13 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         return mapControl.view as! MKMapView
     }
     
-    var searchText : UITextField {
+    var nameText : UITextField {
         return nameControl.view as! UITextField
     }
     
+    var searchBar : UISearchBar {
+        return searchBarControl.view as! UISearchBar
+    }
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
@@ -253,7 +256,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        searchText.resignFirstResponder()
+        searchBar.resignFirstResponder()
         
         let comp = searchResults[indexPath.row]
         (addressControl.view as! UITextField).text = comp.subtitle
@@ -265,7 +268,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
                 
 //                let point = MKPointAnnotation()
 //                point.coordinate = item.placemark.coordinate
-                self.searchText.text = item.placemark.name
+                self.nameText.text = item.placemark.name
 //                self.mapView.addAnnotation(point)
                 self.mapView.addAnnotation(item.placemark)
             }

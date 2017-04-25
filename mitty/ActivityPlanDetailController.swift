@@ -53,6 +53,15 @@ class ActivityPlanDetailsController : UIViewController {
         self.navigationItem.title = activityTitle
         
         self.view.backgroundColor = UIColor.white
+        
+        form.eventTitle.event(.touchUpInside) {
+            v in
+            let e = EventService.instance.buildEvent(1)
+            let c = EventDetailViewController(event: e!)
+            
+            self.navigationController?.pushViewController(c, animated: true)
+            
+        }
     }
     
 }

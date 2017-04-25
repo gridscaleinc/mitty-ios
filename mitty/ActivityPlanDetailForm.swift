@@ -12,6 +12,76 @@ import PureLayout
 
 class ActivityPlanDetailsForm : MQForm {
     
+    //  Title
+    var title : Control = {
+        let t = UILabel.newAutoLayout()
+        t.text = ".新年の鐘を聞きに行く"
+        t.font = UIFont.boldSystemFont(ofSize: 14)
+        t.textColor = .red
+        let c = Control(name:"title", view: t)
+        return c
+    } ()
+    
+    //  Memo
+    var memo : Control = {
+        let t = UILabel.newAutoLayout()
+        t.text = "休みを取ることは忘れなく。引き継ぎ事情もあるかもしれないから、早めにリーダに相談する。航空券、ホテル。。。。"
+        t.font = UIFont.systemFont(ofSize: 14)
+        t.textColor = UIColor.gray
+        t.numberOfLines = 0
+        t.layer.borderColor = UIColor.black.cgColor
+        t.layer.borderWidth = 0.5
+        t.layer.cornerRadius = 3
+        let c = Control(name:"memo", view: t)
+        return c
+    } ()
+    
+    //  Main event
+    //    Title                         Logo
+    var eventTitle : Control = {
+        let t = TapableLabel.newAutoLayout()
+        t.text = "タイムスクエア　New year count down"
+        t.font = UIFont.systemFont(ofSize: 14)
+        t.numberOfLines = 0
+        t.textColor = UIColor.blue
+        
+        let c = Control(name:"eventTitle", view: t)
+        return c
+    } ()
+    var eventLogo : Control = {
+        let l = UIImageView.newAutoLayout()
+        l.image = UIImage(named: "timesquare")
+        let c = Control(name:"eventTitle", view: l)
+        return c
+    } ()
+    //     From date time -> date time
+    var eventTime : Control = {
+        let t = UILabel.newAutoLayout()
+        t.text = "⏰  2017/12/31  〜　2018/01/01"
+        t.textColor = UIColor.gray
+        let c = Control(name:"eventTitle", view: t)
+        return c
+    } ()
+    
+    //  Action list Title
+    //  Action addition tool bar
+    //  Action list (Loop)
+    //  1) Title         Event logo (of type)
+    //     Notification Flag, Notification Date time
+    //     Memo
+    //     from date time - date time   (link)
+    //  2) Title         Event logo (of type)
+    //     Notification Flag, Notification Date time
+    //     Memo
+    //     from date time - date time   (link)
+    //  3) Title         Event logo (of type)
+    //     Notification Flag, Notification Date time
+    //     Memo
+    //     from date time - date time   (link)
+    //
+    
+    
+    
     func loadForm() {
         
         var page = self as MQForm
@@ -21,11 +91,11 @@ class ActivityPlanDetailsForm : MQForm {
         page += header
         
         header.layout() { (v) in
-            v.upper().height(30)
+            v.upper().height(1)
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:620)
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:800)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -42,122 +112,116 @@ class ActivityPlanDetailsForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(620)
+            c.upper().width(UIScreen.main.bounds.size.width).height(800)
         }
         
+        // title
         var row = Row.LeftAligned().layout() {
-            r in
-            r.height(20).fillHolizon()
-        }
-        
-        var title : Control = {
-            let l = TapableLabel.newAutoLayout()
-            l.text = "メインイベント"
-            l.textColor = UIColor.white
-            l.backgroundColor = UIColor.purple
-            return Control(name: "sectionTitle", view: l)
-            
-        }()
-        title.layout() { t in
-            t.margin = ControlMargin(10)
-            t.height(20).fillHolizon(10)
-        }
-        
-        row +++ title
-        inputForm <<< row
-        
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(40).fillHolizon()
-        }
-        
-        row +++ label(name: "title" , title: "タイムスクエア新年カウントダウン" ).width(250).height(35)
-        row +++ img(name: "icon" , url:"timesquare").height(35).width(35)
-       
-        inputForm <<< row
-        
-        row = Row.LeftAligned().layout() {
             r in
             r.height(35).fillHolizon()
         }
         
-        row +++ label(name: "time" , title: "２０１７年１月１日 ０：００" ).width(250).height(30)
-        inputForm <<< row
-        
-        
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(40).fillHolizon()
+        row +++ title.layout {
+            t in
+            t.fillHolizon(10).height(35)
         }
- 
-        row +++ label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).width(250).height(35)
-        
-        row +++ img(name: "icon" , url:"timesquare").height(35).width(35)
-        
         inputForm <<< row
-        
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(20).fillHolizon()
-        }
 
-        title  = {
+        // memo
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(80).fillHolizon()
+        }
+        
+        row +++ memo.layout {
+            t in
+            t.fillHolizon(10)
+        }
+        inputForm <<< row
+
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(30).fillHolizon()
+        }
+        
+        let eventHeader : Control = {
             let l = TapableLabel.newAutoLayout()
-            l.text = "関連計画"
+            l.text = "メインイベント"
             l.textColor = UIColor.white
-            l.backgroundColor = UIColor.gray
-            return Control(name: "relatedActivities", view: l)
+            l.backgroundColor = UIColor.red
+            return Control(name: "sectionTitle", view: l)
             
         }()
-        
-        title.layout() { t in
+        eventHeader.layout() { t in
             t.margin = ControlMargin(10)
             t.height(20).fillHolizon(10)
         }
         
-        row +++ title
+        row +++ eventHeader
         inputForm <<< row
         
-        for _ in 1...5 {
-            row = Row.LeftAligned()
-            row.layout() {
-                r in
-                r.height(40).fillHolizon(20)
-            }
-            let line : Control = {
-                let l = TapableLabel.newAutoLayout()
-                l.text = "2017/8/19 12:34 イベント名          🚗"
-                l.font = UIFont.systemFont(ofSize: 14)
-                l.backgroundColor = UIColor.white
-                return Control(name: "line", view: l).height(30)
-            }()
-            line.layout() {
-                line in
-                line.height(30).fillHolizon(10)
-            }
-            
-            row +++ line
-//            let subRow = Row.RightAligned()
-//            subRow +++ label(name: "icon", title: "🚗").width(50).height(35)
-//            row +++ subRow
-            inputForm <<< row
-
+        // event title
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(60).fillHolizon()
         }
+        
+        row +++ eventTitle.layout {
+            t in
+            t.leftMost(withInset: 10).rightMost(withInset: 50)
+        }
+        row +++ eventLogo.layout {
+            logo in
+            logo.height(30).width(30).rightMost(withInset: 10).upMargin(5)
+        }
+        
+        inputForm <<< row
+
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(50).fillHolizon()
+        }
+        
+        row +++ eventTime.layout {
+            t in
+            t.leftMost(withInset: 10).rightMost(withInset: 10)
+        }
+        inputForm <<< row
+        
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(50).fillHolizon()
+        }
+ 
+        row +++ label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).layout {
+            l in
+            (l.view as! UILabel).textColor = UIColor.gray
+            l.leftMost(withInset:10).rightMost(withInset: 50).height(35)
+        }
+        
+        row +++ img(name: "icon" , url:"timesquare").layout{
+            img in
+            img.height(30).width(30).rightMost(withInset: 10)
+        }
+        inputForm <<< row
         
         row = Row.LeftAligned()
         row.layout() {
             r in
-            r.height(20).fillHolizon()
+            r.height(30).fillHolizon()
         }
         let plus : Control = {
             let l = TapableLabel.newAutoLayout()
-            l.text = "　 ➕"
+            l.text = "　 ➕ 関連計画"
             l.backgroundColor = UIColor.white
             return Control(name: "line", view: l).height(20)
         }()
         plus.layout() {
             plus in
-            plus.height(20).width(80)
+            plus.height(20).width(200)
         }
         row +++ plus
         inputForm <<< row
@@ -167,7 +231,7 @@ class ActivityPlanDetailsForm : MQForm {
             r in
             r.height(1).fillHolizon(10)
         }
-
+        
         let line : Control = {
             let l = HL()
             l.backgroundColor = UIColor.red
@@ -180,11 +244,11 @@ class ActivityPlanDetailsForm : MQForm {
         }
         row +++ line
         inputForm <<< row
-
+        
         row = Row.LeftAligned()
         row.layout() {
             r in
-            r.height(30).fillHolizon(10)
+            r.height(40).fillHolizon(10)
         }
         
         let buttons : Control = {
@@ -200,6 +264,110 @@ class ActivityPlanDetailsForm : MQForm {
         row +++ buttons
         inputForm <<< row
 
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(20).fillHolizon()
+        }
+
+        
+        for n in 1...5 {
+            row = Row.LeftAligned()
+            row.layout() {
+                r in
+                r.height(50).fillHolizon(20)
+            }
+            
+            let number = UILabel.newAutoLayout()
+            number.text = "\(n)"
+            number.textColor = .white
+            number.backgroundColor = .red
+            number.layer.masksToBounds = true
+            number.layer.cornerRadius = 12.5
+            number.textAlignment = .center
+            
+            let nc = Control(name: "no", view:number).layout {
+                n in
+                n.width(25).height(25).leftMost(withInset:30)
+            }
+            
+            row +++ nc
+            
+            let line : Control = {
+                let l = TapableLabel.newAutoLayout()
+                l.text = "2017/8/19 12:34 イベント名         🚗"
+                l.textColor = UIColor.black
+                l.font = UIFont.boldSystemFont(ofSize: 14)
+                l.backgroundColor = UIColor.white
+                return Control(name: "line", view: l).height(30)
+            }()
+            line.layout() {
+                line in
+                line.height(30).rightMost()
+            }
+            
+            row +++ line
+            inputForm <<< row
+            
+            row = Row.LeftAligned()
+            row.layout() {
+                r in
+                r.height(50).fillHolizon(20)
+            }
+            
+            let swch = UISwitch.newAutoLayout()
+            if (n == 2) {
+                swch.isOn = true
+            }
+            let swchControl = Control(name: "notificationFlag", view: swch)
+            row +++ swchControl.layout {
+                w in
+                w.leftMost(withInset:10).height(20)
+            }
+            
+            let labelNoti = UILabel.newAutoLayout()
+            labelNoti.text = "知らせ時間：2018/01/01 12:00"
+            labelNoti.font = UIFont.systemFont(ofSize: 14)
+            let notification = Control(name:"notification", view: labelNoti)
+            row +++ notification.layout {
+                n in
+                n.rightMost().height(30)
+            }
+ 
+            inputForm <<< row
+            
+            row = Row.LeftAligned()
+            row.layout() {
+                r in
+                r.height(50).fillHolizon(20)
+            }
+
+            let labelMemo = UILabel.newAutoLayout()
+            labelMemo.text = "忘れないためのメモ"
+            labelMemo.font = UIFont.systemFont(ofSize: 14)
+            
+            labelMemo.textColor = .gray
+            labelMemo.layer.borderColor = UIColor.black.cgColor
+            
+            labelMemo.layer.borderWidth = 0.5
+            
+            let labelMemoCtl = Control(name:"labelMemo", view: labelMemo)
+            row +++ labelMemoCtl.layout {
+                n in
+                n.rightMost().height(45).leftMost(withInset:20)
+            }
+            row +++ labelMemoCtl
+
+            inputForm <<< row
+
+            
+//            let subRow = Row.RightAligned()
+//            subRow +++ label(name: "icon", title: "🚗").width(50).height(35)
+//            row +++ subRow
+
+        }
+        
+        
         
         inputForm <<< Row.LeftAligned().height(50)
 
