@@ -16,7 +16,7 @@ class ActivityPlanDetailsForm : MQForm {
     var title : Control = {
         let t = UILabel.newAutoLayout()
         t.text = ".新年の鐘を聞きに行く"
-        t.font = UIFont.boldSystemFont(ofSize: 14)
+        t.font = UIFont.boldSystemFont(ofSize: 18)
         t.textColor = .red
         let c = Control(name:"title", view: t)
         return c
@@ -95,7 +95,7 @@ class ActivityPlanDetailsForm : MQForm {
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:800)
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:1200)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -112,7 +112,7 @@ class ActivityPlanDetailsForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(800)
+            c.upper().width(UIScreen.main.bounds.size.width).height(1200)
         }
         
         // title
