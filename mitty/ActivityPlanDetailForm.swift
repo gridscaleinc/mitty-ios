@@ -41,7 +41,7 @@ class ActivityPlanDetailsForm : MQForm {
     var eventTitle : Control = {
         let t = TapableLabel.newAutoLayout()
         t.text = "タイムスクエア　New year count down"
-        t.font = UIFont.systemFont(ofSize: 14)
+        t.font = UIFont.systemFont(ofSize: 16)
         t.numberOfLines = 0
         t.textColor = UIColor.blue
         
@@ -169,7 +169,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         row +++ eventTitle.layout {
             t in
-            t.leftMost(withInset: 10).rightMost(withInset: 50)
+            t.leftMost(withInset: 10).rightMost(withInset: 50).height(30)
         }
         row +++ eventLogo.layout {
             logo in
@@ -260,7 +260,7 @@ class ActivityPlanDetailsForm : MQForm {
             row = Row.LeftAligned()
             row.layout() {
                 r in
-                r.height(50).fillHolizon(20)
+                r.height(35).fillHolizon(20)
             }
             
             let number = UILabel.newAutoLayout()
@@ -293,11 +293,12 @@ class ActivityPlanDetailsForm : MQForm {
             
             row +++ line
             inputForm <<< row
-            
+            let backColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
             row = Row.LeftAligned()
             row.layout() {
                 r in
-                r.height(50).fillHolizon(20)
+                r.height(50).leftMost(withInset: 5).rightMost(withInset: 5)
+                r.view.backgroundColor = backColor
             }
             
             let swch = UISwitch.newAutoLayout()
@@ -307,7 +308,7 @@ class ActivityPlanDetailsForm : MQForm {
             let swchControl = Control(name: "notificationFlag", view: swch)
             row +++ swchControl.layout {
                 w in
-                w.leftMost(withInset:10).height(20)
+                w.leftMost(withInset:10).height(20).upMargin(5)
             }
             
             let labelNoti = UILabel.newAutoLayout()
@@ -316,7 +317,7 @@ class ActivityPlanDetailsForm : MQForm {
             let notification = Control(name:"notification", view: labelNoti)
             row +++ notification.layout {
                 n in
-                n.rightMost().height(30)
+                n.rightMost(withInset: 10).height(30)
             }
  
             inputForm <<< row
@@ -324,7 +325,8 @@ class ActivityPlanDetailsForm : MQForm {
             row = Row.LeftAligned()
             row.layout() {
                 r in
-                r.height(50).fillHolizon(20)
+                r.height(50).leftMost(withInset: 5).rightMost(withInset: 5)
+                r.view.backgroundColor = backColor
             }
 
             let labelMemo = UILabel.newAutoLayout()
@@ -339,7 +341,7 @@ class ActivityPlanDetailsForm : MQForm {
             let labelMemoCtl = Control(name:"labelMemo", view: labelMemo)
             row +++ labelMemoCtl.layout {
                 n in
-                n.rightMost().height(45).leftMost(withInset:20)
+                n.rightMost(withInset:20).height(45).leftMost(withInset:20)
             }
             row +++ labelMemoCtl
 

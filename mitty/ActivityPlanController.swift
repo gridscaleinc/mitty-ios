@@ -95,7 +95,10 @@ class ActivityPlanViewController : UIViewController {
     
     func setFromDateTime(_ picker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm:ss";
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .medium
+        
         form.quest("[name=fromDateTime]").forEach() { (c) in
             let textField = c.view as! UITextField
             textField.text = dateFormatter.string(from: picker.date)
@@ -105,7 +108,9 @@ class ActivityPlanViewController : UIViewController {
     
     func setToDateTime(_ picker: UIDatePicker) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat  = "yyyy/MM/dd HH:mm:ss";
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .long
         form.quest("[name=toDateTime]").forEach() { (c) in
             let textField = c.view as! UITextField
             textField.text = dateFormatter.string(from: picker.date)

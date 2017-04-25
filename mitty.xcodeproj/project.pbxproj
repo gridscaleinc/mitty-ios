@@ -84,18 +84,8 @@
 		FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */; };
 		FCEDA2C41E6D7946006FBF20 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B91E6D7946006FBF20 /* Structures.swift */; };
 		FCEDA2C51E6D7946006FBF20 /* Tagnizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */; };
-		FCF265DB1E3B4C02001F3F96 /* RequestProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */; };
 		FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DC1E3B4CEC001F3F96 /* Request.swift */; };
 		FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DE1E3B4D00001F3F96 /* Proposal.swift */; };
-		FCF265E11E3B4D68001F3F96 /* CampaignProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265E01E3B4D68001F3F96 /* CampaignProtocol.swift */; };
-		FCF265E31E3B4D7E001F3F96 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265E21E3B4D7E001F3F96 /* Reservation.swift */; };
-		FCF265E51E3B4E29001F3F96 /* Invitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265E41E3B4E29001F3F96 /* Invitation.swift */; };
-		FCF265E71E3B4EFB001F3F96 /* Activity.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265E61E3B4EFB001F3F96 /* Activity.swift */; };
-		FCF265E91E3B4F07001F3F96 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265E81E3B4F07001F3F96 /* Event.swift */; };
-		FCF265EB1E3B4F41001F3F96 /* Island.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265EA1E3B4F41001F3F96 /* Island.swift */; };
-		FCF265ED1E3B4F5B001F3F96 /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265EC1E3B4F5B001F3F96 /* Meeting.swift */; };
-		FCF265EF1E3B4F69001F3F96 /* Conversation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265EE1E3B4F69001F3F96 /* Conversation.swift */; };
-		FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265F01E3B4F90001F3F96 /* Checkin.swift */; };
 		FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0CD1E73DCDF00536D32 /* Selection.swift */; };
 		FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D11E777C3600536D32 /* MQForm.swift */; };
 		FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */; };
@@ -256,18 +246,8 @@
 		FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
 		FCEDA2B91E6D7946006FBF20 /* Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
 		FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tagnizer.swift; sourceTree = "<group>"; };
-		FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestProtocol.swift; sourceTree = "<group>"; };
 		FCF265DC1E3B4CEC001F3F96 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
 		FCF265DE1E3B4D00001F3F96 /* Proposal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposal.swift; sourceTree = "<group>"; };
-		FCF265E01E3B4D68001F3F96 /* CampaignProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CampaignProtocol.swift; sourceTree = "<group>"; };
-		FCF265E21E3B4D7E001F3F96 /* Reservation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
-		FCF265E41E3B4E29001F3F96 /* Invitation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Invitation.swift; sourceTree = "<group>"; };
-		FCF265E61E3B4EFB001F3F96 /* Activity.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Activity.swift; sourceTree = "<group>"; };
-		FCF265E81E3B4F07001F3F96 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		FCF265EA1E3B4F41001F3F96 /* Island.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Island.swift; sourceTree = "<group>"; };
-		FCF265EC1E3B4F5B001F3F96 /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
-		FCF265EE1E3B4F69001F3F96 /* Conversation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Conversation.swift; sourceTree = "<group>"; };
-		FCF265F01E3B4F90001F3F96 /* Checkin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Checkin.swift; sourceTree = "<group>"; };
 		FCF2A0CD1E73DCDF00536D32 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		FCF2A0D11E777C3600536D32 /* MQForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQForm.swift; sourceTree = "<group>"; };
 		FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityListForm.swift; sourceTree = "<group>"; };
@@ -415,7 +395,6 @@
 			isa = PBXGroup;
 			children = (
 				FCEDA2B01E6D7946006FBF20 /* mittyquest */,
-				FCF265D91E3B4A30001F3F96 /* protocol */,
 				FCF957591DC613A100A52125 /* util */,
 				FC0AF1E11DC4F24000C76408 /* service */,
 				FC0AF1E01DC4F23000C76408 /* datastore */,
@@ -681,23 +660,6 @@
 				FC276D991E86B5400089140B /* StyledTextField.swift */,
 			);
 			path = mittyquest;
-			sourceTree = "<group>";
-		};
-		FCF265D91E3B4A30001F3F96 /* protocol */ = {
-			isa = PBXGroup;
-			children = (
-				FCF265DA1E3B4C02001F3F96 /* RequestProtocol.swift */,
-				FCF265E01E3B4D68001F3F96 /* CampaignProtocol.swift */,
-				FCF265E21E3B4D7E001F3F96 /* Reservation.swift */,
-				FCF265E41E3B4E29001F3F96 /* Invitation.swift */,
-				FCF265E61E3B4EFB001F3F96 /* Activity.swift */,
-				FCF265E81E3B4F07001F3F96 /* Event.swift */,
-				FCF265EA1E3B4F41001F3F96 /* Island.swift */,
-				FCF265EC1E3B4F5B001F3F96 /* Meeting.swift */,
-				FCF265EE1E3B4F69001F3F96 /* Conversation.swift */,
-				FCF265F01E3B4F90001F3F96 /* Checkin.swift */,
-			);
-			name = protocol;
 			sourceTree = "<group>";
 		};
 		FCF33B381E5F1170006DC28B /* form */ = {
@@ -1078,8 +1040,6 @@
 				FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */,
 				FCEDA2BD1E6D7946006FBF20 /* CustomPoint.swift in Sources */,
 				FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */,
-				FCF265DB1E3B4C02001F3F96 /* RequestProtocol.swift in Sources */,
-				FCF265EF1E3B4F69001F3F96 /* Conversation.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
@@ -1097,7 +1057,6 @@
 				FCFEBF411E38F6A100DC989B /* FlightEnventEntryController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
-				FCF265EB1E3B4F41001F3F96 /* Island.swift in Sources */,
 				FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */,
 				FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
@@ -1115,22 +1074,18 @@
 				FCFEBF471E38F70C00DC989B /* ShipEntryController.swift in Sources */,
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
 				FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */,
-				FCF265F11E3B4F90001F3F96 /* Checkin.swift in Sources */,
 				FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
 				FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */,
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */,
 				FC276DA01E8775360089140B /* DateTimePicker.swift in Sources */,
-				FCF265E31E3B4D7E001F3F96 /* Reservation.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
 				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
-				FCF265E71E3B4EFB001F3F96 /* Activity.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
 				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
-				FCF265E11E3B4D68001F3F96 /* CampaignProtocol.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
@@ -1139,7 +1094,6 @@
 				FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */,
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,
 				FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */,
-				FCF265E91E3B4F07001F3F96 /* Event.swift in Sources */,
 				FCF957601DC6471D00A52125 /* RegisterPersonalInfoViewController.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */,
@@ -1154,7 +1108,6 @@
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
 				FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */,
 				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,
-				FCF265E51E3B4E29001F3F96 /* Invitation.swift in Sources */,
 				FCFEBF451E38F6EE00DC989B /* EatEntryController.swift in Sources */,
 				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
@@ -1168,7 +1121,6 @@
 				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
 				FCEDA2BF1E6D7946006FBF20 /* Extensions.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
-				FCF265ED1E3B4F5B001F3F96 /* Meeting.swift in Sources */,
 				FCFEBF431E38F6BD00DC989B /* HotelEntryController.swift in Sources */,
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,
 				FC16A5361E549A8A00C49F5F /* ExplorerTopViewController.swift in Sources */,
