@@ -24,9 +24,7 @@
 		F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* CenterViewController.swift */; };
 		F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */; };
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
-		FC002FFA1E3A450C001CB6EF /* ActivityPlan.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
-		FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */; };
 		FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081861DD3890A00C1F970 /* TalkingCell.swift */; };
 		FC00818D1DD394D300C1F970 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0081891DD394D300C1F970 /* pengin1.png */; };
 		FC00818E1DD394D300C1F970 /* pengin2.png in Resources */ = {isa = PBXBuildFile; fileRef = FC00818A1DD394D300C1F970 /* pengin2.png */; };
@@ -47,9 +45,6 @@
 		FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850E1E627DB500CAC38B /* ActivityCell.swift */; };
 		FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1785101E627F0500CAC38B /* ActivityDelegates.swift */; };
 		FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D991E86B5400089140B /* StyledTextField.swift */; };
-		FC276D9C1E8775280089140B /* StepCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D9B1E8775280089140B /* StepCollectionViewFlowLayout.swift */; };
-		FC276D9F1E8775360089140B /* DateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D9D1E8775360089140B /* DateCollectionViewCell.swift */; };
-		FC276DA01E8775360089140B /* DateTimePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D9E1E8775360089140B /* DateTimePicker.swift */; };
 		FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2862AA1DCEAFA6000854D9 /* EventService.swift */; };
 		FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30EB501EA32B7A00829E52 /* QuestViewController.swift */; };
 		FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30EB521EA575A700829E52 /* RequestViewController.swift */; };
@@ -84,8 +79,6 @@
 		FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */; };
 		FCEDA2C41E6D7946006FBF20 /* Structures.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B91E6D7946006FBF20 /* Structures.swift */; };
 		FCEDA2C51E6D7946006FBF20 /* Tagnizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */; };
-		FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DC1E3B4CEC001F3F96 /* Request.swift */; };
-		FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF265DE1E3B4D00001F3F96 /* Proposal.swift */; };
 		FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0CD1E73DCDF00536D32 /* Selection.swift */; };
 		FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D11E777C3600536D32 /* MQForm.swift */; };
 		FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */; };
@@ -104,13 +97,11 @@
 		FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */; };
 		FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */; };
 		FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5251EAB399B00F4A265 /* IslandForm.swift */; };
-		FCFA32C91E3F89AE007F115A /* Campaign.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA32C81E3F89AE007F115A /* Campaign.swift */; };
 		FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB07D81E719C6600E435BE /* Abstracts.swift */; };
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
 		FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5871E594F3200B861F4 /* event10.jpeg */; };
 		FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */; };
-		FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */; };
 		FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
 		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
@@ -127,15 +118,6 @@
 		FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF321E38F36F00DC989B /* BusinessIslandEntryViewController.swift */; };
 		FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF341E38F48200DC989B /* IslandDetailViewController.swift */; };
 		FCFEBF371E38F4B100DC989B /* IslandConstructViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF361E38F4B100DC989B /* IslandConstructViewController.swift */; };
-		FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF381E38F4F400DC989B /* RequestEntryController.swift */; };
-		FCFEBF3B1E38F52D00DC989B /* ProposalController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF3A1E38F52D00DC989B /* ProposalController.swift */; };
-		FCFEBF3D1E38F54800DC989B /* RequestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF3C1E38F54800DC989B /* RequestController.swift */; };
-		FCFEBF3F1E38F57400DC989B /* PlaceEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF3E1E38F57400DC989B /* PlaceEntryController.swift */; };
-		FCFEBF411E38F6A100DC989B /* FlightEnventEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF401E38F6A100DC989B /* FlightEnventEntryController.swift */; };
-		FCFEBF431E38F6BD00DC989B /* HotelEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF421E38F6BD00DC989B /* HotelEntryController.swift */; };
-		FCFEBF451E38F6EE00DC989B /* EatEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF441E38F6EE00DC989B /* EatEntryController.swift */; };
-		FCFEBF471E38F70C00DC989B /* ShipEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF461E38F70C00DC989B /* ShipEntryController.swift */; };
-		FCFEBF491E38F73400DC989B /* TaxiEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF481E38F73400DC989B /* TaxiEntryController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,9 +168,7 @@
 		F4BB80251DAE58FE00055D48 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
-		FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlan.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
-		FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkFetchService.swift; sourceTree = "<group>"; };
 		FC0081861DD3890A00C1F970 /* TalkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingCell.swift; sourceTree = "<group>"; };
 		FC0081891DD394D300C1F970 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin1.png; path = images/pengin1.png; sourceTree = "<group>"; };
 		FC00818A1DD394D300C1F970 /* pengin2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin2.png; path = images/pengin2.png; sourceTree = "<group>"; };
@@ -209,9 +189,6 @@
 		FC17850E1E627DB500CAC38B /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		FC1785101E627F0500CAC38B /* ActivityDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDelegates.swift; sourceTree = "<group>"; };
 		FC276D991E86B5400089140B /* StyledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
-		FC276D9B1E8775280089140B /* StepCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
-		FC276D9D1E8775360089140B /* DateCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateCollectionViewCell.swift; sourceTree = "<group>"; };
-		FC276D9E1E8775360089140B /* DateTimePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimePicker.swift; sourceTree = "<group>"; };
 		FC2862AA1DCEAFA6000854D9 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		FC30EB501EA32B7A00829E52 /* QuestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
 		FC30EB521EA575A700829E52 /* RequestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestViewController.swift; sourceTree = "<group>"; };
@@ -246,8 +223,6 @@
 		FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
 		FCEDA2B91E6D7946006FBF20 /* Structures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Structures.swift; sourceTree = "<group>"; };
 		FCEDA2BA1E6D7946006FBF20 /* Tagnizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tagnizer.swift; sourceTree = "<group>"; };
-		FCF265DC1E3B4CEC001F3F96 /* Request.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Request.swift; sourceTree = "<group>"; };
-		FCF265DE1E3B4D00001F3F96 /* Proposal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposal.swift; sourceTree = "<group>"; };
 		FCF2A0CD1E73DCDF00536D32 /* Selection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Selection.swift; sourceTree = "<group>"; };
 		FCF2A0D11E777C3600536D32 /* MQForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MQForm.swift; sourceTree = "<group>"; };
 		FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityListForm.swift; sourceTree = "<group>"; };
@@ -266,13 +241,11 @@
 		FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandPicker.swift; sourceTree = "<group>"; };
 		FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandInfo.swift; sourceTree = "<group>"; };
 		FCF9E5251EAB399B00F4A265 /* IslandForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandForm.swift; sourceTree = "<group>"; };
-		FCFA32C81E3F89AE007F115A /* Campaign.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Campaign.swift; sourceTree = "<group>"; };
 		FCFB07D81E719C6600E435BE /* Abstracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Abstracts.swift; sourceTree = "<group>"; };
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
 		FCFBA5871E594F3200B861F4 /* event10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event10.jpeg; path = images/event10.jpeg; sourceTree = "<group>"; };
 		FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInputForm.swift; sourceTree = "<group>"; };
-		FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SinglePageForm.swift; sourceTree = "<group>"; };
 		FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionForm.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
 		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
@@ -289,15 +262,6 @@
 		FCFEBF321E38F36F00DC989B /* BusinessIslandEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessIslandEntryViewController.swift; sourceTree = "<group>"; };
 		FCFEBF341E38F48200DC989B /* IslandDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandDetailViewController.swift; sourceTree = "<group>"; };
 		FCFEBF361E38F4B100DC989B /* IslandConstructViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandConstructViewController.swift; sourceTree = "<group>"; };
-		FCFEBF381E38F4F400DC989B /* RequestEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestEntryController.swift; sourceTree = "<group>"; };
-		FCFEBF3A1E38F52D00DC989B /* ProposalController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalController.swift; sourceTree = "<group>"; };
-		FCFEBF3C1E38F54800DC989B /* RequestController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestController.swift; sourceTree = "<group>"; };
-		FCFEBF3E1E38F57400DC989B /* PlaceEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaceEntryController.swift; sourceTree = "<group>"; };
-		FCFEBF401E38F6A100DC989B /* FlightEnventEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlightEnventEntryController.swift; sourceTree = "<group>"; };
-		FCFEBF421E38F6BD00DC989B /* HotelEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HotelEntryController.swift; sourceTree = "<group>"; };
-		FCFEBF441E38F6EE00DC989B /* EatEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EatEntryController.swift; sourceTree = "<group>"; };
-		FCFEBF461E38F70C00DC989B /* ShipEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShipEntryController.swift; sourceTree = "<group>"; };
-		FCFEBF481E38F73400DC989B /* TaxiEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaxiEntryController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -453,10 +417,6 @@
 			isa = PBXGroup;
 			children = (
 				FC0AF1F01DC4F65100C76408 /* DataModel.swift */,
-				FC002FF91E3A450C001CB6EF /* ActivityPlan.swift */,
-				FCF265DC1E3B4CEC001F3F96 /* Request.swift */,
-				FCF265DE1E3B4D00001F3F96 /* Proposal.swift */,
-				FCFA32C81E3F89AE007F115A /* Campaign.swift */,
 				FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */,
 			);
 			name = model;
@@ -476,7 +436,6 @@
 				FC0AF1EC1DC4F61B00C76408 /* Service.swift */,
 				FC2862AA1DCEAFA6000854D9 /* EventService.swift */,
 				FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */,
-				FC0081841DD37EFB00C1F970 /* TalkFetchService.swift */,
 				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
 			);
 			name = service;
@@ -506,15 +465,6 @@
 			isa = PBXGroup;
 			children = (
 				F4BB801F1DAE57A300055D48 /* ActivityTopController.swift */,
-				FCFEBF381E38F4F400DC989B /* RequestEntryController.swift */,
-				FCFEBF3A1E38F52D00DC989B /* ProposalController.swift */,
-				FCFEBF3C1E38F54800DC989B /* RequestController.swift */,
-				FCFEBF3E1E38F57400DC989B /* PlaceEntryController.swift */,
-				FCFEBF401E38F6A100DC989B /* FlightEnventEntryController.swift */,
-				FCFEBF421E38F6BD00DC989B /* HotelEntryController.swift */,
-				FCFEBF441E38F6EE00DC989B /* EatEntryController.swift */,
-				FCFEBF461E38F70C00DC989B /* ShipEntryController.swift */,
-				FCFEBF481E38F73400DC989B /* TaxiEntryController.swift */,
 				FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */,
 				FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */,
 				FCDC70941E8A8F75003034B3 /* ActivityPlanDetailController.swift */,
@@ -666,7 +616,6 @@
 			isa = PBXGroup;
 			children = (
 				FC427B801DCACB43009F43AE /* EventCell.swift */,
-				FCFBC67C1E640DF200AEF869 /* SinglePageForm.swift */,
 				FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */,
 				FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */,
 				FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */,
@@ -694,9 +643,6 @@
 		FCF957591DC613A100A52125 /* util */ = {
 			isa = PBXGroup;
 			children = (
-				FC276D9D1E8775360089140B /* DateCollectionViewCell.swift */,
-				FC276D9E1E8775360089140B /* DateTimePicker.swift */,
-				FC276D9B1E8775280089140B /* StepCollectionViewFlowLayout.swift */,
 				F42CDE521DCD7525001CAFBE /* Strings.swift */,
 			);
 			name = util;
@@ -1037,30 +983,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC0081851DD37EFB00C1F970 /* TalkFetchService.swift in Sources */,
 				FCEDA2BD1E6D7946006FBF20 /* CustomPoint.swift in Sources */,
 				FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,
-				FCFBC67D1E640DF200AEF869 /* SinglePageForm.swift in Sources */,
-				FCFEBF3B1E38F52D00DC989B /* ProposalController.swift in Sources */,
 				FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */,
 				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
 				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
 				FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */,
-				FCFEBF3F1E38F57400DC989B /* PlaceEntryController.swift in Sources */,
 				FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */,
 				FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */,
 				FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */,
-				FCFEBF411E38F6A100DC989B /* FlightEnventEntryController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
 				FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */,
 				FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
-				FCFEBF3D1E38F54800DC989B /* RequestController.swift in Sources */,
 				FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
@@ -1068,18 +1008,14 @@
 				F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */,
 				FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */,
 				FCFEBF371E38F4B100DC989B /* IslandConstructViewController.swift in Sources */,
-				FCFA32C91E3F89AE007F115A /* Campaign.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
-				FCFEBF471E38F70C00DC989B /* ShipEntryController.swift in Sources */,
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
 				FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */,
-				FCFEBF391E38F4F400DC989B /* RequestEntryController.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
 				FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */,
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */,
-				FC276DA01E8775360089140B /* DateTimePicker.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
 				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
@@ -1089,8 +1025,6 @@
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
-				FC276D9C1E8775280089140B /* StepCollectionViewFlowLayout.swift in Sources */,
-				FC002FFA1E3A450C001CB6EF /* ActivityPlan.swift in Sources */,
 				FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */,
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,
 				FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */,
@@ -1103,12 +1037,8 @@
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,
-				FCFEBF491E38F73400DC989B /* TaxiEntryController.swift in Sources */,
-				FC276D9F1E8775360089140B /* DateCollectionViewCell.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
-				FCF265DD1E3B4CEC001F3F96 /* Request.swift in Sources */,
 				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,
-				FCFEBF451E38F6EE00DC989B /* EatEntryController.swift in Sources */,
 				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
@@ -1117,11 +1047,9 @@
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */,
-				FCF265DF1E3B4D00001F3F96 /* Proposal.swift in Sources */,
 				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
 				FCEDA2BF1E6D7946006FBF20 /* Extensions.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
-				FCFEBF431E38F6BD00DC989B /* HotelEntryController.swift in Sources */,
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,
 				FC16A5361E549A8A00C49F5F /* ExplorerTopViewController.swift in Sources */,
 			);

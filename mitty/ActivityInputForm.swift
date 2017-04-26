@@ -59,7 +59,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-start", title: "開始")
-        row +++ text(name: "fromDateTime" , placeHolder: "開始日時"  , width: 200).height(35)
+        row +++ text(name: "fromDateTime" , placeHolder: "開始日時"  , width: 230).height(35)
         
         row.layout() {
             r in
@@ -70,7 +70,7 @@ class ActivityInputForm : MQForm {
 
         row = Row.LeftAligned()
         row +++ label(name: "label-End", title: "終了")
-        row +++ text(name: "toDateTime" , placeHolder: "終了日時"  , width: 200).height(35)
+        row +++ text(name: "toDateTime" , placeHolder: "終了日時"  , width: 230).height(35)
         
         row.layout() {
             r in
@@ -80,7 +80,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-des", title: "メモ")
-        row +++ text(name: "memo" , placeHolder: "メモ"  , width: 250).height(60)
+        row +++ textView(name: "memo" , width: 250).height(60)
         
         row.layout() {
             r in
@@ -144,7 +144,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-InfoSource", title: "情報源")
-        row +++ text(name: "infoSource" , placeHolder: "ウェブサイトなどの情報"  , width: 260).height(70)
+        row +++ textView(name: "infoSource", width: 260).height(70)
         row.layout() {
             r in
             r.height(75).fillHolizon()

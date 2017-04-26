@@ -110,7 +110,7 @@ class ActivityPlanViewController : UIViewController {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
         dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .long
+        dateFormatter.timeStyle = .medium
         form.quest("[name=toDateTime]").forEach() { (c) in
             let textField = c.view as! UITextField
             textField.text = dateFormatter.string(from: picker.date)

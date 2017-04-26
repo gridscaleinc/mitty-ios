@@ -131,7 +131,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         scrollContainer +++ detailForm
         
-        imageView.image = UIImage(named: images[Int(event.id)])
+        imageView.image = UIImage(named: images[Int(event.id!)])
         let img = Control(name: "image", view: imageView).layout {
             i in
             i.width(UIScreen.main.bounds.size.width).upper().fillHolizon()
@@ -189,7 +189,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
         }
         
-        let dates = form.label(name: "sheduledData", title: "⏰　2018/1/1 〜　2018/1/3").layout { l in
+        let dates = form.label(name: "sheduledData", title: event.duration()).layout { l in
             l.height(35).width(250)
         }
         
@@ -414,6 +414,6 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     func buildDummyEvent(e : Event) {
         e.action = "専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。"
         e.title = "フィンテックの話"
-        e.iconId = 1
+        e.logoId = 1
     }
 }

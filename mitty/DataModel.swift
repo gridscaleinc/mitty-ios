@@ -11,43 +11,114 @@ import Foundation
 ///
 /// イベント情報
 class Event {
-    var    id : Int8 = 0
-    var    type : String? = nil
-    var    iconId: Int? = nil
-    var    tag : String = ""
-    var    title : String? = nil
-    var    action : String? = nil
-    var    tel : String? = nil
-    var    fax : String? = nil
-    var    mailaddress : String? = nil
-    var    webpage : String? = nil
-    var    startDateTime : String? = nil
-    var    endDateTime : String? = nil
-    var    alldayFlag : String? = nil
-    var    limitOfApplications : String? = nil
-    var    galleryId: Int? = nil
-    var    gallery : [Gallery] = []
-    var    islandId : Int? = nil
-    var    island : Island? = nil
-    var    meetingId : String? = nil
-    var    priceName1 : String? = nil
-    var    price1 : String? = nil
-    var    priceName2 : String? = nil
-    var    price2 : String? = nil
-    var    priceCurrence : String? = nil
-    var    priceInfo : String? = nil
-    var    publisherId : String? = nil
-    var    orgnizationId : String? = nil
-    var    sourceName : String? = nil
-    var    sourceUrl : String? = nil
-    var    anticipants : String? = nil
-    var    likes : Int? = 0
-    var    status : String? = nil
-    var    lastUpdated : String? = nil
-    var    amenderId : Int? = nil
+    
+    //(O) PK イベントID
+    var id : Int8? = nil
+    
+    //(M) イベントの種類
+    var type: String? = nil
+    
+    //(O) カテゴリー
+    var category: String? = nil
+    
+    //(O) テーマ
+    var theme: String? = nil
+    
+    //(M) イベントについて利用者が入力したデータの分類識別。
+    var tag:  String? = nil
+    
+    //(M) イベントタイトル
+    var title: String? = nil
+    
+    //(M) イベントの行い概要内容
+    var action: String? = nil
+    
+    //(M) イベント開始日時
+    var startDate: Date? = nil
+    
+    //(M) イベント終了日時
+    var endDate: Date? = nil
+    
+    //(M) 時刻非表示フラグ。
+    var allDayFlag: Bool = false
+    
+    //(M) 島ID
+    var islandId:  Int8? = nil
+    
+    var logoId: Int8? = nil
+    
+    var galleryId: Int8? = nil
+    
+    var meetingId: Int8? = nil
+    
+    //(O) 価格名称１
+    var priceName1: String? = nil
+    
+    //(O) 価格額１
+    var price1: Double? = nil
+    
+    //(O) 価格名称2
+    var priceName2: String?   = nil
+    
+    //(O) 価格額２
+    var    price2: Double?       = nil
+    
+    //(O) 通貨　(USD,JPY,などISO通貨３桁表記)
+    var currency: String? = nil
+    
+    //(O) 価格について一般的な記述
+    var priceInfo: String? = nil
+    
+    //(M) イベントについて詳細な説明記述
+    var description: String? = nil
+    
+    //(O) 連絡電話番号
+    var contactTel: String? = nil
+    
+    //(O) 連絡FAX
+    var contactFax: String? = nil
+    
+    //(O) 連絡メール
+    var contactMail: String? = nil
+    
+    //(O) イベント公式ページURL
+    var officialUrl: String? = nil
+    
+    //(O) 主催者の個人や団体の名称
+    var organizer: String? = nil
+    
+    //(M) 情報源の名称
+    var sourceName: String? = nil
+    
+    //(O) 情報源のWebPageのURL
+    var sourceUrl: String? = nil
+    
+    //(O) イベント参加方式、 OPEN：　自由参加、
+    //    INVITATION:招待制、PRIVATE:個人用、他の人は参加不可。
+    var anticipation: String? = nil
+    
+    //(M) イベント情報のアクセス制御：　PUBLIC: 全公開、
+    //    PRIVATE: 非公開、 SHARED:関係者のみ
+    var accessControl: String = "PRIVATE"
+    
+    var likes: Int? = nil
+    
+    var status: String = "DRAFT"
+    
+    //(M) 言語情報　(Ja_JP, en_US, en_GB) elasticsearchに使用する。
+    var language: String = Locale.current.identifier
     
     init (_ id : Int8) {
         self.id = id
+    }
+    
+    func duration() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale.current
+        formatter.dateStyle = .long
+        formatter.timeStyle = .medium
+        
+        return "🕒" + formatter.string(from:startDate!) + " - " + formatter.string(from: endDate!)
     }
     
 }
@@ -137,8 +208,5 @@ class SocialContactInfo {
     public var mittyId = ""
     public var imageUrl = ""
     public var name = ""
-    
-    
-    
 }
 

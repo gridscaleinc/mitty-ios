@@ -97,8 +97,8 @@ class EventCell: UICollectionViewCell {
         // 登録者
         
         // TODO
-//        itemImageView.image = UIImage(data: Data(bytes: (event.gallery[0].content?.data)!))
-        itemImageView.image = UIImage(named: images[Int(event.id)])
+        // itemImageView.image = UIImage(data: Data(bytes: (event.gallery[0].content?.data)!))
+        itemImageView.image = UIImage(named: images[Int(event.id!)])
         
         titleLabel.numberOfLines = 2
         titleLabel.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
@@ -108,7 +108,7 @@ class EventCell: UICollectionViewCell {
         priceLabel.text = LS(key: "now") + String(describing: event.price1) + LS(key: "yen")
 
         endTimeLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
-        endTimeLabel.text = "🕒" + event.startDateTime! + " - " + event.endDateTime!
+        endTimeLabel.text = event.duration()
         
 
         likesLabel.font = UIFont.systemFont(ofSize: CGFloat(10))

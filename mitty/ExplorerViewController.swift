@@ -166,7 +166,7 @@ extension EventViewController: UICollectionViewDelegateFlowLayout {
         
         let e = events[indexPath.row]
         // TODO
-        let image = UIImage(named: images[Int(e.id)])
+        let image = UIImage(named: images[Int(e.id!)])
         let ratio = image == nil ? 1: (image?.size.height)!/(image?.size.width)!
         
         let screenSize:CGSize = UIScreen.main.bounds.size

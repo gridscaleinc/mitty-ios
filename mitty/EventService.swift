@@ -41,17 +41,16 @@ class EventService {
     // イベントを生成する
     func buildEvent(_ n:Int) ->Event! {
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
         let a = Event(Int8(n))
         a.title = "title" + String(n)
         a.priceInfo  = "\(10 * n)"
 
-        a.startDateTime = "2016-09-09"
-        a.endDateTime = "2016-10-10"
-        let gallery = Gallery(1,1)
-        let content = Content(1)
-//        content.data = UIImagePNGRepresentation(UIImage(named: images[n]))
-        gallery.content = content
-        a.gallery.append(gallery)
+        a.startDate = formatter.date(from:"2016-10-10 12:12:12")
+        a.endDate = formatter.date(from:"2016-10-10 12:12:12")
+        
         
         a.likes = 10 + n
         
