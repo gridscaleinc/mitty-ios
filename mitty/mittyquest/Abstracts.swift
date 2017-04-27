@@ -35,7 +35,7 @@ import UIKit
 // by layout, event registeration, and Async excution
 protocol Operatable {
     func layout(_ coder: @escaping LayoutCoder) -> Self
-    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self
+    func bindEvent(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self
     func future(_ operation: @escaping (Operatable) -> Void, _ completion: (()->Void)?) -> Self
 }
 

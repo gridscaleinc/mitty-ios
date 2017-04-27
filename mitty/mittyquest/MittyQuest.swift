@@ -120,7 +120,7 @@ open class MittyQuest : OperationSet {
         let mitty = (selector != nil) ? self[selector!] : self
         
         for c in mitty.controls {
-            c.event(event, handler)
+            c.bindEvent(event, handler)
         }
         return mitty
         

@@ -59,6 +59,7 @@ open class Control : NSObject, Node, Operatable {
     
     var view: UIView { return _view }
     
+    // parent control
     var parent: Control? {
         get { return _parent}
         set (p) {
@@ -66,6 +67,7 @@ open class Control : NSObject, Node, Operatable {
         }
     }
     
+    // sub controls
     internal var children : [Control] = []
     
     // construct a default named control
@@ -77,7 +79,7 @@ open class Control : NSObject, Node, Operatable {
         _name = "Node#" + String(view.tag)
     }
     
-    //
+    // initalize control using name and specific view
     public init(name: String, view v: UIView) {
         _name = name
         if (v.tag == 0) {
@@ -87,12 +89,12 @@ open class Control : NSObject, Node, Operatable {
         super.init()
     }
     
-    // Initializer
+    // Initializer, using name only with default UIView underly.
     public convenience init(name: String) {
         self.init(name: name, view: UIView.newAutoLayout())
     }
     
-    // Initializer
+    // Initializer, with no name , and a defulat UIView underly.
     public convenience override init() {
         self.init(name: "", view: UIView.newAutoLayout())
         self._name = type(of:self).description() + "\(_view.tag)"
@@ -141,7 +143,9 @@ open class Control : NSObject, Node, Operatable {
     
     /*
      Make it conform to Operatable protocol
-     registration Layout coder
+     registration Layout coder.
+     The layout coder is registered only, it will not working until configLayout func
+     called.
      */
     @discardableResult
     func layout(_ coder: @escaping LayoutCoder) -> Self {
@@ -177,7 +181,7 @@ open class Control : NSObject, Node, Operatable {
      register event handler here
      */
     @discardableResult
-    func event(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self {
+    func bindEvent(_ event: UIControlEvents, _ handler: @escaping EventHandler) -> Self {
 
         let delegator = ControlEventDelegator()
         delegators.append(delegator)
@@ -187,11 +191,46 @@ open class Control : NSObject, Node, Operatable {
         return self
     }
     
-    //
+    // config layout by previously registered layout coders.
     func configLayout () {
         for code in layoutCoders {
             code(self)
         }
     }
     
+    // retrieve underlying UILabel view.
+    // Its throws error if the underlying view is not conform to UILabel.
+    var label : UILabel  {
+        return _view as! UILabel
+    }
+    
+    // retrieve underlying UITextField view.
+    // Its throws error if the underlying view is not conform to UITextField.
+    var textField : UITextField  {
+        return _view as! UITextField
+    }
+    
+    // retrieve underlying UITextView view.
+    // Its throws error if the underlying view is not conform to UITextView.
+    var textView : UITextView  {
+        return _view as! UITextView
+    }
+    
+    // retrieve underlying UIStepper view.
+    // Its throws error if the underlying view is not conform to UIStepper.
+    var stepper : UIStepper  {
+        return _view as! UIStepper
+    }
+    
+    // retrieve underlying UISwitch view.
+    // Its throws error if the underlying view is not conform to UISwitch.
+    var switcher : UISwitch  {
+        return _view as! UISwitch
+    }
+    
+    // retrieve underlying UIImageView view.
+    // Its throws error if the underlying view is not conform to UIImageView.
+    var image : UIImageView  {
+        return _view as! UIImageView
+    }
 }

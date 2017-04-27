@@ -203,7 +203,7 @@ class RequestViewController : UIViewController {
             b.backgroundColor = .orange
         }
         
-        row["Post"]?.event(.touchUpInside) { [weak self] btn in
+        row["Post"]?.bindEvent(.touchUpInside) { [weak self] btn in
             self?.navigationController?.popViewController(animated: true)
         }
         

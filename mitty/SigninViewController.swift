@@ -195,16 +195,16 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         inputForm <<< row
         
-        loginButton.event(.touchUpInside) { [weak self] b in
+        loginButton.bindEvent(.touchUpInside) { [weak self] b in
             self!.onClickSigninButton(b as! UIButton)
         }
         
-        signUpLabel.event(.touchUpInside) {[weak self] v in
+        signUpLabel.bindEvent(.touchUpInside) {[weak self] v in
             self!.onClickLinkButton(v as! UILabel)
         }
 
         
-        instantUse.event(.touchUpInside) { v in
+        instantUse.bindEvent(.touchUpInside) { v in
             let mainTabBarController: MainTabBarController = MainTabBarController()
             self.present(mainTabBarController, animated:true, completion:nil)
         }

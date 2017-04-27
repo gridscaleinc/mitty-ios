@@ -71,9 +71,7 @@
 		FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCDC70961E8A9011003034B3 /* ActivityPlanDetailForm.swift */; };
 		FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEB696F1E9D0C2800A32C4F /* LoadingProxy.swift */; };
 		FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B11E6D7946006FBF20 /* Controls.swift */; };
-		FCEDA2BD1E6D7946006FBF20 /* CustomPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B21E6D7946006FBF20 /* CustomPoint.swift */; };
 		FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B31E6D7946006FBF20 /* EventDispatcher.swift */; };
-		FCEDA2BF1E6D7946006FBF20 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B41E6D7946006FBF20 /* Extensions.swift */; };
 		FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B51E6D7946006FBF20 /* Layout.swift */; };
 		FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B61E6D7946006FBF20 /* MittyQuest.swift */; };
 		FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */; };
@@ -87,7 +85,6 @@
 		FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */; };
 		FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */; };
 		FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D6401DD762020059B270 /* ImageEdit.swift */; };
-		FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D6441DD7F6960059B270 /* MittyStyles.swift */; };
 		FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */; };
 		FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */; };
 		FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */; };
@@ -215,9 +212,7 @@
 		FCDC70961E8A9011003034B3 /* ActivityPlanDetailForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanDetailForm.swift; sourceTree = "<group>"; };
 		FCEB696F1E9D0C2800A32C4F /* LoadingProxy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingProxy.swift; sourceTree = "<group>"; };
 		FCEDA2B11E6D7946006FBF20 /* Controls.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Controls.swift; sourceTree = "<group>"; };
-		FCEDA2B21E6D7946006FBF20 /* CustomPoint.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPoint.swift; sourceTree = "<group>"; };
 		FCEDA2B31E6D7946006FBF20 /* EventDispatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDispatcher.swift; sourceTree = "<group>"; };
-		FCEDA2B41E6D7946006FBF20 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		FCEDA2B51E6D7946006FBF20 /* Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Layout.swift; sourceTree = "<group>"; };
 		FCEDA2B61E6D7946006FBF20 /* MittyQuest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyQuest.swift; sourceTree = "<group>"; };
 		FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OperationSet.swift; sourceTree = "<group>"; };
@@ -231,7 +226,6 @@
 		FCF7F3431DD0D2FA00D78384 /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		FCF7F3451DD0D3BD00D78384 /* PageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		FCF8D6401DD762020059B270 /* ImageEdit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageEdit.swift; sourceTree = "<group>"; };
-		FCF8D6441DD7F6960059B270 /* MittyStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyles.swift; sourceTree = "<group>"; };
 		FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInfoViewController.swift; sourceTree = "<group>"; };
 		FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactInfoCell.swift; sourceTree = "<group>"; };
 		FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialContactService.swift; sourceTree = "<group>"; };
@@ -595,9 +589,7 @@
 			isa = PBXGroup;
 			children = (
 				FCEDA2B11E6D7946006FBF20 /* Controls.swift */,
-				FCEDA2B21E6D7946006FBF20 /* CustomPoint.swift */,
 				FCEDA2B31E6D7946006FBF20 /* EventDispatcher.swift */,
-				FCEDA2B41E6D7946006FBF20 /* Extensions.swift */,
 				FCEDA2B51E6D7946006FBF20 /* Layout.swift */,
 				FCEDA2B61E6D7946006FBF20 /* MittyQuest.swift */,
 				FCEDA2B71E6D7946006FBF20 /* OperationSet.swift */,
@@ -655,7 +647,6 @@
 				FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */,
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
-				FCF8D6441DD7F6960059B270 /* MittyStyles.swift */,
 				FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */,
 			);
 			name = util;
@@ -983,7 +974,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FCEDA2BD1E6D7946006FBF20 /* CustomPoint.swift in Sources */,
 				FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
@@ -1039,7 +1029,6 @@
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
 				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,
-				FCF8D6451DD7F6960059B270 /* MittyStyles.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
@@ -1048,7 +1037,6 @@
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */,
 				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
-				FCEDA2BF1E6D7946006FBF20 /* Extensions.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,
 				FC16A5361E549A8A00C49F5F /* ExplorerTopViewController.swift in Sources */,
