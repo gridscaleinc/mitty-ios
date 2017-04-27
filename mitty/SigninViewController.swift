@@ -66,10 +66,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         var row = Row.LeftAligned()
         
-        row +++ loginForm.img(name: "icon" , url:"pengin4").layout() { c in
+        row +++ MQForm.img(name: "icon" , url:"pengin4").layout() { c in
             c.height(50).width(50).leftMargin(30)
         }
-        row +++ loginForm.label(name:"welcome-message", title: "Mittyへようこそ" ).layout() {
+        row +++ MQForm.label(name:"welcome-message", title: "Mittyへようこそ" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.boldSystemFont(ofSize: 22)
@@ -84,7 +84,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         
         row = Row.LeftAligned()
-        row +++ loginForm.text(name: "userId" , placeHolder: "👩 ユーザーID" ).width(200).layout() {
+        row +++ MQForm.text(name: "userId" , placeHolder: "👩 ユーザーID" ).width(200).layout() {
             c in
             c.height(50).leftMargin(30)
         }
@@ -96,7 +96,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ loginForm.text(name: "password" , placeHolder: "🔐 パスワード" ).width(200).layout() {
+        row +++ MQForm.text(name: "password" , placeHolder: "🔐 パスワード" ).width(200).layout() {
             c in
             (c.view as! UITextField).isSecureTextEntry = true
             c.height(50).leftMargin(30)
@@ -110,7 +110,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         
         row = Row.LeftAligned()
-        let loginButton = loginForm.button(name: "Login" , title: "Login").layout() {
+        let loginButton = MQForm.button(name: "Login" , title: "Login").layout() {
             c in
             c.height(30).width(140).leftMargin(30)
         }
@@ -124,7 +124,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        let errorMessage = loginForm.label(name:"errormessage", title: "" ).layout() {
+        let errorMessage = MQForm.label(name:"errormessage", title: "" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 12)
@@ -142,7 +142,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ loginForm.label(name:"forget-password", title: ".Passwordを忘れた場合" ).layout() {
+        row +++ MQForm.label(name:"forget-password", title: ".Passwordを忘れた場合" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 15)
@@ -158,7 +158,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        let signUpLabel = loginForm.label(name:"forget-password", title: ".初めて利用の方へ" ).layout() {
+        let signUpLabel = MQForm.label(name:"forget-password", title: ".初めて利用の方へ" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 15)
@@ -177,7 +177,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         row = Row.RightAligned()
         
-        let instantUse = loginForm.label(name:"using-withoudid", title: "ログインなしで利用へ" ).layout() {
+        let instantUse = MQForm.label(name:"using-withoudid", title: "ログインなしで利用へ" ).layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 15)

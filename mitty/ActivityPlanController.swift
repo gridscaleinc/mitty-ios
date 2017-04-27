@@ -150,9 +150,6 @@ class ActivityPlanViewController : UIViewController {
         
         self.view.setNeedsUpdateConstraints()
     }
-    
-    
-    
 }
 
 

@@ -88,24 +88,24 @@ class ActivityListForm : MQForm {
         buttons.distribution = .atIntervals
         
 //        let buttons = Row.LeftAligned()
-        let thisYearButton :Control = button (name: "thisYear", title: "今年").layout() { (button) in
+        let thisYearButton :Control = MQForm.button(name: "thisYear", title: "今年").layout() { (button) in
             button.width(80).height(50)
         }
         
         buttons +++ thisYearButton
     
-        let nextYearButton : Control = button (name: "nextYear", title: "来年").layout() { (button) in
+        let nextYearButton : Control = MQForm.button(name: "nextYear", title: "来年").layout() { (button) in
             button.width(80).height(50)
         }
         
         nextYearButton.margin.left = 10
         buttons +++ nextYearButton
         
-        let stepperCtl :Control = stepper(name: "stepper", min: 2019, max: 2049).layout() { (stepper) in
+        let stepperCtl :Control = MQForm.stepper(name: "stepper", min: 2019, max: 2049).layout() { (stepper) in
             stepper.width(50).height(28)
         }
         
-        let indicatorCtl : Control = button (name: "indicator", title: "2019").layout() { (button) in
+        let indicatorCtl : Control = MQForm.button (name: "indicator", title: "2019").layout() { (button) in
             button.width(80).height(28)
         }
         indicatorCtl.margin.bottom = 10
@@ -153,8 +153,8 @@ class ActivityListForm : MQForm {
             let row = Row.LeftAligned()
             section <<< row
             
-            row +++ label(name: "activitylabel", title: t.label).width(250).height(30)
-                +++ img(name:"icon", url: t.imgName).width(30).height(20)
+            row +++ MQForm.label(name: "activitylabel", title: t.label).width(250).height(30)
+                +++ MQForm.img(name:"icon", url: t.imgName).width(30).height(20)
 
                 
             row.layout(){ r in

@@ -99,7 +99,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let height_normal : CGFloat = 60.0
         
-        let anchor = form.label(name: "dummy", title: "").layout {
+        let anchor = MQForm.label(name: "dummy", title: "").layout {
             a in
             a.height(0).leftMost().rightMost()
         }
@@ -139,7 +139,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         detailForm +++ img
         
-        let titleLabel = form.label(name: "Title", title: event.title!).layout {
+        let titleLabel = MQForm.label(name: "Title", title: event.title!).layout {
             l in
             l.leftMost(withInset: 25).upper(withInset: 50).height(20)
 
@@ -152,14 +152,14 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         detailForm +++ titleLabel
         
-        let imageIcon = form.img(name: "image-icon", url: "timesquare").layout {
+        let imageIcon = MQForm.img(name: "image-icon", url: "timesquare").layout {
             i in
             i.width(35).height(35).topAlign(with: titleLabel).rightMost(withInset: 30)
         }
         detailForm +++ imageIcon
         
 
-        let actionLabel = form.label(name: "action", title: (event.action ?? "")).layout {
+        let actionLabel = MQForm.label(name: "action", title: (event.action ?? "")).layout {
             c in
             c.putUnder(of: img, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel
@@ -176,7 +176,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(35)
         }
         
-        let likes = form.label(name: "heart", title: "❤️ 134  価格:¥1000.").layout { l in
+        let likes = MQForm.label(name: "heart", title: "❤️ 134  価格:¥1000.").layout { l in
             l.height(35).width(330)
         }
         
@@ -189,7 +189,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
         }
         
-        let dates = form.label(name: "sheduledData", title: event.duration()).layout { l in
+        let dates = MQForm.label(name: "sheduledData", title: event.duration()).layout { l in
             l.height(35).width(250)
         }
         
@@ -201,13 +201,13 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
         }
         
-        let location = form.label(name: "isLand", title: "📍　ビッグサイト").layout { l in
+        let location = MQForm.label(name: "isLand", title: "📍　ビッグサイト").layout { l in
             l.height(35).width(250)
         }
         
         row +++ location
         
-        let lacationIcon = form.img(name: "locationIocn", url: "timesquare").layout {
+        let lacationIcon = MQForm.img(name: "locationIocn", url: "timesquare").layout {
             icon in
             icon.height(35).width(20).topAlign(with: location)
         }
@@ -221,11 +221,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(35)
         }
-        contact +++ form.label(name: "tel", title: "☎️　03-3733-0987").layout {
+        contact +++ MQForm.label(name: "tel", title: "☎️　03-3733-0987").layout {
             l in
             l.height(35)
         }
-        contact +++ form.label(name: "fax", title: "📠　03-3733-0989").layout {
+        contact +++ MQForm.label(name: "fax", title: "📠　03-3733-0989").layout {
             l in
             l.height(35)
         }
@@ -237,11 +237,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: contact, withOffset: 5).height(35)
         }
-        infoSource +++ form.label(name: "sponsor", title: "主催者").layout {
+        infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
             l in
             l.height(35)
         }
-        infoSource +++ form.label(name: "name", title: "先端金融情報研究会").layout {
+        infoSource +++ MQForm.label(name: "name", title: "先端金融情報研究会").layout {
             l in
             l.height(35)
         }
@@ -252,7 +252,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(35)
         }
-        url +++ form.label(name: "URL", title: "情報源").layout {
+        url +++ MQForm.label(name: "URL", title: "情報源").layout {
             l in
             l.height(35)
         }
@@ -281,7 +281,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let description = "フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。"
         
-        let descriptionLabel = form.label(name: "detailDescription", title: description).layout {
+        let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
             c in
             c.putUnder(of: url, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel

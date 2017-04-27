@@ -105,9 +105,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             r.fillHolizon().height(35)
         }
         
-        row +++ form.button(name: "Taxi", title: "タクシー乗場").height(35)
-        row +++ form.button(name: "PeopleNearby", title: "近くの人").height(35)
-        row +++ form.button(name: "PeopleNearby", title: "近くの島").height(35)
+        row +++ MQForm.button(name: "Taxi", title: "タクシー乗場").height(35)
+        row +++ MQForm.button(name: "PeopleNearby", title: "近くの人").height(35)
+        row +++ MQForm.button(name: "PeopleNearby", title: "近くの島").height(35)
         
         section <<< row
         
@@ -116,8 +116,8 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             r.fillHolizon().height(40)
         }
 
-        row +++ form.label(name: "Taxi", title: "現在地:東京タワー🗼").height(35)
-        row +++ form.button(name: "checkIn", title: "チェックイン").height(35)
+        row +++ MQForm.label(name: "Taxi", title: "現在地:東京タワー🗼").height(35)
+        row +++ MQForm.button(name: "checkIn", title: "チェックイン").height(35)
         
         section <<< row
         
@@ -126,9 +126,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             r.fillHolizon().height(40)
         }
 
-        row +++ form.button(name: "Transperent", title: "透明").height(35)
-        row +++ form.button(name: "Unopen", title: "📌非公開").height(35)
-        row +++ form.button(name: "settings", title: "＋設定").height(35)
+        row +++ MQForm.button(name: "Transperent", title: "透明").height(35)
+        row +++ MQForm.button(name: "Unopen", title: "📌非公開").height(35)
+        row +++ MQForm.button(name: "settings", title: "＋設定").height(35)
         
         section <<< row
         

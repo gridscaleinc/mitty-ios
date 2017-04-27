@@ -196,13 +196,13 @@ class ActivityPlanDetailsForm : MQForm {
             r.height(50).fillHolizon()
         }
  
-        row +++ label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).layout {
+        row +++ MQForm.label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).layout {
             l in
             (l.view as! UILabel).textColor = UIColor.gray
             l.leftMost(withInset:10).rightMost(withInset: 50).height(35)
         }
         
-        row +++ img(name: "icon" , url:"timesquare").layout{
+        row +++ MQForm.img(name: "icon" , url:"timesquare").layout{
             img in
             img.height(30).width(30).rightMost(withInset: 10)
         }
@@ -354,14 +354,12 @@ class ActivityPlanDetailsForm : MQForm {
 
         }
         
-        
-        
         inputForm <<< Row.LeftAligned().height(50)
 
         row = Row.Intervaled()
         row.spacing = 40
         
-        let bt = button(name: "delete", title: "活動計画を削除").width(80).height(28)
+        let bt = MQForm.button(name: "delete", title: "活動計画を削除").width(80).height(28)
         bt.layout() {
             c in
             c.view.backgroundColor = UIColor.red

@@ -199,7 +199,6 @@ extension Control {
         return self
     }
     
-    
     @discardableResult
     open func verticalCenter() -> Self {
         self.view.autoAlignAxis(toSuperviewMarginAxis: .horizontal)

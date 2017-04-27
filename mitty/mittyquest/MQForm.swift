@@ -63,14 +63,14 @@ open class MQForm : UIView {
     }
     
     // Label
-    func  label (name: String, title: String) -> Control {
+    static func  label (name: String, title: String) -> Control {
         let l = TapableLabel.newAutoLayout()
         l.text = title
         return Control(name: name, view: l)
     }
     
     // TextField
-    func text(name: String, placeHolder: String) -> Control {
+    static func text(name: String, placeHolder: String) -> Control {
         let t = StyledTextField.newAutoLayout()
         t.hilightedLineColor = UIColor.blue.cgColor
         t.placeholder = placeHolder
@@ -81,7 +81,7 @@ open class MQForm : UIView {
     }
     
     // TextView
-    func textView(name: String) -> Control {
+    static func textView(name: String) -> Control {
         let t = StyledTextView.newAutoLayout()
         t.hilightedLineColor = UIColor.blue.cgColor
         let c = Control(name: name, view: t)
@@ -89,14 +89,14 @@ open class MQForm : UIView {
     }
     
     // Button
-    func button(name: String, title: String ) -> Control {
+    static func button(name: String, title: String ) -> Control {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
         return Control(name: name, view:button)
     }
     
     // Image
-    func img(name: String, url: String ) -> Control {
+    static func img(name: String, url: String ) -> Control {
  
         let img = UIImageView.newAutoLayout()
         img.image = UIImage(named: url)
@@ -106,7 +106,7 @@ open class MQForm : UIView {
     }
     
     // Stepper
-    func stepper (name: String, min: Double, max: Double) -> Control {
+    static func stepper (name: String, min: Double, max: Double) -> Control {
         let stepper = UIStepper.newAutoLayout()
         stepper.minimumValue = min
         stepper.maximumValue = max

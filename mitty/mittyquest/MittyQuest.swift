@@ -219,7 +219,6 @@ class MittyUIViewController : UIViewController {
     }
     
     func MQ() -> MittyQuest {
-        now("Start Travel.....")
         let rootView = self.view
         if (rootView is MQForm) {
             rootMitty = (rootView as! MQForm).quest()
@@ -240,7 +239,6 @@ class MittyUIViewController : UIViewController {
         for vx in rootView!.subviews {
             travel(vx, m)
         }
-        now("End Travel.....")
         return m
     }
     
@@ -261,21 +259,5 @@ class MittyUIViewController : UIViewController {
         }
         
         return mitty
-        
-    }
-
-    func now(_ msg: String? = "") {
-        let now = NSDate()
-        
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
-        
-        let string = formatter.string(from: now as Date) + ":" + msg!
-        
-        print(string)
-    }
-    
-    deinit {
-        now("<MittyUIController:> " + self.description + " destroyed.")
     }
 }
