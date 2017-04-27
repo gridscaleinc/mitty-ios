@@ -84,7 +84,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         
         
         row = Row.LeftAligned()
-        row +++ loginForm.text(name: "userId" , placeHolder: "👩 ユーザーID"  , width: 200).layout() {
+        row +++ loginForm.text(name: "userId" , placeHolder: "👩 ユーザーID" ).width(200).layout() {
             c in
             c.height(50).leftMargin(30)
         }
@@ -96,7 +96,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ loginForm.text(name: "password" , placeHolder: "🔐 パスワード"  , width: 200).layout() {
+        row +++ loginForm.text(name: "password" , placeHolder: "🔐 パスワード" ).width(200).layout() {
             c in
             (c.view as! UITextField).isSecureTextEntry = true
             c.height(50).leftMargin(30)

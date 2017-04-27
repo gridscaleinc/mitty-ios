@@ -33,7 +33,6 @@ import UIKit
 
 open class Container : Control, Selectable {
     
-
     subscript (named: String) -> Control? {
         let set = select() { (c: Control) in
             return c.name == named
@@ -109,6 +108,7 @@ open class Container : Control, Selectable {
             right.parent = nil
         }
     }
+    
     /**
      Configure container layout
      */

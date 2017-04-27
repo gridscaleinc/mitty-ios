@@ -32,14 +32,16 @@ import UIKit
 
 @objc(MQForm)
 open class MQForm : UIView {
-    var rootMitty = MittyQuest()
-    var controls: [Control] = []
-    var controlDictionary : [String: Control] = [:]
     
+    // コントロールの順序を保ったクレクション
+    var controls: [Control] = []
+    
+    // アサイメント計算
     static func += (left: inout MQForm, control: Control) {
         left.append(control)
     }
     
+    // 足し算
     @discardableResult
     static func +++ (left: MQForm, right: Control) -> MQForm {
         var f = left
@@ -47,68 +49,63 @@ open class MQForm : UIView {
         return left
     }
     
-    var controlCount : Int { return controls.count }
-    
+    // 足す
     func append(_ control: Control) {
         controls.append(control)
-        controlDictionary[control.name] = control
         addSubview(control.view)
     }
     
+    // 
+    // コントロール名よりコントロール取得。
+    // このフォームに含まれるすべてのコントロールから名称が一致するものの一番最初に見つけたのを返す。
     subscript(_ name: String) -> Control? {
         return quest("[name=\(name)]").control()
     }
     
+    // Label
     func  label (name: String, title: String) -> Control {
         let l = TapableLabel.newAutoLayout()
         l.text = title
-        l.font = UIFont.systemFont(ofSize: 14)
         return Control(name: name, view: l)
     }
     
-    ///
-    func text(name: String, placeHolder: String, width: CGFloat?) -> Control {
+    // TextField
+    func text(name: String, placeHolder: String) -> Control {
         let t = StyledTextField.newAutoLayout()
         t.hilightedLineColor = UIColor.blue.cgColor
         t.placeholder = placeHolder
         t.backgroundColor = .white
         let c = Control(name: name, view: t)
-        if width != nil {
-            c.width(width!)
-        }
         
         return c
     }
     
-    func textView(name: String, width: CGFloat?) -> Control {
+    // TextView
+    func textView(name: String) -> Control {
         let t = StyledTextView.newAutoLayout()
         t.hilightedLineColor = UIColor.blue.cgColor
-        t.backgroundColor = .white
         let c = Control(name: name, view: t)
-        if width != nil {
-            c.width(width!)
-        }
         return c
     }
     
+    // Button
     func button(name: String, title: String ) -> Control {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
-        MQForm.setButtonStyle(button: button)
         return Control(name: name, view:button)
     }
     
+    // Image
     func img(name: String, url: String ) -> Control {
  
         let img = UIImageView.newAutoLayout()
-        img.contentMode = UIViewContentMode.scaleAspectFit
-        
         img.image = UIImage(named: url)
         
         return Control(name: name, view: img)
 
     }
     
+    // Stepper
     func stepper (name: String, min: Double, max: Double) -> Control {
         let stepper = UIStepper.newAutoLayout()
         stepper.minimumValue = min
@@ -119,13 +116,14 @@ open class MQForm : UIView {
         return Control(name: name , view:stepper)
     }
     
-    //
+    // Quest by selector
     func quest(_ selector: String) -> MittyQuest {
         return quest()[selector]
     }
 
+    // Build the Quest of all controlls in form
     func quest() -> MittyQuest {
-        rootMitty = MittyQuest()
+        let rootMitty = MittyQuest()
         var opSet = rootMitty as OperationSet
         for c in controls {
             if (c is Container) {
@@ -137,22 +135,26 @@ open class MQForm : UIView {
         return rootMitty
     }
     
+    // Doing configuration of layouts
     func configLayout() {
         for c in controls {
             c.configLayout()
         }
     }
     
-    static func setButtonStyle (button: UIButton) {
+    // 
+    // フォームの主要部を構成するスクロールコンテナーコントロルを作成
+    //
+    func scrollContainer(name: String, contentSize: CGSize) -> Container {
+        let scroll = UIScrollView.newAutoLayout()
+        scroll.contentSize = contentSize
+        scroll.isScrollEnabled = true
+        scroll.flashScrollIndicators()
+        scroll.canCancelContentTouches = false
         
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        button.setTitleColor(.white, for: UIControlState.normal)
-        button.setTitleColor(.gray, for: .disabled)
-        button.backgroundColor = UIColor.lightGray
-        button.layer.cornerRadius = 5
-        button.layer.borderWidth = 0.5
-        button.layer.borderColor = UIColor.gray.cgColor
+        let container = Container(name: name, view: scroll)
+        
+        return container
     }
-    
     
 }

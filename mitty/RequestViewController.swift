@@ -81,7 +81,7 @@ class RequestViewController : UIViewController {
             c.leftMost(withInset: 20)
         }
         
-        row +++ form.text(name: "title-text", placeHolder: "タイトルを入力", width: 350).layout {
+        row +++ form.text(name: "title-text", placeHolder: "タイトルを入力").width(350).layout {
             t in
             t.height(height_normal).rightMost()
         }
@@ -99,7 +99,7 @@ class RequestViewController : UIViewController {
             c.leftMost(withInset: 20)
         }
         
-        row +++ form.text(name: "desciption", placeHolder: "体験したいこと、目的地などを", width: 350).layout {
+        row +++ form.text(name: "desciption", placeHolder: "体験したいこと、目的地などを").width(350).layout {
             t in
             t.height(height_tall).rightMost(withInset: 20)
         }
@@ -117,7 +117,7 @@ class RequestViewController : UIViewController {
             c.leftMost(withInset: 20)
         }
         
-        row +++ form.text(name: "lationInfo", placeHolder: "エリア、場所", width: 350).layout {
+        row +++ form.text(name: "lationInfo", placeHolder: "エリア、場所").width(350).layout {
             t in
             t.height(height_tall).rightMost(withInset: 20)
         }
@@ -133,11 +133,11 @@ class RequestViewController : UIViewController {
             c.height(height_normal).width(65)
             c.leftMost(withInset: 20)
         }
-        row +++ form.text(name: "startDate", placeHolder: "この日から", width: 120).layout {
+        row +++ form.text(name: "startDate", placeHolder: "この日から").width(120).layout {
             t in
             t.height(height_normal)
         }
-        row +++ form.text(name: "endDate", placeHolder: "この日の間", width: 120).layout {
+        row +++ form.text(name: "endDate", placeHolder: "この日の間").width(120).layout {
             t in
             t.height(height_normal)
         }
@@ -158,11 +158,11 @@ class RequestViewController : UIViewController {
             c.height(height_normal).width(65)
             c.leftMost(withInset: 20)
         }
-        row +++ form.text(name: "startPrice", placeHolder: "ここから", width: 90).layout {
+        row +++ form.text(name: "startPrice", placeHolder: "ここから").width(90).layout {
             t in
             t.height(height_normal)
         }
-        row +++ form.text(name: "limitedPrice", placeHolder: "このまままで", width: 120).layout {
+        row +++ form.text(name: "limitedPrice", placeHolder: "このまままで").width(120).layout {
             t in
             t.height(height_normal)
         }
@@ -178,7 +178,7 @@ class RequestViewController : UIViewController {
             c.height(height_normal).width(65)
             c.leftMost(withInset: 20)
         }
-        row +++ form.text(name: "numOfPerson", placeHolder: "人数", width: 70).layout {
+        row +++ form.text(name: "numOfPerson", placeHolder: "人数").width(70).layout {
             t in
             t.height(height_normal)
         }
@@ -186,7 +186,7 @@ class RequestViewController : UIViewController {
             c in
             c.height(height_normal).width(40)
         }
-        row +++ form.text(name: "expiryDate", placeHolder: "提案締切日", width: 120).layout {
+        row +++ form.text(name: "expiryDate", placeHolder: "提案締切日").width(120).layout {
             t in
             t.height(height_normal)
         }

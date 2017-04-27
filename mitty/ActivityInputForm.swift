@@ -13,6 +13,15 @@ import PureLayout
 
 class ActivityInputForm : MQForm {
     
+    // 値を持つI/O項目はインスタンスメンバーとして定義
+    // ヘッダーなど、表示だけで良いコントロールはインスタンス変数かする必要はないが、共通できるものは親クラスに用意する。
+    
+    // ボタンなど、アクション必要なコントロールはインスタンスメンバーを定義し、
+    // viewを直で取得できるComputedPropertyを用意
+    
+    //　項目単位の小さいロジックはForm中で実装して良い。
+    
+    
     func loadForm() {
         
         var page = self as MQForm
@@ -25,13 +34,8 @@ class ActivityInputForm : MQForm {
             v.upper().height(30)
         }
         
-        let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:810)
-        scroll.isScrollEnabled = true
-        scroll.flashScrollIndicators()
-        scroll.canCancelContentTouches = false
-        
-        let inputContainer = Container(name: "Input-Container", view: scroll)
+        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 810)
+        let inputContainer = scrollContainer(name:"inputContainer", contentSize: contentSize)
         
         self +++ inputContainer
         
@@ -48,7 +52,7 @@ class ActivityInputForm : MQForm {
         
         var row = Row.LeftAligned()
         
-        row +++ text(name: "title" , placeHolder: "タイトル"  , width: 250).height(35)
+        row +++ text(name: "title" , placeHolder: "タイトル").width(250).height(35)
         row +++ img(name: "icon" , url:"noicon").height(45).width(45)
         
         row.layout() {
@@ -59,7 +63,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-start", title: "開始")
-        row +++ text(name: "fromDateTime" , placeHolder: "開始日時"  , width: 230).height(35)
+        row +++ text(name: "fromDateTime" , placeHolder: "開始日時").width(230).height(35)
         
         row.layout() {
             r in
@@ -70,7 +74,7 @@ class ActivityInputForm : MQForm {
 
         row = Row.LeftAligned()
         row +++ label(name: "label-End", title: "終了")
-        row +++ text(name: "toDateTime" , placeHolder: "終了日時"  , width: 230).height(35)
+        row +++ text(name: "toDateTime" , placeHolder: "終了日時" ).width(230).height(35)
         
         row.layout() {
             r in
@@ -80,7 +84,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-des", title: "メモ")
-        row +++ textView(name: "memo" , width: 250).height(60)
+        row +++ textView(name: "memo" ).width(250).height(60)
         
         row.layout() {
             r in
@@ -103,7 +107,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-Location", title: "場所")
-        row +++ text(name: "location" , placeHolder: "場所名を入力"  , width: 210).height(35)
+        row +++ text(name: "location" , placeHolder: "場所名を入力").width(210).height(35)
         row +++ img(name: "icon" , url:"noicon").height(45).width(45)
         
         
@@ -115,7 +119,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-Address", title: "住所")
-        row +++ text(name: "address" , placeHolder: "住所を入力"  , width: 260).height(35)
+        row +++ text(name: "address" , placeHolder: "住所を入力").width(260).height(35)
         row.layout() {
             r in
             r.height(40).fillHolizon()
@@ -125,7 +129,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-Tel", title: "連絡先")
-        row +++ text(name: "contact-Tel" , placeHolder: "☎️"  , width: 150).height(35)
+        row +++ text(name: "contact-Tel" , placeHolder: "☎️" ).width(150).height(35)
         row.layout() {
             r in
             r.height(40).fillHolizon()
@@ -134,7 +138,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-Mail", title: "メール")
-        row +++ text(name: "contact-mail" , placeHolder: "📩"  , width: 260).height(35)
+        row +++ text(name: "contact-mail" , placeHolder: "📩").width(260).height(35)
         row.layout() {
             r in
             r.height(40).fillHolizon()
@@ -144,7 +148,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-InfoSource", title: "情報源")
-        row +++ textView(name: "infoSource", width: 260).height(70)
+        row +++ textView(name: "infoSource").width(260).height(70)
         row.layout() {
             r in
             r.height(75).fillHolizon()
@@ -153,7 +157,7 @@ class ActivityInputForm : MQForm {
         
         row = Row.LeftAligned()
         row +++ label(name: "label-URL", title: "URL")
-        row +++ text(name: "infoUrl" , placeHolder: "URL"  , width: 260).height(35)
+        row +++ text(name: "infoUrl" , placeHolder: "URL").width(260).height(35)
         row.layout() {
             r in
             r.height(40).fillHolizon()

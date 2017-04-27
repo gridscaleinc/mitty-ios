@@ -33,7 +33,6 @@ class ActivitySelectionForm : UIView {
     let addButton : UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("+", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
         button.backgroundColor = .red
         return button
     } ()
@@ -41,7 +40,6 @@ class ActivitySelectionForm : UIView {
     let loadFromCalButton:UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("カレンダーから", for: UIControlState())
-        MQForm.setButtonStyle(button: button)
         button.backgroundColor = .orange
         
         return button

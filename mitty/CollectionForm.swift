@@ -36,10 +36,6 @@ class CollectionForm : MQForm {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override subscript(_ name: String) -> Section? {
-        return controlDictionary[name] as! Section?
-    }
-    
     // Section
     subscript (_ index: Int) -> Section {
         return controls[index] as! Section
