@@ -71,7 +71,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         let mitty = form.quest()
         
-        form["thisYear"]?.event(.touchUpInside ) {thisYearButton in
+        form["thisYear"]?.bindEvent(.touchUpInside ) {thisYearButton in
             thisYearButton.backgroundColor = .red
             print("This Year taped")
         }

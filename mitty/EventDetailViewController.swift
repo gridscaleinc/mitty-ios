@@ -263,7 +263,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         url +++ Control(name:"URL", view:link).layout {
             l in
             l.height(35)
-        }.event(.touchUpInside) {
+        }.bindEvent(.touchUpInside) {
             b in
             
             let urlString : String = "http://qiita.com/senseiswift/items/70825c8dd4b8dd9d73f9"
@@ -303,7 +303,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         detailForm +++ subscribe
         
-        subscribe.event(.touchUpInside) {
+        subscribe.bindEvent(.touchUpInside) {
             b in
             let button = b as! UIButton
             self.pressSubscribe(sender: button)

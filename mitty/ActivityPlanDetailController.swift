@@ -54,7 +54,7 @@ class ActivityPlanDetailsController : UIViewController {
         
         self.view.backgroundColor = UIColor.white
         
-        form.eventTitle.event(.touchUpInside) {
+        form.eventTitle.bindEvent(.touchUpInside) {
             v in
             let e = EventService.instance.buildEvent(1)
             let c = EventDetailViewController(event: e!)
