@@ -15,4 +15,9 @@ import UIKit
 class ApplicationContext {
     static var uiApplication:UIApplication? = nil;
     
+    static var isFirstTime = true
+    static var accessToken = ""
+    static var isLogedIn = false
+    
+    
 }
