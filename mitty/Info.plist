@@ -60,5 +60,7 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Access Camera roll</string>
 </dict>
 </plist>

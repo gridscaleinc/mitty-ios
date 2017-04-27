@@ -8,9 +8,11 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 @objc(QuestViewController)
-class QuestViewController : UIViewController {
+class QuestViewController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var queryTargets : UISegmentedControl = UISegmentedControl(items: ["Event", "Request"])
     let logo = UIImageView(image: UIImage(named: "applogo"))
@@ -27,12 +29,21 @@ class QuestViewController : UIViewController {
         return b
     } ()
     
+    
+    let postGalleryButton : UIButton = {
+        let b = UIButton.newAutoLayout()
+        b.setTitle(".Post Gallery Content", for: .normal)
+        b.setTitleColor(.blue, for: .normal)
+        return b
+    } ()
+
     override func viewDidLoad() {
         self.view.addSubview(queryTargets)
         self.view.addSubview(logo)
         self.view.addSubview(searchBar)
         self.view.addSubview(postRequestButton)
-        
+        self.view.addSubview(postGalleryButton)
+
         searchBar.backgroundColor = .white
         searchBar.layer.borderColor = UIColor.black.cgColor
         searchBar.layer.borderWidth = 0.5
@@ -88,7 +99,15 @@ class QuestViewController : UIViewController {
         postRequestButton.autoSetDimension(.width, toSize: 200)
 
         postRequestButton.addTarget(self, action: #selector(postRequest(_:)), for: .touchUpInside)
+
         
+        postGalleryButton.autoPinEdge(toSuperviewEdge: .left, withInset: 50)
+        postGalleryButton.autoPinEdge(.top, to: .bottom, of: postRequestButton, withOffset: 30)
+        postGalleryButton.autoSetDimension(.height, toSize: 30)
+        postGalleryButton.autoSetDimension(.width, toSize: 200)
+        
+        postGalleryButton.addTarget(self, action: #selector(postGallery(_:)), for: .touchUpInside)
+
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -100,6 +119,65 @@ class QuestViewController : UIViewController {
         let vc = RequestViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
+
+    func postGallery(_ b: UILabel) {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = false
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+    }
+    
+    //MARK: - Delegates
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        NSLog("\(info)")
+        let chosenImage = info[UIImagePickerControllerOriginalImage] as! UIImage
+        let imageData:NSData = UIImagePNGRepresentation(chosenImage)! as NSData
+        let strBase64 = imageData.base64EncodedString()
+
+        let parameters = [
+            "gallery": [
+                "id": 1,
+                "seq": 2,
+                "caption": "hoge caption",
+                "briefInfo": "hoge briefInfo",
+                "freeText": "hoge freeText",
+                "eventId": 1,
+                "islandId": 1
+            ],
+            "content": [
+                "mime": "hoge mime",
+                "name": "hoge name",
+                "link_url": "hoge link url",
+                "data": strBase64
+            ]
+        ]
+        
+        let urlString = "http://dev.mitty.co/api/gallery/content"
+        
+        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default).validate(statusCode: 200..<300).responseString { response in
+            switch response.result {
+            case .success:
+                DispatchQueue.main.async {
+                    self.dismiss(animated:true, completion: nil)
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        
+    }
+    
+    
     
 }
 
