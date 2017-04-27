@@ -230,10 +230,9 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
                     DispatchQueue.main.async {
                         let accessToken = json["access_token"].stringValue
                         
-                        // 設定値の保存 キーは"keyName"、値は"value"としました。
                         let config = UserDefaults.standard
                         config.set(accessToken, forKey:"ACCES-TOKEN")
-                        config.synchronize() // シンクロを入れないとうまく動作しないときがあります
+                        config.synchronize() 
                         ApplicationContext.accessToken = accessToken
                         
                         let mainTabBarController: MainTabBarController = MainTabBarController()

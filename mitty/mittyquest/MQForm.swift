@@ -92,6 +92,8 @@ open class MQForm : UIView {
     static func button(name: String, title: String ) -> Control {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
+        button.backgroundColor = .orange
+        button.layer.cornerRadius = 3
         return Control(name: name, view:button)
     }
     

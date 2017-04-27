@@ -264,13 +264,12 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         let searchRequest = MKLocalSearchRequest(completion: comp)
         let search = MKLocalSearch(request: searchRequest)
         search.start { (response, error) in
-            response?.mapItems.forEach { item in
-                
-//                let point = MKPointAnnotation()
-//                point.coordinate = item.placemark.coordinate
-                self.nameText.text = item.placemark.name
-//                self.mapView.addAnnotation(point)
-                self.mapView.addAnnotation(item.placemark)
+            response?.mapItems.forEach { [weak self] item in
+                if self?.mapView.annotations != nil {
+                    self?.mapView.removeAnnotations((self?.mapView.annotations)!)
+                }
+                self?.nameText.text = item.placemark.name
+                self?.mapView.addAnnotation(item.placemark)
             }
             
             self.mapView.showAnnotations(self.mapView.annotations, animated: true)
