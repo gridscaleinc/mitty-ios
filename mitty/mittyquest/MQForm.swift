@@ -118,6 +118,15 @@ open class MQForm : UIView {
         return Control(name: name , view:stepper)
     }
     
+    // Switchs
+    static func switcher(name: String, value: Bool? = false) -> Control {
+        let sw = UISwitch.newAutoLayout()
+        sw.isOn = value!
+        
+        return Control(name: name, view: sw)
+        
+    }
+    
     // Quest by selector
     func quest(_ selector: String) -> MittyQuest {
         return quest()[selector]

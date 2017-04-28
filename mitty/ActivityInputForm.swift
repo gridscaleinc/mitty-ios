@@ -18,30 +18,44 @@ class ActivityInputForm : MQForm {
     
     let eventTitle = MQForm.text(name: "title" , placeHolder: "タイトル")
     
+    // イベントIcon
+    let icon = MQForm.img(name: "icon" , url:"noicon")
+ 
+    // 開始日時
     let startDate = MQForm.text(name: "fromDateTime" , placeHolder: "開始日時")
     
+    //  終了日時
     let endDate = MQForm.text(name: "toDateTime" , placeHolder: "終了日時" )
     
-    let icon = MQForm.img(name: "icon" , url:"noicon")
-    
-    let infoSource = MQForm.textView(name: "infoSource")
-    
+    // 終日フラグ
+    let allDayFlag = MQForm.switcher(name: "allDayFlg")
+   
+    // 行い
     let action = MQForm.textView(name: "action" )
     
-    let image = MQForm.img(name: "picture", url: "nolargeimg")
+    let price = MQForm.text(name: "price" , placeHolder: "価格" )
     
+    // 場所
     let location = MQForm.text(name: "location" , placeHolder: "場所名を入力")
     let locationIcon = MQForm.img(name: "icon" , url:"noicon")
     
+    
+    // 情報源
+    let infoSource = MQForm.textView(name: "infoSource")
     let infoUrl = MQForm.text(name: "infoUrl" , placeHolder: "URL")
-    
     let address = MQForm.text(name: "address" , placeHolder: "住所を入力")
+
+    // 連絡情報（FAXは？）
     let contactTel = MQForm.text(name: "contact-Tel" , placeHolder: "☎️" )
-    
     let contactEmail = MQForm.text(name: "contact-mail" , placeHolder: "📩")
-    
+
+    // イメージは最後にオプションとして洗濯させる。
+    let image = MQForm.img(name: "picture", url: "nolargeimg")
+
     // ボタンなど、アクション必要なコントロールはインスタンスメンバーを定義し、
     // viewを直で取得できるComputedPropertyを用意
+    let registerButton = MQForm.button(name: "register", title: "登録")
+    let cancelButton = MQForm.button(name: "cancel", title: "キャンセル")
     
     //　項目単位の小さいロジックはForm中で実装して良い。
     
@@ -84,6 +98,16 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        //終日フラグ
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "alldayFlagTitle", title: "終日").width(80).height(35)
+        row +++ allDayFlag.height(45).width(45)
+        row.layout() {
+            r in
+            r.height(45).fillHolizon()
+        }
+        inputForm <<< row
+        
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-start", title: "開始")
         row +++ startDate.width(230).height(35)
@@ -117,18 +141,14 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
 
-        row = Row.LeftAligned()
-        row +++ image.layout() {
+        row = Row.LeftAligned().height(40)
+        row +++ MQForm.label(name: "price", title: "価格").height(40)
+        row +++ price.layout {
             c in
-            c.fillHolizon().height(200)
+            c.rightMost(withInset:10).height(40).width(250)
         }
         
-        row.layout() {
-            r in
-            r.height(210).fillHolizon()
-        }
         inputForm <<< row
-
         
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-Location", title: "場所")
@@ -192,24 +212,34 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        row = Row.LeftAligned()
+        row +++ image.layout() {
+            c in
+            c.width(80).height(80).holizontalCenter()
+        }
+        
+        row.layout() {
+            r in
+            r.height(210).fillHolizon()
+        }
+        inputForm <<< row
+        
+
         inputForm <<< Row.LeftAligned().height(50)
         
-        row = Row.Intervaled()
+        row = Row.Intervaled().layout() {
+            r in
+            r.height(55).fillHolizon()
+        }
         row.spacing = 40
         
-        let bt = MQForm.button(name: "register", title: "登録").width(60).height(50)
-        bt.layout() {
+        row +++ registerButton.width(60).height(50).layout() {
             c in
             c.view.backgroundColor = UIColor.orange
         }
         
-        row +++ bt
-        row +++ MQForm.button(name: "cancel", title: "キャンセル").width(60).height(50)
+        row +++ cancelButton.width(60).height(50)
         
-        row.layout() {
-            r in
-            r.height(55).fillHolizon()
-        }
         
         inputForm <<< row
         
