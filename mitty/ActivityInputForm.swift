@@ -48,7 +48,12 @@ class ActivityInputForm : MQForm {
     // 連絡情報（FAXは？）
     let contactTel = MQForm.text(name: "contact-Tel" , placeHolder: "☎️" )
     let contactEmail = MQForm.text(name: "contact-mail" , placeHolder: "📩")
-
+    let officialUrl = MQForm.text(name: "officialUrl" , placeHolder: "公式ページ")
+    
+    let detailDescription = MQForm.textView(name: "description")
+    
+    let organizer = MQForm.text(name: "organizer", placeHolder: "主催者")
+    
     // イメージは最後にオプションとして洗濯させる。
     let image = MQForm.img(name: "picture", url: "nolargeimg")
 
@@ -71,7 +76,7 @@ class ActivityInputForm : MQForm {
             v.upper().height(30)
         }
         
-        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 810)
+        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 1200)
         let inputContainer = scrollContainer(name:"inputContainer", contentSize: contentSize)
         
         self +++ inputContainer
@@ -84,7 +89,7 @@ class ActivityInputForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(810)
+            c.upper().width(UIScreen.main.bounds.size.width).height(1200)
         }
         
         var row = Row.LeftAligned()
@@ -145,7 +150,7 @@ class ActivityInputForm : MQForm {
         row +++ MQForm.label(name: "price", title: "価格").height(40)
         row +++ price.layout {
             c in
-            c.rightMost(withInset:10).height(40).width(250)
+            c.height(40).width(250)
         }
         
         inputForm <<< row
@@ -191,7 +196,16 @@ class ActivityInputForm : MQForm {
             r.height(40).fillHolizon()
         }
         inputForm <<< row
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "label-page", title: "公式ページ")
+        row +++ officialUrl.width(260).height(35)
         
+        row.layout() {
+            r in
+            r.height(40).fillHolizon()
+        }
+        inputForm <<< row
+
         
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-InfoSource", title: "情報源")
@@ -212,6 +226,26 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "label-org", title: "主催者")
+        row +++ organizer.width(260).height(35)
+        
+        row.layout() {
+            r in
+            r.height(40).fillHolizon()
+        }
+        inputForm <<< row
+        
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "label-detail", title: "詳細")
+        row +++ detailDescription.width(260).height(90)
+        
+        row.layout() {
+            r in
+            r.height(90).fillHolizon()
+        }
+        inputForm <<< row
+    
         row = Row.LeftAligned()
         row +++ image.layout() {
             c in

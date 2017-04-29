@@ -14,7 +14,7 @@ class ActivitySelectionCell: UICollectionViewCell {
     static let id = "activity-selection-cell"
     
     var activitySelection : (label:UILabel, icon:UIImageView)? = nil
-    var activity : (label:String, icon:String)? = nil
+    var activity : (label:String, type : String, icon:String)? = nil
     
     
     // MARK: - Initializers
@@ -67,7 +67,7 @@ class ActivitySelectionCell: UICollectionViewCell {
         
     }
     
-    func configureView(activity: (label:String, icon:String)) {
+    func configureView(activity: (label:String, type: String, icon:String)) {
         
         self.activity = activity
         

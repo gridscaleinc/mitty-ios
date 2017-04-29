@@ -49,13 +49,14 @@ class ActivitySelectionViewController : MittyUIViewController {
         form.configLayout()
         
         // Closure を利用して、イベント処理をする。
-        dataSource?.onCellTapped () {  (cell) in
+        dataSource?.onCellTapped () { [weak self] (cell) in
             print(cell.activity?.label ?? "")
             let vc = ActivityPlanViewController()
             vc.activityTitle = (cell.activity?.label)!
+            vc.type = (cell.activity?.type)!
             
-            self.navigationItem.title = "戻る"
-            self.navigationController?.pushViewController(vc, animated: true)
+            self?.navigationItem.title = "戻る"
+            self?.navigationController?.pushViewController(vc, animated: true)
         }
         
         form.collectionView.dataSource = self.dataSource

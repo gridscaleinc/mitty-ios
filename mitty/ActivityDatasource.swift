@@ -16,12 +16,21 @@ class ActivitySelectionDatasource : NSObject, UICollectionViewDataSource {
         self.controller = controller
     }
     
-    let selectionList : [(label:String, icon:String)] = [
-        ("空の旅", "pengin1"), ("電車で出張", "pengin1"),("飲み会", "pengin1"),
-        ("デート", "pengin1"), ("運動", "pengin1"),("買い物", "pengin1"),
-        ("コンサート", "pengin1"), ("映画鑑賞", "pengin1"),("ペット", "pengin1"),
-        ("山・川", "pengin1"), ("遊園地", "pengin1"),("釣り", "pengin1"),
-        ("ボランティア", "pengin1"), ("部活", "pengin1")
+    let selectionList : [(label:String, type: String, icon:String)] = [
+        ("空の旅", "Travel", "pengin1"),
+        ("電車で出張", "Business Travel", "pengin1"),
+        ("飲み会", "Drinking Party", "pengin1"),
+        ("デート", "Dating", "pengin1"),
+        ("運動", "Excersing", "pengin1"),
+        ("買い物", "Shopping", "pengin1"),
+        ("コンサート", "Concert", "pengin1"),
+        ("映画鑑賞", "Cinema", "pengin1"),
+        ("ペット", "Pet", "pengin1"),
+        ("山・川", "Nature", "pengin1"),
+        ("遊園地", "Lesure", "pengin1"),
+        ("釣り", "Fishing", "pengin1"),
+        ("ボランティア", "Volunteer", "pengin1"),
+        ("部活", "School Club", "pengin1")
     ]
     
     ///

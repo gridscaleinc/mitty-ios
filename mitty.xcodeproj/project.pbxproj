@@ -60,6 +60,8 @@
 		FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC448D3C1DD5EA730032F0D4 /* RightButton.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
 		FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */; };
+		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
+		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
@@ -201,6 +203,8 @@
 		FC448D3C1DD5EA730032F0D4 /* RightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightButton.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
 		FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionController.swift; sourceTree = "<group>"; };
+		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
+		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
@@ -431,6 +435,7 @@
 				FC2862AA1DCEAFA6000854D9 /* EventService.swift */,
 				FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */,
 				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
+				FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -636,6 +641,7 @@
 			isa = PBXGroup;
 			children = (
 				F42CDE521DCD7525001CAFBE /* Strings.swift */,
+				FC5ECFF11EB42FA800AA6C13 /* date.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -981,6 +987,7 @@
 				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,
 				FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */,
 				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
+				FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */,
 				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
 				FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */,
 				FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */,
@@ -1028,6 +1035,7 @@
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
+				FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */,
 				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,

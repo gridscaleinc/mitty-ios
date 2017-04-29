@@ -112,7 +112,7 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-        searchBar.becomeFirstResponder()
+//        searchBar.becomeFirstResponder()
     }
     
     func postRequest(_ b: UILabel) {
