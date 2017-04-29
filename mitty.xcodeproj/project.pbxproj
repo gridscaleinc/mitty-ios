@@ -62,6 +62,7 @@
 		FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
+		FC5ECFF41EB4F22900AA6C13 /* IslandPickerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF31EB4F22900AA6C13 /* IslandPickerDelegate.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
@@ -205,6 +206,7 @@
 		FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionController.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
+		FC5ECFF31EB4F22900AA6C13 /* IslandPickerDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandPickerDelegate.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
@@ -654,6 +656,7 @@
 				FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */,
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
 				FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */,
+				FC5ECFF31EB4F22900AA6C13 /* IslandPickerDelegate.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1034,6 +1037,7 @@
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,
+				FC5ECFF41EB4F22900AA6C13 /* IslandPickerDelegate.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
 				FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */,
 				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,

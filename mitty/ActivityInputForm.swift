@@ -145,15 +145,6 @@ class ActivityInputForm : MQForm {
             r.height(65).fillHolizon()
         }
         inputForm <<< row
-
-        row = Row.LeftAligned().height(40)
-        row +++ MQForm.label(name: "price", title: "価格").height(40)
-        row +++ price.layout {
-            c in
-            c.height(40).width(250)
-        }
-        
-        inputForm <<< row
         
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-Location", title: "場所")
@@ -174,6 +165,15 @@ class ActivityInputForm : MQForm {
             r in
             r.height(40).fillHolizon()
         }
+        inputForm <<< row
+
+        row = Row.LeftAligned().height(40)
+        row +++ MQForm.label(name: "price", title: "価格").height(40)
+        row +++ price.layout {
+            c in
+            c.height(40).width(250)
+        }
+        
         inputForm <<< row
 
         
@@ -249,12 +249,12 @@ class ActivityInputForm : MQForm {
         row = Row.LeftAligned()
         row +++ image.layout() {
             c in
-            c.width(80).height(80).holizontalCenter()
+            c.width(80).height(80)
         }
         
         row.layout() {
             r in
-            r.height(210).fillHolizon()
+            r.height(80).fillHolizon()
         }
         inputForm <<< row
         
