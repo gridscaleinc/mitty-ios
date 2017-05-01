@@ -17,7 +17,7 @@ class ActivityPlanDetailsForm : MQForm {
         let t = UILabel.newAutoLayout()
         t.text = ".新年の鐘を聞きに行く"
         t.font = UIFont.boldSystemFont(ofSize: 18)
-        t.textColor = .black
+        t.textColor = .orange
         
         let c = Control(name:"title", view: t)
         return c
@@ -30,8 +30,8 @@ class ActivityPlanDetailsForm : MQForm {
         t.font = UIFont.systemFont(ofSize: 14)
         t.textColor = UIColor.black
         t.numberOfLines = 0
-        t.layer.borderColor = UIColor.black.cgColor
-        t.layer.borderWidth = 0.8
+//        t.layer.borderColor = UIColor.black.cgColor
+//        t.layer.borderWidth = 0.8
         t.layer.cornerRadius = 3
         let c = Control(name:"memo", view: t)
         return c
@@ -140,43 +140,10 @@ class ActivityPlanDetailsForm : MQForm {
         }
         inputForm <<< row
 
-        
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(30).fillHolizon()
-        }
-        
-        let eventHeader : Control = {
-            let l = TapableLabel.newAutoLayout()
-            l.text = "メインイベント"
-            l.textColor = UIColor.black
-            l.font = UIFont.boldSystemFont(ofSize: 18)
-            return Control(name: "sectionTitle", view: l)
-            
-        }()
-        eventHeader.layout() { t in
-            t.margin = ControlMargin(10)
-            t.height(20).fillHolizon(10)
-        }
-        
-        row +++ eventHeader
-        inputForm <<< row
-        
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(5).fillHolizon(10)
-            let layer = MittyColor.gradientLayer()
-            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2)
-            r.view.layer.insertSublayer(layer, at: 0)
-        }
-        
-        inputForm <<< row
-
-        // event title
+         // event title
         row = Row.LeftAligned().layout() {
             r in
             r.height(60).fillHolizon()
-            r.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
         }
         
         row +++ eventTitle.layout {
@@ -193,7 +160,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         row = Row.LeftAligned().layout() {
             r in
-            r.height(50).fillHolizon()
+            r.height(30).fillHolizon()
         }
         
         row +++ eventTime.layout {
@@ -207,7 +174,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         row = Row.LeftAligned().layout() {
             r in
-            r.height(50).fillHolizon()
+            r.height(30).fillHolizon()
         }
  
         row +++ MQForm.label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).layout {
@@ -223,43 +190,11 @@ class ActivityPlanDetailsForm : MQForm {
         }
         inputForm <<< row
         
-        row = Row.LeftAligned()
-        row.layout() {
-            r in
-            r.height(30).fillHolizon()
-        }
 
-        let planlistHeader : Control = {
-            let l = TapableLabel.newAutoLayout()
-            l.text = "活動プラン"
-            l.font = UIFont.boldSystemFont(ofSize: 18)
-            l.textColor = .black
-            return Control(name: "sectionTitle", view: l)
-            
-        }()
-        
-        row +++ planlistHeader.layout() { t in
-            t.margin = ControlMargin(10)
-            t.height(20).fillHolizon(10)
-        }
-
-        inputForm <<< row
-        
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(5).fillHolizon(10)
-            let layer = MittyColor.gradientLayer()
-            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2)
-            r.view.layer.insertSublayer(layer, at: 0)
-        }
-        
-        inputForm <<< row
-        
         row = Row.LeftAligned()
         row.layout() {
             r in
             r.height(40).fillHolizon(0)
-            r.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
 
         }
         
@@ -290,26 +225,10 @@ class ActivityPlanDetailsForm : MQForm {
                 r.height(35).fillHolizon(20)
             }
             
-            let number = UILabel.newAutoLayout()
-            number.text = "\(n)"
-            number.textColor = .white
-            number.backgroundColor = .orange
-        
-            number.layer.masksToBounds = true
-            number.layer.cornerRadius = 12.5
-            number.textAlignment = .center
-            
-            let nc = Control(name: "no", view:number).layout {
-                n in
-                n.width(25).height(25).leftMost(withInset:30)
-            }
-            
-            row +++ nc
-            
             let line : Control = {
                 let l = TapableLabel.newAutoLayout()
                 l.text = "2017/8/19 12:34 イベント名         🚗"
-                l.textColor = UIColor.black
+                l.textColor = MittyColor.healthyGreen
                 l.font = UIFont.boldSystemFont(ofSize: 14)
                 l.backgroundColor = UIColor.white
                 return Control(name: "line", view: l).height(30)
@@ -321,12 +240,10 @@ class ActivityPlanDetailsForm : MQForm {
             
             row +++ line
             inputForm <<< row
-            let backColor = UIColor(red:0.95, green:0.95, blue:0.95, alpha:1.0)
             row = Row.LeftAligned()
             row.layout() {
                 r in
                 r.height(50).leftMost(withInset: 5).rightMost(withInset: 5)
-                r.view.backgroundColor = backColor
             }
             
             let swch = UISwitch.newAutoLayout()
@@ -354,7 +271,6 @@ class ActivityPlanDetailsForm : MQForm {
             row.layout() {
                 r in
                 r.height(50).leftMost(withInset: 5).rightMost(withInset: 5)
-                r.view.backgroundColor = backColor
             }
 
             let labelMemo = UILabel.newAutoLayout()
@@ -362,9 +278,6 @@ class ActivityPlanDetailsForm : MQForm {
             labelMemo.font = UIFont.systemFont(ofSize: 14)
             
             labelMemo.textColor = .gray
-            labelMemo.layer.borderColor = UIColor.black.cgColor
-            
-            labelMemo.layer.borderWidth = 0.5
             
             let labelMemoCtl = Control(name:"labelMemo", view: labelMemo)
             row +++ labelMemoCtl.layout {
@@ -375,10 +288,6 @@ class ActivityPlanDetailsForm : MQForm {
 
             inputForm <<< row
 
-            
-//            let subRow = Row.RightAligned()
-//            subRow +++ label(name: "icon", title: "🚗").width(50).height(35)
-//            row +++ subRow
 
         }
         
@@ -403,19 +312,6 @@ class ActivityPlanDetailsForm : MQForm {
         }
         
         inputForm <<< row
-        
-        
-        
-        //    self +++ thisYearButton
-        //    thisYearButton.event(.touchUpInside) { [weak self]
-        //        c in
-        //        self?.quest().forEach() {
-        //            ct in
-        //            print(ct.name)
-        //            print(ct.view.bounds)
-        //            print(ct.view.frame)
-        //        }
-        //  }
         
     }
     
