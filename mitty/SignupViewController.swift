@@ -141,9 +141,10 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.systemFont(ofSize: 12)
+            l.numberOfLines=0
             l.textColor = UIColor.red
             
-            c.width(350).height(50).leftMargin(35)
+            c.width(250).height(70).leftMargin(35)
         }
         
         row +++ errorMessage
@@ -178,7 +179,6 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             self!.onClickSignupButton(b as! UIButton)
         }
         
-        
         instantUse.bindEvent(.touchUpInside) { v in
             let mainTabBarController: MainTabBarController = MainTabBarController()
             self.present(mainTabBarController, animated:true, completion:nil)
@@ -206,7 +206,7 @@ class SignupViewController: UIViewController, UITextFieldDelegate {
             case .failure(let error):
                 LoadingProxy.off()
                 let errorMessage = self?.signupForm.quest("[name=errormessage]").control()?.view as! UILabel
-                errorMessage.text = "ユーザーIDまたはパスワードが正しくない。"
+                errorMessage.text = "ユーザーIDやパスワード、メールアドレスを確認してください。"
                 let signupButton = self?.signupForm.quest("[name=Signup]").control()?.view as! UIButton
                 signupButton.isEnabled = true
                 print(error)

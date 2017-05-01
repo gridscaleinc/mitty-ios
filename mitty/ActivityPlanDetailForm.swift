@@ -17,7 +17,8 @@ class ActivityPlanDetailsForm : MQForm {
         let t = UILabel.newAutoLayout()
         t.text = ".新年の鐘を聞きに行く"
         t.font = UIFont.boldSystemFont(ofSize: 18)
-        t.textColor = .red
+        t.textColor = .orange
+        
         let c = Control(name:"title", view: t)
         return c
     } ()
@@ -27,10 +28,10 @@ class ActivityPlanDetailsForm : MQForm {
         let t = UILabel.newAutoLayout()
         t.text = "休みを取ることは忘れなく。引き継ぎ事情もあるかもしれないから、早めにリーダに相談する。航空券、ホテル。。。。"
         t.font = UIFont.systemFont(ofSize: 14)
-        t.textColor = UIColor.gray
+        t.textColor = UIColor.black
         t.numberOfLines = 0
         t.layer.borderColor = UIColor.black.cgColor
-        t.layer.borderWidth = 0.5
+        t.layer.borderWidth = 0.8
         t.layer.cornerRadius = 3
         let c = Control(name:"memo", view: t)
         return c
@@ -40,10 +41,10 @@ class ActivityPlanDetailsForm : MQForm {
     //    Title                         Logo
     var eventTitle : Control = {
         let t = TapableLabel.newAutoLayout()
-        t.text = "タイムスクエア　New year count down"
+        t.text = "ニューヨークタイムスクエア　New year count down！"
         t.font = UIFont.systemFont(ofSize: 16)
         t.numberOfLines = 0
-        t.textColor = UIColor.blue
+        t.textColor = MittyColor.healthyGreen
         
         let c = Control(name:"eventTitle", view: t)
         return c
@@ -148,8 +149,7 @@ class ActivityPlanDetailsForm : MQForm {
         let eventHeader : Control = {
             let l = TapableLabel.newAutoLayout()
             l.text = "メインイベント"
-            l.textColor = UIColor.white
-            l.backgroundColor = UIColor.red
+            l.textColor = UIColor.black
             return Control(name: "sectionTitle", view: l)
             
         }()
@@ -161,15 +161,26 @@ class ActivityPlanDetailsForm : MQForm {
         row +++ eventHeader
         inputForm <<< row
         
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(5).fillHolizon(10)
+            let layer = MittyColor.gradientLayer()
+            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2)
+            r.view.layer.insertSublayer(layer, at: 0)
+        }
+        
+        inputForm <<< row
+
         // event title
         row = Row.LeftAligned().layout() {
             r in
-            r.height(60).fillHolizon()
+            r.height(50).fillHolizon()
+            r.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
         }
         
         row +++ eventTitle.layout {
             t in
-            t.leftMost(withInset: 10).rightMost(withInset: 50).height(30)
+            t.leftMost(withInset: 10).rightMost(withInset: 50).height(50)
         }
         row +++ eventLogo.layout {
             logo in
@@ -217,8 +228,7 @@ class ActivityPlanDetailsForm : MQForm {
         let planlistHeader : Control = {
             let l = TapableLabel.newAutoLayout()
             l.text = "活動プラン"
-            l.textColor = UIColor.white
-            l.backgroundColor = UIColor(red: 0, green: 0.6, blue: 0, alpha: 1)
+            l.textColor = .black
             return Control(name: "sectionTitle", view: l)
             
         }()
@@ -230,10 +240,22 @@ class ActivityPlanDetailsForm : MQForm {
 
         inputForm <<< row
         
+        row = Row.LeftAligned().layout() {
+            r in
+            r.height(5).fillHolizon(10)
+            let layer = MittyColor.gradientLayer()
+            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2)
+            r.view.layer.insertSublayer(layer, at: 0)
+        }
+        
+        inputForm <<< row
+        
         row = Row.LeftAligned()
         row.layout() {
             r in
-            r.height(40).fillHolizon(10)
+            r.height(40).fillHolizon(0)
+            r.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
+
         }
         
         let buttons : Control = {
@@ -266,7 +288,8 @@ class ActivityPlanDetailsForm : MQForm {
             let number = UILabel.newAutoLayout()
             number.text = "\(n)"
             number.textColor = .white
-            number.backgroundColor = .red
+            number.backgroundColor = .orange
+        
             number.layer.masksToBounds = true
             number.layer.cornerRadius = 12.5
             number.textAlignment = .center

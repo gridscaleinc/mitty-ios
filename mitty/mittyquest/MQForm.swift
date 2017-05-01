@@ -82,8 +82,10 @@ open class MQForm : UIView {
     
     // TextView
     static func textView(name: String) -> Control {
-        let t = StyledTextView.newAutoLayout()
-        t.hilightedLineColor = UIColor.blue.cgColor
+        let t = UITextView.newAutoLayout()
+        t.layer.borderColor = UIColor.gray.cgColor
+        t.layer.borderWidth = 0.5
+        
         let c = Control(name: name, view: t)
         return c
     }

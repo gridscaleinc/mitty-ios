@@ -216,7 +216,7 @@ extension Control {
     }
 
     @discardableResult
-    open func fillHolizon(_ withInset: CGFloat = 0.0) -> Self {
+    open func fillHolizon(_ withInset: CGFloat? = 0.0) -> Self {
         leftMost(withInset: withInset).rightMost(withInset: withInset)
         return self
     }

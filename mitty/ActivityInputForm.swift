@@ -65,6 +65,7 @@ class ActivityInputForm : MQForm {
     //　項目単位の小さいロジックはForm中で実装して良い。
     
     func loadForm() {
+        let row_height = CGFloat(70)
         
         var page = self as MQForm
         
@@ -93,13 +94,30 @@ class ActivityInputForm : MQForm {
         }
         
         var row = Row.LeftAligned()
+        row.layout {
+            r in
+            r.fillHolizon(0).height(35)
+            r.view.backgroundColor = .orange
+        }
+        
+        row +++ MQForm.label(name: "title-main-event", title: "メインイベント入力").layout {
+            c in
+            c.height(40).width(300)
+            c.leftMost(withInset: 20)
+            let l = c.view as! UILabel
+            l.textColor = .white
+            l.font = .systemFont(ofSize: 16)
+        }
+        inputForm <<< row
+        
+        row = Row.LeftAligned()
         
         row +++ eventTitle.width(250).height(35)
         row +++ icon.height(45).width(45)
         
         row.layout() {
             r in
-            r.height(45).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
@@ -109,7 +127,7 @@ class ActivityInputForm : MQForm {
         row +++ allDayFlag.height(45).width(45)
         row.layout() {
             r in
-            r.height(45).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
@@ -119,7 +137,7 @@ class ActivityInputForm : MQForm {
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         
         inputForm <<< row
@@ -130,7 +148,7 @@ class ActivityInputForm : MQForm {
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
@@ -142,33 +160,33 @@ class ActivityInputForm : MQForm {
         
         row.layout() {
             r in
-            r.height(65).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Location", title: "場所")
+        row +++ MQForm.label(name: "label-Location", title: "場所").height(35)
         row +++ location.width(210).height(35)
         row +++ locationIcon.height(45).width(45)
         
         
         row.layout() {
             r in
-            r.height(45).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Address", title: "住所")
+        row +++ MQForm.label(name: "label-Address", title: "住所").height(35)
         row +++ address.width(150).height(35)
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
 
-        row = Row.LeftAligned().height(40)
-        row +++ MQForm.label(name: "price", title: "価格").height(40)
+        row = Row.LeftAligned().height(row_height)
+        row +++ MQForm.label(name: "price", title: "価格").height(35)
         row +++ price.layout {
             c in
             c.height(40).width(250)
@@ -178,66 +196,66 @@ class ActivityInputForm : MQForm {
 
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Tel", title: "連絡先")
+        row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(35)
         row +++ contactTel.width(150).height(35)
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Mail", title: "メール")
+        row +++ MQForm.label(name: "label-Mail", title: "メール").height(35)
         row +++ contactEmail.width(260).height(35)
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-page", title: "公式ページ")
+        row +++ MQForm.label(name: "label-page", title: "公式ページ").height(35)
         row +++ officialUrl.width(260).height(35)
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
 
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-InfoSource", title: "情報源")
-        row +++ infoSource.width(260).height(70)
+        row +++ MQForm.label(name: "label-InfoSource", title: "情報源").height(35)
+        row +++ infoSource.width(260).height(35)
         row.layout() {
             r in
-            r.height(75).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-URL", title: "URL")
+        row +++ MQForm.label(name: "label-URL", title: "URL").height(35)
         row +++ infoUrl.width(260).height(35)
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-org", title: "主催者")
+        row +++ MQForm.label(name: "label-org", title: "主催者").height(35)
         row +++ organizer.width(260).height(35)
         
         row.layout() {
             r in
-            r.height(40).fillHolizon()
+            r.height(row_height).fillHolizon()
         }
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-detail", title: "詳細")
+        row +++ MQForm.label(name: "label-detail", title: "詳細").height(90)
         row +++ detailDescription.width(260).height(90)
         
         row.layout() {
