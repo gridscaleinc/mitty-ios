@@ -11,6 +11,7 @@ import QuartzCore
 import UIKit
 
 class MittyColor {
+    
     static let background = UIColor.white
     static let title = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)
     static let buttonNormal = UIColor(red: 1.0, green: 0.8, blue: 0.0, alpha: 1.0)
@@ -23,11 +24,10 @@ class MittyColor {
     static func gradientLayer() -> CAGradientLayer {
         
         let gradientLayer = CAGradientLayer()
+        
         gradientLayer.colors = [
             UIColor.orange.cgColor,
-            UIColor.yellow.cgColor,
-            healthyGreen.cgColor,
-            healthyGreen.cgColor
+            UIColor.orange.cgColor
         ]
         
         gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)

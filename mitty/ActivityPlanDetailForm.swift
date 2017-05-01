@@ -17,7 +17,7 @@ class ActivityPlanDetailsForm : MQForm {
         let t = UILabel.newAutoLayout()
         t.text = ".新年の鐘を聞きに行く"
         t.font = UIFont.boldSystemFont(ofSize: 18)
-        t.textColor = .orange
+        t.textColor = .black
         
         let c = Control(name:"title", view: t)
         return c
@@ -42,7 +42,7 @@ class ActivityPlanDetailsForm : MQForm {
     var eventTitle : Control = {
         let t = TapableLabel.newAutoLayout()
         t.text = "ニューヨークタイムスクエア　New year count down！"
-        t.font = UIFont.systemFont(ofSize: 16)
+        t.font = UIFont.boldSystemFont(ofSize: 18)
         t.numberOfLines = 0
         t.textColor = MittyColor.healthyGreen
         
@@ -150,6 +150,7 @@ class ActivityPlanDetailsForm : MQForm {
             let l = TapableLabel.newAutoLayout()
             l.text = "メインイベント"
             l.textColor = UIColor.black
+            l.font = UIFont.boldSystemFont(ofSize: 18)
             return Control(name: "sectionTitle", view: l)
             
         }()
@@ -174,7 +175,7 @@ class ActivityPlanDetailsForm : MQForm {
         // event title
         row = Row.LeftAligned().layout() {
             r in
-            r.height(50).fillHolizon()
+            r.height(60).fillHolizon()
             r.view.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1.0)
         }
         
@@ -197,6 +198,8 @@ class ActivityPlanDetailsForm : MQForm {
         
         row +++ eventTime.layout {
             t in
+            t.label.textColor = UIColor.gray
+            t.label.font = UIFont.systemFont(ofSize: 14)
             t.leftMost(withInset: 10).rightMost(withInset: 10)
         }
         inputForm <<< row
@@ -209,7 +212,8 @@ class ActivityPlanDetailsForm : MQForm {
  
         row +++ MQForm.label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).layout {
             l in
-            (l.view as! UILabel).textColor = UIColor.gray
+            l.label.textColor = UIColor.gray
+            l.label.font = UIFont.systemFont(ofSize: 14)
             l.leftMost(withInset:10).rightMost(withInset: 50).height(35)
         }
         
@@ -228,6 +232,7 @@ class ActivityPlanDetailsForm : MQForm {
         let planlistHeader : Control = {
             let l = TapableLabel.newAutoLayout()
             l.text = "活動プラン"
+            l.font = UIFont.boldSystemFont(ofSize: 18)
             l.textColor = .black
             return Control(name: "sectionTitle", view: l)
             

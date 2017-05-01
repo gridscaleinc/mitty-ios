@@ -36,7 +36,7 @@ class EventViewController: UIViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()
         self.searchBar.resignFirstResponder()
@@ -141,7 +141,7 @@ extension EventViewController: UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.id, for: indexPath ) as? EventCell
         {
             cell.configureView(event: events[indexPath.row])
-            cell.backgroundColor = UIColor(white: 0.95, alpha: 1)
+            cell.backgroundColor = .white
             let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(EventViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
 
@@ -171,7 +171,7 @@ extension EventViewController: UICollectionViewDelegateFlowLayout {
         
         let screenSize:CGSize = UIScreen.main.bounds.size
         let width = ( screenSize.width - (10 * 3) ) 
-        let cellSize: CGSize = CGSize( width: width, height:width * ratio + 30 )
+        let cellSize: CGSize = CGSize( width: width, height:width * ratio + 150 )
         return cellSize
     }
     
