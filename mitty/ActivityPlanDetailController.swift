@@ -15,6 +15,8 @@ class ActivityPlanDetailsController : UIViewController {
     var activityTitle = "活動計画詳細"
     var form = ActivityPlanDetailsForm()
     
+    var status = 2
+    
     override func loadView() {
         
         // navigation bar の初期化をする
@@ -29,7 +31,7 @@ class ActivityPlanDetailsController : UIViewController {
         self.view.addSubview(form)
         
         
-        form.loadForm()
+        form.loadForm(status)
         
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
@@ -54,13 +56,23 @@ class ActivityPlanDetailsController : UIViewController {
         
         self.view.backgroundColor = UIColor.white
         
-        form.eventTitle.bindEvent(.touchUpInside) {
-            v in
-            let e = EventService.instance.buildEvent(1)
-            let c = EventDetailViewController(event: e!)
+        if (status == 1) {
+            form.mainEventButton.bindEvent(.touchUpInside) { [weak self]
+                v in
+                let vc = ActivitySelectionViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+                self?.status = 3
+            }
+        } else {
             
-            self.navigationController?.pushViewController(c, animated: true)
-            
+            form.eventTitle.bindEvent(.touchUpInside) {
+                v in
+                let e = EventService.instance.buildEvent(1)
+                let c = EventDetailViewController(event: e!)
+                
+                self.navigationController?.pushViewController(c, animated: true)
+                
+            }
         }
     }
     

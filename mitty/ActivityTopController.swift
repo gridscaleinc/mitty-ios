@@ -205,7 +205,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     
     func addActivity() {
         
-        let vc = ActivitySelectionViewController()
+        let vc = ActivityEntryViewController()
         self.navigationItem.title = "戻る"
         self.tabBarController?.tabBar.isHidden = true
         

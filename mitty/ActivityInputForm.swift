@@ -65,7 +65,7 @@ class ActivityInputForm : MQForm {
     //　項目単位の小さいロジックはForm中で実装して良い。
     
     func loadForm() {
-        let row_height = CGFloat(70)
+        let row_height = CGFloat(65)
         
         var page = self as MQForm
         
@@ -124,10 +124,10 @@ class ActivityInputForm : MQForm {
         //終日フラグ
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "alldayFlagTitle", title: "終日").width(80).height(35)
-        row +++ allDayFlag.height(45).width(45)
+        row +++ allDayFlag.height(30).width(45)
         row.layout() {
             r in
-            r.height(row_height).fillHolizon()
+            r.height(30).fillHolizon()
         }
         inputForm <<< row
         

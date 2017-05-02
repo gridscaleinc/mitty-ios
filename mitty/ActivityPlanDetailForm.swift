@@ -37,6 +37,8 @@ class ActivityPlanDetailsForm : MQForm {
         return c
     } ()
     
+    var mainEventButton = MQForm.button(name: "mainEvent", title: "メインベント登録へ")
+    
     //  Main event
     //    Title                         Logo
     var eventTitle : Control = {
@@ -81,9 +83,7 @@ class ActivityPlanDetailsForm : MQForm {
     //     from date time - date time   (link)
     //
     
-    
-    
-    func loadForm() {
+    func loadForm(_ status: Int) {
         
         var page = self as MQForm
         
@@ -140,6 +140,22 @@ class ActivityPlanDetailsForm : MQForm {
         }
         inputForm <<< row
 
+        
+        if status == 1 {
+            row = Row.LeftAligned().layout {
+                r in
+                r.height(60).fillHolizon()
+            }
+            
+            row +++ mainEventButton.layout {
+                b in
+                b.height(50).fillHolizon(50)
+            }
+            inputForm <<< row
+            
+            return
+        }
+        
          // event title
         row = Row.LeftAligned().layout() {
             r in
@@ -200,7 +216,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         let buttons : Control = {
             let l = TapableLabel.newAutoLayout()
-            l.text = "　 ✈️　 🏩　 🚗　 🍴　 🏥　 🚚"
+            l.text = "＋　 ✈️　 🏩　 🚗　 🍴　 🏥　 🚚"
             return Control(name: "line", view: l).height(40)
         }()
         
@@ -211,6 +227,17 @@ class ActivityPlanDetailsForm : MQForm {
         row +++ buttons
         inputForm <<< row
 
+        row = Row.LeftAligned().layout() {
+            r in
+            
+            r.height(5).fillHolizon(10)
+            let layer = MittyColor.gradientLayer()
+            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2)
+            r.view.layer.insertSublayer(layer, at: 0)
+        }
+        
+        
+        inputForm <<< row
         
         row = Row.LeftAligned().layout() {
             r in
@@ -243,7 +270,7 @@ class ActivityPlanDetailsForm : MQForm {
             row = Row.LeftAligned()
             row.layout() {
                 r in
-                r.height(50).leftMost(withInset: 5).rightMost(withInset: 5)
+                r.height(30).leftMost(withInset: 5).rightMost(withInset: 5)
             }
             
             let swch = UISwitch.newAutoLayout()

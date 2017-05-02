@@ -249,9 +249,7 @@ class ActivityPlanViewController : UIViewController {
             switch response.result {
             case .success:
                 LoadingProxy.off()
-                let c = self?.navigationController?.viewControllers.count
-                let target = self?.navigationController?.viewControllers[c!-3]
-                self?.navigationController?.popToViewController(target!, animated: true)
+                self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
