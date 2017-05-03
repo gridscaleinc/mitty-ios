@@ -170,7 +170,7 @@ class ActivityPlanViewController : UIViewController {
         request.setStr(.type, type)
         
         // tag:  string,          (M)      -- イベントについて利用者が入力したデータの分類識別。
-        request.setStr(.tag, "Travel")
+        request.setStr(.tagList, form.tagList.textField.text)
         
         // title: string,         (M)      -- イベントタイトル
         request.setStr(.title, form.eventTitle.textField.text)

@@ -15,7 +15,7 @@ class ActivityPlanDetailsController : UIViewController {
     var activityTitle = "活動計画詳細"
     var form = ActivityPlanDetailsForm()
     
-    var status = 2
+    var status = 1
     
     override func loadView() {
         

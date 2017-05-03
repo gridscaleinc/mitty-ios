@@ -100,10 +100,9 @@ class ActivityEntryViewController : UIViewController {
                 LoadingProxy.off()
                 let vc = ActivityPlanDetailsController()
                 vc.status = 1
-                
                 self?.navigationController?.pushViewController(vc, animated: true)
-            case .failure(let error):
                 
+            case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
                 do {

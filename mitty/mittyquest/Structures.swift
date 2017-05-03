@@ -171,10 +171,10 @@ open class Row : Container {
                 if (c === first) {
                     c.leftMost(withInset: spacing + c.margin.left)
                 } else {
-                     c.righter(than: previous!, withOffset: spacing + c.margin.left)
+                    c.righter(than: previous!, withOffset: spacing + c.margin.left)
                 }
                 previous = c
-                c.upper(withInset: c.margin.up)
+                c.down(withInset: c.margin.up)
             }
         case .right:
             let last = children.last

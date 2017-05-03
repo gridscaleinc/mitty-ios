@@ -66,6 +66,7 @@ open class MQForm : UIView {
     static func  label (name: String, title: String) -> Control {
         let l = TapableLabel.newAutoLayout()
         l.text = title
+        l.baselineAdjustment = .alignBaselines
         return Control(name: name, view: l)
     }
     
