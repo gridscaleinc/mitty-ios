@@ -87,13 +87,15 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
             textField.keyboardType = .URL
         }
         
-        form.quest("[name=location]").bindEvent(for: .editingDidBegin) {
+        form.quest("[name=location]").bindEvent(for: .editingDidBegin) { [weak self]
             c in
             c.resignFirstResponder()
             let controller = IslandPicker()
             controller.delegate = self
-            
-            self.navigationController?.pushViewController(controller, animated: true)
+            controller.islandForm.addressControl.textField.text=self?.form.address.label.text
+            controller.islandForm.nameText.text=self?.form.location.textField.text
+        
+            self?.navigationController?.pushViewController(controller, animated: true)
         }
         
         form.registerButton.bindEvent(.touchUpInside) { [weak self]

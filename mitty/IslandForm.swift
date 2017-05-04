@@ -200,7 +200,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         searchCompleter.filterType = .locationsAndQueries
         
         (searchBarControl.view as! UISearchBar).delegate = self
-        
+        searchCompleter.queryFragment = nameText.text ?? ""
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {

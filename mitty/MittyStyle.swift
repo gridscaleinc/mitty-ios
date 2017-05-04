@@ -20,6 +20,9 @@ class MittyColor {
     
     static let baseYellow = UIColor(red: 1.0, green: 1.0, blue: 0.6, alpha: 1.0)
     static let healthyGreen = UIColor(red: 72/255, green: 201/255, blue: 176/255, alpha:1.0)
+    static let lightYellow = UIColor(red: 250/255, green: 215/255, blue: 160/255, alpha:1.0)
+    static let light = UIColor(white:0.93, alpha:1.0)
+
     
     static func gradientLayer() -> CAGradientLayer {
         
