@@ -192,13 +192,13 @@ class RequestViewController : UIViewController {
         }
         inputForm <<< row
         
-        row = Row.LeftAligned()
+        row = Row.Intervaled()
         row.layout {
             r in
-            r.fillHolizon(20).height(height_middle)
+            r.fillHolizon().height(height_middle)
         }
         row +++ MQForm.button(name: "Post", title: "Post Request").layout { button in
-            button.width(90).height(height_normal).holizontalCenter()
+            button.fillHolizon(60).height(50)
             let b = button.view as! UIButton
             b.backgroundColor = .orange
         }

@@ -97,8 +97,6 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     
     func buildform () {
         
-        let height_normal : CGFloat = 60.0
-        
         let anchor = MQForm.label(name: "dummy", title: "").layout {
             a in
             a.height(0).leftMost().rightMost()

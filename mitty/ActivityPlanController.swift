@@ -11,12 +11,12 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ActivityPlanViewController : UIViewController {
+class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     
     var activityTitle = "活動"
     var type = "Unkown"
     
-    var form = ActivityInputForm()
+    var form = EventInputForm()
     
     override func loadView() {
         
@@ -91,6 +91,8 @@ class ActivityPlanViewController : UIViewController {
             c in
             c.resignFirstResponder()
             let controller = IslandPicker()
+            controller.delegate = self
+            
             self.navigationController?.pushViewController(controller, animated: true)
         }
         
@@ -132,6 +134,11 @@ class ActivityPlanViewController : UIViewController {
         notificationCenter.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         
         notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func pickedIsland(landInfo: IslandInfo) {
+        form.location.textField.text = landInfo.name
+        form.address.label.text = landInfo.address
     }
     
     var scrollConstraints : NSLayoutConstraint?

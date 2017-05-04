@@ -11,14 +11,17 @@ import Foundation
 import UIKit
 import PureLayout
 
-class ActivityInputForm : MQForm {
+//
+//
+//
+class EventInputForm : MQForm {
     
     // 値を持つI/O項目はインスタンスメンバーとして定義
     // ヘッダーなど、表示だけで良いコントロールはインスタンス変数かする必要はないが、共通できるものは親クラスに用意する。
     
-    let eventTitle = MQForm.text(name: "title" , placeHolder: "タイトル")
+    let eventTitle = MQForm.text(name: "title" , placeHolder: "イベントタイトル")
     
-    let tagList = MQForm.text(name: "tag" , placeHolder: "tag1 tag2 ...")
+    let tagList = MQForm.text(name: "tag" , placeHolder: "tag1 tag2 複数可...")
     
     // イベントIcon
     let icon = MQForm.img(name: "icon" , url:"noicon")
@@ -35,26 +38,25 @@ class ActivityInputForm : MQForm {
     // 行い
     let action = MQForm.textView(name: "action" )
     
-    let price = MQForm.text(name: "price" , placeHolder: "価格" )
+    let price = MQForm.text(name: "price" , placeHolder: "価格を入力" )
     
     // 場所
     let location = MQForm.text(name: "location" , placeHolder: "場所名を入力")
     let locationIcon = MQForm.img(name: "icon" , url:"noicon")
-    
+    let address = MQForm.label(name: "address" , title: "")
     
     // 情報源
     let infoSource = MQForm.textView(name: "infoSource")
-    let infoUrl = MQForm.text(name: "infoUrl" , placeHolder: "URL")
-    let address = MQForm.text(name: "address" , placeHolder: "住所を入力")
+    let infoUrl = MQForm.text(name: "infoUrl" , placeHolder: "情報源のURL")
 
     // 連絡情報（FAXは？）
-    let contactTel = MQForm.text(name: "contact-Tel" , placeHolder: "☎️" )
-    let contactEmail = MQForm.text(name: "contact-mail" , placeHolder: "📩")
-    let officialUrl = MQForm.text(name: "officialUrl" , placeHolder: "公式ページ")
+    let contactTel = MQForm.text(name: "contact-Tel" , placeHolder: "☎️ 電話番号" )
+    let contactEmail = MQForm.text(name: "contact-mail" , placeHolder: "📩 メールアドレス")
+    let officialUrl = MQForm.text(name: "officialUrl" , placeHolder: "公式ホームページURL")
     
     let detailDescription = MQForm.textView(name: "description")
     
-    let organizer = MQForm.text(name: "organizer", placeHolder: "主催者")
+    let organizer = MQForm.text(name: "organizer", placeHolder: "主催者名称")
     
     // イメージは最後にオプションとして洗濯させる。
     let image = MQForm.img(name: "picture", url: "nolargeimg")
@@ -67,8 +69,8 @@ class ActivityInputForm : MQForm {
     //　項目単位の小さいロジックはForm中で実装して良い。
     
     func loadForm() {
-        let row_height = CGFloat(55)
-        let line_height = CGFloat(50)
+        let row_height = CGFloat(50)
+        let line_height = CGFloat(48)
         
         var page = self as MQForm
         
@@ -77,10 +79,10 @@ class ActivityInputForm : MQForm {
         page += header
         
         header.layout() { (v) in
-            v.upper().height(30)
+            v.upper().height(2)
         }
         
-        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 1200)
+        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 1300)
         let inputContainer = scrollContainer(name:"inputContainer", contentSize: contentSize)
         
         self +++ inputContainer
@@ -93,14 +95,14 @@ class ActivityInputForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(1200)
+            c.upper().width(UIScreen.main.bounds.size.width).height(1300)
         }
         
         var row = Row.LeftAligned()
         row.layout {
             r in
             r.fillHolizon(0).height(35)
-            r.view.backgroundColor = .orange
+            r.view.backgroundColor = .red
         }
         
         row +++ MQForm.label(name: "title-main-event", title: "メインイベント入力").layout {
@@ -139,6 +141,7 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        seperator(section: inputForm, caption: "日程")
         //終日フラグ
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "alldayFlagTitle", title: "終日").width(60).height(line_height)
@@ -179,8 +182,8 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        seperator(section: inputForm, caption: "行い内容")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-des", title: "内容").height(line_height).width(60)
         row +++ action.layout {
             line in
             line.height(line_height).rightMost(withInset: 10)
@@ -195,13 +198,13 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        seperator(section: inputForm, caption: "場所")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Location", title: "場所").height(line_height).width(60)
         row +++ location.layout{
             line in
+            line.textField.textColor = MittyColor.healthyGreen
             line.height(line_height).rightMost(withInset: 60)
         }
-
         row +++ locationIcon.height(line_height).width(line_height)
         
         
@@ -215,6 +218,10 @@ class ActivityInputForm : MQForm {
         row +++ MQForm.label(name: "label-Address", title: "住所").height(line_height).width(60)
         row +++ address.layout {
             line in
+            line.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            line.label.isUserInteractionEnabled = false
+            line.label.textColor = UIColor.gray
+            line.label.numberOfLines = 0
             line.height(line_height).rightMost(withInset: 10)
         }
 
@@ -224,6 +231,7 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
 
+        seperator(section: inputForm, caption: "価格")
         row = Row.LeftAligned().height(row_height)
         row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60)
         row +++ price.layout{
@@ -233,7 +241,7 @@ class ActivityInputForm : MQForm {
         
         inputForm <<< row
 
-        
+        seperator(section: inputForm, caption: "問い合わせ・連絡情報")
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70)
         row +++ contactTel.layout{
@@ -273,9 +281,8 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
 
-        
+        seperator(section: inputForm, caption: "情報源")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-InfoSource", title: "情報源").height(line_height).width(60)
         row +++ infoSource.layout{
             line in
             line.height(line_height).rightMost(withInset: 10)
@@ -287,7 +294,6 @@ class ActivityInputForm : MQForm {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-URL", title: "URL").height(row_height).width(60)
         row +++ infoUrl.layout{
             line in
             line.height(line_height).rightMost(withInset: 10)
@@ -299,8 +305,8 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        seperator(section: inputForm, caption: "主催者")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-org", title: "主催者").height(line_height).width(60)
         row +++ organizer.layout{
             line in
             line.height(line_height).rightMost(withInset: 10)
@@ -312,8 +318,8 @@ class ActivityInputForm : MQForm {
         }
         inputForm <<< row
         
+        seperator(section: inputForm, caption: "詳細")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-detail", title: "詳細").height(90).width(60)
         row +++ detailDescription.layout{
             line in
             line.height(90).rightMost(withInset: 10)
@@ -349,7 +355,7 @@ class ActivityInputForm : MQForm {
             r in
             r.height(55).fillHolizon()
         }
-        row.spacing = 40
+        row.spacing = 20
         
         row +++ registerButton.width(60).height(50).layout() {
             c in
@@ -363,4 +369,21 @@ class ActivityInputForm : MQForm {
         
     }
 
+    func seperator(section : Section, caption: String) {
+        let row = Row.Intervaled().layout() {
+            r in
+            r.height(23).fillHolizon()
+        }
+        
+        let c = MQForm.label(name: "caption", title: caption).layout {
+            c in
+            c.height(20)
+            c.label.backgroundColor = .lightGray
+            c.label.textColor = .white
+            c.label.textAlignment = .center
+            c.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        }
+        row +++ c
+        section <<< row
+    }
 }

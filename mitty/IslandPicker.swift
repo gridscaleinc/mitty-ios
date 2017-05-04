@@ -24,6 +24,15 @@ class IslandPicker : UIViewController {
     
     var candidates : [IslandInfo] = []
     var islandForm : IslandPickForm = IslandPickForm.newAutoLayout()
+    var delegate : IslandPickerDelegate? {
+        get {
+            return islandForm.delegate
+        }
+        
+        set(dele) {
+            islandForm.delegate = dele!
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

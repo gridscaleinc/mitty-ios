@@ -11,6 +11,9 @@ import UIKit
 import MapKit
 
 class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
+    
+    var delegate : IslandPickerDelegate? = nil
+    
     var searchBarControl : Control = {
         let bar = UISearchBar.newAutoLayout()
         bar.backgroundColor = .white
@@ -164,7 +167,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         
         row +++ completerControl.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).down().upMargin(10)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).upper().upMargin(10)
         }
         
         section <<< row
@@ -178,7 +181,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         
         row +++ mapControl.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).down().upMargin(10)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).upper().upMargin(10)
         }
         
         section <<< row
@@ -259,7 +262,8 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         searchBar.resignFirstResponder()
         
         let comp = searchResults[indexPath.row]
-        (addressControl.view as! UITextField).text = comp.subtitle
+        self.addressControl.textField.text = comp.subtitle
+        self.nameText.text = comp.title
         
         let searchRequest = MKLocalSearchRequest(completion: comp)
         let search = MKLocalSearch(request: searchRequest)
@@ -268,12 +272,17 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
                 if self?.mapView.annotations != nil {
                     self?.mapView.removeAnnotations((self?.mapView.annotations)!)
                 }
-                self?.nameText.text = item.placemark.name
                 self?.mapView.addAnnotation(item.placemark)
             }
             
             self.mapView.showAnnotations(self.mapView.annotations, animated: true)
             
+        }
+        if (delegate != nil) {
+            let info = IslandInfo()
+            info.name = comp.title
+            info.address = comp.subtitle
+            delegate?.pickedIsland(landInfo: info)
         }
     }
     
