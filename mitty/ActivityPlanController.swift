@@ -13,10 +13,20 @@ import SwiftyJSON
 
 class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     
+    var activityInfo : ActivityInfo
     var activityTitle = "活動"
     var type = "Unkown"
     
     var form = EventInputForm()
+    
+    init(_ info: ActivityInfo) {
+        activityInfo = info
+        super.init(nibName: nil, bundle:nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         
@@ -250,6 +260,13 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         
         // language: string       (M)      -- 言語情報　(Ja_JP, en_US, en_GB) elastic　searchに使用する。
         request.setStr(.language, "Ja_JP")
+        
+        request.setInt(.relatedActivityId, activityInfo.id)
+        if (activityInfo.mainEventId == nil) {
+            request.setStr(.asMainEvent, "true")
+        } else {
+            request.setStr(.asMainEvent, "false")
+        }
         
         let urlString = "http://dev.mitty.co/api/new/event"
         

@@ -91,16 +91,30 @@ class ActivityEntryViewController : UIViewController {
         let parameters: Parameters = [
             "title": activityTitle.textField.text!,
             "memo": memo.textView.text!,
-            "mainEventId": "123"
+            "mainEventId": "0"
         ]
 
+        print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
             case .success:
                 LoadingProxy.off()
-                let vc = ActivityPlanDetailsController()
-                vc.status = 1
-                self?.navigationController?.pushViewController(vc, animated: true)
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    DispatchQueue.main.async {
+                        let activityId = json["activityId"].stringValue
+                        
+                        let activityInfo = ActivityInfo()
+                        activityInfo.title = parameters["title"] as! String
+                        activityInfo.memo = parameters["memo"] as? String
+                        activityInfo.id = activityId
+                        
+                        let vc = ActivityPlanDetailsController(activityInfo)
+                        vc.status = 1
+                        self?.navigationController?.pushViewController(vc, animated: true)
+       
+                    }
+                }
                 
             case .failure(let error):
                 print(response.debugDescription)

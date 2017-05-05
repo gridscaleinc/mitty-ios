@@ -13,7 +13,7 @@ import Foundation
 class Event {
     
     //(O) PK イベントID
-    var id : Int8? = nil
+    var id : String
     
     //(M) イベントの種類
     var type: String? = nil
@@ -34,34 +34,34 @@ class Event {
     var action: String? = nil
     
     //(M) イベント開始日時
-    var startDate: Date? = nil
+    var startDate: String? = nil
     
     //(M) イベント終了日時
-    var endDate: Date? = nil
+    var endDate: String? = nil
     
     //(M) 時刻非表示フラグ。
-    var allDayFlag: Bool = false
+    var allDayFlag: String = "false"
     
     //(M) 島ID
-    var islandId:  Int8? = nil
+    var islandId:  String? = nil
     
-    var logoId: Int8? = nil
+    var logoId: String? = nil
     
-    var galleryId: Int8? = nil
+    var galleryId: String? = nil
     
-    var meetingId: Int8? = nil
+    var meetingId: String? = nil
     
     //(O) 価格名称１
     var priceName1: String? = nil
     
     //(O) 価格額１
-    var price1: Double? = nil
+    var price1: String? = nil
     
     //(O) 価格名称2
     var priceName2: String?   = nil
     
     //(O) 価格額２
-    var    price2: Double?       = nil
+    var    price2: String?       = nil
     
     //(O) 通貨　(USD,JPY,などISO通貨３桁表記)
     var currency: String? = nil
@@ -108,9 +108,10 @@ class Event {
     //(M) 言語情報　(Ja_JP, en_US, en_GB) elasticsearchに使用する。
     var language: String = Locale.current.identifier
     
-    init (_ id : Int8) {
-        self.id = id
+    init (_ id : Int) {
+        self.id = String(id)
     }
+
     
     func duration() -> String {
         let formatter = DateFormatter()
@@ -118,7 +119,7 @@ class Event {
         formatter.dateStyle = .long
         formatter.timeStyle = .medium
         
-        return "🕒" + formatter.string(from:startDate!) + " - " + formatter.string(from: endDate!)
+        return "🕒" + startDate! + " - " + endDate!
     }
     
 }

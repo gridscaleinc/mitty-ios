@@ -83,7 +83,7 @@ class ActivityPlanDetailsForm : MQForm {
     //     from date time - date time   (link)
     //
     
-    func loadForm(_ status: Int) {
+    func loadForm(_ activity: ActivityInfo) {
         
         var page = self as MQForm
         
@@ -122,6 +122,7 @@ class ActivityPlanDetailsForm : MQForm {
             r.height(35).fillHolizon()
         }
         
+        title.label.text = activity.title
         row +++ title.layout {
             t in
             t.fillHolizon(10).height(35)
@@ -134,6 +135,8 @@ class ActivityPlanDetailsForm : MQForm {
             r.height(80).fillHolizon()
         }
         
+        memo.label.text = activity.memo
+        
         row +++ memo.layout {
             t in
             t.fillHolizon(10)
@@ -141,7 +144,7 @@ class ActivityPlanDetailsForm : MQForm {
         inputForm <<< row
 
         
-        if status == 1 {
+        if activity.mainEventId == nil {
             row = Row.LeftAligned().layout {
                 r in
                 r.height(60).fillHolizon()

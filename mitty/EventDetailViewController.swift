@@ -68,8 +68,6 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
 
         self.view.backgroundColor = UIColor.white
         
-        buildDummyEvent(e:event)
-        
         buildform()
         self.view.addSubview(form)
         
@@ -129,7 +127,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         scrollContainer +++ detailForm
         
-        imageView.image = UIImage(named: images[Int(event.id!)])
+        imageView.image = UIImage(named: images[3])
         let img = Control(name: "image", view: imageView).layout {
             i in
             i.width(UIScreen.main.bounds.size.width).upper().fillHolizon()
@@ -219,11 +217,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(35)
         }
-        contact +++ MQForm.label(name: "tel", title: "☎️　03-3733-0987").layout {
+        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel!).layout {
             l in
             l.height(35)
         }
-        contact +++ MQForm.label(name: "fax", title: "📠　03-3733-0989").layout {
+        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax!).layout {
             l in
             l.height(35)
         }
@@ -239,7 +237,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             l in
             l.height(35)
         }
-        infoSource +++ MQForm.label(name: "name", title: "先端金融情報研究会").layout {
+        infoSource +++ MQForm.label(name: "name", title: event.organizer!).layout {
             l in
             l.height(35)
         }
@@ -261,10 +259,10 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         url +++ Control(name:"URL", view:link).layout {
             l in
             l.height(35)
-        }.bindEvent(.touchUpInside) {
+        }.bindEvent(.touchUpInside) { [ weak self]
             b in
             
-            let urlString : String = "http://qiita.com/senseiswift/items/70825c8dd4b8dd9d73f9"
+            let urlString : String = (self?.event.sourceUrl)!
             
             if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url){
                 if #available(iOS 10.0, *) {
@@ -277,9 +275,9 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         detailForm +++ url
         
         
-        let description = "フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。フィンテックは言われるほど簡単ではない、しっかり勉強しないとダメです。イベントをぜひ参加してください。お台場ビグサイトに定期的にイベントを開いてます。ぜひ注目お願いします。"
+        let description = event.description
         
-        let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
+        let descriptionLabel = MQForm.label(name: "detailDescription", title: description!).layout {
             c in
             c.putUnder(of: url, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel
@@ -407,11 +405,5 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         // ④ Alertを表示
         present(alert, animated: true, completion: nil)
         
-    }
-    
-    func buildDummyEvent(e : Event) {
-        e.action = "専門家と話し合って、金融の最先端を覗いてみよう！きっと勉強になる。特別価格で提供します。"
-        e.title = "フィンテックの話"
-        e.logoId = 1
     }
 }

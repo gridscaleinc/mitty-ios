@@ -95,21 +95,15 @@ extension EventViewController: UISearchBarDelegate
         
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
-        // 非同期方式で処理を呼び出す。
-        let queue = OperationQueue()
+
         let key = searchBar.text
-        
+        LoadingProxy.set(self)
         if key != nil || (key?.lengthOfBytes(using: String.Encoding.utf8 ))! >= 0 {
-            queue.addOperation() {
-                // 非同期処理
                 let service = EventService.instance
-                let keys = [key]
-                
-                self.events = service.search(keys: keys as! [String])
-                // 非同期処理のコールバック
-                OperationQueue.main.addOperation() {
-                    self.collectionView.reloadData()
-                }
+            service.search(keys: key!) {
+                events in
+                self.events = events
+                self.collectionView.reloadData()
             }
         }
     }
@@ -166,7 +160,7 @@ extension EventViewController: UICollectionViewDelegateFlowLayout {
         
         let e = events[indexPath.row]
         // TODO
-        let image = UIImage(named: images[Int(e.id!)])
+        let image = UIImage(named: images[3])
         let ratio = image == nil ? 1: (image?.size.height)!/(image?.size.width)!
         
         let screenSize:CGSize = UIScreen.main.bounds.size

@@ -39,6 +39,10 @@ class NewEventReq : JSONRequest {
         case accessControl = "accessControl" // (O)イベント情報のアクセス制御：　PUBLIC: 全公開、　
                                              //   PRIVATE: 非公開、 SHARED:関係者のみ
         case language = "language"           // (M)言語情報　(Ja_JP, en_US, en_GB) elastic　searchに使用する。
+        
+        case relatedActivityId = "relatedActivityId"
+        
+        case asMainEvent = "asMainEvent"
     }
     
     func setStr(_ key: KeyNames, _ value: String?) {

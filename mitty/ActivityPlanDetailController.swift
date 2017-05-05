@@ -15,7 +15,18 @@ class ActivityPlanDetailsController : UIViewController {
     var activityTitle = "活動計画詳細"
     var form = ActivityPlanDetailsForm()
     
-    var status = 1
+    var status = 2
+    
+    var activityInfo : ActivityInfo
+    
+    init(_ activity: ActivityInfo) {
+        activityInfo = activity
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func loadView() {
         
@@ -31,7 +42,7 @@ class ActivityPlanDetailsController : UIViewController {
         self.view.addSubview(form)
         
         
-        form.loadForm(status)
+        form.loadForm(activityInfo)
         
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
@@ -59,7 +70,7 @@ class ActivityPlanDetailsController : UIViewController {
         if (status == 1) {
             form.mainEventButton.bindEvent(.touchUpInside) { [weak self]
                 v in
-                let vc = ActivitySelectionViewController()
+                let vc = ActivitySelectionViewController((self?.activityInfo)!)
                 self?.navigationController?.pushViewController(vc, animated: true)
                 self?.status = 3
             }

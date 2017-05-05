@@ -111,7 +111,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         }
         
         labels.bindEvent(for: .touchUpInside) { [weak self] label in
-            let detailViewController = ActivityPlanDetailsController()
+            let detailViewController = ActivityPlanDetailsController(ActivityInfo().dummy())
             self?.navigationItem.title = "..."
             self?.tabBarController?.tabBar.isHidden = true
             self?.navigationController?.pushViewController(detailViewController, animated: true)

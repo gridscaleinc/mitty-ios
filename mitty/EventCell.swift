@@ -8,15 +8,12 @@ class EventCell: UICollectionViewCell {
     var event : Event?
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
 
-    let form = MQForm.newAutoLayout()
+    var form = MQForm.newAutoLayout()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
         
         super.init(frame: frame)
-        self.addSubview(form)
-        form.autoPinEdgesToSuperviewEdges()
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -31,7 +28,10 @@ class EventCell: UICollectionViewCell {
     func configureView(event: Event) {
         
         self.event = event
-        
+        form = MQForm.newAutoLayout()
+        self.addSubview(form)
+        form.autoPinEdgesToSuperviewEdges()
+
         let section = Section(name: "eventcell", view: UIView.newAutoLayout())
         section.layout {
             s in
@@ -48,7 +48,7 @@ class EventCell: UICollectionViewCell {
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
         row +++ publisherIcon.width(30).height(30)
         
-        let publisher = MQForm.label(name: "publisher", title: "Some Publisher")
+        let publisher = MQForm.label(name: "publisher", title: "OWner(TBS)")
         row +++ publisher.layout{
             pub in
             let l = pub.label
@@ -77,7 +77,7 @@ class EventCell: UICollectionViewCell {
             c.height(75).width(25)
         }
         col +++ MQForm.label(name: "likes1", title: "🔺").width(25).height(25)
-        col +++ MQForm.label(name: "likes2", title: "133").width(25).height(25).layout {
+        col +++ MQForm.label(name: "likes2", title: String(describing: event.likes)).width(25).height(25).layout {
             l in
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
@@ -87,7 +87,7 @@ class EventCell: UICollectionViewCell {
         row +++ col
         
         row +++ MQForm.img(name: "eventIcon", url: "timesquare").width(50).height(50)
-        let titleLabel = MQForm.label(name: "titleLabel", title: "Goto newyork city , Time square, Happy new year count down!").layout {t in
+        let titleLabel = MQForm.label(name: "titleLabel", title: event.title!).layout {t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
             t.rightMost()
@@ -100,7 +100,7 @@ class EventCell: UICollectionViewCell {
             r.fillHolizon().height(150)
         }
         // imageがある場合、イメージを表示
-        let itemImage = MQForm.img(name: "eventImage", url: images[Int(event.id!)]).layout {
+        let itemImage = MQForm.img(name: "eventImage", url: images[3]).layout {
             img in
             img.fillHolizon()
         }
@@ -153,5 +153,6 @@ class EventCell: UICollectionViewCell {
         for v in contentView.subviews {
             v.removeFromSuperview()
         }
+        form.removeFromSuperview()
     }
 }

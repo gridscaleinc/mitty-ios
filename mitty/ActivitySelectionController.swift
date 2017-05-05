@@ -15,11 +15,12 @@ class ActivitySelectionViewController : MittyUIViewController {
     
     // activityList を作成する
     let form : ActivitySelectionForm
-    
+    var activityInfo : ActivityInfo
     var dataSource : ActivitySelectionDatasource? = nil
     let delegate = ActivitySelectionDelegate()
     
-    override init () {
+    init (_ activity : ActivityInfo) {
+        activityInfo = activity
         form = ActivitySelectionForm.newAutoLayout()
         super.init()
         dataSource = ActivitySelectionDatasource(controller: self)
@@ -51,7 +52,7 @@ class ActivitySelectionViewController : MittyUIViewController {
         // Closure を利用して、イベント処理をする。
         dataSource?.onCellTapped () { [weak self] (cell) in
             print(cell.activity?.label ?? "")
-            let vc = ActivityPlanViewController()
+            let vc = ActivityPlanViewController((self?.activityInfo)!)
             vc.activityTitle = (cell.activity?.label)!
             vc.type = (cell.activity?.type)!
             
