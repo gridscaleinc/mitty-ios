@@ -1,43 +1,18 @@
 import UIKit
 import PureLayout
+import Starscream
+import SwiftyJSON
 
 
 @objc(TalkListViewController)
-class TalkListViewController: UIViewController {
-    
+class TalkListViewController: UIViewController ,WebSocketDelegate {
+    var socket = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/")!, protocols: ["chat", "superchat"])
+
     var talkingIsLand : Island!
     
     // MARK: - Properties
     var talkingList: [Talk] = {
         var tks = [Talk]()
-        var tk1 = Talk()
-        tk1.familyName="黄"
-        tk1.mittyId = "domanthan"
-        tk1.speaking = "こんにちは,よろしくお願いいたします。"
-        tk1.avatarIcon = "pengin"
-        
-        tks.append(tk1)
-        
-        tk1 = Talk()
-        tk1.familyName="金"
-        tk1.mittyId = "dongri"
-        tk1.speaking = "こんにちは,よろしくお願いいたします。"
-        tk1.avatarIcon = "pengin1"
-        tks.append(tk1)
-        
-        tk1 = Talk()
-        tk1.familyName="楊"
-        tk1.mittyId = "Yang"
-        tk1.speaking = "こんにちは,よろしくお願いいたします。"
-        tk1.avatarIcon = "pengin2"
-        tks.append(tk1)
-        
-        tk1 = Talk()
-        tk1.familyName="張"
-        tk1.mittyId = "choiii"
-        tk1.speaking = "こんにちは,よろしくお願いいたします。"
-        tk1.avatarIcon = "pengin4"
-        tks.append(tk1)
         
         
         return tks
@@ -45,7 +20,7 @@ class TalkListViewController: UIViewController {
     } ()
     
     let topLabel: UILabel
-    let talkInputField: UITextField
+    let talkInputField: StyledTextField
     let talkSendButton: UIButton
     
     
@@ -78,8 +53,8 @@ class TalkListViewController: UIViewController {
         
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
         
-        talkInputField = UITextField.newAutoLayout()
-        talkInputField.text = "input message here"
+        talkInputField = StyledTextField.newAutoLayout()
+        talkInputField.placeholder = "input message here"
         
         talkSendButton = UIButton.newAutoLayout()
         talkSendButton.setTitle("送信", for: .normal)
@@ -87,6 +62,7 @@ class TalkListViewController: UIViewController {
         talkSendButton.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)
         
         super.init(nibName: nil, bundle: nil)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -110,6 +86,22 @@ class TalkListViewController: UIViewController {
         addSubviews()
         addConstraints()
         configureSubviews()
+        
+        talkSendButton.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
+        socket.delegate = self
+        socket.connect()
+        
+    }
+    
+    func sendMessage(_ sender: UIButton) {
+        let message : [String:Any] = [
+            "email" : "domanthan@gmail.com",
+            "username" : "domanthan",
+            "message" : talkInputField.text ?? "No message"
+        ]
+        
+        let js = JSON(message).rawString()
+        socket.write(string: js!)
         
     }
     
@@ -182,6 +174,50 @@ class TalkListViewController: UIViewController {
         
     }
     
+    // MARK: Websocket Delegate Methods.
+    
+    func websocketDidConnect(socket: WebSocket) {
+        print("websocket is connected")
+    }
+    
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+        if let e = error {
+            print("websocket is disconnected: \(e.localizedDescription)")
+        } else {
+            print("websocket disconnected")
+        }
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+        let js = JSON.parse(text)
+        print(text)
+        print(js)
+        
+        let tk1 = Talk()
+        
+        let mail = js["email"]
+        tk1.familyName = mail.rawString()!
+        let userId = js["username"].rawString()!
+        
+        tk1.mittyId = userId
+        tk1.speaking = js["message"].rawString()!
+        if userId == "domanthan" {
+            tk1.avatarIcon = "pengin"
+        } else {
+            tk1.avatarIcon = "pengin4"
+        }
+        
+        talkingList.append(tk1)
+        
+        collectionView.reloadData()
+        self.collectionView.scrollToItem(at:IndexPath(item: talkingList.count-1, section: 0), at: .bottom, animated: true)
+
+    }
+    
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+        print("Received data: \(data.count)")
+    }
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -189,7 +225,7 @@ extension TalkListViewController: UICollectionViewDataSource {
     
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
