@@ -72,7 +72,7 @@ class IslandViewController: UIViewController {
         
         meetingSegments.selectedSegmentIndex = 0
         meetingSegments.translatesAutoresizingMaskIntoConstraints = false
-        meetingSegments.autoPinEdge(.top, to: .bottom, of: topImage, withOffset: 10)
+        meetingSegments.autoPinEdge(.top, to: .bottom, of: topImage, withOffset: 1)
         meetingSegments.autoPinEdge(toSuperviewEdge: .left, withInset: 0)
         meetingSegments.autoPinEdge(toSuperviewEdge: .right, withInset: 0)
         
