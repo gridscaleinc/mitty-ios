@@ -7,7 +7,8 @@ import SwiftyJSON
 @objc(TalkListViewController)
 class TalkListViewController: UIViewController ,WebSocketDelegate {
     var socket = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/")!, protocols: ["chat", "superchat"])
-
+    var disconnected = true
+    
     var talkingIsLand : Island!
     
     // MARK: - Properties
@@ -20,6 +21,9 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     } ()
     
     let topLabel: UILabel
+    
+    let panel : UIView = UIView.newAutoLayout()
+    var bottomCons : NSLayoutConstraint? = nil
     let talkInputField: StyledTextField
     let talkSendButton: UIButton
     
@@ -89,11 +93,34 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         talkSendButton.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
         socket.delegate = self
-        socket.connect()
+ 
+        
+        manageKeyboard()
         
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if disconnected {
+            socket.connect()
+        }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        if disconnected {
+            return
+        }
+        socket.disconnect()
+    }
+    
     func sendMessage(_ sender: UIButton) {
+        if (talkInputField.text == "") {
+            return
+        }
+        
+        if (disconnected) {
+            socket.connect()
+            return
+        }
         let message : [String:Any] = [
             "email" : "domanthan@gmail.com",
             "username" : "domanthan",
@@ -102,6 +129,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         let js = JSON(message).rawString()
         socket.write(string: js!)
+        talkInputField.text = ""
         
     }
     
@@ -135,8 +163,9 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         view.addSubview(topLabel)
         view.addSubview(collectionView)
         
-        view.addSubview(talkInputField)
-        view.addSubview(talkSendButton)
+        view.addSubview(panel)
+        panel.addSubview(talkInputField)
+        panel.addSubview(talkSendButton)
         
     }
     
@@ -159,32 +188,74 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         collectionView.autoPinEdge(toSuperviewEdge: .left)
         collectionView.autoPinEdge(toSuperviewEdge: .right)
-        collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 90)
+        bottomCons = collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 50)
         
         
-        talkInputField.autoPinEdge(.top, to: .bottom, of: collectionView, withOffset:20 )
-        talkInputField.autoPinEdge(toSuperviewEdge: .left, withInset: 20 )
-        talkInputField.autoSetDimension(.height, toSize: 40)
-        talkInputField.autoSetDimension(.width, toSize: UIScreen.main.bounds.width - 120)
+        panel.autoPinEdge(.top, to: .bottom, of: collectionView, withOffset: 10)
+        panel.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
+        panel.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
+        panel.autoSetDimension(.height, toSize: 40)
         
-        talkSendButton.autoPinEdge(.top, to: .top, of: talkInputField)
-        talkSendButton.autoPinEdge(.left, to: .right, of: talkInputField, withOffset: 10)
-        talkSendButton.autoSetDimension(.height, toSize: 30)
-        talkSendButton.autoSetDimension(.width, toSize: 60)
+        talkInputField.autoPinEdge(toSuperviewEdge: .left)
+        talkInputField.autoPinEdge(toSuperviewEdge: .top)
+        talkInputField.autoPinEdge(toSuperviewEdge: .bottom)
+        talkInputField.autoPinEdge(toSuperviewEdge: .right, withInset: 80)
+
+        talkSendButton.autoPinEdge(.left, to: .right, of: talkInputField, withOffset:2)
+        talkSendButton.autoPinEdge(toSuperviewEdge: .top)
+        talkSendButton.autoPinEdge(toSuperviewEdge: .bottom)
+        talkSendButton.autoPinEdge(toSuperviewEdge: .right)
         
+    }
+    
+    func manageKeyboard() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    @objc
+    func onKeyboardShow(_ notification: NSNotification) {
+        //郵便入れみたいなもの
+        let userInfo = notification.userInfo!
+        //キーボードの大きさを取得
+        let keyboardRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let keyboardHeight = keyboardRect.size.height
+        
+        if bottomCons != nil {
+            bottomCons?.autoRemove()
+            bottomCons = collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 50 + keyboardHeight)
+        }
+    }
+    
+    
+    @objc
+    func onKeyboardHide(_ notification: NSNotification) {
+        if bottomCons != nil {
+            bottomCons?.autoRemove()
+            bottomCons = collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 50)
+        }
+        
+        self.view.setNeedsUpdateConstraints()
     }
     
     // MARK: Websocket Delegate Methods.
     
     func websocketDidConnect(socket: WebSocket) {
         print("websocket is connected")
+        disconnected = false
+        
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         if let e = error {
             print("websocket is disconnected: \(e.localizedDescription)")
         } else {
-            print("websocket disconnected")
+            print("websocket disconnected, auto reconnecting.")
+            socket.connect()
         }
     }
     
@@ -210,6 +281,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         talkingList.append(tk1)
         
         collectionView.reloadData()
+        collectionView.layoutIfNeeded()
         self.collectionView.scrollToItem(at:IndexPath(item: talkingList.count-1, section: 0), at: .bottom, animated: true)
 
     }
@@ -237,6 +309,7 @@ extension TalkListViewController: UICollectionViewDataSource {
         {
             cell.configureView(talk: talkingList[indexPath.row])
             cell.backgroundColor = UIColor(white: 0.99, alpha: 1)
+            collectionView.setNeedsLayout()
             return cell
         }
         return IslandCell()
@@ -248,9 +321,14 @@ extension TalkListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        let talk = talkingList[indexPath.row]
+        
         let screenSize:CGSize = UIScreen.main.bounds.size
         let width = ( screenSize.width - (10 * 3) )
-        let cellSize: CGSize = CGSize( width: width, height:70 )
+        var cellSize: CGSize = CGSize( width: width, height:70 )
+        if (talk.height > 0) {
+            cellSize.height = CGFloat(talk.height)
+        }
         return cellSize
     }
     

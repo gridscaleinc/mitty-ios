@@ -78,5 +78,9 @@ class TalkingCell: UICollectionViewCell {
         avatarIcon.image = UIImage (named: (self.talk?.avatarIcon)!)
         talking.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         talking.text = self.talk.speaking
+        
+        talking.sizeToFit()
+        self.talk.height = talking.frame.height + 40
+
     }
 }

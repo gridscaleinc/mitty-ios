@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 ///
 /// イベント情報
@@ -201,6 +202,9 @@ class Talk {
     public var avatarIcon = ""
     public var familyName = ""
     public var speaking = ""
+    
+    public var height = CGFloat(0.0)
+    
     
 }
 

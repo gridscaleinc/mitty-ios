@@ -60,7 +60,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         super.loadView()
         self.navigationItem.title = "活動予定"
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(white: 0.96, alpha: 1)
         self.view.addSubview(form)
         
         configureNavigationBar()
@@ -106,8 +106,8 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         let labels = form.quest("[name=activitylabel]")
         labels.forEach() { c in
             let l = c.view as! UILabel
-            l.textColor = UIColor(red: 0.3, green: 0.6, blue: 0.4, alpha: 0.9)
-            l.font = UIFont(name:"AppleGothic", size: 12)
+            l.textColor = MittyColor.healthyGreen
+            l.font = UIFont(name:"AppleGothic", size: 14)
         }
         
         labels.bindEvent(for: .touchUpInside) { [weak self] label in
