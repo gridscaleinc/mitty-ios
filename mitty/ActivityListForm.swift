@@ -13,18 +13,6 @@ import PureLayout
 @objc(ActivityListForm)
 class ActivityListForm : MQForm {
     
-//    let collectionView : UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        layout.sectionHeadersPinToVisibleBounds = true
-//        layout.sectionFootersPinToVisibleBounds = false
-//        
-//        let v = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-//        v.translatesAutoresizingMaskIntoConstraints = false
-//        v.backgroundColor = .white
-//        return v
-//    } ()
-//    
-    
     
     override public init(frame: CGRect) {
         super.init(frame: frame)
@@ -34,26 +22,16 @@ class ActivityListForm : MQForm {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let activityList : [(label:String, imgName:String)] = [
-        (label: "2/18 平和島公園", imgName: "timesquare"),
-        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
-        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
-        (label: "2/18 Iot どこかで", imgName: "pengin3"),
-        (label: "2/18 島祭り", imgName: "pengin"),
-        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
-        (label: "2/18 島祭り", imgName: "pengin"),
-        (label: "2/18 平和島公園", imgName: "timesquare"),
-        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
-        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
-        (label: "2/18 Iot どこかで", imgName: "pengin3"),
-        (label: "2/18 島祭り", imgName: "pengin"),
-        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
-        (label: "2/19 フィンテック＠ビグサイト", imgName: "pengin1"),
-        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
-        (label: "2/18 Iot どこかで", imgName: "pengin3"),
-        (label: "2/18 島祭り", imgName: "pengin"),
-        (label: "2/18 沖縄ペンギン島", imgName: "pengin2"),
-        (label: "2/18 島祭り", imgName: "pengin")
+    let activityList : [(date: String, label:String, imgName:String)] = [
+        (date: "2/18", label: "平和島公園", imgName: "timesquare"),
+        (date: "2/18", label: "沖縄ペンギン島", imgName: "pengin2"),
+        (date: "2/18", label: "Iot どこかで", imgName: "pengin3"),
+        (date: "2/18", label: "島祭り", imgName: "pengin"),
+        (date: "2/18", label: "フィンテック＠ビグサイト", imgName: "pengin1"),
+        (date: "2/18", label: "Iot どこかで", imgName: "pengin3"),
+        (date: "2/18", label: "フィンテック＠ビグサイト", imgName: "pengin1"),
+        (date: "2/18", label: "沖縄ペンギン島", imgName: "pengin2"),
+        (date: "2/18", label: "島祭り", imgName: "pengin")
     ]
     
     func loadForm () {
@@ -149,22 +127,106 @@ class ActivityListForm : MQForm {
         let section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
         container += section
         
+        var row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(20)
+        }
+        section <<< row
+        row +++ MQForm.label(name: "activity-title", title: "計画中").layout {
+            l in
+            l.label.textColor = .orange
+            l.height(20).fillParent()
+        }
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(30)
+        }
+        
+        section <<< row
+        
+        row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
+            l in
+            l.label.textColor = .gray
+        }
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(20)
+        }
+        section <<< row
+        row +++ MQForm.label(name: "activity-title", title: "活動予定一覧").layout {
+            l in
+            l.label.textColor = .orange
+            l.fillParent().height(20)
+        }
+
         for t in activityList {
             let row = Row.LeftAligned()
             section <<< row
             
-            row +++ MQForm.label(name: "activitylabel", title: t.label).width(250).height(30)
+            row +++ MQForm.label(name: "activityDate", title: t.date).layout {
+                 d in
+                 d.label.textColor = .orange
+                 d.width(50).height(30)
+            }
+            
+            row +++ MQForm.label(name: "activitylabel", title: t.label).width(200).height(30)
                 +++ MQForm.img(name:"icon", url: t.imgName).width(30).height(20)
 
-                
             row.layout(){ r in
                 let w = UIScreen.main.bounds.size.width - 20
                 r.leftMost().rightMost().height(40).width(w)
             }
         }
-
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(20)
+        }
+        section <<< row
+        row +++ MQForm.label(name: "activity-title", title: "招待一覧").layout {
+            l in
+            l.label.textColor = .orange
+            l.height(20).fillParent()
+        }
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(30)
+        }
+        
+        section <<< row
+        
+        row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
+            l in
+            l.label.textColor = .gray
+        }
+        
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(20)
+        }
+        section <<< row
+        row +++ MQForm.label(name: "activity-title", title: "リクエスト一覧").layout {
+            l in
+            l.label.textColor = .orange
+            l.height(20).fillParent()
+        }
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(30)
+        }
+        
+        section <<< row
+        
+        row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
+            l in
+            l.label.textColor = .gray
+        }
         section.layout() { [weak self]s in
-            let height = 40.0*(CGFloat((self?.activityList.count)!))
+            let height = 40.0*(CGFloat((self?.activityList.count)!) + 6)
 //            s.view.backgroundColor = UIColor.brown
             s.upper().width(UIScreen.main.bounds.size.width).height(height)
         }

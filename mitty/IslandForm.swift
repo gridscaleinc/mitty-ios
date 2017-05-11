@@ -12,8 +12,6 @@ import MapKit
 
 class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegate, UITableViewDataSource,UISearchBarDelegate {
     
-    var delegate : IslandPickerDelegate? = nil
-    
     var searchBarControl : Control = {
         let bar = UISearchBar.newAutoLayout()
         bar.backgroundColor = .white
@@ -65,7 +63,20 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
     var addressControl : Control = {
         let t = StyledTextField.newAutoLayout()
         t.placeholder = "住所"
-        let c = Control(name:"id", view: t)
+        let c = Control(name:"address", view: t)
+        return c
+    } ()
+    
+    // OK button
+    var okButton : Control = {
+        let b = MQForm.button(name: "ok-button", title: "OK")
+        return b
+    } ()
+    
+    // 候補場所テーブル
+    var nameTable : Control = {
+        let searchResultsTableView : UITableView = UITableView.newAutoLayout()
+        let c = Control(name: "searchResult", view: searchResultsTableView)
         return c
     } ()
     
@@ -76,15 +87,12 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         return c
     } ()
     
-    var completerControl : Control = {
-        let searchResultsTableView : UITableView = UITableView.newAutoLayout()
-        let c = Control(name: "searchResult", view: searchResultsTableView)
-        return c
-    } ()
     
     
     var searchCompleter = MKLocalSearchCompleter()
     var searchResults = [MKLocalSearchCompletion]()
+    
+    var selectedPlaceMark : CLPlacemark? = nil
     
     //
     //
@@ -154,8 +162,15 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         
         row +++ addressControl.layout {
             l in
-            l.fillHolizon(10).height(30)
+            l.rightMost(withInset: 70).height(30)
         }
+        
+        row +++ okButton.layout {
+            l in
+            l.rightMost(withInset: 2).height(30)
+            l.view.backgroundColor = .gray
+        }
+        
         
         section <<< row
 
@@ -165,7 +180,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
             r.height(180).fillHolizon()
         }
         
-        row +++ completerControl.layout {
+        row +++ nameTable.layout {
             m in
             m.leftMost(withInset: 10).rightMost(withInset: 10).upper().upMargin(10)
         }
@@ -189,7 +204,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         
         searchCompleter.delegate = self
         
-        let searchResultsTableView = completerControl.view as! UITableView
+        let searchResultsTableView = nameTable.view as! UITableView
         
         searchResultsTableView.dataSource = self
         searchResultsTableView.delegate = self
@@ -236,7 +251,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
     
     func completerDidUpdateResults(_ completer: MKLocalSearchCompleter) {
         searchResults = completer.results
-        let searchResultsTableView = completerControl.view as! UITableView
+        let searchResultsTableView = nameTable.view as! UITableView
         mapView.removeAnnotations(mapView.annotations)
         searchResultsTableView.reloadData()
     }
@@ -273,17 +288,13 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
                     self?.mapView.removeAnnotations((self?.mapView.annotations)!)
                 }
                 self?.mapView.addAnnotation(item.placemark)
+                self?.selectedPlaceMark = item.placemark
             }
             
             self.mapView.showAnnotations(self.mapView.annotations, animated: true)
             
         }
-        if (delegate != nil) {
-            let info = IslandInfo()
-            info.name = comp.title
-            info.address = comp.subtitle
-            delegate?.pickedIsland(landInfo: info)
-        }
+
     }
     
     func setColor(_ v: UIView, _ color: UIColor) {

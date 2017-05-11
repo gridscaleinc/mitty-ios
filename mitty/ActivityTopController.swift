@@ -28,8 +28,6 @@ import PureLayout
 @objc(ActivityTopViewController)
 class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     
-    var activityListDS :ActivityListDataSource? = nil
-    let activityListDelegate :ActivityListDelegate
     
     // Search Box
     let searchBox : UISearchBar = {
@@ -44,9 +42,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     
     override init () {
         self.form = ActivityListForm.newAutoLayout()
-        activityListDelegate = ActivityListDelegate()
         super.init()
-        activityListDS = ActivityListDataSource(controller: self)
     }
     
     required init?(coder aDecoder: NSCoder) {

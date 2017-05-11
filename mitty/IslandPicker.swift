@@ -24,15 +24,8 @@ class IslandPicker : UIViewController {
     
     var candidates : [IslandInfo] = []
     var islandForm : IslandPickForm = IslandPickForm.newAutoLayout()
-    var delegate : IslandPickerDelegate? {
-        get {
-            return islandForm.delegate
-        }
-        
-        set(dele) {
-            islandForm.delegate = dele!
-        }
-    }
+    var delegate : IslandPickerDelegate? = nil
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +42,18 @@ class IslandPicker : UIViewController {
         islandForm.configLayout()
 
         self.navigationItem.title = "場所選択"
+        
+        islandForm.okButton.bindEvent(.touchUpInside) { [weak self]
+            v in
+            if (self?.delegate != nil) {
+                let info = IslandInfo()
+                info.name = self?.islandForm.nameControl.textField.text
+                info.address = self?.islandForm.addressControl.textField.text
+                info.placeMark = self?.islandForm.selectedPlaceMark
+                self?.delegate?.pickedIsland(landInfo: info)
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
         
     }
 }

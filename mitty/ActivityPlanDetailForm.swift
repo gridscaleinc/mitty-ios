@@ -39,6 +39,8 @@ class ActivityPlanDetailsForm : MQForm {
     
     var mainEventButton = MQForm.button(name: "mainEvent", title: "メインベント登録へ")
     
+    var requestButton = MQForm.button(name: "request", title: "聞いてみる")
+    
     //  Main event
     //    Title                         Logo
     var eventTitle : Control = {
@@ -158,6 +160,8 @@ class ActivityPlanDetailsForm : MQForm {
             
             return
         }
+        
+        
         
          // event title
         row = Row.LeftAligned().layout() {
@@ -323,14 +327,27 @@ class ActivityPlanDetailsForm : MQForm {
         
         inputForm <<< Row.LeftAligned().height(50)
 
+        row = Row.Intervaled().layout {
+            r in
+            r.height(40).fillHolizon()
+        }
+        
+        row +++ requestButton.layout {
+            b in
+            b.height(40).fillHolizon(90)
+        }
+        inputForm <<< row
+        
+        
         row = Row.Intervaled()
         row.spacing = 40
         
-        let bt = MQForm.button(name: "delete", title: "活動計画を削除").width(80).height(28)
+        let bt = MQForm.button(name: "delete", title: "活動計画を削除")
         bt.layout() {
             c in
             c.view.backgroundColor = UIColor.red
             c.view.layer.cornerRadius = 8
+            c.height(28).fillHolizon(60)
             
         }
         
@@ -338,7 +355,7 @@ class ActivityPlanDetailsForm : MQForm {
 
         row.layout() {
             r in
-            r.height(55).fillHolizon()
+            r.height(90).fillHolizon()
         }
         
         inputForm <<< row

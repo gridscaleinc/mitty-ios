@@ -7,14 +7,17 @@
 //
 
 import Foundation
+import MapKit
 
 class IslandInfo {
+    
     var id : Int = 0
     var iconUrl : String?
     var name : String?
     var nickName : String?
     var address : String?
-    var lontitude : Double?
-    var altitude : Double?
+    
+    var placeMark: CLPlacemark?
+    
     
 }

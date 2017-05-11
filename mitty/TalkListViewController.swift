@@ -6,6 +6,8 @@ import SwiftyJSON
 
 @objc(TalkListViewController)
 class TalkListViewController: UIViewController ,WebSocketDelegate {
+    var pingPongTimer : Timer? = nil
+    
     var socket = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/")!, protocols: ["chat", "superchat"])
     var disconnected = true
     
@@ -102,7 +104,20 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     override func viewWillAppear(_ animated: Bool) {
         if disconnected {
             socket.connect()
+            super.viewWillAppear(true)
+            pingPongTimer = Timer.scheduledTimer(timeInterval: 10.0, target: self, selector: #selector(self.sendPing), userInfo: nil, repeats: true)
+            
+            pingPongTimer?.fire()
         }
+    }
+    
+    func sendPing() {
+        if ( !disconnected) {
+            socket.write(ping: Data())
+        } else {
+            socket.connect()
+        }
+        
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -243,7 +258,6 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     }
     
     // MARK: Websocket Delegate Methods.
-    
     func websocketDidConnect(socket: WebSocket) {
         print("websocket is connected")
         disconnected = false
@@ -253,6 +267,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         if let e = error {
             print("websocket is disconnected: \(e.localizedDescription)")
+            pingPongTimer?.invalidate()
         } else {
             print("websocket disconnected, auto reconnecting.")
             socket.connect()
@@ -279,6 +294,9 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         }
         
         talkingList.append(tk1)
+        if talkingList.count > 100 {
+            talkingList.remove(at: 0)
+        }
         
         collectionView.reloadData()
         collectionView.layoutIfNeeded()
