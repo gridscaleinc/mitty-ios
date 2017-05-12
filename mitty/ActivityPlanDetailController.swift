@@ -39,13 +39,17 @@ class ActivityPlanDetailsController : UIViewController {
         super.loadView()
         
         self.form.translatesAutoresizingMaskIntoConstraints = false
+        
+        
         self.view.addSubview(form)
         
+        ActivityService.instance.fetch(id: activityInfo.id) {
+            activityDetail in
+            self.form.loadForm(activityDetail)
+            self.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+
+        }
         
-        form.loadForm(activityInfo)
-        
-        
-        view.setNeedsUpdateConstraints() // bootstrap Auto Layout
         
     }
     

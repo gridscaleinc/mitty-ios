@@ -99,3 +99,7 @@ infix operator +++ : AddPrecedence
 infix operator <<< : JoinPrecedence
 prefix operator +=
 
+protocol Linkable {
+    var  underlyObj : Any { get  set }
+}
+

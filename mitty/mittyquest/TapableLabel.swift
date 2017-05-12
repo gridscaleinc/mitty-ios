@@ -9,7 +9,16 @@
 import Foundation
 import UIKit
 
-class TapableLabel : UILabel {
+class TapableLabel : UILabel, Linkable {
+    private var underling : Any = NSObject()
+    var underlyObj: Any {
+        get {
+            return underling
+        }
+        set (newvalue) {
+            underling = newvalue
+        }
+    }
     
     override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
 

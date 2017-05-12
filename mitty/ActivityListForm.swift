@@ -160,9 +160,14 @@ class ActivityListForm : MQForm {
                  d.label.textColor = .orange
                  d.width(50).height(30)
             }
+
+            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30)
+            row +++ l
             
-            row +++ MQForm.label(name: "activitylabel", title: t.title).width(200).height(30)
-                +++ MQForm.img(name:"icon", url: t.logoUrl).width(30).height(20)
+            // ラベルに紐つくactivityを保存
+            (l.label as! TapableLabel).underlyObj = t
+                
+            row +++ MQForm.img(name:"icon", url: t.logoUrl).width(30).height(20)
 
             row.layout(){ r in
                 let w = UIScreen.main.bounds.size.width - 20

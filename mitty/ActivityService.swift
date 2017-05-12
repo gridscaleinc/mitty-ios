@@ -64,7 +64,7 @@ class ActivityService {
         let act = ActivityInfo()
         act.id = id
         
-        act.mainEventId = jsAct["eventId"].int64
+        act.mainEventId = jsAct["eventId"].stringValue
         act.title = jsAct["title"].stringValue
         act.startDateTime = jsAct["startDateTime"].stringValue
         act.logoUrl = jsAct["eventLogoUrl"].stringValue
@@ -72,6 +72,64 @@ class ActivityService {
         act.logoUrl = "timesquare"
         
         return act
+    }
+    
+    func fetch(id: String, _ callback: @escaping( _ act: Activity) -> Void  ) {
+        
+        let urlString = "http://dev.mitty.co/api/activity/details"
+        
+        let parmeters = [
+            "id" : id
+        ]
+        
+        
+        // ダミーコード、本当はサーバーから検索する。
+        var activity : Activity = Activity()
+        let request = Alamofire.request(urlString, method: .get, parameters: parmeters)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                     activity = self.bindActivityDetails(json)
+                }
+                
+                callback(activity)
+                
+            case .failure(let error):
+                LoadingProxy.off()
+                print(error)
+            }
+        }
+
+    }
+    
+    func bindActivityDetails(_ json: JSON) -> Activity {
+        let a = Activity()
+        let info = ActivityInfo()
+        a.info = info
+        
+        let infoJson = json["activity"]
+        info.id = infoJson["id"].stringValue
+        info.mainEventId = infoJson["main_event_id"].stringValue
+        info.memo = infoJson["memo"].stringValue
+        
+        for (_, detailJson) in json["details"] {
+            let item = ActivityItem()
+            item.eventId = detailJson["eventId"].stringValue
+            item.title = detailJson["title"].stringValue
+            item.memo = detailJson["memo"].stringValue
+            item.notification = detailJson["notification"].stringValue
+            item.notificationTime = detailJson["notificationTime"].stringValue
+            item.eventTitle = detailJson["eventTitle"].stringValue
+            item.startDateTime = detailJson["startDateTime"].stringValue
+            item.endDateTime = detailJson["endDateTime"].stringValue
+            item.allDayFlag = detailJson["allDayFlag"].boolValue
+            item.eventLogoUrl = detailJson["eventLogoUrl"].stringValue
+            a.items.append(item)
+        }
+        return a
     }
     
 }
