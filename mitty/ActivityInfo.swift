@@ -16,10 +16,15 @@ class ActivityInfo {
     
     var mainItem : ActivityItemInfo? = nil
     
+    var startDateTime : String = ""
+
+    var logoUrl : String = ""
+    
     var memo: String? = ""
     var activityItems : [ActivityItemInfo] = []
     
     func dummy() -> ActivityInfo {
+        
         let info = ActivityInfo()
         info.title = "新年の鐘を聞きに行く"
         info.mainEventId=123

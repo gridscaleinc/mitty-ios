@@ -191,6 +191,7 @@ extension QuestViewController: UISearchBarDelegate
         
         // 非同期方式で処理を呼び出す。
         eventSearch.searchBar.text = searchBar.text
+        eventSearch.shallWeSearch = true
         self.navigationController?.pushViewController(eventSearch, animated: true)
         
     }

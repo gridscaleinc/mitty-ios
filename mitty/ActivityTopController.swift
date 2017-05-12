@@ -10,7 +10,7 @@
 //  活動タブのトップビューコントローラー
 //  直近の活動一覧を表示し、フィルタにより絞り込み可能にする。
 //  追加ボタンを押すと、活動の追加登録画面に遷移する。
-//  一覧にある活動をタップすると、該当活動の詳細表示画面に遷移する。
+//  一覧にある活動をタップすると、該当活動の詳細表示画面に遷varする。
 
 //
 //
@@ -38,7 +38,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     }()
     
     // activityList を作成する
-     let form : ActivityListForm
+    var form : ActivityListForm
     
     override init () {
         self.form = ActivityListForm.newAutoLayout()
@@ -60,6 +60,18 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         self.view.addSubview(form)
         
         configureNavigationBar()
+        
+    }
+    
+    func loadForm(activities : [ActivityInfo]) {
+    
+        form.removeFromSuperview()
+        self.form = ActivityListForm.newAutoLayout()
+
+        self.view.addSubview(form)
+        
+        form.activityList.removeAll()
+        form.activityList.insert(contentsOf: activities, at: 0)
         
         loadActivityList()
 
@@ -220,10 +232,9 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     }
     
     override func viewDidLoad() {
-        form.quest().forEach() {
-            c in
-            print(c.name)
-            print(c.view.bounds)
+        ActivityService.instance.search(keys: "") { [weak self]
+            activities in
+            self?.loadForm(activities: activities)
         }
     }
 }

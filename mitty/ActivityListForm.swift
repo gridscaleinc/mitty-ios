@@ -22,17 +22,7 @@ class ActivityListForm : MQForm {
         fatalError("init(coder:) has not been implemented")
     }
     
-    let activityList : [(date: String, label:String, imgName:String)] = [
-        (date: "2/18", label: "平和島公園", imgName: "timesquare"),
-        (date: "2/18", label: "沖縄ペンギン島", imgName: "pengin2"),
-        (date: "2/18", label: "Iot どこかで", imgName: "pengin3"),
-        (date: "2/18", label: "島祭り", imgName: "pengin"),
-        (date: "2/18", label: "フィンテック＠ビグサイト", imgName: "pengin1"),
-        (date: "2/18", label: "Iot どこかで", imgName: "pengin3"),
-        (date: "2/18", label: "フィンテック＠ビグサイト", imgName: "pengin1"),
-        (date: "2/18", label: "沖縄ペンギン島", imgName: "pengin2"),
-        (date: "2/18", label: "島祭り", imgName: "pengin")
-    ]
+    var activityList : [ActivityInfo] = [ ]
     
     func loadForm () {
         
@@ -165,20 +155,21 @@ class ActivityListForm : MQForm {
             let row = Row.LeftAligned()
             section <<< row
             
-            row +++ MQForm.label(name: "activityDate", title: t.date).layout {
+            row +++ MQForm.label(name: "activityDate", title: t.startDateTime).layout {
                  d in
                  d.label.textColor = .orange
                  d.width(50).height(30)
             }
             
-            row +++ MQForm.label(name: "activitylabel", title: t.label).width(200).height(30)
-                +++ MQForm.img(name:"icon", url: t.imgName).width(30).height(20)
+            row +++ MQForm.label(name: "activitylabel", title: t.title).width(200).height(30)
+                +++ MQForm.img(name:"icon", url: t.logoUrl).width(30).height(20)
 
             row.layout(){ r in
                 let w = UIScreen.main.bounds.size.width - 20
                 r.leftMost().rightMost().height(40).width(w)
             }
         }
+        
         row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(20)

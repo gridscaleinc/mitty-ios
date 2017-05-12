@@ -11,7 +11,7 @@ import UIKit
 
 ///
 /// イベント情報
-class Event {
+class EventInfo {
     
     //(O) PK イベントID
     var id : String

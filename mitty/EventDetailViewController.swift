@@ -22,7 +22,7 @@ import SwiftyJSON
 
 class EventDetailViewController: UIViewController, UITextFieldDelegate {
     
-    var event : Event
+    var event : EventInfo
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     
 
@@ -54,7 +54,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     } ()
     
 
-    init (event: Event) {
+    init (event: EventInfo) {
         self.event = event
         super.init(nibName: nil, bundle:nil)
     }

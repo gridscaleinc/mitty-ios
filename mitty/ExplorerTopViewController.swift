@@ -10,8 +10,8 @@ import Foundation
 import UIKit
 import PureLayout
 
-@objc(ExplorerTopViewController)
-class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
+@objc(ExplorerTopViewController1)
+class ExplorerTopViewController1 : UIViewController , UISearchBarDelegate {
     
     var id = 1
     let explorerViewController = EventViewController()
@@ -125,11 +125,11 @@ class ExplorerTopViewController : UIViewController , UISearchBarDelegate {
     func configSwipeRecognizer () {
         
         let leftSwipe = UISwipeGestureRecognizer(target: self,
-                                                         action:#selector(ExplorerTopViewController.swipeGesture(handler:)))
+                                                         action:#selector(ExplorerTopViewController1.swipeGesture(handler:)))
         leftSwipe.direction = .left
         
         let rightSwipe = UISwipeGestureRecognizer(target: self,
-                                                 action:#selector(ExplorerTopViewController.swipeGesture(handler:)))
+                                                 action:#selector(ExplorerTopViewController1.swipeGesture(handler:)))
         rightSwipe.direction = .right
         self.view.addGestureRecognizer(leftSwipe)
         self.view.addGestureRecognizer(rightSwipe)

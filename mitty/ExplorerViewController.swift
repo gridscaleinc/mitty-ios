@@ -5,9 +5,11 @@ import PureLayout
 @objc(EventViewController)
 class EventViewController: UIViewController {
     
+    var shallWeSearch = false
+    
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     // MARK: - Properties
-    var events: [Event]
+    var events: [EventInfo]
     
     // MARK: - View Elements
     let searchBar: UISearchBar
@@ -21,7 +23,7 @@ class EventViewController: UIViewController {
     
     // MARK: - Initializers
     init() {
-        events = [Event]()
+        events = [EventInfo]()
         self.searchBar = UISearchBar.newAutoLayout()
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,7 +58,10 @@ class EventViewController: UIViewController {
     
 
     override func viewDidAppear(_ animated: Bool) {
-        searchBarSearchButtonClicked(searchBar)
+        if shallWeSearch {
+            searchBarSearchButtonClicked(searchBar)
+            shallWeSearch = false
+        }
     }
     
     // MARK: - View Setup
@@ -124,7 +129,7 @@ extension EventViewController: UICollectionViewDataSource {
    
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

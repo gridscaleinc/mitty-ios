@@ -5,7 +5,7 @@ class EventCell: UICollectionViewCell {
     static let id = "journey-search-result-cell"
     
     // MARK: - View Elements
-    var event : Event?
+    var event : EventInfo?
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
 
     var form = MQForm.newAutoLayout()
@@ -25,7 +25,7 @@ class EventCell: UICollectionViewCell {
         
     }
     
-    func configureView(event: Event) {
+    func configureView(event: EventInfo) {
         
         self.event = event
         form = MQForm.newAutoLayout()

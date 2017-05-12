@@ -45,6 +45,7 @@
 		FC17850F1E627DB500CAC38B /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850E1E627DB500CAC38B /* ActivityCell.swift */; };
 		FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1785101E627F0500CAC38B /* ActivityDelegates.swift */; };
 		FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */; };
+		FC1FE0551EC5B112007AE8A5 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */; };
 		FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D991E86B5400089140B /* StyledTextField.swift */; };
 		FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2862AA1DCEAFA6000854D9 /* EventService.swift */; };
 		FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30EB501EA32B7A00829E52 /* QuestViewController.swift */; };
@@ -193,6 +194,7 @@
 		FC17850E1E627DB500CAC38B /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		FC1785101E627F0500CAC38B /* ActivityDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDelegates.swift; sourceTree = "<group>"; };
 		FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIslandReq.swift; sourceTree = "<group>"; };
+		FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		FC276D991E86B5400089140B /* StyledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		FC2862AA1DCEAFA6000854D9 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		FC30EB501EA32B7A00829E52 /* QuestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
 				FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */,
 				FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */,
+				FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1063,6 +1066,7 @@
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */,
+				FC1FE0551EC5B112007AE8A5 /* ActivityService.swift in Sources */,
 				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,

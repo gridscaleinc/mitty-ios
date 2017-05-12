@@ -27,13 +27,13 @@ class EventService {
     }
 
     // サーバーからイベントを検索。
-    func search(keys : String, callback: @escaping (_ events: [Event]) -> Void ) {
+    func search(keys : String, callback: @escaping (_ events: [EventInfo]) -> Void ) {
         let parmeters = [
             "q" : keys
         ]
         
         // ダミーコード、本当はサーバーから検索する。
-        var events = [Event]()
+        var events = [EventInfo]()
         let request = Alamofire.request(urlBase, method: .get, parameters: parmeters)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
@@ -61,9 +61,9 @@ class EventService {
         }
     }
 
-    func bindEvent(_ jsEvent: JSON) -> Event {
+    func bindEvent(_ jsEvent: JSON) -> EventInfo {
         let id = jsEvent["id"].int
-        let e = Event(id!)
+        let e = EventInfo(id!)
         
         //(M) イベントの種類
         e.type = jsEvent["type"].stringValue
@@ -161,12 +161,12 @@ class EventService {
     }
     
     // イベントを生成する
-    func buildEvent(_ n:Int) ->Event! {
+    func buildEvent(_ n:Int) ->EventInfo! {
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         
-        let a = Event(n)
+        let a = EventInfo(n)
         a.title = "title" + String(n)
         a.priceInfo  = "\(10 * n)"
 
