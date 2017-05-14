@@ -109,9 +109,10 @@ class ActivityService {
         let a = Activity()
         let info = ActivityInfo()
         a.info = info
-        
+        print(json)
         let infoJson = json["activity"]
         info.id = infoJson["id"].stringValue
+        info.title = infoJson["title"].stringValue
         info.mainEventId = infoJson["main_event_id"].stringValue
         info.memo = infoJson["memo"].stringValue
         
@@ -120,13 +121,16 @@ class ActivityService {
             item.eventId = detailJson["eventId"].stringValue
             item.title = detailJson["title"].stringValue
             item.memo = detailJson["memo"].stringValue
-            item.notification = detailJson["notification"].stringValue
+            item.notification = detailJson["notification"].boolValue
             item.notificationTime = detailJson["notificationTime"].stringValue
             item.eventTitle = detailJson["eventTitle"].stringValue
             item.startDateTime = detailJson["startDateTime"].stringValue
             item.endDateTime = detailJson["endDateTime"].stringValue
             item.allDayFlag = detailJson["allDayFlag"].boolValue
             item.eventLogoUrl = detailJson["eventLogoUrl"].stringValue
+            item.islandName = detailJson["islandName"].stringValue
+            item.islandNickname = detailJson["islandNickname"].stringValue
+            item.islandLogoUrl = detailJson["islandLogoUrl"].stringValue
             a.items.append(item)
         }
         return a

@@ -317,6 +317,12 @@ open class Section : Container {
     private var _title = ""
     private var _titleControl :Control? = nil
     private var contents : [Container] = []
+    private var _lineSpace : CGFloat = 5
+    
+    var lineSpace : CGFloat {
+        get { return _lineSpace }
+        set (v) { _lineSpace = v }
+    }
     
     var title : String {
         get { return _title }
@@ -375,7 +381,7 @@ open class Section : Container {
                     r.upper()
                 }
             } else {
-                r.putUnder(of: previous!)
+                r.putUnder(of: previous!, withOffset: _lineSpace)
             }
             r.leftMost().rightMost()
             previous = r

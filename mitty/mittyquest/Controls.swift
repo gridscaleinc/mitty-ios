@@ -233,4 +233,10 @@ open class Control : NSObject, Node, Operatable {
     var image : UIImageView  {
         return _view as! UIImageView
     }
+    
+    // retrieve underlying UIButton view.
+    // Its throws error if the underlying view is not conform to UIButton.
+    var button : UIButton  {
+        return _view as! UIButton
+    }
 }

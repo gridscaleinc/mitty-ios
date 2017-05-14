@@ -7,6 +7,8 @@ class EventCell: UICollectionViewCell {
     // MARK: - View Elements
     var event : EventInfo?
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
+    
+    
 
     var form = MQForm.newAutoLayout()
     
@@ -87,7 +89,7 @@ class EventCell: UICollectionViewCell {
         row +++ col
         
         row +++ MQForm.img(name: "eventIcon", url: "timesquare").width(50).height(50)
-        let titleLabel = MQForm.label(name: "titleLabel", title: event.title!).layout {t in
+        let titleLabel = MQForm.label(name: "titleLabel", title: event.title).layout {t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
             t.rightMost()

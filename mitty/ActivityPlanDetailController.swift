@@ -71,7 +71,7 @@ class ActivityPlanDetailsController : UIViewController {
         
         self.view.backgroundColor = UIColor.white
         
-        if (status == 1) {
+        if (activityInfo.mainEventId == nil || activityInfo.mainEventId == "" || activityInfo.mainEventId == "0") {
             form.mainEventButton.bindEvent(.touchUpInside) { [weak self]
                 v in
                 let vc = ActivitySelectionViewController((self?.activityInfo)!)
@@ -79,14 +79,13 @@ class ActivityPlanDetailsController : UIViewController {
                 self?.status = 3
             }
         } else {
-            
             form.eventTitle.bindEvent(.touchUpInside) {
                 v in
-                let e = EventService.instance.buildEvent(1)
-                let c = EventDetailViewController(event: e!)
-                
-                self.navigationController?.pushViewController(c, animated: true)
-                
+                EventService.instance.fetch(id: self.activityInfo.mainEventId!) {
+                    event in
+                    let c = EventDetailViewController(event: event)
+                    self.navigationController?.pushViewController(c, animated: true)
+                }
             }
         }
     }

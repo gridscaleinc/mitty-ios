@@ -152,10 +152,15 @@ extension EventViewController: UICollectionViewDataSource {
     ///
     func cellTapped(handler: UITapGestureRecognizer) {
         print (handler.view?.description ?? "")
-        let eventViewController = EventDetailViewController(event: ((handler.view) as! EventCell).event!)
-        self.navigationItem.title = "..."
-        self.tabBarController?.tabBar.isHidden = true
-        self.navigationController?.pushViewController(eventViewController, animated: true)
+        let id = ((handler.view) as! EventCell).event!.id
+        
+        EventService.instance.fetch(id: id) {
+            event in
+            let c = EventDetailViewController(event: event)
+            self.navigationController?.pushViewController(c, animated: true)
+            self.navigationItem.title = "..."
+            self.tabBarController?.tabBar.isHidden = true
+        }
     }
 }
 

@@ -141,7 +141,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         row +++ memo.layout {
             t in
-            t.fillHolizon(10)
+            t.fillHolizon()
         }
         inputForm <<< row
 
@@ -161,14 +161,13 @@ class ActivityPlanDetailsForm : MQForm {
             return
         }
         
-        
-        
          // event title
         row = Row.LeftAligned().layout() {
             r in
             r.height(60).fillHolizon()
         }
         
+        eventTitle.label.text = activity.mainItem?.eventTitle
         row +++ eventTitle.layout {
             t in
             t.leftMost(withInset: 10).rightMost(withInset: 50).height(50)
@@ -186,6 +185,8 @@ class ActivityPlanDetailsForm : MQForm {
             r.height(30).fillHolizon()
         }
         
+        eventTime.label.text = activity.mainItem?.startDateTime
+
         row +++ eventTime.layout {
             t in
             t.label.textColor = UIColor.gray
@@ -200,7 +201,7 @@ class ActivityPlanDetailsForm : MQForm {
             r.height(30).fillHolizon()
         }
  
-        row +++ MQForm.label(name: "location" , title: "📍 ニューヨークタイムスクエア" ).layout {
+        row +++ MQForm.label(name: "location" , title: "📍 \((activity.mainItem?.islandName) ?? "")" ).layout {
             l in
             l.label.textColor = UIColor.gray
             l.label.font = UIFont.systemFont(ofSize: 14)
@@ -214,24 +215,25 @@ class ActivityPlanDetailsForm : MQForm {
         inputForm <<< row
         
 
-        row = Row.LeftAligned()
+        row = Row.Intervaled()
         row.layout() {
             r in
             r.height(40).fillHolizon(0)
 
         }
         
-        let buttons : Control = {
-            let l = TapableLabel.newAutoLayout()
-            l.text = "＋　 ✈️　 🏩　 🚗　 🍴　 🏥　 🚚"
-            return Control(name: "line", view: l).height(40)
-        }()
+        let button = MQForm.button(name: "label", title: "＋").height(40)
+        button.button.backgroundColor = .white
+        button.button.setTitleColor(.black, for: .normal)
+
+        row +++ button
         
-        buttons.layout() {
-            b in
-            b.height(30).fillHolizon(10)
+        let buttons = ["✈️", "🏩", "🚗","🍴"]
+        for b in buttons {
+            let button = MQForm.button(name: "toolbar", title: b).height(40)
+            button.button.backgroundColor = .white
+            row +++ button
         }
-        row +++ buttons
         inputForm <<< row
 
         row = Row.LeftAligned().layout() {
@@ -252,7 +254,7 @@ class ActivityPlanDetailsForm : MQForm {
         }
 
         
-        for n in 1...5 {
+        for item in activity.items {
             row = Row.LeftAligned()
             row.layout() {
                 r in
@@ -261,7 +263,7 @@ class ActivityPlanDetailsForm : MQForm {
             
             let line : Control = {
                 let l = TapableLabel.newAutoLayout()
-                l.text = "2017/8/19 12:34 イベント名         🚗"
+                l.text = "\(item.startDateTime):\(item.eventTitle)         🚗"
                 l.textColor = MittyColor.healthyGreen
                 l.font = UIFont.boldSystemFont(ofSize: 14)
                 l.backgroundColor = UIColor.white
@@ -281,7 +283,7 @@ class ActivityPlanDetailsForm : MQForm {
             }
             
             let swch = UISwitch.newAutoLayout()
-            if (n == 2) {
+            if (item.notification) {
                 swch.isOn = true
             }
             let swchControl = Control(name: "notificationFlag", view: swch)
@@ -308,8 +310,9 @@ class ActivityPlanDetailsForm : MQForm {
             }
 
             let labelMemo = UILabel.newAutoLayout()
-            labelMemo.text = "忘れないためのメモ"
+            labelMemo.text = item.memo
             labelMemo.font = UIFont.systemFont(ofSize: 14)
+            labelMemo.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
             
             labelMemo.textColor = .gray
             

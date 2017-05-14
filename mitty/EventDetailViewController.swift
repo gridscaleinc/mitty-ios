@@ -22,7 +22,7 @@ import SwiftyJSON
 
 class EventDetailViewController: UIViewController, UITextFieldDelegate {
     
-    var event : EventInfo
+    var event : Event
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     
 
@@ -54,7 +54,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     } ()
     
 
-    init (event: EventInfo) {
+    init (event: Event) {
         self.event = event
         super.init(nibName: nil, bundle:nil)
     }
@@ -135,7 +135,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         detailForm +++ img
         
-        let titleLabel = MQForm.label(name: "Title", title: event.title!).layout {
+        let titleLabel = MQForm.label(name: "Title", title: event.title).layout {
             l in
             l.leftMost(withInset: 25).upper(withInset: 50).height(20)
 
@@ -155,7 +155,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         detailForm +++ imageIcon
         
 
-        let actionLabel = MQForm.label(name: "action", title: (event.action ?? "")).layout {
+        let actionLabel = MQForm.label(name: "action", title: (event.action)).layout {
             c in
             c.putUnder(of: img, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel
@@ -187,6 +187,8 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let dates = MQForm.label(name: "sheduledData", title: event.duration()).layout { l in
             l.height(35).width(250)
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.textColor = UIColor(white: 0.33, alpha: 1)
         }
         
         row +++ dates
@@ -197,7 +199,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
         }
         
-        let location = MQForm.label(name: "isLand", title: "📍　ビッグサイト").layout { l in
+        let location = MQForm.label(name: "isLand", title: "📍　\(event.isLandName)").layout { l in
             l.height(35).width(250)
         }
         
@@ -217,11 +219,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(35)
         }
-        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel!).layout {
+        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel).layout {
             l in
             l.height(35)
         }
-        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax!).layout {
+        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax).layout {
             l in
             l.height(35)
         }
@@ -237,7 +239,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             l in
             l.height(35)
         }
-        infoSource +++ MQForm.label(name: "name", title: event.organizer!).layout {
+        infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
             l in
             l.height(35)
         }
@@ -255,7 +257,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let link = UIButton.newAutoLayout()
         link.setTitleColor(.blue, for: .normal)
-        link.setTitle("Webページ", for: .normal)
+        link.setTitle(event.sourceName, for: .normal)
         url +++ Control(name:"URL", view:link).layout {
             l in
             l.height(35)
@@ -277,7 +279,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let description = event.description
         
-        let descriptionLabel = MQForm.label(name: "detailDescription", title: description!).layout {
+        let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
             c in
             c.putUnder(of: url, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel

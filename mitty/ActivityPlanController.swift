@@ -18,6 +18,7 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     var type = "Unkown"
     
     var form = EventInputForm()
+    var islandInfo : IslandInfo? = nil
     
     init(_ info: ActivityInfo) {
         activityInfo = info
@@ -155,6 +156,7 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         if landInfo.id == 0 {
             registerNewIsland(landInfo)
         }
+        islandInfo = landInfo
     }
     
     var scrollConstraints : NSLayoutConstraint?
@@ -187,6 +189,11 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     func register() {
         let request = NewEventReq()
         
+        if (islandInfo == nil || islandInfo?.placeMark == nil) {
+            showError("住所を入力してください")
+            return
+        }
+        
         var dp = form.startDate.textField.inputView as! UIDatePicker
 
         // type: string,          (M)      -- イベントの種類
@@ -212,7 +219,7 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         request.setStr(.allDayFlag, "true")
 
         // islandId:  int,        (M)      -- 島ID
-        request.setInt(.islandId, "1")
+        request.setInt(.islandId, String(islandInfo!.id))
         
         // priceName1: string,    (O)      -- 価格名称１
         request.setStr(.priceName1, form.price.textField.text)
@@ -257,16 +264,16 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         request.setStr(.sourceUrl, form.infoUrl.textField.text)
         
         // anticipation: string,  (O)      -- イベント参加方式、 OPEN：　自由参加、　INVITATION:招待制、PRIVATE:個人用、他の人は参加不可。
-        request.setStr(.anticipation, "PRIVATE")
+        request.setStr(.anticipation, "open")
         
         // accessControl: string, (O)      -- イベント情報のアクセス制御：　PUBLIC: 全公開、　PRIVATE: 非公開、 SHARED:関係者のみ
-        request.setStr(.accessControl, "PRIVATE")
+        request.setStr(.accessControl, "public")
         
         // language: string       (M)      -- 言語情報　(Ja_JP, en_US, en_GB) elastic　searchに使用する。
         request.setStr(.language, "Ja_JP")
         
         request.setInt(.relatedActivityId, activityInfo.id)
-        if (activityInfo.mainEventId == nil) {
+        if (activityInfo.mainEventId == nil || activityInfo.mainEventId == "0" || activityInfo.mainEventId == "0") {
             request.setStr(.asMainEvent, "true")
         } else {
             request.setStr(.asMainEvent, "false")
@@ -426,9 +433,15 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         // print(landInfo.placeMark?.addressDictionary)
         if let addressLines = landInfo.placeMark?.addressDictionary?["FormattedAddressLines"] as? NSArray {
             //address1-3           : string      --(O)  住所行１-3
-            request.setStr(.address1, addressLines[0] as? String)
-            request.setStr(.address2, addressLines[1] as? String)
-            request.setStr(.address3, addressLines[2] as? String)
+            if addressLines.count>0 {
+                request.setStr(.address1, addressLines[0] as? String)
+            }
+            if addressLines.count>1 {
+                request.setStr(.address2, addressLines[1] as? String)
+            }
+            if addressLines.count>2 {
+                request.setStr(.address3, addressLines[2] as? String)
+            }
         }
         
         //latitude           : double      --(O)  地理位置の緯度
@@ -449,6 +462,12 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
             switch response.result {
             case .success:
                 LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    let islandId = json["islandId"].intValue
+                    landInfo.id = islandId
+                }
+                
 //                self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(response.debugDescription)
