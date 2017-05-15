@@ -11,6 +11,8 @@ import UIKit
 
 class RequestViewController : UIViewController {
     
+    var relatedActivity : ActivityInfo? = nil
+    
     let form : MQForm = MQForm.newAutoLayout()
     
     override func viewDidLoad() {

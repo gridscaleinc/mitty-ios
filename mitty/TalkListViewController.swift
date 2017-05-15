@@ -37,7 +37,6 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         return arswitch
     } ()
     
-    
     let navLabel : UILabel = {
         let l = UILabel.newAutoLayout()
         l.text = "AR"
@@ -45,8 +44,6 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         l.font = l.font.withSize(12.0)
         return l
     } ()
-    
-    
     
     // MARK: - Initializers
     init(island: Island) {
@@ -61,12 +58,12 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         talkInputField = StyledTextField.newAutoLayout()
         talkInputField.placeholder = "input message here"
+        talkInputField.layer.borderColor = UIColor.orange.cgColor
         
         talkSendButton = UIButton.newAutoLayout()
         talkSendButton.setTitle("送信", for: .normal)
-        talkSendButton.setTitleColor(UIColor.black, for: UIControlState.normal)
-        talkSendButton.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)
-        
+        talkSendButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        talkSendButton.backgroundColor = MittyColor.healthyGreen
         super.init(nibName: nil, bundle: nil)
         
     }
@@ -150,27 +147,24 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     
     // MARK: - View Setup
     private func configureNavigationBar() {
-//        let rect = CGRect(x:0, y:0, width:40, height:32)
-//        let rightButton = RightButton(frame: rect)
         
         navLabel.autoSetDimension(.height, toSize:15)
         navLabel.autoSetDimension(.width, toSize: 10)
         
-//        arSwitch.transform = CGAffineTransform(scaleX: 0.75, y: 0.75)
-//        let rightItems = [UIBarButtonItem(customView: navLabel), UIBarButtonItem(customView: arSwitch)]
-        let action = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.action, target:self, action:#selector(action1))
-        let camera = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.camera, target:self, action:#selector(action1))
-        let b1 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.fixedSpace, target:self, action:#selector(action1))
-        let b2 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target:self, action:#selector(action1))
-        let b3 = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target:self, action:#selector(action1))
+        let cameraItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.camera, target:self, action:#selector(camera))
+        let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target:self, action:#selector(search))
         
-        let rightItems = [action, camera, b1, b2, b3]
+        let rightItems = [cameraItem, searchItem]
         
         navigationItem.setRightBarButtonItems(rightItems, animated: true)
         
     }
     
-    func action1() {
+    func camera() {
+        
+    }
+    
+    func search() {
         
     }
     
@@ -330,7 +324,7 @@ extension TalkListViewController: UICollectionViewDataSource {
             collectionView.setNeedsLayout()
             return cell
         }
-        return IslandCell()
+        return TalkingCell()
     }
     
 }

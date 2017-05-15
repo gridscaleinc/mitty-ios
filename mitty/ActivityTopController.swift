@@ -241,6 +241,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     }
     
     override func viewDidLoad() {
+        LoadingProxy.set(self)
         ActivityService.instance.search(keys: "") { [weak self]
             activities in
             self?.loadForm(activities: activities)

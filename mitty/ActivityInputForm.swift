@@ -45,6 +45,8 @@ class EventInputForm : MQForm {
     let locationIcon = MQForm.img(name: "icon" , url:"noicon")
     let address = MQForm.label(name: "address" , title: "")
     
+    var addressRow : Row? = nil
+    
     // 情報源
     let infoSource = MQForm.textView(name: "infoSource")
     let infoUrl = MQForm.text(name: "infoUrl" , placeHolder: "情報源のURL")
@@ -82,7 +84,7 @@ class EventInputForm : MQForm {
             v.upper().height(2)
         }
         
-        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 1300)
+        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 1400)
         let inputContainer = scrollContainer(name:"inputContainer", contentSize: contentSize)
         
         self +++ inputContainer
@@ -95,7 +97,7 @@ class EventInputForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(1300)
+            c.upper().width(UIScreen.main.bounds.size.width).height(1400)
         }
         
         var row = Row.LeftAligned()
@@ -220,6 +222,8 @@ class EventInputForm : MQForm {
         inputForm <<< row
         
         row = Row.LeftAligned()
+        addressRow = row
+        addressRow?.view.isHidden = true
         row +++ MQForm.label(name: "label-Address", title: "住所").height(line_height).width(60)
         row +++ address.layout {
             line in

@@ -27,8 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         startUp()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
-        let themeColor = UIColor(red: 0.1, green: 0.21, blue: 0.50, alpha: 1.0)
-        self.window?.tintColor = themeColor;
+        self.window?.tintColor = MittyColor.healthyGreen;
         if skipGuideView == true {
             if ApplicationContext.isLogedIn {
                  self.window?.rootViewController = mainTabBarController

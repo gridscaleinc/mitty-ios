@@ -43,10 +43,35 @@ class ActivityPlanDetailsController : UIViewController {
         
         self.view.addSubview(form)
         
-        ActivityService.instance.fetch(id: activityInfo.id) {
+        ActivityService.instance.fetch(id: activityInfo.id) { [weak self]
             activityDetail in
-            self.form.loadForm(activityDetail)
-            self.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+            self?.form.loadForm(activityDetail)
+            self?.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+
+            self?.form.quest("[name=addItem]").bindEvent(for: .touchUpInside) { [weak self]
+                c in
+                let vc = ActivityPlanViewController((self?.activityInfo)!)
+                let t = (c as! UIButton).titleLabel?.text
+                if t == "✈️" {
+                    vc.activityTitle = "航空券計画"
+                    vc.type = "FLIGHT"
+                } else if t == "🏩" {
+                    vc.activityTitle = "ホテル"
+                    vc.type = "HOTEL"
+                } else if t == "🚗" {
+                    vc.activityTitle = "電車・車の移動"
+                    vc.type = "MOVING"
+                } else if t == "🍴" {
+                    vc.activityTitle = "食事・休憩"
+                    vc.type = "FOOD"
+                } else {
+                    vc.activityTitle = "任意"
+                    vc.type = "ANY"
+                    
+                }
+                
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
 
         }
         
@@ -87,6 +112,14 @@ class ActivityPlanDetailsController : UIViewController {
                     self.navigationController?.pushViewController(c, animated: true)
                 }
             }
+            
+        }
+        
+        form.requestButton.bindEvent(.touchUpInside) {
+            v in
+            let c = RequestViewController()
+            c.relatedActivity = self.activityInfo
+            self.navigationController?.pushViewController(c, animated: true)
         }
     }
     

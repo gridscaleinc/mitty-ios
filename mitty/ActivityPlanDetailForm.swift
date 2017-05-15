@@ -68,6 +68,8 @@ class ActivityPlanDetailsForm : MQForm {
         return c
     } ()
     
+    var addressRow : Row? = nil
+    
     //  Action list Title
     //  Action addition tool bar
     //  Action list (Loop)
@@ -98,7 +100,7 @@ class ActivityPlanDetailsForm : MQForm {
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:1230)
+        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:1400)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -115,7 +117,7 @@ class ActivityPlanDetailsForm : MQForm {
         inputContainer +++ inputForm
         
         inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(1230)
+            c.upper().width(UIScreen.main.bounds.size.width).height(1400)
         }
         
         // title
@@ -134,28 +136,47 @@ class ActivityPlanDetailsForm : MQForm {
         // memo
         row = Row.LeftAligned().layout() {
             r in
-            r.height(80).fillHolizon()
+            r.height(80).fillHolizon(10)
+            r.view.backgroundColor = UIColor(white: 0.99, alpha: 0.99)
         }
         
         memo.label.text = activity.info.memo
         
         row +++ memo.layout {
             t in
-            t.fillHolizon()
+            t.fillHolizon(10)
         }
+        
         inputForm <<< row
 
         
         if activity.info.mainEventId == nil || activity.info.mainEventId == "0" {
-            row = Row.LeftAligned().layout {
+            row = Row.Intervaled().layout {
                 r in
                 r.height(60).fillHolizon()
             }
             
             row +++ mainEventButton.layout {
                 b in
-                b.height(50).fillHolizon(50)
+                b.height(40)
             }
+            row.spacing = 30
+            
+            inputForm <<< row
+            
+            row = Row.Intervaled().layout {
+                r in
+                r.height(60).fillHolizon()
+            }
+            
+            row +++ requestButton.layout {
+                b in
+                b.height(40)
+                b.button.backgroundColor = UIColor.gray
+            }
+            
+            row.spacing = 30
+            
             inputForm <<< row
             
             return
@@ -230,7 +251,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         let buttons = ["✈️", "🏩", "🚗","🍴"]
         for b in buttons {
-            let button = MQForm.button(name: "toolbar", title: b).height(40)
+            let button = MQForm.button(name: "addItem", title: b).height(40)
             button.button.backgroundColor = .white
             row +++ button
         }

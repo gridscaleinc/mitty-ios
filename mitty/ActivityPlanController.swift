@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
+class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
     
     var activityInfo : ActivityInfo
     var activityTitle = "活動"
@@ -19,6 +19,14 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     
     var form = EventInputForm()
     var islandInfo : IslandInfo? = nil
+    
+    var dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .medium
+        return dateFormatter
+    } ()
     
     init(_ info: ActivityInfo) {
         activityInfo = info
@@ -67,20 +75,30 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         self.navigationItem.title = activityTitle
         
         self.view.backgroundColor = UIColor.white
-        form.quest("[name=fromDateTime]").forEach() { (c) in
-            let textField = c.view as! UITextField
-            let picker = UIDatePicker()
-            textField.inputView = picker
-            picker.addTarget(self, action: #selector(setFromDateTime(_:)), for: .valueChanged)
-        }
         
-        form.quest("[name=toDateTime]").forEach() { (c) in
-            
-            let textField = c.view as! UITextField
-            let picker = UIDatePicker()
-            textField.inputView = picker
-            picker.addTarget(self, action: #selector(setToDateTime(_:)), for: .valueChanged)
+        let startDateText = form.startDate.textField
+        let picker1 = UIDatePicker()
+        startDateText.inputView = picker1
+        setFromDateTime(picker1)
+        picker1.addTarget(self, action: #selector(setFromDateTime(_:)), for: .valueChanged)
         
+        
+        let endDateText = form.startDate.textField
+        let picker2 = UIDatePicker()
+        endDateText.inputView = picker2
+        setToDateTime(picker2)
+        picker2.addTarget(self, action: #selector(setToDateTime(_:)), for: .valueChanged)
+        
+        let allDay = form.allDayFlag
+        allDay.bindEvent(.valueChanged) { [weak self]
+            s in
+            if (s as! UISwitch).isOn {
+                self?.dateFormatter.timeStyle = .none
+            } else {
+                self?.dateFormatter.timeStyle = .medium
+            }
+            self?.setFromDateTime(picker1)
+            self?.setToDateTime(picker2)
         }
         
         form.quest("[name=contact-Tel]").forEach() { (c) in
@@ -119,27 +137,14 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     }
     
     func setFromDateTime(_ picker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
-        
-        form.quest("[name=fromDateTime]").forEach() { (c) in
-            let textField = c.view as! UITextField
-            textField.text = dateFormatter.string(from: picker.date)
-        }
+        let textField = form.startDate.textField
+        textField.text = dateFormatter.string(from: picker.date)
     }
     
     
     func setToDateTime(_ picker: UIDatePicker) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.locale = Locale.current
-        dateFormatter.dateStyle = .long
-        dateFormatter.timeStyle = .medium
-        form.quest("[name=toDateTime]").forEach() { (c) in
-            let textField = c.view as! UITextField
-            textField.text = dateFormatter.string(from: picker.date)
-        }
+        let textField = form.endDate.textField
+        textField.text = dateFormatter.string(from: picker.date)
     }
     
     func manageKeyboard() {
@@ -152,7 +157,7 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     func pickedIsland(landInfo: IslandInfo) {
         form.location.textField.text = landInfo.name
         form.address.label.text = landInfo.address
-        
+        form.addressRow?.view.isHidden = false
         if landInfo.id == 0 {
             registerNewIsland(landInfo)
         }
@@ -189,26 +194,32 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
     func register() {
         let request = NewEventReq()
         
-        if (islandInfo == nil || islandInfo?.placeMark == nil) {
-            showError("住所を入力してください")
-            return
-        }
-        
-        var dp = form.startDate.textField.inputView as! UIDatePicker
-
         // type: string,          (M)      -- イベントの種類
         request.setStr(.type, type)
         
         // tag:  string,          (M)      -- イベントについて利用者が入力したデータの分類識別。
+        if (form.tagList.textField.text == "") {
+            showError("タグを入力してください")
+            return
+        }
         request.setStr(.tagList, form.tagList.textField.text)
         
         // title: string,         (M)      -- イベントタイトル
+        if (form.eventTitle.textField.text == "") {
+            showError("タイトルを入力してください")
+            return
+        }
         request.setStr(.title, form.eventTitle.textField.text)
         
         // action: string,        (M)      -- イベントの行い概要内容
+        if (form.action.textView.text == "") {
+            showError("行い事の概要を入力してください")
+            return
+        }
         request.setStr(.action, form.action.textView.text)
         
         // startDate: dateTime,   (M)      -- イベント開始日時
+        var dp = form.startDate.textField.inputView as! UIDatePicker
         request.setDate(.startDate, dp.date)
         
         // endDate: dateTime,     (M)      -- イベント終了日時
@@ -218,12 +229,18 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         // allDayFlag: bool,      (M)      -- 時刻非表示フラグ。
         request.setStr(.allDayFlag, "true")
 
+        if (islandInfo == nil || islandInfo?.placeMark == nil) {
+            showError("住所を入力してください")
+            return
+        }
+        
         // islandId:  int,        (M)      -- 島ID
         request.setInt(.islandId, String(islandInfo!.id))
         
         // priceName1: string,    (O)      -- 価格名称１
         request.setStr(.priceName1, form.price.textField.text)
         
+        // TODO
         // price1: Double ,       (O)      -- 価格額１
         request.setDouble(.price1, "100000.0")
         
@@ -237,8 +254,12 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
         request.setStr(.currency, "USD")
         
         // priceInfo: string      (O)      -- 価格について一般的な記述
-        request.setStr(.priceInfo, "abc")
+        request.setStr(.priceInfo, form.price.textField.text)
         
+        if (form.action.textView.text == "") {
+            showError("行い事の概要を入力してください")
+            return
+        }
         // description: string    (M)      -- イベントについて詳細な説明記述
         request.setStr(.description, form.detailDescription.textView.text)
         
@@ -304,41 +325,6 @@ class ActivityPlanViewController : UIViewController, IslandPickerDelegate {
                 LoadingProxy.off()
                 print(error)
             }
-        }
-    }
-    
-    var error : Control?
-    var lock = NSLock()
-    
-    func showError(_ errorMsg: String ) {
-        lock.lock()
-        defer {lock.unlock()}
-        
-        if error != nil {
-            return
-        }
-        let message = UILabel.newAutoLayout()
-        message.backgroundColor = .yellow
-        message.text = errorMsg
-        message.textAlignment = .center
-        self.view.addSubview(message)
-        
-        error = Control(name: "error", view: message).layout{
-            e in
-            e.upper(withInset: 80).fillHolizon().height(40)
-        }
-        error?.configLayout()
-        
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(clearMessage), userInfo: nil, repeats: true)
-    }
-    
-    func clearMessage() {
-        lock.lock()
-        defer {lock.unlock()}
-        
-        if (error != nil) {
-            error?.view.removeFromSuperview()
-            error = nil
         }
     }
     

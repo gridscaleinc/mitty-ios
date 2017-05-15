@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 
-class ActivityEntryViewController : UIViewController {
+class ActivityEntryViewController : MittyViewController {
     var pageTitle = "活動作成"
     var form = MQForm.newAutoLayout()
     
@@ -42,14 +42,26 @@ class ActivityEntryViewController : UIViewController {
             
         }
         
-        form +++ memo.layout { [weak self]
+        let caption = MQForm.label(name: "caption", title: "活動・計画メモ").layout {
+            c in
+            c.height(20).fillHolizon(10)
+            c.label.backgroundColor = MittyColor.light
+            c.label.textColor = .gray
+            c.label.textAlignment = .center
+            c.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            c.putUnder(of: self.activityTitle, withOffset: 10)
+        }
+
+        form +++ caption
+        
+        form +++ memo.layout {
             m in
-            m.putUnder(of: (self?.activityTitle)!, withOffset: 10)
-                .leftMost(withInset: 10).rightMost(withInset: 10).height(80)
+            m.putUnder(of: caption, withOffset: 2)
+                .leftMost(withInset: 10).rightMost(withInset: 10).height(100)
         }
         
         form +++ doneButton.layout { [ weak self] b in
-            b.holizontalCenter().width(130).height(50).putUnder(of: (self?.memo)!, withOffset: 10)
+            b.holizontalCenter().width(130).height(45).putUnder(of: (self?.memo)!, withOffset: 10)
         }
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
@@ -94,6 +106,11 @@ class ActivityEntryViewController : UIViewController {
             "mainEventId": "0"
         ]
 
+        if ((parameters["title"]) as! String  == "" || (parameters["memo"]) as! String == "") {
+            showError("タイトルとメモを入力してください")
+            return
+        }
+        
         print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
