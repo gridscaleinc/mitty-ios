@@ -63,6 +63,10 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -137,9 +141,9 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         let titleLabel = MQForm.label(name: "Title", title: event.title).layout {
             l in
-            l.leftMost(withInset: 25).upper(withInset: 50).height(20)
+            l.leftMost(withInset: 25).upper(withInset: 50).height(50)
 
-            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 16)
+            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 24)
             (l.view as! UILabel).textColor = .white
             (l.view as! UILabel).shadowColor = UIColor.black
             (l.view as! UILabel).shadowOffset = CGSize(width:0, height:1)

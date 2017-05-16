@@ -133,9 +133,11 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
             socket.connect()
             return
         }
+        
         let message : [String:Any] = [
-            "email" : "domanthan@gmail.com",
-            "username" : "domanthan",
+            "email" : "",
+            "username" : (ApplicationContext.userSession.userName == "") ? "Guest" : ApplicationContext.userSession.userName
+                      ,
             "message" : talkInputField.text ?? "No message"
         ]
         

@@ -13,8 +13,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     
-    var skipGuideView = false;
-
     // Class for view Mitty
     //let guideViewController: TutorialViewController = TutorialViewController()
     let guideViewController: GuideViewController = GuideViewController()
@@ -24,12 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        startUp()
+        ApplicationContext.startUp()
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.tintColor = MittyColor.healthyGreen;
-        if skipGuideView == true {
-            if ApplicationContext.isLogedIn {
+        if ApplicationContext.skipGuideView  {
+            if ApplicationContext.userSession.isLogedIn {
                  self.window?.rootViewController = mainTabBarController
             } else {
                 let signinViewController = SigninViewController()
@@ -43,37 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
 
-    func startUp() {
-        
-        // 設定値の保存 キーは"keyName"、値は"value"としました。
-        let config = UserDefaults.standard
-
-        // 設定値の取得
-        var accessCount : Int? = config.object(forKey: "access-count") as? Int
-        
-        print("Welcome to use \(String(describing: accessCount))")
-
-        if (accessCount != nil) {
-            skipGuideView = true
-            ApplicationContext.isFirstTime = false
-            accessCount = accessCount! + 1
-            skipGuideView = true
-        } else {
-            accessCount = 1
-        }
-        
-        config.set(accessCount, forKey:"access-count")
-        config.synchronize() // シンクロを入れないとうまく動作しないときがあります
-        
-        // 存在しないキーはnilが返る
-        let accessToken : String? = config.object(forKey: "ACCES-TOKEN") as? String
-        
-        if (accessToken != nil) {
-            ApplicationContext.accessToken = accessToken!
-            ApplicationContext.isLogedIn = true
-        }
-        
-    }
+    
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.

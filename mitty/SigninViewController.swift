@@ -230,10 +230,11 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
                     DispatchQueue.main.async {
                         let accessToken = json["access_token"].stringValue
                         
-                        let config = UserDefaults.standard
-                        config.set(accessToken, forKey:"ACCES-TOKEN")
-                        config.synchronize() 
-                        ApplicationContext.accessToken = accessToken
+                        ApplicationContext.userSession.accessToken = accessToken
+                        ApplicationContext.userSession.userId = (json["user_id"].int64) ?? 0
+                        ApplicationContext.userSession.userName = usernameField.text!
+                        ApplicationContext.userSession.isLogedIn = true
+                        ApplicationContext.saveSession()
                         
                         let mainTabBarController: MainTabBarController = MainTabBarController()
                         self.present(mainTabBarController, animated:true, completion:nil)

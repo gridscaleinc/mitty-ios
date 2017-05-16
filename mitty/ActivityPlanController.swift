@@ -37,6 +37,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    
     override func loadView() {
         
         // navigation bar の初期化をする
@@ -50,9 +51,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         self.form.translatesAutoresizingMaskIntoConstraints = false
         self.view.addSubview(form)
 
-        
         form.loadForm()
-        
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
         
@@ -83,7 +82,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         picker1.addTarget(self, action: #selector(setFromDateTime(_:)), for: .valueChanged)
         
         
-        let endDateText = form.startDate.textField
+        let endDateText = form.endDate.textField
         let picker2 = UIDatePicker()
         endDateText.inputView = picker2
         setToDateTime(picker2)

@@ -74,7 +74,7 @@ class TalkingCell: UICollectionViewCell {
         
         name.numberOfLines = 1
         name.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        name.text = self.talk.mittyId + "(" + self.talk!.familyName + ")"
+        name.text = self.talk.mittyId 
         avatarIcon.image = UIImage (named: (self.talk?.avatarIcon)!)
         talking.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         talking.text = self.talk.speaking

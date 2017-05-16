@@ -48,6 +48,7 @@
 		FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0561EC69813007AE8A5 /* Event.swift */; };
 		FC1FE05A1EC85C37007AE8A5 /* MittyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0591EC85C37007AE8A5 /* MittyViewController.swift */; };
 		FC1FE05C1EC89BE6007AE8A5 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE05B1EC89BE6007AE8A5 /* ActivityCell.swift */; };
+		FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE05D1ECAB3C9007AE8A5 /* UserSession.swift */; };
 		FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC276D991E86B5400089140B /* StyledTextField.swift */; };
 		FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2862AA1DCEAFA6000854D9 /* EventService.swift */; };
 		FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30EB501EA32B7A00829E52 /* QuestViewController.swift */; };
@@ -199,6 +200,7 @@
 		FC1FE0561EC69813007AE8A5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		FC1FE0591EC85C37007AE8A5 /* MittyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyViewController.swift; sourceTree = "<group>"; };
 		FC1FE05B1EC89BE6007AE8A5 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		FC1FE05D1ECAB3C9007AE8A5 /* UserSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		FC276D991E86B5400089140B /* StyledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
 		FC2862AA1DCEAFA6000854D9 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
 		FC30EB501EA32B7A00829E52 /* QuestViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestViewController.swift; sourceTree = "<group>"; };
@@ -665,6 +667,7 @@
 				F42CDE521DCD7525001CAFBE /* Strings.swift */,
 				FC5ECFF11EB42FA800AA6C13 /* date.swift */,
 				FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */,
+				FC1FE05D1ECAB3C9007AE8A5 /* UserSession.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1021,6 +1024,7 @@
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
+				FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */,
 				FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */,
 				FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
