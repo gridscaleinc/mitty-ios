@@ -109,7 +109,7 @@
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
 		FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5871E594F3200B861F4 /* event10.jpeg */; };
-		FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */; };
+		FCFBC6791E63C39000AEF869 /* EventInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* EventInputForm.swift */; };
 		FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
 		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
@@ -261,7 +261,7 @@
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
 		FCFBA5871E594F3200B861F4 /* event10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event10.jpeg; path = images/event10.jpeg; sourceTree = "<group>"; };
-		FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInputForm.swift; sourceTree = "<group>"; };
+		FCFBC6781E63C39000AEF869 /* EventInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInputForm.swift; sourceTree = "<group>"; };
 		FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionForm.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
 		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
@@ -641,7 +641,7 @@
 				FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */,
 				FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */,
 				FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */,
-				FCFBC6781E63C39000AEF869 /* ActivityInputForm.swift */,
+				FCFBC6781E63C39000AEF869 /* EventInputForm.swift */,
 				FCF2A0D31E7A85F200536D32 /* ActivityListForm.swift */,
 				FCDC70961E8A9011003034B3 /* ActivityPlanDetailForm.swift */,
 				FCF9E5251EAB399B00F4A265 /* IslandForm.swift */,
@@ -1078,7 +1078,7 @@
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */,
 				FC1FE0551EC5B112007AE8A5 /* ActivityService.swift in Sources */,
-				FCFBC6791E63C39000AEF869 /* ActivityInputForm.swift in Sources */,
+				FCFBC6791E63C39000AEF869 /* EventInputForm.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,
 				FC16A5361E549A8A00C49F5F /* ExplorerTopViewController.swift in Sources */,

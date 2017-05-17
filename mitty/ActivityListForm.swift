@@ -43,58 +43,6 @@ class ActivityListForm : MQForm {
             main.putUnder(of: header).fillHolizon().down(withInset: 125)
         }
         
-        let redLine = Control(view:HL(UIColor.red))
-        page +++ redLine
-        
-        redLine.layout() { (hl) in
-            hl.fillHolizon()
-            hl.putUnder(of: data)
-        }
-        
-        
-        let buttons = Row()
-        buttons.distribution = .atIntervals
-        
-//        let buttons = Row.LeftAligned()
-        let thisYearButton :Control = MQForm.button(name: "thisYear", title: "今年").layout() { (button) in
-            button.width(80).height(50)
-        }
-        
-        buttons +++ thisYearButton
-    
-        let nextYearButton : Control = MQForm.button(name: "nextYear", title: "来年").layout() { (button) in
-            button.width(80).height(50)
-        }
-        
-        nextYearButton.margin.left = 10
-        buttons +++ nextYearButton
-        
-        let stepperCtl :Control = MQForm.stepper(name: "stepper", min: 2019, max: 2049).layout() { (stepper) in
-            stepper.width(50).height(28)
-        }
-        
-        let indicatorCtl : Control = MQForm.button (name: "indicator", title: "2019").layout() { (button) in
-            button.width(80).height(28)
-        }
-        indicatorCtl.margin.bottom = 10
-        
-        let indicateYear = Col.UpDownAligned().width(80).height(60)
-        indicateYear.margin.left = 10
-        indicateYear +++ indicatorCtl
-            +++ stepperCtl
-        
-        
-        buttons +++ indicateYear
-   
-        buttons.layout() { (buttons) in
-            buttons.height(65)
-            //buttons.view.backgroundColor = UIColor.gray
-            buttons.leftMost().rightMost().putUnder(of: redLine, withOffset: 2)
-        }
-        
-        page +++ buttons
-        
-        
     }
     
     func load () {
@@ -117,10 +65,7 @@ class ActivityListForm : MQForm {
         let section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
         container += section
         
-        var row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(20)
-        }
+        var row = newTitleRow()
         section <<< row
         row +++ MQForm.label(name: "activity-title", title: "計画中").layout {
             l in
@@ -130,7 +75,7 @@ class ActivityListForm : MQForm {
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(30)
+            r.fillHolizon(3).height(30)
         }
         
         section <<< row
@@ -140,10 +85,8 @@ class ActivityListForm : MQForm {
             l.label.textColor = .gray
         }
         
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(20)
-        }
+        row = newTitleRow()
+        
         section <<< row
         row +++ MQForm.label(name: "activity-title", title: "活動予定一覧").layout {
             l in
@@ -175,10 +118,8 @@ class ActivityListForm : MQForm {
             }
         }
         
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(20)
-        }
+        row = newTitleRow()
+        
         section <<< row
         row +++ MQForm.label(name: "activity-title", title: "招待一覧").layout {
             l in
@@ -199,10 +140,8 @@ class ActivityListForm : MQForm {
         }
         
         
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(20)
-        }
+        row = newTitleRow()
+        
         section <<< row
         row +++ MQForm.label(name: "activity-title", title: "リクエスト一覧").layout {
             l in
@@ -214,6 +153,7 @@ class ActivityListForm : MQForm {
             r in
             r.fillHolizon().height(30)
         }
+
         
         section <<< row
         
@@ -229,5 +169,14 @@ class ActivityListForm : MQForm {
         
         
         return container
+    }
+    
+    func newTitleRow() -> Row {
+        let row =  Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(20)
+            r.view.backgroundColor = UIColor(white: 0.96, alpha: 1)
+        }
+        return row
     }
 }

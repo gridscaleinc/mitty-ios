@@ -56,7 +56,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
         
         super.loadView()
         self.navigationItem.title = "活動予定"
-        self.view.backgroundColor = UIColor(white: 0.96, alpha: 1)
+        self.view.backgroundColor = UIColor.white
         self.view.addSubview(form)
         
         configureNavigationBar()
@@ -77,39 +77,6 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
 
         self.form.load()
         
-        let mitty = form.quest()
-        
-        form["thisYear"]?.bindEvent(.touchUpInside ) {thisYearButton in
-            thisYearButton.backgroundColor = .red
-            print("This Year taped")
-        }
-
-        form.quest("[name=nextYear]").bindEvent(for: .touchUpInside) {[weak self](view) in
-            view.backgroundColor = .yellow
-            print("Next Year taped")
-            self?.printFrames()
-        }
-        
-        let indicator = mitty["[name=indicator]"]
-        indicator.bindEvent(for: .touchUpInside) {(view) in
-            view.backgroundColor = .blue
-            print("Indicator Button taped")
-        }
-        var showOrHide = true
-        
-        mitty["[name=stepper]"].bindEvent(for: .valueChanged) {(view) in
-            view.backgroundColor = .blue
-            let stepper = (view as! UIStepper).value
-            let indicatorButton = indicator.control()?.view as! UIButton
-            indicatorButton.setTitle("\(Int(stepper))" + "年", for: .normal)
-            indicatorButton.isHidden = !showOrHide
-            showOrHide = !showOrHide
-            print("stepper changed")
-        }
-        
-//        form.quest().forEach { (c) in
-//            c.view.layer.borderWidth=1
-//        }
         
         let labels = form.quest("[name=activitylabel]")
         labels.forEach() { c in
@@ -139,21 +106,8 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
 
     }
     
-    var firstTime = true
-    
-    func printFrames() {
-        if (!firstTime) {
-            return
-        }
-        form.quest().forEach() { c in
-            print("---------")
-            print(c.name + ":")
-            print(c.view.bounds)
-        }
-        firstTime = true
-    }
-    
     var didSetupConstraints = false
+    
     //
     // 活動予定一覧の読み込み
     //

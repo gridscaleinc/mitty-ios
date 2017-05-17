@@ -143,6 +143,22 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         
+        seperator(section: inputForm, caption: "行い内容")
+        row = Row.LeftAligned()
+        row +++ action.layout {
+            line in
+            line.height(line_height).rightMost(withInset: 10)
+        }
+        
+        action.textView.textContainer.maximumNumberOfLines = 3
+        action.textView.textContainer.lineBreakMode = .byWordWrapping
+        
+        row.layout() {
+            r in
+            r.height(row_height).fillHolizon()
+        }
+        inputForm <<< row
+        
         seperator(section: inputForm, caption: "日程")
         //終日フラグ
         row = Row.LeftAligned()
@@ -188,22 +204,6 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         
-        seperator(section: inputForm, caption: "行い内容")
-        row = Row.LeftAligned()
-        row +++ action.layout {
-            line in
-            line.height(line_height).rightMost(withInset: 10)
-        }
-        
-        action.textView.textContainer.maximumNumberOfLines = 3
-        action.textView.textContainer.lineBreakMode = .byWordWrapping
-        
-        row.layout() {
-            r in
-            r.height(row_height).fillHolizon()
-        }
-        inputForm <<< row
-        
         seperator(section: inputForm, caption: "場所")
         row = Row.LeftAligned()
         row +++ location.layout{
@@ -239,6 +239,20 @@ class EventInputForm : MQForm {
             r.height(row_height).fillHolizon()
         }
         inputForm <<< row
+        
+        seperator(section: inputForm, caption: "詳細")
+        row = Row.LeftAligned()
+        row +++ detailDescription.layout{
+            line in
+            line.height(90).rightMost(withInset: 10)
+        }
+        
+        row.layout() {
+            r in
+            r.height(100).fillHolizon()
+        }
+        inputForm <<< row
+        
 
         seperator(section: inputForm, caption: "価格")
         row = Row.LeftAligned().height(row_height)
@@ -329,18 +343,7 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         
-        seperator(section: inputForm, caption: "詳細")
-        row = Row.LeftAligned()
-        row +++ detailDescription.layout{
-            line in
-            line.height(90).rightMost(withInset: 10)
-        }
         
-        row.layout() {
-            r in
-            r.height(100).fillHolizon()
-        }
-        inputForm <<< row
     
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "dummy", title: "＋画像").height(90).width(60).layout {
