@@ -60,14 +60,14 @@ extension Control {
     // set the height dimension
     @discardableResult
     open func height(_ height: CGFloat) -> Self {
-        self.view.autoSetDimension(.height, toSize: height)
+        heightConstraints = self.view.autoSetDimension(.height, toSize: height)
         return self
     }
     
     // set the width dimension
     @discardableResult
     open func width(_ width: CGFloat) -> Self {
-        self.view.autoSetDimension(.width, toSize: width)
+        widthConstraints = self.view.autoSetDimension(.width, toSize: width)
         return self
     }
     

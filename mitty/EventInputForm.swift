@@ -38,11 +38,21 @@ class EventInputForm : MQForm {
     // 行い
     let action = MQForm.textView(name: "action" )
     
-    let price = MQForm.text(name: "price" , placeHolder: "価格を入力" )
+    let priceInput = MQForm.button(name: "priceInput" , title: "価格を入力" )
+    let price1 = MQForm.label(name: "price1", title: "")
+    var price1Row : Row? = nil
+
+    let price2 = MQForm.label(name: "price2", title: "")
+    var price2Row : Row? = nil
+
+    let priceDetail = MQForm.label(name: "priceDetail", title: "")
+    var priceDetailRow : Row? = nil
+    
     
     // 場所
     let location = MQForm.text(name: "location" , placeHolder: "場所名を入力")
     let locationIcon = MQForm.img(name: "icon" , url:"noicon")
+    let addressLabel = MQForm.label(name: "label-Address", title: "住所")
     let address = MQForm.label(name: "address" , title: "")
     
     var addressRow : Row? = nil
@@ -223,15 +233,17 @@ class EventInputForm : MQForm {
         
         row = Row.LeftAligned()
         addressRow = row
-        addressRow?.view.isHidden = true
-        row +++ MQForm.label(name: "label-Address", title: "住所").height(line_height).width(60)
+        row +++ addressLabel.layout {
+            l in
+            l.height(0).width(60)
+        }
         row +++ address.layout {
             line in
             line.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             line.label.isUserInteractionEnabled = false
             line.label.textColor = UIColor.gray
             line.label.numberOfLines = 0
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(0).rightMost(withInset: 10)
         }
 
         row.layout() {
@@ -257,15 +269,48 @@ class EventInputForm : MQForm {
         seperator(section: inputForm, caption: "価格")
         row = Row.LeftAligned().height(row_height)
         row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60)
-        row +++ price.layout{
+        row +++ priceInput.layout{
             line in
-            line.textField.textColor = MittyColor.healthyGreen
-            line.textField.attributedPlaceholder = NSAttributedString(string:"価格情報を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
+            line.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+            line.button.backgroundColor = .white
+            line.button.layer.borderWidth = 0
+            
             line.height(line_height).rightMost(withInset: 10)
         }
         
         inputForm <<< row
 
+        price1Row = Row.LeftAligned().height(20)
+        price1Row! +++ price1.layout {
+            p in
+            p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            p.label.textColor = .gray
+            p.fillHolizon(20)
+        }
+        
+        inputForm <<< price1Row!
+        
+        price2Row = Row.LeftAligned().height(20)
+        price2Row! +++ price2.layout {
+            p in
+            p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            p.label.textColor = .gray
+            p.fillHolizon(20)
+
+        }
+        
+        inputForm <<< price2Row!
+        
+        priceDetailRow = Row.LeftAligned().height(30)
+        priceDetailRow! +++ priceDetail.layout {
+            p in
+            p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            p.label.textColor = .gray
+            p.fillHolizon(20)
+        }
+        
+        inputForm <<< priceDetailRow!
+        
         seperator(section: inputForm, caption: "問い合わせ・連絡情報")
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70)
@@ -400,5 +445,56 @@ class EventInputForm : MQForm {
         }
         row +++ c
         section <<< row
+    }
+    
+    func updateLayout () {
+        
+        addressLabel.heightConstraints?.autoRemove()
+        address.heightConstraints?.autoRemove()
+        addressRow?.heightConstraints?.autoRemove()
+        
+        if address.label.text != "" {
+            addressLabel.height(48)
+            address.height(48)
+            addressRow?.height(48)
+        } else {
+            addressLabel.height(0)
+            address.height(0)
+            addressRow?.height(0)
+        }
+        
+        price1Row?.heightConstraints?.autoRemove()
+        price1.heightConstraints?.autoRemove()
+        price2Row?.heightConstraints?.autoRemove()
+        price2.heightConstraints?.autoRemove()
+        priceDetailRow?.heightConstraints?.autoRemove()
+        priceDetail.heightConstraints?.autoRemove()
+        
+        
+        if price1.label.text != "" {
+            price1Row?.height(15)
+            price1.height(15)
+        } else {
+            price1Row?.height(0)
+            price1.height(0)
+        }
+        
+        if price2.label.text != "" {
+            price2Row?.height(15)
+            price2.height(15)
+        } else {
+            price2Row?.height(0)
+            price2.height(0)
+        }
+        
+        if priceDetail.label.text != "" {
+            priceDetailRow?.height(60)
+            priceDetail.height(60)
+        } else {
+            priceDetailRow?.height(0)
+            priceDetail.height(0)
+        }
+        
+        
     }
 }

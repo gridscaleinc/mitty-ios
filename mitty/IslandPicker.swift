@@ -24,7 +24,7 @@ class IslandPicker : UIViewController {
     
     var candidates : [IslandInfo] = []
     var islandForm : IslandPickForm = IslandPickForm.newAutoLayout()
-    var delegate : IslandPickerDelegate? = nil
+    weak var delegate : IslandPickerDelegate? = nil
     
     
     override func viewDidLoad() {
@@ -56,4 +56,10 @@ class IslandPicker : UIViewController {
         }
         
     }
+}
+
+
+protocol IslandPickerDelegate : class {
+    func pickedIsland(landInfo: IslandInfo)
+    func clearPickedIsland()
 }

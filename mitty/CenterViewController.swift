@@ -31,6 +31,13 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
     // Autolayout済みフラグ
     var didSetupConstraints = false
     
+    let indicator : BaguaIndicator = {
+        let rect = CGRect(x:0, y:0, width:40, height: 40/1.414)
+        let ind = BaguaIndicator(frame: rect)
+        return ind
+    } ()
+    
+    
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
   
@@ -67,9 +74,6 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         //ここからが現在地取得の処理
         myLocationManager.delegate = self
         
-        let rect = CGRect(x:0, y:0, width:40, height: 40/1.414)
-        
-        let indicator = BaguaIndicator(frame: rect)
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
@@ -100,6 +104,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             s.upper(withInset: 0).fillHolizon()
             s.view.backgroundColor = UIColor(white: 0.1, alpha: 0.9)
         }
+        
         form +++ section
         
         var row = Row.Intervaled().layout() {
@@ -164,29 +169,22 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         
         section <<< row
         
-        form.configLayout()
-        
         view.addSubview(form)
-        
         
         view.addSubview(display)
         
-        display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-        display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
-        display.autoSetDimension(.height, toSize: 60)
-        display.autoSetDimension(.width, toSize: 180)
-
-        display.layer.borderWidth = 0.7
-        display.layer.borderColor = UIColor.white.cgColor
         
-        display +++ MQForm.label(name: "Taxi", title: "現在地:東京タワー🗼").layout {
+        display +++ MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼").layout {
             c in
             c.label.backgroundColor = UIColor(white:0.5, alpha:0.3)
+            c.label.numberOfLines = 2
+            c.label.adjustsFontSizeToFitWidth = true
+            c.label.textColor = UIColor.gray.darkerColor(percent: 19)
+            c.label.shadowColor = .white
+            c.label.shadowOffset = CGSize(width: 1, height: 1)
             c.fillParent()
         }
         
-        display.configLayout()
-
         
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
@@ -208,6 +206,8 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
     //
     override func updateViewConstraints() {
         
+        super.updateViewConstraints()
+        
         if (!didSetupConstraints) {
             form.autoPin(toBottomLayoutGuideOf: self, withInset: 5)
             form.autoPinEdge(toSuperviewEdge: .left)
@@ -215,10 +215,21 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             form.autoSetDimension(.height, toSize: 130)
             form.backgroundColor =  UIColor(white: 0.1, alpha: 0.0)
             
+            display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
+            display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
+            display.autoSetDimension(.height, toSize: 60)
+            display.autoSetDimension(.width, toSize: 180)
+            
+            display.layer.borderWidth = 0.7
+            display.layer.borderColor = UIColor.white.cgColor
+            
+            form.configLayout()
+            
+            display.configLayout()
+
             didSetupConstraints = true
         }
         
-        super.updateViewConstraints()
     }
 
     //

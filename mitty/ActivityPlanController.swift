@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
+class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate {
     
     var activityInfo : ActivityInfo
     var activityTitle = "活動"
@@ -19,6 +19,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
     
     var form = EventInputForm()
     var islandInfo : IslandInfo? = nil
+    let pricePicker = PricePicker()
     
     var dateFormatter : DateFormatter = {
         let dateFormatter = DateFormatter()
@@ -57,14 +58,23 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         
     }
     
+    var didSetupConstraints = false
     
     override func updateViewConstraints() {
-        form.autoPin(toTopLayoutGuideOf: self, withInset:0)
-        form.autoPinEdge(toSuperviewEdge: .left)
-        form.autoPinEdge(toSuperviewEdge: .right)
-        form.autoPinEdge(toSuperviewEdge: .bottom)
+        if !didSetupConstraints {
+            form.autoPin(toTopLayoutGuideOf: self, withInset:0)
+            form.autoPinEdge(toSuperviewEdge: .left)
+            form.autoPinEdge(toSuperviewEdge: .right)
+            form.autoPinEdge(toSuperviewEdge: .bottom)
+            
+            form.configLayout()
+            didSetupConstraints = true
+        }
         
-        form.configLayout()
+        
+        form.updateLayout()
+        
+        
         super.updateViewConstraints()
 
     }
@@ -74,6 +84,8 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         self.navigationItem.title = activityTitle
         
         self.view.backgroundColor = UIColor.white
+        
+        pricePicker.delegate = self
         
         let startDateText = form.startDate.textField
         let picker1 = UIDatePicker()
@@ -126,6 +138,12 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
             self?.navigationController?.pushViewController(controller, animated: true)
         }
         
+        form.quest("[name=priceInput]").bindEvent(for: .touchUpInside) { [weak self]
+            c in
+            c.resignFirstResponder()
+            self?.navigationController?.pushViewController((self?.pricePicker)!, animated: true)
+        }
+        
         form.registerButton.bindEvent(.touchUpInside) { [weak self]
             c in
             self?.register()
@@ -156,11 +174,30 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
     func pickedIsland(landInfo: IslandInfo) {
         form.location.textField.text = landInfo.name
         form.address.label.text = landInfo.address
-        form.addressRow?.view.isHidden = false
+        
+        
         if landInfo.id == 0 {
             registerNewIsland(landInfo)
         }
         islandInfo = landInfo
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.updateConstraintsIfNeeded()
+        self.view.layoutIfNeeded()
+    }
+    
+    func clearPickedIsland() {
+        
+    }
+    
+    func pickedPrice(_ picker: PricePicker) {
+        form.price1.label.text = picker.getPrice1()
+        form.price2.label.text = picker.getPrice2()
+        form.priceDetail.label.text = picker.priceInfo.textView.text
+    }
+    
+    func clearPickedPriceInfo() {
+        
     }
     
     var scrollConstraints : NSLayoutConstraint?
@@ -174,7 +211,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         
         let keyboardHeight = keyboardRect.size.height
         
-        let scroll = form.quest("[name=Input-Container]").control()
+        let scroll = form.quest("[name=inputContainer]").control()
         scrollConstraints?.autoRemove()
         scrollConstraints = scroll?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: keyboardHeight)
         self.view.setNeedsUpdateConstraints()
@@ -237,23 +274,31 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate {
         request.setInt(.islandId, String(islandInfo!.id))
         
         // priceName1: string,    (O)      -- 価格名称１
-        request.setStr(.priceName1, form.price.textField.text)
+        request.setStr(.priceName1, pricePicker.priceName1.textField.text)
         
         // TODO
         // price1: Double ,       (O)      -- 価格額１
-        request.setDouble(.price1, "100000.0")
+        let price = pricePicker.price1.textField.text
+        if (price != nil && price != "") {
+            request.setDouble(.price1, price!)
+        }
+        
         
         // priceName2,            (O)      -- 価格名称2
-        request.setStr(.priceName2, "abc")
+        request.setStr(.priceName2, pricePicker.priceName2.textField.text)
+        
         
         // price2: Double ,       (O)      -- 価格額２
-        request.setDouble(.price2, "10.0")
+        let price2 = pricePicker.price2.textField.text
+        if (price2 != nil && price != "") {
+            request.setDouble(.price2, price2!)
+        }
         
         // currency: string 　　　（O)      -- 通貨　(USD,JPY,などISO通貨３桁表記)
-        request.setStr(.currency, "USD")
+        request.setStr(.currency, pricePicker.currency.textField.text)
         
         // priceInfo: string      (O)      -- 価格について一般的な記述
-        request.setStr(.priceInfo, form.price.textField.text)
+        request.setStr(.priceInfo, pricePicker.priceInfo.textView.text)
         
         if (form.action.textView.text == "") {
             showError("行い事の概要を入力してください")

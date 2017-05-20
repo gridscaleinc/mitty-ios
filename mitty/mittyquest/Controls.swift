@@ -141,6 +141,9 @@ open class Control : NSObject, Node, Operatable {
         return _name.hashValue
     }
     
+    var heightConstraints : NSLayoutConstraint? = nil
+    var widthConstraints: NSLayoutConstraint? = nil
+    
     /*
      Make it conform to Operatable protocol
      registration Layout coder.
