@@ -33,6 +33,8 @@ class EventService {
             "q" : keys
         ]
         
+        LoadingProxy.on()
+        
         // ダミーコード、本当はサーバーから検索する。
         var events = [EventInfo]()
         let request = Alamofire.request(urlSearch, method: .get, parameters: parmeters)
@@ -104,6 +106,8 @@ class EventService {
         let parmeters = [
             "id" : id
         ]
+        
+        LoadingProxy.on()
         
         // ダミーコード、本当はサーバーから検索する。
         let request = Alamofire.request(urlFetch, method: .get, parameters: parmeters)

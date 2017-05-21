@@ -3,12 +3,12 @@ import PureLayout
 
 
 @objc(IsLandViewController)
-class IslandViewController: UIViewController {
+class IslandViewController: MittyViewController {
     
     var meetingSegments : UISegmentedControl = UISegmentedControl(items: ["Public", "Private"])
     
     // MARK: - Properties
-    var islands: [Island]
+    var islands: [IslandInfo]
     
     // MARK: - View Elements
     let topImage: UIImageView
@@ -17,7 +17,7 @@ class IslandViewController: UIViewController {
     
     // MARK: - Initializers
     init() {
-        islands = [Island]()
+        islands = [IslandInfo]()
         self.topImage = UIImageView.newAutoLayout()
         self.topImage.image = UIImage(named: "penginland")
         
@@ -35,6 +35,8 @@ class IslandViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        LoadingProxy.set(self)
+        
         view.backgroundColor = UIColor.white
         
         self.navigationItem.title = "島会議"
@@ -44,6 +46,7 @@ class IslandViewController: UIViewController {
         addConstraints()
         configureSubviews()
         initalIsland()
+        
 
     }
     
@@ -88,23 +91,19 @@ class IslandViewController: UIViewController {
         self.navigationItem.title = "島会議"
     }
     
-
-
     func initalIsland () {
-        let queue = OperationQueue()
-        queue.addOperation() {
-            // 非同期処理
-            let service = IslandService.instance
-            let keys = ["nothing"]
-            
-            self.islands = service.search(keys: keys)
-            // 非同期処理のコールバック
-            OperationQueue.main.addOperation() {
-                self.collectionView.reloadData()
-            }
+        // 非同期処理
+        let service = IslandService.instance
+        
+        service.fetchIslandInfo("平和島", callback: {
+            lands in
+            self.islands = lands
+            self.collectionView.reloadData()
+        }) {
+            error in
+            self.showError(error as! String)
         }
     }
-
 }
 
 // MARK: - UITableViewDataSource

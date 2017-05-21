@@ -11,7 +11,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     var socket = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/")!, protocols: ["chat", "superchat"])
     var disconnected = true
     
-    var talkingIsLand : Island!
+    var talkingIsLand : IslandInfo!
     
     // MARK: - Properties
     var talkingList: [Talk] = {
@@ -46,7 +46,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     } ()
     
     // MARK: - Initializers
-    init(island: Island) {
+    init(island: IslandInfo) {
         
         self.talkingIsLand = island
         
@@ -78,7 +78,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         view.backgroundColor = UIColor.white
         self.topLabel.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)        
-        self.navigationItem.title = "# " + (talkingIsLand.name ?? "")
+        self.navigationItem.title = "# " + (talkingIsLand.name)
         
         talkInputField.layer.borderWidth = 1
         let leftPadding = UIView(frame: CGRect(x:0, y:0, width:15, height:40))

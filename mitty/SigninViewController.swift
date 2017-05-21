@@ -221,6 +221,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             "password": passwordField.text!
         ]
         
+        LoadingProxy.on()
+        
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:

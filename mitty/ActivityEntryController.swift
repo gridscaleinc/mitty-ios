@@ -111,6 +111,8 @@ class ActivityEntryViewController : MittyViewController {
             return
         }
         
+        LoadingProxy.on()
+        
         print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {

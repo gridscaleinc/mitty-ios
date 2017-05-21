@@ -80,7 +80,7 @@ class JSONRequest  {
     }
     
     func setDate(named name: String, date: Date) {
-        setStr(named: name, value: date.iso8601UTC())
+        setStr(named: name, value: date.iso8601UTC)
     }
 
     //

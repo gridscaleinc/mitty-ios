@@ -10,7 +10,9 @@ import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import MapKit
 
+//
 class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate {
     
     var activityInfo : ActivityInfo
@@ -18,7 +20,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
     var type = "Unkown"
     
     var form = EventInputForm()
-    var islandInfo : IslandInfo? = nil
+    var pickedIsland : IslandPick? = nil
     let pricePicker = PricePicker()
     
     var dateFormatter : DateFormatter = {
@@ -34,11 +36,15 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         super.init(nibName: nil, bundle:nil)
     }
     
+    //
+    //
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     
+    //
+    //
     override func loadView() {
         
         // navigation bar の初期化をする
@@ -171,19 +177,66 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-    func pickedIsland(landInfo: IslandInfo) {
+    // 
+    // 場所選択した際の処理
+    //
+    func pickedIsland(landInfo: IslandPick) {
         form.location.textField.text = landInfo.name
         form.address.label.text = landInfo.address
         
         
+        pickedIsland = landInfo
+        
         if landInfo.id == 0 {
-            registerNewIsland(landInfo)
+            let service = IslandService.instance
+            service.fetchIslandInfo(pickedIsland!.name!, callback: checkAndRegist) {
+                                        error in
+                                        self.showError(error as! String)
+            }
         }
-        islandInfo = landInfo
         
         self.view.setNeedsUpdateConstraints()
         self.view.updateConstraintsIfNeeded()
         self.view.layoutIfNeeded()
+    }
+    
+    // 同じ場所が存在しなければ、登録する。
+    func checkAndRegist(_ islands: [IslandInfo]) {
+        if pickedIsland == nil {
+            return
+        }
+        
+        for island in islands {
+            if isSameInfo(island, pickedIsland!) {
+                return
+            }
+        }
+        
+        IslandService.instance.registerNewIsland(pickedIsland!) {
+            error in
+            self.showError(error as! String)
+        }
+    }
+    
+    func isSameInfo(_ islandInfo: IslandInfo, _ pickedInfo : IslandPick ) -> Bool {
+        if (islandInfo.name != pickedInfo.name) {
+            return false
+        }
+        
+        let location = CLLocation(latitude: islandInfo.latitude, longitude: islandInfo.longitude)
+        
+        if let picklocation = pickedInfo.placeMark?.location {
+            // 同じ名称で、距離が１００メートル以内であれば、同じ場所とみなす。
+            print("location:", location)
+            print("picklocation:", picklocation)
+            let distance = location.distance(from: picklocation)
+            print("distance:", distance)
+            if (distance < 100) {
+                return true
+            }
+        }
+        
+        return false
     }
     
     func clearPickedIsland() {
@@ -265,13 +318,13 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         // allDayFlag: bool,      (M)      -- 時刻非表示フラグ。
         request.setStr(.allDayFlag, "true")
 
-        if (islandInfo == nil || islandInfo?.placeMark == nil) {
+        if (pickedIsland == nil || pickedIsland?.placeMark == nil) {
             showError("住所を入力してください")
             return
         }
         
         // islandId:  int,        (M)      -- 島ID
-        request.setInt(.islandId, String(islandInfo!.id))
+        request.setInt(.islandId, String(pickedIsland!.id))
         
         // priceName1: string,    (O)      -- 価格名称１
         request.setStr(.priceName1, pricePicker.priceName1.textField.text)
@@ -346,6 +399,8 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         
         let urlString = "http://dev.mitty.co/api/new/event"
         
+        LoadingProxy.on()
+        
         print(request.parameters)
         Alamofire.request(urlString, method: .post, parameters: request.parameters).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
@@ -372,154 +427,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         }
     }
     
-    func registerNewIsland(_ landInfo : IslandInfo) {
-        let request = NewIslandReq()
-        
-        //nickname           : string      --(O)  愛称
-        request.setStr(.nickname, "")
-        
-        //name               : string      --(M)  名称
-        request.setStr(.name, landInfo.placeMark?.name)
-        
-        //logoId             : int         --(O)  LogoのContent Id
-//        request.setStr(.logoId, "")
-        
-        //description        : string      --(O)  説明
-        request.setStr(.description,"")
-        
-        //category           : string      --(M)  カテゴリ
-        request.setStr(.category,"UKNOWN")
-        
-        //mobilityType       : string      --(M)  移動性分類
-        request.setStr(.mobilityTyep,"NONE")
-        
-        //realityType        : string      --(M)  実在性分類
-        request.setStr(.realityType,"REAL")
-        
-        //ownershipType      : string      --(M)  所有者分類
-        request.setStr(.ownershipTYpe,"PUBLIC")
-        
-        //ownerName          : string      --(O)  所有者名
-        request.setStr(.ownerName,"UNOWNED")
-        
-        //ownerId            : int         --(O)  所有者のMitty User Id
-//        request.setStr(.ownerId,"")
-        
-        //creatorId          : int         --(O)  作成者のMitty User Id
-//        request.setStr(.creatorId,"")
-        
-        //meetingId          : int         --(O)  会議Id
-//        request.setStr(.meetingId,"")
-        
-        //galleryId          : int         --(O)  ギャラリーID
-//        request.setStr(.galleryId,"")
-        
-        //tel                : string      --(O)  電話番号
-        request.setStr(.tel, "")
-        
-        //fax                : string      --(O)  FAX
-        request.setStr(.fax,"")
-        
-        //mailaddress        : string      --(O)  メールアドレス
-        request.setStr(.mailaddress, "")
-        
-        //webpage            : string      --(O) 　WebページのURL
-        request.setStr(.webpage,"")
-        
-        //likes              : string      --(O)  いいねの数
-        request.setStr(.likes, "0")
-        
-        //countryCode        : string      --(O)  国コード
-        request.setStr(.countryCode, landInfo.placeMark?.isoCountryCode)
-        
-        //countryName        : string      --(O)  国名称
-        request.setStr(.countryName, landInfo.placeMark?.country)
-        
-        //state              : string      --(O)  都道府県
-        request.setStr(.state, landInfo.placeMark?.administrativeArea)
-        
-        //city               : string      --(O)  市、区
-        request.setStr(.city, landInfo.placeMark?.locality)
-        
-        //postcode           : string      --(O)  郵便番号
-        request.setStr(.postcode, landInfo.placeMark?.postalCode)
-        
-        //thoroghfare        : string      --(O)  大通り
-        request.setStr(.thoroghfare, landInfo.placeMark?.thoroughfare)
-        
-        //subthroghfare      : string      --(O)  通り
-        request.setStr(.subthorghfare, landInfo.placeMark?.subThoroughfare)
-        
-        //buildingName       : string      --(O)  建物名称
-        request.setStr(.buildingName, "")
-        
-        //floorNumber        : string      --(O)  フロー番号
-        request.setStr(.floorNumber, String(describing: landInfo.placeMark?.location?.floor?.level))
-        
-        //roomNumber         : string      --(O)  部屋番号
-        request.setStr(.roomNumber,"")
-        
-        //address1           : string      --(O)  住所行１
-        // print(landInfo.placeMark?.addressDictionary)
-        if let addressLines = landInfo.placeMark?.addressDictionary?["FormattedAddressLines"] as? NSArray {
-            //address1-3           : string      --(O)  住所行１-3
-            if addressLines.count>0 {
-                request.setStr(.address1, addressLines[0] as? String)
-            }
-            if addressLines.count>1 {
-                request.setStr(.address2, addressLines[1] as? String)
-            }
-            if addressLines.count>2 {
-                request.setStr(.address3, addressLines[2] as? String)
-            }
-        }
-        
-        //latitude           : double      --(O)  地理位置の緯度
-        if let lat = landInfo.placeMark?.location?.coordinate.longitude {
-            request.setDouble(.latitude, String(describing: lat))
-        }
-        
-        //longitude          : double      --(O)  地理位置の経度
-        if let longi = landInfo.placeMark?.location?.coordinate.longitude {
-            request.setDouble(.longitude, String(describing: longi))
-        }
-        
-        print(request.parameters)
-        
-        let urlString = "http://dev.mitty.co/api/new/island"
-
-        Alamofire.request(urlString, method: .post, parameters: request.parameters).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    let islandId = json["islandId"].intValue
-                    landInfo.id = islandId
-                }
-                
-//                self?.navigationController?.popToRootViewController(animated: true)
-            case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    self?.showError("error occored")
-                    
-                } catch {
-                    print("Serialize Error")
-                }
-                
-                print(response.description)
-                
-                LoadingProxy.off()
-                print(error)
-            }
-        }
-
-    }
-
+    
 }
 
 

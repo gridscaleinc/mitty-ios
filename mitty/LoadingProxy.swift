@@ -11,14 +11,11 @@ import UIKit
 
 struct LoadingProxy{
     
-    static var myActivityIndicator: UIActivityIndicatorView!
+    static var myActivityIndicator: BaguaIndicator!
     
     static func set(_ v:UIViewController){
-        self.myActivityIndicator = UIActivityIndicatorView()
-        self.myActivityIndicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        self.myActivityIndicator = BaguaIndicator(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
         self.myActivityIndicator.center = v.view.center
-        self.myActivityIndicator.hidesWhenStopped = false
-        self.myActivityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         self.myActivityIndicator.backgroundColor = UIColor.clear
         self.myActivityIndicator.layer.masksToBounds = true
         self.myActivityIndicator.layer.cornerRadius = 5.0;

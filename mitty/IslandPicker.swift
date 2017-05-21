@@ -20,9 +20,9 @@ import MapKit
 @available(iOS 9.3, *)
 class IslandPicker : UIViewController {
     
-    var selectedIsland : IslandInfo? = nil
+    var selectedIsland : IslandPick? = nil
     
-    var candidates : [IslandInfo] = []
+    var candidates : [IslandPick] = []
     var islandForm : IslandPickForm = IslandPickForm.newAutoLayout()
     weak var delegate : IslandPickerDelegate? = nil
     
@@ -46,7 +46,7 @@ class IslandPicker : UIViewController {
         islandForm.okButton.bindEvent(.touchUpInside) { [weak self]
             v in
             if (self?.delegate != nil) {
-                let info = IslandInfo()
+                let info = IslandPick()
                 info.name = self?.islandForm.nameControl.textField.text
                 info.address = self?.islandForm.addressControl.textField.text
                 info.placeMark = self?.islandForm.selectedPlaceMark
@@ -60,6 +60,6 @@ class IslandPicker : UIViewController {
 
 
 protocol IslandPickerDelegate : class {
-    func pickedIsland(landInfo: IslandInfo)
+    func pickedIsland(landInfo: IslandPick)
     func clearPickedIsland()
 }

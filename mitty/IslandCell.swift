@@ -5,7 +5,7 @@ class IslandCell: UICollectionViewCell {
     static let id = "island-cell"
     
     // MARK: - View Elements
-    var island : Island?
+    var island : IslandInfo?
     
     let name: UILabel
     
@@ -38,7 +38,7 @@ class IslandCell: UICollectionViewCell {
         
     }
     
-    func configureView(island: Island) {
+    func configureView(island: IslandInfo) {
         
         self.island = island
         

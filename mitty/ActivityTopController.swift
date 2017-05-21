@@ -188,6 +188,15 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         self.navigationItem.title = "活動予定"
+
+        ActivityService.instance.search(keys: "") { [weak self]
+            activities in
+            self?.loadForm(activities: activities)
+            self?.didSetupConstraints = false
+            self?.view.setNeedsUpdateConstraints()
+            self?.view.updateConstraintsIfNeeded()
+            self?.view.layoutIfNeeded()
+        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -196,10 +205,6 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     
     override func viewDidLoad() {
         LoadingProxy.set(self)
-        ActivityService.instance.search(keys: "") { [weak self]
-            activities in
-            self?.loadForm(activities: activities)
-        }
     }
 }
 

@@ -15,6 +15,27 @@ class ActivityInfo {
     var startDateTime : String = ""
     var logoUrl : String = ""
     var memo: String? = ""
+    
+    // main event　あるかどうかをチェック
+    var hasEvent : Bool {
+        if mainEventId == nil {
+            return false
+        } else if mainEventId == "" || mainEventId == "0" {
+            return false
+        } else {
+            return true
+        }
+        
+    }
+    
+    var monthDay : String {
+        if startDateTime.isISO8601 {
+            let dt = startDateTime.dateFromISO8601!
+            return dt.monthDay
+        }
+        
+        return ""
+    }
 }
 
 class ActivityItem {

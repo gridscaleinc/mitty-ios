@@ -59,6 +59,8 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
         
         configViews()
         
+        LoadingProxy.set(self)
+        
     }
     
     func setColor(_ v: UIView, _ color: UIColor) {
@@ -158,6 +160,8 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
                 "data": strBase64
             ]
         ]
+        
+        LoadingProxy.on()
         
         let urlString = "http://dev.mitty.co/api/gallery/content"
         

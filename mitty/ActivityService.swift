@@ -30,6 +30,8 @@ class ActivityService {
             "q" : keys
         ]
         
+        LoadingProxy.on()
+        
         // ダミーコード、本当はサーバーから検索する。
         var activities = [ActivityInfo]()
         let request = Alamofire.request(urlBase, method: .get, parameters: parmeters)
@@ -82,6 +84,7 @@ class ActivityService {
             "id" : id
         ]
         
+        LoadingProxy.on()
         
         // ダミーコード、本当はサーバーから検索する。
         var activity : Activity = Activity()

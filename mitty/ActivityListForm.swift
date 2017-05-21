@@ -73,16 +73,40 @@ class ActivityListForm : MQForm {
             l.height(20).fillParent()
         }
         
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon(3).height(30)
+        var outstandingActivity = [ActivityInfo]()
+        var planedActivity = [ActivityInfo]()
+        
+        for t in activityList {
+            if t.hasEvent {
+                planedActivity.append(t)
+            } else {
+                outstandingActivity.append(t)
+            }
         }
         
-        section <<< row
+        for t in outstandingActivity {
+            let row = Row.LeftAligned()
+            section <<< row
+            
+            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30)
+            row +++ l
+            
+            // ラベルに紐つくactivityを保存
+            (l.label as! TapableLabel).underlyObj = t
+            
+            row.layout(){ r in
+                r.fillHolizon(20).height(40)
+            }
+        }
         
-        row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
-            l in
-            l.label.textColor = .gray
+        if outstandingActivity.count == 0 {
+            let row = Row.LeftAligned()
+            section <<< row
+            
+            row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
+                l in
+                l.label.textColor = .gray
+            }
         }
         
         row = newTitleRow()
@@ -94,11 +118,11 @@ class ActivityListForm : MQForm {
             l.fillParent().height(20)
         }
 
-        for t in activityList {
+        for t in planedActivity {
             let row = Row.LeftAligned()
             section <<< row
             
-            row +++ MQForm.label(name: "activityDate", title: t.startDateTime).layout {
+            row +++ MQForm.label(name: "activityDate", title: t.monthDay).layout {
                  d in
                  d.label.textColor = .orange
                  d.width(50).height(30)
@@ -115,6 +139,15 @@ class ActivityListForm : MQForm {
             row.layout(){ r in
                 let w = UIScreen.main.bounds.size.width - 20
                 r.leftMost().rightMost().height(40).width(w)
+            }
+        }
+        if planedActivity.count == 0 {
+            let row = Row.LeftAligned()
+            section <<< row
+            
+            row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
+                l in
+                l.label.textColor = .gray
             }
         }
         
