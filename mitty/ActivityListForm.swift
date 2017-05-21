@@ -40,7 +40,7 @@ class ActivityListForm : MQForm {
         let data = buildActivityData()
         page +++ data
         data.layout() { (main) in
-            main.putUnder(of: header).fillHolizon().down(withInset: 125)
+            main.putUnder(of: header).fillHolizon().down(withInset: 3)
         }
         
     }
@@ -53,7 +53,7 @@ class ActivityListForm : MQForm {
     func buildActivityData() -> Control {
         
         let scrollView = UIScrollView.newAutoLayout()
-        scrollView.contentSize = UIScreen.main.bounds.size
+        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat((activityList.count + 3) * 50))
         scrollView.isScrollEnabled = true
         scrollView.flashScrollIndicators()
         scrollView.canCancelContentTouches = false
@@ -196,7 +196,6 @@ class ActivityListForm : MQForm {
         }
         section.layout() { [weak self]s in
             let height = 40.0*(CGFloat((self?.activityList.count)!) + 6)
-//            s.view.backgroundColor = UIColor.brown
             s.upper().width(UIScreen.main.bounds.size.width).height(height)
         }
         
