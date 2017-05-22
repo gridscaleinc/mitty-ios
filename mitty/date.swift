@@ -23,6 +23,24 @@ extension Formatter {
         formatter.dateFormat = "MM/dd"
         return formatter
     } ()
+    
+    static let dateTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MM/dd' 'HH:mm"
+        return formatter
+    } ()
+    
+    static let longDateTime: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd' 'HH:mm"
+        return formatter
+    } ()
+    
+    static let time: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "HH:mm"
+        return formatter
+    } ()
 }
 
 extension Date {
@@ -30,9 +48,23 @@ extension Date {
         return Formatter.iso8601.string(from: self)
     }
     
+    var dateTime: String {
+        return Formatter.dateTime.string(from: self)
+    }
+    
+    var longDateTime: String {
+        return Formatter.longDateTime.string(from: self)
+    }
+    
     var monthDay: String {
         return Formatter.monthDay.string(from: self)
     }
+    
+    var time: String {
+        return Formatter.time.string(from: self)
+    }
+
+    
 }
 
 extension String {

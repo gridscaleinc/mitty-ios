@@ -52,6 +52,29 @@ class ActivityItem {
     var islandName : String  = ""
     var islandNickname : String  = ""
     var islandLogoUrl : String  = ""
+    
+    var start : String {
+        if startDateTime.isISO8601 {
+            let dt = startDateTime.dateFromISO8601!
+            if allDayFlag {
+                return dt.monthDay
+            } else {
+                return dt.monthDay
+            }
+        }
+        
+        return ""
+    }
+    
+    var notifyTime : String {
+        if notification {
+            if notificationTime.isISO8601 {
+                let dt = notificationTime.dateFromISO8601!
+                return dt.dateTime
+            }
+        }
+        return ""
+    }
 }
 
 // 活動詳細

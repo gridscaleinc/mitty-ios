@@ -206,7 +206,7 @@ class ActivityPlanDetailsForm : MQForm {
             r.height(30).fillHolizon()
         }
         
-        eventTime.label.text = activity.mainItem?.startDateTime
+        eventTime.label.text = activity.mainItem?.start
 
         row +++ eventTime.layout {
             t in
@@ -215,7 +215,6 @@ class ActivityPlanDetailsForm : MQForm {
             t.leftMost(withInset: 10).rightMost(withInset: 10)
         }
         inputForm <<< row
-        
         
         row = Row.LeftAligned().layout() {
             r in
@@ -276,45 +275,44 @@ class ActivityPlanDetailsForm : MQForm {
 
         
         for item in activity.items {
+            
             row = Row.LeftAligned()
-            row.layout() {
-                r in
-                r.height(35).fillHolizon(20)
-            }
-            
-            let line : Control = {
-                let l = TapableLabel.newAutoLayout()
-                l.text = "\(item.startDateTime):\(item.eventTitle)         🚗"
-                l.textColor = MittyColor.healthyGreen
-                l.font = UIFont.boldSystemFont(ofSize: 14)
-                l.backgroundColor = UIColor.white
-                return Control(name: "line", view: l).height(30)
-            }()
-            line.layout() {
-                line in
-                line.height(30).rightMost()
-            }
-            
-            row +++ line
             inputForm <<< row
+            
+            row +++ MQForm.label(name: "activityDate", title: item.start).layout {
+                d in
+                d.label.textColor = .orange
+                d.label.font = UIFont.boldSystemFont(ofSize: 14)
+                d.width(50).height(30)
+            }
+            
+            let l = MQForm.label(name: "activitylabel", title: item.eventTitle).layout {
+                l in
+                l.width(200).height(30)
+                l.label.textColor = MittyColor.healthyGreen
+                l.label.font = UIFont.boldSystemFont(ofSize: 14)
+            }
+            
+            row +++ l
+            
+            // ラベルに紐つくactivityを保存
+            (l.label as! TapableLabel).underlyObj = item
+            
+            row +++ MQForm.img(name:"icon", url: "timesquare").width(30).height(20)
+            
+            row.layout(){ r in
+                let w = UIScreen.main.bounds.size.width - 20
+                r.leftMost().rightMost().height(40).width(w)
+            }
+            
             row = Row.LeftAligned()
             row.layout() {
                 r in
                 r.height(30).leftMost(withInset: 5).rightMost(withInset: 5)
             }
             
-            let swch = UISwitch.newAutoLayout()
-            if (item.notification) {
-                swch.isOn = true
-            }
-            let swchControl = Control(name: "notificationFlag", view: swch)
-            row +++ swchControl.layout {
-                w in
-                w.leftMost(withInset:10).height(20).upMargin(5)
-            }
-            
             let labelNoti = UILabel.newAutoLayout()
-            labelNoti.text = "知らせ時間：2018/01/01 12:00"
+            labelNoti.text = "知らせ時間：\(item.notifyTime)"
             labelNoti.font = UIFont.systemFont(ofSize: 14)
             let notification = Control(name:"notification", view: labelNoti)
             row +++ notification.layout {
