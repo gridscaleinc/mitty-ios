@@ -90,7 +90,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         
         bagua.font = UIFont.systemFont(ofSize: 16)
         
-        let strings = ["May I talk to you?  MittyはSNSではない。SNSを築くツールです。Mittyのコセプトは人と人がバーチャルな空間ではなく、リアルな空間での出会いをサポートします。Mittyがあれば、人と人の新たな関係を良い形で容易に作れる。"]
+        let strings = ["招待：１件、　本日の予定：３件、　"]
         
         bagua.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
         

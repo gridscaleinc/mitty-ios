@@ -7,6 +7,7 @@ target 'mitty' do
 
   # Pods for mitty
   pod 'Alamofire', '4.0.0'
+  pod 'AlamofireImage', '3.1'
   pod 'PureLayout', '3.0.2'
   pod 'SwiftyJSON', '3.1.1'
   pod 'Starscream', '2.0.3'

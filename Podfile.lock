@@ -1,21 +1,25 @@
 PODS:
   - Alamofire (4.0.0)
+  - AlamofireImage (3.1.0):
+    - Alamofire (~> 4.0)
   - PureLayout (3.0.2)
   - Starscream (2.0.3)
   - SwiftyJSON (3.1.1)
 
 DEPENDENCIES:
   - Alamofire (= 4.0.0)
+  - AlamofireImage (= 3.1)
   - PureLayout (= 3.0.2)
   - Starscream (= 2.0.3)
   - SwiftyJSON (= 3.1.1)
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
   Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
-PODFILE CHECKSUM: 2c72a662511bc1490265d3ee4ad0b2411a8c6798
+PODFILE CHECKSUM: d188c9546e3f70b1d2fcdaf351f95c75099c8f3b
 
 COCOAPODS: 1.2.0
