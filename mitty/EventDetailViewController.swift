@@ -56,6 +56,11 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
 
     init (event: Event) {
         self.event = event
+        if event.accessControl == "PUBLIC" {
+            if event.participationStatus {
+                subscribeButton.setTitle("やめます", for: .normal)
+            }
+        }
         super.init(nibName: nil, bundle:nil)
     }
 

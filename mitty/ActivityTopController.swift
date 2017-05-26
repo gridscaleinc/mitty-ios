@@ -124,13 +124,14 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
             form.autoPinEdge(toSuperviewEdge: .left)
             form.autoPinEdge(toSuperviewEdge: .right)
-            form.autoPinEdge(toSuperviewEdge: .bottom)
+            form.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
             
             form.configLayout()
             didSetupConstraints = true
         }
 
         super.updateViewConstraints()
+        
 
     }
     
@@ -197,10 +198,16 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
             self?.view.updateConstraintsIfNeeded()
             self?.view.layoutIfNeeded()
         }
+        super.viewWillAppear(animated)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidLoad()
+        
     }
     
     override func viewDidLoad() {

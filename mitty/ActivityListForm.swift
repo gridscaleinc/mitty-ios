@@ -14,9 +14,13 @@ import PureLayout
 class ActivityListForm : MQForm {
     
     
+    
     override public init(frame: CGRect) {
         super.init(frame: frame)
     }
+    
+    var section : Section!
+    var scrollView : UIScrollView!
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -40,7 +44,7 @@ class ActivityListForm : MQForm {
         let data = buildActivityData()
         page +++ data
         data.layout() { (main) in
-            main.putUnder(of: header).fillHolizon().down(withInset: 3)
+            main.view.autoPinEdgesToSuperviewEdges()
         }
         
     }
@@ -52,8 +56,8 @@ class ActivityListForm : MQForm {
     
     func buildActivityData() -> Control {
         
-        let scrollView = UIScrollView.newAutoLayout()
-        scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat((activityList.count + 3) * 50))
+        self.scrollView = UIScrollView.newAutoLayout()
+        // scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat((activityList.count + 3) * 50))
         scrollView.isScrollEnabled = true
         scrollView.flashScrollIndicators()
         scrollView.canCancelContentTouches = false
@@ -62,7 +66,7 @@ class ActivityListForm : MQForm {
 //        scrollView.backgroundColor = UIColor.blue
 
         var container = Container(name:"Scroll-View", view:scrollView)
-        let section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
+        self.section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
         container += section
         
         var row = newTitleRow()
@@ -70,7 +74,7 @@ class ActivityListForm : MQForm {
         row +++ MQForm.label(name: "activity-title", title: "計画中").layout {
             l in
             l.label.textColor = .orange
-            l.height(20).fillParent()
+            l.height(20).fillHolizon()
         }
         
         var outstandingActivity = [ActivityInfo]()
@@ -157,7 +161,7 @@ class ActivityListForm : MQForm {
         row +++ MQForm.label(name: "activity-title", title: "招待一覧").layout {
             l in
             l.label.textColor = .orange
-            l.height(20).fillParent()
+            l.height(20).fillHolizon()
         }
         
         row = Row.LeftAligned().layout {
@@ -179,7 +183,7 @@ class ActivityListForm : MQForm {
         row +++ MQForm.label(name: "activity-title", title: "リクエスト一覧").layout {
             l in
             l.label.textColor = .orange
-            l.height(20).fillParent()
+            l.height(20).fillHolizon()
         }
         
         row = Row.LeftAligned().layout {
@@ -194,11 +198,21 @@ class ActivityListForm : MQForm {
             l in
             l.label.textColor = .gray
         }
-        section.layout() { [weak self]s in
-            let height = 40.0*(CGFloat((self?.activityList.count)!) + 6)
-            s.upper().width(UIScreen.main.bounds.size.width).height(height)
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(30)
         }
         
+        section <<< row
+        
+        // スクロールviewの対応。
+        // sectionはコンテンツViewの役割とする。
+        // content-viewの高さはサブビューの一番下のViewの底辺に合わせる。
+        // content-viewの四辺はscrollviewにPinする。
+        section.layout() { [weak self]s in
+            s.fillParent().bottomAlign(with: row)
+        }
         
         return container
     }

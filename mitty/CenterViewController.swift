@@ -37,16 +37,13 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         return ind
     } ()
     
-    
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
-  
         self.navigationItem.title = LS(key: "operation_center")
         self.tabBarController?.tabBar.isHidden = false
-        
     }
     
-    // ビューが非表示になる直前にタイトルを「...]に変える。
+    // ビューが非表示になる直前にタイトルを「...」に変える。
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationItem.title = "..."
     }
@@ -90,7 +87,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         
         bagua.font = UIFont.systemFont(ofSize: 16)
         
-        let strings = ["招待：１件、　本日の予定：３件、　"]
+        let strings = ["招待：１件、　本日の予定：３件、                            　"]
         
         bagua.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
         
@@ -102,81 +99,79 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(130).layout() {
             s in
             s.upper(withInset: 0).fillHolizon()
-            s.view.backgroundColor = UIColor(white: 0.1, alpha: 0.9)
+            s.view.backgroundColor = UIColor(white: 0.15, alpha: 0.15)
         }
         
         form +++ section
         
         var row = Row.Intervaled().layout() {
             r in
-            r.fillHolizon().height(35)
+            r.fillHolizon().height(45)
         }
         row.spacing = 30
         
         row +++ MQForm.button(name: "Taxi", title: "🚕🚏").layout {
             c in
-            c.height(35)
-            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.7)
+            c.height(30)
+            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
         row +++ MQForm.button(name: "PeopleNearby", title: "👨‍👩‍👧‍👦").layout {
             c in
-            c.height(35)
-            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.7)
+            c.height(30)
+            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
 
         row +++ MQForm.button(name: "PeopleNearby", title: "島").layout {
             c in
-            c.height(35)
-            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.7)
+            c.height(30)
+            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
 
-        
         section <<< row
         
         row = Row.Intervaled().layout() {
             r in
             r.fillHolizon().height(40)
         }
+        
         row.spacing = 30
         
         row +++ MQForm.button(name: "Transperent", title: "透明").layout {
             c in
-            c.height(35)
-            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.5)
+            c.height(30)
+            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
 
         row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
             c in
-            c.height(35)
-            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.5)
+            c.height(30)
+            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
 
         row +++ MQForm.button(name: "settings", title: "⚙").layout {
             c in
-            c.height(35)
-            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.5)
+            c.height(30)
+            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
 
-        
         section <<< row
         
         view.addSubview(form)
         
         view.addSubview(display)
         
-        
         display +++ MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼").layout {
             c in
-            c.label.backgroundColor = UIColor(white:0.5, alpha:0.3)
+            c.label.backgroundColor = UIColor(white:0.8, alpha:0.6)
             c.label.numberOfLines = 2
             c.label.adjustsFontSizeToFitWidth = true
             c.label.textColor = UIColor.gray.darkerColor(percent: 19)
@@ -184,7 +179,6 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             c.label.shadowOffset = CGSize(width: 1, height: 1)
             c.fillParent()
         }
-        
         
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
@@ -197,8 +191,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         }
         // 位置情報の更新を開始
         myLocationManager.startUpdatingLocation()
-        
-        
+
     }
     
     //
@@ -209,11 +202,11 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         super.updateViewConstraints()
         
         if (!didSetupConstraints) {
-            form.autoPin(toBottomLayoutGuideOf: self, withInset: 5)
+            form.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5)
             form.autoPinEdge(toSuperviewEdge: .left)
             form.autoPinEdge(toSuperviewEdge: .right)
             form.autoSetDimension(.height, toSize: 130)
-            form.backgroundColor =  UIColor(white: 0.1, alpha: 0.0)
+            form.backgroundColor =  UIColor(white: 0.9, alpha: 0.0)
             
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)

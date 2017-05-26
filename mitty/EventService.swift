@@ -73,8 +73,10 @@ class EventService {
          e.id = jsEvent["id"].stringValue
          e.title = jsEvent["title"].stringValue                        // イベントタイトル
          e.action = jsEvent["title"].stringValue                       // イベントの行い概要内容
-         e.startDate = jsEvent["startDatetime"].stringValue            // イベント開始日時  ISO8601-YYYY-MM-DDTHH:mm:ssZ
-         e.endDate = jsEvent["endDatetime"].stringValue                // イベント終了日時　ISO8601-YYYY-MM-DDTHH:mm:ssZ
+         e.startDate = Date.bindDate(jsEvent["startDatetime"].stringValue)
+                                                                       // イベント開始日時  ISO8601-YYYY-MM-DDTHH:mm:ssZ
+         e.endDate = Date.bindDate(jsEvent["endDatetime"].stringValue)
+                                                                       // イベント終了日時　ISO8601-YYYY-MM-DDTHH:mm:ssZ
          e.allDayFlag = jsEvent["allDayFlag"].boolValue                // 時刻非表示フラグ。
          e.eventLogoUrl = jsEvent["eventLogoUrl"].stringValue          // 該当イベントのLogoIdが指すContentsのLinkUrl
          e.imageUrl = jsEvent["imageUrl"].stringValue                  // galleryId<>Nullの場合、該当GalleryId, Seq=1のコンテンツ
@@ -153,10 +155,10 @@ class EventService {
         e.action = json["action"].stringValue
         
         //  イベント開始日時  ISO8601-YYYY-MM-DDTHH : mm : ssZ
-        e.startDate = json["startDatetime"].stringValue
+        e.startDate = Date.bindDate(json["startDatetime"].stringValue)
         
         //  イベント終了日時
-        e.endDate = json["endDatetime"].stringValue
+        e.endDate = Date.bindDate(json["endDatetime"].stringValue)
         
         //  時刻非表示フラグ。
         e.allDayFlag = json["allDayFlag"].boolValue
@@ -248,7 +250,9 @@ class EventService {
         
         //  加入情報　　ログイン中ユーザーが該当イベントを加入しているかどうかを示す。
         //  Participating/Watching/Notyet
-        e.participationStatus = json["participationStatus"].stringValue
+        e.participationStatus = json["participationStatus"].boolValue
+        
+        //TODO: ActivityItemに該当ステータスを記録すべし
 
         return e
     }

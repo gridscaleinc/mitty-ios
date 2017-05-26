@@ -22,10 +22,10 @@ class EventInfo {
     var action : String = ""
     
     // イベント開始日時  ISO8601-YYYY-MM-DDTHH : mm : ssZ
-    var startDate : String = ""
+    var startDate : Date = Date.nulldate
     
     // イベント終了日時　ISO8601-YYYY-MM-DDTHH : mm : ssZ
-    var endDate : String = ""
+    var endDate : Date = Date.nulldate
     
     // 時刻非表示フラグ。
     var allDayFlag : Bool = false
@@ -85,12 +85,13 @@ class EventInfo {
     var publishedDays : String = ""
     
     func duration() -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.dateStyle = .long
-        formatter.timeStyle = .medium
         
-        return "🕒" + startDate + " - " + endDate
+        if allDayFlag {
+            return "🕒" + startDate.monthDay + " - " + endDate.monthDay
+        } else {
+            return "🕒" + startDate.dateTime + " - " + endDate.dateTime
+        }
+        
     }
     
 }
@@ -120,10 +121,10 @@ class Event {
     var action : String = ""
     
     //  イベント開始日時  ISO8601-YYYY-MM-DDTHH : mm : ssZ
-    var startDate : String = ""
+    var startDate : Date = Date.nulldate
     
     //  イベント終了日時
-    var endDate : String = ""
+    var endDate : Date = Date.nulldate
     
     //  時刻非表示フラグ。
     var allDayFlag : Bool = false
@@ -215,14 +216,15 @@ class Event {
     
     //  加入情報　　ログイン中ユーザーが該当イベントを加入しているかどうかを示す。
     //  Participating/Watching/Notyet
-    var participationStatus : String = ""
+    var participationStatus : Bool = false
     
     func duration() -> String {
-        let formatter = DateFormatter()
-        formatter.locale = Locale.current
-        formatter.dateStyle = .long
-        formatter.timeStyle = .medium
         
-        return "🕒" + startDate + " - " + endDate
+        if allDayFlag {
+            return "🕒" + startDate.monthDay + " - " + endDate.monthDay
+        } else {
+            return "🕒" + startDate.dateTime + " - " + endDate.dateTime
+        }
+        
     }
 }

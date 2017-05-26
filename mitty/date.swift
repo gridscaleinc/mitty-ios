@@ -63,6 +63,24 @@ extension Date {
     var time: String {
         return Formatter.time.string(from: self)
     }
+    
+    static var nulldate : Date {
+        let date = Date()
+        let interval = date.timeIntervalSince1970
+        return date.addingTimeInterval(-interval)
+    }
+    
+    static func bindDate(_ d :String?) -> Date {
+        if d == nil {
+            return nulldate
+        }
+        
+        let s = d!
+        if s.isISO8601 {
+            return s.dateFromISO8601!
+        }
+        return Date.nulldate
+    }
 
     
 }
