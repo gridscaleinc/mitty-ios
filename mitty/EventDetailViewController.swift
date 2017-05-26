@@ -104,6 +104,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     
     func buildform () {
         
+        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
         let anchor = MQForm.label(name: "dummy", title: "").layout {
             a in
             a.height(0).leftMost().rightMost()
@@ -126,13 +127,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         form +++ scrollContainer
         
-        let detailForm = Section(name: "Content-Form", view: UIView.newAutoLayout()).layout() { c in
-            
-            //            c.view.layer.borderWidth = 1
-            //            c.view.layer.borderColor = UIColor.yellow.cgColor
-            c.upper()
-            c.width(UIScreen.main.bounds.size.width).height(900)
-        }
+        let detailForm = Section(name: "Content-Form", view: UIView.newAutoLayout())
         
         scrollContainer +++ detailForm
         
@@ -314,6 +309,13 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             b in
             let button = b as! UIButton
             self.pressSubscribe(sender: button)
+        }
+        
+        detailForm.layout {
+            f in
+            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: subscribe)
+            f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
+            f.view.backgroundColor = UIColor.white
         }
     }
     

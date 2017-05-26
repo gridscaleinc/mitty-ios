@@ -88,6 +88,7 @@ class ActivityPlanDetailsForm : MQForm {
     //
     
     func loadForm(_ activity: Activity) {
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
         
         var page = self as MQForm
         
@@ -100,7 +101,6 @@ class ActivityPlanDetailsForm : MQForm {
         }
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:1400)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -108,10 +108,6 @@ class ActivityPlanDetailsForm : MQForm {
         let inputContainer = Container(name: "Details-Container", view: scroll)
         
         self +++ inputContainer
-        
-        inputContainer.layout() { (main) in
-            main.putUnder(of: header).fillHolizon().down(withInset: 10)
-        }
         
         let inputForm = Section(name: "Details-Form", view: UIView.newAutoLayout())
         inputContainer +++ inputForm
@@ -179,6 +175,12 @@ class ActivityPlanDetailsForm : MQForm {
             
             inputForm <<< row
             
+            row = Row.Intervaled()
+            inputForm <<< row
+            
+            inputContainer.layout() { (main) in
+                main.fillVertical().width(UIScreen.main.bounds.width - 5).bottomAlign(with: row)
+            }
             return
         }
         
@@ -382,6 +384,15 @@ class ActivityPlanDetailsForm : MQForm {
         
         inputForm <<< row
         
+        row = Row.Intervaled()
+        inputForm <<< row
+
+        
+        inputContainer.layout() { (main) in
+            main.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+            main.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
+            main.view.backgroundColor = UIColor.white
+        }
     }
     
 }

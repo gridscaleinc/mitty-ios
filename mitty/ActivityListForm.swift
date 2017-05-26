@@ -30,6 +30,8 @@ class ActivityListForm : MQForm {
     
     func loadForm () {
         
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+        
         var page = self as MQForm
         
         let header = Header()
@@ -210,8 +212,10 @@ class ActivityListForm : MQForm {
         // sectionはコンテンツViewの役割とする。
         // content-viewの高さはサブビューの一番下のViewの底辺に合わせる。
         // content-viewの四辺はscrollviewにPinする。
-        section.layout() { [weak self]s in
-            s.fillParent().bottomAlign(with: row)
+        section.layout() { s in
+            s.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+            s.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
+            s.view.backgroundColor = UIColor.white
         }
         
         return container

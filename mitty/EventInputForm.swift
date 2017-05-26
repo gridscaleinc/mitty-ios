@@ -81,6 +81,9 @@ class EventInputForm : MQForm {
     //　項目単位の小さいロジックはForm中で実装して良い。
     
     func loadForm() {
+        
+        self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+        
         let row_height = CGFloat(50)
         let line_height = CGFloat(48)
         
@@ -94,8 +97,7 @@ class EventInputForm : MQForm {
             v.upper().height(2)
         }
         
-        let contentSize = CGSize(width:UIScreen.main.bounds.size.width, height: 1400)
-        let inputContainer = scrollContainer(name:"inputContainer", contentSize: contentSize)
+        let inputContainer = scrollContainer(name:"inputContainer")
         
         self +++ inputContainer
         
@@ -105,10 +107,6 @@ class EventInputForm : MQForm {
         
         let inputForm = Section(name: "Input-Form", view: UIView.newAutoLayout())
         inputContainer +++ inputForm
-        
-        inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(1400)
-        }
         
         var row = Row.LeftAligned()
         row.layout {
@@ -426,6 +424,17 @@ class EventInputForm : MQForm {
         
         
         inputForm <<< row
+        
+        row = Row.Intervaled().layout() {
+            r in
+            r.height(20).fillHolizon()
+        }
+
+        inputForm <<< row
+        
+        inputForm.layout() { c in
+            c.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+        }
         
     }
 

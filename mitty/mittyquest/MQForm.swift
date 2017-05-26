@@ -159,9 +159,8 @@ open class MQForm : UIView {
     // 
     // フォームの主要部を構成するスクロールコンテナーコントロルを作成
     //
-    func scrollContainer(name: String, contentSize: CGSize) -> Container {
+    func scrollContainer(name: String) -> Container {
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = contentSize
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
