@@ -445,8 +445,9 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
                         let eventId = json["eventId"].stringValue
                         self?.registerGallery(eventId)
                     }
+                } else {
+                    self?.navigationController?.popToRootViewController(animated: true)
                 }
-                self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -494,15 +495,17 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         let urlString = "http://dev.mitty.co/api/gallery/content"
         
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
-            , headers : httpHeaders ).validate(statusCode: 200..<300).responseString { response in
-            LoadingProxy.off()
-            switch response.result {
-            case .success:
-                break
-            case .failure(let error):
-                print(error)
-                self.showError("\(error) error occored")
-            }
+            , headers : httpHeaders ).validate(statusCode: 200..<300).responseString { [weak self] response in
+                LoadingProxy.off()
+                switch response.result {
+                case .success:
+                    break
+                case .failure(let error):
+                    print(error)
+                    self?.showError("画像登録エラー")
+                    Thread.sleep(forTimeInterval: 4)
+                }
+                self?.navigationController?.popToRootViewController(animated: true)
         }
     }
 }

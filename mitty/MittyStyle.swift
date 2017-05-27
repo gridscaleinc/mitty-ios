@@ -102,3 +102,13 @@ extension UIColor {
         }
     }
 }
+
+extension CGSize {
+    var ratio : CGFloat {
+        if self.width == 0 || self.height == 0 {
+            return -1
+        }
+        
+        return self.height / self.width
+    }
+}

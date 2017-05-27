@@ -54,6 +54,8 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Take picture for check in etc.</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>

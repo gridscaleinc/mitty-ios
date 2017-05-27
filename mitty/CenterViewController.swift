@@ -171,14 +171,38 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         
         display +++ MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼").layout {
             c in
-            c.label.backgroundColor = UIColor(white:0.8, alpha:0.6)
+            c.label.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
             c.label.numberOfLines = 2
             c.label.adjustsFontSizeToFitWidth = true
             c.label.textColor = UIColor.gray.darkerColor(percent: 19)
             c.label.shadowColor = .white
-            c.label.shadowOffset = CGSize(width: 1, height: 1)
-            c.fillParent()
+            c.label.shadowOffset = CGSize(width: 0.1, height: 0.1)
+            c.height(50).fillHolizon().upper()
         }
+        
+        let checkinButton = MQForm.button(name: "checkin", title: "").layout {
+            b in
+            b.button.setImage(UIImage(named:"checkin.jpeg")?.af_imageRoundedIntoCircle(), for: .normal)
+            b.down(withInset: 5).height(40).width(40).leftMost(withInset:5)
+            b.button.backgroundColor = UIColor.clear
+            b.button.layer.borderWidth = 0
+        }
+        
+        checkinButton.bindEvent(.touchUpInside) {
+            view in
+            let checkinvc = CheckinViewController()
+            self.navigationController?.pushViewController(checkinvc, animated: true)
+        }
+        
+        display +++ checkinButton
+        
+        
+        display +++ MQForm.label(name: "checkLabel", title: "  チェックイン").layout {
+            l in
+            l.label.backgroundColor = UIColor.clear
+            l.down(withInset: 5).height(40).width(130).rightMost(withInset: 5)
+        }
+        
         
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
@@ -210,7 +234,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
-            display.autoSetDimension(.height, toSize: 60)
+            display.autoSetDimension(.height, toSize: 100)
             display.autoSetDimension(.width, toSize: 180)
             
             display.layer.borderWidth = 0.7
