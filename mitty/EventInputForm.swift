@@ -71,7 +71,11 @@ class EventInputForm : MQForm {
     let organizer = MQForm.text(name: "organizer", placeHolder: "主催者名称")
     
     // イメージは最後にオプションとして洗濯させる。
-    let image = MQForm.img(name: "picture", url: "nolargeimg")
+    let image : Control = {
+        let i = MQForm.img(name: "picture", url: "sunnyGreen.jpg")
+        i.image.contentMode = .scaleAspectFit
+        return i
+    } ()
 
     // ボタンなど、アクション必要なコントロールはインスタンスメンバーを定義し、
     // viewを直で取得できるComputedPropertyを用意
@@ -81,7 +85,7 @@ class EventInputForm : MQForm {
     //　項目単位の小さいロジックはForm中で実装して良い。
     
     func loadForm() {
-        
+        self.backgroundColor = .white
         self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
         
         let row_height = CGFloat(50)
@@ -102,7 +106,7 @@ class EventInputForm : MQForm {
         self +++ inputContainer
         
         inputContainer.layout() { (main) in
-            main.putUnder(of: header).fillHolizon().down(withInset: 10)
+            main.putUnder(of: header).fillHolizon().down(withInset: 0)
         }
         
         let inputForm = Section(name: "Input-Form", view: UIView.newAutoLayout())
@@ -167,6 +171,33 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         
+        row = Row.LeftAligned()
+        let imageContainer = Container(name: "iamgeCont", view:UIView.newAutoLayout())
+        row +++ imageContainer.layout {
+            i in
+            i.fillParent()
+        }
+        
+        imageContainer +++ image.layout() {
+            c in
+            c.height(UIScreen.main.bounds.width).fillHolizon().upper()
+        }
+        
+        imageContainer +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(120).width(90).layout {
+            l in
+            l.label.textColor = MittyColor.healthyGreen
+            l.label.textAlignment = .center
+            l.label.font = UIFont.boldSystemFont(ofSize: 30)
+            l.fillHolizon().upper()
+        }
+        
+        row.layout() {
+            r in
+            r.height(UIScreen.main.bounds.width).fillHolizon()
+        }
+        inputForm <<< row
+        
+
         seperator(section: inputForm, caption: "日程")
         //終日フラグ
         row = Row.LeftAligned()
@@ -386,27 +417,6 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         
-        
-    
-        row = Row.LeftAligned()
-        row +++ MQForm.label(name: "dummy", title: "＋画像").height(90).width(60).layout {
-            l in
-            l.label.textColor = MittyColor.healthyGreen
-            l.label.textAlignment = .center
-        }
-        row +++ image.layout() {
-            c in
-            c.image.contentMode = .scaleAspectFit
-            c.height(80).width(120)
-        }
-        
-        row.layout() {
-            r in
-            r.height(90).fillHolizon()
-        }
-        inputForm <<< row
-        
-
         inputForm <<< Row.LeftAligned().height(50)
         
         row = Row.Intervaled().layout() {
@@ -434,6 +444,7 @@ class EventInputForm : MQForm {
         
         inputForm.layout() { c in
             c.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+            c.view.backgroundColor = .white
         }
         
     }

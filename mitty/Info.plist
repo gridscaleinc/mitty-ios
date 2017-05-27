@@ -57,7 +57,7 @@
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Access Camera roll</string>
+	<string>Let users to pick a photo and upload as a content resource</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

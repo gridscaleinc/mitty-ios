@@ -11,14 +11,15 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import MapKit
+import AlamofireImage
 
 //
-class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate {
+class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var activityInfo : ActivityInfo
     var activityTitle = "活動"
     var type = "Unkown"
-    
+    var imagePicked = false
     var form = EventInputForm()
     var pickedIsland : IslandPick? = nil
     let pricePicker = PricePicker()
@@ -89,7 +90,8 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         
         self.navigationItem.title = activityTitle
         
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+        
         
         pricePicker.delegate = self
         
@@ -150,6 +152,11 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
             self?.navigationController?.pushViewController((self?.pricePicker)!, animated: true)
         }
         
+        form.quest("[name=addImageLabel]").bindEvent(for: .touchUpInside) {
+            label in
+            self.pickImage ()
+        }
+        
         form.registerButton.bindEvent(.touchUpInside) { [weak self]
             c in
             self?.register()
@@ -157,6 +164,31 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         
         manageKeyboard()
         LoadingProxy.set(self)
+    }
+    
+    func pickImage () {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+
+    }
+    
+    
+    //MARK: - Delegates
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        NSLog("\(info)")
+        let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        form.image.image.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
+        self.dismiss(animated: false, completion: nil)
+        imagePicked = true
     }
     
     func setFromDateTime(_ picker: UIDatePicker) {
@@ -405,7 +437,15 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         Alamofire.request(urlString, method: .post, parameters: request.parameters).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
             case .success:
-                LoadingProxy.off()
+                if (self?.imagePicked)! {
+                    if let jsonObject = response.result.value {
+                        let json = JSON(jsonObject)
+                        print(json)
+                        
+                        let eventId = json["eventId"].stringValue
+                        self?.registerGallery(eventId)
+                    }
+                }
                 self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(response.debugDescription)
@@ -427,7 +467,44 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         }
     }
     
-    
+    func registerGallery (_ eventId: String ) {
+        
+        let imageData:NSData = UIImagePNGRepresentation(self.form.image.image.image!)! as NSData
+        let strBase64 = imageData.base64EncodedString()
+        
+        let parameters = [
+            "gallery": [
+                "caption": "イベント画像",
+                "briefInfo": "-",
+                "freeText": "-",
+                "eventId": eventId
+            ],
+            "content": [
+                "mime": "image/png",
+                "name": String(format: "%02d", "\(eventId)"),
+                "link_url": "-",
+                "data": strBase64
+            ]
+        ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        let urlString = "http://dev.mitty.co/api/gallery/content"
+        
+        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
+            , headers : httpHeaders ).validate(statusCode: 200..<300).responseString { response in
+            LoadingProxy.off()
+            switch response.result {
+            case .success:
+                break
+            case .failure(let error):
+                print(error)
+                self.showError("\(error) error occored")
+            }
+        }
+    }
 }
 
 
