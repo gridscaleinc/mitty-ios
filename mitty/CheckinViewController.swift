@@ -22,10 +22,12 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
     
     let form = MQForm.newAutoLayout()
     
+    let nameCardForm = NameCardForm.newAutoLayout()
+    
+    
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
         self.navigationItem.title = LS(key: "operation_center")
-        self.tabBarController?.tabBar.isHidden = false
     }
     
     // ビューが非表示になる直前にタイトルを「...」に変える。
@@ -39,6 +41,10 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         self.view.addSubview(form)
         
         loadForm()
+        
+        self.view.addSubview(nameCardForm)
+        nameCardForm.load()
+        
         view.setNeedsUpdateConstraints()
     }
     
@@ -55,6 +61,13 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
             form.autoPinEdge(toSuperviewEdge: .right)
             
             form.configLayout()
+            
+            nameCardForm.autoPinEdge(.left, to: .left, of: picture.view)
+            nameCardForm.autoPinEdge(.top, to: .bottom, of: picture.view, withOffset: 40)
+            nameCardForm.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
+            
+            nameCardForm.configLayout()
+            
             didSetupConstraints = true
         }
         

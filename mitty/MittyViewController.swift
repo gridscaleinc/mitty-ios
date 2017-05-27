@@ -15,6 +15,14 @@ class MittyViewController : UIViewController {
     var error : Control?
     var lock = NSLock()
     
+    override var hidesBottomBarWhenPushed: Bool {
+        get {
+            return true
+        }
+        set (v) {
+        }
+    }
+  
     func showError(_ errorMsg: String ) {
         lock.lock()
         defer {lock.unlock()}
