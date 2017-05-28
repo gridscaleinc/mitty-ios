@@ -11,6 +11,7 @@ target 'mitty' do
   pod 'PureLayout', '3.0.2'
   pod 'SwiftyJSON', '3.1.1'
   pod 'Starscream', '2.0.3'
+  pod 'SlackTextViewController'
   
   target 'mittyTests' do
     inherit! :search_paths

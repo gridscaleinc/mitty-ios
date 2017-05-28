@@ -26,7 +26,7 @@ import PureLayout
  *
  */
 @objc(ActivityTopViewController)
-class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
+class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     
     
     // Search Box
@@ -38,16 +38,7 @@ class ActivityTopViewController: MittyUIViewController, UISearchBarDelegate {
     }()
     
     // activityList を作成する
-    var form : ActivityListForm
-    
-    override init () {
-        self.form = ActivityListForm.newAutoLayout()
-        super.init()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var form = ActivityListForm.newAutoLayout()
     
     //
     // Viewの読み込み。

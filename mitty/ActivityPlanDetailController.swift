@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class ActivityPlanDetailsController : UIViewController {
+class ActivityPlanDetailsController : MittyViewController {
     
     var activityTitle = "活動計画詳細"
     var form = ActivityPlanDetailsForm()
