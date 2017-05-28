@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import Alamofire
+import AlamofireImage
+
 import SwiftyJSON
 
 // シングルトンサービスクラス。
@@ -259,5 +261,69 @@ class EventService {
         //TODO: ActivityItemに該当ステータスを記録すべし
 
         return e
+    }
+    
+    func loadImages (_ e: EventInfo) {
+        DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
+        if e.coverImageUrl != "" && e.coverImage == nil {
+            Alamofire.request(e.coverImageUrl).validate(statusCode: 200..<300).responseImage {
+                response in
+                self.debugInfo(response)
+                if let image = response.result.value {
+                    e.coverImage = image
+                    if e.isDataReady {
+                        e.dataReadyHandler()
+                    }
+                }
+            }
+        }
+        
+        if e.eventLogoUrl != "" && e.eventLogo == nil {
+            Alamofire.request(e.eventLogoUrl).validate(statusCode: 200..<300).responseImage {
+                response in
+                self.debugInfo(response)
+                if let image = response.result.value {
+                    e.eventLogo = image
+                    if e.isDataReady {
+                        e.dataReadyHandler()
+                    }
+                }
+                
+            }
+        }
+        
+        if e.islandLogoUrl != "" && e.islandLogo == nil {
+            Alamofire.request(e.islandLogoUrl).validate(statusCode: 200..<300).responseImage {
+                response in
+                self.debugInfo(response)
+                if let image = response.result.value {
+                    e.islandLogo = image
+                    if e.isDataReady {
+                        e.dataReadyHandler()
+                    }
+                }
+            }
+        }
+        
+        if e.publisherIconUrl != "" && e.publisherIcon != nil {
+            Alamofire.request(e.publisherIconUrl).validate(statusCode: 200..<300).responseImage {
+                response in
+                self.debugInfo(response)
+                if let image = response.result.value {
+                    e.publisherIcon = image
+                    if e.isDataReady {
+                        e.dataReadyHandler()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+    func debugInfo( _ response: DataResponse<Image>?) {
+        debugPrint(response ?? "no response")
+        print(response?.request ?? "null request")
+        print(response?.response ?? "null response")
+        debugPrint(response?.result ?? "no result")
     }
 }

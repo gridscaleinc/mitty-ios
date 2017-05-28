@@ -139,11 +139,18 @@ extension EventViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.id, for: indexPath ) as? EventCell
         {
-            cell.configureView(event: events[indexPath.row])
+            let event = events[indexPath.row]
+            if (!event.isDataReady) {
+                event.dataReadyHandler = {
+                    cell.reloadImages()
+                    // collectionView.reloadItems(at: [indexPath])
+                }
+                EventService.instance.loadImages(event)
+            }
+            cell.configureView(event: event)
             cell.backgroundColor = .white
             let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(EventViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
-
             return cell
         }
         return EventCell()
@@ -169,13 +176,13 @@ extension EventViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         let e = events[indexPath.row]
-        // TODO
-        let image = UIImage(named: images[3])
-        let ratio = image == nil ? 1: (image?.size.height)!/(image?.size.width)!
+ 
+        let image = e.coverImage ?? UIImage(named: images[3])
+        // let ratio = image == nil ? 1: (image?.size.ratio)
         
         let screenSize:CGSize = UIScreen.main.bounds.size
         let width = ( screenSize.width - (10 * 3) ) 
-        let cellSize: CGSize = CGSize( width: width, height:width * ratio + 150 )
+        let cellSize: CGSize = CGSize( width: width, height:width * 1 + 150 )
         return cellSize
     }
     

@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import UIKit
+
 
 ///
 /// イベント情報
@@ -32,11 +34,14 @@ class EventInfo {
     
     // 該当イベントのLogoIdが指すContentsのLinkUrl
     var eventLogoUrl : String = ""
+    var eventLogo:UIImage? = nil
     
     // galleryId<>Nullの場合、該当GalleryId, Seq=1のコンテンツ
     // のLinkUrl
     
     var coverImageUrl : String = ""
+    
+    var coverImage : UIImage? = nil
     
     // 価格名称１
     var priceName1 : String = ""
@@ -73,6 +78,7 @@ class EventInfo {
     
     // 該当island（島）のlogo_idが指すContentsのLinkURL
     var islandLogoUrl : String = ""
+    var islandLogo : UIImage? = nil
     
     //  投稿者情報
     // 投稿者の名前
@@ -80,6 +86,7 @@ class EventInfo {
     
     // 投稿者のアイコンのURL
     var publisherIconUrl : String = ""
+    var publisherIcon : UIImage? = nil
     
     // 何日たちましたか
     var publishedDays : String = ""
@@ -93,6 +100,36 @@ class EventInfo {
         }
         
     }
+    
+    var isDataReady : Bool {
+        if eventLogoUrl != "" {
+            if eventLogo == nil {
+                return false
+            }
+        }
+        
+        if coverImageUrl != "" {
+            if coverImage == nil {
+                return false
+            }
+        }
+        
+        if islandLogoUrl != "" {
+            if islandLogo == nil {
+                return false
+            }
+        }
+        
+        if publisherIconUrl != "" {
+            if publisherIcon == nil {
+                return false
+            }
+        }
+        
+        return true
+    }
+    
+    var dataReadyHandler : () -> Void = {}
     
 }
 

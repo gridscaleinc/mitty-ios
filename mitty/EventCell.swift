@@ -88,7 +88,7 @@ class EventCell: UICollectionViewCell {
         col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
         row +++ col
         
-        row +++ MQForm.img(name: "eventIcon", url: "timesquare").width(50).height(50)
+        row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
         let titleLabel = MQForm.label(name: "titleLabel", title: event.title).layout {t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -99,12 +99,15 @@ class EventCell: UICollectionViewCell {
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(150)
+            r.fillHolizon().height(UIScreen.main.bounds.width - 30)
         }
         // imageがある場合、イメージを表示
-        let itemImage = MQForm.img(name: "eventImage", url: images[3]).layout {
+        let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
             img in
-            img.fillHolizon()
+            img.fillHolizon().height(UIScreen.main.bounds.width - 30)
+            if event.coverImage != nil {
+                img.image.image = event.coverImage
+            }
         }
         row +++ itemImage
         section <<< row
@@ -148,6 +151,21 @@ class EventCell: UICollectionViewCell {
 
         form.configLayout()
         
+    }
+    func reloadImages() {
+        if let img = event?.coverImage {
+            if let iv = form.quest("[name=eventImage]").control()?.image {
+                iv.image = img
+            }
+        }
+        
+        if let img = event?.eventLogo {
+            form.quest("[name=eventLogo]").control()?.image.image = img
+        }
+        
+        if let img = event?.publisherIcon {
+            form.quest("[name=pushlisherIcon]").control()?.image.image = img
+        }
     }
     
     override func prepareForReuse() {

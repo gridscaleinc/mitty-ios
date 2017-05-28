@@ -131,10 +131,12 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         scrollContainer +++ detailForm
         
-        imageView.image = UIImage(named: images[3])
+        if (event.coverImageUrl != "") {
+             imageView.af_setImage(withURL: URL(string: event.coverImageUrl)!)
+        }
         let img = Control(name: "image", view: imageView).layout {
             i in
-            i.width(UIScreen.main.bounds.size.width).upper().fillHolizon()
+            i.width(UIScreen.main.bounds.size.width).upper().height(UIScreen.main.bounds.size.width)
         }
         
         detailForm +++ img
