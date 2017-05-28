@@ -79,7 +79,7 @@ class EventService {
                                                                        // イベント終了日時　ISO8601-YYYY-MM-DDTHH:mm:ssZ
          e.allDayFlag = jsEvent["allDayFlag"].boolValue                // 時刻非表示フラグ。
          e.eventLogoUrl = jsEvent["eventLogoUrl"].stringValue          // 該当イベントのLogoIdが指すContentsのLinkUrl
-         e.imageUrl = jsEvent["imageUrl"].stringValue                  // galleryId<>Nullの場合、該当GalleryId, Seq=1のコンテンツ
+         e.coverImageUrl = jsEvent["coverImageUrl"].stringValue        // galleryId<>Nullの場合、該当GalleryId, Seq=1のコンテンツ
                                                                        // のLinkUrl
          e.priceName1 = jsEvent["priceName1"].stringValue              // 価格名称１
          e.price1 = jsEvent["price1"].stringValue                      // 価格額１
@@ -165,6 +165,10 @@ class EventService {
         
         //  島ID
         e.islandId = json["islandId"].stringValue
+        
+        //  該当イベントのCoverImage指すContentsのLinkUrl
+        e.coverImageUrl = json["coverImageUrl"].stringValue
+        
         
         //  該当イベントのLogoIdが指すContentsのLinkUrl
         e.eventLogoUrl = json["eventLogoUrl"].stringValue

@@ -17,9 +17,15 @@ class MittyViewController : UIViewController {
     
     override var hidesBottomBarWhenPushed: Bool {
         get {
-            return true
+            if let c = self.navigationController  {
+                if c.viewControllers.count > 1 {
+                    return true
+                }
+            }
+            return super.hidesBottomBarWhenPushed
         }
         set (v) {
+            super.hidesBottomBarWhenPushed = v
         }
     }
   

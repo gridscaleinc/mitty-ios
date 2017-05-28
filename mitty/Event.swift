@@ -36,7 +36,7 @@ class EventInfo {
     // galleryId<>Nullの場合、該当GalleryId, Seq=1のコンテンツ
     // のLinkUrl
     
-    var imageUrl : String = ""
+    var coverImageUrl : String = ""
     
     // 価格名称１
     var priceName1 : String = ""
@@ -131,6 +131,9 @@ class Event {
     
     //  島ID
     var islandId : String = ""
+    
+    //  該当イベントのCoverImage URL
+    var coverImageUrl : String = ""
     
     //  該当イベントのLogoIdが指すContentsのLinkUrl
     var eventLogoUrl : String = ""

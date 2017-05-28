@@ -478,7 +478,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
                 "caption": "イベント画像",
                 "briefInfo": "-",
                 "freeText": "-",
-                "eventId": eventId
+                "eventId": NSNumber(value: Int(eventId)!)
             ],
             "content": [
                 "mime": "image/png",
@@ -491,6 +491,9 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         let httpHeaders = [
             "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
         ]
+        
+        print(parameters)
+        print(httpHeaders)
         
         let urlString = "http://dev.mitty.co/api/gallery/content"
         
