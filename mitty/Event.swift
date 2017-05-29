@@ -325,12 +325,10 @@ class Event {
         if !isValidGeoInfo {
             return
         }
+        
         let url = URL(string:"comgooglemapsurl://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving&x-source=mitty://")
-        if UIApplication.shared.canOpenURL(url!) {
-            UIApplication.shared.openURL(url!)
-        } else {
-            openAppleMap()
-        }
+        UIApplication.shared.openURL(url!)
+        
     }
     
     var priceShortInfo : String {
