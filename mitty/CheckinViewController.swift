@@ -63,6 +63,7 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         view.setNeedsUpdateConstraints()
         
         super.viewDidLoad()
+        print(self.topLayoutGuide)
     }
     
     var didSetupConstraints = false

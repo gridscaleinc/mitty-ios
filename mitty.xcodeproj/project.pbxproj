@@ -65,6 +65,7 @@
 		FC3482D01EDA61A9005E539E /* MeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482CF1EDA61A9005E539E /* MeetingViewController.swift */; };
 		FC3482D21EDA8073005E539E /* PresenceForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482D11EDA8073005E539E /* PresenceForm.swift */; };
 		FC3482D41EDA8090005E539E /* FootMarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482D31EDA8090005E539E /* FootMarkForm.swift */; };
+		FC3482D61EDB1EE1005E539E /* downloading.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3482D51EDB1EE1005E539E /* downloading.png */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -227,6 +228,7 @@
 		FC3482CF1EDA61A9005E539E /* MeetingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingViewController.swift; sourceTree = "<group>"; };
 		FC3482D11EDA8073005E539E /* PresenceForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceForm.swift; sourceTree = "<group>"; };
 		FC3482D31EDA8090005E539E /* FootMarkForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootMarkForm.swift; sourceTree = "<group>"; };
+		FC3482D51EDB1EE1005E539E /* downloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = downloading.png; path = images/downloading.png; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 		FC4CB5831E3A00D2008D2796 /* materials */ = {
 			isa = PBXGroup;
 			children = (
+				FC3482D51EDB1EE1005E539E /* downloading.png */,
 				FC3482C31ED9B5EA005E539E /* checkin.jpeg */,
 				FCD8C7181EA226AC00AAD750 /* applogo.png */,
 				FCD8C7141EA1AB9400AAD750 /* noicon.png */,
@@ -867,6 +870,7 @@
 				FCFE67BF1DE50FA1007203EF /* bagua_2.png in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
 				FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */,
+				FC3482D61EDB1EE1005E539E /* downloading.png in Resources */,
 				FCD8C7171EA1AB9400AAD750 /* nolargeimg.png in Resources */,
 				FCFE67C11DE50FA1007203EF /* bagua_4.png in Resources */,
 				FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */,
@@ -1283,6 +1287,7 @@
 				INFOPLIST_FILE = mitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1304,6 +1309,7 @@
 				INFOPLIST_FILE = mitty/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = co.mitty.journey;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "";

@@ -98,6 +98,9 @@ class EventService {
          // 島情報
          e.islandName = jsEvent["islandName"].stringValue              // isLandIdに結びつく島名称
          e.islandLogoUrl = jsEvent["islandLogoUrl"].stringValue        // 該当island（島）のlogo_idが指すContentsのLinkURL
+        
+         e.latitude = jsEvent["latitude"].doubleValue
+         e.longitude = jsEvent["longitude"].doubleValue
                                                                        //  投稿者情報
          e.publisherName = jsEvent["publisherName"].stringValue        // 投稿者の名前
          e.publisherIconUrl = jsEvent["publisherIconUrl"].stringValue  // 投稿者のアイコンのURL
@@ -243,6 +246,10 @@ class EventService {
         
         //  該当island（島）のlogo_idが指すContentsのLinkURL
         e.isLandLogoUrl = json["isLandLogoUrl"].stringValue
+        
+        e.latitude = json["latitude"].doubleValue
+        
+        e.longitude = json["longitude"].doubleValue
         
         //  投稿者情報
         //  投稿者の名前

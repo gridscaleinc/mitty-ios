@@ -132,7 +132,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         scrollContainer +++ detailForm
         
         if (event.coverImageUrl != "") {
-             imageView.af_setImage(withURL: URL(string: event.coverImageUrl)!)
+             imageView.af_setImage(withURL: URL(string: event.coverImageUrl)!, placeholderImage: UIImage(named: "downloading"))
         }
         let img = Control(name: "image", view: imageView).layout {
             i in
@@ -178,7 +178,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(35)
         }
         
-        let likes = MQForm.label(name: "heart", title: "❤️ 134  価格:¥1000.").layout { l in
+        let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes)  価格:\(event.priceShortInfo)").layout { l in
             l.height(35).width(330)
         }
         
@@ -202,11 +202,21 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
+            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(40)
         }
-        
-        let location = MQForm.label(name: "isLand", title: "📍　\(event.isLandName)").layout { l in
-            l.height(35).width(250)
+        row +++ MQForm.label(name: "geoIcon", title:"📍").height(35).width(25)
+        let location = MQForm.label(name: "isLand", title: "\(event.isLandName)").layout { l in
+            l.height(40).width(210)
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.numberOfLines = 2
+            if self.event.isValidGeoInfo {
+                l.label.textColor = MittyColor.healthyGreen
+            }
+        }
+        if (event.isValidGeoInfo) {
+            location.bindEvent(.touchUpInside) {_ in 
+                self.event.openGoogleMap()
+            }
         }
         
         row +++ location

@@ -80,6 +80,10 @@ class EventInfo {
     var islandLogoUrl : String = ""
     var islandLogo : UIImage? = nil
     
+    // 緯度、経度. 999は無効な位置を意味する。
+    var latitude : Double = 999
+    var longitude : Double = 999
+    
     //  投稿者情報
     // 投稿者の名前
     var publisherName : String = ""
@@ -129,8 +133,27 @@ class EventInfo {
         return true
     }
     
+    var isValidGeoInfo : Bool {
+        if latitude > 90 || longitude > 180 || latitude < -90 || longitude < -180 {
+            return false
+        }
+        
+        return true
+    }
+    
     var dataReadyHandler : () -> Void = {}
     
+    func openAppleMap() {
+        if !isValidGeoInfo {
+            return
+        }
+        let daddr = NSString(format: "%f,%f", latitude, longitude)
+        let urlString = "http://maps.apple.com/?daddr=\(daddr)&dirflg=d"
+        let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        let url = URL(string: encodedUrl)!
+        UIApplication.shared.openURL(url)
+        
+    }
 }
 
 
@@ -168,6 +191,7 @@ class Event {
     
     //  島ID
     var islandId : String = ""
+    
     
     //  該当イベントのCoverImage URL
     var coverImageUrl : String = ""
@@ -244,6 +268,10 @@ class Event {
     //  該当island（島）のlogo_idが指すContentsのLinkURL
     var isLandLogoUrl : String = ""
     
+    // 緯度、経度. 999は無効な位置を意味する。
+    var latitude : Double = 999
+    var longitude : Double = 999
+    
     //  投稿者情報
     //  投稿者の名前
     var publisherName : String = ""
@@ -267,4 +295,51 @@ class Event {
         }
         
     }
+    
+    var isValidGeoInfo : Bool {
+        if latitude > 90 || longitude > 180 || latitude < -90 || longitude < -180 {
+            return false
+        }
+        
+        return true
+    }
+    
+    // TODO　configによって、どのmakerの地図を表示するかを決定する。
+    func openMap() {
+        
+    }
+    
+    func openAppleMap() {
+        if !isValidGeoInfo {
+            return
+        }
+        let daddr = NSString(format: "%f,%f", latitude, longitude)
+        let urlString = "http://maps.apple.com/?daddr=\(daddr)&dirflg=d"
+        let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)!
+        let url = URL(string: encodedUrl)!
+        UIApplication.shared.openURL(url)
+        
+    }
+    
+    func openGoogleMap() {
+        if !isValidGeoInfo {
+            return
+        }
+        let url = URL(string:"comgooglemapsurl://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving&x-source=mitty://")
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.openURL(url!)
+        } else {
+            openAppleMap()
+        }
+    }
+    
+    var priceShortInfo : String {
+        if price1 != "" {
+            return price1 + " " + currency
+        } else if price2 != "" {
+            return price2 + " " + currency
+        }
+        return "なし"
+    }
+
 }
