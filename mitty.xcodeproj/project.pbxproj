@@ -66,6 +66,7 @@
 		FC3482D21EDA8073005E539E /* PresenceForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482D11EDA8073005E539E /* PresenceForm.swift */; };
 		FC3482D41EDA8090005E539E /* FootMarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482D31EDA8090005E539E /* FootMarkForm.swift */; };
 		FC3482D61EDB1EE1005E539E /* downloading.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3482D51EDB1EE1005E539E /* downloading.png */; };
+		FC3483151EDDC0DB005E539E /* WebPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3483141EDDC0DB005E539E /* WebPicker.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -229,6 +230,7 @@
 		FC3482D11EDA8073005E539E /* PresenceForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceForm.swift; sourceTree = "<group>"; };
 		FC3482D31EDA8090005E539E /* FootMarkForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootMarkForm.swift; sourceTree = "<group>"; };
 		FC3482D51EDB1EE1005E539E /* downloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = downloading.png; path = images/downloading.png; sourceTree = "<group>"; };
+		FC3483141EDDC0DB005E539E /* WebPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPicker.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -714,6 +716,7 @@
 				FCF8D6401DD762020059B270 /* ImageEdit.swift */,
 				FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */,
 				FC30182C1ED00E7400A5F183 /* PriceInfoPicker.swift */,
+				FC3483141EDDC0DB005E539E /* WebPicker.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1104,6 +1107,7 @@
 				FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */,
 				FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */,
 				FCEDA2C51E6D7946006FBF20 /* Tagnizer.swift in Sources */,
+				FC3483151EDDC0DB005E539E /* WebPicker.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,

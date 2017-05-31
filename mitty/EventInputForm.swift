@@ -368,7 +368,7 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-page", title: "公式ページ").height(line_height).width(90)
+        row +++ MQForm.label(name: "label-official-page", title: "公式ページ").height(line_height).width(90)
         row +++ officialUrl.layout{
             line in
             line.height(line_height).rightMost(withInset: 10)
@@ -395,7 +395,10 @@ class EventInputForm : MQForm {
         row = Row.LeftAligned()
         row +++ infoUrl.layout{
             line in
+            line.textField.textColor = MittyColor.healthyGreen
+            line.textField.attributedPlaceholder = NSAttributedString(string:"情報源URLを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
             line.height(line_height).rightMost(withInset: 10)
+
         }
         
         row.layout() {

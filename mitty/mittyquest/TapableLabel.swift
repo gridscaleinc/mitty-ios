@@ -8,6 +8,26 @@
 
 import Foundation
 import UIKit
+class TapableUIImageView : UIImageView {
+    private var underling : Any = NSObject()
+    var underlyObj: Any {
+        get {
+            return underling
+        }
+        set (newvalue) {
+            underling = newvalue
+        }
+    }
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
+        if self.point(inside: point, with: event) {
+            return self
+        } else {
+            return nil
+        }
+    }
+
+}
 
 class TapableLabel : UILabel, Linkable {
     private var underling : Any = NSObject()

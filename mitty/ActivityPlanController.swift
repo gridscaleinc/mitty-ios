@@ -14,7 +14,7 @@ import MapKit
 import AlamofireImage
 
 //
-class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,WebPickerDelegate {
     
     var activityInfo : ActivityInfo
     var activityTitle = "活動"
@@ -162,8 +162,27 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
             self?.register()
         }
         
+        form.quest("[name=label-official-page]").bindEvent(for: .touchUpInside) {
+            label in
+            let wb = WebPicker()
+            wb.delegate = self
+            self.navigationController?.pushViewController(wb, animated: true)
+        }
+        
+        form.quest("[name=infoUrl]").bindEvent(for: .editingDidBegin) {
+            text in
+            let wb = WebPicker()
+            wb.delegate = self
+            self.navigationController?.pushViewController(wb, animated: true)
+        }
+        
+        
         manageKeyboard()
         LoadingProxy.set(self)
+    }
+    
+    func webpicker(_ picker: WebPicker, _ info: PickedInfo) -> Void {
+        
     }
     
     func pickImage () {
