@@ -171,6 +171,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         
         form.quest("[name=infoUrl]").bindEvent(for: .editingDidBegin) {
             text in
+            text.resignFirstResponder()
             let wb = WebPicker()
             wb.delegate = self
             self.navigationController?.pushViewController(wb, animated: true)

@@ -58,7 +58,6 @@
 		FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC31D7C91E80103F00F79E07 /* TapableLabel.swift */; };
 		FC3482AC1ED87E96005E539E /* beauty.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FC3482AB1ED87E96005E539E /* beauty.jpeg */; };
 		FC3482AE1ED87F9C005E539E /* beauty2.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FC3482AD1ED87F9C005E539E /* beauty2.jpeg */; };
-		FC3482C21ED9747E005E539E /* sunnyGreen.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC3482C11ED9747E005E539E /* sunnyGreen.jpg */; };
 		FC3482C41ED9B5EA005E539E /* checkin.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FC3482C31ED9B5EA005E539E /* checkin.jpeg */; };
 		FC3482C61ED9BDA8005E539E /* CheckinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482C51ED9BDA8005E539E /* CheckinViewController.swift */; };
 		FC3482C81ED9D70A005E539E /* NameCardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482C71ED9D70A005E539E /* NameCardForm.swift */; };
@@ -67,6 +66,8 @@
 		FC3482D41EDA8090005E539E /* FootMarkForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3482D31EDA8090005E539E /* FootMarkForm.swift */; };
 		FC3482D61EDB1EE1005E539E /* downloading.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3482D51EDB1EE1005E539E /* downloading.png */; };
 		FC3483151EDDC0DB005E539E /* WebPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3483141EDDC0DB005E539E /* WebPicker.swift */; };
+		FC3483171EE060A8005E539E /* broken.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3483161EE060A8005E539E /* broken.png */; };
+		FC3483191EE062D1005E539E /* sunnyGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3483181EE062D1005E539E /* sunnyGreen.png */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -222,7 +223,6 @@
 		FC31D7C91E80103F00F79E07 /* TapableLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TapableLabel.swift; sourceTree = "<group>"; };
 		FC3482AB1ED87E96005E539E /* beauty.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = beauty.jpeg; path = images/beauty.jpeg; sourceTree = "<group>"; };
 		FC3482AD1ED87F9C005E539E /* beauty2.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = beauty2.jpeg; path = images/beauty2.jpeg; sourceTree = "<group>"; };
-		FC3482C11ED9747E005E539E /* sunnyGreen.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = sunnyGreen.jpg; path = images/sunnyGreen.jpg; sourceTree = "<group>"; };
 		FC3482C31ED9B5EA005E539E /* checkin.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = checkin.jpeg; path = images/checkin.jpeg; sourceTree = "<group>"; };
 		FC3482C51ED9BDA8005E539E /* CheckinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckinViewController.swift; sourceTree = "<group>"; };
 		FC3482C71ED9D70A005E539E /* NameCardForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardForm.swift; sourceTree = "<group>"; };
@@ -231,6 +231,8 @@
 		FC3482D31EDA8090005E539E /* FootMarkForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FootMarkForm.swift; sourceTree = "<group>"; };
 		FC3482D51EDB1EE1005E539E /* downloading.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = downloading.png; path = images/downloading.png; sourceTree = "<group>"; };
 		FC3483141EDDC0DB005E539E /* WebPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPicker.swift; sourceTree = "<group>"; };
+		FC3483161EE060A8005E539E /* broken.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = broken.png; path = images/broken.png; sourceTree = "<group>"; };
+		FC3483181EE062D1005E539E /* sunnyGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sunnyGreen.png; path = images/sunnyGreen.png; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -587,6 +589,7 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC3483161EE060A8005E539E /* broken.png */,
 				FCC9CBA01DE9B3DA00F2582C /* we.png */,
 				FCC9CB9E1DE9B3CB00F2582C /* explorer.png */,
 				FC8D70171DC8F4FF0083E8E4 /* search.png */,
@@ -601,7 +604,6 @@
 		FC4CB5821E3A0052008D2796 /* samples */ = {
 			isa = PBXGroup;
 			children = (
-				FC3482C11ED9747E005E539E /* sunnyGreen.jpg */,
 				FC3482AD1ED87F9C005E539E /* beauty2.jpeg */,
 				FC3482AB1ED87E96005E539E /* beauty.jpeg */,
 				FC1766481E5C6D52000A4BAE /* event11.png */,
@@ -626,6 +628,7 @@
 		FC4CB5831E3A00D2008D2796 /* materials */ = {
 			isa = PBXGroup;
 			children = (
+				FC3483181EE062D1005E539E /* sunnyGreen.png */,
 				FC3482D51EDB1EE1005E539E /* downloading.png */,
 				FC3482C31ED9B5EA005E539E /* checkin.jpeg */,
 				FCD8C7181EA226AC00AAD750 /* applogo.png */,
@@ -852,6 +855,7 @@
 				FC00818E1DD394D300C1F970 /* pengin2.png in Resources */,
 				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
 				FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */,
+				FC3483191EE062D1005E539E /* sunnyGreen.png in Resources */,
 				FC3482C41ED9B5EA005E539E /* checkin.jpeg in Resources */,
 				FC427B911DCAFDE1009F43AE /* event4.png in Resources */,
 				FC00818D1DD394D300C1F970 /* pengin1.png in Resources */,
@@ -862,6 +866,7 @@
 				FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */,
 				FC0AF1FD1DC5088400C76408 /* activity.png in Resources */,
 				FCFE67C31DE50FA1007203EF /* bagua_6.png in Resources */,
+				FC3483171EE060A8005E539E /* broken.png in Resources */,
 				FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */,
 				FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */,
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,
@@ -882,7 +887,6 @@
 				FCFE67C01DE50FA1007203EF /* bagua_3.png in Resources */,
 				FC0081911DD3955300C1F970 /* pengin.png in Resources */,
 				FCFE67C41DE50FA1007203EF /* bagua_7.png in Resources */,
-				FC3482C21ED9747E005E539E /* sunnyGreen.jpg in Resources */,
 				FC3482AE1ED87F9C005E539E /* beauty2.jpeg in Resources */,
 				FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */,
 				FC1766491E5C6D52000A4BAE /* event11.png in Resources */,

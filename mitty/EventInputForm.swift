@@ -72,7 +72,7 @@ class EventInputForm : MQForm {
     
     // イメージは最後にオプションとして洗濯させる。
     let image : Control = {
-        let i = MQForm.img(name: "picture", url: "sunnyGreen.jpg")
+        let i = MQForm.img(name: "picture", url: "sunnyGreen")
         i.image.contentMode = .scaleAspectFit
         return i
     } ()
@@ -368,7 +368,11 @@ class EventInputForm : MQForm {
         }
         inputForm <<< row
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-official-page", title: "公式ページ").height(line_height).width(90)
+        row +++ MQForm.label(name: "label-official-page", title: "+公式ページ").layout {
+            c in
+            c.height(line_height).width(100)
+            c.label.textColor = MittyColor.healthyGreen
+        }
         row +++ officialUrl.layout{
             line in
             line.height(line_height).rightMost(withInset: 10)

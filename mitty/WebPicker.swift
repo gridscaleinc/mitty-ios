@@ -18,6 +18,7 @@ class PickedInfo {
     var width = 0
     
 }
+
 protocol WebPickerDelegate : class {
     func webpicker(_ picker: WebPicker, _ info: PickedInfo) -> Void
 }
@@ -27,7 +28,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
     // Search Box
     let searchBox : UISearchBar = {
         let t = UISearchBar()
-        t.placeholder = "Input your search key here."
+        t.placeholder = "検索キー"
         t.showsCancelButton = false
         return t
     }()
@@ -73,11 +74,20 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         showSearchBox()
     }
     
+    let button = MQForm.button(name: "pick", title: "pick").height(20).width(80)
+    
     // navigation bar の初期化をする
     private func configureNavigationBar() {
         
         let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target:self, action:#selector(showSearchBox))
-        let doneItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target:self, action:#selector(pickTheSite))
+        
+        button.bindEvent(.touchUpInside) {
+            b in
+            self.pickTheSite()
+        }
+        
+        let doneItem = UIBarButtonItem(customView: button.button )
+        
         
         let rightItems = [doneItem, searchItem]
         navigationItem.setRightBarButtonItems(rightItems, animated: true)
@@ -94,7 +104,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         let titleView = self.navigationItem.titleView
         self.navigationItem.titleView = searchBox
         // nest function　to serve search event
-        
+        form.isHidden = true
         func searchIt (_ searchBar: UISearchBar) -> Void {
             naviItem.titleView = titleView
             configureNavigationBar()
@@ -123,6 +133,13 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
     }
     
     func pickTheSite() {
+        if (button.button.titleLabel?.text == "Done") {
+            if (delegate != nil) {
+                delegate?.webpicker(self, bascket!)
+                self.navigationController?.popViewController(animated: true)
+            }
+            return
+        }
         
         webView.evaluateJavaScript("(function() {var images=document.querySelectorAll(\"img\");var imageList=[];[].forEach.call(images, function(el) { var img={}; img.width=el.width; img.height=el.height;img.url=el.src;imageList[imageList.length] = img;}); var result={images:imageList};result.title=document.title;result.location=document.URL;return JSON.stringify(result);})()") {
             json , error in
@@ -145,6 +162,10 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         form.backgroundColor = .white
         
         container = Container(name:"scroll-view", view: UIScrollView.newAutoLayout())
+        
+        siteTitle = MQForm.label(name: "siteTitle", title: "")
+        siteUrl = MQForm.label(name: "siteUrl", title: "")
+        siteImage = Control(name:"siteImage", view: UIImageView.newAutoLayout())
     }
     
     func loadForm(_ json: String) {
@@ -159,7 +180,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         form.autoPinEdge(toSuperviewEdge: .bottom)
         
         let row = Row.LeftAligned()
-        row +++ MQForm.label(name: "titleLabel", title: "サイトタイトル：").layout {
+        row +++ MQForm.label(name: "titleLabel", title: " タイトル：").layout {
             l in
             l.height(40).width(100).leftMost().fillVertical()
             l.label.adjustsFontSizeToFitWidth = true
@@ -180,7 +201,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         
         let row1 = Row.LeftAligned()
         
-        row1 +++ MQForm.label(name: "titleLabel", title: "サイトURL：").layout {
+        row1 +++ MQForm.label(name: "titleLabel", title: " URL：").layout {
             l in
             l.height(40).width(100).leftMost().upper()
             l.label.adjustsFontSizeToFitWidth = true
@@ -202,7 +223,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         
         let row2 = Row.LeftAligned()
         
-        row2 +++ MQForm.label(name: "titelImage", title: "画像：").layout {
+        row2 +++ MQForm.label(name: "titelImage", title: " 画 像：").layout {
             l in
             l.height(40).width(100).leftMost().upper()
             l.label.adjustsFontSizeToFitWidth = true
@@ -251,6 +272,12 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
                 continue
             }
             
+            if let url = URL(string: p.imgUrl) {
+                if url.scheme == "data" {
+                    continue
+                }
+            }
+            
             resultMap[p.imgUrl] = p
         }
         
@@ -283,6 +310,8 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
                 image in
                 if (image.result.isSuccess) {
                     v.image = image.result.value
+                } else {
+                    v.image = UIImage(named: "broken")
                 }
             }
             
@@ -297,8 +326,9 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
             
             imgControl.bindEvent(.touchUpInside) {
                 img in
-                self.bascket = (img as! TapableUIImageView).underlyObj as? PickedInfo
+                self.bascket = p.value
                 self.siteImage.image.image = (img as! UIImageView).image
+                self.button.button.setTitle("Done", for: .normal)
             }
             
         }
