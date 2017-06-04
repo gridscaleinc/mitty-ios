@@ -8,7 +8,7 @@ class IslandViewController: MittyViewController {
     var meetingSegments : UISegmentedControl = UISegmentedControl(items: ["Public", "Private"])
     
     // MARK: - Properties
-    var islands: [IslandInfo]
+    var meetingList: [MeetingInfo]
     
     // MARK: - View Elements
     let topImage: UIImageView
@@ -17,7 +17,7 @@ class IslandViewController: MittyViewController {
     
     // MARK: - Initializers
     init() {
-        islands = [IslandInfo]()
+        meetingList = [MeetingInfo]()
         self.topImage = UIImageView.newAutoLayout()
         self.topImage.image = UIImage(named: "penginland")
         
@@ -45,7 +45,7 @@ class IslandViewController: MittyViewController {
         addSubviews()
         addConstraints()
         configureSubviews()
-        initalIsland()
+        initalMeetingList()
         
 
     }
@@ -62,7 +62,7 @@ class IslandViewController: MittyViewController {
     private func configureSubviews() {
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(IslandCell.self, forCellWithReuseIdentifier:IslandCell.id)
+        collectionView.register(MeetingCell.self, forCellWithReuseIdentifier:MeetingCell.id)
         
         collectionView.backgroundColor = UIColor.white
     }
@@ -91,18 +91,19 @@ class IslandViewController: MittyViewController {
         self.navigationItem.title = "島会議"
     }
     
-    func initalIsland () {
+    func initalMeetingList () {
         // 非同期処理
-        let service = IslandService.instance
+        let service = MeetingService.instance
         
-        service.fetchIslandInfo("平和島", callback: {
-            lands in
-            self.islands = lands
+        service.getEventMeeting(callback: {
+            meetings in
+            self.meetingList = meetings
             self.collectionView.reloadData()
-        }) {
-            error in
-            self.showError(error as! String)
-        }
+        },
+                                onError: {
+                                    error in
+                                    self.showError(error as! String)
+        })
     }
 }
 
@@ -111,17 +112,17 @@ extension IslandViewController: UICollectionViewDataSource {
     
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return islands.count
+        return meetingList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: IslandCell.id, for: indexPath ) as? IslandCell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MeetingCell.id, for: indexPath ) as? MeetingCell
         {
-            cell.configureView(island: islands[indexPath.row])
+            cell.configureView(meeting: meetingList[indexPath.row])
             cell.backgroundColor = UIColor(white: 0.99, alpha: 1)
             let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:#selector(IslandViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
@@ -134,12 +135,10 @@ extension IslandViewController: UICollectionViewDataSource {
     ///
     func cellTapped(handler: UITapGestureRecognizer) {
         print (handler.view?.description ?? "")
-        let controller = TalkListViewController(island: ((handler.view) as! IslandCell).island!)
+        let controller = TalkListViewController(meeting: ((handler.view) as! MeetingCell).meetingInfo!)
         self.navigationItem.title = "戻る"
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(controller, animated: true)
-
-        
     }
 }
 
@@ -154,6 +153,6 @@ extension IslandViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 10)
+        return UIEdgeInsets(top: 3, left: 10, bottom: 3, right: 1)
     }
 }

@@ -183,7 +183,12 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
     }
     
     func webpicker(_ picker: WebPicker, _ info: PickedInfo) -> Void {
-        
+        form.infoUrl.textField.text = info.siteUrl
+        form.infoSource.textView.text = info.siteTitle
+        if (info.siteImage != nil) {
+            form.image.image.image = info.siteImage
+            imagePicked = true
+        }
     }
     
     func pickImage () {
@@ -260,6 +265,8 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         
         for island in islands {
             if isSameInfo(island, pickedIsland!) {
+                // TODO int64 -> int
+                pickedIsland?.id = Int(island.id)
                 return
             }
         }
@@ -474,7 +481,8 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(json)
-                    self?.showError("error occored")
+                    
+                    self?.showError("error occored" + (json as AnyObject).description)
 
                 } catch {
                     print("Serialize Error")

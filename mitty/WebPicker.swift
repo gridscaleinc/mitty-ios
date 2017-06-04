@@ -17,6 +17,11 @@ class PickedInfo {
     var height = 0
     var width = 0
     
+    var siteUrl = ""
+    var siteTitle = ""
+    var siteImage : UIImage? = nil
+    
+    
 }
 
 protocol WebPickerDelegate : class {
@@ -43,7 +48,8 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
     var siteTitle = MQForm.label(name: "siteTitle", title: "")
     var siteUrl = MQForm.label(name: "siteUrl", title: "")
     var siteImage = Control(name:"siteImage", view: UIImageView.newAutoLayout())
-
+    let pickButton = MQForm.button(name: "pick", title: "pick").height(20).width(80)
+    
     //
     // Viewの読み込み。
     //
@@ -53,6 +59,10 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         self.navigationItem.title = "ウェブからイベント検索"
         self.view.backgroundColor = UIColor.white
         
+        pickButton.bindEvent(.touchUpInside) {
+            b in
+            self.pickTheSite()
+        }
         configureNavigationBar()
         
     }
@@ -74,19 +84,16 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         showSearchBox()
     }
     
-    let button = MQForm.button(name: "pick", title: "pick").height(20).width(80)
+    
     
     // navigation bar の初期化をする
     private func configureNavigationBar() {
         
         let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target:self, action:#selector(showSearchBox))
         
-        button.bindEvent(.touchUpInside) {
-            b in
-            self.pickTheSite()
-        }
         
-        let doneItem = UIBarButtonItem(customView: button.button )
+        
+        let doneItem = UIBarButtonItem(customView: pickButton.button )
         
         
         let rightItems = [doneItem, searchItem]
@@ -133,15 +140,20 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
     }
     
     func pickTheSite() {
-        if (button.button.titleLabel?.text == "Done") {
+        if (pickButton.button.titleLabel?.text == "Done") {
             if (delegate != nil) {
+                bascket?.siteUrl = self.siteUrl.label.text ?? ""
+                bascket?.siteTitle = self.siteTitle.label.text ?? ""
+                bascket?.siteImage = self.siteImage.image.image
+                
                 delegate?.webpicker(self, bascket!)
                 self.navigationController?.popViewController(animated: true)
             }
             return
         }
         
-        webView.evaluateJavaScript("(function() {var images=document.querySelectorAll(\"img\");var imageList=[];[].forEach.call(images, function(el) { var img={}; img.width=el.width; img.height=el.height;img.url=el.src;imageList[imageList.length] = img;}); var result={images:imageList};result.title=document.title;result.location=document.URL;return JSON.stringify(result);})()") {
+        webView.evaluateJavaScript(
+            "(function() {var images=document.querySelectorAll(\"img\");var imageList=[];[].forEach.call(images, function(el) { var img={}; img.width=el.width; img.height=el.height;img.url=el.src;imageList[imageList.length] = img;}); var result={images:imageList};result.title=document.title;result.location=document.URL;return JSON.stringify(result);})()") {
             json , error in
             let info = PickedInfo()
             
@@ -328,7 +340,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
                 img in
                 self.bascket = p.value
                 self.siteImage.image.image = (img as! UIImageView).image
-                self.button.button.setTitle("Done", for: .normal)
+                self.pickButton.button.setTitle("Done", for: .normal)
             }
             
         }

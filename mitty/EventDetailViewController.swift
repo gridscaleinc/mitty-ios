@@ -172,8 +172,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             c.putUnder(of: img, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel
             l.numberOfLines = 0
-            l.textColor = .black
-            l.font = .boldSystemFont(ofSize: 15)
+            l.font = .boldSystemFont(ofSize: 18)
             l.layer.borderColor = UIColor.black.cgColor
         }
         

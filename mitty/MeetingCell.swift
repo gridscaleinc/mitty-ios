@@ -1,11 +1,19 @@
-import UIKit
-import PureLayout
+//
+//  MeetingCell.swift
+//  mitty
+//
+//  Created by gridscale on 2017/06/04.
+//  Copyright © 2017年 GridScale Inc. All rights reserved.
+//
 
-class IslandCell: UICollectionViewCell {
-    static let id = "island-cell"
+import Foundation
+import UIKit
+
+class MeetingCell : UICollectionViewCell {
+    static let id = "Event-Meeting-cell"
     
     // MARK: - View Elements
-    var island : IslandInfo?
+    var meetingInfo : MeetingInfo?
     
     let name: UILabel
     
@@ -50,18 +58,19 @@ class IslandCell: UICollectionViewCell {
         
         
     }
-
-    func configureView(island: IslandInfo) {
+    
+    func configureView(meeting: MeetingInfo) {
         
-        self.island = island
+        self.meetingInfo = meeting
         
         name.numberOfLines = 2
         name.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        name.text = "#" + (island.name )
+        name.text = "#" + (meeting.name )
         name.textColor = MittyColor.healthyGreen
         
         icon.image = UIImage(named: "timesquare")
         icon.contentMode = .scaleAspectFit
         
     }
+
 }

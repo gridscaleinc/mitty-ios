@@ -22,6 +22,7 @@ class IslandPick {
 }
 
 class IslandInfo {
+    var id         : Int64  = 0       // (M)  名称
     var nickname   : String = ""      // (O)  愛称
     var name       : String = ""      // (M)  名称
     var logoUrl    : String = ""      // 該当 島のLogoIdに紐つくContentのURL

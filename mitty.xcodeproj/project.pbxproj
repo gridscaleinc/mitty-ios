@@ -68,6 +68,9 @@
 		FC3483151EDDC0DB005E539E /* WebPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3483141EDDC0DB005E539E /* WebPicker.swift */; };
 		FC3483171EE060A8005E539E /* broken.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3483161EE060A8005E539E /* broken.png */; };
 		FC3483191EE062D1005E539E /* sunnyGreen.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3483181EE062D1005E539E /* sunnyGreen.png */; };
+		FC34831B1EE412A7005E539E /* MeetingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831A1EE412A7005E539E /* MeetingService.swift */; };
+		FC34831D1EE41389005E539E /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831C1EE41389005E539E /* Meeting.swift */; };
+		FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831E1EE42F44005E539E /* MeetingCell.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -233,6 +236,9 @@
 		FC3483141EDDC0DB005E539E /* WebPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebPicker.swift; sourceTree = "<group>"; };
 		FC3483161EE060A8005E539E /* broken.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = broken.png; path = images/broken.png; sourceTree = "<group>"; };
 		FC3483181EE062D1005E539E /* sunnyGreen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sunnyGreen.png; path = images/sunnyGreen.png; sourceTree = "<group>"; };
+		FC34831A1EE412A7005E539E /* MeetingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingService.swift; sourceTree = "<group>"; };
+		FC34831C1EE41389005E539E /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
+		FC34831E1EE42F44005E539E /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -462,6 +468,7 @@
 				FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */,
 				FC5ECFF91EBB170000AA6C13 /* ActivityInfo.swift */,
 				FC1FE0561EC69813007AE8A5 /* Event.swift */,
+				FC34831C1EE41389005E539E /* Meeting.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -484,6 +491,7 @@
 				FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */,
 				FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */,
 				FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */,
+				FC34831A1EE412A7005E539E /* MeetingService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -532,6 +540,7 @@
 				FCFEBF341E38F48200DC989B /* IslandDetailViewController.swift */,
 				FCFEBF361E38F4B100DC989B /* IslandConstructViewController.swift */,
 				FC3482CF1EDA61A9005E539E /* MeetingViewController.swift */,
+				FC34831E1EE42F44005E539E /* MeetingCell.swift */,
 			);
 			name = talk;
 			sourceTree = "<group>";
@@ -1057,6 +1066,7 @@
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
+				FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */,
 				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,
 				FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */,
 				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
@@ -1072,6 +1082,7 @@
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
 				FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */,
+				FC34831B1EE412A7005E539E /* MeetingService.swift in Sources */,
 				FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */,
 				FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
@@ -1113,6 +1124,7 @@
 				FCEDA2C51E6D7946006FBF20 /* Tagnizer.swift in Sources */,
 				FC3483151EDDC0DB005E539E /* WebPicker.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
+				FC34831D1EE41389005E539E /* Meeting.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,

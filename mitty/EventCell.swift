@@ -9,7 +9,6 @@ class EventCell: UICollectionViewCell {
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     
     
-
     var form = MQForm.newAutoLayout()
     
     // MARK: - Initializers
@@ -50,7 +49,7 @@ class EventCell: UICollectionViewCell {
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
         row +++ publisherIcon.width(30).height(30)
         
-        let publisher = MQForm.label(name: "publisher", title: "OWner(TBS)")
+        let publisher = MQForm.label(name: "publisher", title: event.publisherName)
         row +++ publisher.layout{
             pub in
             let l = pub.label
@@ -58,7 +57,7 @@ class EventCell: UICollectionViewCell {
             l.textColor = MittyColor.healthyGreen
         }
         
-        let published = MQForm.label(name: "publishDate", title: "10 days ago.")
+        let published = MQForm.label(name: "days", title: "\(event.publishedDays)days ago.")
         row +++ published.layout{
             pub in
             let l = pub.label
@@ -74,7 +73,7 @@ class EventCell: UICollectionViewCell {
             r in
             r.fillHolizon().height(75)
         }
-        let col = Col.UpDownAligned().layout {
+        let col = Col.BottomUpAligned().layout {
             c in
             c.height(75).width(25)
         }
@@ -83,6 +82,7 @@ class EventCell: UICollectionViewCell {
             l in
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
+            label.textAlignment = .center
         }
         
         col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
@@ -92,7 +92,8 @@ class EventCell: UICollectionViewCell {
         let titleLabel = MQForm.label(name: "titleLabel", title: event.title).layout {t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
-            t.rightMost()
+            t.rightMost().height(50)
+            t.label.textColor = MittyColor.healthyGreen
         }
         row +++ titleLabel
         section <<< row
@@ -118,37 +119,33 @@ class EventCell: UICollectionViewCell {
             r.fillHolizon().height(20)
         }
         let endTimeLabel = UILabel.newAutoLayout()
-        endTimeLabel.font = UIFont.systemFont(ofSize: CGFloat(10))
         endTimeLabel.text = event.duration()
         let timeDuration = Control(name:"duration", view: endTimeLabel).layout {
             l in
             l.fillParent()
+            l.label.font = UIFont.systemFont(ofSize: 14)
         }
         row +++ timeDuration
         section <<< row
         
-        // 価格情報を設定
-//        let priceLabel: UILabel
+        // 日付情報を設定
+        row = Row.LeftAligned()
+        let actionLabel = UILabel.newAutoLayout()
+        actionLabel.text = event.action
+        let actionCtrl = Control(name:"actionLabel", view: actionLabel).layout {
+            l in
+            l.fillParent()
+            l.label.font = UIFont.systemFont(ofSize: 12)
+            l.label.textColor = UIColor(white: 0.33, alpha: 1)
+            l.label.numberOfLines = 0
+        }
+        row.layout {
+            r in
+            r.fillHolizon().height(40)
+        }
+        row +++ actionCtrl
+        section <<< row
         
-        // 説明があれば、説明をつける。
-        
-        // like数
-        
-        // 登録者
-        
-
-//        priceLabel.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-//        priceLabel.text = LS(key: "now") + String(describing: event.price1) + LS(key: "yen")
-
-    
-        
-        
-        
-//        priceLabel.autoPinEdge(.top, to: .bottom, of: titleLabel, withOffset: 3.0)
-//        priceLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
-//        priceLabel.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
-        
-
         form.configLayout()
         
     }

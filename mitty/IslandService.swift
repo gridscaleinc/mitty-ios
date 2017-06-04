@@ -225,6 +225,7 @@ class IslandService {
     func bindIsland(_ json: JSON ) -> IslandInfo {
         let islandInfo = IslandInfo()
         
+        islandInfo.id = json["id"].int64!
         islandInfo.name = json["name"].stringValue
         islandInfo.nickname = json["nickname"].stringValue
         islandInfo.logoUrl = json["logoUrl"].stringValue

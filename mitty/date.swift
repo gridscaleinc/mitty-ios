@@ -18,6 +18,15 @@ extension Formatter {
         return formatter
     }()
     
+    static let iso8601Long: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.calendar = Calendar(identifier: .iso8601)
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSXXX'Z'"
+        return formatter
+    }()
+    
     static let monthDay: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
@@ -46,6 +55,10 @@ extension Formatter {
 extension Date {
     var iso8601UTC: String {
         return Formatter.iso8601.string(from: self)
+    }
+    
+    var iso8601LongUTC: String {
+        return Formatter.iso8601Long.string(from: self)
     }
     
     var dateTime: String {
@@ -82,6 +95,18 @@ extension Date {
         return Date.nulldate
     }
 
+    static func bindDateLong(_ d :String?) -> Date {
+        if d == nil {
+            return nulldate
+        }
+        
+        let s = d!
+        if s.isISO8601Long {
+            return s.dateFromISO8601Long!
+        }
+        return Date.nulldate
+    }
+
     
 }
 
@@ -97,4 +122,17 @@ extension String {
         }
         return false
     }
+    
+    var dateFromISO8601Long: Date? {
+        return Formatter.iso8601Long.date(from: self)   // "Mar 22, 2017, 10:22 AM"
+    }
+    
+    var isISO8601Long : Bool {
+        let test = Formatter.iso8601Long.date(from: self)
+        if (test != nil) {
+            return true
+        }
+        return false
+    }
+
 }

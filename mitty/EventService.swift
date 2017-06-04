@@ -74,7 +74,7 @@ class EventService {
         //  イベント情報
          e.id = jsEvent["id"].stringValue
          e.title = jsEvent["title"].stringValue                        // イベントタイトル
-         e.action = jsEvent["title"].stringValue                       // イベントの行い概要内容
+         e.action = jsEvent["action"].stringValue                       // イベントの行い概要内容
          e.startDate = Date.bindDate(jsEvent["startDatetime"].stringValue)
                                                                        // イベント開始日時  ISO8601-YYYY-MM-DDTHH:mm:ssZ
          e.endDate = Date.bindDate(jsEvent["endDatetime"].stringValue)

@@ -174,15 +174,10 @@ extension EventViewController: UICollectionViewDataSource {
 extension EventViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        let e = events[indexPath.row]
  
-        let image = e.coverImage ?? UIImage(named: images[3])
-        // let ratio = image == nil ? 1: (image?.size.ratio)
-        
         let screenSize:CGSize = UIScreen.main.bounds.size
         let width = ( screenSize.width - (10 * 3) ) 
-        let cellSize: CGSize = CGSize( width: width, height:width * 1 + 150 )
+        let cellSize: CGSize = CGSize( width: width, height:width * 1 + 190 )
         return cellSize
     }
     
