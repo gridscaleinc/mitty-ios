@@ -77,7 +77,7 @@ class  MeetingService {
         meeting.logoUrl = json["logoUrl"].stringValue
         meeting.created = json["created"].stringValue.dateFromISO8601Long!
         meeting.updated = json["updated"].stringValue.dateFromISO8601Long!
-        
+        print(json)
         return meeting
     }
 }

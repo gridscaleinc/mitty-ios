@@ -8,7 +8,12 @@ import SwiftyJSON
 class TalkListViewController: UIViewController ,WebSocketDelegate {
     var pingPongTimer : Timer? = nil
     
-    var socket = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/")!, protocols: ["chat", "superchat"])
+    var socket : WebSocket = {
+        let ws = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/abc")!, protocols: ["chat", "superchat"])
+        ws.headers["X-Mitty-AccessToken"] = ApplicationContext.userSession.accessToken
+        return ws
+    } ()
+    
     var disconnected = true
     
     var meeting : MeetingInfo!
@@ -134,11 +139,11 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
             return
         }
         
+        
         let message : [String:Any] = [
-            "email" : "",
-            "username" : (ApplicationContext.userSession.userName == "") ? "Guest" : ApplicationContext.userSession.userName
-                      ,
-            "message" : talkInputField.text ?? "No message"
+            "meetingId" : NSNumber(value: meeting.id),
+            "speaking" : talkInputField.text ?? "No message",
+            "speakTime" : Date().iso8601UTC
         ]
         
         let js = JSON(message).rawString()
@@ -277,17 +282,10 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         let tk1 = Talk()
         
-        let mail = js["email"]
-        tk1.familyName = mail.rawString()!
-        let userId = js["username"].rawString()!
-        
-        tk1.mittyId = userId
-        tk1.speaking = js["message"].rawString()!
-        if userId == "domanthan" {
-            tk1.avatarIcon = "pengin"
-        } else {
-            tk1.avatarIcon = "pengin4"
-        }
+        tk1.meetingId = js["meetingId"].int64!
+        tk1.speakerId = js["speakerId"].int64!
+        tk1.speakTime = js["speakTime"].stringValue.dateFromISO8601!
+        tk1.speaking = js["speaking"].rawString()!
         
         talkingList.append(tk1)
         if talkingList.count > 100 {

@@ -82,12 +82,12 @@ class Content {
 /// 発言
 class Talk {
     
-    public var mittyId = ""
-    public var avatarIcon = ""
-    public var familyName = ""
-    public var speaking = ""
+    var meetingId : Int64 = 0
+    var speakerId : Int64 = 0
+    var speaking = ""
+    var speakTime = Date.nulldate
     
-    public var height = CGFloat(0.0)
+    var height = CGFloat(0.0)
     
     
 }
