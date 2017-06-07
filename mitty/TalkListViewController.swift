@@ -3,6 +3,10 @@ import PureLayout
 import Starscream
 import SwiftyJSON
 
+enum MeetingStatus {
+    case initializing
+    case talking
+}
 
 @objc(TalkListViewController)
 class TalkListViewController: UIViewController ,WebSocketDelegate {
@@ -13,6 +17,8 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         ws.headers["X-Mitty-AccessToken"] = ApplicationContext.userSession.accessToken
         return ws
     } ()
+    
+    var status = MeetingStatus.initializing
     
     var disconnected = true
     
@@ -100,6 +106,16 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
  
         
         manageKeyboard()
+        
+        MeetingService.instance.getLatestConversation(meeting.id, callback: {
+            talks in
+            self.talkingList.append(contentsOf: talks)
+            self.collectionView.reloadData()
+            self.status = .talking
+        }, onError: {
+            error in
+            
+        })
         
     }
     

@@ -21,6 +21,69 @@ class  MeetingService {
         
     }
     
+    func getLatestConversation(_ meetingId : Int64, callback: @escaping (_ talkList: [Talk]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
+        let eventMeetingUrl = "http://dev.mitty.co/api/latest/conversation"
+        
+        LoadingProxy.on()
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        let parameters = [
+            "meetingId" : NSNumber(value: meetingId)
+        ]
+        
+        Alamofire.request(eventMeetingUrl, method: .get, parameters: parameters, headers : httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                var conversation = [Talk]()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    let talks = json["conversations"]
+                    print(json)
+                    print(talks)
+                    
+                    for ( _, talk) in talks {
+                        conversation.append((self?.bindConversation(talk))!)
+                    }
+                }
+                
+                callback (conversation)
+            //  self?.navigationController?.popToRootViewController(animated: true)
+            case .failure(let error):
+                print(response.debugDescription)
+                print(response.data ?? "No Data")
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(json)
+                    onError("error occored")
+                } catch {
+                    print("Serialize Error")
+                }
+                
+                print(response.description)
+                
+                LoadingProxy.off()
+                print(error)
+            }
+        }
+
+    }
+        
+    func bindConversation(_ js: JSON) -> Talk {
+        let tk1 = Talk()
+        
+        tk1.meetingId = js["meetingId"].int64!
+        tk1.speakerId = js["speakerId"].int64!
+        tk1.speakTime = js["speakTime"].stringValue.dateFromISO8601!
+        tk1.speaking = js["speaking"].rawString()!
+        
+        return tk1
+        
+    }
+    
     func getEventMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
         let eventMeetingUrl = "http://dev.mitty.co/api/event/meeting"
         
