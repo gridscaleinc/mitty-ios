@@ -326,8 +326,13 @@ class Event {
             return
         }
         
+        
         let url = URL(string:"comgooglemapsurl://?saddr=&daddr=\(latitude),\(longitude)&directionsmode=driving&x-source=mitty://")
-        UIApplication.shared.openURL(url!)
+        if UIApplication.shared.canOpenURL(url!) {
+            UIApplication.shared.openURL(url!)
+        } else {
+            openAppleMap()
+        }
         
     }
     

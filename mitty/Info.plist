@@ -37,9 +37,11 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
-		<string>line</string>
+		<string>comgooglemapsurl</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
