@@ -354,10 +354,21 @@ extension TalkListViewController: UICollectionViewDelegateFlowLayout {
         let screenSize:CGSize = UIScreen.main.bounds.size
         let width = ( screenSize.width - (10 * 3) )
         var cellSize: CGSize = CGSize( width: width, height:70 )
-        if (talk.height > 0) {
-            cellSize.height = CGFloat(talk.height)
-        }
+        
+        cellSize.height = heightForView(text: talk.speaking, font: UIFont.systemFont(ofSize: UIFont.smallSystemFontSize), width: width - 40) + 50
+        
         return cellSize
+    }
+    
+    func heightForView(text:String, font:UIFont, width:CGFloat) -> CGFloat{
+        let label:UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
+        label.numberOfLines = 0
+        label.lineBreakMode = NSLineBreakMode.byWordWrapping
+        label.font = font
+        label.text = text
+        label.sizeToFit()
+        
+        return label.frame.height
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

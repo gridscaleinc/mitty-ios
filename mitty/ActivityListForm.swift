@@ -59,13 +59,9 @@ class ActivityListForm : MQForm {
     func buildActivityData() -> Control {
         
         self.scrollView = UIScrollView.newAutoLayout()
-        // scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width, height: CGFloat((activityList.count + 3) * 50))
         scrollView.isScrollEnabled = true
         scrollView.flashScrollIndicators()
         scrollView.canCancelContentTouches = false
-
-
-//        scrollView.backgroundColor = UIColor.blue
 
         var container = Container(name:"Scroll-View", view:scrollView)
         self.section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
@@ -106,7 +102,7 @@ class ActivityListForm : MQForm {
         }
         
         if outstandingActivity.count == 0 {
-            let row = Row.LeftAligned()
+            let row = Row.LeftAligned().height(30)
             section <<< row
             
             row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
@@ -148,7 +144,7 @@ class ActivityListForm : MQForm {
             }
         }
         if planedActivity.count == 0 {
-            let row = Row.LeftAligned()
+            let row = Row.LeftAligned().height(30)
             section <<< row
             
             row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
@@ -203,7 +199,7 @@ class ActivityListForm : MQForm {
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(30)
+            r.fillHolizon()
         }
         
         section <<< row
