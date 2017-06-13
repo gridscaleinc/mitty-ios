@@ -143,7 +143,7 @@ extension EventViewController: UICollectionViewDataSource {
             if (!event.isDataReady) {
                 event.dataReadyHandler = {
                     cell.reloadImages()
-                    // collectionView.reloadItems(at: [indexPath])
+                    collectionView.reloadItems(at: [indexPath])
                 }
                 EventService.instance.loadImages(event)
             }
@@ -175,9 +175,19 @@ extension EventViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
  
+        let event = events[indexPath.row]
+        
         let screenSize:CGSize = UIScreen.main.bounds.size
+        
+        if event.coverImage != nil {
+            let width = ( screenSize.width - (10 * 3) )
+            let height = event.coverImage!.size.ratio * width
+            let cellSize: CGSize = CGSize( width: width, height: height + 190 )
+            return cellSize
+        }
+        
         let width = ( screenSize.width - (10 * 3) ) 
-        let cellSize: CGSize = CGSize( width: width, height:width * 1 + 190 )
+        let cellSize: CGSize = CGSize( width: width, height:190 )
         return cellSize
     }
     

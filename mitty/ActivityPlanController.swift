@@ -113,11 +113,17 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
             s in
             if (s as! UISwitch).isOn {
                 self?.dateFormatter.timeStyle = .none
+                picker1.datePickerMode = .date
+                picker2.datePickerMode = .date
             } else {
                 self?.dateFormatter.timeStyle = .medium
+                picker1.datePickerMode = .dateAndTime
+                picker2.datePickerMode = .dateAndTime
             }
             self?.setFromDateTime(picker1)
             self?.setToDateTime(picker2)
+            
+            
         }
         
         form.quest("[name=contact-Tel]").forEach() { (c) in

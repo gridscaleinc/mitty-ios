@@ -98,20 +98,25 @@ class EventCell: UICollectionViewCell {
         row +++ titleLabel
         section <<< row
         
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(UIScreen.main.bounds.width - 30)
-        }
-        // imageがある場合、イメージを表示
-        let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
-            img in
-            img.fillHolizon().height(UIScreen.main.bounds.width - 30)
-            if event.coverImage != nil {
+        
+        if event.coverImage != nil {
+            let height = (UIScreen.main.bounds.width - 30) * event.coverImage!.size.ratio
+            // imageがある場合、イメージを表示
+            let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
+                img in
+                img.fillHolizon().height(height)
                 img.image.image = event.coverImage
             }
+            
+            row = Row.LeftAligned().layout {
+                r in
+                r.fillHolizon().height(height)
+            }
+            
+            row +++ itemImage
+            section <<< row
+            
         }
-        row +++ itemImage
-        section <<< row
         
         // 日付情報を設定
         row = Row.LeftAligned().layout {

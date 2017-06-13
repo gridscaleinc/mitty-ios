@@ -8,12 +8,26 @@
 
 import Foundation
 import UIKit
+import Alamofire
+import SwiftyJSON
 
-class RequestViewController : UIViewController {
+class RequestViewController : MittyViewController {
     
     var relatedActivity : ActivityInfo? = nil
     
     let form : MQForm = MQForm.newAutoLayout()
+    
+    let titleText = MQForm.text(name: "title-text", placeHolder: "タイトルを入力")
+    let descriptionText = MQForm.text(name: "desciption", placeHolder: "体験したいこと、目的地などを")
+    let locationText = MQForm.text(name: "locationInfo", placeHolder: "エリア、場所")
+    let preferredDatetime1 = MQForm.text(name: "startDate", placeHolder: "この日から")
+    let preferredDatetime2 = MQForm.text(name: "endDate", placeHolder: "この日の間")
+    
+    let startPrice = MQForm.text(name: "startPrice", placeHolder: "ここから")
+    let limitedPrice = MQForm.text(name: "limitedPrice", placeHolder: "ここから")
+    let numOfPerson = MQForm.text(name: "numOfPerson", placeHolder: "人数")
+    let expiryDate = MQForm.text(name: "expiryDate", placeHolder: "提案締切日")
+    let postButton = MQForm.button(name: "Post", title: "Post Request")
     
     override func viewDidLoad() {
         
@@ -83,7 +97,7 @@ class RequestViewController : UIViewController {
             c.leftMost(withInset: 20)
         }
         
-        row +++ MQForm.text(name: "title-text", placeHolder: "タイトルを入力").width(350).layout {
+        row +++ titleText.width(350).layout {
             t in
             t.height(height_normal).rightMost()
         }
@@ -101,7 +115,7 @@ class RequestViewController : UIViewController {
             c.leftMost(withInset: 20)
         }
         
-        row +++ MQForm.text(name: "desciption", placeHolder: "体験したいこと、目的地などを").width(350).layout {
+        row +++ descriptionText.width(350).layout {
             t in
             t.height(height_tall).rightMost(withInset: 20)
         }
@@ -119,7 +133,7 @@ class RequestViewController : UIViewController {
             c.leftMost(withInset: 20)
         }
         
-        row +++ MQForm.text(name: "lationInfo", placeHolder: "エリア、場所").width(350).layout {
+        row +++ locationText.width(350).layout {
             t in
             t.height(height_tall).rightMost(withInset: 20)
         }
@@ -135,18 +149,18 @@ class RequestViewController : UIViewController {
             c.height(height_normal).width(65)
             c.leftMost(withInset: 20)
         }
-        row +++ MQForm.text(name: "startDate", placeHolder: "この日から").width(120).layout {
+        row +++ preferredDatetime1.width(120).layout {
             t in
             t.height(height_normal)
         }
-        row +++ MQForm.text(name: "endDate", placeHolder: "この日の間").width(120).layout {
+        row +++ preferredDatetime2.width(120).layout {
             t in
             t.height(height_normal)
         }
         
         let dp = UIDatePicker.newAutoLayout()
-        (row["startDate"]?.view as! UITextField).inputView = dp
-        (row["endDate"]?.view as! UITextField).inputView = dp
+        preferredDatetime1.textField.inputView = dp
+        preferredDatetime2.textField.inputView = dp
         
         inputForm <<< row
         
@@ -160,11 +174,11 @@ class RequestViewController : UIViewController {
             c.height(height_normal).width(65)
             c.leftMost(withInset: 20)
         }
-        row +++ MQForm.text(name: "startPrice", placeHolder: "ここから").width(90).layout {
+        row +++ startPrice.width(90).layout {
             t in
             t.height(height_normal)
         }
-        row +++ MQForm.text(name: "limitedPrice", placeHolder: "このまままで").width(120).layout {
+        row +++ limitedPrice.width(120).layout {
             t in
             t.height(height_normal)
         }
@@ -180,7 +194,8 @@ class RequestViewController : UIViewController {
             c.height(height_normal).width(65)
             c.leftMost(withInset: 20)
         }
-        row +++ MQForm.text(name: "numOfPerson", placeHolder: "人数").width(70).layout {
+        
+        row +++ numOfPerson.width(70).layout {
             t in
             t.height(height_normal)
         }
@@ -188,7 +203,7 @@ class RequestViewController : UIViewController {
             c in
             c.height(height_normal).width(40)
         }
-        row +++ MQForm.text(name: "expiryDate", placeHolder: "提案締切日").width(120).layout {
+        row +++ expiryDate.width(120).layout {
             t in
             t.height(height_normal)
         }
@@ -199,19 +214,84 @@ class RequestViewController : UIViewController {
             r in
             r.fillHolizon().height(height_middle)
         }
-        row +++ MQForm.button(name: "Post", title: "Post Request").layout { button in
+        row +++ postButton.layout { button in
             button.fillHolizon(60).height(50)
             let b = button.view as! UIButton
             b.backgroundColor = .orange
         }
         
         row["Post"]?.bindEvent(.touchUpInside) { [weak self] btn in
-            self?.navigationController?.popViewController(animated: true)
+            self?.postRequest()
         }
         
         inputForm <<< row
         
     }
     
+    func postRequest () {
+        
+        let newRequest = NewRquestReq()
+        
+        newRequest.setStr(.title, titleText.textField.text)
+        newRequest.setStr(.tagList, "TODO")
+        newRequest.setStr(.description, descriptionText.textField.text)
+        newRequest.setStr(.startPlace, locationText.textField.text)
+        
+        var dp = preferredDatetime1.textField.inputView as! UIDatePicker
+        newRequest.setDate(.preferredDatetime1, dp.date)
+        
+        dp = preferredDatetime2.textField.inputView as! UIDatePicker
+        newRequest.setDate(.preferredDatetime2, dp.date)
+        
+        if let price = startPrice.textField.text {
+            newRequest.setInt(.preferredPrice1, price)
+        }
+        
+        if let price = limitedPrice.textField.text {
+            newRequest.setInt(.preferredPrice2, price)
+        }
+        
+        let urlString = "http://dev.mitty.co/api/new/request"
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        print(newRequest.parameters)
+        Alamofire.request(urlString, method: .post, parameters: newRequest.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    let requestId = json["id"].stringValue
+ 
+                    print(requestId)
+                    
+                }
+                
+            case .failure(let error):
+                print(response.debugDescription)
+                print(response.data ?? "No Data")
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(json)
+                    
+                    self?.showError("error occored" + (json as AnyObject).description)
+                    
+                } catch {
+                    print("Serialize Error")
+                }
+                
+                print(response.description)
+                
+                LoadingProxy.off()
+                print(error)
+            }
+        }
+        
+    }
     
 }
