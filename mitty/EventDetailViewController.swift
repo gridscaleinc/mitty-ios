@@ -309,8 +309,9 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
             l.textColor = .black
             l.font = .systemFont(ofSize: 15)
             l.layer.cornerRadius = 2
-            l.layer.borderWidth = 1
-            l.layer.borderColor = UIColor.black.cgColor
+            l.layer.borderWidth = 0.8
+            l.layer.borderColor = UIColor.gray.cgColor
+            l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
         
         detailForm +++ descriptionLabel
