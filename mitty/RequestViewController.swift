@@ -18,13 +18,13 @@ class RequestViewController : MittyViewController {
     let form : MQForm = MQForm.newAutoLayout()
     
     let titleText = MQForm.text(name: "title-text", placeHolder: "タイトルを入力")
-    let descriptionText = MQForm.text(name: "desciption", placeHolder: "体験したいこと、目的地などを")
+    let descriptionText = MQForm.textView(name: "desciption")
     let locationText = MQForm.text(name: "locationInfo", placeHolder: "エリア、場所")
     let preferredDatetime1 = MQForm.text(name: "startDate", placeHolder: "この日から")
     let preferredDatetime2 = MQForm.text(name: "endDate", placeHolder: "この日の間")
     
     let startPrice = MQForm.text(name: "startPrice", placeHolder: "ここから")
-    let limitedPrice = MQForm.text(name: "limitedPrice", placeHolder: "ここから")
+    let limitedPrice = MQForm.text(name: "limitedPrice", placeHolder: "ここまで")
     let numOfPerson = MQForm.text(name: "numOfPerson", placeHolder: "人数")
     let expiryDate = MQForm.text(name: "expiryDate", placeHolder: "提案締切日")
     let postButton = MQForm.button(name: "Post", title: "Post Request")
@@ -117,7 +117,7 @@ class RequestViewController : MittyViewController {
         
         row +++ descriptionText.width(350).layout {
             t in
-            t.height(height_tall).rightMost(withInset: 20)
+            t.height(height_tall).rightMost()
         }
         inputForm <<< row
         
@@ -135,7 +135,7 @@ class RequestViewController : MittyViewController {
         
         row +++ locationText.width(350).layout {
             t in
-            t.height(height_tall).rightMost(withInset: 20)
+            t.height(height_tall).rightMost()
         }
         inputForm <<< row
         
@@ -158,9 +158,13 @@ class RequestViewController : MittyViewController {
             t.height(height_normal)
         }
         
-        let dp = UIDatePicker.newAutoLayout()
-        preferredDatetime1.textField.inputView = dp
-        preferredDatetime2.textField.inputView = dp
+        let dp1 = UIDatePicker.newAutoLayout()
+        dp1.datePickerMode = .date
+        preferredDatetime1.textField.inputView = dp1
+        
+        let dp2 = UIDatePicker.newAutoLayout()
+        dp2.datePickerMode = .date
+        preferredDatetime2.textField.inputView = dp2
         
         inputForm <<< row
         
@@ -207,6 +211,10 @@ class RequestViewController : MittyViewController {
             t in
             t.height(height_normal)
         }
+        let dp3 = UIDatePicker.newAutoLayout()
+        dp3.datePickerMode = .date
+        expiryDate.textField.inputView = dp3
+        
         inputForm <<< row
         
         row = Row.Intervaled()
@@ -232,9 +240,19 @@ class RequestViewController : MittyViewController {
         
         let newRequest = NewRquestReq()
         
+        if (titleText.textField.text == nil || titleText.textField.text == "") {
+            showError("タイトルを入力してください")
+            return
+        }
+        
+        if (descriptionText.textView.text == nil || descriptionText.textView.text == "") {
+            showError("内容を入力してください")
+            return
+        }
+        
         newRequest.setStr(.title, titleText.textField.text)
         newRequest.setStr(.tagList, "TODO")
-        newRequest.setStr(.description, descriptionText.textField.text)
+        newRequest.setStr(.description, descriptionText.textView.text)
         newRequest.setStr(.startPlace, locationText.textField.text)
         
         var dp = preferredDatetime1.textField.inputView as! UIDatePicker
@@ -260,6 +278,9 @@ class RequestViewController : MittyViewController {
         
         print(newRequest.parameters)
         Alamofire.request(urlString, method: .post, parameters: newRequest.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+
+            LoadingProxy.off()
+
             switch response.result {
             case .success:
                 if let jsonObject = response.result.value {
@@ -271,6 +292,8 @@ class RequestViewController : MittyViewController {
                     print(requestId)
                     
                 }
+                
+                self?.navigationController?.popViewController(animated: false)
                 
             case .failure(let error):
                 print(response.debugDescription)
@@ -287,7 +310,6 @@ class RequestViewController : MittyViewController {
                 
                 print(response.description)
                 
-                LoadingProxy.off()
                 print(error)
             }
         }

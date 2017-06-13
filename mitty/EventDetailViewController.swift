@@ -252,7 +252,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         // TODO: Mail address
         
-        let infoSource = Row.Intervaled().layout {
+        let infoSource = Row.LeftAligned().layout {
             r in
             r.fillHolizon().putUnder(of: contact, withOffset: 5).height(35)
         }
@@ -267,7 +267,7 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         detailForm +++ infoSource
         
         
-        let url = Row.Intervaled().layout {
+        let url = Row.LeftAligned().layout {
             r in
             r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(35)
         }
