@@ -67,6 +67,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         longTapGesture.addTarget(self, action: #selector(longPressed))
         myMapView.addGestureRecognizer(longTapGesture)
         myMapView.showsUserLocation = true
+        myMapView.userTrackingMode = .followWithHeading
 
         //ここからが現在地取得の処理
         myLocationManager.delegate = self
