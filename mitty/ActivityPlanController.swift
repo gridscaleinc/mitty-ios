@@ -171,7 +171,13 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         form.quest("[name=label-official-page]").bindEvent(for: .touchUpInside) {
             label in
             let wb = WebPicker()
+            
+            wb.initUrl = self.form.officialUrl.textField.text ?? ""
+            
+            wb.initKey = self.form.eventTitle.textField.text ?? ""
+            
             wb.delegate = self
+            
             self.navigationController?.pushViewController(wb, animated: true)
         }
         
@@ -179,16 +185,21 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
             text in
             text.resignFirstResponder()
             let wb = WebPicker()
+            wb.initUrl = self.form.infoUrl.textField.text ?? ""
+            wb.initKey = self.form.eventTitle.textField.text ?? ""
             wb.delegate = self
             self.navigationController?.pushViewController(wb, animated: true)
         }
         
-        
+    
+        form.eventTitle.textField.text = activityInfo.title
+        form.action.textView.text = activityInfo.memo
+
         manageKeyboard()
         LoadingProxy.set(self)
     }
     
-    func webpicker(_ picker: WebPicker, _ info: PickedInfo) -> Void {
+    func webpicker(_ picker: WebPicker?, _ info: PickedInfo) -> Void {
         form.infoUrl.textField.text = info.siteUrl
         form.infoSource.textView.text = info.siteTitle
         if (info.siteImage != nil) {

@@ -14,7 +14,7 @@ import SwiftyJSON
 @objc(QuestViewController)
 class QuestViewController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var queryTargets : UISegmentedControl = UISegmentedControl(items: ["Event", "Request"])
+    var queryTargets : UISegmentedControl = UISegmentedControl(items: ["Event", "Request","Web"])
     let logo = UIImageView(image: UIImage(named: "applogo"))
     var searchBar : UISearchBar = UISearchBar.newAutoLayout()
     var query : String = ""
@@ -74,9 +74,10 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
         queryTargets.selectedSegmentIndex = 0
         queryTargets.translatesAutoresizingMaskIntoConstraints = false
         queryTargets.autoPin(toTopLayoutGuideOf: self, withInset: 10)
-        queryTargets.autoPinEdge(toSuperviewEdge: .left, withInset: 90)
-        queryTargets.autoPinEdge(toSuperviewEdge: .right, withInset: 90)
+        queryTargets.autoPinEdge(toSuperviewEdge: .left, withInset: 40)
+        queryTargets.autoPinEdge(toSuperviewEdge: .right, withInset: 40)
         
+        queryTargets.addTarget(self, action: #selector(changeQuery(_:)), for: .valueChanged)
         logo.autoPinEdge(.top, to: .bottom, of: queryTargets, withOffset: 50)
         logo.autoAlignAxis(.vertical, toSameAxisOf: self.view)
         logo.autoSetDimensions(to: CGSize(width: 40, height: 40))
@@ -105,21 +106,45 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func changeQuery(_ s: UISegmentedControl) {
+        searchBarSearchButtonClicked(searchBar)
+    }
 }
 
 // MARK: - UISearchBarDelegate
-extension QuestViewController: UISearchBarDelegate {
+extension QuestViewController: UISearchBarDelegate, WebPickerDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         
         searchBar.resignFirstResponder()
         searchBar.showsCancelButton = false
         
-        // 非同期方式で処理を呼び出す。
-        eventSearch.searchBar.text = searchBar.text
-        eventSearch.shallWeSearch = true
-        self.navigationController?.pushViewController(eventSearch, animated: true)
+        if (searchBar.text == "") {
+            return
+        }
+        
+        if queryTargets.selectedSegmentIndex == 0 {
+            // 非同期方式で処理を呼び出す。
+            eventSearch.searchBar.text = searchBar.text
+            eventSearch.shallWeSearch = true
+            self.navigationController?.pushViewController(eventSearch, animated: true)
+        } else if queryTargets.selectedSegmentIndex == 2 {
+            let wb = WebPicker()
+            wb.delegate = self
+            wb.initKey = searchBar.text!
+            self.navigationController?.pushViewController(wb, animated: true)
+        }
         
     }
+    
+    func webpicker(_ picker: WebPicker?, _ info: PickedInfo) -> Void {
+
+        let vc = ActivityEntryViewController()
+        vc.pickedInfo = info
+        vc.activityTitle.textField.text = searchBar.text
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.showsCancelButton = false

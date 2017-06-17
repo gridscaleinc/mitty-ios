@@ -22,6 +22,8 @@ class ActivityEntryViewController : MittyViewController {
     
     let doneButton = MQForm.button(name: "done", title: "Done")
     
+    var pickedInfo : PickedInfo? = nil
+    
     override func loadView() {
         
         // navigation bar の初期化をする
@@ -62,6 +64,10 @@ class ActivityEntryViewController : MittyViewController {
         
         form +++ doneButton.layout { [ weak self] b in
             b.holizontalCenter().width(130).height(45).putUnder(of: (self?.memo)!, withOffset: 10)
+        }
+        
+        if let info = pickedInfo {
+            memo.textView.text = info.siteTitle
         }
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
@@ -128,10 +134,16 @@ class ActivityEntryViewController : MittyViewController {
                         activityInfo.memo = parameters["memo"] as? String
                         activityInfo.id = activityId
                         
-                        let vc = ActivityPlanDetailsController(activityInfo)
-                        vc.status = 1
-                        self?.navigationController?.pushViewController(vc, animated: true)
-       
+                        if let info = self?.pickedInfo {
+                            let vc = ActivityPlanViewController(activityInfo)
+                            vc.webpicker(nil, info)
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                        } else {
+                            let vc = ActivityPlanDetailsController(activityInfo)
+                            vc.status = 1
+                            self?.navigationController?.pushViewController(vc, animated: true)
+                        }
+                        
                     }
                 }
                 

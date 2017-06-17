@@ -131,18 +131,20 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
         
         scrollContainer +++ detailForm
         
+        let img = Control(name: "image", view: imageView).layout {
+            i in
+            i.width(UIScreen.main.bounds.size.width).upper().height(UIScreen.main.bounds.size.width)
+        }
+        
         if (event.coverImageUrl != "") {
             DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
             imageView.af_setImage(withURL: URL(string: event.coverImageUrl)!, placeholderImage: UIImage(named: "downloading"), completion : { image in
                 if (image.result.isSuccess) {
                     self.imageView.image = image.result.value
+                    img.height(UIScreen.main.bounds.size.width * (image.result.value?.size.ratio)!)
                 }
             }
             )
-        }
-        let img = Control(name: "image", view: imageView).layout {
-            i in
-            i.width(UIScreen.main.bounds.size.width).upper().height(UIScreen.main.bounds.size.width)
         }
         
         detailForm +++ img

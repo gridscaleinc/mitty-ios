@@ -28,7 +28,6 @@ import PureLayout
 @objc(ActivityTopViewController)
 class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     
-    
     // Search Box
     let searchBox : UISearchBar = {
         let t = UISearchBar()

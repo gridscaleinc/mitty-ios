@@ -21,14 +21,17 @@ class PickedInfo {
     var siteTitle = ""
     var siteImage : UIImage? = nil
     
-    
 }
 
 protocol WebPickerDelegate : class {
-    func webpicker(_ picker: WebPicker, _ info: PickedInfo) -> Void
+    func webpicker(_ picker: WebPicker?, _ info: PickedInfo) -> Void
 }
 
 class WebPicker : MittyViewController , UISearchBarDelegate {
+    
+    var initKey = ""
+    
+    var initUrl = ""
     
     // Search Box
     let searchBox : UISearchBar = {
@@ -82,8 +85,17 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         isDidSetupViewConstraints = false
         view.setNeedsUpdateConstraints()
         showSearchBox()
+        
+        if (initUrl != "") {
+            let myURL = URL(string: initUrl)
+            let myRequest = URLRequest(url: myURL!)
+
+            webView.load(myRequest)
+        } else if (initKey != "") {
+            searchBox.text = initKey
+            searchBarSearchButtonClicked(searchBox)
+        }
     }
-    
     
     
     // navigation bar の初期化をする
@@ -91,10 +103,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         
         let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target:self, action:#selector(showSearchBox))
         
-        
-        
         let doneItem = UIBarButtonItem(customView: pickButton.button )
-        
         
         let rightItems = [doneItem, searchItem]
         navigationItem.setRightBarButtonItems(rightItems, animated: true)
@@ -141,14 +150,14 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
     
     func pickTheSite() {
         if (pickButton.button.titleLabel?.text == "Done") {
+            self.navigationController?.popViewController(animated: true)
             if (delegate != nil) {
                 bascket?.siteUrl = self.siteUrl.label.text ?? ""
                 bascket?.siteTitle = self.siteTitle.label.text ?? ""
                 bascket?.siteImage = self.siteImage.image.image
-                
                 delegate?.webpicker(self, bascket!)
-                self.navigationController?.popViewController(animated: true)
             }
+            
             return
         }
         
@@ -309,8 +318,8 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
             
         }
         
-        if picks.count > 10 {
-            picks.removeSubrange(9..<picks.count)
+        if picks.count > 100 {
+            picks.removeSubrange(100..<picks.count)
         }
         
         DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
@@ -344,6 +353,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
             }
             
         }
+
         let c = MQForm.label(name: "dummy", title: "<End>")
         section +++ c
         section.layout {

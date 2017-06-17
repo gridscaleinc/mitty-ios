@@ -297,7 +297,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         let currentLocation = myLocation.coordinate
         //ピンの生成と配置
         currentLocationPin.coordinate = currentLocation
-
+        
         if isStarting {
             currentLocationPin.title = "現在地"
             self.myMapView.addAnnotation(currentLocationPin)
@@ -308,6 +308,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             myMapView.region = myRegion
             isStarting = false
         }
+        
+        
+
     }
     
     //GPSの取得に失敗したときの処理
