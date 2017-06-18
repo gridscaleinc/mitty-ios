@@ -112,6 +112,10 @@ class ActivityEntryViewController : MittyViewController {
             "mainEventId": "0"
         ]
 
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
         if ((parameters["title"]) as! String  == "" || (parameters["memo"]) as! String == "") {
             showError("タイトルとメモを入力してください")
             return
@@ -120,7 +124,7 @@ class ActivityEntryViewController : MittyViewController {
         LoadingProxy.on()
         
         print(parameters)
-        Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+        Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
             case .success:
                 LoadingProxy.off()

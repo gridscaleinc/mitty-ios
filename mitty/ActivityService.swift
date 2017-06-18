@@ -32,9 +32,13 @@ class ActivityService {
         
         LoadingProxy.on()
         
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
         // ダミーコード、本当はサーバーから検索する。
         var activities = [ActivityInfo]()
-        let request = Alamofire.request(urlBase, method: .get, parameters: parmeters)
+        let request = Alamofire.request(urlBase, method: .get, parameters: parmeters, headers: httpHeaders)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:
@@ -84,11 +88,15 @@ class ActivityService {
             "id" : id
         ]
         
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
         LoadingProxy.on()
         
         // ダミーコード、本当はサーバーから検索する。
         var activity : Activity = Activity()
-        let request = Alamofire.request(urlString, method: .get, parameters: parmeters)
+        let request = Alamofire.request(urlString, method: .get, parameters: parmeters, headers: httpHeaders)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:
