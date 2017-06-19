@@ -17,7 +17,7 @@ import CoreLocation
 // 個人情報を管理するView
 //
 @objc(CenterViewController)
-class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapViewDelegate {
+class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
    
     //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
     let myLocationManager = CLLocationManager()
@@ -27,7 +27,6 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
     let form = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
 
-    
     // Autolayout済みフラグ
     var didSetupConstraints = false
     
@@ -35,7 +34,11 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         let rect = CGRect(x:0, y:0, width:40, height: 40/1.414)
         let ind = BaguaIndicator(frame: rect)
         return ind
-    } ()
+    }()
+    
+    let picture : Control = MQForm.button(name: "m2", title: "")
+    
+    let currentLocation = MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼")
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
@@ -58,7 +61,6 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         let swiftColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1)
         self.view.backgroundColor = swiftColor
         
-
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
         
@@ -75,6 +77,21 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
+        
+        self.view.addSubview(picture.button)
+        picture.button.setImage(UIImage(named: "pengin2")?.af_imageRoundedIntoCircle(), for: .normal)
+        picture.layout {
+            p in
+            p.button.autoPinEdge(.left, to: .left, of: self.indicator)
+            p.button.autoPinEdge(.top, to: .bottom, of: self.indicator, withOffset: 180)
+            p.height(45).width(45)
+            p.button.isHidden = true
+            p.button.backgroundColor  = .clear
+        }
+        
+        picture.bindEvent(.touchUpInside) { _ in
+            self.pictureTaped()
+        }
         
         let rect1 = CGRect(x:3, y:3, width:220, height: 150)
         let bagua = MarqueeLabel(frame: rect1)
@@ -96,6 +113,37 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         
         //self.view.addSubview(bagua)
         self.navigationItem.titleView = bagua
+        
+        LoadingProxy.set(self)
+
+    
+        loadForm()
+        
+        loadDestinations()
+        
+        // ここでビューの整列をする。
+        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
+        view.setNeedsUpdateConstraints()
+        
+        let status = CLLocationManager.authorizationStatus()
+        if status == CLAuthorizationStatus.notDetermined {
+            // まだ承認が得られていない場合は、認証ダイアログを表示
+            myLocationManager.requestAlwaysAuthorization()
+        }
+        
+        // 位置情報の更新を開始
+        myLocationManager.startUpdatingLocation()
+
+    }
+    
+    func pictureTaped() {
+        let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
+        let myRegion = MKCoordinateRegionMake(self.currentLocationPin.coordinate, mySpan)
+        self.myMapView.region = myRegion
+        picture.button.isHidden = true
+    }
+    
+    func loadForm (){
         
         let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(130).layout() {
             s in
@@ -123,14 +171,14 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
-
+        
         row +++ MQForm.button(name: "PeopleNearby", title: "島").layout {
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
-
+        
         section <<< row
         
         row = Row.Intervaled().layout() {
@@ -147,7 +195,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
-
+        
         row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
             c in
             c.height(30)
@@ -155,7 +203,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
-
+        
         row +++ MQForm.button(name: "settings", title: "⚙").layout {
             c in
             c.height(30)
@@ -163,14 +211,14 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
-
+        
         section <<< row
         
         view.addSubview(form)
         
         view.addSubview(display)
         
-        display +++ MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼").layout {
+        display +++ currentLocation.layout {
             c in
             c.label.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
             c.label.numberOfLines = 2
@@ -203,20 +251,37 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             l.label.backgroundColor = UIColor.clear
             l.down(withInset: 5).height(40).width(130).rightMost(withInset: 5)
         }
-        
-        
-        // ここでビューの整列をする。
-        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
-        view.setNeedsUpdateConstraints()
-        
-        let status = CLLocationManager.authorizationStatus()
-        if status == CLAuthorizationStatus.notDetermined {
-            // まだ承認が得られていない場合は、認証ダイアログを表示
-            myLocationManager.requestAlwaysAuthorization()
-        }
-        // 位置情報の更新を開始
-        myLocationManager.startUpdatingLocation()
 
+    }
+    
+    func loadDestinations () {
+        
+        ActivityService.instance.getDestinationList() {
+            destinations in
+            for d in destinations {
+                
+                if (d.latitude == 0 && d.longitude == 0) {
+                    continue
+                }
+                
+                let point = CLLocationCoordinate2D (latitude: d.latitude, longitude: d.longitude)
+                print(point)
+                
+                //ピンの生成
+                let pin = MKPointAnnotation()
+                //ピンを置く場所を指定
+                pin.coordinate = point
+                //ピンのタイトルを設定
+                pin.title = d.islandName
+                //ピンのサブタイトルの設定
+                pin.subtitle = "\(d.eventTitle)"
+                //ピンをMapViewの上に置く
+                self.myMapView.addAnnotation(pin)
+                self.myMapView.showAnnotations(self.myMapView.annotations, animated: true)
+                self.currentLocation.label.text = d.islandName
+            }
+            
+        }
     }
     
     //
@@ -227,6 +292,8 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
         super.updateViewConstraints()
         
         if (!didSetupConstraints) {
+            picture.configLayout()
+            
             form.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5)
             form.autoPinEdge(toSuperviewEdge: .left)
             form.autoPinEdge(toSuperviewEdge: .right)
@@ -309,7 +376,11 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate,MKMapVie
             isStarting = false
         }
         
-        
+        if myMapView.isUserLocationVisible {
+            self.picture.button.isHidden = true
+        } else {
+            self.picture.button.isHidden = false
+        }
 
     }
     

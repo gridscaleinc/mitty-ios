@@ -65,6 +65,7 @@ class ActivityService {
         }
     }
     
+    
     func bindActivity(_ jsAct: JSON) -> ActivityInfo {
         let id = jsAct["id"].stringValue
         let act = ActivityInfo()
@@ -116,6 +117,66 @@ class ActivityService {
 
     }
     
+    func getDestinationList(_ callback: @escaping(_ events: [Destination]) -> Void ) {
+        
+        let urlString = "http://dev.mitty.co/api/destination/list"
+        
+
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        // ダミーコード、本当はサーバーから検索する。
+        var destinations = [Destination]()
+        let request = Alamofire.request(urlString, method: .get, headers: httpHeaders)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["destinations"] == nil) {
+                        callback([])
+                        return
+                    }
+                    
+                    for ( _, dest) in json["destinations"] {
+                        destinations.append(self.bindDestination(dest))
+                    }
+                }
+                
+                callback(destinations)
+                
+            case .failure(let error):
+                LoadingProxy.off()
+                print(error)
+            }
+        }
+        
+    }
+    
+    func bindDestination(_ json: JSON) -> Destination {
+        let d = Destination()
+        d.islandId = json["islandId"].intValue
+        d.islandName = json["islandName"].stringValue
+        d.islandNickName = json["islandNickName"].stringValue
+        d.latitude = json["latitude"].doubleValue
+        d.longitude = json["longitude"].doubleValue
+        d.islandLogo = json["islandLogo"].stringValue
+        d.eventId = json["eventId"].intValue
+        d.eventTitle = json["eventTitle"].stringValue
+        
+        if let time = json["eventTime"].stringValue.dateFromISO8601 {
+            d.eventTime = time
+        }
+        print(d.longitude)
+        
+        return d
+        
+    }
     func bindActivityDetails(_ json: JSON) -> Activity {
         let a = Activity()
         let info = ActivityInfo()

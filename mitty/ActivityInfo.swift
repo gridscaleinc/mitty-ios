@@ -38,6 +38,18 @@ class ActivityInfo {
     }
 }
 
+class Destination {
+    var islandId              : Int = 0        // -- island.id as island_id
+    var islandNickName        : String  = ""   // -- island.nickname as island_nickname,
+    var islandName            : String  = ""   // -- island.name as island_name,
+    var latitude              : Double  = 0    // -- island.latitude,
+    var longitude             : Double  = 0    // -- island.longitude,
+    var islandLogo            : String  = ""   // -- contents.link_url as island_logo,
+    var eventId               : Int     = 0    // -- events.id as event_id,
+    var eventTitle            : String  = ""   // -- events.title as event_title,
+    var eventTime             : Date    = Date.nulldate // -- events.start_datetime as eventTime
+}
+
 class ActivityItem {
     var eventId: String = "0"
     var title: String = ""
@@ -91,4 +103,4 @@ class Activity {
             return ActivityItem()
         }
     }
- }
+}
