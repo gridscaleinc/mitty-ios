@@ -157,14 +157,37 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         
         let message : [String:Any] = [
-            "meetingId" : NSNumber(value: meeting.id),
-            "speaking" : talkInputField.text ?? "No message",
-            "speakTime" : Date().iso8601UTC
+            "messageType" : "Conversation",
+            "topic" : "Conversation:(\(meeting.id))",
+            "command" : "talk",
+            "conversation" : [
+                "meetingId" : NSNumber(value: meeting.id),
+                "speaking" : talkInputField.text ?? "No message",
+                "speakTime" : Date().iso8601UTC
+                ]
         ]
         
         let js = JSON(message).rawString()
         socket.write(string: js!)
         talkInputField.text = ""
+        print(js ?? "")
+        
+    }
+    
+    // MessageType string `json:"messageType"`
+    // Topic string `json:"topic"`
+    // Command string `json:"command"`
+    func subscribe() {
+        let message : [String:Any] = [
+            "messageType" : "Conversation",
+            "topic" : "Conversation:(\(meeting.id))",
+            "command" : "subscribe"
+        ]
+        
+        let js = JSON(message).rawString()
+        print(js)
+        
+        socket.write(string: js!)
         
     }
     
@@ -277,6 +300,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     // MARK: Websocket Delegate Methods.
     func websocketDidConnect(socket: WebSocket) {
         print("websocket is connected")
+        subscribe()
         disconnected = false
         
     }
@@ -298,10 +322,11 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         
         let tk1 = Talk()
         
-        tk1.meetingId = js["meetingId"].int64!
-        tk1.speakerId = js["speakerId"].int64!
-        tk1.speakTime = js["speakTime"].stringValue.dateFromISO8601!
-        tk1.speaking = js["speaking"].rawString()!
+        let conversationJs = js["conversation"]
+        tk1.meetingId = conversationJs["meetingId"].int64!
+        tk1.speakerId = conversationJs["speakerId"].int64!
+        tk1.speakTime = conversationJs["speakTime"].stringValue.dateFromISO8601!
+        tk1.speaking = conversationJs["speaking"].rawString()!
         
         talkingList.append(tk1)
         if talkingList.count > 100 {
