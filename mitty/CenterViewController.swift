@@ -36,9 +36,12 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         return ind
     }()
     
+    let speedDisplay = MQForm.label(name: "speed", title: "0.0 M/S")
+    
     let picture : Control = MQForm.button(name: "m2", title: "")
     
     let currentLocation = MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼")
+    var speedMeter : SpeedMeter? = nil
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
@@ -77,6 +80,11 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
+        
+        
+        speedDisplay.label.textColor = UIColor.red
+        speedDisplay.label.font = speedDisplay.label.font.withSize(13)
+        self.view.addSubview(speedDisplay.view)
         
         self.view.addSubview(picture.button)
         picture.button.setImage(UIImage(named: "pengin2")?.af_imageRoundedIntoCircle(), for: .normal)
@@ -305,6 +313,10 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             display.autoSetDimension(.height, toSize: 100)
             display.autoSetDimension(.width, toSize: 180)
             
+            speedDisplay.label.autoPinEdge(.top, to: .bottom, of: indicator, withOffset: 10)
+            speedDisplay.label.autoPinEdge(.left, to: .left, of: indicator)
+            speedDisplay.height(30).width(300)
+            
             display.layer.borderWidth = 0.7
             display.layer.borderColor = UIColor.white.cgColor
             
@@ -324,7 +336,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     // 
     func editPersonalInfo() {
-        let eidtorView = RegisterPersonalInfoViewController()
+        let eidtorView = PersonalInfoViewController()
         self.navigationItem.title = "..."
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(eidtorView, animated: true)
@@ -373,7 +385,17 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
             let myRegion = MKCoordinateRegionMake(currentLocation, mySpan)
             myMapView.region = myRegion
+            speedMeter = SpeedMeter(start: myLocation)
             isStarting = false
+        } else {
+            speedMeter?.updateLocation(nowLocation: myLocation)
+            if let sm = speedMeter {
+                if sm.status == .moving {
+                    speedDisplay.label.text = sm.velocityMeter
+                } else {
+                    speedDisplay.label.text = "停止中"
+                }
+            }
         }
         
         if myMapView.isUserLocationVisible {

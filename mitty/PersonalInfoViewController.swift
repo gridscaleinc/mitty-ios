@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class RegisterPersonalInfoViewController: UIViewController {
+class PersonalInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "個人情報詳細表示"
