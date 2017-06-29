@@ -196,14 +196,14 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         row.spacing = 30
         
-        row +++ MQForm.button(name: "Transperent", title: "透明").layout {
+        let setTransparentButton = MQForm.button(name: "Transperent", title: "透明").layout {
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
-        
+        row +++ setTransparentButton
         row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
             c in
             c.height(30)
@@ -212,14 +212,20 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
         
-        row +++ MQForm.button(name: "settings", title: "⚙").layout {
+        let settingsButton = MQForm.button(name: "settings", title: "⚙").layout {
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
             c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
+        row +++ settingsButton
         
+        settingsButton.bindEvent(.touchUpInside) {
+            b in
+            let pinfoViewController = PersonalInfoViewController()
+            self.navigationController?.pushViewController(pinfoViewController, animated: true)
+        }
         section <<< row
         
         view.addSubview(form)

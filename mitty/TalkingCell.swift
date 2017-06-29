@@ -1,5 +1,6 @@
 import UIKit
 import PureLayout
+import Alamofire
 
 class TalkingCell: UICollectionViewCell {
     static let id = "talking-cell"
@@ -107,8 +108,15 @@ class TalkingCell: UICollectionViewCell {
             }
             self.name.text = "\(user!.userName)"
             if (user!.icon != "") {
+                
+                DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
                 if let url = URL(string: user!.icon) {
-                    self.avatarIcon.af_setImage(withURL: url)
+                    self.avatarIcon.af_setImage(withURL:url, placeholderImage: UIImage(named: "downloading"), completion : { image in
+                        if (image.result.isSuccess) {
+                            self.avatarIcon.image = image.result.value
+                        }
+                    }
+                    )
                 }
             }
         }

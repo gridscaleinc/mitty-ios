@@ -96,6 +96,7 @@
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ECE1F03FEA90090B601 /* UserService.swift */; };
 		FCB45ED11F0400740090B601 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED01F0400740090B601 /* UserInfo.swift */; };
+		FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED21F05560D0090B601 /* ContentService.swift */; };
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
 		FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7141EA1AB9400AAD750 /* noicon.png */; };
@@ -271,6 +272,7 @@
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FCB45ECE1F03FEA90090B601 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FCB45ED01F0400740090B601 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
+		FCB45ED21F05560D0090B601 /* ContentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentService.swift; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
 		FCD8C7141EA1AB9400AAD750 /* noicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noicon.png; path = images/noicon.png; sourceTree = "<group>"; };
@@ -510,6 +512,7 @@
 				FC7D4B871EEEC1470074C259 /* RequestService.swift */,
 				FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */,
 				FCB45ECE1F03FEA90090B601 /* UserService.swift */,
+				FCB45ED21F05560D0090B601 /* ContentService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1122,6 +1125,7 @@
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
 				FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
+				FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */,
 				FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */,
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
