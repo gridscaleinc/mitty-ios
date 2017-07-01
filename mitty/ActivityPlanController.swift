@@ -446,7 +446,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         request.setStr(.contactMail, form.contactEmail.textField.text)
         
         // officialUrl: URL,      (O)      -- イベント公式ページURL
-        request.setStr(.officialUrl, form.officialUrl.textField.text)
+        request.setStr(.officialUrl, trim(form.officialUrl.textField.text, 200))
         
         // organizer: string,     (O)      -- 主催者の個人や団体の名称
         request.setStr(.organizer, form.organizer.textField.text)
@@ -455,7 +455,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         request.setStr(.sourceName, form.infoSource.textView.text)
         
         // sourceUrl: URL,        (O)      -- 情報源のWebPageのURL
-        request.setStr(.sourceUrl, form.infoUrl.textField.text)
+        request.setStr(.sourceUrl, trim(form.infoUrl.textField.text,200))
         
         // anticipation: string,  (O)      -- イベント参加方式、 OPEN：　自由参加、　INVITATION:招待制、PRIVATE:個人用、他の人は参加不可。
         request.setStr(.anticipation, "open")
@@ -511,6 +511,16 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
                 print(error)
             }
         }
+    }
+    
+    func trim(_ s: String?, _ size: Int) -> String? {
+        if (s == nil) {
+            return nil
+        }
+        let nss = s! as NSString
+        
+        return nss.substring(to: size)
+        
     }
     
     func registerGallery (_ eventId: String ) {
