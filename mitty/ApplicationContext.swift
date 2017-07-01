@@ -45,4 +45,11 @@ class ApplicationContext {
         config.set(userSession.userDatas, forKey: UserSession.ID)
         config.synchronize()
     }
+    
+    static func killSession() {
+        config.removeObject(forKey: UserSession.ID)
+        userSession = UserSession()
+        userSession.accessCount = 1
+        saveSession()
+    }
 }

@@ -12,6 +12,9 @@ import UIKit
 class PersonalInfoViewController: UIViewController, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     let picture : Control = MQForm.button(name: "m2", title: "aa")
+    
+    let signOut : Control = MQForm.button(name: "signOut", title: "Sign Out")
+    
     var didSetupConstraints = false
     
     override func viewDidLoad() {
@@ -32,6 +35,17 @@ class PersonalInfoViewController: UIViewController, UIImagePickerControllerDeleg
         
         picture.bindEvent(.touchUpInside) { _ in
             self.pictureTaped()
+        }
+        
+        
+        self.view.addSubview(signOut.view)
+        signOut.button.autoPin(toBottomLayoutGuideOf: self, withInset: 5)
+        signOut.button.autoPinEdge(toSuperviewEdge: .left, withInset: 60)
+        signOut.button.autoPinEdge(toSuperviewEdge: .right, withInset: 60)
+        signOut.height(50)
+        
+        signOut.bindEvent(.touchUpInside) { b in
+            ApplicationContext.killSession()
         }
         
         // ここでビューの整列をする。

@@ -40,8 +40,13 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     let picture : Control = MQForm.button(name: "m2", title: "")
     
-    let currentLocation = MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼")
+    var targetLocation : Destination? = nil
+    
+    let targetLocationDisp = MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼")
     var speedMeter : SpeedMeter? = nil
+    
+    var isStarting = true
+    var currentLocationPin = MKPointAnnotation()
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
@@ -232,10 +237,10 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         view.addSubview(display)
         
-        display +++ currentLocation.layout {
+        display +++ targetLocationDisp.layout {
             c in
             c.label.backgroundColor = UIColor.orange.withAlphaComponent(0.3)
-            c.label.numberOfLines = 2
+            c.label.numberOfLines = 1
             c.label.adjustsFontSizeToFitWidth = true
             c.label.textColor = UIColor.gray.darkerColor(percent: 19)
             c.label.shadowColor = .white
@@ -292,7 +297,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 //ピンをMapViewの上に置く
                 self.myMapView.addAnnotation(pin)
                 self.myMapView.showAnnotations(self.myMapView.annotations, animated: true)
-                self.currentLocation.label.text = d.islandName
+                self.targetLocationDisp.label.text = d.islandName
+                
+                self.targetLocation = d
             }
             
         }
@@ -372,8 +379,6 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         self.myMapView.addAnnotation(pin)
     }
     
-    var isStarting = true
-    var currentLocationPin = MKPointAnnotation()
     // GPSから値を取得した際に呼び出されるメソッド
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // 配列から現在座標を取得（配列locationsの中から最新のものを取得する）
@@ -410,6 +415,16 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             self.picture.button.isHidden = false
         }
 
+        updateDistance(myLocation)
+    }
+    
+    func updateDistance(_ l: CLLocation ) {
+        if (targetLocation == nil) {
+            return
+        }
+        let dest = CLLocation(latitude: targetLocation!.latitude, longitude: targetLocation!.longitude)
+        let distance = String(format:"%.1f", dest.distance(from: l)/1000 )
+        targetLocationDisp.label.text = targetLocation!.islandName + " \(distance) km"
     }
     
     //GPSの取得に失敗したときの処理
