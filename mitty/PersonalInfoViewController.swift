@@ -85,7 +85,10 @@ class PersonalInfoViewController: UIViewController, UIImagePickerControllerDeleg
         self.dismiss(animated: false, completion: nil)
 
         // upload
-        ContentService.instance.uploadContent(img: iconimage)
+        ContentService.instance.uploadContent(img: iconimage) { 
+            contentId in
+            UserService.instance.setUserIcon(contentId)
+        }
         
     }
     

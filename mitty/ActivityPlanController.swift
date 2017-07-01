@@ -543,7 +543,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         let urlString = "http://dev.mitty.co/api/gallery/content"
         
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
-            , headers : httpHeaders ).validate(statusCode: 200..<300).responseString { [weak self] response in
+            , headers : httpHeaders ).validate(statusCode: 200..<300).responseJSON { [weak self] response in
                 LoadingProxy.off()
                 switch response.result {
                 case .success:

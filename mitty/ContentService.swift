@@ -25,7 +25,7 @@ class ContentService {
     }
     
     // サーバーからイベントを検索。
-    func uploadContent(img : UIImage) {
+    func uploadContent(img : UIImage,  onCompletion : @escaping(_ : Int64 ) -> Void) {
         
         let imageData:NSData = UIImagePNGRepresentation(img)! as NSData
         let strBase64 = imageData.base64EncodedString()
@@ -45,7 +45,7 @@ class ContentService {
         
 
         Alamofire.request(apiUploadContent, method: .post, parameters: parameters, encoding: JSONEncoding.default
-            , headers : httpHeaders ).validate(statusCode: 200..<300).responseString { response in
+            , headers : httpHeaders ).validate(statusCode: 200..<300).responseJSON { response in
                 LoadingProxy.off()
                 switch response.result {
                 case .success:
@@ -55,6 +55,9 @@ class ContentService {
                         if (json == nil || json["contentId"] == nil) {
                             return
                         }
+                        
+                        let contentId = json["contentId"].int64Value
+                        onCompletion(contentId)
                         
                         return
                     }

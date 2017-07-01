@@ -185,7 +185,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         ]
         
         let js = JSON(message).rawString()
-        print(js)
+
         
         socket.write(string: js!)
         

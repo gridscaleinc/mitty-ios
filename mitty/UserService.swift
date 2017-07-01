@@ -15,6 +15,7 @@ import SwiftyJSON
 // シングルトンサービスクラス。
 class UserService {
     let apiUserInfo = "http://dev.mitty.co/api/user/info"
+    let apiSetUserIcon = "http://dev.mitty.co/api/set/user/icon"
     
     static var instance : UserService = {
         let instance = UserService()
@@ -24,6 +25,39 @@ class UserService {
     private init() {
         
     }
+    
+    // サーバーからイベントを検索。
+    func setUserIcon(_ contentId : Int64) {
+        let urlString = apiSetUserIcon + "?contentId=\(contentId)"
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        Alamofire.request(urlString, method: .post, encoding: JSONEncoding.default
+            , headers : httpHeaders ).validate(statusCode: 200..<300).responseJSON { response in
+                LoadingProxy.off()
+                switch response.result {
+                case .success:
+                    if let jsonObject = response.result.value {
+                        let json = JSON(jsonObject)
+                        print(json)
+                        if (json == nil || json["ok"] == nil) {
+                            return
+                        }
+                        
+                        return
+                    }
+                    
+                    break
+                    
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
+
     
     // サーバーからイベントを検索。
     func getUserInfo(id : String, callback: @escaping (_ user: UserInfo?, _ ok: Bool) -> Void ) {
