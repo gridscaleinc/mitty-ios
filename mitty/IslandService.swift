@@ -140,7 +140,11 @@ class IslandService {
         
         let urlString = "http://dev.mitty.co/api/new/island"
         
-        Alamofire.request(urlString, method: .post, parameters: request.parameters).validate(statusCode: 200..<300).responseJSON { response in
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        Alamofire.request(urlString, method: .post, parameters: request.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:
                 LoadingProxy.off()

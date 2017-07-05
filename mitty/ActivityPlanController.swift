@@ -475,10 +475,14 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         
         let urlString = "http://dev.mitty.co/api/new/event"
         
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
         LoadingProxy.on()
         
         print(request.parameters)
-        Alamofire.request(urlString, method: .post, parameters: request.parameters).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+        Alamofire.request(urlString, method: .post, parameters: request.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
             case .success:
                 if (self?.imagePicked)! {
@@ -519,7 +523,11 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         }
         let nss = s! as NSString
         
-        return nss.substring(to: size)
+        if (nss.length > size) {
+            return nss.substring(to: size)
+        } else {
+            return s
+        }
         
     }
     

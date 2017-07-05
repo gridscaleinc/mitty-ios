@@ -52,6 +52,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     override func viewDidAppear(_ animated: Bool) {
         self.navigationItem.title = LS(key: "operation_center")
         self.tabBarController?.tabBar.isHidden = false
+        // ここでビューの整列をする。
+        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
+        view.setNeedsUpdateConstraints()
     }
     
     // ビューが非表示になる直前にタイトルを「...」に変える。
@@ -134,9 +137,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         loadDestinations()
         
-        // ここでビューの整列をする。
-        // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
-        view.setNeedsUpdateConstraints()
+
         
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined {
@@ -158,7 +159,7 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     
     func loadForm (){
         
-        let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(130).layout() {
+        let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(150).layout() {
             s in
             s.upper(withInset: 0).fillHolizon()
             s.view.backgroundColor = UIColor(white: 0.15, alpha: 0.15)
@@ -170,26 +171,24 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             r in
             r.fillHolizon().height(45)
         }
-        row.spacing = 30
+        row.spacing = 60
         
-        row +++ MQForm.button(name: "Taxi", title: "🚕🚏").layout {
-            c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
-            c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }
-        row +++ MQForm.button(name: "PeopleNearby", title: "👨‍👩‍👧‍👦").layout {
+
+        row +++ MQForm.button(name: "nearby", title: "Near By").layout {
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
         
-        row +++ MQForm.button(name: "PeopleNearby", title: "島").layout {
+        row +++ MQForm.button(name: "destinations", title: "行先").layout {
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            }.bindEvent(.touchUpInside) {
+                b in
+                self.loadDestinations()
         }
         
         section <<< row
@@ -199,16 +198,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             r.fillHolizon().height(40)
         }
         
-        row.spacing = 30
+        row.spacing = 60
         
-        let setTransparentButton = MQForm.button(name: "Transperent", title: "透明").layout {
-            c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
-            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
-            c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }
-        row +++ setTransparentButton
+
         row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
             c in
             c.height(30)
@@ -277,9 +269,16 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
         
         ActivityService.instance.getDestinationList() {
             destinations in
+            let now = Date()
+            
             for d in destinations {
                 
                 if (d.latitude == 0 && d.longitude == 0) {
+                    continue
+                }
+                
+                // すぎたイベントは非表示
+                if d.eventTime < now {
                     continue
                 }
                 
@@ -297,10 +296,22 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
                 //ピンをMapViewの上に置く
                 self.myMapView.addAnnotation(pin)
                 self.myMapView.showAnnotations(self.myMapView.annotations, animated: true)
-                self.targetLocationDisp.label.text = d.islandName
                 
-                self.targetLocation = d
+                if (self.targetLocation == nil) {
+                    self.targetLocation = d
+                } else {
+                    if self.targetLocation!.eventTime > d.eventTime {
+                        self.targetLocation = d
+                    }
+                }
             }
+            
+            if (self.targetLocation != nil) {
+                self.targetLocationDisp.label.text = self.targetLocation?.islandName
+            } else {
+                self.targetLocationDisp.label.text = ""
+            }
+            
             
         }
     }

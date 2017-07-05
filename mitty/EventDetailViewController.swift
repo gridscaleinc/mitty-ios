@@ -7,15 +7,6 @@
 //
 
 import Foundation
-//
-//  SigninViewController.swift
-//  mitty
-//
-//  Created by D on 2017/04/11.
-//  Copyright © 2017 GridScale Inc. All rights reserved.
-//
-
-import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON

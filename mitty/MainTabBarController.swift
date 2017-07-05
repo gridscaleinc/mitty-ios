@@ -44,22 +44,27 @@ class MainTabBarController: UITabBarController {
         tab2ActivityController.tabBarItem = UITabBarItem(title: LS(key: "activity"), image: UIImage(named: "activity"), tag: 2)
 
         // 個人情報管理タブ
-        tab3MyselfController = ViewControllerFactory.createPersonalInfoNaviController()
+        tab3MyselfController = UINavigationController(rootViewController: CenterViewController())
+        tab3MyselfController.tabBarItem = UITabBarItem(title: LS(key: "center"), image: UIImage(named: "myself"), tag: 3)
         
         // 島会議タブ
         tab4IslandController = UINavigationController(rootViewController: IslandViewController())
-        tab4IslandController.tabBarItem = UITabBarItem(title: LS(key: "island"), image: UIImage(named: "island"), tag: 3)
+        tab4IslandController.tabBarItem = UITabBarItem(title: LS(key: "island"), image: UIImage(named: "island"), tag: 4)
         
         //　ソーシャルタブ
         tab5SocialController = UINavigationController(rootViewController:SocialViewController())
         tab5SocialController.tabBarItem = UITabBarItem(title: LS(key: "we"), image: UIImage(named:
-            "we"), tag: 4)
+            "we"), tag: 5)
     
         
         // タブグループ登録
         let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3MyselfController, tab4IslandController!, tab5SocialController!)
         self.setViewControllers(tabs as? [UIViewController], animated: true)
+    }
+    
+    
+    //
+    override func viewDidAppear(_ animated: Bool) {
         self.selectedViewController = tab3MyselfController
-        
     }
 }

@@ -46,6 +46,8 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
     
     //
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         self.view.addSubview(form)
         
         loadForm()
@@ -62,15 +64,12 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         
         view.setNeedsUpdateConstraints()
         
-        super.viewDidLoad()
         print(self.topLayoutGuide)
     }
     
     var didSetupConstraints = false
     
     override func updateViewConstraints() {
-        
-        super.updateViewConstraints()
         
         if (!didSetupConstraints) {
             form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
@@ -105,6 +104,9 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         
         picture.widthConstraints?.autoRemove()
         picture.width(161*picture.image.image!.size.ratio)
+        
+        super.updateViewConstraints()
+        
     }
     
     func loadForm () {
@@ -112,7 +114,7 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         
         form +++ picture.layout {
             p in
-            p.height(100).width(100).leftMost(withInset: 30).upper(withInset: 60)
+            p.height(100).width(100).leftMost(withInset: 30).upper(withInset: 10)
         }
         
         let row = Row.Intervaled().height(50)
@@ -171,5 +173,9 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
             self.view.needsUpdateConstraints()
         }
         self.dismiss(animated: false, completion: nil)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        print(self.topLayoutGuide)
     }
 }
