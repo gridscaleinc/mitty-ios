@@ -77,7 +77,7 @@ class  MeetingService {
         
         tk1.meetingId = js["meetingId"].int64!
         tk1.speakerId = js["speakerId"].int64!
-        tk1.speakTime = js["speakTime"].stringValue.dateFromISO8601!
+        tk1.speakTime = js["speakTime"].stringValue.utc2Date()
         tk1.speaking = js["speaking"].rawString()!
         
         return tk1
@@ -138,8 +138,8 @@ class  MeetingService {
         meeting.type = json["type"].stringValue
         meeting.title = json["title"].stringValue
         meeting.logoUrl = json["logoUrl"].stringValue
-        meeting.created = json["created"].stringValue.dateFromISO8601Long!
-        meeting.updated = json["updated"].stringValue.dateFromISO8601Long!
+        meeting.created = json["created"].stringValue.utc2Date()
+        meeting.updated = json["updated"].stringValue.utc2Date()
         print(json)
         return meeting
     }

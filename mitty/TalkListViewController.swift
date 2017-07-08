@@ -324,7 +324,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
         let conversationJs = js["conversation"]
         tk1.meetingId = conversationJs["meetingId"].int64!
         tk1.speakerId = conversationJs["speakerId"].int64!
-        tk1.speakTime = conversationJs["speakTime"].stringValue.dateFromISO8601!
+        tk1.speakTime = conversationJs["speakTime"].stringValue.utc2Date()
         tk1.speaking = conversationJs["speaking"].rawString()!
         
         talkingList.append(tk1)

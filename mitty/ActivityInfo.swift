@@ -29,12 +29,10 @@ class ActivityInfo {
     }
     
     var monthDay : String {
-        if startDateTime.isISO8601 {
-            let dt = startDateTime.dateFromISO8601!
-            return dt.monthDay
-        }
+
+        let dt = startDateTime.utc2Date()
+        return dt.monthDay
         
-        return ""
     }
 }
 
@@ -66,24 +64,18 @@ class ActivityItem {
     var islandLogoUrl : String  = ""
     
     var start : String {
-        if startDateTime.isISO8601 {
-            let dt = startDateTime.dateFromISO8601!
-            if allDayFlag {
-                return dt.monthDay
-            } else {
-                return dt.monthDay
-            }
+        let dt = startDateTime.utc2Date()
+        if allDayFlag {
+            return dt.monthDay
+        } else {
+            return dt.monthDay
         }
-        
-        return ""
     }
     
     var notifyTime : String {
         if notification {
-            if notificationTime.isISO8601 {
-                let dt = notificationTime.dateFromISO8601!
-                return dt.dateTime
-            }
+            let dt = notificationTime.utc2Date()
+            return dt.dateTime
         }
         return ""
     }

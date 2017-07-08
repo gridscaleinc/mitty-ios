@@ -20,7 +20,7 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
     var query : String = ""
 
     let eventSearch = EventViewController()
-    let requestSearch = EventViewController()
+    let requestSearch = RequestExplorerViewController()
     
     let postRequestButton : UIButton = {
         let b = UIButton.newAutoLayout()
@@ -123,10 +123,14 @@ extension QuestViewController: UISearchBarDelegate, WebPickerDelegate {
         }
         
         if queryTargets.selectedSegmentIndex == 0 {
-            // 非同期方式で処理を呼び出す。
             eventSearch.searchBar.text = searchBar.text
             eventSearch.shallWeSearch = true
             self.navigationController?.pushViewController(eventSearch, animated: true)
+        } else if queryTargets.selectedSegmentIndex == 1 {
+            requestSearch.searchBar.text = searchBar.text
+            requestSearch.shallWeSearch = true
+            self.navigationController?.pushViewController(requestSearch, animated: true)
+
         } else if queryTargets.selectedSegmentIndex == 2 {
             let wb = WebPicker()
             wb.delegate = self

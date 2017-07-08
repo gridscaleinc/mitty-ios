@@ -75,9 +75,9 @@ class EventService {
          e.id = jsEvent["id"].stringValue
          e.title = jsEvent["title"].stringValue                        // イベントタイトル
          e.action = jsEvent["action"].stringValue                       // イベントの行い概要内容
-         e.startDate = Date.bindDate(jsEvent["startDatetime"].stringValue)
+         e.startDate = jsEvent["startDatetime"].stringValue.utc2Date()
                                                                        // イベント開始日時  ISO8601-YYYY-MM-DDTHH:mm:ssZ
-         e.endDate = Date.bindDate(jsEvent["endDatetime"].stringValue)
+         e.endDate = jsEvent["endDatetime"].stringValue.utc2Date()
                                                                        // イベント終了日時　ISO8601-YYYY-MM-DDTHH:mm:ssZ
          e.allDayFlag = jsEvent["allDayFlag"].boolValue                // 時刻非表示フラグ。
          e.eventLogoUrl = jsEvent["eventLogoUrl"].stringValue          // 該当イベントのLogoIdが指すContentsのLinkUrl
@@ -160,10 +160,10 @@ class EventService {
         e.action = json["action"].stringValue
         
         //  イベント開始日時  ISO8601-YYYY-MM-DDTHH : mm : ssZ
-        e.startDate = Date.bindDate(json["startDatetime"].stringValue)
+        e.startDate = json["startDatetime"].stringValue.utc2Date()
         
         //  イベント終了日時
-        e.endDate = Date.bindDate(json["endDatetime"].stringValue)
+        e.endDate = json["endDatetime"].stringValue.utc2Date()
         
         //  時刻非表示フラグ。
         e.allDayFlag = json["allDayFlag"].boolValue

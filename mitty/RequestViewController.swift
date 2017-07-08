@@ -18,6 +18,8 @@ class RequestViewController : MittyViewController {
     let form : MQForm = MQForm.newAutoLayout()
     
     let titleText = MQForm.text(name: "title-text", placeHolder: "タイトルを入力")
+    let tag = MQForm.text(name: "tag", placeHolder: "TAG")
+    
     let descriptionText = MQForm.textView(name: "desciption")
     let locationText = MQForm.text(name: "locationInfo", placeHolder: "エリア、場所")
     let preferredDatetime1 = MQForm.text(name: "startDate", placeHolder: "この日から")
@@ -52,7 +54,7 @@ class RequestViewController : MittyViewController {
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
         
-        let loginContainer = Container(name: "Login-form", view: scroll)
+        let loginContainer = Container(name: "Request-form", view: scroll)
         
         form +++ loginContainer
         
@@ -103,6 +105,24 @@ class RequestViewController : MittyViewController {
         }
         inputForm <<< row
         
+        row = Row.LeftAligned()
+        row.layout {
+            r in
+            r.fillHolizon(20).height(height_normal)
+        }
+        
+        row +++ MQForm.label(name: "TagLabel", title: "Tag").layout {
+            c in
+            c.height(height_normal).width(70)
+            c.leftMost(withInset: 20)
+        }
+        
+        row +++ tag.width(350).layout {
+            t in
+            t.height(height_normal).rightMost()
+        }
+        inputForm <<< row
+
         row = Row.LeftAligned()
         row.layout {
             r in
@@ -249,17 +269,26 @@ class RequestViewController : MittyViewController {
             showError("内容を入力してください")
             return
         }
+
+        if (tag.textField.text == nil || tag.textField.text == "") {
+            showError("TAGを入力してください")
+            return
+        }
         
         newRequest.setStr(.title, titleText.textField.text)
-        newRequest.setStr(.tagList, "TODO")
+        newRequest.setStr(.tagList, tag.textField.text)
         newRequest.setStr(.description, descriptionText.textView.text)
         newRequest.setStr(.startPlace, locationText.textField.text)
         
-        var dp = preferredDatetime1.textField.inputView as! UIDatePicker
-        newRequest.setDate(.preferredDatetime1, dp.date)
+        if (preferredDatetime2.textField.text != "") {
+            let dp = preferredDatetime1.textField.inputView as! UIDatePicker
+            newRequest.setDate(.preferredDatetime1, dp.date)
+        }
         
-        dp = preferredDatetime2.textField.inputView as! UIDatePicker
-        newRequest.setDate(.preferredDatetime2, dp.date)
+        if (preferredDatetime2.textField.text != "") {
+            let dp = preferredDatetime2.textField.inputView as! UIDatePicker
+            newRequest.setDate(.preferredDatetime2, dp.date)
+        }
         
         if let price = startPrice.textField.text {
             newRequest.setInt(.preferredPrice1, price)

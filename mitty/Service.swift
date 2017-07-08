@@ -51,7 +51,7 @@ class JSONRequest  {
     //
     //
     func setInt(named name : String, value: String?) {
-        if (value == nil) {
+        if (value == nil || value == "") {
             parameters[name] = nil
             return
         }
@@ -61,7 +61,7 @@ class JSONRequest  {
     }
     
     func setDouble(named name: String, value : String?) {
-        if (value == nil) {
+        if (value == nil || value == "") {
             parameters[name] = nil
             return
         }

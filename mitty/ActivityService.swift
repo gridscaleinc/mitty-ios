@@ -169,9 +169,8 @@ class ActivityService {
         d.eventId = json["eventId"].intValue
         d.eventTitle = json["eventTitle"].stringValue
         
-        if let time = json["eventTime"].stringValue.dateFromISO8601 {
-            d.eventTime = time
-        }
+        d.eventTime = json["eventTime"].stringValue.utc2Date()
+        
         print(d.longitude)
         
         return d

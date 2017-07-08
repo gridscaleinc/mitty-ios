@@ -1,13 +1,19 @@
+//
+//  RequestCell.swift
+//  mitty
+//
+//  Created by gridscale on 2017/07/06.
+//  Copyright © 2017年 GridScale Inc. All rights reserved.
+//
+import Foundation
 import UIKit
 import PureLayout
 
-class EventCell: UICollectionViewCell {
-    static let id = "journey-search-result-cell"
+class RequestCell: UICollectionViewCell {
+    static let id = "request-search-result-cell"
     
     // MARK: - View Elements
-    var event : EventInfo?
-    var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
-    
+    var request : RequestInfo?
     
     var form = MQForm.newAutoLayout()
     
@@ -26,14 +32,14 @@ class EventCell: UICollectionViewCell {
         
     }
     
-    func configureView(event: EventInfo) {
+    func configureView(req: RequestInfo) {
         
-        self.event = event
+        self.request = req
         form = MQForm.newAutoLayout()
         self.addSubview(form)
         form.autoPinEdgesToSuperviewEdges()
-
-        let section = Section(name: "eventcell", view: UIView.newAutoLayout())
+        
+        let section = Section(name: "request-cell", view: UIView.newAutoLayout())
         section.layout {
             s in
             s.fillParent()
@@ -49,7 +55,7 @@ class EventCell: UICollectionViewCell {
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
         row +++ publisherIcon.width(30).height(30)
         
-        let publisher = MQForm.label(name: "publisher", title: event.publisherName)
+        let publisher = MQForm.label(name: "publisher", title: "request.publisherName")
         row +++ publisher.layout{
             pub in
             let l = pub.label
@@ -57,13 +63,8 @@ class EventCell: UICollectionViewCell {
             l.textColor = MittyColor.healthyGreen
         }
         
-        let remainder = event.startDate.timeIntervalSinceNow / 86400
-        var remainDays = String(Int(-remainder)) + "日前."
-        if (remainder >= 0) {
-            remainDays = "開始まであと\(Int(remainder))日. "
-        }
         
-        let published = MQForm.label(name: "days", title: remainDays)
+        let published = MQForm.label(name: "days", title: "??? Days ago")
         
         row +++ published.layout{
             pub in
@@ -85,7 +86,7 @@ class EventCell: UICollectionViewCell {
             c.height(75).width(25)
         }
         col +++ MQForm.label(name: "likes1", title: "🔺").width(25).height(25)
-        col +++ MQForm.label(name: "likes2", title: String(describing: event.likes)).width(25).height(25).layout {
+        col +++ MQForm.label(name: "likes2", title: String(describing: "?")).width(25).height(25).layout {
             l in
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
@@ -96,7 +97,7 @@ class EventCell: UICollectionViewCell {
         row +++ col
         
         row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
-        let titleLabel = MQForm.label(name: "titleLabel", title: event.title).layout {t in
+        let titleLabel = MQForm.label(name: "titleLabel", title: req.title).layout {t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
             t.rightMost().height(50)
@@ -105,45 +106,10 @@ class EventCell: UICollectionViewCell {
         row +++ titleLabel
         section <<< row
         
-        
-        if event.coverImage != nil {
-            let height = (UIScreen.main.bounds.width - 30) * event.coverImage!.size.ratio
-            // imageがある場合、イメージを表示
-            let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
-                img in
-                img.fillHolizon().height(height)
-                img.image.image = event.coverImage
-            }
-            
-            row = Row.LeftAligned().layout {
-                r in
-                r.fillHolizon().height(height)
-            }
-            
-            row +++ itemImage
-            section <<< row
-            
-        }
-        
-        // 日付情報を設定
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(20)
-        }
-        let endTimeLabel = UILabel.newAutoLayout()
-        endTimeLabel.text = event.duration()
-        let timeDuration = Control(name:"duration", view: endTimeLabel).layout {
-            l in
-            l.fillParent()
-            l.label.font = UIFont.systemFont(ofSize: 14)
-        }
-        row +++ timeDuration
-        section <<< row
-        
-        // 日付情報を設定
+        // リクエスト情報を設定
         row = Row.LeftAligned()
         let actionLabel = UILabel.newAutoLayout()
-        actionLabel.text = event.action
+        actionLabel.text = req.desc
         let actionCtrl = Control(name:"actionLabel", view: actionLabel).layout {
             l in
             l.fillParent()
@@ -160,21 +126,6 @@ class EventCell: UICollectionViewCell {
         
         form.configLayout()
         
-    }
-    func reloadImages() {
-        if let img = event?.coverImage {
-            if let iv = form.quest("[name=eventImage]").control()?.image {
-                iv.image = img
-            }
-        }
-        
-        if let img = event?.eventLogo {
-            form.quest("[name=eventLogo]").control()?.image.image = img
-        }
-        
-        if let img = event?.publisherIcon {
-            form.quest("[name=pushlisherIcon]").control()?.image.image = img
-        }
     }
     
     override func prepareForReuse() {

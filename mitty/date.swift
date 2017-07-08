@@ -70,10 +70,16 @@ extension Date {
     }
     
     var monthDay: String {
+        if self == Date.nulldate {
+            return ""
+        }
         return Formatter.monthDay.string(from: self)
     }
     
     var time: String {
+        if self == Date.nulldate {
+            return ""
+        }
         return Formatter.time.string(from: self)
     }
     
@@ -82,37 +88,11 @@ extension Date {
         let interval = date.timeIntervalSince1970
         return date.addingTimeInterval(-interval)
     }
-    
-    static func bindDate(_ d :String?) -> Date {
-        if d == nil {
-            return nulldate
-        }
-        
-        let s = d!
-        if s.isISO8601 {
-            return s.dateFromISO8601!
-        }
-        return Date.nulldate
-    }
-
-    static func bindDateLong(_ d :String?) -> Date {
-        if d == nil {
-            return nulldate
-        }
-        
-        let s = d!
-        if s.isISO8601Long {
-            return s.dateFromISO8601Long!
-        }
-        return Date.nulldate
-    }
-
-    
 }
 
 extension String {
-    var dateFromISO8601: Date? {
-        return Formatter.iso8601.date(from: self)   // "Mar 22, 2017, 10:22 AM"
+    fileprivate var dateFromISO8601: Date {
+        return Formatter.iso8601.date(from: self) ?? Date.nulldate
     }
     
     var isISO8601 : Bool {
@@ -123,8 +103,8 @@ extension String {
         return false
     }
     
-    var dateFromISO8601Long: Date? {
-        return Formatter.iso8601Long.date(from: self)   // "Mar 22, 2017, 10:22 AM"
+    fileprivate var dateFromISO8601Long: Date {
+        return Formatter.iso8601Long.date(from: self) ?? .nulldate   // "Mar 22, 2017, 10:22 AM"
     }
     
     var isISO8601Long : Bool {
@@ -134,5 +114,14 @@ extension String {
         }
         return false
     }
-
+    
+    func utc2Date() -> Date {
+        if self.isISO8601 {
+            return self.dateFromISO8601
+        } else if self.isISO8601Long {
+            return self.dateFromISO8601Long
+        } else {
+            return Date.nulldate
+        }
+    }
 }

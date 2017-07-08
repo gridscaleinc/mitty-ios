@@ -271,6 +271,8 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
             destinations in
             let now = Date()
             
+            self.myMapView.removeAnnotations(self.myMapView.annotations)
+            
             for d in destinations {
                 
                 if (d.latitude == 0 && d.longitude == 0) {

@@ -133,6 +133,9 @@
 		FCFA847A1F08A8B000E9C6F2 /* SocialId.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA84791F08A8B000E9C6F2 /* SocialId.swift */; };
 		FCFA847C1F08A8C000E9C6F2 /* NameCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA847B1F08A8C000E9C6F2 /* NameCard.swift */; };
 		FCFA847E1F0A848E00E9C6F2 /* editpen.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFA847D1F0A848E00E9C6F2 /* editpen.png */; };
+		FCFA84801F0DA6AF00E9C6F2 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */; };
+		FCFA84821F0DA76900E9C6F2 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA84811F0DA76900E9C6F2 /* RequestCell.swift */; };
+		FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */; };
 		FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB07D81E719C6600E435BE /* Abstracts.swift */; };
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
@@ -313,6 +316,9 @@
 		FCFA84791F08A8B000E9C6F2 /* SocialId.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialId.swift; sourceTree = "<group>"; };
 		FCFA847B1F08A8C000E9C6F2 /* NameCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCard.swift; sourceTree = "<group>"; };
 		FCFA847D1F0A848E00E9C6F2 /* editpen.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = editpen.png; path = images/editpen.png; sourceTree = "<group>"; };
+		FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
+		FCFA84811F0DA76900E9C6F2 /* RequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
+		FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
 		FCFB07D81E719C6600E435BE /* Abstracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Abstracts.swift; sourceTree = "<group>"; };
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
@@ -497,6 +503,7 @@
 				FCFA84771F08A89D00E9C6F2 /* Profile.swift */,
 				FCFA84791F08A8B000E9C6F2 /* SocialId.swift */,
 				FCFA847B1F08A8C000E9C6F2 /* NameCard.swift */,
+				FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -716,6 +723,7 @@
 			children = (
 				FC1FE05B1EC89BE6007AE8A5 /* ActivityCell.swift */,
 				FC427B801DCACB43009F43AE /* EventCell.swift */,
+				FCFA84811F0DA76900E9C6F2 /* RequestCell.swift */,
 				FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */,
 				FCF7F2581E6316B200A5D99B /* ActivitySelectionForm.swift */,
 				FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */,
@@ -738,6 +746,7 @@
 				FC30EB501EA32B7A00829E52 /* QuestViewController.swift */,
 				FC30EB521EA575A700829E52 /* RequestViewController.swift */,
 				FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */,
+				FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */,
 			);
 			name = explore;
 			sourceTree = "<group>";
@@ -1150,12 +1159,15 @@
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
 				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
+				FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */,
 				FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */,
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,
+				FCFA84821F0DA76900E9C6F2 /* RequestCell.swift in Sources */,
+				FCFA84801F0DA6AF00E9C6F2 /* Requests.swift in Sources */,
 				FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */,
 				FC5ECFFA1EBB170000AA6C13 /* ActivityInfo.swift in Sources */,
 				FCF957601DC6471D00A52125 /* PersonalInfoViewController.swift in Sources */,
