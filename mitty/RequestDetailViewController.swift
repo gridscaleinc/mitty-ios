@@ -249,6 +249,8 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
     
     
     func pressProposol (sender:UIButton){
-        
+        let vc = ProposalViewController()
+        vc.relatedRequest = request
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }

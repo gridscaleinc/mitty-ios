@@ -136,6 +136,7 @@
 		FCFA84801F0DA6AF00E9C6F2 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */; };
 		FCFA84821F0DA76900E9C6F2 /* RequestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA84811F0DA76900E9C6F2 /* RequestCell.swift */; };
 		FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */; };
+		FCFA84861F121E1400E9C6F2 /* ProposalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFA84851F121E1400E9C6F2 /* ProposalViewController.swift */; };
 		FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFB07D81E719C6600E435BE /* Abstracts.swift */; };
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
@@ -319,6 +320,7 @@
 		FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		FCFA84811F0DA76900E9C6F2 /* RequestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestCell.swift; sourceTree = "<group>"; };
 		FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestDetailViewController.swift; sourceTree = "<group>"; };
+		FCFA84851F121E1400E9C6F2 /* ProposalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalViewController.swift; sourceTree = "<group>"; };
 		FCFB07D81E719C6600E435BE /* Abstracts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Abstracts.swift; sourceTree = "<group>"; };
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
@@ -747,6 +749,7 @@
 				FC30EB521EA575A700829E52 /* RequestViewController.swift */,
 				FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */,
 				FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */,
+				FCFA84851F121E1400E9C6F2 /* ProposalViewController.swift */,
 			);
 			name = explore;
 			sourceTree = "<group>";
@@ -1156,6 +1159,7 @@
 				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */,
+				FCFA84861F121E1400E9C6F2 /* ProposalViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
 				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,

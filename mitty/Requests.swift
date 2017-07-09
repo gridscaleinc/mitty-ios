@@ -8,6 +8,7 @@
 
 import Foundation
 
+// リクエスト情報
 class RequestInfo  {
     var id : Int64 = 0
     var title : String = ""
@@ -37,7 +38,7 @@ class RequestInfo  {
         return preferredDatetime1.monthDay + "〜" + preferredDatetime1.monthDay
     }
     
-    // 希望期間
+    // 希望価格
     func price() -> String {
         return String(preferredPrice1) + "〜" + String(preferredPrice2) + "円"
     }
@@ -47,12 +48,12 @@ class RequestInfo  {
         return "大人 " + String(numOfPerson) + "人、 子供 " + String(numOfChildren) + "人"
     }
     
-    //
+    // リクエスト経過日数。
     func requestDays() -> String {
         if (created == Date.nulldate) {
             return ""
         }
         
-        return  String(Int(Date().timeIntervalSince(created) / 83640)) + " Days"
+        return  String(Int(Date().timeIntervalSince(created) / (24*3600))) + " Days"
     }
 }
