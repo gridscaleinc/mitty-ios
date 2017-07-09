@@ -96,8 +96,6 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
         self.automaticallyAdjustsScrollViewInsets = false
-        //        scroll.layer.borderWidth = 1
-        //        scroll.layer.borderColor = UIColor.blue.cgColor
         
         let scrollContainer = Container(name: "Detail-form", view: scroll).layout() { (container) in
             container.fillParent()
@@ -111,31 +109,36 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
         
         let titleLabel = MQForm.label(name: "Title", title: request.title).layout {
             l in
-            l.leftMost(withInset: 25).upper(withInset: 50).height(50)
-            
+            l.leftMost(withInset: 25).upper(withInset: 40).fillHolizon(10)
+            l.view.backgroundColor = MittyColor.healthyGreen
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 24)
             (l.view as! UILabel).textColor = .white
-            (l.view as! UILabel).shadowColor = UIColor.black
-            (l.view as! UILabel).shadowOffset = CGSize(width:0, height:1)
             (l.view as! UILabel).numberOfLines = 0
         }
         
         detailForm +++ titleLabel
         
-        let imageIcon = MQForm.img(name: "image-icon", url: "timesquare").layout {
-            i in
-            i.width(35).height(35).topAlign(with: titleLabel).rightMost(withInset: 30)
+        let tagLabel = MQForm.label(name: "tag", title: "🏷 " + request.tag).layout {
+            l in
+            l.width(35).height(35).putUnder(of: titleLabel).fillHolizon(10).height(20)
+            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
+            (l.view as! UILabel).textColor = .gray
+            (l.view as! UILabel).numberOfLines = 1
         }
-        detailForm +++ imageIcon
+        detailForm +++ tagLabel
         
         
         let actionLabel = MQForm.label(name: "action", title: (request.desc)).layout {
             c in
-            c.putUnder(of: titleLabel, withOffset: 5).fillHolizon(10)
+            c.putUnder(of: tagLabel, withOffset: 5).fillHolizon(10)
             let l = c.view as! UILabel
             l.numberOfLines = 0
-            l.font = .boldSystemFont(ofSize: 18)
-            l.layer.borderColor = UIColor.black.cgColor
+            l.textColor = .black
+            l.font = .systemFont(ofSize: 15)
+            l.layer.cornerRadius = 2
+            l.layer.borderWidth = 0.8
+            l.layer.borderColor = UIColor.gray.cgColor
+            l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
         
         detailForm +++ actionLabel
@@ -158,7 +161,8 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
         }
         
-        let dates = MQForm.label(name: "preferedDate", title: "request.duration()").layout { l in
+        row +++ MQForm.label(name: "Term", title: "希望期間:").height(35)
+        let dates = MQForm.label(name: "preferedDate", title: request.term()).layout { l in
             l.height(35).width(250)
             l.label.adjustsFontSizeToFitWidth = true
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
@@ -169,10 +173,12 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(40)
+            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
         }
+        
+        row +++ MQForm.label(name: "Location", title: "希望エリア:").height(35)
         let location = MQForm.label(name: "isLand", title: "\(request.startPlace)").layout { l in
-            l.height(40).width(210)
+            l.height(35).width(210)
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
         }
@@ -181,9 +187,41 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
         
         detailForm +++ row
         
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: location, withOffset: 5).height(35)
+        }
+        
+        row +++ MQForm.label(name: "Price", title: "希望価格:").height(35)
+        let price = MQForm.label(name: "price", title: request.price()).layout { l in
+            l.height(35).width(210)
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.numberOfLines = 2
+        }
+        
+        row +++ price
+        
+        detailForm +++ row
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: price, withOffset: 5).height(35)
+        }
+        
+        row +++ MQForm.label(name: "NumberOfPerson", title: "人数:").height(35)
+        let nop = MQForm.label(name: "NumberOfPerson", title: request.nop()).layout { l in
+            l.height(35).width(210)
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.numberOfLines = 2
+        }
+        
+        row +++ nop
+        
+        detailForm +++ row
+        
         let proposol = Control(name: "scbscribe", view: proposolButton).layout {
             c in
-            c.height(45).holizontalCenter().width(140).putUnder(of: actionLabel, withOffset: 30)
+            c.height(45).holizontalCenter().width(140).putUnder(of: nop, withOffset: 30)
         }
         
         detailForm +++ proposol
@@ -194,9 +232,16 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
             self.pressProposol(sender: button)
         }
         
+        let bottom = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: proposol, withOffset: 5)
+        }
+        
+        detailForm +++ bottom
+
         detailForm.layout {
             f in
-            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: proposol)
+            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
             f.view.backgroundColor = UIColor.white
         }

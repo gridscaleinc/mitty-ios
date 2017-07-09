@@ -64,7 +64,7 @@ class RequestCell: UICollectionViewCell {
         }
         
         
-        let published = MQForm.label(name: "days", title: "??? Days ago")
+        let published = MQForm.label(name: "days", title: req.requestDays())
         
         row +++ published.layout{
             pub in

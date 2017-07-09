@@ -31,4 +31,28 @@ class RequestInfo  {
     var ownerId : Int64 = 0
     var created : Date = .nulldate
     var updated : Date = .nulldate
+    
+    // 希望期間
+    func term() -> String {
+        return preferredDatetime1.monthDay + "〜" + preferredDatetime1.monthDay
+    }
+    
+    // 希望期間
+    func price() -> String {
+        return String(preferredPrice1) + "〜" + String(preferredPrice2) + "円"
+    }
+    
+    // 人数
+    func nop() -> String {
+        return "大人 " + String(numOfPerson) + "人、 子供 " + String(numOfChildren) + "人"
+    }
+    
+    //
+    func requestDays() -> String {
+        if (created == Date.nulldate) {
+            return ""
+        }
+        
+        return  String(Int(Date().timeIntervalSince(created) / 83640)) + " Days"
+    }
 }
