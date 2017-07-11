@@ -7,17 +7,28 @@
 //
 
 import Foundation
-
-import Foundation
 import UIKit
 import Alamofire
 import SwiftyJSON
+import MapKit
 
-class ProposalViewController : MittyViewController {
+class ProposalViewController : MittyViewController, IslandPickerDelegate, PricePickerDelegate {
 
     var relatedRequest: RequestInfo!
     
     let form : MQForm = MQForm.newAutoLayout()
+    
+    var pickedIsland : IslandPick? = nil
+    let pricePicker = PricePicker()
+    
+    // 場所
+    let location = MQForm.text(name: "location" , placeHolder: "場所名を入力")
+    let locationIcon = MQForm.img(name: "icon" , url:"noicon")
+    let addressLabel = MQForm.label(name: "label-Address", title: "住所")
+    let address = MQForm.label(name: "address" , title: "")
+    
+    var addressRow : Row? = nil
+
     
     let priceInput = MQForm.button(name: "priceInput" , title: "価格を入力" )
     let price1 = MQForm.label(name: "price1", title: "")
@@ -29,20 +40,87 @@ class ProposalViewController : MittyViewController {
     let priceDetail = MQForm.label(name: "priceDetail", title: "")
     var priceDetailRow : Row? = nil
 
+    let contactTel = MQForm.text(name: "contact-Tel" , placeHolder: "☎️ 電話番号" )
+    // 開始日時
+    let date1 = MQForm.text(name: "fromDateTime" , placeHolder: "開始日時")
+    
+    //  終了日時
+    let date2 = MQForm.text(name: "toDateTime" , placeHolder: "終了日時" )
+    var dateFormatter : DateFormatter = {
+        let dateFormatter = DateFormatter()
+        dateFormatter.locale = Locale.current
+        dateFormatter.dateStyle = .long
+        dateFormatter.timeStyle = .none
+        return dateFormatter
+    } ()
+    
+    
+    let additionalInfo = MQForm.textView(name: "description")
+    
+    
+
     
     override func viewDidLoad() {
         
+        super.autoCloseKeyboard()
+        
         buildForm()
+        
+        
+        pricePicker.delegate = self
+        
+        let startDateText = date1.textField
+        let picker1 = UIDatePicker()
+        startDateText.inputView = picker1
+        setFromDateTime(picker1)
+        picker1.addTarget(self, action: #selector(setFromDateTime(_:)), for: .valueChanged)
+        
+        
+        let endDateText = date2.textField
+        let picker2 = UIDatePicker()
+        endDateText.inputView = picker2
+        setToDateTime(picker2)
+        picker2.addTarget(self, action: #selector(setToDateTime(_:)), for: .valueChanged)
+
         
         self.view.addSubview(form)
         self.view.backgroundColor = .white
         
+        location.bindEvent(.editingDidBegin) { [weak self]
+                c in
+                c.resignFirstResponder()
+                let controller = IslandPicker()
+                controller.delegate = self
+                controller.islandForm.addressControl.textField.text=self?.address.label.text
+                controller.islandForm.nameText.text=self?.location.textField.text
+                
+                self?.navigationController?.pushViewController(controller, animated: true)
+        }
+
         form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
         form.autoPinEdge(toSuperviewEdge: .left)
         form.autoPinEdge(toSuperviewEdge: .right)
         form.autoPinEdge(toSuperviewEdge: .bottom)
-        form.configLayout()
         
+        self.view.setNeedsUpdateConstraints()
+        
+    }
+    
+    func setFromDateTime(_ picker: UIDatePicker) {
+        let textField = date1.textField
+        textField.text = dateFormatter.string(from: picker.date)
+    }
+    
+    
+    func setToDateTime(_ picker: UIDatePicker) {
+        let textField = date2.textField
+        textField.text = dateFormatter.string(from: picker.date)
+    }
+    
+    override func updateViewConstraints() {
+         super.updateViewConstraints()
+         form.configLayout()
+         updateLayout()
     }
     
     func buildForm() {
@@ -197,6 +275,104 @@ class ProposalViewController : MittyViewController {
         
         detailForm <<< priceDetailRow!
 
+        seperator(section: detailForm, caption: "日程")
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "label-start", title: "開始").height(line_height).width(60)
+        row +++ date1.layout{
+            line in
+            line.textField.textColor = MittyColor.healthyGreen
+            line.textField.attributedPlaceholder = NSAttributedString(string:"開始日付・時刻を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
+            line.height(line_height).rightMost(withInset: 10)
+        }
+        
+        row.layout() {
+            r in
+            r.height(row_height).fillHolizon()
+        }
+        
+        detailForm <<< row
+        
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "label-End", title: "終了").height(line_height).width(60)
+        row +++ date2.layout{
+            line in
+            line.textField.textColor = MittyColor.healthyGreen
+            line.textField.attributedPlaceholder = NSAttributedString(string:"終了日付・時刻を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
+            line.height(line_height).rightMost(withInset: 10)
+        }
+        
+        row.layout() {
+            r in
+            r.height(row_height).fillHolizon()
+        }
+        
+        detailForm <<< row
+
+        seperator(section: detailForm, caption: "場所")
+        row = Row.LeftAligned()
+        row +++ location.layout{
+            line in
+            line.textField.textColor = MittyColor.healthyGreen
+            line.textField.attributedPlaceholder = NSAttributedString(string:"場所名・住所などを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
+            line.height(line_height).rightMost(withInset: 60)
+        }
+        row +++ locationIcon.height(line_height).width(line_height)
+        
+        
+        row.layout() {
+            r in
+            r.height(row_height).fillHolizon()
+        }
+        detailForm <<< row
+        
+        row = Row.LeftAligned()
+        addressRow = row
+        row +++ addressLabel.layout {
+            l in
+            l.height(0).width(60)
+        }
+        row +++ address.layout {
+            line in
+            line.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            line.label.isUserInteractionEnabled = false
+            line.label.textColor = UIColor.gray
+            line.label.numberOfLines = 0
+            line.height(0).rightMost(withInset: 10)
+        }
+        
+        row.layout() {
+            r in
+            r.height(row_height).fillHolizon()
+        }
+        detailForm <<< row
+        
+        seperator(section: detailForm, caption: "補足")
+        row = Row.LeftAligned()
+        row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70)
+        row +++ contactTel.layout{
+            line in
+            line.height(line_height).rightMost(withInset: 10)
+        }
+        
+        row.layout() {
+            r in
+            r.height(row_height).fillHolizon()
+        }
+        
+        detailForm <<< row
+        
+        row = Row.LeftAligned()
+        row +++ additionalInfo.layout{
+            line in
+            line.height(90).rightMost(withInset: 10)
+        }
+        
+        row.layout() {
+            r in
+            r.height(100).fillHolizon()
+        }
+        
+        detailForm <<< row
 
 
         //reply_to_request_id		int8
@@ -222,11 +398,10 @@ class ProposalViewController : MittyViewController {
         
         let bottom = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().upper(withInset: 100)
+            r.fillHolizon()
         }
         
-        detailForm +++ bottom
-        
+        detailForm <<< bottom
         
         detailForm.layout {
             f in
@@ -292,4 +467,83 @@ class ProposalViewController : MittyViewController {
         
     }
 
+    //
+    // 場所選択した際の処理
+    //
+    func pickedIsland(landInfo: IslandPick) {
+        self.location.textField.text = landInfo.name
+        self.address.label.text = landInfo.address
+        
+        
+        pickedIsland = landInfo
+        
+        if landInfo.id == 0 {
+            let service = IslandService.instance
+            service.fetchIslandInfo(pickedIsland!.name!, callback: checkAndRegist) {
+                error in
+                self.showError(error as! String)
+            }
+        }
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.updateConstraintsIfNeeded()
+        self.view.layoutIfNeeded()
+    }
+    
+    
+    // 同じ場所が存在しなければ、登録する。
+    func checkAndRegist(_ islands: [IslandInfo]) {
+        if pickedIsland == nil {
+            return
+        }
+        
+        for island in islands {
+            if isSameInfo(island, pickedIsland!) {
+                // TODO int64 -> int
+                pickedIsland?.id = Int(island.id)
+                return
+            }
+        }
+        
+        IslandService.instance.registerNewIsland(pickedIsland!) {
+            error in
+            self.showError(error as! String)
+        }
+    }
+    
+    func isSameInfo(_ islandInfo: IslandInfo, _ pickedInfo : IslandPick ) -> Bool {
+        if (islandInfo.name != pickedInfo.name) {
+            return false
+        }
+        
+        let location = CLLocation(latitude: islandInfo.latitude, longitude: islandInfo.longitude)
+        
+        if let picklocation = pickedInfo.placeMark?.location {
+            // 同じ名称で、距離が１００メートル以内であれば、同じ場所とみなす。
+            print("location:", location)
+            print("picklocation:", picklocation)
+            let distance = location.distance(from: picklocation)
+            print("distance:", distance)
+            if (distance < 100) {
+                return true
+            }
+        }
+        
+        return false
+    }
+
+    
+    func clearPickedIsland() {
+        
+    }
+    
+    func pickedPrice(_ picker: PricePicker) {
+        self.price1.label.text = picker.getPrice1()
+        self.price2.label.text = picker.getPrice2()
+        self.priceDetail.label.text = picker.priceInfo.textView.text
+    }
+    
+    func clearPickedPriceInfo() {
+        
+    }
 }

@@ -294,6 +294,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         }
     }
     
+    // change to uitily 
     func isSameInfo(_ islandInfo: IslandInfo, _ pickedInfo : IslandPick ) -> Bool {
         if (islandInfo.name != pickedInfo.name) {
             return false
