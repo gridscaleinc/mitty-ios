@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import PureLayout
 
-class ActivitySelectionViewController : MittyUIViewController {
+class ActivitySelectionViewController : MittyViewController {
     
     // activityList を作成する
     let form : ActivitySelectionForm
@@ -22,8 +22,7 @@ class ActivitySelectionViewController : MittyUIViewController {
     init (_ activity : ActivityInfo) {
         activityInfo = activity
         form = ActivitySelectionForm.newAutoLayout()
-        super.init()
-        dataSource = ActivitySelectionDatasource(controller: self)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -32,6 +31,10 @@ class ActivitySelectionViewController : MittyUIViewController {
     
     
     override func viewDidLoad() {
+        
+        dataSource = ActivitySelectionDatasource(controller: self)
+
+        super.autoCloseKeyboard()
         
         // navigation bar の初期化をする
         

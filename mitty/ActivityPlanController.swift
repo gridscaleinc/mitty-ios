@@ -88,6 +88,8 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
     
     override func viewDidLoad() {
         
+        super.autoCloseKeyboard()
+        
         self.navigationItem.title = activityTitle
         
         self.view.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)

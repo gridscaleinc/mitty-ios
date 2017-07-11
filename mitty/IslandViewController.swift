@@ -35,6 +35,8 @@ class IslandViewController: MittyViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        super.autoCloseKeyboard()
+        
         LoadingProxy.set(self)
         
         view.backgroundColor = UIColor.white

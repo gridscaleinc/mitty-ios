@@ -10,13 +10,16 @@ import Foundation
 import UIKit
 import Alamofire
 
-class SignupViewController: UIViewController, UITextFieldDelegate {
+class SignupViewController: MittyViewController, UITextFieldDelegate {
     
     
     var signupForm = MQForm.newAutoLayout()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
+        
         self.view.backgroundColor = UIColor.white
         
         buildLoginForm()

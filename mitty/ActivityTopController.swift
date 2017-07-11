@@ -196,11 +196,14 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidLoad()
+
         
     }
     
     override func viewDidLoad() {
+        
+        super.autoCloseKeyboard()
+        
         LoadingProxy.set(self)
     }
 }

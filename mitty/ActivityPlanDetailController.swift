@@ -92,6 +92,8 @@ class ActivityPlanDetailsController : MittyViewController {
     
     override func viewDidLoad() {
         
+        super.autoCloseKeyboard()
+        
         self.navigationItem.title = activityTitle
         
         self.view.backgroundColor = UIColor.white

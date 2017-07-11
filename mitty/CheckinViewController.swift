@@ -48,6 +48,8 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        super.autoCloseKeyboard()
+        
         self.view.addSubview(form)
         
         loadForm()

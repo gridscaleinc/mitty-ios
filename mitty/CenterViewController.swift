@@ -17,7 +17,7 @@ import CoreLocation
 // 個人情報を管理するView
 //
 @objc(CenterViewController)
-class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMapViewDelegate {
    
     //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
     let myLocationManager = CLLocationManager()
@@ -65,6 +65,9 @@ class CenterViewController: UIViewController, CLLocationManagerDelegate, MKMapVi
     //
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        super.autoCloseKeyboard()
 
         self.navigationItem.title = LS(key: "operation_center")
         

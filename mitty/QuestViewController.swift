@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 @objc(QuestViewController)
-class QuestViewController : UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class QuestViewController : MittyViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var queryTargets : UISegmentedControl = UISegmentedControl(items: ["Event", "Request","Web"])
     let logo = UIImageView(image: UIImage(named: "applogo"))
@@ -30,6 +30,9 @@ class QuestViewController : UIViewController, UIImagePickerControllerDelegate, U
     } ()
 
     override func viewDidLoad() {
+        
+        super.autoCloseKeyboard()
+        
         self.view.addSubview(queryTargets)
         self.view.addSubview(logo)
         self.view.addSubview(searchBar)

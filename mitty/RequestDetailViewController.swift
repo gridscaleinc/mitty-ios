@@ -13,7 +13,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class RequestDetailViewController: UIViewController, UITextFieldDelegate {
+class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
     
     var request : RequestInfo
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
@@ -52,6 +52,8 @@ class RequestDetailViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
         
         self.view.backgroundColor = UIColor.white
         

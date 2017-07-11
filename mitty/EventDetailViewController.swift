@@ -11,7 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-class EventDetailViewController: UIViewController, UITextFieldDelegate {
+class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     
     var event : Event
     var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
@@ -65,7 +65,9 @@ class EventDetailViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        super.autoCloseKeyboard()
+        
         self.view.backgroundColor = UIColor.white
         
         buildform()

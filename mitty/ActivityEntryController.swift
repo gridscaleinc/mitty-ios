@@ -88,6 +88,8 @@ class ActivityEntryViewController : MittyViewController {
     
     override func viewDidLoad() {
         
+        super.autoCloseKeyboard()
+        
         self.navigationItem.title = pageTitle
         
         self.view.backgroundColor = UIColor.white

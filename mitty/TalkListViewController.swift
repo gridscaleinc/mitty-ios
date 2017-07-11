@@ -9,7 +9,7 @@ enum MeetingStatus {
 }
 
 @objc(TalkListViewController)
-class TalkListViewController: UIViewController ,WebSocketDelegate {
+class TalkListViewController: MittyViewController ,WebSocketDelegate {
     var pingPongTimer : Timer? = nil
     
     var socket : WebSocket = {
@@ -86,6 +86,7 @@ class TalkListViewController: UIViewController ,WebSocketDelegate {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        super.autoCloseKeyboard()
         
         view.backgroundColor = UIColor.white
         self.topLabel.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)        

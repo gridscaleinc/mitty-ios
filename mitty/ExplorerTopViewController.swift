@@ -11,7 +11,7 @@ import UIKit
 import PureLayout
 
 @objc(ExplorerTopViewController1)
-class ExplorerTopViewController1 : UIViewController , UISearchBarDelegate {
+class ExplorerTopViewController1 : MittyViewController , UISearchBarDelegate {
     
     var id = 1
     let explorerViewController = EventViewController()
@@ -90,6 +90,8 @@ class ExplorerTopViewController1 : UIViewController , UISearchBarDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
         
         customNavigationBar()
         

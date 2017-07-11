@@ -16,7 +16,7 @@ protocol PricePickerDelegate : class {
     func clearPickedPriceInfo()
 }
 
-class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
+class PricePicker: MittyViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
     weak var delegate : PricePickerDelegate? = nil
     
@@ -41,6 +41,8 @@ class PricePicker: UIViewController, UIPickerViewDataSource, UIPickerViewDelegat
     var didSetupConstraints = false
     
     override func viewDidLoad() {
+        
+        super.autoCloseKeyboard()
         
         self.view.addSubview(form)
         self.view.backgroundColor = .white

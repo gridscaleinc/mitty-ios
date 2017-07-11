@@ -12,7 +12,7 @@ import UIKit
 import PureLayout
 
 @objc(HogeViewController)
-class PageViewController: UIViewController {
+class PageViewController: MittyViewController {
     
     var pageIndex: Int = 0
     let backImage : UIImageView = {
@@ -33,6 +33,9 @@ class PageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
+        
         self.view.addSubview(backImage)
         
         startButton.addTarget(self, action: #selector(PageViewController.start), for: .touchUpInside)

@@ -33,6 +33,8 @@ class RequestViewController : MittyViewController {
     
     override func viewDidLoad() {
         
+        super.autoCloseKeyboard()
+        
         buildForm()
         
         self.view.addSubview(form)

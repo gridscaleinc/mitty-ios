@@ -3,7 +3,7 @@ import PureLayout
 
 
 @objc(EventViewController)
-class EventViewController: UIViewController {
+class EventViewController: MittyViewController {
     
     var shallWeSearch = false
     
@@ -38,6 +38,9 @@ class EventViewController: UIViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
+        
         view.backgroundColor = UIColor(white: 0.90, alpha: 1)
         view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()

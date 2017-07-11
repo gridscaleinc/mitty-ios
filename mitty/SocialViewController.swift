@@ -3,7 +3,7 @@ import PureLayout
 
 
 @objc(SocialViewController)
-class SocialViewController: UIViewController {
+class SocialViewController: MittyViewController {
     
     
     // MARK: - Properties
@@ -33,6 +33,8 @@ class SocialViewController: UIViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
         
         view.backgroundColor = UIColor.white
         

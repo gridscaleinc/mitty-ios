@@ -18,7 +18,7 @@ import MapKit
 // 4.地図を動かしたら、地図の住所を逆引きしてテキストボックスに反映する。
 
 @available(iOS 9.3, *)
-class IslandPicker : UIViewController {
+class IslandPicker : MittyViewController {
     
     var selectedIsland : IslandPick? = nil
     
@@ -29,6 +29,8 @@ class IslandPicker : UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        super.autoCloseKeyboard()
         
         self.view.backgroundColor = .white
         self.view.addSubview(islandForm)
