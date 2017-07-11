@@ -37,8 +37,6 @@ class SpeedMeter {
         startTime = start.timestamp
     }
     
-    
-    
     func updateLocation(nowLocation: CLLocation) {
         let nowtime = nowLocation.timestamp
         let displace = nowLocation.distance(from: previousLocation)

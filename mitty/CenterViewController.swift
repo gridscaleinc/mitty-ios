@@ -26,7 +26,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     
     let form = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
-
+    var timer = Timer()
+    
     // Autolayout済みフラグ
     var didSetupConstraints = false
     
@@ -59,7 +60,9 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     
     // ビューが非表示になる直前にタイトルを「...」に変える。
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
         self.navigationItem.title = "..."
+        timer.invalidate()
     }
     
     //
@@ -371,6 +374,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         self.navigationController?.pushViewController(eidtorView, animated: true)
     }
     
+    
     //長押しした時にピンを置く処理
     func longPressed(sender: UILongPressGestureRecognizer) {
         
@@ -414,6 +418,12 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             myMapView.region = myRegion
             speedMeter = SpeedMeter(start: myLocation)
             isStarting = false
+            
+            
+            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+            
+            timer.fire()
+        
         } else {
             speedMeter?.updateLocation(nowLocation: myLocation)
             if let sm = speedMeter {
@@ -433,7 +443,19 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         updateDistance(myLocation)
     }
-    
+
+    @objc
+    func update(tm: Timer) {
+        if speedMeter == nil {
+            return
+        }
+        
+        if Date().timeIntervalSince(speedMeter!.previousTime) > 10 {
+            speedMeter!.status = .stopping
+            speedDisplay.label.text = "停止中"
+        }
+    }
+
     func updateDistance(_ l: CLLocation ) {
         if (targetLocation == nil) {
             return

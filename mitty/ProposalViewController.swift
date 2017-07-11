@@ -55,10 +55,20 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
     } ()
     
     
+    ///
+    ///
+    let proposolButton : UIButton = {
+        
+        let b = UIButton.newAutoLayout()
+        b.setTitle("Done", for: .normal)
+        b.setTitleColor(.black, for: .normal)
+        b.backgroundColor = .orange
+        
+        return b
+    } ()
+    
     let additionalInfo = MQForm.textView(name: "description")
     
-    
-
     
     override func viewDidLoad() {
         
@@ -155,6 +165,26 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         scrollContainer +++ detailForm
         
         var row = Row.LeftAligned()
+
+        row.layout {
+            r in
+            r.fillHolizon(0).height(25)
+            r.view.backgroundColor = MittyColor.healthyGreen
+        }
+        
+        row +++ MQForm.label(name: "title-request", title: "リクエスト").layout {
+            c in
+            c.height(25)
+            c.leftMost(withInset: 20)
+            let l = c.view as! UILabel
+            l.textColor = .white
+            l.font = .systemFont(ofSize: 16)
+        }
+        detailForm <<< row
+        
+        
+        row = Row.LeftAligned()
+        
         row.layout {
             r in
             r.fillHolizon(0).height(25)
@@ -163,9 +193,8 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         let titleLabel = MQForm.label(name: "Title", title: relatedRequest.title).layout {
             l in
             l.fillHolizon(10).height(25)
-            l.view.backgroundColor = MittyColor.healthyGreen
-            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 24)
-            (l.view as! UILabel).textColor = .white
+            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 20)
+            (l.view as! UILabel).textColor = .black
             (l.view as! UILabel).numberOfLines = 0
         }
         
@@ -213,13 +242,13 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         row = Row.LeftAligned()
         row.layout {
             r in
-            r.fillHolizon(0).height(35)
+            r.fillHolizon(0).height(25)
             r.view.backgroundColor = .orange
         }
         
         row +++ MQForm.label(name: "title-main-proposal", title: "提案情報登録").layout {
             c in
-            c.height(40)
+            c.height(25)
             c.leftMost(withInset: 20)
             let l = c.view as! UILabel
             l.textColor = .white
@@ -374,7 +403,23 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         
         detailForm <<< row
 
-
+        row = Row.Intervaled()
+        row.spacing = 90
+        
+        let proposol = Control(name: "scbscribe", view: proposolButton).layout {
+            c in
+            c.height(45)
+        }
+        
+        row +++ proposol
+        
+        row.layout() {
+            r in
+            r.height(100).fillHolizon()
+        }
+        
+        detailForm <<< row
+        
         //reply_to_request_id		int8
         //contact_tel		varchar	(20),
         //proposed_island_id		int8
