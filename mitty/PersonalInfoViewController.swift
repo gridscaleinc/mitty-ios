@@ -137,10 +137,23 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate,UIIma
         // build name cards
         buildNameCards(detailForm)
         
+        var row = Row.Intervaled().height(40)
+        row.spacing = 90
+        row +++ signOut.layout {
+            b in
+            b.height(40)
+            }.bindEvent(.touchUpInside) {_ in 
+                ApplicationContext.killSession()
+        }
+        
+        detailForm <<< row
+        
+        let bottom = Row.LeftAligned()
+        detailForm <<< bottom
         
         detailForm.layout {
             f in
-            f.fillVertical().width(UIScreen.main.bounds.width)
+            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
             f.view.backgroundColor = UIColor.white
         }

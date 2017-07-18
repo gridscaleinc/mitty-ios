@@ -450,6 +450,10 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             return
         }
         
+        if speedMeter?.status == .stopping {
+            return
+        }
+        
         if Date().timeIntervalSince(speedMeter!.previousTime) > 10 {
             speedMeter!.status = .stopping
             speedDisplay.label.text = "停止中"
