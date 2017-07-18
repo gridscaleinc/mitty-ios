@@ -174,7 +174,7 @@ open class Row : Container {
                     c.righter(than: previous!, withOffset: spacing + c.margin.left)
                 }
                 previous = c
-                c.down(withInset: c.margin.up)
+                c.upper(withInset: c.margin.up)
             }
         case .right:
             let last = children.last

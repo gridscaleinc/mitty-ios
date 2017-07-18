@@ -241,11 +241,11 @@ class ActivityPlanDetailsForm : MQForm {
         row.layout() {
             r in
             r.height(40).fillHolizon(0)
-
+            r.view.backgroundColor = .white
         }
         
         let button = MQForm.button(name: "label", title: "＋").height(40)
-        button.button.backgroundColor = .white
+        button.button.backgroundColor = .clear
         button.button.setTitleColor(.black, for: .normal)
 
         row +++ button
@@ -253,7 +253,7 @@ class ActivityPlanDetailsForm : MQForm {
         let buttons = ["✈️", "🏩", "🚗","🍴"]
         for b in buttons {
             let button = MQForm.button(name: "addItem", title: b).height(40)
-            button.button.backgroundColor = .white
+            button.button.backgroundColor = .clear
             row +++ button
         }
         inputForm <<< row
@@ -261,9 +261,9 @@ class ActivityPlanDetailsForm : MQForm {
         row = Row.LeftAligned().layout() {
             r in
             
-            r.height(5).fillHolizon(10)
+            r.height(3).fillHolizon(10)
             let layer = MittyColor.gradientLayer()
-            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 2)
+            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 3)
             r.view.layer.insertSublayer(layer, at: 0)
         }
         
