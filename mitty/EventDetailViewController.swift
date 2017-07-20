@@ -14,10 +14,9 @@ import SwiftyJSON
 class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     
     var event : Event
-    var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     
-
     var form = MQForm.newAutoLayout()
+    
     //
     // Purelayout流の画面パーツ作り方、必ずnewAutoLayoutを一度呼び出す。
     // 画面を構成するパーツだから、methoの中ではなく、インスタンス変数として持つ。

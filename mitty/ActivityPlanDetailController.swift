@@ -123,6 +123,20 @@ class ActivityPlanDetailsController : MittyViewController {
             c.relatedActivity = self.activityInfo
             self.navigationController?.pushViewController(c, animated: true)
         }
+        
+        form.itemTapped = self.itemTapped
+        form.activityTapped = self.activityTapped
     }
     
+    // activity item tapped
+    func itemTapped (_ item: ActivityItem) {
+        let vc = EditItemViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    // activity taped
+    func activityTapped () {
+        let vc = EditViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }

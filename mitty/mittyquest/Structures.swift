@@ -386,6 +386,7 @@ open class Section : Container {
             r.leftMost().rightMost()
             previous = r
         }
+        self.bottomAlign(with: previous!)
     }
     
     static func += (left: inout Section, right: Container) {

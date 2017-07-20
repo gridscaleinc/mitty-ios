@@ -207,9 +207,15 @@ extension Control {
     
     
     @discardableResult
-    open func fillParent(withInset inset: CGFloat? = 0) -> Self {
-        self.view.autoPinEdge(toSuperviewEdge: .top, withInset: inset!)
-        self.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: inset!)
+    open func fillParent(withInset inset: CGFloat? = 0, guidedBy viewController: UIViewController? = nil) -> Self {
+        if let vc = viewController {
+            self.view.autoPin(toTopLayoutGuideOf: vc, withInset: inset!)
+            self.view.autoPin(toBottomLayoutGuideOf: vc, withInset: inset!)
+        } else {
+            self.view.autoPinEdge(toSuperviewEdge: .top, withInset: inset!)
+            self.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: inset!)
+        }
+        
         self.view.autoPinEdge(toSuperviewEdge: .left, withInset: inset!)
         self.view.autoPinEdge(toSuperviewEdge: .right, withInset: inset!)
         return self

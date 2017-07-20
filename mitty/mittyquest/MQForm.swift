@@ -29,6 +29,7 @@
 
 import Foundation
 import UIKit
+import PureLayout
 
 @objc(MQForm)
 open class MQForm : UIView {
@@ -168,6 +169,13 @@ open class MQForm : UIView {
         let container = Container(name: name, view: scroll)
         
         return container
+    }
+    
+    func fillIn(vc: UIViewController , inset : CGFloat = 0) {
+        self.autoPin(toTopLayoutGuideOf: vc, withInset: inset)
+        self.autoPin(toBottomLayoutGuideOf: vc, withInset: inset)
+        self.autoPinEdge(toSuperviewEdge: .left, withInset: inset)
+        self.autoPinEdge(toSuperviewEdge: .right, withInset: inset)
     }
     
 }

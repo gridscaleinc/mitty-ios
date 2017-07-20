@@ -7,7 +7,6 @@ class EventViewController: MittyViewController {
     
     var shallWeSearch = false
     
-    var images = ["event1", "event6", "event4","event10.jpeg","event5", "event9.jpeg"]
     // MARK: - Properties
     var events: [EventInfo]
     
@@ -50,10 +49,6 @@ class EventViewController: MittyViewController {
         self.navigationItem.title = "島探"
         
         configureNavigationBar()
-//        let uiimage = UIImageView()
-//        uiimage.image = UIImage(named: "event1")
-//        uiimage.frame = self.view.frame
-//        self.view.addSubview(uiimage)
         addSubviews()
         addConstraints()
         configureSubviews()
