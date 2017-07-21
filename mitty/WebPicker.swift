@@ -358,7 +358,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         section +++ c
         section.layout {
             s in
-            s.rightAlign(with: c).fillParent()
+            s.rightAlign(with: c).fillParent().height(150)
         }
         
         form.configLayout()
