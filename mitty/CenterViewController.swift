@@ -24,7 +24,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     
     let myMapView = MKMapView()
     
-    let form = MQForm.newAutoLayout()
+    let controlPanel = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
     var timer = Timer()
     
@@ -165,13 +165,13 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     
     func loadForm (){
         
-        let section = Section(name: "control-panel", view: UIView.newAutoLayout()).height(150).layout() {
+        let section = Section(name: "control-panel", view: UIView.newAutoLayout()).layout() {
             s in
-            s.upper(withInset: 0).fillHolizon()
+            s.fillParent()
             s.view.backgroundColor = UIColor(white: 0.15, alpha: 0.15)
         }
         
-        form +++ section
+        controlPanel +++ section
         
         var row = Row.Intervaled().layout() {
             r in
@@ -231,7 +231,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         }
         section <<< row
         
-        view.addSubview(form)
+        view.addSubview(controlPanel)
         
         view.addSubview(display)
         
@@ -333,12 +333,11 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         
         if (!didSetupConstraints) {
             picture.configLayout()
-            
-            form.autoPinEdge(toSuperviewEdge: .bottom, withInset: 5)
-            form.autoPinEdge(toSuperviewEdge: .left)
-            form.autoPinEdge(toSuperviewEdge: .right)
-            form.autoSetDimension(.height, toSize: 130)
-            form.backgroundColor =  UIColor(white: 0.9, alpha: 0.0)
+            controlPanel.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
+            controlPanel.autoPinEdge(toSuperviewEdge: .left)
+            controlPanel.autoPinEdge(toSuperviewEdge: .right)
+            controlPanel.autoSetDimension(.height, toSize: 100)
+            controlPanel.backgroundColor =  UIColor(white: 0.9, alpha: 0.0)
             
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
@@ -352,7 +351,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             display.layer.borderWidth = 0.7
             display.layer.borderColor = UIColor.white.cgColor
             
-            form.configLayout()
+            controlPanel.configLayout()
             
             display.configLayout()
 

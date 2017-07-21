@@ -137,7 +137,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
-            l.label.font = UIFont.boldSystemFont(ofSize: 20)
+            l.label.font = UIFont.systemFont(ofSize: 20)
             l.down()
         }
         
@@ -162,7 +162,12 @@ class ActivityPlanDetailsForm : MQForm {
             t in
             t.fillHolizon(10)
         }
-        
+        row.bindEvent(.touchUpInside) {
+            a in
+            if self.activityTapped != nil {
+                self.activityTapped!()
+            }
+        }
         inputForm <<< row
 
         
@@ -438,7 +443,7 @@ class ActivityPlanDetailsForm : MQForm {
         
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
-            l.label.font = UIFont.boldSystemFont(ofSize: 20)
+            l.label.font = UIFont.systemFont(ofSize: 20)
             l.down()
         }
 

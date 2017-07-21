@@ -65,6 +65,6 @@ class MainTabBarController: UITabBarController {
     
     //
     override func viewDidAppear(_ animated: Bool) {
-        self.selectedViewController = tab3MyselfController
+        self.selectedIndex = 2
     }
 }
