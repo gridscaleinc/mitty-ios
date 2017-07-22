@@ -47,6 +47,10 @@ class EventCell: UICollectionViewCell {
         }
         
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
+        if (event.publisherIcon != nil) {
+            publisherIcon.image.image = event.publisherIcon
+        }
+        
         row +++ publisherIcon.width(30).height(30)
         
         let publisher = MQForm.label(name: "publisher", title: event.publisherName)

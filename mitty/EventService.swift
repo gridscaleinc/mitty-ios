@@ -312,7 +312,7 @@ class EventService {
             }
         }
         
-        if e.publisherIconUrl != "" && e.publisherIcon != nil {
+        if e.publisherIconUrl != "" {
             Alamofire.request(e.publisherIconUrl).validate(statusCode: 200..<300).responseImage {
                 response in
                 self.debugInfo(response)
