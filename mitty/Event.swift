@@ -283,8 +283,8 @@ class Event {
     var publishedDays : String = ""
     
     //  加入情報　　ログイン中ユーザーが該当イベントを加入しているかどうかを示す。
-    //  Participating/Watching/Notyet
-    var participationStatus : Bool = false
+    //  OWNER/PATICIPATING/Watching/Notyet
+    var participationStatus : String = ""
     
     func duration() -> String {
         
@@ -343,6 +343,11 @@ class Event {
             return price2 + " " + currency
         }
         return "なし"
+    }
+    
+    // イベントに参加したかどうかを判定する。
+    func participated() -> Bool {
+        return participationStatus == "OWNER" || participationStatus == "PARTICIPATING"
     }
 
 }

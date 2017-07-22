@@ -46,8 +46,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     init (event: Event) {
         self.event = event
-        if event.accessControl == "PUBLIC" {
-            if event.participationStatus {
+        if event.accessControl == "public" {
+            if event.participated() {
                 subscribeButton.setTitle("やめます", for: .normal)
             }
         }

@@ -263,7 +263,7 @@ class EventService {
         
         //  加入情報　　ログイン中ユーザーが該当イベントを加入しているかどうかを示す。
         //  Participating/Watching/Notyet
-        e.participationStatus = json["participationStatus"].boolValue
+        e.participationStatus = json["participationStatus"].stringValue
         
         //TODO: ActivityItemに該当ステータスを記録すべし
 
