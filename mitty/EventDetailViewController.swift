@@ -310,7 +310,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         detailForm +++ descriptionLabel
         
-        let subscribe = Control(name: "scbscribe", view: subscribeButton).layout {
+        let subscribe = Control(name: "subscribe", view: subscribeButton).layout {
             c in
             c.height(45).holizontalCenter().width(140).putUnder(of: descriptionLabel, withOffset: 30)
         }

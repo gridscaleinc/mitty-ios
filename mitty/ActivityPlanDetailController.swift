@@ -46,6 +46,8 @@ class ActivityPlanDetailsController : MittyViewController {
         ActivityService.instance.fetch(id: activityInfo.id) { [weak self]
             activityDetail in
             self?.form.loadForm(activityDetail)
+            self?.activityInfo = activityDetail.info
+            
             self?.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
 
             self?.form.quest("[name=addItem]").bindEvent(for: .touchUpInside) { [weak self]
@@ -130,13 +132,13 @@ class ActivityPlanDetailsController : MittyViewController {
     
     // activity item tapped
     func itemTapped (_ item: ActivityItem) {
-        let vc = EditItemViewController()
+        let vc = EditItemViewController(item)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // activity taped
     func activityTapped () {
-        let vc = EditViewController()
+        let vc = EditViewController(activityInfo)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

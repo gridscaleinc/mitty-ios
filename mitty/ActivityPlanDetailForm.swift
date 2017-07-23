@@ -45,7 +45,7 @@ class ActivityPlanDetailsForm : MQForm {
     //    Title                         Logo
     var eventTitle : Control = {
         let t = TapableLabel.newAutoLayout()
-        t.text = "ニューヨークタイムスクエア　New year count down！"
+        t.text = ""
         t.font = UIFont.boldSystemFont(ofSize: 18)
         t.numberOfLines = 0
         t.textColor = MittyColor.healthyGreen
@@ -356,26 +356,6 @@ class ActivityPlanDetailsForm : MQForm {
     
     func loadItem(_ detail: Section, _ item: ActivityItem) {
         
-        // todo func 作成。
-        // 1 itemを1 sectionとして処理し、イベントハンドラーを作成。
-        // tap するとitem編集VCを開く。
-        let itemRow = Row.LeftAligned().layout() {
-            r in
-            r.fillHolizon().height(120)
-        }
-        
-        detail <<< itemRow
-        
-        let itemSection = Section(name: "itemSection", view: UIView.newAutoLayout())
-        itemRow +++ itemSection
-        
-        itemSection.bindEvent(.touchUpInside) {
-            s in
-            if self.itemTapped != nil {
-                self.itemTapped!(item)
-            }
-        }
-        
         var row = Row.LeftAligned()
         row +++ MQForm.label(name: "activityDate", title: item.start).layout {
             d in
@@ -402,12 +382,54 @@ class ActivityPlanDetailsForm : MQForm {
             let w = UIScreen.main.bounds.size.width - 20
             r.leftMost().rightMost().height(40).width(w)
         }
+        
+        detail <<< row
+        
+        // todo func 作成。
+        // 1 itemを1 sectionとして処理し、イベントハンドラーを作成。
+        // tap するとitem編集VCを開く。
+        let itemRow = Row.LeftAligned().layout() {
+            r in
+            r.fillHolizon().height(120)
+        }
+        
+        detail <<< itemRow
+        
+        let itemSection = Section(name: "itemSection", view: UIView.newAutoLayout())
+        itemSection.layout{
+            s in
+            s.fillParent()
+        }
+        itemRow +++ itemSection
+        
+        itemSection.bindEvent(.touchUpInside) {
+            s in
+            if self.itemTapped != nil {
+                self.itemTapped!(item)
+            }
+        }
+        
+        row = Row.LeftAligned()
+        row.layout {
+            r in
+            r.fillHolizon().height(30)
+        }
+        
+        let title = MQForm.label(name: "title", title: item.title).layout {
+            l in
+            l.width(200).height(30)
+            l.label.textColor = UIColor.gray
+            l.label.font = UIFont.boldSystemFont(ofSize: 14)
+        }
+        
+        row +++ title
+        
         itemSection <<< row
         
         row = Row.LeftAligned()
         row.layout() {
             r in
-            r.height(30).leftMost(withInset: 5).rightMost(withInset: 5)
+            r.height(25).leftMost(withInset: 5).rightMost(withInset: 5)
         }
         
         let labelNoti = UILabel.newAutoLayout()
@@ -416,7 +438,7 @@ class ActivityPlanDetailsForm : MQForm {
         let notification = Control(name:"notification", view: labelNoti)
         row +++ notification.layout {
             n in
-            n.rightMost(withInset: 10).height(30)
+            n.rightMost(withInset: 10).height(25)
         }
         
         itemSection <<< row
