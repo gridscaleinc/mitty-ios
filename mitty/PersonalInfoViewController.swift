@@ -12,7 +12,7 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class PersonalInfoViewController: MittyViewController, UITextFieldDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIImagePickerControllerDelegate,UINavigationControllerDelegate {
     
     var userInfo = UserInfo()
     var profile = Profile()
@@ -20,7 +20,6 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate,UIIma
     var nameCardBox = [NameCard]()
     
     var form = MQForm.newAutoLayout()
-    
     
     let picture : Control = MQForm.button(name: "m2", title: "aa")
     let signOut : Control = MQForm.button(name: "signOut", title: "Sign Out")

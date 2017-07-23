@@ -131,6 +131,11 @@ open class MQForm : UIView {
         
     }
     
+    static func section(name: String) -> Section {
+        let section = Section(name: name, view: UIView.newAutoLayout())
+        return section
+    }
+    
     // Quest by selector
     func quest(_ selector: String) -> MittyQuest {
         return quest()[selector]
