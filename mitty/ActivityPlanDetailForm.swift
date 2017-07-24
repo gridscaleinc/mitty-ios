@@ -117,14 +117,15 @@ class ActivityPlanDetailsForm : MQForm {
         
         let inputContainer = Container(name: "Details-Container", view: scroll)
         
+        inputContainer.layout() { (main) in
+            main.fillParent()
+            main.view.backgroundColor = UIColor.white
+        }
+        
         self +++ inputContainer
         
         let inputForm = Section(name: "Details-Form", view: UIView.newAutoLayout())
         inputContainer +++ inputForm
-        
-        inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(1400)
-        }
         
         // title
         var row = Row.LeftAligned().layout() {
@@ -348,12 +349,11 @@ class ActivityPlanDetailsForm : MQForm {
         row = Row.Intervaled()
         inputForm <<< row
 
-        
-        inputContainer.layout() { (main) in
-            main.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
-            main.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
-            main.view.backgroundColor = UIColor.white
+        inputForm.layout() { c in
+            c.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+            c.view.backgroundColor = .white
         }
+        
     }
     
     
