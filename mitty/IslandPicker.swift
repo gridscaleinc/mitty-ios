@@ -30,7 +30,7 @@ class IslandPicker : MittyViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        super.autoCloseKeyboard()
+       // super.autoCloseKeyboard()
         
         self.view.backgroundColor = .white
         self.view.addSubview(islandForm)

@@ -182,7 +182,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         
         row +++ nameTable.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).upper().upMargin(10)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).down().upMargin(10)
         }
         
         section <<< row
@@ -196,7 +196,7 @@ class IslandPickForm : MQForm, MKLocalSearchCompleterDelegate, UITableViewDelega
         
         row +++ mapControl.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).upper().upMargin(10)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).down().upMargin(10)
         }
         
         section <<< row

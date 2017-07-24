@@ -68,7 +68,7 @@ class ActivityItem {
         if allDayFlag {
             return dt.monthDay
         } else {
-            return dt.monthDay
+            return dt.monthDay + " " + dt.time
         }
     }
     
