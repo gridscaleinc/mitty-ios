@@ -77,6 +77,9 @@ class ActivityPlanDetailsForm : MQForm {
     
     var activityTapped : (() -> Void)? = nil
     
+    // eventをクリックした際のハンドラー
+    var openEventHandler : ((_ eventId: String) -> Void)? = nil
+    
     //  Action list Title
     //  Action addition tool bar
     //  Action list (Loop)
@@ -369,6 +372,12 @@ class ActivityPlanDetailsForm : MQForm {
             l.width(200).height(30)
             l.label.textColor = MittyColor.healthyGreen
             l.label.font = UIFont.boldSystemFont(ofSize: 14)
+        }
+        
+        l.bindEvent(.touchUpInside) { label in
+            if (self.openEventHandler != nil) {
+                self.openEventHandler!(item.eventId)
+            }
         }
         
         row +++ l

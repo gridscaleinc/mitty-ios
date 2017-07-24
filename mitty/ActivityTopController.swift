@@ -28,6 +28,8 @@ import PureLayout
 @objc(ActivityTopViewController)
 class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     
+    var activityTypes : UISegmentedControl = UISegmentedControl(items: ["Request", "Activity","Invitation"])
+    
     // Search Box
     let searchBox : UISearchBar = {
         let t = UISearchBar()
@@ -48,6 +50,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         self.navigationItem.title = "活動予定"
         self.view.backgroundColor = UIColor.white
         self.view.addSubview(form)
+        self.view.addSubview(activityTypes)
+        
+        activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
         
         configureNavigationBar()
         
@@ -111,7 +116,16 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
             
-            form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+            
+            activityTypes.selectedSegmentIndex = 0
+            activityTypes.translatesAutoresizingMaskIntoConstraints = false
+            activityTypes.autoPin(toTopLayoutGuideOf: self, withInset: 5)
+            activityTypes.autoPinEdge(toSuperviewEdge: .left, withInset: 5)
+            activityTypes.autoPinEdge(toSuperviewEdge: .right, withInset: 5)
+            
+            
+            form.autoPinEdge(.top, to: .bottom, of:activityTypes, withOffset: 5 )
+            
             form.autoPinEdge(toSuperviewEdge: .left)
             form.autoPinEdge(toSuperviewEdge: .right)
             form.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
@@ -205,6 +219,11 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         super.autoCloseKeyboard()
         
         LoadingProxy.set(self)
+    }
+    
+    // 選択した種類によて、一覧表示を変える。
+    func changeType(_ s: UISegmentedControl) {
+        // query Type を変える。
     }
 }
 

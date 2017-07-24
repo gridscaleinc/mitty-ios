@@ -110,11 +110,7 @@ class ActivityPlanDetailsController : MittyViewController {
         } else {
             form.eventTitle.bindEvent(.touchUpInside) {
                 v in
-                EventService.instance.fetch(id: self.activityInfo.mainEventId!) {
-                    event in
-                    let c = EventDetailViewController(event: event)
-                    self.navigationController?.pushViewController(c, animated: true)
-                }
+                self.openEvent(self.activityInfo.mainEventId!)
             }
             
         }
@@ -128,6 +124,8 @@ class ActivityPlanDetailsController : MittyViewController {
         
         form.itemTapped = self.itemTapped
         form.activityTapped = self.activityTapped
+        form.openEventHandler = openEvent
+        
     }
     
     // activity item tapped
@@ -140,5 +138,13 @@ class ActivityPlanDetailsController : MittyViewController {
     func activityTapped () {
         let vc = EditViewController(activityInfo)
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func openEvent(_ eventId: String) {
+        EventService.instance.fetch(id: self.activityInfo.mainEventId!) {
+            event in
+            let c = EventDetailViewController(event: event)
+            self.navigationController?.pushViewController(c, animated: true)
+        }
     }
 }
