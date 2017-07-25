@@ -106,74 +106,35 @@ class ActivityEntryViewController : MittyViewController {
     
     func registerActivity() {
         
-        let urlString = "http://dev.mitty.co/api/new/activity"
+        let title = activityTitle.textField.text!
+        let memoText = memo.textView.text!
         
-        let parameters: Parameters = [
-            "title": activityTitle.textField.text!,
-            "memo": memo.textView.text!,
-            "mainEventId": "0"
-        ]
-
-        let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
-        ]
-        
-        if ((parameters["title"]) as! String  == "" || (parameters["memo"]) as! String == "") {
+        if (title == "" || memoText == "") {
             showError("タイトルとメモを入力してください")
             return
         }
         
-        LoadingProxy.on()
-        
-        print(parameters)
-        Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    DispatchQueue.main.async {
-                        let activityId = json["activityId"].stringValue
-                        
-                        let activityInfo = ActivityInfo()
-                        activityInfo.title = parameters["title"] as! String
-                        activityInfo.memo = parameters["memo"] as? String
-                        activityInfo.id = activityId
-                        
-                        if let info = self?.pickedInfo {
-                            let vc = ActivityPlanViewController(activityInfo)
-                            vc.webpicker(nil, info)
-                            self?.navigationController?.pushViewController(vc, animated: true)
-                        } else {
-                            let vc = ActivityPlanDetailsController(activityInfo)
-                            vc.status = 1
-                            self?.navigationController?.pushViewController(vc, animated: true)
-                        }
-                        
-                    }
+        ActivityService.instance.register(activityTitle.textField.text!, memo.textView.text!
+            , "0", onCompletion: {
+                act in
+                if let info = self.pickedInfo {
+                    let vc = ActivityPlanViewController(act)
+                    vc.webpicker(nil, info)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                } else {
+                    let vc = ActivityPlanDetailsController(act)
+                    vc.status = 1
+                    self.navigationController?.pushViewController(vc, animated: true)
                 }
+        },
+              onError: { error in
                 
-            case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    
-                } catch {
-                    print("Serialize Error")
-                }
-                
-                print(response.description)
-                
-
                 LoadingProxy.off()
                 print(error)
-                let count = self?.navigationController?.viewControllers.count
-                let vc = self?.navigationController?.viewControllers[count!-2]
-                self?.navigationController?.popToViewController(vc!, animated: true)
-                
-            }
-        }
+                let count = self.navigationController?.viewControllers.count
+                let vc = self.navigationController?.viewControllers[count!-2]
+                self.navigationController?.popToViewController(vc!, animated: true)
+        })
+
     }
 }

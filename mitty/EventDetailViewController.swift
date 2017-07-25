@@ -359,76 +359,21 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
     }
     
+    // 参加
     func pressSubscribe (sender:UIButton){
-        
-        // ① UIAlertControllerクラスのインスタンスを生成
-        // タイトル, メッセージ, Alertのスタイルを指定する
-        // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
-        let alert: UIAlertController = UIAlertController(title: "確認", message: "このイベントをカレンダーに登録しますか？", preferredStyle:  UIAlertControllerStyle.actionSheet)
-        
-        // ② Actionの設定
-        // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
-        // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
-        // OKボタン
-        let defaultAction: UIAlertAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("OK,\(self.event.id)に参加します。")
-            
-            self.confirmCalendarRegister()
-            
+        ActivityService.instance.register(event.title, event.description, event.id,
+        onCompletion: {
+            act in
+            // 登録しました。
+            ActivityService.instance.registerItem(act.id, "NO-title", "", act.mainEventId!, notify: false, notifyTime: nil, asMainEvent: true, onError: {
+                error in
+                self.showError("活動Item登録時エラーになりました。")
+            })
+        },
+        onError: {
+            error in
+            self.showError("活動登録時エラーになりました。")
         })
-        // キャンセルボタン
-        let cancelAction: UIAlertAction = UIAlertAction(title: "キャンセル", style: UIAlertActionStyle.cancel, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("Cancel\(self.event.id)に参加しません。")
-        })
-        
-        // ③ UIAlertControllerにActionを追加
-        alert.addAction(cancelAction)
-        alert.addAction(defaultAction)
-        
-        // ④ Alertを表示
-        present(alert, animated: true, completion: nil)
     }
     
-    func confirmCalendarRegister () {
-        // ① UIAlertControllerクラスのインスタンスを生成
-        // タイトル, メッセージ, Alertのスタイルを指定する
-        // 第3引数のpreferredStyleでアラートの表示スタイルを指定する
-        let alert: UIAlertController = UIAlertController(title: "確認", message: "イベントの参加をネットで公開しますか？", preferredStyle:  UIAlertControllerStyle.actionSheet)
-        
-        // ② Actionの設定
-        // Action初期化時にタイトル, スタイル, 押された時に実行されるハンドラを指定する
-        // 第3引数のUIAlertActionStyleでボタンのスタイルを指定する
-        // OKボタン
-        let openAction: UIAlertAction = UIAlertAction(title: "実名でネットで公開します。", style: UIAlertActionStyle.destructive, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("実名公開,\(self.event.id) 。")
-        })
-        // OKボタン
-        let defaultAction: UIAlertAction = UIAlertAction(title: "プライベート予定なのでやめます。", style: UIAlertActionStyle.cancel, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("やめる,\(self.event.id) を公開にしません。")
-        })
-        // キャンセルボタン
-        let anonymousAction: UIAlertAction = UIAlertAction(title: "名前を出さないで公開します。", style: UIAlertActionStyle.default, handler:{
-            // ボタンが押された時の処理を書く（クロージャ実装）
-            (action: UIAlertAction!) -> Void in
-            print("匿名公開\(self.event.id)。")
-        })
-        
-        // ③ UIAlertControllerにActionを追加
-        alert.addAction(openAction)
-        alert.addAction(anonymousAction)
-        alert.addAction(defaultAction)
-        
-        
-        // ④ Alertを表示
-        present(alert, animated: true, completion: nil)
-        
-    }
 }
