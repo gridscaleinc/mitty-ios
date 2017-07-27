@@ -74,8 +74,9 @@ class JSONRequest  {
     func setBool(named name: String, value : Bool) {
         if (value) {
             parameters[name] = "true"
+        } else {
+            parameters[name] = "false"
         }
-        parameters[name] = "false"
         
     }
     

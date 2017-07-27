@@ -364,11 +364,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         ActivityService.instance.register(event.title, event.description, event.id,
         onCompletion: {
             act in
-            // 登録しました。
-            ActivityService.instance.registerItem(act.id, "NO-title", "", act.mainEventId!, notify: false, notifyTime: nil, asMainEvent: true, onError: {
-                error in
-                self.showError("活動Item登録時エラーになりました。")
-            })
+            let detailViewController = ActivityPlanDetailsController(act)
+            self.navigationItem.title = "..."
+            self.tabBarController?.tabBar.isHidden = true
+            self.navigationController?.pushViewController(detailViewController, animated: true)
         },
         onError: {
             error in

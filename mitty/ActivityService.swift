@@ -57,7 +57,7 @@ class ActivityService {
                         activityInfo.title = parameters["title"] as! String
                         activityInfo.memo = parameters["memo"] as? String
                         activityInfo.id = activityId
-                        
+                        activityInfo.mainEventId = mainEventId
                         onCompletion (activityInfo)
                         
                 }
@@ -84,7 +84,7 @@ class ActivityService {
 
     //
     func registerItem(_ actId: String, _ title: String, _ memo: String, _ eventId: String, notify: Bool, notifyTime : Date?,
-                      asMainEvent: Bool,
+                      asMainEvent: Bool, onCompletion : @escaping (_ actItem: ActivityItem ) -> Void,
                   onError : @escaping (_ error: String ) -> Void ) {
         
         let urlString = "http://dev.mitty.co/api/new/activity/item"
@@ -95,11 +95,11 @@ class ActivityService {
         request.setStr(named: "title", value: title)
         request.setStr(named: "memo", value: memo)
         request.setStr(named: "eventId", value: eventId)
-        request.setBool(named: "notification", value: notify)
+        request.setStr(named: "notification", value: (notify ? "true" : "false"))
         if (notify) {
             request.setDate(named: "notificationDateTime", date: notifyTime!)
         }
-        request.setBool(named: "notification", value: asMainEvent)
+        request.setStr(named: "asMainEvent", value: (asMainEvent ? "true" : "false"))
         
         let parameters = request.parameters
         
@@ -113,7 +113,16 @@ class ActivityService {
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:
+                
                 LoadingProxy.off()
+                
+                let item = ActivityItem()
+                item.allDayFlag = false
+                item.eventId = eventId
+                item.title = title
+                item.memo = memo
+                
+                onCompletion(item)
                 
             case .failure(let error):
                 print(response.debugDescription)

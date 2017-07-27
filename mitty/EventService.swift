@@ -124,6 +124,7 @@ class EventService {
                 LoadingProxy.off()
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)["event"]
+                    print(json)
                     let event = self.bindEvent(json)
                     callback(event)
                 }
