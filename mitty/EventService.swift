@@ -116,8 +116,12 @@ class EventService {
         
         LoadingProxy.on()
         
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
         // ダミーコード、本当はサーバーから検索する。
-        let request = Alamofire.request(urlFetch, method: .get, parameters: parmeters)
+        let request = Alamofire.request(urlFetch, method: .get, parameters: parmeters, headers: httpHeaders)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:

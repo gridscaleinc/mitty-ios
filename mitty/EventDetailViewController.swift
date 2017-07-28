@@ -43,14 +43,28 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         return b
     } ()
     
+    let shareButton : UIButton = {
+        
+        let b = UIButton.newAutoLayout()
+        b.setTitle("シェア", for: .normal)
+        b.setTitleColor(.black, for: .normal)
+        b.backgroundColor = .orange
+        
+        return b
+    } ()
+    
+    let revertButton : UIButton = {
+        
+        let b = UIButton.newAutoLayout()
+        b.setTitle("脱退", for: .normal)
+        b.setTitleColor(.black, for: .normal)
+        b.backgroundColor = .orange
+        
+        return b
+    } ()
 
     init (event: Event) {
         self.event = event
-        if event.accessControl == "public" {
-            if event.participated() {
-                subscribeButton.setTitle("やめます", for: .normal)
-            }
-        }
         super.init(nibName: nil, bundle:nil)
     }
 
@@ -110,8 +124,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
         self.automaticallyAdjustsScrollViewInsets = false
-        //        scroll.layer.borderWidth = 1
-        //        scroll.layer.borderColor = UIColor.blue.cgColor
         
         let scrollContainer = Container(name: "Detail-form", view: scroll).layout() { (container) in
             container.fillParent()
@@ -177,11 +189,30 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(35)
         }
         
-        let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes)  価格:\(event.priceShortInfo)").layout { l in
-            l.height(35).width(330)
+        let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes)").layout { l in
+            l.height(35).width(90)
         }
         
         row +++ likes
+        
+        var rightRow = Row.RightAligned().layout {
+            r in
+            r.rightMost().fillVertical()
+        }
+        
+        let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
+            b.height(30).width(90)
+            b.view.backgroundColor = .white
+            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderWidth = 0.7
+            b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+        }
+        
+        rightRow +++ likeButton
+        row +++ rightRow
+        
+        // TODO : Price Info
+        addPriceInfo(detailForm)
         
         detailForm +++ row
         
@@ -203,93 +234,52 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: dates, withOffset: 5).height(40)
         }
-        row +++ MQForm.label(name: "geoIcon", title:"📍").height(35).width(25)
+        row +++ MQForm.label(name: "geoIcon", title:"📍").height(35).width(30)
+
+        let lacationIcon = MQForm.img(name: "locationIocn", url: "timesquare").layout {
+            icon in
+            icon.height(25).width(25)
+        }
+        
+        row +++ lacationIcon
+        
         let location = MQForm.label(name: "isLand", title: "\(event.isLandName)").layout { l in
-            l.height(40).width(210)
+            l.height(40).width(150)
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
             if self.event.isValidGeoInfo {
                 l.label.textColor = MittyColor.healthyGreen
             }
         }
+        
         if (event.isValidGeoInfo) {
-            location.bindEvent(.touchUpInside) {_ in 
+            location.bindEvent(.touchUpInside) {_ in
                 self.event.openGoogleMap()
             }
         }
         
         row +++ location
-        
-        let lacationIcon = MQForm.img(name: "locationIocn", url: "timesquare").layout {
-            icon in
-            icon.height(35).width(20).topAlign(with: location)
+
+        rightRow = Row.RightAligned().layout {
+            r in
+            r.rightMost().fillVertical()
         }
-        row +++ lacationIcon
+        
+        let routeButton = MQForm.button(name: "route", title: "経路").layout { b in
+            b.height(30).width(50)
+            b.view.backgroundColor = .white
+            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderWidth = 0.7
+            b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+        }
+        
+        rightRow +++ routeButton
+        row +++ rightRow
         
         detailForm +++ row
         
         
-        
-        let contact = Row.Intervaled().layout {
-            r in
-            r.fillHolizon().putUnder(of: lacationIcon, withOffset: 5).height(35)
-        }
-        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel).layout {
-            l in
-            l.height(35)
-        }
-        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax).layout {
-            l in
-            l.height(35)
-        }
-        detailForm +++ contact
-        
-        // TODO: Mail address
-        
-        let infoSource = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().putUnder(of: contact, withOffset: 5).height(35)
-        }
-        infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
-            l in
-            l.height(35)
-        }
-        infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
-            l in
-            l.height(35)
-        }
-        detailForm +++ infoSource
-        
-        
-        let url = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(35)
-        }
-        url +++ MQForm.label(name: "URL", title: "情報源").layout {
-            l in
-            l.height(35)
-        }
-        
-        let link = UIButton.newAutoLayout()
-        link.setTitleColor(.blue, for: .normal)
-        link.setTitle(event.sourceName, for: .normal)
-        url +++ Control(name:"URL", view:link).layout {
-            l in
-            l.height(35)
-        }.bindEvent(.touchUpInside) { [ weak self]
-            b in
-            
-            let urlString : String = (self?.event.sourceUrl)!
-            
-            if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url){
-                if #available(iOS 10.0, *) {
-                    UIApplication.shared.open(url, options: [:])
-                } else {
-                    UIApplication.shared.openURL(url)
-                }
-            }
-        }
-        detailForm +++ url
+        let url = addContactInfo(detailForm, location)
         
         
         let description = event.description
@@ -310,29 +300,147 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         detailForm +++ descriptionLabel
         
-        let subscribe = Control(name: "subscribe", view: subscribeButton).layout {
-            c in
-            c.height(45).holizontalCenter().width(140).putUnder(of: descriptionLabel, withOffset: 30)
+        let interval = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon()
         }
-        
-        detailForm +++ subscribe
-        
-        subscribe.bindEvent(.touchUpInside) {
-            b in
-            let button = b as! UIButton
-            self.pressSubscribe(sender: button)
-        }
+        detailForm +++ interval
         
         detailForm.layout {
             f in
-            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: subscribe)
+            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: interval)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
             f.view.backgroundColor = UIColor.white
         }
+        
+        setButtons()
     }
     
+    // 価格情報をデータに応じて表示。
+    //
+    func addPriceInfo(_ section: Section) {
+        
+    }
     
-    func pressSubscribe2 (sender: UIButton) {
+    func addContactInfo(_ section: Section, _ anchor : Control) -> Control {
+        
+        let contact = Row.Intervaled().layout {
+            r in
+            r.fillHolizon().putUnder(of: anchor, withOffset: 5).height(35)
+        }
+        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel).layout {
+            l in
+            l.height(35)
+        }
+        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax).layout {
+            l in
+            l.height(35)
+        }
+        
+        section +++ contact
+        
+        // TODO: Mail address
+        
+        let infoSource = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: contact, withOffset: 5).height(35)
+        }
+        
+        
+        infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
+            l in
+            l.height(35)
+        }
+        infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
+            l in
+            l.height(35)
+        }
+        section +++ infoSource
+        
+        let url = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(35)
+        }
+        url +++ MQForm.label(name: "URL", title: "情報源").layout {
+            l in
+            l.height(35)
+        }
+        
+        let link = UIButton.newAutoLayout()
+        link.setTitleColor(.blue, for: .normal)
+        link.setTitle(event.sourceName, for: .normal)
+        url +++ Control(name:"URL", view:link).layout {
+            l in
+            l.height(35)
+            }.bindEvent(.touchUpInside) { [ weak self]
+                b in
+                
+                let urlString : String = (self?.event.sourceUrl)!
+                
+                if let url = URL(string: urlString), UIApplication.shared.canOpenURL(url){
+                    if #available(iOS 10.0, *) {
+                        UIApplication.shared.open(url, options: [:])
+                    } else {
+                        UIApplication.shared.openURL(url)
+                    }
+                }
+        }
+        
+        section +++ url
+
+        return url
+    }
+    
+    var buttons = Row.Intervaled()
+    
+    func setButtons() {
+        
+        buttons = Row.Intervaled().layout{
+            r in
+            r.fillHolizon().down().height(40)
+        }
+        
+        
+        let subscribe = Control(name: "subscribe", view: subscribeButton).layout {
+            c in
+            c.height(40)
+        }
+        
+        subscribe.bindEvent(.touchUpInside) {
+            b in
+            self.pressSubscribe(sender: self.subscribeButton)
+        }
+        
+        let revert = Control(name: "revert", view: revertButton).layout {
+            c in
+            c.height(40)
+        }
+
+        let share = Control(name: "revert", view: shareButton).layout {
+            c in
+            c.height(40)
+        }
+        share.bindEvent(.touchUpInside) {
+            b in
+            self.share(sender: self.shareButton)
+        }
+        
+        buttons +++ share
+        
+        
+        if event.accessControl == "public" {
+            if !event.participated() {
+                buttons +++ subscribe
+            } else {
+                buttons +++ revert
+            }
+        }
+        
+        form +++ buttons
+        
+    }
+    
+    func share (sender: UIButton) {
         // 共有する項目
         let shareText = "Apple - Apple Watch"
         let shareWebsite = NSURL(string: "https://www.apple.com/jp/watch/")!
@@ -368,11 +476,14 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             self.navigationItem.title = "..."
             self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(detailViewController, animated: true)
+            self.event.participationStatus = "PARTICIPATING"
         },
         onError: {
             error in
             self.showError("活動登録時エラーになりました。")
         })
     }
+    
+    
     
 }
