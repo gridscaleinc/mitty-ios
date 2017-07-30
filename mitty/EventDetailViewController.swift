@@ -111,15 +111,9 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     func buildform () {
         
         form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
-        let anchor = MQForm.label(name: "dummy", title: "").layout {
-            a in
-            a.height(0).leftMost().rightMost()
-        }
-        form +++ anchor
         
         // スクロールViewを作る
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:900)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -135,9 +129,11 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         scrollContainer +++ detailForm
         
+        let topRow = Row.LeftAligned()
+        let topContainer = Container (name: "topContainer", view: UIView.newAutoLayout())
         let img = Control(name: "image", view: imageView).layout {
             i in
-            i.width(UIScreen.main.bounds.size.width).upper().height(UIScreen.main.bounds.size.width)
+            i.width(UIScreen.main.bounds.size.width).height(UIScreen.main.bounds.size.width)
         }
         
         if (event.coverImageUrl != "") {
@@ -150,13 +146,18 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             }
             )
         }
+        topContainer +++ img
+        topContainer.layout {
+            c in
+            c.fillHolizon()
+            c.topAlign(with: img).bottomAlign(with: img)
+        }
         
-        detailForm +++ img
         
         let titleLabel = MQForm.label(name: "Title", title: event.title).layout {
             l in
             l.leftMost(withInset: 25).upper(withInset: 50).height(50)
-
+            
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 24)
             (l.view as! UILabel).textColor = .white
             (l.view as! UILabel).shadowColor = UIColor.black
@@ -164,14 +165,25 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             (l.view as! UILabel).numberOfLines = 0
         }
         
-        detailForm +++ titleLabel
+        topContainer +++ titleLabel
         
         let imageIcon = MQForm.img(name: "image-icon", url: "timesquare").layout {
             i in
             i.width(35).height(35).topAlign(with: titleLabel).rightMost(withInset: 30)
         }
-        detailForm +++ imageIcon
         
+        topContainer +++ imageIcon
+
+        topRow +++ topContainer
+        topRow.layout {
+            r in
+            r.fillHolizon()
+            r.topAlign(with: topContainer).bottomAlign(with: topContainer)
+        }
+        
+        detailForm <<< topRow
+        
+        let actionRow = Row.LeftAligned()
 
         let actionLabel = MQForm.label(name: "action", title: (event.action)).layout {
             c in
@@ -182,11 +194,18 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             l.layer.borderColor = UIColor.black.cgColor
         }
         
-        detailForm +++ actionLabel
+        actionRow +++ actionLabel
+        actionRow.layout {
+            r in
+            r.fillHolizon()
+            r.topAlign(with: actionLabel).bottomAlign(with: actionLabel)
+        }
+        
+        detailForm <<< actionRow
         
         var row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
         
         let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes)").layout { l in
@@ -214,11 +233,11 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         // TODO : Price Info
         addPriceInfo(detailForm)
         
-        detailForm +++ row
+        detailForm <<< row
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
         
         let dates = MQForm.label(name: "sheduledData", title: event.duration()).layout { l in
@@ -228,7 +247,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         row +++ dates
-        detailForm +++ row
+        detailForm <<< row
         
         row = Row.LeftAligned().layout {
             r in
@@ -276,17 +295,17 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         rightRow +++ routeButton
         row +++ rightRow
         
-        detailForm +++ row
+        detailForm <<< row
         
+        addContactInfo(detailForm)
         
-        let url = addContactInfo(detailForm, location)
-        
+        let descriptionRow = Row.LeftAligned()
         
         let description = event.description
         
         let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
             c in
-            c.putUnder(of: url, withOffset: 5).fillHolizon(10)
+            c.fillHolizon(10)
             let l = c.view as! UILabel
             //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
             l.numberOfLines = 0
@@ -297,18 +316,24 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             l.layer.borderColor = UIColor.gray.cgColor
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
+        descriptionRow +++ descriptionLabel
+        descriptionRow.layout{
+            r in
+            r.fillHolizon().topAlign(with: descriptionLabel).bottomAlign(with: descriptionLabel)
+        }
         
-        detailForm +++ descriptionLabel
+        detailForm <<< descriptionRow
         
         let interval = Row.LeftAligned().layout {
             r in
-            r.fillHolizon()
+            r.fillHolizon().height(30)
         }
-        detailForm +++ interval
+        
+        detailForm <<< interval
         
         detailForm.layout {
             f in
-            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: interval)
+            f.fillParent().width(UIScreen.main.bounds.width).bottomAlign(with: interval)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
             f.view.backgroundColor = UIColor.white
         }
@@ -322,28 +347,30 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
     }
     
-    func addContactInfo(_ section: Section, _ anchor : Control) -> Control {
+    func addContactInfo(_ section: Section) {
         
-        let contact = Row.Intervaled().layout {
-            r in
-            r.fillHolizon().putUnder(of: anchor, withOffset: 5).height(35)
-        }
-        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel).layout {
-            l in
-            l.height(35)
-        }
-        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax).layout {
-            l in
-            l.height(35)
-        }
+//        let contact = Row.Intervaled().layout {
+//            r in
+//            r.fillHolizon().putUnder(of: anchor, withOffset: 5).height(35)
+//        }
+//        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel).layout {
+//            l in
+//            l.height(35)
+//        }
+//        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax).layout {
+//            l in
+//            l.height(35)
+//        }
+//        
+//        section +++ contact
+//        
         
-        section +++ contact
         
         // TODO: Mail address
         
         let infoSource = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: contact, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
         
         
@@ -353,13 +380,24 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
             l in
-            l.height(35)
+            l.height(35).rightMost(withInset: 60)
         }
-        section +++ infoSource
+        
+        let contactButton = MQForm.button(name: "contact", title: "問合せ").layout { b in
+            b.height(30).width(50)
+            b.view.backgroundColor = .white
+            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderWidth = 0.7
+            b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+        }
+        
+        infoSource +++ contactButton
+        
+        section <<< infoSource
         
         let url = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: infoSource, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
         url +++ MQForm.label(name: "URL", title: "情報源").layout {
             l in
@@ -386,19 +424,28 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
                 }
         }
         
-        section +++ url
+        section <<< url
 
-        return url
     }
     
     var buttons = Row.Intervaled()
     
     func setButtons() {
         
+        // ２回目以降に呼ばれる際に備える。
+        for b in buttons.children {
+            b.view.removeFromSuperview()
+        }
+        if (buttons.view.superview != nil) {
+            buttons.view.removeFromSuperview()
+        }
+        
         buttons = Row.Intervaled().layout{
             r in
             r.fillHolizon().down().height(40)
         }
+        
+        buttons.spacing = 10
         
         
         let subscribe = Control(name: "subscribe", view: subscribeButton).layout {
@@ -419,6 +466,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let share = Control(name: "revert", view: shareButton).layout {
             c in
             c.height(40)
+            c.button.backgroundColor = MittyColor.healthyGreen
         }
         share.bindEvent(.touchUpInside) {
             b in
@@ -466,7 +514,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         self.present(activityVC, animated: true, completion: nil)
         
     }
-    
+
     // 参加
     func pressSubscribe (sender:UIButton){
         ActivityService.instance.register(event.title, event.description, event.id,
@@ -477,6 +525,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             self.tabBarController?.tabBar.isHidden = true
             self.navigationController?.pushViewController(detailViewController, animated: true)
             self.event.participationStatus = "PARTICIPATING"
+            self.setButtons()
+            self.buttons.configLayout()
         },
         onError: {
             error in

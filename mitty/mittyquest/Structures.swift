@@ -132,7 +132,7 @@ open class Container : Control, Selectable {
 open class Row : Container {
     
     private var _distributionMode : LeftRight = .left
-    private var _spacing :CGFloat = 10.0
+    private var _spacing :CGFloat = 0
     
     var distribution : LeftRight {
         get {
@@ -227,7 +227,7 @@ open class Row : Container {
 open class Col : Container {
     
     private var _distributionMode : UpBottom = .up
-    private var  _spacing : CGFloat = 10.0
+    private var  _spacing : CGFloat = 0.0
     
     var distribution : UpBottom {
         get {
@@ -317,7 +317,7 @@ open class Section : Container {
     private var _title = ""
     private var _titleControl :Control? = nil
     private var contents : [Container] = []
-    private var _lineSpace : CGFloat = 5
+    private var _lineSpace : CGFloat = 0
     
     var lineSpace : CGFloat {
         get { return _lineSpace }

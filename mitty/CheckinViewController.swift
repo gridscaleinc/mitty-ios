@@ -119,6 +119,7 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         }
         
         let row = Row.Intervaled().height(50)
+        row.spacing = 10
         
         row +++ cameraButton.layout {
             c in
