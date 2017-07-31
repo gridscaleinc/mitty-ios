@@ -51,7 +51,6 @@ class RequestViewController : MittyViewController {
         let height_middle : CGFloat = 80.0
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width:UIScreen.main.bounds.size.width, height:900)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -61,15 +60,11 @@ class RequestViewController : MittyViewController {
         form +++ loginContainer
         
         loginContainer.layout() { (container) in
-            container.upper().fillHolizon().down(withInset: 10)
+            container.fillParent()
         }
 
         let inputForm = Section(name: "Input-Form", view: UIView.newAutoLayout())
         loginContainer +++ inputForm
-        
-        inputForm.layout() { c in
-            c.upper().width(UIScreen.main.bounds.size.width).height(900)
-        }
         
         var row = Row.LeftAligned()
         row.layout {
@@ -255,6 +250,16 @@ class RequestViewController : MittyViewController {
         }
         
         inputForm <<< row
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.fillHolizon()
+        }
+        inputForm <<< row
+        
+        inputForm.layout() { c in
+            c.fillParent().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+        }
         
     }
     

@@ -317,7 +317,7 @@ open class Section : Container {
     private var _title = ""
     private var _titleControl :Control? = nil
     private var contents : [Container] = []
-    private var _lineSpace : CGFloat = 0
+    private var _lineSpace : CGFloat = 1
     
     var lineSpace : CGFloat {
         get { return _lineSpace }

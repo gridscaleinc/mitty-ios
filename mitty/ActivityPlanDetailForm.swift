@@ -154,18 +154,19 @@ class ActivityPlanDetailsForm : MQForm {
         inputForm <<< row
 
         // memo
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(80).fillHolizon(10)
-            r.view.backgroundColor = UIColor(white: 0.99, alpha: 0.99)
-        }
-        
+        row = Row.LeftAligned()
         memo.label.text = activity.info.memo
         
         row +++ memo.layout {
             t in
             t.fillHolizon(10)
         }
+        row.layout() {
+                r in
+                r.fillHolizon(10).topAlign(with: self.memo).bottomAlign(with: self.memo)
+                r.view.backgroundColor = UIColor(white: 0.99, alpha: 0.99)
+        }
+
         row.bindEvent(.touchUpInside) {
             a in
             if self.activityTapped != nil {

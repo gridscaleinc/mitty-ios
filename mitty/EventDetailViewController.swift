@@ -43,10 +43,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         return b
     } ()
     
-    let shareButton : UIButton = {
+    let invitationButton : UIButton = {
         
         let b = UIButton.newAutoLayout()
-        b.setTitle("シェア", for: .normal)
+        b.setTitle("招待", for: .normal)
         b.setTitleColor(.black, for: .normal)
         b.backgroundColor = .orange
         
@@ -225,6 +225,14 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             b.view.layer.borderColor = UIColor.orange.cgColor
             b.view.layer.borderWidth = 0.7
             b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+            b.button.setTitleColor(.gray, for: UIControlState.disabled)
+
+
+        }
+        
+        likeButton.bindEvent(.touchUpInside) {b in
+            LikesService.instance.sendLike("EVENT", id: Int64(self.event.id)!)
+            (b as! UIButton).isEnabled = false
         }
         
         rightRow +++ likeButton
@@ -326,7 +334,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let interval = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(30)
+            r.fillHolizon()
         }
         
         detailForm <<< interval
@@ -463,17 +471,17 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             c.height(40)
         }
 
-        let share = Control(name: "revert", view: shareButton).layout {
+        let invitation = Control(name: "revert", view: invitationButton).layout {
             c in
             c.height(40)
             c.button.backgroundColor = MittyColor.healthyGreen
         }
-        share.bindEvent(.touchUpInside) {
+        invitation.bindEvent(.touchUpInside) {
             b in
-            self.share(sender: self.shareButton)
+            self.share(sender: self.invitationButton)
         }
         
-        buttons +++ share
+        buttons +++ invitation
         
         
         if event.accessControl == "public" {
