@@ -23,8 +23,10 @@ class RequestService {
     }
     
     func search (keys : String, callback: @escaping (_ request: [RequestInfo]) -> Void ) {
-        let parmeters = [
-            "q" : keys
+        let parmeters : [String : Any] = [
+            "q" : keys,
+            "offset" : 0,
+            "limit" : 30,
         ]
         
         let httpHeaders = [
