@@ -105,7 +105,20 @@ class EditViewController: MittyViewController {
     }
     
     func updateActivity() {
+        activityInfo.title = activityTitle.textField.text!
+        activityInfo.memo = memo.textView.text
+        ActivityService.instance.save(activityInfo, onCompletion: {
+            info in
+            if self.onEditComplete != nil {
+                self.onEditComplete!(info)
+            }
+            self.navigationController?.popViewController(animated: true)
+        },
+        onError: {error in
+            print(error)
+        })
         
     }
     
+    var onEditComplete : ((_ info: ActivityInfo) -> Void)?
 }

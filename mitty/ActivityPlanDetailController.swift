@@ -137,6 +137,11 @@ class ActivityPlanDetailsController : MittyViewController {
     // activity taped
     func activityTapped () {
         let vc = EditViewController(activityInfo)
+        vc.onEditComplete = {
+            info in
+            self.form.title.label.text = info.title
+            self.form.memo.label.text = info.memo
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

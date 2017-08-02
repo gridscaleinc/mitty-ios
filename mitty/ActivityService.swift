@@ -81,6 +81,60 @@ class ActivityService {
             }
         }
     }
+    
+    func save(_ info: ActivityInfo,
+                  onCompletion : @escaping (_ info: ActivityInfo ) -> Void,
+                  onError : @escaping (_ error: String ) -> Void ) {
+        
+        let urlString = "http://dev.mitty.co/api/update/activity"
+        
+        let parameters: Parameters = [
+            "activityId" : info.id,
+            "title": info.title,
+            "memo": info.memo ?? "",
+        ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        LoadingProxy.on()
+        
+        print(parameters)
+        Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    
+                    let activityId = json["activityId"].stringValue
+                    if (activityId != "") {
+                        onCompletion (info)
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print(response.debugDescription)
+                print(response.data ?? "No Data")
+                print(error)
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(json)
+                    
+                } catch {
+                    onError("応答電文エラー。")
+                }
+                
+                print(response.description)
+                
+                LoadingProxy.off()
+                
+            }
+        }
+    }
 
     //
     func registerItem(_ actId: String, _ title: String, _ memo: String, _ eventId: String, notify: Bool, notifyTime : Date?,
