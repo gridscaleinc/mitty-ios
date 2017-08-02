@@ -30,6 +30,7 @@ class RequestViewController : MittyViewController {
     let numOfPerson = MQForm.text(name: "numOfPerson", placeHolder: "人数")
     let expiryDate = MQForm.text(name: "expiryDate", placeHolder: "提案締切日")
     let postButton = MQForm.button(name: "Post", title: "Post Request")
+    var scrollConstraints : NSLayoutConstraint?
     
     override func viewDidLoad() {
         
@@ -41,6 +42,7 @@ class RequestViewController : MittyViewController {
         self.view.backgroundColor = .white
         form.autoPinEdgesToSuperviewEdges()
         form.configLayout()
+        manageKeyboard()
 
     }
     
@@ -55,16 +57,16 @@ class RequestViewController : MittyViewController {
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
         
-        let loginContainer = Container(name: "Request-form", view: scroll)
+        let requestContainer = Container(name: "Request-Container", view: scroll)
         
-        form +++ loginContainer
+        form +++ requestContainer
         
-        loginContainer.layout() { (container) in
+        requestContainer.layout() { (container) in
             container.fillParent()
         }
 
         let inputForm = Section(name: "Input-Form", view: UIView.newAutoLayout())
-        loginContainer +++ inputForm
+        requestContainer +++ inputForm
         
         var row = Row.LeftAligned()
         row.layout {
@@ -178,10 +180,12 @@ class RequestViewController : MittyViewController {
         let dp1 = UIDatePicker.newAutoLayout()
         dp1.datePickerMode = .date
         preferredDatetime1.textField.inputView = dp1
+        dp1.addTarget(self, action: #selector(pickedPreferredDatetime1(_:)), for: .valueChanged)
         
         let dp2 = UIDatePicker.newAutoLayout()
         dp2.datePickerMode = .date
         preferredDatetime2.textField.inputView = dp2
+        dp2.addTarget(self, action: #selector(pickedPreferredDatetime2(_:)), for: .valueChanged)
         
         inputForm <<< row
         
@@ -231,6 +235,7 @@ class RequestViewController : MittyViewController {
         let dp3 = UIDatePicker.newAutoLayout()
         dp3.datePickerMode = .date
         expiryDate.textField.inputView = dp3
+        dp3.addTarget(self, action: #selector(pickedExpiryDate(_:)), for: .valueChanged)
         
         inputForm <<< row
         
@@ -261,6 +266,18 @@ class RequestViewController : MittyViewController {
             c.fillParent().width(UIScreen.main.bounds.width).bottomAlign(with: row)
         }
         
+    }
+    
+    func pickedPreferredDatetime1(_ dp: UIDatePicker) {
+        preferredDatetime1.textField.text = dp.date.ymd
+    }
+    
+    func pickedPreferredDatetime2(_ dp: UIDatePicker) {
+        preferredDatetime2.textField.text = dp.date.ymd
+    }
+    
+    func pickedExpiryDate(_ dp: UIDatePicker) {
+        expiryDate.textField.text = dp.date.ymd
     }
     
     func postRequest () {
@@ -350,6 +367,31 @@ class RequestViewController : MittyViewController {
             }
         }
         
+    }
+    
+    @objc
+    override func onKeyboardShow(_ notification: NSNotification) {
+        //郵便入れみたいなもの
+        let userInfo = notification.userInfo!
+        //キーボードの大きさを取得
+        let keyboardRect = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        let keyboardHeight = keyboardRect.size.height
+        
+        let scroll = form.quest("[name=Request-Container]").control()
+        scrollConstraints?.autoRemove()
+        scrollConstraints = scroll?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: keyboardHeight)
+        self.view.setNeedsUpdateConstraints()
+        
+    }
+    
+    
+    @objc
+    override func onKeyboardHide(_ notification: NSNotification) {
+        scrollConstraints?.autoRemove()
+        scrollConstraints = nil
+        
+        self.view.setNeedsUpdateConstraints()
     }
     
 }

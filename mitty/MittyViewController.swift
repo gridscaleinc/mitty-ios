@@ -85,4 +85,22 @@ class MittyViewController : UIViewController {
         }
     }
     
+    func manageKeyboard() {
+        let notificationCenter = NotificationCenter.default
+        notificationCenter.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        
+        notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    func onKeyboardShow(_ notification: NSNotification) {
+        
+        
+    }
+    
+    
+    @objc
+    func onKeyboardHide(_ notification: NSNotification) {
+       //サブクラスで実装
+    }
+    
 }

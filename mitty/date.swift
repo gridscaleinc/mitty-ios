@@ -27,6 +27,12 @@ extension Formatter {
         return formatter
     }()
     
+    static let ymd: DateFormatter = {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy/MM/dd"
+        return formatter
+    } ()
+    
     static let monthDay: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd"
@@ -67,6 +73,13 @@ extension Date {
     
     var longDateTime: String {
         return Formatter.longDateTime.string(from: self)
+    }
+    
+    var ymd : String {
+        if self == Date.nulldate {
+            return ""
+        }
+        return Formatter.ymd.string(from: self)
     }
     
     var monthDay: String {

@@ -263,16 +263,9 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         
     }
     
-    func manageKeyboard() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
     
     @objc
-    func onKeyboardShow(_ notification: NSNotification) {
+    override func onKeyboardShow(_ notification: NSNotification) {
         //郵便入れみたいなもの
         let userInfo = notification.userInfo!
         //キーボードの大きさを取得
@@ -288,7 +281,7 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
     
     
     @objc
-    func onKeyboardHide(_ notification: NSNotification) {
+    override func onKeyboardHide(_ notification: NSNotification) {
         if bottomCons != nil {
             bottomCons?.autoRemove()
             bottomCons = collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 50)

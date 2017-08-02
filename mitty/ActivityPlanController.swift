@@ -246,13 +246,6 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         textField.text = dateFormatter.string(from: picker.date)
     }
     
-    func manageKeyboard() {
-        let notificationCenter = NotificationCenter.default
-        notificationCenter.addObserver(self, selector: #selector(onKeyboardShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        notificationCenter.addObserver(self, selector: #selector(onKeyboardHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
     // 
     // 場所選択した際の処理
     //
@@ -335,7 +328,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
     var scrollConstraints : NSLayoutConstraint?
     
     @objc
-    func onKeyboardShow(_ notification: NSNotification) {
+    override func onKeyboardShow(_ notification: NSNotification) {
         //郵便入れみたいなもの
         let userInfo = notification.userInfo!
         //キーボードの大きさを取得
@@ -352,7 +345,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
     
     
     @objc
-    func onKeyboardHide(_ notification: NSNotification) {
+    override func onKeyboardHide(_ notification: NSNotification) {
         scrollConstraints?.autoRemove()
         scrollConstraints = nil
         
