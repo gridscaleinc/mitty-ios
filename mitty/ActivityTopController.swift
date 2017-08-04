@@ -28,7 +28,7 @@ import PureLayout
 @objc(ActivityTopViewController)
 class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     
-    var activityTypes : UISegmentedControl = UISegmentedControl(items: ["Request", "Activity","Invitation"])
+    var activityTypes : UISegmentedControl = UISegmentedControl(items: ["Activity", "Request", "Invitation"])
     
     // Search Box
     let searchBox : UISearchBar = {

@@ -11,7 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class RequestService {
-     let urlSearch = "http://dev.mitty.co/api/search/request"
+    let urlSearch = "http://dev.mitty.co/api/search/request"
+    let urlMyrequest = "http://dev.mitty.co/api/myrequest"
     
     static var instance : RequestService = {
         let instance = RequestService()
@@ -19,6 +20,49 @@ class RequestService {
     }()
     
     private init() {
+        
+    }
+    
+    func getMyRequests (key : String, callback: @escaping (_ request: [RequestInfo]) -> Void ) {
+        let parmeters : [String : Any] = [
+            "q" : key,
+            ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        
+        LoadingProxy.on()
+        
+        // ダミーコード、本当はサーバーから検索する。
+        var requests = [RequestInfo]()
+        let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    if (json == nil || json["requests"] == nil) {
+                        callback([])
+                        return
+                    }
+                    
+                    for ( _, jsonReq) in json["requests"] {
+                        requests.append(self.bindRequestInfo(jsonReq))
+                    }
+                    callback(requests)
+                }
+                
+            case .failure(let error):
+                LoadingProxy.off()
+                print(error)
+            }
+        }
         
     }
     
