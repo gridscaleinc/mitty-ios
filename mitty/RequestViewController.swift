@@ -322,7 +322,7 @@ class RequestViewController : MittyViewController {
             newRequest.setInt(.preferredPrice2, price)
         }
         
-        let urlString = "http://dev.mitty.co/api/new/request"
+        let urlString = MITTY_SERVICE_BASE_URL + "/new/request"
         let httpHeaders = [
             "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
         ]

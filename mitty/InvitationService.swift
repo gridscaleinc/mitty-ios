@@ -15,7 +15,7 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class InvitationService {
-    let apiSendInvitation = "http://dev.mitty.co/api/send/invitation"
+    let apiSendInvitation = MITTY_SERVICE_BASE_URL + "/send/invitation"
     
     static var instance : InvitationService = {
         let instance = InvitationService()

@@ -13,7 +13,7 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class ContentService {
-    let apiUploadContent = "http://dev.mitty.co/api/upload/content"
+    let apiUploadContent = MITTY_SERVICE_BASE_URL + "/upload/content"
     
     static var instance : ContentService = {
         let instance = ContentService()

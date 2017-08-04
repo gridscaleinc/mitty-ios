@@ -189,7 +189,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
     }
     
     func onClickSignupButton(_ sender: UIButton){
-        let urlString = "http://dev.mitty.co/api/signup"
+        let urlString = MITTY_SERVICE_BASE_URL + "/signup"
         let usernameField = signupForm.quest("[name=userId]").control()?.view as! UITextField
         let passwordField = signupForm.quest("[name=password]").control()?.view as! UITextField
         let mail_address = signupForm.quest("[name=mailAddress]").control()?.view as! UITextField

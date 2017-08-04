@@ -6,9 +6,12 @@
 //  Copyright © 2016年 GridScale Inc. All rights reserved.
 //
 
-
 import Foundation
 import Alamofire
+
+public let MITTY_SERVICE_BASE_URL = "http://dev.mitty.co/api"
+let signUpUrl = MITTY_SERVICE_BASE_URL + "/signup"
+let signInUrl = MITTY_SERVICE_BASE_URL + "/signin"
 
 // Serverとの通信を使う
 func SignUp(username: String, password: String) {
@@ -16,7 +19,8 @@ func SignUp(username: String, password: String) {
         "username": username,
         "password": password
     ]
-    Alamofire.request("http://dev.mitty.co/api/signup", method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in
+    
+    Alamofire.request(signUpUrl, method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in
         debugPrint(response)
         if let json = response.result.value {
             print("JSON: \(json)")
@@ -24,12 +28,13 @@ func SignUp(username: String, password: String) {
     }
 }
 
+// SignIn ...
 func SignIn(username: String, password: String) {
     let params = [
         "username": username,
         "password": password
     ]
-    Alamofire.request("http://dev.mitty.co/api/signin", method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in       debugPrint(response)
+    Alamofire.request(MITTY_SERVICE_BASE_URL + "/signin", method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in       debugPrint(response)
         if let json = response.result.value {
             print("JSON: \(json)")
         }

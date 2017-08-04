@@ -15,8 +15,8 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class EventService {
-    let urlSearch = "http://dev.mitty.co/api/search/event"
-    let urlFetch = "http://dev.mitty.co/api/event/of"
+    let urlSearch = MITTY_SERVICE_BASE_URL + "/search/event"
+    let urlFetch = MITTY_SERVICE_BASE_URL + "/event/of"
     
     static var instance : EventService = {
         let instance = EventService()

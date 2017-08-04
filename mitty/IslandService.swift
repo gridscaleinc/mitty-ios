@@ -138,7 +138,7 @@ class IslandService {
         LoadingProxy.on()
         
         
-        let urlString = "http://dev.mitty.co/api/new/island"
+        let urlString = MITTY_SERVICE_BASE_URL + "/new/island"
         
         let httpHeaders = [
             "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
@@ -177,7 +177,7 @@ class IslandService {
     }
 
     func fetchIslandInfo(_ name: String , callback: @escaping (_ infoList: [IslandInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
-        let islandInfoUrl = "http://dev.mitty.co/api/island/info"
+        let islandInfoUrl = MITTY_SERVICE_BASE_URL + "/island/info"
         let parameter : [String : Any] = [
             "name" : name
         ]

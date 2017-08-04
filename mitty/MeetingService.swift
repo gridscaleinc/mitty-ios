@@ -22,7 +22,7 @@ class  MeetingService {
     }
     
     func getLatestConversation(_ meetingId : Int64, callback: @escaping (_ talkList: [Talk]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
-        let eventMeetingUrl = "http://dev.mitty.co/api/latest/conversation"
+        let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/latest/conversation"
         
         LoadingProxy.on()
         
@@ -85,7 +85,7 @@ class  MeetingService {
     }
     
     func getEventMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
-        let eventMeetingUrl = "http://dev.mitty.co/api/event/meeting"
+        let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/event/meeting"
         
         
         LoadingProxy.on()

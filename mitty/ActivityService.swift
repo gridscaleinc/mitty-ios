@@ -13,7 +13,7 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class ActivityService {
-    let urlBase = "http://dev.mitty.co/api/activity/list"
+    let urlBase = MITTY_SERVICE_BASE_URL + "/activity/list"
     
     static var instance : ActivityService = {
         let instance = ActivityService()
@@ -28,7 +28,7 @@ class ActivityService {
                   onCompletion : @escaping (_ info: ActivityInfo ) -> Void,
                   onError : @escaping (_ error: String ) -> Void ) {
         
-        let urlString = "http://dev.mitty.co/api/new/activity"
+        let urlString = MITTY_SERVICE_BASE_URL + "/new/activity"
         
         let parameters: Parameters = [
             "title": title,
@@ -86,7 +86,7 @@ class ActivityService {
                   onCompletion : @escaping (_ info: ActivityInfo ) -> Void,
                   onError : @escaping (_ error: String ) -> Void ) {
         
-        let urlString = "http://dev.mitty.co/api/update/activity"
+        let urlString = MITTY_SERVICE_BASE_URL + "/update/activity"
         
         let parameters: Parameters = [
             "activityId" : info.id,
@@ -141,7 +141,7 @@ class ActivityService {
                       asMainEvent: Bool, onCompletion : @escaping (_ actItem: ActivityItem ) -> Void,
                   onError : @escaping (_ error: String ) -> Void ) {
         
-        let urlString = "http://dev.mitty.co/api/new/activity/item"
+        let urlString = MITTY_SERVICE_BASE_URL + "/new/activity/item"
         
         let request = JSONRequest()
         
@@ -257,7 +257,7 @@ class ActivityService {
     
     func fetch(id: String, _ callback: @escaping( _ act: Activity) -> Void  ) {
         
-        let urlString = "http://dev.mitty.co/api/activity/details"
+        let urlString = MITTY_SERVICE_BASE_URL + "/activity/details"
         
         let parmeters = [
             "id" : id
@@ -293,7 +293,7 @@ class ActivityService {
     
     func getDestinationList(_ callback: @escaping(_ events: [Destination]) -> Void ) {
         
-        let urlString = "http://dev.mitty.co/api/destination/list"
+        let urlString = MITTY_SERVICE_BASE_URL + "/destination/list"
         
 
         let httpHeaders = [

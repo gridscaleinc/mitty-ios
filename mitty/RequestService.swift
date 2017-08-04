@@ -11,8 +11,8 @@ import Alamofire
 import SwiftyJSON
 
 class RequestService {
-    let urlSearch = "http://dev.mitty.co/api/search/request"
-    let urlMyrequest = "http://dev.mitty.co/api/myrequest"
+    let urlSearch = MITTY_SERVICE_BASE_URL + "/search/request"
+    let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myrequest"
     
     static var instance : RequestService = {
         let instance = RequestService()

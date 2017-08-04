@@ -211,7 +211,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     }
     
     func onClickSigninButton(_ sender: UIButton){
-        let urlString = "http://dev.mitty.co/api/signin"
+        let urlString = MITTY_SERVICE_BASE_URL + "/signin"
         
         let usernameField = loginForm.quest("[name=userId]").control()?.view as! UITextField
         let passwordField = loginForm.quest("[name=password]").control()?.view as! UITextField

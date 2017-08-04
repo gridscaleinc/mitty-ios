@@ -469,7 +469,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
             request.setStr(.asMainEvent, "false")
         }
         
-        let urlString = "http://dev.mitty.co/api/new/event"
+        let urlString = MITTY_SERVICE_BASE_URL + "/new/event"
         
         let httpHeaders = [
             "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
@@ -554,7 +554,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
         print(parameters)
         print(httpHeaders)
         
-        let urlString = "http://dev.mitty.co/api/gallery/content"
+        let urlString = MITTY_SERVICE_BASE_URL + "/gallery/content"
         
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
             , headers : httpHeaders ).validate(statusCode: 200..<300).responseJSON { [weak self] response in

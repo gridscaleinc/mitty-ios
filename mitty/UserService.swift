@@ -14,8 +14,8 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class UserService {
-    let apiUserInfo = "http://dev.mitty.co/api/user/info"
-    let apiSetUserIcon = "http://dev.mitty.co/api/update/user/icon"
+    let apiUserInfo = MITTY_SERVICE_BASE_URL + "/user/info"
+    let apiSetUserIcon = MITTY_SERVICE_BASE_URL + "/update/user/icon"
     
     static var instance : UserService = {
         let instance = UserService()

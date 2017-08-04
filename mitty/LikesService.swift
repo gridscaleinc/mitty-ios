@@ -15,8 +15,8 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class LikesService {
-    let apiSendLike = "http://dev.mitty.co/api/send/like"
-    let apiRemoveLike = "http://dev.mitty.co/api/remove/like"
+    let apiSendLike = MITTY_SERVICE_BASE_URL + "/send/like"
+    let apiRemoveLike = MITTY_SERVICE_BASE_URL + "/remove/like"
     
     static var instance : LikesService = {
         let instance = LikesService()
