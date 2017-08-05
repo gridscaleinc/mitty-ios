@@ -527,13 +527,13 @@
 		FC0AF1E11DC4F24000C76408 /* service */ = {
 			isa = PBXGroup;
 			children = (
+				FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */,
 				FC0AF1EC1DC4F61B00C76408 /* Service.swift */,
 				FC2862AA1DCEAFA6000854D9 /* EventService.swift */,
 				FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */,
 				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
 				FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */,
 				FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */,
-				FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */,
 				FC34831A1EE412A7005E539E /* MeetingService.swift */,
 				FC7D4B871EEEC1470074C259 /* RequestService.swift */,
 				FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */,

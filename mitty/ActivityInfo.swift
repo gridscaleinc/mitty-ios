@@ -49,11 +49,13 @@ class Destination {
 }
 
 class ActivityItem {
+    var id : Int64 = 0
+    var activityId : Int64 = 0
     var eventId: String = "0"
     var title: String = ""
     var memo: String = ""
     var notification: Bool  = false
-    var notificationTime: String  = ""
+    var notificationTime: Date  = .nulldate
     var eventTitle:String  = ""
     var startDateTime: String  = ""
     var endDateTime: String  = ""
@@ -74,7 +76,7 @@ class ActivityItem {
     
     var notifyTime : String {
         if notification {
-            let dt = notificationTime.utc2Date()
+            let dt = notificationTime
             return dt.dateTime
         }
         return ""

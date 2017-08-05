@@ -186,6 +186,20 @@ class EditItemViewController: MittyViewController {
     //
     func updateActivityItem() {
         
+        activityItem.title = itemTitle.textField.text!
+        activityItem.memo = itemMemo.textView.text
+        activityItem.notification = switchButton.switcher.isOn
+        activityItem.notificationTime = timePicker.date
+        ActivityService.instance.saveItem(activityItem, onCompletion: {
+            item in
+            if self.onEditItemComplete != nil {
+                self.onEditItemComplete!(item)
+            }
+            self.navigationController?.popViewController(animated: true)
+        },
+        onError: {error in
+            print(error)
+        })
     }
 
     //
@@ -193,4 +207,7 @@ class EditItemViewController: MittyViewController {
         let textField = textNotifyTime.textField
         textField.text = dateFormatter.string(from: picker.date)
     }
+    
+    
+    var onEditItemComplete : ((_ info: ActivityItem) -> Void)?
 }

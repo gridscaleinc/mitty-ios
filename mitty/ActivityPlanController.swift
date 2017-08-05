@@ -551,9 +551,6 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
             "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
         ]
         
-        print(parameters)
-        print(httpHeaders)
-        
         let urlString = MITTY_SERVICE_BASE_URL + "/gallery/content"
         
         Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default

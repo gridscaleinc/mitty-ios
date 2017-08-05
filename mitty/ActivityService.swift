@@ -135,6 +135,67 @@ class ActivityService {
             }
         }
     }
+    
+    func saveItem(_ item: ActivityItem,
+              onCompletion : @escaping (_ info: ActivityItem ) -> Void,
+              onError : @escaping (_ error: String ) -> Void ) {
+        
+        let urlString = MITTY_SERVICE_BASE_URL + "/update/activity/item"
+        
+        let parameters: Parameters = [
+            "id" : item.id,
+            "activityId" : item.activityId,
+            "eventId" : item.eventId,
+            "title": item.title,
+            "memo": item.memo ,
+            "notification" : item.notification ? "true" : "false",
+            "notificationDateTime" : item.notificationTime.iso8601LongUTC
+            ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        print(parameters)
+        
+        LoadingProxy.on()
+        
+        print(parameters)
+        Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    
+                    let activityId = json["id"].stringValue
+                    if (activityId != "") {
+                        onCompletion (item)
+                    }
+                    
+                }
+                
+            case .failure(let error):
+                print(response.debugDescription)
+                print(response.data ?? "No Data")
+                print(error)
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(json)
+                    
+                } catch {
+                    onError("応答電文エラー。")
+                }
+                
+                print(response.description)
+                
+                LoadingProxy.off()
+                
+            }
+        }
+    }
+
 
     //
     func registerItem(_ actId: String, _ title: String, _ memo: String, _ eventId: String, notify: Bool, notifyTime : Date?,
@@ -364,11 +425,13 @@ class ActivityService {
         
         for (_, detailJson) in json["details"] {
             let item = ActivityItem()
+            item.id = detailJson["id"].int64Value
+            item.activityId = detailJson["activityId"].int64Value
             item.eventId = detailJson["eventId"].stringValue
             item.title = detailJson["title"].stringValue
             item.memo = detailJson["memo"].stringValue
             item.notification = detailJson["notification"].boolValue
-            item.notificationTime = detailJson["notificationTime"].stringValue
+            item.notificationTime = detailJson["notificationTime"].stringValue.utc2Date()
             item.eventTitle = detailJson["eventTitle"].stringValue
             item.startDateTime = detailJson["startDateTime"].stringValue
             item.endDateTime = detailJson["endDateTime"].stringValue

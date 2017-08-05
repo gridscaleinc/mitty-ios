@@ -357,23 +357,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     
     func addContactInfo(_ section: Section) {
         
-//        let contact = Row.Intervaled().layout {
-//            r in
-//            r.fillHolizon().putUnder(of: anchor, withOffset: 5).height(35)
-//        }
-//        contact +++ MQForm.label(name: "tel", title: "☎️　" + event.contactTel).layout {
-//            l in
-//            l.height(35)
-//        }
-//        contact +++ MQForm.label(name: "fax", title: "📠 " + event.contactFax).layout {
-//            l in
-//            l.height(35)
-//        }
-//        
-//        section +++ contact
-//        
-        
-        
         // TODO: Mail address
         
         let infoSource = Row.LeftAligned().layout {
@@ -407,6 +390,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().height(35)
         }
+        
         url +++ MQForm.label(name: "URL", title: "情報源").layout {
             l in
             l.height(35)
