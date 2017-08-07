@@ -19,6 +19,8 @@ class SendInvitationViewController : MittyViewController {
     let invitationTitle = MQForm.label(name: "invitation-title", title: "")
     let message = MQForm.textView(name: "invitation-message")
     
+    var event : Event!
+    
     override func viewDidLoad() {
         
         super.autoCloseKeyboard()
@@ -90,6 +92,43 @@ class SendInvitationViewController : MittyViewController {
             l.textColor = .white
             l.font = .systemFont(ofSize: 16)
         }
+        detailForm <<< row
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.fillHolizon(0).height(60)
+        }
+        
+        row +++ MQForm.label(name: "event-title", title: "イベント：").layout{
+            l in
+            l.width(120).height(line_height)
+            l.label.adjustsFontSizeToFitWidth = true
+        }
+        
+        invitationTitle.label.text = event.title
+        row +++ invitationTitle.layout {
+            m in
+            m.height(line_height).rightMost(withInset: 10)
+        }
+        
+        detailForm <<< row
+        
+        row = Row.LeftAligned().layout() {
+            r in
+            r.fillHolizon(0).height(60)
+        }
+        
+        row +++ MQForm.label(name: "title-memo", title: "メッセージ").layout{
+            l in
+            l.width(120)
+            l.label.adjustsFontSizeToFitWidth = true
+        }
+        
+        row +++ message.layout {
+            m in
+            m.height(60).rightMost(withInset: 10)
+        }
+        
         detailForm <<< row
         
         

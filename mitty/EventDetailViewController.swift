@@ -483,6 +483,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     func invite (sender: UIButton) {
         
         let vc = SendInvitationViewController()
+        vc.event = self.event
         self.navigationController?.pushViewController(vc, animated: true)
         
     }
