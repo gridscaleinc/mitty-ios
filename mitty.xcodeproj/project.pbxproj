@@ -70,6 +70,8 @@
 		FC34831B1EE412A7005E539E /* MeetingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831A1EE412A7005E539E /* MeetingService.swift */; };
 		FC34831D1EE41389005E539E /* Meeting.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831C1EE41389005E539E /* Meeting.swift */; };
 		FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831E1EE42F44005E539E /* MeetingCell.swift */; };
+		FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */; };
+		FC3C16DA1F388F0200E7622B /* SendIvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -257,6 +259,8 @@
 		FC34831A1EE412A7005E539E /* MeetingService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingService.swift; sourceTree = "<group>"; };
 		FC34831C1EE41389005E539E /* Meeting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meeting.swift; sourceTree = "<group>"; };
 		FC34831E1EE42F44005E539E /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
+		FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasicInfoViewController.swift; sourceTree = "<group>"; };
+		FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendIvitationViewController.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -614,6 +618,7 @@
 				FC3482C51ED9BDA8005E539E /* CheckinViewController.swift */,
 				FC4B88661F010CAF00458912 /* SocialMirrorViewController.swift */,
 				FC4B88681F010E0900458912 /* NameCardViewController.swift */,
+				FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */,
 			);
 			name = center;
 			sourceTree = "<group>";
@@ -759,6 +764,7 @@
 				FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */,
 				FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */,
 				FCFA84851F121E1400E9C6F2 /* ProposalViewController.swift */,
+				FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */,
 			);
 			name = explore;
 			sourceTree = "<group>";
@@ -1155,6 +1161,7 @@
 				FCFA848A1F20EA0900E9C6F2 /* EditViewController.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
 				FCEDA2C41E6D7946006FBF20 /* Structures.swift in Sources */,
+				FC3C16DA1F388F0200E7622B /* SendIvitationViewController.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */,
 				FC3482D01EDA61A9005E539E /* MeetingViewController.swift in Sources */,
 				FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */,
@@ -1171,6 +1178,7 @@
 				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */,
+				FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */,
 				FCFA84861F121E1400E9C6F2 /* ProposalViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
 				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,

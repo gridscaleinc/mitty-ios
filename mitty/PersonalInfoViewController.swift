@@ -136,7 +136,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
         // build name cards
         buildNameCards(detailForm)
         
-        var row = Row.Intervaled().height(40)
+        let row = Row.Intervaled().height(40)
         row.spacing = 90
         row +++ signOut.layout {
             b in
@@ -200,8 +200,30 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     }
     
     func buildIdentity(_ section: Section) {
+        var row = Row.LeftAligned()
+        row.layout{
+            r in
+            r.height(20).fillHolizon()
+        }
         
-        let row = Row.LeftAligned()
+        row +++ MQForm.label(name: "speechLabel", title: "基本情報").layout{
+            l in
+            l.leftMost(withInset:2).rightMost(withInset : 40)
+            l.label.backgroundColor = MittyColor.healthyGreen
+            l.label.textColor = UIColor.white
+        }
+        row +++ MQForm.img(name: "aaa", url: "editpen").layout {
+            i in
+            i.rightMost().height(20).width(20)
+        }
+        
+        row.bindEvent(.touchUpInside) {
+            v in
+            
+        }
+        section <<< row
+        
+        row = Row.LeftAligned()
         row.layout{
             r in
             r.height(100).fillHolizon()

@@ -462,7 +462,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         invitation.bindEvent(.touchUpInside) {
             b in
-            self.share(sender: self.invitationButton)
+            self.invite(sender: self.invitationButton)
         }
         
         buttons +++ invitation
@@ -477,6 +477,13 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         form +++ buttons
+        
+    }
+    
+    func invite (sender: UIButton) {
+        
+        let vc = SendInvitationViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
         
     }
     
