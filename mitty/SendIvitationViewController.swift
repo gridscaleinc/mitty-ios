@@ -21,6 +21,9 @@ class SendInvitationViewController : MittyViewController {
     
     var event : Event!
     
+    var searchBar : UISearchBar = UISearchBar.newAutoLayout()
+
+    
     override func viewDidLoad() {
         
         super.autoCloseKeyboard()
@@ -38,6 +41,7 @@ class SendInvitationViewController : MittyViewController {
         
         self.view.setNeedsUpdateConstraints()
         
+        searchBar.delegate = self
     }
     
     override func updateViewConstraints() {
@@ -76,25 +80,10 @@ class SendInvitationViewController : MittyViewController {
         
         scrollContainer +++ detailForm
         
-        var row = Row.LeftAligned()
+        seperator(section: detailForm, caption: "招待")
         
-        row.layout {
-            r in
-            r.fillHolizon(0).height(25)
-            r.view.backgroundColor = MittyColor.healthyGreen
-        }
         
-        row +++ MQForm.label(name: "title-request", title: "招待").layout {
-            c in
-            c.height(25)
-            c.leftMost(withInset: 20)
-            let l = c.view as! UILabel
-            l.textColor = .white
-            l.font = .systemFont(ofSize: 16)
-        }
-        detailForm <<< row
-        
-        row = Row.LeftAligned().layout() {
+        var row = Row.LeftAligned().layout() {
             r in
             r.fillHolizon(0).height(60)
         }
@@ -115,7 +104,7 @@ class SendInvitationViewController : MittyViewController {
         
         row = Row.LeftAligned().layout() {
             r in
-            r.fillHolizon(0).height(60)
+            r.fillHolizon(0).height(65)
         }
         
         row +++ MQForm.label(name: "title-memo", title: "メッセージ").layout{
@@ -127,6 +116,22 @@ class SendInvitationViewController : MittyViewController {
         row +++ message.layout {
             m in
             m.height(60).rightMost(withInset: 10)
+        }
+        
+        detailForm <<< row
+        
+        
+        
+        seperator(section: detailForm, caption:  "招待メンバーリスト")
+        row = Row.LeftAligned().layout() {
+            r in
+            r.fillHolizon(0).height(65)
+        }
+        
+        row +++ Control(name:"", view: searchBar).layout{
+            l in
+            l.fillHolizon().height(40)
+            
         }
         
         detailForm <<< row
@@ -146,5 +151,48 @@ class SendInvitationViewController : MittyViewController {
             f.view.backgroundColor = UIColor.white
         }
         
+    }
+    
+    func seperator(section : Section, caption: String) {
+        let row = Row.Intervaled().layout() {
+            r in
+            r.height(23).fillHolizon()
+        }
+        
+        let c = MQForm.label(name: "caption", title: caption).layout {
+            c in
+            c.height(20)
+            c.label.backgroundColor = MittyColor.light
+            c.label.textColor = MittyColor.healthyGreen
+            c.label.textAlignment = .center
+            c.label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+        }
+        row +++ c
+        section <<< row
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension SendInvitationViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        searchBar.resignFirstResponder()
+        searchBar.showsCancelButton = false
+        
+        if (searchBar.text == "") {
+            return
+        }
+        
+        
+        
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+    }
+    
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.showsCancelButton = true
     }
 }
