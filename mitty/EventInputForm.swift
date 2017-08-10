@@ -24,7 +24,7 @@ class EventInputForm : MQForm {
     let tagList = MQForm.text(name: "tag" , placeHolder: "tag1 tag2 複数可...")
     
     // イベントIcon
-    let icon = MQForm.img(name: "icon" , url:"noicon")
+    let icon = MQForm.tapableImg(name: "icon" , url:"noicon")
  
     // 開始日時
     let startDate = MQForm.text(name: "fromDateTime" , placeHolder: "開始日時")
@@ -141,6 +141,7 @@ class EventInputForm : MQForm {
             r in
             r.height(row_height).fillHolizon()
         }
+        
         inputForm <<< row
         
         row = Row.LeftAligned()

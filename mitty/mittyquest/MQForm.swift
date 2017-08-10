@@ -111,6 +111,16 @@ open class MQForm : UIView {
 
     }
     
+    // TapableImage
+    static func tapableImg(name: String, url: String ) -> Control {
+        
+        let img = TapableUIImageView.newAutoLayout()
+        img.image = UIImage(named: url)
+        
+        return Control(name: name, view: img)
+        
+    }
+    
     // Stepper
     static func stepper (name: String, min: Double, max: Double) -> Control {
         let stepper = UIStepper.newAutoLayout()

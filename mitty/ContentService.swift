@@ -14,6 +14,7 @@ import SwiftyJSON
 // シングルトンサービスクラス。
 class ContentService {
     let apiUploadContent = MITTY_SERVICE_BASE_URL + "/upload/content"
+    let apiContentList = MITTY_SERVICE_BASE_URL + "/mycontents/list"
     
     static var instance : ContentService = {
         let instance = ContentService()
@@ -69,4 +70,54 @@ class ContentService {
                 }
         }
     }
+    
+    // サーバーからイベントを検索。
+    func myContents(onCompletion : @escaping(_ : [Content] ) -> Void) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        Alamofire.request(apiContentList, method: .get, encoding: JSONEncoding.default
+            , headers : httpHeaders ).validate(statusCode: 200..<300).responseJSON { response in
+                LoadingProxy.off()
+                switch response.result {
+                case .success:
+                    if let jsonObject = response.result.value {
+                        let json = JSON(jsonObject)
+                        print(json)
+                        if (json == nil || json["contents"] == nil) {
+                            return
+                        }
+                        
+                        let contents = self.bindContents(json["contents"])
+                        onCompletion(contents)
+                        
+                        return
+                    }
+                    
+                    break
+                    
+                case .failure(let error):
+                    print(error)
+                }
+        }
+    }
+    
+    // contents -> [Content]
+    func bindContents(_ contents : JSON) -> [Content] {
+        
+        var result = [Content]()
+        for (_, content) in contents {
+            let c = Content()
+            c.id = content["id"].int64Value
+            c.title = content["name"].stringValue
+            c.linkUrl = content["link_url"].stringValue
+            result.append(c)
+        }
+        
+        return result
+    }
+
 }

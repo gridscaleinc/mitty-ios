@@ -72,6 +72,9 @@
 		FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC34831E1EE42F44005E539E /* MeetingCell.swift */; };
 		FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */; };
 		FC3C16DA1F388F0200E7622B /* SendIvitationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */; };
+		FC3C16DC1F3A7A2600E7622B /* ContentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */; };
+		FC3C16DF1F3B196700E7622B /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3C16DD1F3B196700E7622B /* unchecked.png */; };
+		FC3C16E01F3B196700E7622B /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3C16DE1F3B196700E7622B /* checked.png */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -261,6 +264,9 @@
 		FC34831E1EE42F44005E539E /* MeetingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MeetingCell.swift; sourceTree = "<group>"; };
 		FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBasicInfoViewController.swift; sourceTree = "<group>"; };
 		FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendIvitationViewController.swift; sourceTree = "<group>"; };
+		FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPicker.swift; sourceTree = "<group>"; };
+		FC3C16DD1F3B196700E7622B /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = images/unchecked.png; sourceTree = "<group>"; };
+		FC3C16DE1F3B196700E7622B /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = images/checked.png; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -656,6 +662,8 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC3C16DD1F3B196700E7622B /* unchecked.png */,
+				FC3C16DE1F3B196700E7622B /* checked.png */,
 				FC3483161EE060A8005E539E /* broken.png */,
 				FCC9CBA01DE9B3DA00F2582C /* we.png */,
 				FCC9CB9E1DE9B3CB00F2582C /* explorer.png */,
@@ -792,6 +800,7 @@
 				FC30182C1ED00E7400A5F183 /* PriceInfoPicker.swift */,
 				FC3483141EDDC0DB005E539E /* WebPicker.swift */,
 				FC4B886A1F01566000458912 /* SpeedMeter.swift */,
+				FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -943,6 +952,7 @@
 				FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */,
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,
 				FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */,
+				FC3C16E01F3B196700E7622B /* checked.png in Resources */,
 				FC0AF2011DC508A700C76408 /* myself.png in Resources */,
 				FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
@@ -954,6 +964,7 @@
 				FCD8C7171EA1AB9400AAD750 /* nolargeimg.png in Resources */,
 				FCFE67C11DE50FA1007203EF /* bagua_4.png in Resources */,
 				FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */,
+				FC3C16DF1F3B196700E7622B /* unchecked.png in Resources */,
 				FCF8D6511DD8B7630059B270 /* connect.png in Resources */,
 				FC3482AC1ED87E96005E539E /* beauty.jpeg in Resources */,
 				FCFE67C01DE50FA1007203EF /* bagua_3.png in Resources */,
@@ -1129,6 +1140,7 @@
 				FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
+				FC3C16DC1F3A7A2600E7622B /* ContentPicker.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */,
 				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,

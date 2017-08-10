@@ -14,7 +14,7 @@ import MapKit
 import AlamofireImage
 
 //
-class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,WebPickerDelegate {
+class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,WebPickerDelegate {
     
     var activityInfo : ActivityInfo
     var activityTitle = "活動"
@@ -196,6 +196,13 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate,Pri
     
         form.eventTitle.textField.text = activityInfo.title
         form.action.textView.text = activityInfo.memo
+
+        // navi
+        form.icon.bindEvent(.touchUpInside) {
+            ic in
+            let vc = ContentPicker()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
 
         manageKeyboard()
         LoadingProxy.set(self)

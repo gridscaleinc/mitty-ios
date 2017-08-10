@@ -65,7 +65,7 @@ class Gallery {
 }
 
 class Content {
-    var id : Int8
+    var id : Int64 = 0
     var mime : String? = nil
     var title : String? = nil
     var linkUrl : String? = nil
@@ -73,10 +73,6 @@ class Content {
     var height : Int? = nil
     var data : [UInt8] = []
     var size : Int? = nil
-    
-    init(_ id: Int8) {
-        self.id = id
-    }
 }
 
 /// 発言
