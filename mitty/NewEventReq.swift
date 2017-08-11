@@ -13,8 +13,9 @@ class NewEventReq : JSONRequest {
     enum KeyNames : String {
         
         case type = "type"                   // (M)イベントの種類
-        case tagList = "tag"                     // (M)イベントについて利用者が入力したデータの分類識別。
+        case tagList = "tag"                 // (M)イベントについて利用者が入力したデータの分類識別。
         case title = "title"                 // (M)イベントタイトル
+        case logoId = "logoId"               // (O)LogoID
         case action = "action"               // (M)イベントの行い概要内容
         case startDate = "startDate"         // (M)イベント開始日時
         case endDate = "endDate"             // (M)イベント終了日時

@@ -154,7 +154,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
             if (delegate != nil) {
                 bascket?.siteUrl = self.siteUrl.label.text ?? ""
                 bascket?.siteTitle = self.siteTitle.label.text ?? ""
-                bascket?.siteImage = self.siteImage.image.image
+                bascket?.siteImage = self.siteImage.imageView.image
                 delegate?.webpicker(self, bascket!)
             }
             
@@ -243,7 +243,6 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         }
         
         let row2 = Row.LeftAligned()
-        
         row2 +++ MQForm.label(name: "titelImage", title: " 画 像：").layout {
             l in
             l.height(40).width(100).leftMost().upper()
@@ -254,7 +253,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
         row2 +++ siteImage.layout {
             img in
             img.height(150).rightMost().putUnder(of: row1)
-            img.image.contentMode = .scaleAspectFit
+            img.imageView.contentMode = .scaleAspectFit
         }
         
         form +++ row2.layout {
@@ -348,7 +347,7 @@ class WebPicker : MittyViewController , UISearchBarDelegate {
             imgControl.bindEvent(.touchUpInside) {
                 img in
                 self.bascket = p.value
-                self.siteImage.image.image = (img as! UIImageView).image
+                self.siteImage.imageView.image = (img as! UIImageView).image
                 self.pickButton.button.setTitle("Done", for: .normal)
             }
             

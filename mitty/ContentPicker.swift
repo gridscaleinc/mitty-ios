@@ -69,13 +69,18 @@ class ContentPicker : MittyViewController, UIImagePickerControllerDelegate, UINa
         
         okButton.bindEvent(.touchUpInside) { [weak self]
             v in
-            if (self?.delegate != nil) {
-                let c = Content()
-                
-                self?.delegate?.pickedContent(content: c)
+            if (self?.delegate != nil && self?.pickedContent != nil) {
+                self?.delegate?.pickedContent(content: (self?.pickedContent)!)
                 self?.navigationController?.popViewController(animated: true)
             }
         }
+        
+        //
+        libButton.bindEvent(.touchUpInside) {
+            b in
+            self.pickImage ()
+        }
+
         
         loadContents()
         
@@ -115,6 +120,20 @@ class ContentPicker : MittyViewController, UIImagePickerControllerDelegate, UINa
             b.height(50)
         }
         
+        cameraButton.bindEvent(.touchUpInside) {
+            b in
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
+                let imagePicker = UIImagePickerController()
+                imagePicker.delegate = self
+                imagePicker.sourceType = .camera
+                imagePicker.allowsEditing = false
+                imagePicker.cameraDevice = .front
+                imagePicker.cameraFlashMode = .off
+                imagePicker.allowsEditing = true
+                self.present(imagePicker, animated: true, completion: nil)
+            }
+        }
+        
         row +++ libButton.layout{
             b in
             b.height(50)
@@ -136,6 +155,31 @@ class ContentPicker : MittyViewController, UIImagePickerControllerDelegate, UINa
             searchResultsTableView.reloadData()
         }
     }
+    
+    func pickImage () {
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary;
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    //MARK: - Delegates
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+    }
+    
+    // image をとったらどうする。
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        NSLog("\(info)")
+        let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        pickedImg.imageView.image = chosenImage
+        picker.dismiss(animated: true)
+    }
+
 }
 
 extension ContentPicker : UITableViewDelegate, UITableViewDataSource {
@@ -167,12 +211,12 @@ extension ContentPicker : UITableViewDelegate, UITableViewDataSource {
         
         if let _ = tableView.cellForRow(at: indexPath) {
             pickedContent = candidates[indexPath.row]
-            pickedImg.image.image = tableView.cellForRow(at: indexPath)?.imageView?.image
+            pickedImg.imageView.image = tableView.cellForRow(at: indexPath)?.imageView?.image
         }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 89
+        return 70
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

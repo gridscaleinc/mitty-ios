@@ -14,7 +14,7 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
     var imagePicked = false
     let picture : Control = {
         let i = MQForm.img(name: "picture", url: "beauty.jpeg")
-        i.image.contentMode = .scaleAspectFit
+        i.imageView.contentMode = .scaleAspectFit
         return i
     } ()
     
@@ -104,7 +104,7 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         }
         
         picture.widthConstraints?.autoRemove()
-        picture.width(161*picture.image.image!.size.ratio)
+        picture.width(161*picture.imageView.image!.size.ratio)
         
         super.updateViewConstraints()
         
@@ -170,7 +170,7 @@ class CheckinViewController : MittyViewController ,UIImagePickerControllerDelega
         NSLog("\(info)")
         if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             let ratio = chosenImage.size.ratio
-            picture.image.image = chosenImage.af_imageScaled(to: CGSize(width: 100, height: 100 * ratio))
+            picture.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 100, height: 100 * ratio))
             imagePicked = true
             self.view.needsUpdateConstraints()
         }

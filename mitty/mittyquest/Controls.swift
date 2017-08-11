@@ -233,7 +233,7 @@ open class Control : NSObject, Node, Operatable {
     
     // retrieve underlying UIImageView view.
     // Its throws error if the underlying view is not conform to UIImageView.
-    var image : UIImageView  {
+    var imageView : UIImageView  {
         return _view as! UIImageView
     }
     

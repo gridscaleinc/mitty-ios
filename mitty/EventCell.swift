@@ -48,7 +48,7 @@ class EventCell: UICollectionViewCell {
         
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
         if (event.publisherIcon != nil) {
-            publisherIcon.image.image = event.publisherIcon
+            publisherIcon.imageView.image = event.publisherIcon
         }
         
         row +++ publisherIcon.width(30).height(30)
@@ -99,7 +99,18 @@ class EventCell: UICollectionViewCell {
         col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
         row +++ col
         
-        row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
+        if event.eventLogo != nil {
+            // imageがある場合、イメージを表示
+            let itemImage = MQForm.img(name: "eventImage", url: event.eventLogoUrl).layout {
+                img in
+                img.width(50).height(50)
+                img.imageView.image = event.eventLogo
+            }
+            row +++ itemImage
+        } else {
+            row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
+        }
+        
         let titleLabel = MQForm.label(name: "titleLabel", title: event.title).layout {t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -116,7 +127,7 @@ class EventCell: UICollectionViewCell {
             let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
                 img in
                 img.fillHolizon().height(height)
-                img.image.image = event.coverImage
+                img.imageView.image = event.coverImage
             }
             
             row = Row.LeftAligned().layout {
@@ -167,17 +178,17 @@ class EventCell: UICollectionViewCell {
     }
     func reloadImages() {
         if let img = event?.coverImage {
-            if let iv = form.quest("[name=eventImage]").control()?.image {
+            if let iv = form.quest("[name=eventImage]").control()?.imageView {
                 iv.image = img
             }
         }
         
         if let img = event?.eventLogo {
-            form.quest("[name=eventLogo]").control()?.image.image = img
+            form.quest("[name=eventLogo]").control()?.imageView.image = img
         }
         
         if let img = event?.publisherIcon {
-            form.quest("[name=pushlisherIcon]").control()?.image.image = img
+            form.quest("[name=pushlisherIcon]").control()?.imageView.image = img
         }
     }
     

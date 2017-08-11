@@ -14,7 +14,7 @@ import MapKit
 import AlamofireImage
 
 //
-class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate,WebPickerDelegate {
+class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, PricePickerDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, WebPickerDelegate, ContentPickerDelegate {
     
     var activityInfo : ActivityInfo
     var activityTitle = "活動"
@@ -22,6 +22,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
     var imagePicked = false
     var form = EventInputForm()
     var pickedIsland : IslandPick? = nil
+    var logoContent : Content? = nil
     let pricePicker = PricePicker()
     
     var dateFormatter : DateFormatter = {
@@ -201,6 +202,9 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
         form.icon.bindEvent(.touchUpInside) {
             ic in
             let vc = ContentPicker()
+
+            vc.delegate = self
+            
             self.navigationController?.pushViewController(vc, animated: true)
         }
 
@@ -212,7 +216,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
         form.infoUrl.textField.text = info.siteUrl
         form.infoSource.textView.text = info.siteTitle
         if (info.siteImage != nil) {
-            form.image.image.image = info.siteImage
+            form.image.imageView.image = info.siteImage
             imagePicked = true
         }
     }
@@ -237,7 +241,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         NSLog("\(info)")
         let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        form.image.image.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
+        form.image.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
         self.dismiss(animated: false, completion: nil)
         imagePicked = true
     }
@@ -332,6 +336,14 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
         
     }
     
+    func pickedContent(content: Content) {
+        logoContent = content
+    }
+    
+    func clearPickedContent() {
+        logoContent = nil
+    }
+    
     var scrollConstraints : NSLayoutConstraint?
     
     @objc
@@ -378,6 +390,11 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
             return
         }
         request.setStr(.title, form.eventTitle.textField.text)
+        
+        // logoId: int           (O)LogoID
+        if logoContent != nil {
+            request.setInt(.logoId, String(logoContent!.id))
+        }
         
         // action: string,        (M)      -- イベントの行い概要内容
         if (form.action.textView.text == "") {
@@ -536,7 +553,7 @@ class ActivityPlanViewController : MittyViewController, IslandPickerDelegate, Pr
     
     func registerGallery (_ eventId: String ) {
         
-        let imageData:NSData = UIImagePNGRepresentation(self.form.image.image.image!)! as NSData
+        let imageData:NSData = UIImagePNGRepresentation(self.form.image.imageView.image!)! as NSData
         let strBase64 = imageData.base64EncodedString()
         
         let parameters = [

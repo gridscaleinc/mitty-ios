@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Alamofire
 
 class MeetingCell : UICollectionViewCell {
     static let id = "Event-Meeting-cell"
@@ -68,7 +69,17 @@ class MeetingCell : UICollectionViewCell {
         name.text = "#" + (meeting.name )
         name.textColor = MittyColor.healthyGreen
         
-        icon.image = UIImage(named: "timesquare")
+        if (meeting.logoUrl != "") {
+            DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
+            icon.af_setImage(withURL: URL(string: meeting.logoUrl)!, placeholderImage: UIImage(named: "timesquare"), completion : { image in
+                if (image.result.isSuccess) {
+                    self.icon.image = image.result.value
+                }
+            }
+            )
+        } else {
+            icon.image = UIImage(named: "timesquare")
+        }
         icon.contentMode = .scaleAspectFit
         
     }

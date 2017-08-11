@@ -166,13 +166,31 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         topContainer +++ titleLabel
+        let imageIcon : Control = {
+            if event.eventLogoUrl != "" {
+                // imageがある場合、イメージを表示
+                let itemImage = MQForm.img(name: "eventImage", url: event.eventLogoUrl).layout {
+                    img in
+                    img.width(35).height(35)
+                }
+                DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
+                itemImage.imageView.af_setImage(withURL: URL(string: event.eventLogoUrl)!, placeholderImage: UIImage(named: "timesquare"), completion : { image in
+                    if (image.result.isSuccess) {
+                        itemImage.imageView.image = image.result.value
+                    }
+                }
+                )
+                return itemImage
+            } else {
+                return MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
+            }
+        } ()
         
-        let imageIcon = MQForm.img(name: "image-icon", url: "timesquare").layout {
+        topContainer +++ imageIcon.layout {
             i in
             i.width(35).height(35).topAlign(with: titleLabel).rightMost(withInset: 30)
         }
-        
-        topContainer +++ imageIcon
+
 
         topRow +++ topContainer
         topRow.layout {

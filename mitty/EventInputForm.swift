@@ -73,7 +73,7 @@ class EventInputForm : MQForm {
     // イメージは最後にオプションとして洗濯させる。
     let image : Control = {
         let i = MQForm.img(name: "picture", url: "sunnyGreen")
-        i.image.contentMode = .scaleAspectFit
+        i.imageView.contentMode = .scaleAspectFit
         return i
     } ()
 
