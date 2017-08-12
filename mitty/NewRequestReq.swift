@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NewRquestReq : JSONRequest {
+class NewRequestReq : JSONRequest {
     
     enum KeyNames : String {
         

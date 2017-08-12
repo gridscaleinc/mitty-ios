@@ -271,6 +271,11 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
             line.height(line_height).rightMost(withInset: 10)
         }
         
+        priceInput.bindEvent(.touchUpInside) { [weak self]
+            c in
+            self?.navigationController?.pushViewController((self?.pricePicker)!, animated: true)
+        }
+        
         detailForm <<< row
         
         price1Row = Row.LeftAligned().height(20)
@@ -476,7 +481,20 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
     }
     
     func updateLayout () {
+        addressLabel.heightConstraints?.autoRemove()
+        address.heightConstraints?.autoRemove()
+        addressRow?.heightConstraints?.autoRemove()
         
+        if address.label.text != "" {
+            addressLabel.height(48)
+            address.height(48)
+            addressRow?.height(48)
+        } else {
+            addressLabel.height(0)
+            address.height(0)
+            addressRow?.height(0)
+        }
+
         price1Row?.heightConstraints?.autoRemove()
         price1.heightConstraints?.autoRemove()
         price2Row?.heightConstraints?.autoRemove()
@@ -519,64 +537,15 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         self.location.textField.text = landInfo.name
         self.address.label.text = landInfo.address
         
-        
         pickedIsland = landInfo
         
-        if landInfo.id == 0 {
-            let service = IslandService.instance
-            service.fetchIslandInfo(pickedIsland!.name!, callback: checkAndRegist) {
-                error in
-                self.showError(error as! String)
-            }
-        }
+        checkAndRegist(landInfo)
         
         self.view.setNeedsUpdateConstraints()
         self.view.updateConstraintsIfNeeded()
         self.view.layoutIfNeeded()
     }
     
-    
-    // 同じ場所が存在しなければ、登録する。
-    func checkAndRegist(_ islands: [IslandInfo]) {
-        if pickedIsland == nil {
-            return
-        }
-        
-        for island in islands {
-            if isSameInfo(island, pickedIsland!) {
-                // TODO int64 -> int
-                pickedIsland?.id = Int(island.id)
-                return
-            }
-        }
-        
-        IslandService.instance.registerNewIsland(pickedIsland!) {
-            error in
-            self.showError(error as! String)
-        }
-    }
-    
-    func isSameInfo(_ islandInfo: IslandInfo, _ pickedInfo : IslandPick ) -> Bool {
-        if (islandInfo.name != pickedInfo.name) {
-            return false
-        }
-        
-        let location = CLLocation(latitude: islandInfo.latitude, longitude: islandInfo.longitude)
-        
-        if let picklocation = pickedInfo.placeMark?.location {
-            // 同じ名称で、距離が１００メートル以内であれば、同じ場所とみなす。
-            print("location:", location)
-            print("picklocation:", picklocation)
-            let distance = location.distance(from: picklocation)
-            print("distance:", distance)
-            if (distance < 100) {
-                return true
-            }
-        }
-        
-        return false
-    }
-
     
     func clearPickedIsland() {
         
@@ -586,6 +555,10 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         self.price1.label.text = picker.getPrice1()
         self.price2.label.text = picker.getPrice2()
         self.priceDetail.label.text = picker.priceInfo.textView.text
+        
+        self.view.setNeedsUpdateConstraints()
+        self.view.updateConstraintsIfNeeded()
+        self.view.layoutIfNeeded()
     }
     
     func clearPickedPriceInfo() {

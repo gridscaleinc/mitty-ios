@@ -13,6 +13,7 @@ import SwiftyJSON
 class RequestService {
     let urlSearch = MITTY_SERVICE_BASE_URL + "/search/request"
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myrequest"
+    let registerUrl = MITTY_SERVICE_BASE_URL + "/new/request"
     
     static var instance : RequestService = {
         let instance = RequestService()
@@ -23,6 +24,51 @@ class RequestService {
         
     }
     
+    func register(_ req: NewRequestReq, onSuccess: @escaping (() -> Void ), onError: @escaping ((_ error: String) -> Void )) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        print(req.parameters)
+        
+        Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+            
+            LoadingProxy.off()
+            
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    let requestId = json["id"].stringValue
+                    
+                    print(requestId)
+                    
+                }
+                onSuccess()
+                
+            case .failure(let error):
+                print(response.debugDescription)
+                print(response.data ?? "No Data")
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(json)
+                    onError("error occoured" + (json as AnyObject).description)
+                } catch {
+                    print("Serialize Error")
+                }
+                
+                print(response.description)
+                
+                print(error)
+            }
+        }
+
+    }
     func getMyRequests (key : String, callback: @escaping (_ request: [RequestInfo]) -> Void ) {
         let parmeters : [String : Any] = [
             "q" : key,

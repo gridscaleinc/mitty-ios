@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import MapKit
 
 class MittyViewController : UIViewController {
     
@@ -103,4 +103,51 @@ class MittyViewController : UIViewController {
        //サブクラスで実装
     }
     
+    // 同じ場所が存在しなければ、登録する。
+    func checkAndRegist(_ pickedIsland: IslandPick) {
+        
+        let service = IslandService.instance
+        service.fetchIslandInfo(pickedIsland.name!, callback: {
+            islands in
+            for island in islands {
+                if self.isSameInfo(island, pickedIsland) {
+                    // TODO int64 -> int
+                    pickedIsland.id = Int(island.id)
+                    return
+                }
+            }
+            
+            IslandService.instance.registerNewIsland(pickedIsland) {
+                error in
+                self.showError(error as! String)
+            }
+        
+        }) {
+            error in
+            self.showError(error as! String)
+        }
+        
+    }
+    
+    // change to uitily
+    func isSameInfo(_ islandInfo: IslandInfo, _ pickedInfo : IslandPick ) -> Bool {
+        if (islandInfo.name != pickedInfo.name) {
+            return false
+        }
+        
+        let location = CLLocation(latitude: islandInfo.latitude, longitude: islandInfo.longitude)
+        
+        if let picklocation = pickedInfo.placeMark?.location {
+            // 同じ名称で、距離が１００メートル以内であれば、同じ場所とみなす。
+            print("location:", location)
+            print("picklocation:", picklocation)
+            let distance = location.distance(from: picklocation)
+            print("distance:", distance)
+            if (distance < 100) {
+                return true
+            }
+        }
+        
+        return false
+    }
 }

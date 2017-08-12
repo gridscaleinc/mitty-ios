@@ -75,6 +75,7 @@
 		FC3C16DC1F3A7A2600E7622B /* ContentPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */; };
 		FC3C16DF1F3B196700E7622B /* unchecked.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3C16DD1F3B196700E7622B /* unchecked.png */; };
 		FC3C16E01F3B196700E7622B /* checked.png in Resources */ = {isa = PBXBuildFile; fileRef = FC3C16DE1F3B196700E7622B /* checked.png */; };
+		FC3C16E21F3EEFFD00E7622B /* NewProposalReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */; };
 		FC427B821DCACB43009F43AE /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B801DCACB43009F43AE /* EventCell.swift */; };
 		FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC427B811DCACB43009F43AE /* ExplorerViewController.swift */; };
 		FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B881DCAFDE1009F43AE /* event1.png */; };
@@ -98,6 +99,8 @@
 		FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
+		FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC95F9181F3EF33800F83766 /* ProposalService.swift */; };
+		FC95F91B1F3EF46800F83766 /* Proposals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC95F91A1F3EF46800F83766 /* Proposals.swift */; };
 		FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ECE1F03FEA90090B601 /* UserService.swift */; };
 		FCB45ED11F0400740090B601 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED01F0400740090B601 /* UserInfo.swift */; };
 		FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED21F05560D0090B601 /* ContentService.swift */; };
@@ -267,6 +270,7 @@
 		FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentPicker.swift; sourceTree = "<group>"; };
 		FC3C16DD1F3B196700E7622B /* unchecked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = unchecked.png; path = images/unchecked.png; sourceTree = "<group>"; };
 		FC3C16DE1F3B196700E7622B /* checked.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checked.png; path = images/checked.png; sourceTree = "<group>"; };
+		FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewProposalReq.swift; sourceTree = "<group>"; };
 		FC427B801DCACB43009F43AE /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		FC427B811DCACB43009F43AE /* ExplorerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorerViewController.swift; sourceTree = "<group>"; };
 		FC427B881DCAFDE1009F43AE /* event1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event1.png; path = images/event1.png; sourceTree = "<group>"; };
@@ -290,6 +294,8 @@
 		FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestReq.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
+		FC95F9181F3EF33800F83766 /* ProposalService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalService.swift; sourceTree = "<group>"; };
+		FC95F91A1F3EF46800F83766 /* Proposals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposals.swift; sourceTree = "<group>"; };
 		FCB45ECE1F03FEA90090B601 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FCB45ED01F0400740090B601 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FCB45ED21F05560D0090B601 /* ContentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentService.swift; sourceTree = "<group>"; };
@@ -522,6 +528,7 @@
 				FCFA84791F08A8B000E9C6F2 /* SocialId.swift */,
 				FCFA847B1F08A8C000E9C6F2 /* NameCard.swift */,
 				FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */,
+				FC95F91A1F3EF46800F83766 /* Proposals.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -546,11 +553,13 @@
 				FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */,
 				FC34831A1EE412A7005E539E /* MeetingService.swift */,
 				FC7D4B871EEEC1470074C259 /* RequestService.swift */,
+				FC95F9181F3EF33800F83766 /* ProposalService.swift */,
 				FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */,
 				FCB45ECE1F03FEA90090B601 /* UserService.swift */,
 				FCB45ED21F05560D0090B601 /* ContentService.swift */,
 				FCCFAB381F2DB9370075C1A2 /* LikesService.swift */,
 				FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */,
+				FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1166,6 +1175,7 @@
 				FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
 				FCFA84781F08A89D00E9C6F2 /* Profile.swift in Sources */,
+				FC95F91B1F3EF46800F83766 /* Proposals.swift in Sources */,
 				FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */,
 				FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
@@ -1198,6 +1208,8 @@
 				FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */,
 				FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
+				FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */,
+				FC3C16E21F3EEFFD00E7622B /* NewProposalReq.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */,

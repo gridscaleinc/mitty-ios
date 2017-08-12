@@ -282,7 +282,7 @@ class RequestViewController : MittyViewController {
     
     func postRequest () {
         
-        let newRequest = NewRquestReq()
+        let newRequest = NewRequestReq()
         
         if (titleText.textField.text == nil || titleText.textField.text == "") {
             showError("タイトルを入力してください")
@@ -322,50 +322,12 @@ class RequestViewController : MittyViewController {
             newRequest.setInt(.preferredPrice2, price)
         }
         
-        let urlString = MITTY_SERVICE_BASE_URL + "/new/request"
-        let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
-        ]
-        
-        LoadingProxy.on()
-        
-        print(newRequest.parameters)
-        Alamofire.request(urlString, method: .post, parameters: newRequest.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-
-            LoadingProxy.off()
-
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    let requestId = json["id"].stringValue
- 
-                    print(requestId)
-                    
-                }
-                
-                self?.navigationController?.popViewController(animated: false)
-                
-            case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    
-                    self?.showError("error occored" + (json as AnyObject).description)
-                    
-                } catch {
-                    print("Serialize Error")
-                }
-                
-                print(response.description)
-                
-                print(error)
-            }
-        }
+        RequestService.instance.register(newRequest, onSuccess : {
+            self.navigationController?.popViewController(animated: false)
+        }, onError: {
+            error in
+            self.showError(error)
+        })
         
     }
     
