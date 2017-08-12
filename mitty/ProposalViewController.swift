@@ -43,9 +43,12 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
     let contactTel = MQForm.text(name: "contact-Tel" , placeHolder: "☎️ 電話番号" )
     // 開始日時
     let date1 = MQForm.text(name: "fromDateTime" , placeHolder: "開始日時")
+    let picker1 = UIDatePicker()
     
     //  終了日時
     let date2 = MQForm.text(name: "toDateTime" , placeHolder: "終了日時" )
+    let picker2 = UIDatePicker()
+    
     var dateFormatter : DateFormatter = {
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale.current
@@ -78,16 +81,17 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         
         
         pricePicker.delegate = self
-        
+        picker1.date = Date()
+        picker2.date = Date()
+
         let startDateText = date1.textField
-        let picker1 = UIDatePicker()
+        
         startDateText.inputView = picker1
         setFromDateTime(picker1)
         picker1.addTarget(self, action: #selector(setFromDateTime(_:)), for: .valueChanged)
         
         
         let endDateText = date2.textField
-        let picker2 = UIDatePicker()
         endDateText.inputView = picker2
         setToDateTime(picker2)
         picker2.addTarget(self, action: #selector(setToDateTime(_:)), for: .valueChanged)
@@ -113,6 +117,7 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         form.autoPinEdge(toSuperviewEdge: .bottom)
         
         self.view.setNeedsUpdateConstraints()
+        
         
     }
     
@@ -411,12 +416,16 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         row = Row.Intervaled()
         row.spacing = 90
         
-        let proposol = Control(name: "scbscribe", view: proposolButton).layout {
+        let proposal = Control(name: "scbscribe", view: proposolButton).layout {
             c in
             c.height(45)
         }
         
-        row +++ proposol
+        proposal.bindEvent(.touchUpInside) {_ in
+            self.propose()
+        }
+        
+        row +++ proposal
         
         row.layout() {
             r in
@@ -563,5 +572,62 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
     
     func clearPickedPriceInfo() {
         
+    }
+    
+    //
+    func propose () {
+        let newProposal = NewProposalReq()
+        
+        newProposal.setInt(.ReplyToRequestID, String(relatedRequest.id))
+        if contactTel.textField.text == nil {
+            showError("連絡電話を入力してください。")
+            return
+        }
+        
+        newProposal.setStr(.ContactTel      , contactTel.textField.text)
+        // newProposal.setStr(.ContactEmail    , contact.textField.text)
+        if (pickedIsland == nil) {
+            showError("場所を選択してください。")
+            return
+        }
+        
+        newProposal.setInt(.ProposedIslandID , String(pickedIsland!.id))
+        
+        // newProposal.setInt(.ProposedIslandID2 , contactTel.textField.text)
+        // newProposal.setInt(.GalleryID         , contactTel.textField.text)
+        newProposal.setStr(.PriceName1, pricePicker.priceName1.textField.text)
+        if pricePicker.price1.textField.text != "" {
+            newProposal.setInt(.Price1, pricePicker.price1.textField.text!)
+        }
+        
+        newProposal.setStr(.PriceName2, pricePicker.priceName2.textField.text)
+        if pricePicker.price2.textField.text != "" {
+            newProposal.setInt(.Price2, pricePicker.price2.textField.text!)
+        }
+        
+        if pricePicker.currency.textField.text != "" {
+            newProposal.setStr(.PriceCurrency, pricePicker.currency.textField.text)
+        }
+        if pricePicker.priceInfo.textView.text != nil {
+            newProposal.setStr(.PriceInfo,  pricePicker.priceInfo.textView.text)
+        }
+        
+        newProposal.setDate(.ProposedDatetime1, picker1.date)
+        newProposal.setDate(.ProposedDatetime2, picker2.date)
+        
+        if additionalInfo.textView.text == nil {
+            showError("提案内容を入力してください。")
+            return
+        }
+        
+        newProposal.setStr(.AdditionalInfo, additionalInfo.textView.text)
+        // newProposal.setStr(.ProposerInfo, contactTel.textField.text)
+
+        ProposalService.instance.register(newProposal, onSuccess: {
+            self.navigationController?.popViewController(animated: true)
+        }, onError: {
+            error in
+            self.showError(error)
+        })
     }
 }

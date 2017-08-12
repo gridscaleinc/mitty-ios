@@ -12,6 +12,7 @@ import SwiftyJSON
 
 class ProposalService {
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myproposal"
+    let registerUrl = MITTY_SERVICE_BASE_URL + "/new/proposal"
     
     static var instance : ProposalService = {
         let instance = ProposalService()
@@ -21,6 +22,53 @@ class ProposalService {
     private init() {
         
     }
+    
+    func register(_ req: NewProposalReq, onSuccess: @escaping (() -> Void ), onError: @escaping ((_ error: String) -> Void )) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        print(req.parameters)
+        
+        Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            
+            LoadingProxy.off()
+            
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    let proposalId = json["id"].stringValue
+                    
+                    print(proposalId)
+                    
+                }
+                onSuccess()
+                
+            case .failure(let error):
+                print(response.debugDescription)
+                print(response.data ?? "No Data")
+                do {
+                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+                    print(json)
+                    onError("error occoured" + (json as AnyObject).description)
+                } catch {
+                    print("Serialize Error")
+                }
+                
+                print(response.description)
+                
+                print(error)
+            }
+        }
+        
+    }
+
     
     func getMyProposals (key : String, callback: @escaping (_ request: [ProposalInfo]) -> Void ) {
         let parmeters : [String : Any] = [
