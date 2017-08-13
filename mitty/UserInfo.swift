@@ -10,10 +10,15 @@ import Foundation
 
 
 class UserInfo {
-    var id            : Int  = 0      // `db:"id" json:"id"`
-    var name          : String  = ""  // `db:"name" json:"name"`
-    var userName      : String  = ""  // `db:"user_name" json:"user_name"`
-    var mailAddress   : String  = ""  // `db:"mail_address" json:"mail_address"`
-    var status        : String  = ""  // `db:"status" json:"status"`
-    var icon          : String  = ""  // `db:"icon" json:"icon"`
+    var id: Int = 0 // `db:"id" json:"id"`
+    
+    var name: String = "" // `db:"name" json:"name"`
+    
+    var userName: String = "" // `db:"user_name" json:"user_name"`
+    
+    var mailAddress: String = "" // `db:"mail_address" json:"mail_address"`
+    
+    var status: String = "" // `db:"status" json:"status"`
+    
+    var icon: String = "" // `db:"icon" json:"icon"`
 }

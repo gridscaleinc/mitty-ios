@@ -13,43 +13,43 @@ import SwiftyJSON
 class ProposalService {
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myproposal"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/proposal"
-    
-    static var instance : ProposalService = {
+
+    static var instance: ProposalService = {
         let instance = ProposalService()
         return instance
     }()
-    
+
     private init() {
-        
+
     }
-    
-    func register(_ req: NewProposalReq, onSuccess: @escaping (() -> Void ), onError: @escaping ((_ error: String) -> Void )) {
-        
+
+    func register(_ req: NewProposalReq, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         LoadingProxy.on()
-        
+
         print(req.parameters)
-        
+
         Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
-            
+
             LoadingProxy.off()
-            
+
             switch response.result {
             case .success:
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
                     print(json)
-                    
+
                     let proposalId = json["id"].stringValue
-                    
+
                     print(proposalId)
-                    
+
                 }
                 onSuccess()
-                
+
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -60,27 +60,27 @@ class ProposalService {
                 } catch {
                     print("Serialize Error")
                 }
-                
+
                 print(response.description)
-                
+
                 print(error)
             }
         }
-        
+
     }
 
-    
-    func getMyProposals (key : String, callback: @escaping (_ request: [ProposalInfo]) -> Void ) {
-        let parmeters : [String : Any] = [
-            "q" : key,
-            ]
-        
-        let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+
+    func getMyProposals (key: String, callback: @escaping (_ request: [ProposalInfo]) -> Void) {
+        let parmeters: [String: Any] = [
+            "q": key,
         ]
-        
+
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+
         LoadingProxy.on()
-        
+
         // ダミーコード、本当はサーバーから検索する。
         var proposals = [ProposalInfo]()
         let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
@@ -91,48 +91,48 @@ class ProposalService {
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
                     print(json)
-                    
+
                     if (json == nil || json["proposals"] == nil) {
                         callback([])
                         return
                     }
-                    
-                    for ( _, jsonReq) in json["proposals"] {
+
+                    for (_, jsonReq) in json["proposals"] {
                         proposals.append(self.bindProposalInfo(jsonReq))
                     }
                     callback(proposals)
                 }
-                
+
             case .failure(let error):
                 LoadingProxy.off()
                 print(error)
             }
         }
-        
+
     }
-    
+
     func bindProposalInfo(_ json: JSON) -> ProposalInfo {
         let info = ProposalInfo()
-        
-        info.replyToRequestID  = json["reply_to_request_id"].int64Value
-        info.contactTel        = json["contact_tel"].stringValue
-        info.contactEmail      = json["contact_email"].stringValue
-        info.proposedIslandID  = json["proposed_island_id"].int64Value
+
+        info.replyToRequestID = json["reply_to_request_id"].int64Value
+        info.contactTel = json["contact_tel"].stringValue
+        info.contactEmail = json["contact_email"].stringValue
+        info.proposedIslandID = json["proposed_island_id"].int64Value
         info.proposedIslandID2 = json["proposed_island_id2"].int64Value
-        info.galleryID         = json["gallery_id"].int64Value
-        info.priceName1        = json["priceName1"].stringValue
-        info.price1            = json["price1"].int64Value
-        info.priceName2        = json["priceName2"].stringValue
-        info.price2            = json["price2"].int64Value
-        info.priceCurrency     = json["price_currency"].stringValue
-        info.priceInfo         = json["price_info"].stringValue
+        info.galleryID = json["gallery_id"].int64Value
+        info.priceName1 = json["priceName1"].stringValue
+        info.price1 = json["price1"].int64Value
+        info.priceName2 = json["priceName2"].stringValue
+        info.price2 = json["price2"].int64Value
+        info.priceCurrency = json["price_currency"].stringValue
+        info.priceInfo = json["price_info"].stringValue
         info.proposedDatetime1 = json["proposed_datetime1"].stringValue
         info.proposedDatetime2 = json["proposed_datetime2"].stringValue
-        info.additionalInfo    = json["additional_info"].stringValue
-        info.proposerInfo      = json["proposer_info"].stringValue
-        info.confirmTel        = json["confirm_tel"].stringValue
-        info.confirmEmail      = json["confirm_email"].stringValue
-        
+        info.additionalInfo = json["additional_info"].stringValue
+        info.proposerInfo = json["proposer_info"].stringValue
+        info.confirmTel = json["confirm_tel"].stringValue
+        info.confirmEmail = json["confirm_email"].stringValue
+
         return info
     }
 

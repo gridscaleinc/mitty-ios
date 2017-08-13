@@ -19,7 +19,7 @@ func SignUp(username: String, password: String) {
         "username": username,
         "password": password
     ]
-    
+
     Alamofire.request(signUpUrl, method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in
         debugPrint(response)
         if let json = response.result.value {
@@ -34,57 +34,57 @@ func SignIn(username: String, password: String) {
         "username": username,
         "password": password
     ]
-    Alamofire.request(MITTY_SERVICE_BASE_URL + "/signin", method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in       debugPrint(response)
+    Alamofire.request(MITTY_SERVICE_BASE_URL + "/signin", method: .post, parameters: params, encoding: URLEncoding.default).responseJSON { response in debugPrint(response)
         if let json = response.result.value {
             print("JSON: \(json)")
         }
     }
 }
 
-// 
 //
-class JSONRequest  {
-    
-    var parameters : [String : Any] = [:]
-    
+//
+class JSONRequest {
+
+    var parameters: [String: Any] = [:]
+
     //
     //
-    func setStr(named name : String, value: String?) {
+    func setStr(named name: String, value: String?) {
         parameters[name] = value
     }
 
     //
     //
-    func setInt(named name : String, value: String?) {
+    func setInt(named name: String, value: String?) {
         if (value == nil || value == "") {
             parameters[name] = nil
             return
         }
-        
+
         let num = NSNumber(value: Int64(value!)!)
         parameters[name] = num
     }
-    
-    func setDouble(named name: String, value : String?) {
+
+    func setDouble(named name: String, value: String?) {
         if (value == nil || value == "") {
             parameters[name] = nil
             return
         }
-        
+
         let num = NSNumber(value: Double(value!)!)
         parameters[name] = num
 
     }
-    
-    func setBool(named name: String, value : Bool) {
+
+    func setBool(named name: String, value: Bool) {
         if (value) {
             parameters[name] = "true"
         } else {
             parameters[name] = "false"
         }
-        
+
     }
-    
+
     func setDate(named name: String, date: Date) {
         setStr(named: name, value: date.iso8601UTC)
     }
@@ -93,11 +93,11 @@ class JSONRequest  {
     func has(named name: String) -> Bool {
         return parameters[name] != nil
     }
-    
+
     func mandatory(name: String) {
         assert(has(named: name))
     }
-    
+
     func isInt(named name: String) -> Bool {
         if (parameters[name] is NSNumber) {
             let n = parameters[name] as! NSNumber
@@ -113,7 +113,7 @@ class JSONRequest  {
         }
         return false
     }
-    
+
 }
 
 

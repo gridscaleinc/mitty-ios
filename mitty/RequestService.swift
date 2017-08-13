@@ -14,43 +14,43 @@ class RequestService {
     let urlSearch = MITTY_SERVICE_BASE_URL + "/search/request"
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myrequest"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/request"
-    
-    static var instance : RequestService = {
+
+    static var instance: RequestService = {
         let instance = RequestService()
         return instance
     }()
-    
+
     private init() {
-        
+
     }
-    
-    func register(_ req: NewRequestReq, onSuccess: @escaping (() -> Void ), onError: @escaping ((_ error: String) -> Void )) {
-        
+
+    func register(_ req: NewRequestReq, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         LoadingProxy.on()
-        
+
         print(req.parameters)
-        
-        Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            
+
+        Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+
             LoadingProxy.off()
-            
+
             switch response.result {
             case .success:
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
                     print(json)
-                    
+
                     let requestId = json["id"].stringValue
-                    
+
                     print(requestId)
-                    
+
                 }
                 onSuccess()
-                
+
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -61,27 +61,27 @@ class RequestService {
                 } catch {
                     print("Serialize Error")
                 }
-                
+
                 print(response.description)
-                
+
                 print(error)
             }
         }
 
     }
-    func getMyRequests (key : String, callback: @escaping (_ request: [RequestInfo]) -> Void ) {
-        let parmeters : [String : Any] = [
-            "q" : key,
-            ]
-        
-        let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+    func getMyRequests (key: String, callback: @escaping (_ request: [RequestInfo]) -> Void) {
+        let parmeters: [String: Any] = [
+            "q": key,
         ]
-        
-        
-        
+
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+
+
+
         LoadingProxy.on()
-        
+
         // ダミーコード、本当はサーバーから検索する。
         var requests = [RequestInfo]()
         let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
@@ -92,39 +92,39 @@ class RequestService {
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
                     print(json)
-                    
+
                     if (json == nil || json["requests"] == nil) {
                         callback([])
                         return
                     }
-                    
-                    for ( _, jsonReq) in json["requests"] {
+
+                    for (_, jsonReq) in json["requests"] {
                         requests.append(self.bindRequestInfo(jsonReq))
                     }
                     callback(requests)
                 }
-                
+
             case .failure(let error):
                 LoadingProxy.off()
                 print(error)
             }
         }
-        
+
     }
-    
-    func search (keys : String, callback: @escaping (_ request: [RequestInfo]) -> Void ) {
-        let parmeters : [String : Any] = [
-            "q" : keys,
-            "offset" : 0,
-            "limit" : 30,
+
+    func search (keys: String, callback: @escaping (_ request: [RequestInfo]) -> Void) {
+        let parmeters: [String: Any] = [
+            "q": keys,
+            "offset": 0,
+            "limit": 30,
         ]
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         LoadingProxy.on()
-        
+
         // ダミーコード、本当はサーバーから検索する。
         var requests = [RequestInfo]()
         let request = Alamofire.request(urlSearch, method: .get, parameters: parmeters, headers: httpHeaders)
@@ -140,13 +140,13 @@ class RequestService {
                         callback([])
                         return
                     }
-                    
-                    for ( _, jsonReq) in json["requests"] {
+
+                    for (_, jsonReq) in json["requests"] {
                         requests.append(self.bindRequestInfo(jsonReq))
                     }
                     callback(requests)
                 }
-                
+
             case .failure(let error):
                 LoadingProxy.off()
                 print(error)
@@ -157,7 +157,7 @@ class RequestService {
 
     func bindRequestInfo(_ json: JSON) -> RequestInfo {
         let info = RequestInfo()
-        info.id	= json["id"].int64Value
+        info.id = json["id"].int64Value
         info.title = json["title"].stringValue
         info.tag = json["tag"].stringValue
         info.desc = json["description"].stringValue
@@ -179,7 +179,7 @@ class RequestService {
         info.ownerId = json["owner_id"].int64Value
         info.created = json["created"].stringValue.utc2Date()
         info.updated = json["updated"].stringValue.utc2Date()
-        
+
         return info
     }
 

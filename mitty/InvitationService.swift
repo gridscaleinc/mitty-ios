@@ -16,30 +16,30 @@ import SwiftyJSON
 // シングルトンサービスクラス。
 class InvitationService {
     let apiSendInvitation = MITTY_SERVICE_BASE_URL + "/send/invitation"
-    
-    static var instance : InvitationService = {
+
+    static var instance: InvitationService = {
         let instance = InvitationService()
         return instance
     }()
-    
+
     private init() {
-        
+
     }
-    
+
     // 招待を送信。
-    func sendInvitation(_ type :String, id : Int64, message: String, userId: [Int]) {
-        
+    func sendInvitation(_ type: String, id: Int64, message: String, userId: [Int]) {
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
-        let parmeters : [String : Any] = [
-            "forType" : type,
-            "idOfType" : id,
-            "message" : message,
+
+        let parmeters: [String: Any] = [
+            "forType": type,
+            "idOfType": id,
+            "message": message,
         ]
-        
-        Alamofire.request(apiSendInvitation, method: .post, parameters: parmeters, headers : httpHeaders ).validate(statusCode: 200..<300).responseJSON { response in
+
+        Alamofire.request(apiSendInvitation, method: .post, parameters: parmeters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             LoadingProxy.off()
             switch response.result {
             case .success:
@@ -49,12 +49,12 @@ class InvitationService {
                     if (json == nil || json["ok"] == nil) {
                         return
                     }
-                    
+
                     return
                 }
-                
+
                 break
-                
+
             case .failure(let error):
                 print(error)
             }

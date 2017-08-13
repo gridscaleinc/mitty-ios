@@ -11,30 +11,30 @@ import Alamofire
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class  MeetingService {
-    static var instance : MeetingService = {
+class MeetingService {
+    static var instance: MeetingService = {
         let instance = MeetingService()
         return instance
     }()
-    
+
     private init() {
-        
+
     }
-    
-    func getLatestConversation(_ meetingId : Int64, callback: @escaping (_ talkList: [Talk]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
+
+    func getLatestConversation(_ meetingId: Int64, callback: @escaping (_ talkList: [Talk]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
         let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/latest/conversation"
-        
+
         LoadingProxy.on()
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         let parameters = [
-            "meetingId" : NSNumber(value: meetingId)
+            "meetingId": NSNumber(value: meetingId)
         ]
-        
-        Alamofire.request(eventMeetingUrl, method: .get, parameters: parameters, headers : httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+
+        Alamofire.request(eventMeetingUrl, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
             case .success:
                 LoadingProxy.off()
@@ -44,14 +44,14 @@ class  MeetingService {
                     let talks = json["conversations"]
                     print(json)
                     print(talks)
-                    
-                    for ( _, talk) in talks {
+
+                    for (_, talk) in talks {
                         conversation.append((self?.bindConversation(talk))!)
                     }
                 }
-                
+
                 callback (conversation)
-            //  self?.navigationController?.popToRootViewController(animated: true)
+                //  self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -62,39 +62,39 @@ class  MeetingService {
                 } catch {
                     print("Serialize Error")
                 }
-                
+
                 print(response.description)
-                
+
                 LoadingProxy.off()
                 print(error)
             }
         }
 
     }
-        
+
     func bindConversation(_ js: JSON) -> Talk {
         let tk1 = Talk()
-        
+
         tk1.meetingId = js["meetingId"].int64!
         tk1.speakerId = js["speakerId"].int64!
         tk1.speakTime = js["speakTime"].stringValue.utc2Date()
         tk1.speaking = js["speaking"].rawString()!
-        
+
         return tk1
-        
+
     }
-    
-    func getEventMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = {_ in } ) {
+
+    func getEventMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
         let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/event/meeting"
-        
-        
+
+
         LoadingProxy.on()
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
-        Alamofire.request(eventMeetingUrl, method: .get, headers : httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+
+        Alamofire.request(eventMeetingUrl, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
             switch response.result {
             case .success:
                 LoadingProxy.off()
@@ -102,14 +102,14 @@ class  MeetingService {
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
                     let meetings = json["eventMeetingList"]
-                    
-                    for ( _, jsonMeeting) in meetings {
+
+                    for (_, jsonMeeting) in meetings {
                         meetingList.append((self?.bindEventMeeting(jsonMeeting))!)
                     }
                 }
-                
+
                 callback (meetingList)
-            //  self?.navigationController?.popToRootViewController(animated: true)
+                //  self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -120,19 +120,19 @@ class  MeetingService {
                 } catch {
                     print("Serialize Error")
                 }
-                
+
                 print(response.description)
-                
+
                 LoadingProxy.off()
                 print(error)
             }
         }
-        
+
     }
 
-    func bindEventMeeting(_ json : JSON) -> MeetingInfo {
+    func bindEventMeeting(_ json: JSON) -> MeetingInfo {
         let meeting = MeetingInfo()
-        
+
         meeting.id = json["id"].int64!
         meeting.name = json["name"].stringValue
         meeting.type = json["type"].stringValue

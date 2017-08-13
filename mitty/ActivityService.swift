@@ -14,35 +14,35 @@ import SwiftyJSON
 // シングルトンサービスクラス。
 class ActivityService {
     let urlBase = MITTY_SERVICE_BASE_URL + "/activity/list"
-    
-    static var instance : ActivityService = {
+
+    static var instance: ActivityService = {
         let instance = ActivityService()
         return instance
     }()
-    
+
     private init() {
-        
+
     }
-    
+
     func register(_ title: String, _ memo: String, _ mainEventId: String,
-                  onCompletion : @escaping (_ info: ActivityInfo ) -> Void,
-                  onError : @escaping (_ error: String ) -> Void ) {
-        
+                  onCompletion: @escaping (_ info: ActivityInfo) -> Void,
+                  onError: @escaping (_ error: String) -> Void) {
+
         let urlString = MITTY_SERVICE_BASE_URL + "/new/activity"
-        
+
         let parameters: Parameters = [
             "title": title,
             "memo": memo,
             "mainEventId": mainEventId
         ]
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
-        
+
+
         LoadingProxy.on()
-        
+
         print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
@@ -51,17 +51,17 @@ class ActivityService {
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
 
-                        let activityId = json["activityId"].stringValue
-                        
-                        let activityInfo = ActivityInfo()
-                        activityInfo.title = parameters["title"] as! String
-                        activityInfo.memo = parameters["memo"] as? String
-                        activityInfo.id = activityId
-                        activityInfo.mainEventId = mainEventId
-                        onCompletion (activityInfo)
-                        
+                    let activityId = json["activityId"].stringValue
+
+                    let activityInfo = ActivityInfo()
+                    activityInfo.title = parameters["title"] as! String
+                    activityInfo.memo = parameters["memo"] as? String
+                    activityInfo.id = activityId
+                    activityInfo.mainEventId = mainEventId
+                    onCompletion (activityInfo)
+
                 }
-                
+
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -69,38 +69,38 @@ class ActivityService {
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(json)
-                    
+
                 } catch {
                     onError("応答電文エラー。")
                 }
-                
+
                 print(response.description)
-                
+
                 LoadingProxy.off()
-                
+
             }
         }
     }
-    
+
     func save(_ info: ActivityInfo,
-                  onCompletion : @escaping (_ info: ActivityInfo ) -> Void,
-                  onError : @escaping (_ error: String ) -> Void ) {
-        
+              onCompletion: @escaping (_ info: ActivityInfo) -> Void,
+              onError: @escaping (_ error: String) -> Void) {
+
         let urlString = MITTY_SERVICE_BASE_URL + "/update/activity"
-        
+
         let parameters: Parameters = [
-            "activityId" : info.id,
+            "activityId": info.id,
             "title": info.title,
             "memo": info.memo ?? "",
         ]
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
-        
+
+
         LoadingProxy.on()
-        
+
         print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
@@ -108,14 +108,14 @@ class ActivityService {
                 LoadingProxy.off()
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
-                    
+
                     let activityId = json["activityId"].stringValue
                     if (activityId != "") {
                         onCompletion (info)
                     }
-                    
+
                 }
-                
+
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -123,44 +123,44 @@ class ActivityService {
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(json)
-                    
+
                 } catch {
                     onError("応答電文エラー。")
                 }
-                
+
                 print(response.description)
-                
+
                 LoadingProxy.off()
-                
+
             }
         }
     }
-    
+
     func saveItem(_ item: ActivityItem,
-              onCompletion : @escaping (_ info: ActivityItem ) -> Void,
-              onError : @escaping (_ error: String ) -> Void ) {
-        
+                  onCompletion: @escaping (_ info: ActivityItem) -> Void,
+                  onError: @escaping (_ error: String) -> Void) {
+
         let urlString = MITTY_SERVICE_BASE_URL + "/update/activity/item"
-        
+
         let parameters: Parameters = [
-            "id" : item.id,
-            "activityId" : item.activityId,
-            "eventId" : item.eventId,
+            "id": item.id,
+            "activityId": item.activityId,
+            "eventId": item.eventId,
             "title": item.title,
-            "memo": item.memo ,
-            "notification" : item.notification ? "true" : "false",
-            "notificationDateTime" : item.notificationTime.iso8601LongUTC
-            ]
-        
-        let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "memo": item.memo,
+            "notification": item.notification ? "true" : "false",
+            "notificationDateTime": item.notificationTime.iso8601LongUTC
         ]
-        
-        
+
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+
+
         print(parameters)
-        
+
         LoadingProxy.on()
-        
+
         print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
@@ -168,14 +168,14 @@ class ActivityService {
                 LoadingProxy.off()
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
-                    
+
                     let activityId = json["id"].stringValue
                     if (activityId != "") {
                         onCompletion (item)
                     }
-                    
+
                 }
-                
+
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -183,29 +183,29 @@ class ActivityService {
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(json)
-                    
+
                 } catch {
                     onError("応答電文エラー。")
                 }
-                
+
                 print(response.description)
-                
+
                 LoadingProxy.off()
-                
+
             }
         }
     }
 
 
     //
-    func registerItem(_ actId: String, _ title: String, _ memo: String, _ eventId: String, notify: Bool, notifyTime : Date?,
-                      asMainEvent: Bool, onCompletion : @escaping (_ actItem: ActivityItem ) -> Void,
-                  onError : @escaping (_ error: String ) -> Void ) {
-        
+    func registerItem(_ actId: String, _ title: String, _ memo: String, _ eventId: String, notify: Bool, notifyTime: Date?,
+                      asMainEvent: Bool, onCompletion: @escaping (_ actItem: ActivityItem) -> Void,
+                      onError: @escaping (_ error: String) -> Void) {
+
         let urlString = MITTY_SERVICE_BASE_URL + "/new/activity/item"
-        
+
         let request = JSONRequest()
-        
+
         request.setStr(named: "activityId", value: actId)
         request.setStr(named: "title", value: title)
         request.setStr(named: "memo", value: memo)
@@ -215,30 +215,30 @@ class ActivityService {
             request.setDate(named: "notificationDateTime", date: notifyTime!)
         }
         request.setStr(named: "asMainEvent", value: (asMainEvent ? "true" : "false"))
-        
+
         let parameters = request.parameters
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         LoadingProxy.on()
-        
+
         print(parameters)
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:
-                
+
                 LoadingProxy.off()
-                
+
                 let item = ActivityItem()
                 item.allDayFlag = false
                 item.eventId = eventId
                 item.title = title
                 item.memo = memo
-                
+
                 onCompletion(item)
-                
+
             case .failure(let error):
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
@@ -246,31 +246,31 @@ class ActivityService {
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(json)
-                    
+
                 } catch {
                     onError("応答電文エラー。")
                 }
-                
+
                 print(response.description)
-                
+
                 LoadingProxy.off()
-                
+
             }
         }
     }
 
     // サーバーからイベントを検索。
-    func search(keys : String, callback: @escaping (_ events: [ActivityInfo]) -> Void ) {
+    func search(keys: String, callback: @escaping (_ events: [ActivityInfo]) -> Void) {
         let parmeters = [
-            "q" : keys
+            "q": keys
         ]
-        
+
         LoadingProxy.on()
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         // ダミーコード、本当はサーバーから検索する。
         var activities = [ActivityInfo]()
         let request = Alamofire.request(urlBase, method: .get, parameters: parmeters, headers: httpHeaders)
@@ -285,53 +285,53 @@ class ActivityService {
                         callback([])
                         return
                     }
-                    
-                    for ( _, activityInfo) in json["activities"] {
+
+                    for (_, activityInfo) in json["activities"] {
                         activities.append(self.bindActivity(activityInfo))
                     }
                 }
-                
+
                 callback(activities)
-                
+
             case .failure(let error):
                 LoadingProxy.off()
                 print(error)
             }
         }
     }
-    
-    
+
+
     func bindActivity(_ jsAct: JSON) -> ActivityInfo {
         let id = jsAct["id"].stringValue
         let act = ActivityInfo()
         act.id = id
-        
+
         act.mainEventId = jsAct["eventId"].stringValue
         act.title = jsAct["title"].stringValue
         act.startDateTime = jsAct["startDateTime"].stringValue
         act.logoUrl = jsAct["eventLogoUrl"].stringValue
-        
+
         act.logoUrl = "timesquare"
-        
+
         return act
     }
-    
-    func fetch(id: String, _ callback: @escaping( _ act: Activity) -> Void  ) {
-        
+
+    func fetch(id: String, _ callback: @escaping(_ act: Activity) -> Void) {
+
         let urlString = MITTY_SERVICE_BASE_URL + "/activity/details"
-        
+
         let parmeters = [
-            "id" : id
+            "id": id
         ]
-        
+
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         LoadingProxy.on()
-        
+
         // ダミーコード、本当はサーバーから検索する。
-        var activity : Activity = Activity()
+        var activity: Activity = Activity()
         let request = Alamofire.request(urlString, method: .get, parameters: parmeters, headers: httpHeaders)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
@@ -339,11 +339,11 @@ class ActivityService {
                 LoadingProxy.off()
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
-                     activity = self.bindActivityDetails(json)
+                    activity = self.bindActivityDetails(json)
                 }
-                
+
                 callback(activity)
-                
+
             case .failure(let error):
                 LoadingProxy.off()
                 print(error)
@@ -351,18 +351,18 @@ class ActivityService {
         }
 
     }
-    
-    func getDestinationList(_ callback: @escaping(_ events: [Destination]) -> Void ) {
-        
+
+    func getDestinationList(_ callback: @escaping(_ events: [Destination]) -> Void) {
+
         let urlString = MITTY_SERVICE_BASE_URL + "/destination/list"
-        
+
 
         let httpHeaders = [
-            "X-Mitty-AccessToken" : ApplicationContext.userSession.accessToken
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
+
         LoadingProxy.on()
-        
+
         // ダミーコード、本当はサーバーから検索する。
         var destinations = [Destination]()
         let request = Alamofire.request(urlString, method: .get, headers: httpHeaders)
@@ -377,22 +377,22 @@ class ActivityService {
                         callback([])
                         return
                     }
-                    
-                    for ( _, dest) in json["destinations"] {
+
+                    for (_, dest) in json["destinations"] {
                         destinations.append(self.bindDestination(dest))
                     }
                 }
-                
+
                 callback(destinations)
-                
+
             case .failure(let error):
                 LoadingProxy.off()
                 print(error)
             }
         }
-        
+
     }
-    
+
     func bindDestination(_ json: JSON) -> Destination {
         let d = Destination()
         d.islandId = json["islandId"].intValue
@@ -403,15 +403,15 @@ class ActivityService {
         d.islandLogo = json["islandLogo"].stringValue
         d.eventId = json["eventId"].intValue
         d.eventTitle = json["eventTitle"].stringValue
-        
+
         d.eventTime = json["eventTime"].stringValue.utc2Date()
-        
+
         print(d.longitude)
-        
+
         return d
-        
+
     }
-    
+
     func bindActivityDetails(_ json: JSON) -> Activity {
         let a = Activity()
         let info = ActivityInfo()
@@ -422,7 +422,7 @@ class ActivityService {
         info.title = infoJson["title"].stringValue
         info.mainEventId = infoJson["main_event_id"].stringValue
         info.memo = infoJson["memo"].stringValue
-        
+
         for (_, detailJson) in json["details"] {
             let item = ActivityItem()
             item.id = detailJson["id"].int64Value
@@ -444,5 +444,5 @@ class ActivityService {
         }
         return a
     }
-    
+
 }
