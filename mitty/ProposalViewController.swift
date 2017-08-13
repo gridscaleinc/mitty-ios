@@ -470,25 +470,7 @@ class ProposalViewController : MittyViewController, IslandPickerDelegate, PriceP
         }
 
     }
-    
-    func seperator(section : Section, caption: String) {
-        let row = Row.Intervaled().layout() {
-            r in
-            r.height(23).fillHolizon()
-        }
-        
-        let c = MQForm.label(name: "caption", title: caption).layout {
-            c in
-            c.height(20)
-            c.label.backgroundColor = MittyColor.light
-            c.label.textColor = .gray
-            c.label.textAlignment = .center
-            c.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }
-        row +++ c
-        section <<< row
-    }
-    
+
     func updateLayout () {
         addressLabel.heightConstraints?.autoRemove()
         address.heightConstraints?.autoRemove()

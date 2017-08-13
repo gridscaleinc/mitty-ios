@@ -7,128 +7,196 @@
 //
 
 import Foundation
-
-//
-//  EditViewController.swift
-//  mitty
-//
-//  Created by gridscale on 2017/07/20.
-//  Copyright © 2017年 GridScale Inc. All rights reserved.
-//
-
-import Foundation
 import UIKit
 
 
 class EditBasicInfoViewController: MittyViewController {
-    
+
     var form = MQForm.newAutoLayout()
-    
-    
-    let activityTitle = MQForm.text(name: "title", placeHolder: "タイトルを入力してください")
-    
-    let memo = MQForm.textView(name: "memo")
-    
-    var updateButton = MQForm.button(name: "update", title: "保存")
-    
-    var activityInfo : ActivityInfo
-    
-    init(_ activity: ActivityInfo) {
-        activityInfo = activity
-        activityTitle.textField.text =  activityInfo.title
-        memo.textView.text = activityInfo.memo
-        
+
+
+    let idlabel = MQForm.label(name: "id", title: "")
+    let nameLabel = MQForm.label(name: "name", title: "")
+
+    let maleLabel = MQForm.label(name: "male", title: "男性")
+    let femaleLabel = MQForm.label(name: "female", title: "女性")
+
+    let underage = MQForm.label(name: "underage", title: "未成年")
+    let yuang = MQForm.label(name: "female", title: "青年")
+    let middleage = MQForm.label(name: "male", title: "中年")
+    let oldage = MQForm.label(name: "female", title: "老年")
+
+    let speech = MQForm.textView(name: "oneword-speech")
+
+    var okButton = MQForm.button(name: "ok", title: "OK")
+
+    var profile: Profile
+
+    init(_ info: Profile) {
+        self.profile = info
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
-        
+
         super.loadView()
-        
+
         self.form.translatesAutoresizingMaskIntoConstraints = false
-        
+
         self.view.addSubview(form)
         
-        form +++ activityTitle.layout {
-            t in
-            t.upper(withInset: 10).leftMost(withInset: 10).rightMost(withInset: 10).height(50)
-            
-        }
-        
-        form +++ memo.layout {
-            m in
-            m.putUnder(of: self.activityTitle, withOffset: 2)
-                .leftMost(withInset: 10).rightMost(withInset: 10).height(100)
-        }
-        
-        form +++ updateButton.layout { [ weak self] b in
-            b.holizontalCenter().width(130).height(45).putUnder(of: (self?.memo)!, withOffset: 10)
-        }
-        
-        let deleteButton = MQForm.button(name: "delete", title: "活動計画を削除")
-        form +++ deleteButton
-        deleteButton.layout() {
-            c in
-            c.view.backgroundColor = UIColor.red
-            c.view.layer.cornerRadius = 8
-            c.height(28).fillHolizon(60).putUnder(of: self.updateButton, withOffset: 40)
-        }
-        
+        buildForm()
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
-        
+
     }
-    
-    
+
+
     override func updateViewConstraints() {
-        form.autoPin(toTopLayoutGuideOf: self, withInset:0)
+        form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
         form.autoPinEdge(toSuperviewEdge: .left)
         form.autoPinEdge(toSuperviewEdge: .right)
         form.autoPinEdge(toSuperviewEdge: .bottom)
-        
+
         form.configLayout()
         super.updateViewConstraints()
-        
+
+    }
+
+    override func viewDidLoad() {
+
+        super.autoCloseKeyboard()
+
+        self.navigationItem.title = "基本情報設定"
+
+        self.view.backgroundColor = UIColor.white
+
+        okButton.bindEvent(.touchUpInside) {
+            b in
+
+            
+
+        }
+    }
+
+
+    // プロファイルを設定。
+    func setProfile(_ info: Profile) {
+        self.profile = info
     }
     
-    override func viewDidLoad() {
-        
-        super.autoCloseKeyboard()
-        
-        self.navigationItem.title = "活動編集"
-        
-        self.view.backgroundColor = UIColor.white
-        
-        updateButton.bindEvent(.touchUpInside) {
-            [weak self] b in
-            
-            self?.updateActivity()
-            
+    func buildForm () {
+        let section = Section(name: "section", view: UIView.newAutoLayout())
+        form +++ section.layout {
+            s in
+            s.fillHolizon().upper()
         }
         
-        LoadingProxy.set(self)
+        // name
+        var row = Row.LeftAligned().layout{
+            r in
+            r.fillHolizon().height(40)
+        }
+        
+        row +++ MQForm.label(name: "namelabel", title: "名前").height(38).width(70)
+        nameLabel.label.text = "黄　永紅"
+        row +++ nameLabel.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
+        }
+        
+        section <<< row
+        
+        section <<< HL(.gray, 0.4)
+        
+        // ID
+        row = Row.LeftAligned().layout{
+            r in
+            r.fillHolizon().height(40)
+        }
+        
+        row +++ MQForm.label(name: "mittyId", title: "MittyID").height(38).width(70)
+        row +++ idlabel.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
+        }
+
+        idlabel.label.text = "0000014"
+        
+        section <<< row
+        
+        section <<< HL(.gray, 0.4)
+        
+        // Gendle
+        row = Row.LeftAligned().layout{
+            r in
+            r.fillHolizon().height(40)
+        }
+        
+        row +++ MQForm.label(name: "gendre", title: "性別").height(38).width(70)
+        let gendle = Row.Intervaled().layout{
+            r in
+            r.rightMost().height(40)
+        }
+        row +++ gendle
+        gendle.spacing = 5
+        gendle +++ setSelection(maleLabel)
+        gendle +++ setSelection(femaleLabel)
+        femaleLabel.label.backgroundColor = MittyColor.pink
+
+        section <<< row
+        
+        seperator(section: section, caption: "年齢層")
+        
+        row = Row.Intervaled().layout{
+            r in
+            r.fillHolizon().height(40)
+        }
+
+        row.spacing = 5
+        
+        row +++ setSelection(underage)
+        
+        row +++ setSelection(yuang)
+        
+        row +++ setSelection(middleage)
+        middleage.label.backgroundColor = MittyColor.healthyGreen
+        
+        row +++ setSelection(oldage)
+        
+        section <<< row
+        
+        seperator(section: section, caption: "One word speech")
+        row = Row.Intervaled().layout{
+            r in
+            r.fillHolizon().height(80)
+        }
+        
+        row +++ speech.layout {
+            s in
+            s.fillParent(withInset: 10)
+        }
+
+        section <<< row
+        
+        section <<< HL(.gray, 0.4)
+        
+        row = Row.Intervaled().layout{
+            r in
+            r.fillHolizon().height(50)
+        }
+        row.spacing = 80
+        
+        row +++ okButton
+        
+        section <<< row
         
     }
-    
-    func updateActivity() {
-        activityInfo.title = activityTitle.textField.text!
-        activityInfo.memo = memo.textView.text
-        ActivityService.instance.save(activityInfo, onCompletion: {
-            info in
-            if self.onEditComplete != nil {
-                self.onEditComplete!(info)
-            }
-            self.navigationController?.popViewController(animated: true)
-        },
-                                      onError: {error in
-                                        print(error)
-        })
-        
-    }
-    
-    var onEditComplete : ((_ info: ActivityInfo) -> Void)?
+
 }

@@ -9,11 +9,11 @@
 import Foundation
 
 class MeetingInfo {
-    var id :  Int64 = 0
-    var name : String = ""
-    var type : String = ""
-    var title : String = ""
-    var logoUrl : String = ""
-    var created : Date = .nulldate
-    var updated : Date = .nulldate
+    var id: Int64 = 0
+    var name: String = ""
+    var type: String = ""
+    var title: String = ""
+    var logoUrl: String = ""
+    var created: Date = .nulldate
+    var updated: Date = .nulldate
 }

@@ -153,23 +153,6 @@ class SendInvitationViewController : MittyViewController {
         
     }
     
-    func seperator(section : Section, caption: String) {
-        let row = Row.Intervaled().layout() {
-            r in
-            r.height(23).fillHolizon()
-        }
-        
-        let c = MQForm.label(name: "caption", title: caption).layout {
-            c in
-            c.height(20)
-            c.label.backgroundColor = MittyColor.light
-            c.label.textColor = MittyColor.healthyGreen
-            c.label.textAlignment = .center
-            c.label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
-        }
-        row +++ c
-        section <<< row
-    }
 }
 
 // MARK: - UISearchBarDelegate

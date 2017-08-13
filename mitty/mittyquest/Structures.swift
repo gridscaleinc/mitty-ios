@@ -386,6 +386,7 @@ open class Section : Container {
             r.leftMost().rightMost()
             previous = r
         }
+        
         self.bottomAlign(with: previous!)
     }
     
@@ -414,19 +415,19 @@ open class Section : Container {
     
 }
 
-func HL (_ color: UIColor? = UIColor.black, _ width: Int? = 1) -> UIView {
+func HL (_ color: UIColor? = UIColor.black, _ width: Float? = 1) -> Container {
     let hl = UIView.newAutoLayout()
     hl.backgroundColor = color
     hl.autoSetDimension(.height, toSize: CGFloat(width!))
     
-    return hl
+    return Container(name: "line", view: hl)
 }
 
 class Header: Section {
     init(_ title: String? = "") {
         super.init(name: "Header-Section", view: UIView.newAutoLayout())
         super.title = title!
-        super.titleConrol = Control(view :HL())
+        super.titleConrol = HL()
         self.view.addSubview((titleConrol?.view)!)
     }
 }

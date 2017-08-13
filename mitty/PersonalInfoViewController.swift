@@ -200,18 +200,9 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     }
     
     func buildIdentity(_ section: Section) {
-        var row = Row.LeftAligned()
-        row.layout{
-            r in
-            r.height(20).fillHolizon()
-        }
+
+        var row = seperator(section: section, caption: "基本情報", LeftRight.left)
         
-        row +++ MQForm.label(name: "speechLabel", title: "基本情報").layout{
-            l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
-        }
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
             i.rightMost().height(20).width(20)
@@ -219,8 +210,10 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
         
         row.bindEvent(.touchUpInside) {
             v in
-            
+            let vc = EditBasicInfoViewController(self.profile)
+            self.navigationController?.pushViewController(vc, animated: true)
         }
+        
         section <<< row
         
         row = Row.LeftAligned()
@@ -296,22 +289,8 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     }
     
     func buildSpeech(_ section: Section) {
-        let row = Row.LeftAligned()
-        row.layout{
-            r in
-            r.height(20).fillHolizon()
-        }
-        row +++ MQForm.label(name: "speechLabel", title: "ひとこと").layout{
-            l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
-        }
-        
-        row +++ MQForm.img(name: "aaa", url: "editpen").layout {
-            i in
-            i.rightMost().height(20).width(20)
-        }
+
+        let row = seperator(section: section, caption: "One word of speech")
         
         section <<< row
         
@@ -330,138 +309,145 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     }
     
     func buildBiography(_ section: Section) {
-        var row = Row.LeftAligned()
-        row.layout{
-            r in
-            r.height(20).fillHolizon()
-        }
-        row +++ MQForm.label(name: "constellation", title: "星座").layout{
-            l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
-        }
+
+        var row = seperator(section: section, caption: "Biography", LeftRight.left)
         
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
             i.rightMost().height(20).width(20)
         }
-        
+        row.bindEvent(.touchUpInside) {
+            r in
+            let vc = EditBiographyViewController(self.profile)
+            self.navigationController?.pushViewController(vc, animated: true)
+
+        }
         section <<< row
         
-        var row1 = Row.LeftAligned()
-        row1.layout{
+        row = Row.LeftAligned().layout{
             r in
-            r.height(30).fillHolizon()
-        }
-        row1 +++ constellationLabel.layout {
-            s in
-            s.fillParent(withInset: 2)
+            r.fillHolizon().height(40)
         }
         
-        section <<< row1
+        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(38).width(70)
+        row +++ constellationLabel.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
+        }
+        
+        section <<< row
+        section <<< HL(.gray, 0.4)
+        
+        row = Row.LeftAligned().layout{
+            r in
+            r.fillHolizon().height(40)
+        }
+        
+        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(38).width(70)
+        row +++ appearanceLabel.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
+        }
+        
+        section <<< row
         
         row = Row.LeftAligned()
         row.layout{
             r in
             r.height(20).fillHolizon()
         }
-        row +++ MQForm.label(name: "appearence", title: "外見").layout{
-            l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
-        }
         
-        row +++ MQForm.img(name: "aaa", url: "editpen").layout {
-            i in
-            i.rightMost().height(20).width(20)
-        }
+        row = seperator(section: section, caption: "職業")
         
         section <<< row
         
-        row1 = Row.LeftAligned()
-        row1.layout{
+        row = Row.LeftAligned().layout{
             r in
-            r.height(30).fillHolizon()
+            r.fillHolizon().height(40)
         }
-        row1 +++ appearanceLabel.layout {
-            s in
-            s.fillParent(withInset: 2)
-        }
-        
-        section <<< row1
-        
-        row = Row.LeftAligned()
-        row.layout{
-            r in
-            r.height(20).fillHolizon()
-        }
-        row +++ MQForm.label(name: "occupation", title: "職業").layout{
+        row +++ MQForm.label(name: "occupationLabel1", title: "職業1").height(38).width(70)
+        row +++ occupationLabel1.layout {
             l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
         }
+        section <<< row
+        section <<< HL(.gray, 0.4)
         
-        row +++ MQForm.img(name: "aaa", url: "editpen").layout {
-            i in
-            i.rightMost().height(20).width(20)
+        row = Row.LeftAligned().layout{
+            r in
+            r.fillHolizon().height(40)
         }
+        row +++ MQForm.label(name: "occupationLabel2", title: "職業2").height(38).width(70)
+        row +++ occupationLabel2.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
+        }
+        section <<< row
+        section <<< HL(.gray, 1.0)
+        
+        row = Row.LeftAligned().layout{
+            r in
+            r.fillHolizon().height(40)
+        }
+        row +++ MQForm.label(name: "occupationLabel3", title: "職業3").height(38).width(70)
+        row +++ occupationLabel3.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
+        }
+        section <<< row
+
+        row = seperator(section: section, caption: "趣味")
         
         section <<< row
         
-        row1 = Row.LeftAligned()
-        row1.layout{
+        row = Row.LeftAligned().layout{
             r in
-            r.height(30).fillHolizon()
+            r.fillHolizon().height(40)
         }
-        row1 +++ occupationLabel1.layout {
-            s in
-            s.fillParent(withInset: 2)
+        row +++ MQForm.label(name: "occupationLabel1", title: "趣味1").height(38).width(70)
+        row +++ hobbyLabel1.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
         }
+        section <<< row
+        section <<< HL(.gray, 0.4)
         
-        section <<< row1
-        
-        row1 = Row.LeftAligned()
-        row1.layout{
+        row = Row.LeftAligned().layout{
             r in
-            r.height(30).fillHolizon()
+            r.fillHolizon().height(40)
         }
-        row1 +++ occupationLabel2.layout {
-            s in
-            s.fillParent(withInset: 2)
+        row +++ MQForm.label(name: "hobbyLabel2", title: "趣味2").height(38).width(70)
+        row +++ hobbyLabel2.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
         }
+        section <<< row
+        section <<< HL(.gray, 1.0)
         
-        section <<< row1
-        
-        row1 = Row.LeftAligned()
-        row1.layout{
+        row = Row.LeftAligned().layout{
             r in
-            r.height(30).fillHolizon()
+            r.fillHolizon().height(40)
         }
-        row1 +++ occupationLabel3.layout {
-            s in
-            s.fillParent(withInset: 2)
+        row +++ MQForm.label(name: "hobbyLabel3", title: "趣味3").height(38).width(70)
+        row +++ hobbyLabel3.layout {
+            l in
+            l.height(38).rightMost(withInset: 10)
+            l.label.textAlignment = .right
         }
-        
-        section <<< row1
+        section <<< row
 
     }
     
     
     func buildSocialLinks(_ section: Section) {
-        let row = Row.LeftAligned()
-        row.layout{
-            r in
-            r.height(20).fillHolizon()
-        }
-        row +++ MQForm.label(name: "socialLink", title: "ソーシャルID").layout{
-            l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
-        }
+        let row = seperator(section: section, caption: "ソーシャルID", LeftRight.left)
         
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
@@ -485,18 +471,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     }
     
     func buildNameCards(_ section: Section) {
-        let row = Row.LeftAligned()
-        row.layout{
-            r in
-            r.height(20).fillHolizon()
-        }
-        row +++ MQForm.label(name: "namecard", title: "名刺").layout{
-            l in
-            l.leftMost(withInset:2).rightMost(withInset : 40)
-            l.label.backgroundColor = MittyColor.healthyGreen
-            l.label.textColor = UIColor.white
-        }
-        
+        let row = seperator(section: section, caption: "名刺", LeftRight.left)
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
             i.rightMost().height(20).width(20)

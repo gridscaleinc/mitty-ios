@@ -90,6 +90,7 @@
 		FC4B886B1F01566000458912 /* SpeedMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B886A1F01566000458912 /* SpeedMeter.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
 		FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */; };
+		FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -285,6 +286,7 @@
 		FC4B886A1F01566000458912 /* SpeedMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedMeter.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
 		FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionController.swift; sourceTree = "<group>"; };
+		FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBiographyViewController.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -634,6 +636,7 @@
 				FC4B88661F010CAF00458912 /* SocialMirrorViewController.swift */,
 				FC4B88681F010E0900458912 /* NameCardViewController.swift */,
 				FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */,
+				FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */,
 			);
 			name = center;
 			sourceTree = "<group>";
@@ -1164,6 +1167,7 @@
 				FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */,
 				FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */,
 				FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */,
+				FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
 				FC4B88671F010CAF00458912 /* SocialMirrorViewController.swift in Sources */,

@@ -60,7 +60,7 @@ class ActivitySelectionForm : UIView {
         collectionView.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom, withInset: 120)
         
-        let redLine = HL(UIColor.red)
+        let redLine = HL(UIColor.red).view
         self.addSubview(redLine)
         redLine.autoPinEdge(.top, to: .bottom, of: collectionView)
         
