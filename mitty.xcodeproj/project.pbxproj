@@ -91,6 +91,7 @@
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
 		FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */; };
 		FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */; };
+		FC570FED1F408CFB0064FDC3 /* NameCardInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -287,6 +288,7 @@
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
 		FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionController.swift; sourceTree = "<group>"; };
 		FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBiographyViewController.swift; sourceTree = "<group>"; };
+		FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardInputForm.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -771,6 +773,7 @@
 				FC3482C71ED9D70A005E539E /* NameCardForm.swift */,
 				FC3482D11EDA8073005E539E /* PresenceForm.swift */,
 				FC3482D31EDA8090005E539E /* FootMarkForm.swift */,
+				FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1241,6 +1244,7 @@
 				FC30182D1ED00E7400A5F183 /* PriceInfoPicker.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
+				FC570FED1F408CFB0064FDC3 /* NameCardInputForm.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
 				FC3482C81ED9D70A005E539E /* NameCardForm.swift in Sources */,
