@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-class BaguaIndicator : UIImageView {
-    
+class BaguaIndicator: UIImageView {
+
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
+
         self.animationImages = [
             UIImage(named: "bagua_1")!,
             UIImage(named: "bagua_2")!,
@@ -24,11 +24,11 @@ class BaguaIndicator : UIImageView {
             UIImage(named: "bagua_7")!,
             UIImage(named: "bagua_8")!
         ]
-        
+
         self.animationDuration = 4
 
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

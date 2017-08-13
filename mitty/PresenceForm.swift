@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class PresenceForm : MQForm {
+class PresenceForm: MQForm {
     
     
     let mittyId = MQForm.label(name: "mittyId", title: "MittyId: #01920023")

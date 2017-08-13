@@ -18,33 +18,33 @@ import MapKit
 // 4.地図を動かしたら、地図の住所を逆引きしてテキストボックスに反映する。
 
 @available(iOS 9.3, *)
-class IslandPicker : MittyViewController {
-    
-    var selectedIsland : IslandPick? = nil
-    
-    var candidates : [IslandPick] = []
-    var islandForm : IslandPickForm = IslandPickForm.newAutoLayout()
-    weak var delegate : IslandPickerDelegate? = nil
-    
-    
+class IslandPicker: MittyViewController {
+
+    var selectedIsland: IslandPick? = nil
+
+    var candidates: [IslandPick] = []
+    var islandForm: IslandPickForm = IslandPickForm.newAutoLayout()
+    weak var delegate: IslandPickerDelegate? = nil
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       // super.autoCloseKeyboard()
-        
+
+        // super.autoCloseKeyboard()
+
         self.view.backgroundColor = .white
         self.view.addSubview(islandForm)
-        
+
         islandForm.autoPin(toTopLayoutGuideOf: self, withInset: 10)
         islandForm.autoPinEdge(toSuperviewEdge: .left)
         islandForm.autoPinEdge(toSuperviewEdge: .right)
         islandForm.autoPinEdge(toSuperviewEdge: .bottom)
-        
+
         islandForm.buildForm(islandInfo: IslandInfo())
         islandForm.configLayout()
 
         self.navigationItem.title = "場所選択"
-        
+
         islandForm.okButton.bindEvent(.touchUpInside) { [weak self]
             v in
             if (self?.delegate != nil) {
@@ -56,12 +56,12 @@ class IslandPicker : MittyViewController {
                 self?.navigationController?.popViewController(animated: true)
             }
         }
-        
+
     }
 }
 
 
-protocol IslandPickerDelegate : class {
+protocol IslandPickerDelegate: class {
     func pickedIsland(landInfo: IslandPick)
     func clearPickedIsland()
 }

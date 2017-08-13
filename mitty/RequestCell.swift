@@ -11,70 +11,70 @@ import PureLayout
 
 class RequestCell: UICollectionViewCell {
     static let id = "request-search-result-cell"
-    
+
     // MARK: - View Elements
-    var request : RequestInfo?
-    
+    var request: RequestInfo?
+
     var form = MQForm.newAutoLayout()
-    
+
     // MARK: - Initializers
     override init(frame: CGRect) {
-        
+
         super.init(frame: frame)
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     private func addConstraints() {
-        
-        
+
+
     }
-    
+
     func configureView(req: RequestInfo) {
-        
+
         self.request = req
         form = MQForm.newAutoLayout()
         self.addSubview(form)
         form.autoPinEdgesToSuperviewEdges()
-        
+
         let section = Section(name: "request-cell", view: UIView.newAutoLayout())
         section.layout {
             s in
             s.fillParent()
         }
         form +++ section
-        
+
         // 誰かポストしたのか
         var row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(30)
         }
-        
+
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
         row +++ publisherIcon.width(30).height(30)
-        
+
         let publisher = MQForm.label(name: "publisher", title: "request.publisherName")
-        row +++ publisher.layout{
+        row +++ publisher.layout {
             pub in
             let l = pub.label
             l.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             l.textColor = MittyColor.healthyGreen
         }
-        
-        
+
+
         let published = MQForm.label(name: "days", title: req.requestDays())
-        
-        row +++ published.layout{
+
+        row +++ published.layout {
             pub in
             let l = pub.label
             l.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
             l.textColor = UIColor.black
         }
-        
+
         section <<< row
-        
+
         // タイトルを表示
         // logoがある場合ロゴを表示
         row = Row.LeftAligned().layout {
@@ -92,12 +92,12 @@ class RequestCell: UICollectionViewCell {
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
             label.textAlignment = .center
         }
-        
+
         col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
         row +++ col
-        
+
         row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
-        let titleLabel = MQForm.label(name: "titleLabel", title: req.title).layout {t in
+        let titleLabel = MQForm.label(name: "titleLabel", title: req.title).layout { t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
             t.rightMost().height(50)
@@ -105,12 +105,12 @@ class RequestCell: UICollectionViewCell {
         }
         row +++ titleLabel
         section <<< row
-        
+
         // リクエスト情報を設定
         row = Row.LeftAligned()
         let actionLabel = UILabel.newAutoLayout()
         actionLabel.text = req.desc
-        let actionCtrl = Control(name:"actionLabel", view: actionLabel).layout {
+        let actionCtrl = Control(name: "actionLabel", view: actionLabel).layout {
             l in
             l.fillParent()
             l.label.font = UIFont.systemFont(ofSize: 12)
@@ -123,11 +123,11 @@ class RequestCell: UICollectionViewCell {
         }
         row +++ actionCtrl
         section <<< row
-        
+
         form.configLayout()
-        
+
     }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         for v in contentView.subviews {

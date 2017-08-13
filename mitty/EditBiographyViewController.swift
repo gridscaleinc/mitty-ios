@@ -23,7 +23,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     var okButton = MQForm.button(name: "ok", title: "OK")
 
     var constellation = MQForm.text(name: "constellation", placeHolder: "選択してください")
-    
+
     var profile: Profile
 
     init(_ info: Profile) {
@@ -72,7 +72,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         constellationPicker.dataSource = self
         constellationPicker.delegate = self
         constellation.textField.inputView = constellationPicker
-        
+
         okButton.bindEvent(.touchUpInside) {
             b in
 
@@ -90,33 +90,33 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         }
 
         seperator(section: section, caption: "")
-        
+
         var row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(40)
         }
-        
-        row +++ MQForm.label(name: "cons", title: "星座").layout{
+
+        row +++ MQForm.label(name: "cons", title: "星座").layout {
             r in
             r.width(70)
         }
-        
+
         row +++ constellation.layout {
             c in
             c.rightMost().height(30)
         }
 
         section <<< row
-        
+
         seperator(section: section, caption: "外見")
         row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(40)
         }
         row.spacing = 5
-        
+
         row +++ createSelection("お洒落")
-        row +++ createSelection("容姿端麗").layout{
+        row +++ createSelection("容姿端麗").layout {
             c in
             c.view.backgroundColor = MittyColor.pink
         }
@@ -124,61 +124,61 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         row +++ createSelection("ぽちゃり")
         row +++ createSelection("細い")
         section <<< row
-        
+
         seperator(section: section, caption: "職業")
         row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(40)
         }
         row.spacing = 5
-        
-        row +++ createSelection("管理").layout{
+
+        row +++ createSelection("管理").layout {
             c in
             c.view.backgroundColor = MittyColor.baseYellow
         }
-        
+
         row +++ createSelection("専門")
         row +++ createSelection("事務")
         row +++ createSelection("販売")
         section <<< row
         section <<< HL(UIColor.gray, 0.5)
-        
+
         row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(40)
         }
         row.spacing = 5
-        
+
         row +++ createSelection("サービス")
         row +++ createSelection("保安")
         row +++ createSelection("農林")
         row +++ createSelection("輸送")
         section <<< row
-        
+
         seperator(section: section, caption: "趣味")
         row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(40)
         }
         row.spacing = 5
-        
-        row +++ createSelection("釣り").layout{
+
+        row +++ createSelection("釣り").layout {
             c in
             c.view.backgroundColor = MittyColor.healthyGreen
         }
-        
+
         row +++ createSelection("ゲーム")
         row +++ createSelection("旅行")
         row +++ createSelection("日曜大工")
         section <<< row
         section <<< HL(UIColor.gray, 0.5)
-        
+
         row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(40)
         }
         row.spacing = 5
-        
+
         row +++ createSelection("読書")
         row +++ createSelection("音楽")
         row +++ createSelection("ガーデニング")
@@ -186,17 +186,17 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         section <<< row
 
         section <<< HL(.gray, 0.4)
-        
-        row = Row.Intervaled().layout{
+
+        row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(50)
         }
         row.spacing = 80
-        
+
         row +++ okButton
-        
+
         section <<< row
-        
+
     }
 
 
@@ -204,23 +204,23 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         let c = MQForm.label(name: "-", title: s)
         return setSelection(c)
     }
-    
-    
+
+
     //Picerviewの列の数は2とする
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
-    
+
     func pickerView(_ namePickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return constellations.count
     }
-    
+
     //表示する文字列を指定する
     //PickerViewに表示する配列の要素数を設定する
-    func pickerView(_ namePickerview: UIPickerView, titleForRow row: Int, forComponent component: Int)-> String? {
+    func pickerView(_ namePickerview: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return constellations[row]
     }
-    
+
     //ラベル表示
     func pickerView(_ picker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         constellation.textField.text = constellations[row]

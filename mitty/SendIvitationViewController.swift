@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 import MapKit
 
-class SendInvitationViewController : MittyViewController {
+class SendInvitationViewController: MittyViewController {
     
     let form : MQForm = MQForm.newAutoLayout()
     

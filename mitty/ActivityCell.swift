@@ -10,21 +10,21 @@ import Foundation
 import UIKit
 import PureLayout
 
-class ActivityListHeaderCell : UICollectionReusableView {
+class ActivityListHeaderCell: UICollectionReusableView {
     static let id = "activity-header-cell"
-    let titleLabel : UILabel = {
+    let titleLabel: UILabel = {
         let l = UILabel.newAutoLayout()
         l.text = "活動予定一覧"
         return l
     } ()
-    
-    let hl : UILabel = {
+
+    let hl: UILabel = {
         let l = UILabel.newAutoLayout()
         l.text = ""
         l.backgroundColor = .red
         return l
     } ()
-    
+
     func config () {
         self.addSubview(titleLabel)
         self.addSubview(hl)
@@ -34,7 +34,7 @@ class ActivityListHeaderCell : UICollectionReusableView {
         hl.autoPinEdge(.left, to: .left, of: titleLabel)
         hl.autoPinEdge(.right, to: .right, of: titleLabel)
         hl.autoSetDimension(.height, toSize: 1)
-        
+
     }
-    
+
 }

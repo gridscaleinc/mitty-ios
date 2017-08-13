@@ -12,37 +12,37 @@ import PureLayout
 
 @objc (GuideViewController)
 class GuideViewController: UIViewController {
-    
+
     var mittyLogo = UIImageView.newAutoLayout()
     var slogan = UILabel.newAutoLayout()
     var scrollView: UIScrollView!
     var imageView = UIImageView()
     var usageLabel = UILabel.newAutoLayout()
     var startButton = UIButton.newAutoLayout()
-    
+
     var messageBoard = UIView.newAutoLayout()
     var message = UILabel.newAutoLayout()
     var pageContol = UIPageControl.newAutoLayout()
 
     let numOfPages = 3
-    
+
     // Autolayout済みフラグ
     var didSetupConstraints = false
-    
+
     override func loadView() {
         super.loadView()
-        
+
         self.view.backgroundColor = UIColor.white
-        
+
         mittyLogo = UIImageView(image: UIImage(named: "applogo"))
         mittyLogo.alpha = 0.7
-        
+
         slogan.text = "Mitty-May I talk to you?"
         slogan.textColor = .white
-        slogan.font=UIFont.boldSystemFont(ofSize: 25)
+        slogan.font = UIFont.boldSystemFont(ofSize: 25)
         slogan.layer.shadowColor = UIColor.black.cgColor
-        
-        
+
+
         scrollView = UIScrollView(frame: self.view.bounds)
         scrollView.isPagingEnabled = true
         scrollView.showsHorizontalScrollIndicator = false
@@ -51,30 +51,30 @@ class GuideViewController: UIViewController {
         scrollView.bounces = false
         scrollView.contentOffset = CGPoint.zero
         scrollView.contentSize = CGSize(width: self.view.bounds.size.width * 3, height: self.view.bounds.size.height)
-        for index  in 0..<numOfPages {
+        for index in 0..<numOfPages {
             imageView = UIImageView(image: UIImage(named: "Guide\(index + 1)"))
-            imageView.frame = CGRect(x: self.view.bounds.size.width * CGFloat(index), y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height )
+            imageView.frame = CGRect(x: self.view.bounds.size.width * CGFloat(index), y: 0, width: self.view.bounds.size.width, height: self.view.bounds.size.height)
             scrollView.addSubview(imageView)
         }
-        
+
         usageLabel.text = "生活の知恵をシェアしましょう"
         usageLabel.textColor = .white
-        usageLabel.font=UIFont.systemFont(ofSize: 20)
+        usageLabel.font = UIFont.systemFont(ofSize: 20)
         usageLabel.layer.shadowColor = UIColor.black.cgColor
-        
+
         startButton.setTitle("開始", for: UIControlState.normal)
         startButton.backgroundColor = .red
         startButton.titleLabel?.font = UIFont.systemFont(ofSize: 20)
         startButton.setTitleColor(.white, for: UIControlState.normal)
         startButton.layer.cornerRadius = 5
-        
+
         messageBoard.backgroundColor = UIColor.black
         messageBoard.alpha = 0.8
-        
+
         message.text = "Mitty.co, Produced by Gridscale Inc."
         message.textColor = .white
         message.layer.shadowColor = UIColor.black.cgColor
-        
+
         startButton.addTarget(self, action: #selector(self.startBtnDo), for: .touchUpInside)
 
 
@@ -84,7 +84,7 @@ class GuideViewController: UIViewController {
     //Viewの表示処理
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         self.view.addSubview(scrollView)
         self.view.addSubview(mittyLogo)
         self.view.addSubview(slogan)
@@ -94,61 +94,61 @@ class GuideViewController: UIViewController {
         self.view.addSubview(startButton)
         self.view.addSubview(pageContol)
     }
-    
-    //Go to the mainbar 
+
+    //Go to the mainbar
     func startBtnDo() {
         // let mainTabBarController: MainTabBarController = MainTabBarController()
         // present(mainTabBarController, animated:true, completion:nil)
-         let signinViewController = SigninViewController()
-         present(signinViewController, animated:true, completion:nil)
+        let signinViewController = SigninViewController()
+        present(signinViewController, animated: true, completion: nil)
     }
-    
+
     //
     // ビュー整列メソッド。PureLayoutの処理はここで存分に活躍。
     //
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
-            
+
             mittyLogo.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
             mittyLogo.autoPinEdge(toSuperviewEdge: ALEdge.top, withInset: 40)
-            mittyLogo.autoSetDimension(.width, toSize:80)
-            mittyLogo.autoSetDimension(.height, toSize:80)
-            
+            mittyLogo.autoSetDimension(.width, toSize: 80)
+            mittyLogo.autoSetDimension(.height, toSize: 80)
+
             slogan.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
             slogan.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
             slogan.autoPinEdge(.top, to: .bottom, of: mittyLogo, withOffset: 5)
-            
+
             slogan.autoSetDimension(.width, toSize: 200)
             slogan.autoSetDimension(.height, toSize: 30)
 
             usageLabel.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 20)
             usageLabel.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 20)
             usageLabel.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 120)
-            usageLabel.autoSetDimension(.height, toSize:30)
+            usageLabel.autoSetDimension(.height, toSize: 30)
 
-            
+
             startButton.autoPinEdge(.top, to: .bottom, of: usageLabel, withOffset: 20)
             startButton.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
-            startButton.autoSetDimension(.width, toSize:90)
-            startButton.autoSetDimension(.height, toSize:40)
-            
-            
+            startButton.autoSetDimension(.width, toSize: 90)
+            startButton.autoSetDimension(.height, toSize: 40)
+
+
             messageBoard.autoPinEdge(toSuperviewEdge: ALEdge.bottom, withInset: 0)
             messageBoard.autoPinEdge(toSuperviewEdge: ALEdge.left, withInset: 0)
             messageBoard.autoPinEdge(toSuperviewEdge: ALEdge.right, withInset: 0)
-            messageBoard.autoSetDimension(.height, toSize:30)
+            messageBoard.autoSetDimension(.height, toSize: 30)
             message.autoPinEdgesToSuperviewEdges(with: UIEdgeInsetsMake(2, 10, 2, 10))
 
             pageContol.autoPinEdge(.top, to: .bottom, of: startButton, withOffset: 10)
             pageContol.autoAlignAxis(toSuperviewAxis: ALAxis.vertical)
             pageContol.autoSetDimension(.width, toSize: 80)
             pageContol.autoSetDimension(.height, toSize: 30)
-            
+
             didSetupConstraints = true
         }
         super.updateViewConstraints()
     }
-    
+
     //メモリ障害警告
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
