@@ -11,19 +11,32 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
-// シングルトンサービスクラス。
-class ActivityService {
+/// 活動に関するサービス。
+class ActivityService: Service {
+    
+    /// URLベース。
     let urlBase = MITTY_SERVICE_BASE_URL + "/activity/list"
 
+    /// シングルトンインスタンス。
     static var instance: ActivityService = {
         let instance = ActivityService()
         return instance
     }()
 
-    private init() {
+    /// シングルトン実装のため、initをプライベート化。
+    private override init() {
 
     }
 
+    
+    /// 活動計画登録。
+    ///
+    /// - Parameters:
+    ///   - title: 活動タイトル。
+    ///   - memo: 活動に関するメモ。
+    ///   - mainEventId: メインイベントのID.
+    ///   - onCompletion: 登録成功時の呼び出し処理。
+    ///   - onError: エラー時に呼び出し処理。
     func register(_ title: String, _ memo: String, _ mainEventId: String,
                   onCompletion: @escaping (_ info: ActivityInfo) -> Void,
                   onError: @escaping (_ error: String) -> Void) {
@@ -82,6 +95,13 @@ class ActivityService {
         }
     }
 
+    
+    /// 活動内容保存。
+    ///
+    /// - Parameters:
+    ///   - info: 活動情報オブジェクト。
+    ///   - onCompletion: 保存処理成功時の非同期に呼び出し処理。
+    ///   - onError: エラー時非同期に呼び出す処理。
     func save(_ info: ActivityInfo,
               onCompletion: @escaping (_ info: ActivityInfo) -> Void,
               onError: @escaping (_ error: String) -> Void) {
@@ -136,6 +156,13 @@ class ActivityService {
         }
     }
 
+    
+    /// 活動アイテム保存処理。
+    ///
+    /// - Parameters:
+    ///   - item: アイテムオブジェクト。
+    ///   - onCompletion: 保存成功時に非同期に呼び出される処理
+    ///   - onError: エラー時に非同期に呼び出される処理。
     func saveItem(_ item: ActivityItem,
                   onCompletion: @escaping (_ info: ActivityItem) -> Void,
                   onError: @escaping (_ error: String) -> Void) {
@@ -198,6 +225,18 @@ class ActivityService {
 
 
     //
+    /// 活動アイテム登録。
+    ///
+    /// - Parameters:
+    ///   - actId: 活動ID.
+    ///   - title: 活動アイテムのタイトル。
+    ///   - memo: 活動アイテムに関するメモ。
+    ///   - eventId: 活動に関するイベントID.
+    ///   - notify: アラームで知らせる要否。
+    ///   - notifyTime: アラーム要の場合、その時刻。
+    ///   - asMainEvent: メインイベントであるかどうかを示すフラグ。
+    ///   - onCompletion: 正常に登録された場合の非同期に呼び出される処理。
+    ///   - onError: エラー時に非同期に呼び出される処理。
     func registerItem(_ actId: String, _ title: String, _ memo: String, _ eventId: String, notify: Bool, notifyTime: Date?,
                       asMainEvent: Bool, onCompletion: @escaping (_ actItem: ActivityItem) -> Void,
                       onError: @escaping (_ error: String) -> Void) {
@@ -259,7 +298,11 @@ class ActivityService {
         }
     }
 
-    // サーバーからイベントを検索。
+    /// サーバーから活動を検索。
+    ///
+    /// - Parameters:
+    ///   - keys: 検索結果をフィルタするためのキー項目。キー項目が含まれる活動のみ検索される。
+    ///   - callback: 検索結果が返された場合の呼び出し処理。
     func search(keys: String, callback: @escaping (_ events: [ActivityInfo]) -> Void) {
         let parmeters = [
             "q": keys
@@ -301,6 +344,10 @@ class ActivityService {
     }
 
 
+    /// 検索結果から活動オブジェクトをバインド。
+    ///
+    /// - Parameter jsAct: 活動情報のJSONオブジェクト。
+    /// - Returns: バインドされた活動情報オブジェクト。
     func bindActivity(_ jsAct: JSON) -> ActivityInfo {
         let id = jsAct["id"].stringValue
         let act = ActivityInfo()
@@ -316,6 +363,12 @@ class ActivityService {
         return act
     }
 
+    
+    /// Description
+    ///
+    /// - Parameters:
+    ///   - id: <#id description#>
+    ///   - callback: <#callback description#>
     func fetch(id: String, _ callback: @escaping(_ act: Activity) -> Void) {
 
         let urlString = MITTY_SERVICE_BASE_URL + "/activity/details"
@@ -352,6 +405,10 @@ class ActivityService {
 
     }
 
+    
+    /// <#Description#>
+    ///
+    /// - Parameter callback: <#callback description#>
     func getDestinationList(_ callback: @escaping(_ events: [Destination]) -> Void) {
 
         let urlString = MITTY_SERVICE_BASE_URL + "/destination/list"
@@ -393,6 +450,10 @@ class ActivityService {
 
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameter json: <#json description#>
+    /// - Returns: <#return value description#>
     func bindDestination(_ json: JSON) -> Destination {
         let d = Destination()
         d.islandId = json["islandId"].intValue
@@ -412,6 +473,10 @@ class ActivityService {
 
     }
 
+    /// 活動の詳細情報をバインド。
+    /// 活動及びその関連アイテムを検索し、その結果をバインド。
+    /// - Parameter json: JSONオブジェクト。
+    /// - Returns: 活動及び関連アイテム情報。
     func bindActivityDetails(_ json: JSON) -> Activity {
         let a = Activity()
         let info = ActivityInfo()

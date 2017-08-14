@@ -116,6 +116,17 @@ class JSONRequest {
 
 }
 
+class Service {
+    func jsonResponse (_ response: DataResponse<Any>) -> Any {
+        do {
+            let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+            return json
+        } catch {
+            return ("Not Serializable Error")
+        }
+    }
+}
+
 
 
 

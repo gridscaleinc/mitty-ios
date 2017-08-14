@@ -10,7 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class RequestService {
+/// リケエストサービス。
+class RequestService: Service {
     let urlSearch = MITTY_SERVICE_BASE_URL + "/search/request"
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myrequest"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/request"
@@ -20,10 +21,16 @@ class RequestService {
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
+    /// リクエスト登録。
+    ///
+    /// - Parameters:
+    ///   - req: リクエスト情報。
+    ///   - onSuccess: 正常時に呼び出されるコールバック。
+    ///   - onError: エラー時に呼び出されるコールバック。
     func register(_ req: NewRequestReq, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
 
         let httpHeaders = [
@@ -69,6 +76,12 @@ class RequestService {
         }
 
     }
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - key: <#key description#>
+    ///   - callback: <#callback description#>
     func getMyRequests (key: String, callback: @escaping (_ request: [RequestInfo]) -> Void) {
         let parmeters: [String: Any] = [
             "q": key,
@@ -112,6 +125,11 @@ class RequestService {
 
     }
 
+    /// 検索。
+    /// キーワードによる検索。（曖昧検索）
+    /// - Parameters:
+    ///   - keys: 検索キー
+    ///   - callback: コールバック。
     func search (keys: String, callback: @escaping (_ request: [RequestInfo]) -> Void) {
         let parmeters: [String: Any] = [
             "q": keys,
@@ -155,6 +173,10 @@ class RequestService {
 
     }
 
+    /// リクエストバインド。
+    ///
+    /// - Parameter json: JSON.
+    /// - Returns: リクエスト情報。
     func bindRequestInfo(_ json: JSON) -> RequestInfo {
         let info = RequestInfo()
         info.id = json["id"].int64Value

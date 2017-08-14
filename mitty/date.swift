@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - フォマッタークラスを拡張。
 extension Formatter {
     static let iso8601: DateFormatter = {
         let formatter = DateFormatter()

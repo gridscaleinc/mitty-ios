@@ -10,17 +10,20 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-// シングルトンサービスクラス。
-class IslandService {
+/// 島関連サービス。
+class IslandService: Service {
     static var instance: IslandService = {
         let instance = IslandService()
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
+    /// 新しい島登録。
+    ///　島とは（場所のこと）
+    /// - Returns: なし。
     func registerNewIsland(_ landInfo: IslandPick, onError: @escaping (_ error: Any) -> Void = { _ in }) {
         let request = NewIslandReq()
 
@@ -156,8 +159,10 @@ class IslandService {
 
                 //                self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
+                
                 print(response.debugDescription)
                 print(response.data ?? "No Data")
+                
                 do {
                     let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
                     print(json)
@@ -176,6 +181,9 @@ class IslandService {
 
     }
 
+    /// 島情報取得。
+    ///
+    /// - Returns: なし。
     func fetchIslandInfo(_ name: String, callback: @escaping (_ infoList: [IslandInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
         let islandInfoUrl = MITTY_SERVICE_BASE_URL + "/island/info"
         let parameter: [String: Any] = [
@@ -216,6 +224,10 @@ class IslandService {
 
     }
 
+    /// 島一覧オブジェクトバインド。
+    ///
+    /// - Parameter json: JSON
+    /// - Returns: 島情報の配列。
     func bindIslands(_ json: JSON) -> [IslandInfo] {
         var islandInfoList = [IslandInfo]()
         for (_, island) in json {
@@ -226,6 +238,10 @@ class IslandService {
     }
 
 
+    /// 島個別情報バインド。
+    ///
+    /// - Parameter json: JSON
+    /// - Returns: 島情報。
     func bindIsland(_ json: JSON) -> IslandInfo {
         let islandInfo = IslandInfo()
 

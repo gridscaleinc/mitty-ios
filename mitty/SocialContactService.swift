@@ -9,13 +9,13 @@
 import Foundation
 
 // シングルトンサービスクラス。
-class SocialContactService {
+class SocialContactService: Service {
     static var instance: SocialContactService = {
         let instance = SocialContactService()
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 

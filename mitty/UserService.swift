@@ -13,7 +13,7 @@ import Alamofire
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class UserService {
+class UserService: Service {
     let apiUserInfo = MITTY_SERVICE_BASE_URL + "/user/info"
     let apiSetUserIcon = MITTY_SERVICE_BASE_URL + "/update/user/icon"
 
@@ -22,11 +22,14 @@ class UserService {
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
-    // サーバーからイベントを検索。
+    
+    /// ユーザーアイコンを設定。
+    ///
+    /// - Parameter contentId: 設定するアイコンのコンテンツID.
     func setUserIcon(_ contentId: Int64) {
         let urlString = apiSetUserIcon + "?contentId=\(contentId)"
 
@@ -59,7 +62,12 @@ class UserService {
     }
 
 
-    // サーバーからイベントを検索。
+    
+    /// ユーザー情報取得。
+    ///
+    /// - Parameters:
+    ///   - id: ユーザーID
+    ///   - callback: コールバック。
     func getUserInfo(id: String, callback: @escaping (_ user: UserInfo?, _ ok: Bool) -> Void) {
         let parmeters = [
             "id": id
@@ -68,7 +76,6 @@ class UserService {
         LoadingProxy.on()
 
 
-        // ダミーコード、本当はサーバーから検索する。
         let request = Alamofire.request(apiUserInfo, method: .get, parameters: parmeters)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
@@ -97,6 +104,10 @@ class UserService {
     }
 
 
+    /// ユーザー情報バインド。
+    ///
+    /// - Parameter jsUser: JSON
+    /// - Returns: ユーザー情報。
     func bindUserInfo(_ jsUser: JSON) -> UserInfo {
 
         let user = UserInfo()

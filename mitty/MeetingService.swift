@@ -11,16 +11,23 @@ import Alamofire
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class MeetingService {
+class MeetingService: Service {
     static var instance: MeetingService = {
         let instance = MeetingService()
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
+    
+    /// 直近の会話を取得。
+    ///
+    /// - Parameter meetingId: 会議室番号。
+    ///             callback: 会話一覧を渡すためのコールバック。
+    ///             onError: エラー時のコールバック。
+    /// - Returns: なし。
     func getLatestConversation(_ meetingId: Int64, callback: @escaping (_ talkList: [Talk]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
         let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/latest/conversation"
 
@@ -72,6 +79,10 @@ class MeetingService {
 
     }
 
+    /// 会話オブジェクトバインド。
+    ///
+    /// - Parameter js: JSON
+    /// - Returns: 会話オブジェクト。
     func bindConversation(_ js: JSON) -> Talk {
         let tk1 = Talk()
 
@@ -84,6 +95,11 @@ class MeetingService {
 
     }
 
+    /// 参加しているイベントの会議一覧取得。
+    ///
+    /// - Parameter callback: 会議一覧を渡すためのコールバック。
+    ///             onError: エラー時のコールバック。
+    /// - Returns: なし。
     func getEventMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
         let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/event/meeting"
 
@@ -130,6 +146,10 @@ class MeetingService {
 
     }
 
+    /// 会議情報バインド。
+    ///
+    /// - Parameter json: JSONオブジェクト。
+    /// - Returns: 会議情報。
     func bindEventMeeting(_ json: JSON) -> MeetingInfo {
         let meeting = MeetingInfo()
 

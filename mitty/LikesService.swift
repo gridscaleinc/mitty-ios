@@ -14,7 +14,7 @@ import AlamofireImage
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class LikesService {
+class LikesService: Service {
     let apiSendLike = MITTY_SERVICE_BASE_URL + "/send/like"
     let apiRemoveLike = MITTY_SERVICE_BASE_URL + "/remove/like"
 
@@ -23,11 +23,15 @@ class LikesService {
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
-    // サーバーにいいねを送信。
+    /// サーバーにいいねを送信。
+    ///
+    /// - Parameters:
+    ///   - type: いいね対象タイプ。(EVENT/REQUEST/PROPOSAL)
+    ///   - id: いいね対象ID。
     func sendLike(_ type: String, id: Int64) {
 
         let httpHeaders = [
@@ -61,7 +65,12 @@ class LikesService {
         }
     }
 
-    // サーバーにいいねを削除。
+    /// サーバーにいいねを削除。
+    ///
+    ///
+    /// - Parameters:
+    ///   - type: いいねを削除対象の種類。(EVENT/REQUEST/PROPOSAL)
+    ///   - id: <#id description#>
     func removeLike(_ type: String, id: Int64) {
 
         let httpHeaders = [

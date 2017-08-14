@@ -14,7 +14,7 @@ import AlamofireImage
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class EventService {
+class EventService: Service {
     let urlSearch = MITTY_SERVICE_BASE_URL + "/search/event"
     let urlFetch = MITTY_SERVICE_BASE_URL + "/event/of"
 
@@ -25,11 +25,17 @@ class EventService {
 
     var images = ["event1", "event6", "event4", "event10", "event5"]
 
-    private init() {
+    private override init() {
 
     }
 
     // サーバーからイベントを検索。
+    /// Google検索のように、キーワードよりイベント一覧を検索。
+    /// TODO: Paging未対応。
+    ///
+    /// - Parameters:
+    ///   - keys: 検索キー
+    ///   - callback: コールバック。
     func search(keys: String, callback: @escaping (_ events: [EventInfo]) -> Void) {
         let parmeters = [
             "q": keys
@@ -66,6 +72,11 @@ class EventService {
         }
     }
 
+    
+    /// イベント情報バインド。
+    ///
+    /// - Parameter jsEvent: JSONオブジェクト。
+    /// - Returns: イベント及び附属情報オブジェクト。
     func bindEventInfo(_ jsEvent: JSON) -> EventInfo {
 
         let e = EventInfo()
@@ -109,6 +120,12 @@ class EventService {
         return e
     }
 
+    
+    /// イベント取得。
+    ///
+    /// - Parameters:
+    ///   - id: イベントID
+    ///   - callback: コールバック。
     func fetch(id: String, callback: @escaping (Event) -> Void) {
         let parmeters = [
             "id": id
@@ -141,6 +158,10 @@ class EventService {
 
     }
 
+    /// イベントオブジエクトバインド。
+    ///
+    /// - Parameter json: JSONオブジェクト。
+    /// - Returns: エベントオブジェクト。
     func bindEvent(_ json: JSON) -> Event {
         let e = Event()
 

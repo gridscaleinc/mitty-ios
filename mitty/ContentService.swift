@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class ContentService {
+class ContentService: Service {
     let apiUploadContent = MITTY_SERVICE_BASE_URL + "/upload/content"
     let apiContentList = MITTY_SERVICE_BASE_URL + "/mycontents/list"
 
@@ -21,11 +21,16 @@ class ContentService {
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
-    // サーバーからイベントを検索。
+    /// コンテントをアプロード。
+    ///
+    ///
+    /// - Parameters:
+    ///   - img: 画像。
+    ///   - onCompletion: 正常処理ごに呼び出される処理。
     func uploadContent(img: UIImage, onCompletion: @escaping(_: Int64) -> Void) {
 
         let imageData: NSData = UIImagePNGRepresentation(img)! as NSData
@@ -71,7 +76,10 @@ class ContentService {
         }
     }
 
-    // サーバーからイベントを検索。
+    /// サーバーからイベントを検索。
+    ///
+    ///
+    /// - Parameter onCompletion: 処理結果を渡すコールバック。
     func myContents(onCompletion: @escaping(_: [Content]) -> Void) {
 
         let httpHeaders = [
@@ -105,7 +113,11 @@ class ContentService {
         }
     }
 
-    // contents -> [Content]
+    /// contents -> [Content]バインド。
+    ///
+    ///
+    /// - Parameter contents: JSON
+    /// - Returns: コンテントオブジェクト一覧。
     func bindContents(_ contents: JSON) -> [Content] {
 
         var result = [Content]()

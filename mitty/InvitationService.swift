@@ -14,7 +14,7 @@ import AlamofireImage
 import SwiftyJSON
 
 // シングルトンサービスクラス。
-class InvitationService {
+class InvitationService: Service {
     let apiSendInvitation = MITTY_SERVICE_BASE_URL + "/send/invitation"
 
     static var instance: InvitationService = {
@@ -22,11 +22,17 @@ class InvitationService {
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
-
-    // 招待を送信。
+    
+    /// 招待を送信。
+    ///
+    /// - Parameters:
+    ///   - type: 招待の種類。(EVENT: イベントへの招待)
+    ///   - id: 招待対象のID.
+    ///   - message: 招待にあったてのメッセージ。
+    ///   - userId: 招待を受けるユーザーのID(複数）.
     func sendInvitation(_ type: String, id: Int64, message: String, userId: [Int]) {
 
         let httpHeaders = [

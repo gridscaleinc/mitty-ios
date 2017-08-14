@@ -10,7 +10,8 @@ import Foundation
 import Alamofire
 import SwiftyJSON
 
-class ProposalService {
+/// 提案サービス。
+class ProposalService: Service {
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myproposal"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/proposal"
 
@@ -19,10 +20,16 @@ class ProposalService {
         return instance
     }()
 
-    private init() {
+    private override init() {
 
     }
 
+    /// 提案を登録。
+    ///
+    /// - Parameters:
+    ///   - req: 送信情報オブジェクト。
+    ///   - onSuccess: 正常時の呼び出し処理。
+    ///   - onError: エラー時の呼び出し処理。
     func register(_ req: NewProposalReq, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
 
         let httpHeaders = [
@@ -70,6 +77,11 @@ class ProposalService {
     }
 
 
+    /// 自分の提案一覧を取得。
+    ///
+    /// - Parameters:
+    ///   - key: フィルタキー。
+    ///   - callback: コールバック。
     func getMyProposals (key: String, callback: @escaping (_ request: [ProposalInfo]) -> Void) {
         let parmeters: [String: Any] = [
             "q": key,
@@ -111,6 +123,11 @@ class ProposalService {
 
     }
 
+    
+    /// 提案オブジェクトバインド。
+    ///
+    /// - Parameter json: JSON
+    /// - Returns: 提案情報。
     func bindProposalInfo(_ json: JSON) -> ProposalInfo {
         let info = ProposalInfo()
 
