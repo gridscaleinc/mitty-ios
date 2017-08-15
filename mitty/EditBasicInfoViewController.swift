@@ -18,14 +18,32 @@ class EditBasicInfoViewController: MittyViewController {
     let idlabel = MQForm.label(name: "id", title: "")
     let nameLabel = MQForm.label(name: "name", title: "")
 
-    let maleLabel = MQForm.label(name: "male", title: "男性")
-    let femaleLabel = MQForm.label(name: "female", title: "女性")
+    let gendle : SelectButton = {
+        let s = SelectButton(name: "gendle", view: UIView.newAutoLayout())
+        s.selectedBackgroundColor = MittyColor.pink
+        s.spacing = 10
+        s.addOption(code: "male", label: "男性")
+        s.addOption(code: "female", label: "女性")
 
-    let underage = MQForm.label(name: "underage", title: "未成年")
-    let yuang = MQForm.label(name: "female", title: "青年")
-    let middleage = MQForm.label(name: "male", title: "中年")
-    let oldage = MQForm.label(name: "female", title: "老年")
+        return s
+    } ()
 
+    let age : SelectButton = {
+        let s = SelectButton(name: "age", view: UIView.newAutoLayout())
+        
+        s.selectedBackgroundColor = MittyColor.pink
+        s.spacing = 10
+        
+        s.addOption(code: "underage", label: "未成年")
+        s.addOption(code: "female", label: "青年")
+        s.addOption(code: "male", label: "中年")
+        s.addOption(code: "female", label: "老年")
+        s.setMultiSelect(true)
+
+        
+        return s
+    } ()
+    
     let speech = MQForm.textView(name: "oneword-speech")
 
     var okButton = MQForm.button(name: "ok", title: "OK")
@@ -136,40 +154,29 @@ class EditBasicInfoViewController: MittyViewController {
         // Gendle
         row = Row.LeftAligned().layout{
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(45)
         }
         
-        row +++ MQForm.label(name: "gendre", title: "性別").height(38).width(70)
-        let gendle = Row.Intervaled().layout{
-            r in
-            r.rightMost().height(40)
+        row +++ MQForm.label(name: "gendre", title: "性別").height(40).width(70)
+        row +++ gendle.layout {
+            c in
+            c.fillParent()
         }
-        row +++ gendle
-        gendle.spacing = 5
-        gendle +++ setSelection(maleLabel)
-        gendle +++ setSelection(femaleLabel)
-        femaleLabel.label.backgroundColor = MittyColor.pink
-
+    
         section <<< row
         
         seperator(section: section, caption: "年齢層")
         
-        row = Row.Intervaled().layout{
+        row = Row.LeftAligned().layout{
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(45)
         }
 
-        row.spacing = 5
-        
-        row +++ setSelection(underage)
-        
-        row +++ setSelection(yuang)
-        
-        row +++ setSelection(middleage)
-        middleage.label.backgroundColor = MittyColor.healthyGreen
-        
-        row +++ setSelection(oldage)
-        
+        row +++ age.layout {
+            c in
+            c.fillParent()
+        }
+                
         section <<< row
         
         seperator(section: section, caption: "One word speech")

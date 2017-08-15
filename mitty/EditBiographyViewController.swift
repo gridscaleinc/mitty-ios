@@ -18,6 +18,69 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         , "牡牛座", "乙女座", "蠍座", "射手座",
         "山羊座", "水瓶座", "魚座", "双子座"]
 
+    let appearance : SelectButton = {
+        let options = [
+            ("1","お洒落"),
+            ("2","容姿端麗"),
+            ("3","ぽちゃり"),
+            ("4","細い"),
+        ]
+        let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
+        btns.selectedBackgroundColor = MittyColor.pink
+        btns.spacing = 5
+        for (c,opt) in options {
+            btns.addOption(code: c, label: opt)
+        }
+        return btns
+    } ()
+    
+    
+    let ocupations : SelectButton = {
+        let options = [
+            ("1","IT"),
+            ("2","観光"),
+            ("3","飲食"),
+            ("4","金融"),
+            ("5","メディア"),
+            ("6","通信"),
+            ("7","交通"),
+            ("8","航空"),
+            ("9","海運"),
+            ("10","農業"),
+            ("11","製造"),
+            ("12","建設"),
+            ]
+        let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
+        btns.selectedBackgroundColor = MittyColor.healthyGreen
+        btns.spacing = 5
+        btns.setMultiSelect(true)
+        for (c,opt) in options {
+            btns.addOption(code: c, label: opt)
+        }
+        return btns
+    } ()
+    
+    let hobbys : SelectButton = {
+        let options = [
+            ("1","釣り"),
+            ("2","ゲーム"),
+            ("3","旅行"),
+            ("4","日曜大工"),
+            ("5","読書"),
+            ("6","音楽"),
+            ("7","ガーデニング"),
+            ("8","運動"),
+            ]
+        let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
+        btns.selectedBackgroundColor = MittyColor.healthyGreen
+        btns.spacing = 5
+        btns.setMultiSelect(true)
+        for (c,opt) in options {
+            btns.addOption(code: c, label: opt)
+        }
+        return btns
+    } ()
+
     var constellationPicker: UIPickerView = UIPickerView()
 
     var okButton = MQForm.button(name: "ok", title: "OK")
@@ -109,80 +172,42 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         section <<< row
 
         seperator(section: section, caption: "外見")
-        row = Row.Intervaled().layout {
+        row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(50)
         }
-        row.spacing = 5
-
-        row +++ createSelection("お洒落")
-        row +++ createSelection("容姿端麗").layout {
-            c in
-            c.view.backgroundColor = MittyColor.pink
+        
+        row +++ appearance.layout {
+            b in
+            b.fillParent()
         }
 
-        row +++ createSelection("ぽちゃり")
-        row +++ createSelection("細い")
         section <<< row
 
         seperator(section: section, caption: "職業")
-        row = Row.Intervaled().layout {
+        row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(120)
         }
-        row.spacing = 5
-
-        row +++ createSelection("管理").layout {
-            c in
-            c.view.backgroundColor = MittyColor.baseYellow
+        
+        row +++ ocupations.layout {
+            o in
+            o.fillParent()
         }
-
-        row +++ createSelection("専門")
-        row +++ createSelection("事務")
-        row +++ createSelection("販売")
-        section <<< row
-        section <<< HL(UIColor.gray, 0.5)
-
-        row = Row.Intervaled().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row.spacing = 5
-
-        row +++ createSelection("サービス")
-        row +++ createSelection("保安")
-        row +++ createSelection("農林")
-        row +++ createSelection("輸送")
+        
         section <<< row
 
         seperator(section: section, caption: "趣味")
         row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(75)
         }
-        row.spacing = 5
-
-        row +++ createSelection("釣り").layout {
-            c in
-            c.view.backgroundColor = MittyColor.healthyGreen
+        
+        row +++ hobbys.layout {
+            o in
+            o.fillParent()
         }
-
-        row +++ createSelection("ゲーム")
-        row +++ createSelection("旅行")
-        row +++ createSelection("日曜大工")
-        section <<< row
-        section <<< HL(UIColor.gray, 0.5)
-
-        row = Row.Intervaled().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row.spacing = 5
-
-        row +++ createSelection("読書")
-        row +++ createSelection("音楽")
-        row +++ createSelection("ガーデニング")
-        row +++ createSelection("運動")
+        
         section <<< row
 
         section <<< HL(.gray, 0.4)
