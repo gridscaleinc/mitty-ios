@@ -333,6 +333,15 @@ open class SelectButton: Container {
             _spacing = newValue
         }
     }
+    
+    var buttonHeight : CGFloat {
+        get {
+            return _buttonHeight
+        }
+        set (newValue) {
+            _buttonHeight = newValue
+        }
+    }
 
     /// <#Description#>
     var unselectedBackgroundColor: UIColor {
@@ -375,10 +384,10 @@ open class SelectButton: Container {
     /// - Parameters:
     ///   - code: <#code description#>
     ///   - label: <#label description#>
-    func addOption(code: String, label: String) {
+    func addOption(code: String, label: String, _ checked: Bool? = false) {
         let b = self.createButton(name: "selection-opt-" + code, title: label)
         options.append((code, b))
-        if options.count == 1 {
+        if (checked)! {
             selected(b)
         }
         let container = self

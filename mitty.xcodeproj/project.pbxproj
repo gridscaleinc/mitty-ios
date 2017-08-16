@@ -24,6 +24,7 @@
 		F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* CenterViewController.swift */; };
 		F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */; };
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
+		FC004C5E1F43322800230DAA /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5D1F43322800230DAA /* ProfileService.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
 		FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081861DD3890A00C1F970 /* TalkingCell.swift */; };
 		FC00818D1DD394D300C1F970 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0081891DD394D300C1F970 /* pengin1.png */; };
@@ -221,6 +222,7 @@
 		F4BB80251DAE58FE00055D48 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		FC004C5D1F43322800230DAA /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
 		FC0081861DD3890A00C1F970 /* TalkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingCell.swift; sourceTree = "<group>"; };
 		FC0081891DD394D300C1F970 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin1.png; path = images/pengin1.png; sourceTree = "<group>"; };
@@ -564,6 +566,7 @@
 				FCCFAB381F2DB9370075C1A2 /* LikesService.swift */,
 				FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */,
 				FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */,
+				FC004C5D1F43322800230DAA /* ProfileService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1223,6 +1226,7 @@
 				FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */,
 				FCFA84821F0DA76900E9C6F2 /* RequestCell.swift in Sources */,
 				FCFA84801F0DA6AF00E9C6F2 /* Requests.swift in Sources */,
+				FC004C5E1F43322800230DAA /* ProfileService.swift in Sources */,
 				FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */,
 				FC5ECFFA1EBB170000AA6C13 /* ActivityInfo.swift in Sources */,
 				FCF957601DC6471D00A52125 /* PersonalInfoViewController.swift in Sources */,

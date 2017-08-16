@@ -12,70 +12,73 @@ import UIKit
 
 class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    var userInfo = UserInfo()
+    var profile = Profile()
+    
     var form = MQForm.newAutoLayout()
 
     let constellations = ["獅子座", "天平座", "蟹座", "牡羊座"
         , "牡牛座", "乙女座", "蠍座", "射手座",
         "山羊座", "水瓶座", "魚座", "双子座"]
 
-    let appearance : SelectButton = {
+    let appearance: SelectButton = {
         let options = [
-            ("1","お洒落"),
-            ("2","容姿端麗"),
-            ("3","ぽちゃり"),
-            ("4","細い"),
+            ("1", "お洒落"),
+            ("2", "容姿端麗"),
+            ("3", "ぽちゃり"),
+            ("4", "細い"),
         ]
         let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.pink
         btns.spacing = 5
-        for (c,opt) in options {
+        for (c, opt) in options {
             btns.addOption(code: c, label: opt)
         }
         return btns
     } ()
-    
-    
-    let ocupations : SelectButton = {
+
+
+    let ocupations: SelectButton = {
         let options = [
-            ("1","IT"),
-            ("2","観光"),
-            ("3","飲食"),
-            ("4","金融"),
-            ("5","メディア"),
-            ("6","通信"),
-            ("7","交通"),
-            ("8","航空"),
-            ("9","海運"),
-            ("10","農業"),
-            ("11","製造"),
-            ("12","建設"),
-            ]
+            ("1", "IT", false),
+            ("2", "観光", false),
+            ("3", "飲食", false),
+            ("4", "金融", false),
+            ("5", "メディア", true),
+            ("6", "通信", false),
+            ("7", "交通", false),
+            ("8", "航空", false),
+            ("9", "海運", false),
+            ("10", "農業", false),
+            ("11", "製造", false),
+            ("12", "建設", false),
+        ]
         let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.healthyGreen
         btns.spacing = 5
         btns.setMultiSelect(true)
-        for (c,opt) in options {
-            btns.addOption(code: c, label: opt)
+        for (c, opt, selected) in options {
+            btns.addOption(code: c, label: opt, selected)
         }
         return btns
     } ()
-    
-    let hobbys : SelectButton = {
+
+    let hobbys: SelectButton = {
         let options = [
-            ("1","釣り"),
-            ("2","ゲーム"),
-            ("3","旅行"),
-            ("4","日曜大工"),
-            ("5","読書"),
-            ("6","音楽"),
-            ("7","ガーデニング"),
-            ("8","運動"),
-            ]
+            ("1", "釣り"),
+            ("2", "ゲーム"),
+            ("3", "旅行"),
+            ("4", "日曜大工"),
+            ("5", "読書"),
+            ("6", "音楽"),
+            ("7", "ガーデニング"),
+            ("8", "運動"),
+        ]
         let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.healthyGreen
         btns.spacing = 5
         btns.setMultiSelect(true)
-        for (c,opt) in options {
+        for (c, opt) in options {
             btns.addOption(code: c, label: opt)
         }
         return btns
@@ -87,9 +90,8 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
     var constellation = MQForm.text(name: "constellation", placeHolder: "選択してください")
 
-    var profile: Profile
-
-    init(_ info: Profile) {
+    init(_ userInfo: UserInfo, _ info: Profile) {
+        self.userInfo = userInfo
         self.profile = info
         super.init(nibName: nil, bundle: nil)
     }
@@ -138,9 +140,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
         okButton.bindEvent(.touchUpInside) {
             b in
-
-
-
+            self.saveProfile()
         }
     }
 
@@ -176,7 +176,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             r in
             r.fillHolizon().height(50)
         }
-        
+
         row +++ appearance.layout {
             b in
             b.fillParent()
@@ -189,12 +189,12 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             r in
             r.fillHolizon().height(120)
         }
-        
+
         row +++ ocupations.layout {
             o in
             o.fillParent()
         }
-        
+
         section <<< row
 
         seperator(section: section, caption: "趣味")
@@ -202,12 +202,12 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             r in
             r.fillHolizon().height(75)
         }
-        
+
         row +++ hobbys.layout {
             o in
             o.fillParent()
         }
-        
+
         section <<< row
 
         section <<< HL(.gray, 0.4)
@@ -223,13 +223,6 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         section <<< row
 
     }
-
-
-    func createSelection(_ s: String) -> Control {
-        let c = MQForm.label(name: "-", title: s)
-        return setSelection(c)
-    }
-
 
     //Picerviewの列の数は2とする
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
@@ -249,5 +242,9 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     //ラベル表示
     func pickerView(_ picker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         constellation.textField.text = constellations[row]
+    }
+    
+    func saveProfile () {
+        
     }
 }

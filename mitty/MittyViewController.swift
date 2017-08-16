@@ -162,7 +162,7 @@ class MittyViewController: UIViewController {
 
         let c = MQForm.label(name: "caption", title: caption).layout {
             c in
-            c.height(20)
+            c.height(30)
             c.label.backgroundColor = MittyColor.light
             c.label.textColor = MittyColor.healthyGreen
             c.label.textAlignment = .center
@@ -172,21 +172,5 @@ class MittyViewController: UIViewController {
         section <<< row
 
         return row
-    }
-
-    func setSelection (_ age: Control) -> Control {
-        age.layout {
-            l in
-            l.label.textAlignment = .center
-            l.label.layer.borderColor = UIColor.gray.cgColor
-            l.label.layer.borderWidth = 0.5
-            l.label.layer.cornerRadius = 5
-            l.label.layer.masksToBounds = true
-            l.height(30)
-            l.label.font = UIFont.systemFont(ofSize: 10)
-            l.label.textColor = UIColor.darkGray
-        }
-
-        return age
     }
 }

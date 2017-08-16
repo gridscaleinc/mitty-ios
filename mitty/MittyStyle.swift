@@ -23,7 +23,7 @@ class MittyColor {
     
     static let healthyGreen = UIColor.colorWithRGB(rgbValue: 0x1ABC9C)
     static let lightYellow = UIColor(red: 250/255, green: 215/255, blue: 160/255, alpha:1.0)
-    static let light = UIColor(white:0.93, alpha:1.0)
+    static let light = UIColor(white:0.98, alpha:1.0)
 
     
     

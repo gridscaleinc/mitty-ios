@@ -71,6 +71,29 @@ open class MQForm : UIView {
         return Control(name: name, view: l)
     }
     
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - label: <#label description#>
+    ///   - name: <#name description#>
+    /// - Returns: <#return value description#>
+    static func hilight (label: String, named name: String) -> Control {
+        let l = MQForm.label(name: name, title: label)
+        
+        l.label.textAlignment = .center
+        l.label.backgroundColor = UIColor.white
+        l.label.layer.borderColor = UIColor.orange.cgColor
+        l.label.layer.borderWidth = 0.5
+        l.label.layer.cornerRadius = 15
+        l.label.layer.masksToBounds = true
+        l.height(30)
+        l.label.font = UIFont.systemFont(ofSize: 13)
+        l.label.textColor = UIColor.orange
+        
+        return l
+    }
+    
     // TextField
     static func text(name: String, placeHolder: String) -> Control {
         let t = StyledTextField.newAutoLayout()

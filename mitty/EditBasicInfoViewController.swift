@@ -11,7 +11,9 @@ import UIKit
 
 
 class EditBasicInfoViewController: MittyViewController {
-
+    var userInfo = UserInfo()
+    var profile = Profile()
+    
     var form = MQForm.newAutoLayout()
 
 
@@ -21,10 +23,10 @@ class EditBasicInfoViewController: MittyViewController {
     let gendle : SelectButton = {
         let s = SelectButton(name: "gendle", view: UIView.newAutoLayout())
         s.selectedBackgroundColor = MittyColor.pink
-        s.spacing = 10
-        s.addOption(code: "male", label: "男性")
-        s.addOption(code: "female", label: "女性")
-
+        s.spacing = 5
+        s.addOption(code: "Male", label: "男性")
+        s.addOption(code: "Female", label: "女性")
+        s.addOption(code: "Scret", label: "秘密")
         return s
     } ()
 
@@ -32,7 +34,7 @@ class EditBasicInfoViewController: MittyViewController {
         let s = SelectButton(name: "age", view: UIView.newAutoLayout())
         
         s.selectedBackgroundColor = MittyColor.pink
-        s.spacing = 10
+        s.spacing = 5
         
         s.addOption(code: "underage", label: "未成年")
         s.addOption(code: "female", label: "青年")
@@ -48,9 +50,8 @@ class EditBasicInfoViewController: MittyViewController {
 
     var okButton = MQForm.button(name: "ok", title: "OK")
 
-    var profile: Profile
-
-    init(_ info: Profile) {
+    init(_ userInfo: UserInfo, _ info: Profile) {
+        self.userInfo = userInfo
         self.profile = info
         super.init(nibName: nil, bundle: nil)
     }
@@ -74,6 +75,7 @@ class EditBasicInfoViewController: MittyViewController {
     }
 
 
+    /// <#Description#>
     override func updateViewConstraints() {
         form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
         form.autoPinEdge(toSuperviewEdge: .left)
@@ -95,9 +97,7 @@ class EditBasicInfoViewController: MittyViewController {
 
         okButton.bindEvent(.touchUpInside) {
             b in
-
-            
-
+            self.saveProfile()
         }
     }
 
@@ -157,7 +157,7 @@ class EditBasicInfoViewController: MittyViewController {
             r.fillHolizon().height(45)
         }
         
-        row +++ MQForm.label(name: "gendre", title: "性別").height(40).width(70)
+        row +++ MQForm.label(name: "gendre", title: "性別").height(30).width(70)
         row +++ gendle.layout {
             c in
             c.fillParent()
@@ -204,6 +204,32 @@ class EditBasicInfoViewController: MittyViewController {
         
         section <<< row
 
+    }
+    
+    func saveProfile () {
+        // 性別は初回のみ設定できない。
+        let gendleSelection = gendle.selectedValues
+        // 未選択
+        if gendleSelection.count == 0 {
+            profile.gender = "Secret"
+        } else {
+            profile.gender = gendleSelection.first!
+        }
+        
+        let ageSelect = age.selectedValues
+        if ageSelect.count == 0 {
+            profile.ageGroup = "Secret"
+        } else {
+            profile.ageGroup = ageSelect.first!
+        }
+        
+        profile.oneWordSpeech = speech.textView.text
+
+        ProfileService.instance.saveProfile(profile, onComplete:{
+            self.navigationController?.popViewController(animated: true)
+        }, onError: { err in
+            self.showError(err)
+        })
     }
 
 }
