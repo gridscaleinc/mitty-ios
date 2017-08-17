@@ -22,7 +22,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     var form = MQForm.newAutoLayout()
 
     let picture: Control = MQForm.button(name: "m2", title: "")
-    
+
     let signOut: Control = MQForm.button(name: "signOut", title: "Sign Out")
 
     let idLabel = MQForm.label(name: "mitty-id", title: "")
@@ -47,6 +47,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     let hobbyLabel3 = MQForm.hilight(label: "未設定", named: "hobby3")
     let hobbyLabel4 = MQForm.hilight(label: "未設定", named: "hobby4")
     let hobbyLabel5 = MQForm.hilight(label: "未設定", named: "hobby5")
+    let blank = MQForm.label(name: "blank", title: "")
 
     let nameCardSection = Section(name: "namecard-section")
     let socialIdSection = Section(name: "social-id-section")
@@ -77,7 +78,10 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
                 ProfileService.instance.myProfile(onComplete: {
                     p in
                     self.profile = p
-                    self.setUserProfile()
+                    p.addObserver(handler: { o in
+                        self.setUserProfile()
+                    })
+                    p.notify()
                 }, onError: { error in
                     self.showError(error)
                 })
@@ -132,6 +136,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
         form +++ scrollContainer
 
         let detailForm = Section(name: "Content-Form", view: UIView.newAutoLayout())
+        detailForm.lineSpace = 3
 
         scrollContainer +++ detailForm
 
@@ -272,10 +277,10 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
         idRow +++ idLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(80)
+            l.rightMost(withInset: 10).height(25)
         }
 
-        
+
         col2 +++ idRow
 
         let nameRow = Row.LeftAligned()
@@ -284,14 +289,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
             r.fillHolizon().height(25)
         }
 
-        nameRow +++ MQForm.label(name: "name", title: "名前:")
+        nameRow +++ MQForm.label(name: "name", title: "名前")
         nameRow +++ nameLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(80)
+            l.rightMost(withInset: 10).height(25).width(120)
         }
 
-        
+
         col2 +++ nameRow
 
         let genderRow = Row.LeftAligned()
@@ -300,14 +305,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
             r.fillHolizon().height(30)
         }
 
-        genderRow +++ MQForm.label(name: "gender", title: "性別:")
+        genderRow +++ MQForm.label(name: "gender", title: "性別")
         genderRow +++ genderLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(80)
+            l.rightMost(withInset: 10).height(25).width(120)
         }
 
-        
+
         col2 +++ genderRow
 
 
@@ -317,13 +322,13 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
             r.fillHolizon().height(30)
         }
 
-        ageGroupRow +++ MQForm.label(name: "age-group", title: "年齢層:")
+        ageGroupRow +++ MQForm.label(name: "age-group", title: "年齢層")
         ageGroupRow +++ ageGroupLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(80)
+            l.rightMost(withInset: 10).height(25).width(120)
         }
-        
+
         col2 +++ ageGroupRow
 
 
@@ -345,10 +350,11 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
             r in
             r.height(50).fillHolizon()
         }
+        row1.spacing = 10
         speech.textView.text = profile.oneWordSpeech
         row1 +++ speech.layout {
             s in
-            s.fillParent(withInset: 2)
+            s.fillParent(withInset: 5)
         }
 
         section <<< row1
@@ -376,150 +382,76 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
             r.fillHolizon().height(40)
         }
 
-        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(38).width(70)
+        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(30).width(70)
         row +++ constellationLabel.layout {
             l in
-            l.height(38).width(100)
+            l.height(30).width(120)
             l.margin.left = 80
         }
 
         section <<< row
-        section <<< HL(.gray, 0.4)
 
         row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(40)
         }
 
-        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(38).width(70)
+        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(35).width(70)
         row +++ appearanceLabel.layout {
             l in
-            l.height(38).width(100)
+            l.height(30).width(120)
             l.margin.left = 80
         }
 
         section <<< row
-
-        row = Row.LeftAligned()
-        row.layout {
-            r in
-            r.height(20).fillHolizon()
-        }
 
         row = seperator(section: section, caption: "職業")
 
         section <<< row
 
-        row = Row.LeftAligned().layout {
+        row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(42)
         }
-        row +++ MQForm.label(name: "occupationLabel1", title: "職業1").height(38).width(70)
-        row +++ occupationLabel1.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
+        row.spacing = 5
         section <<< row
-        section <<< HL(.gray, 0.4)
 
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row +++ MQForm.label(name: "occupationLabel2", title: "職業2").height(38).width(70)
-        row +++ occupationLabel2.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-
-        }
-        section <<< row
-        section <<< HL(.gray, 1.0)
-
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row +++ MQForm.label(name: "occupationLabel3", title: "職業3").height(38).width(70)
-        row +++ occupationLabel3.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
-        section <<< row
+        row +++ occupationLabel1
+        row +++ occupationLabel2
+        row +++ occupationLabel3
 
         row = seperator(section: section, caption: "趣味")
 
         section <<< row
 
-        row = Row.LeftAligned().layout {
+        // Hobby Line1
+        row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(42)
         }
-        row +++ MQForm.label(name: "occupationLabel1", title: "趣味1").height(38).width(70)
-        row +++ hobbyLabel1.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
-        section <<< row
-        section <<< HL(.gray, 0.4)
-
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row +++ MQForm.label(name: "hobbyLabel2", title: "趣味2").height(38).width(70)
-        row +++ hobbyLabel2.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
-        section <<< row
-        section <<< HL(.gray, 1.0)
-
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row +++ MQForm.label(name: "hobbyLabel3", title: "趣味3").height(38).width(70)
-        row +++ hobbyLabel3.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
-        section <<< row
-        section <<< HL(.gray, 1.0)
-        
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row +++ MQForm.label(name: "hobbyLabel4", title: "趣味4").height(38).width(70)
-        row +++ hobbyLabel4.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
-        section <<< row
-        section <<< HL(.gray, 1.0)
-        
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        row +++ MQForm.label(name: "hobbyLabel5", title: "趣味5").height(38).width(70)
-        row +++ hobbyLabel5.layout {
-            l in
-            l.height(38).width(100)
-            l.margin.left = 80
-        }
+        row.spacing = 5
         section <<< row
 
+        row +++ hobbyLabel1
+        row +++ hobbyLabel2
+        row +++ hobbyLabel3
+
+        // Hobby Line2
+        row = Row.Intervaled().layout {
+            r in
+            r.fillHolizon().height(42)
+        }
+        row.spacing = 5
+        section <<< row
+
+        row +++ hobbyLabel4
+        row +++ hobbyLabel5
+        row +++ blank
     }
 
-
+    /// <#Description#>
+    ///
+    /// - Parameter section: <#section description#>
     func buildSocialLinks(_ section: Section) {
         let row = seperator(section: section, caption: "ソーシャルID", LeftRight.left)
 
@@ -567,16 +499,36 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
 
     }
 
-    
+
     /// <#Description#>
     func setUserProfile() {
-        idLabel.label.text = String(userInfo.id)
+
+        // Basic Info
+        idLabel.label.text = String(format: "%010d", userInfo.id)
         nameLabel.label.text = userInfo.userName
         genderLabel.label.text = profile.gender == "" ? "秘密" : profile.gender
         ageGroupLabel.label.text = profile.ageGroup == "" ? "秘密" : profile.ageGroup
         if userInfo.icon != "" {
             picture.button.setMittyImage(url: userInfo.icon)
         }
+
+        speech.textView.text = profile.oneWordSpeech
+
+        // Biography
+        constellationLabel.label.text = profile.constellation == "" ? "秘密" : profile.constellation
+        appearanceLabel.label.text = profile.appearanceTag == "" ? "秘密" : profile.appearanceTag
+
+        occupationLabel1.label.text = profile.occupationTag1 == "" ? "未設定" : profile.occupationTag1
+        occupationLabel2.label.text = profile.occupationTag2 == "" ? "未設定" : profile.occupationTag2
+        occupationLabel3.label.text = profile.occupationTag3 == "" ? "未設定" : profile.occupationTag3
+
+        hobbyLabel1.label.text = profile.hobbyTag1 == "" ? "未設定" : profile.hobbyTag1
+        hobbyLabel2.label.text = profile.hobbyTag2 == "" ? "未設定" : profile.hobbyTag2
+        hobbyLabel3.label.text = profile.hobbyTag3 == "" ? "未設定" : profile.hobbyTag3
+        hobbyLabel4.label.text = profile.hobbyTag4 == "" ? "未設定" : profile.hobbyTag4
+        hobbyLabel5.label.text = profile.hobbyTag5 == "" ? "未設定" : profile.hobbyTag5
+
+
     }
 
 }

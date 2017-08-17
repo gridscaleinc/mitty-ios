@@ -25,6 +25,7 @@
 		F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */; };
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
 		FC004C5E1F43322800230DAA /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5D1F43322800230DAA /* ProfileService.swift */; };
+		FC004C601F45E13200230DAA /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5F1F45E13200230DAA /* Code.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
 		FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081861DD3890A00C1F970 /* TalkingCell.swift */; };
 		FC00818D1DD394D300C1F970 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0081891DD394D300C1F970 /* pengin1.png */; };
@@ -223,6 +224,7 @@
 		F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		FC004C5D1F43322800230DAA /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
+		FC004C5F1F45E13200230DAA /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
 		FC0081861DD3890A00C1F970 /* TalkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingCell.swift; sourceTree = "<group>"; };
 		FC0081891DD394D300C1F970 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin1.png; path = images/pengin1.png; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				FCFA847B1F08A8C000E9C6F2 /* NameCard.swift */,
 				FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */,
 				FC95F91A1F3EF46800F83766 /* Proposals.swift */,
+				FC004C5F1F45E13200230DAA /* Code.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -1159,6 +1162,7 @@
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
 				FC3C16DC1F3A7A2600E7622B /* ContentPicker.swift in Sources */,
+				FC004C601F45E13200230DAA /* Code.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */,
 				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,

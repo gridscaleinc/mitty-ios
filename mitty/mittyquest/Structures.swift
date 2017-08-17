@@ -314,15 +314,14 @@ open class Col: Container {
 }
 
 /// <#Description#>
-open class SelectButton: Container {
+open class SelectButton: Container, Observable {
     private var options: [(String, Control)] = []
-    private var multiSelectable = false
     private var numOfColumns = 4
     private var _spacing: CGFloat = 0
     private var _unselectedBackgroundColor = UIColor.white
     private var _selectedBackgroundColor = UIColor.blue
     private var _buttonHeight = CGFloat(30.0)
-    
+    private var _maxSelectable = 1
 
     /// <#Description#>
     var spacing: CGFloat {
@@ -362,7 +361,14 @@ open class SelectButton: Container {
             _selectedBackgroundColor = newValue
         }
     }
+    
+    private var observers : [Observer] = []
 
+    func addObserver (handler : @escaping Observer) {
+        observers.append(handler)
+    }
+    
+    
     /// <#Description#>
     ///
     /// - Parameters:
@@ -375,8 +381,8 @@ open class SelectButton: Container {
     /// <#Description#>
     ///
     /// - Parameter selectable: <#selectable description#>
-    func setMultiSelect(_ selectable: Bool) {
-        multiSelectable = selectable
+    func setMax(selectable: Int) {
+        _maxSelectable = selectable
     }
 
     /// <#Description#>
@@ -415,7 +421,13 @@ open class SelectButton: Container {
         let btn = Control(name: name, view: button).height(_buttonHeight)
         btn.bindEvent(.touchUpInside) {
             c in
+            let before = btn.button.isSelected
             self.toggleSelect(btn)
+            if btn.button.isSelected != before {
+                for  obs in self.observers {
+                    obs(self)
+                }
+            }
         }
 
         return btn
@@ -425,19 +437,24 @@ open class SelectButton: Container {
     ///
     /// - Parameter btn: <#btn description#>
     func toggleSelect(_ btn: Control) {
-        if multiSelectable {
+        if _maxSelectable > 1 {
             if btn.button.isSelected {
                 disselect(btn)
             } else {
+                if (selectedValues.count == _maxSelectable) {
+                    return
+                }
                 selected(btn)
             }
-        } else {
+        } else if _maxSelectable == 1 {
             for (_, control) in options {
                 if control != btn {
                     disselect(control)
                 }
             }
             selected(btn)
+        } else {
+            // nothing to select
         }
     }
 
@@ -449,8 +466,7 @@ open class SelectButton: Container {
         btn.button.layer.borderWidth = 0.4
         btn.button.backgroundColor = _unselectedBackgroundColor
         btn.button.setTitleColor(UIColor.darkGray, for: .normal)
-        
-
+    
     }
 
     /// <#Description#>
@@ -463,6 +479,14 @@ open class SelectButton: Container {
         btn.button.backgroundColor = _selectedBackgroundColor
     }
 
+    func selected ( code: String) {
+        for (c, control) in options {
+            if (c == code) {
+                toggleSelect(control)
+            }
+        }
+    }
+    
     /// <#Description#>
     override func distribute () {
 
@@ -512,7 +536,7 @@ open class SelectButton: Container {
     var selectedValues : [String] {
         var result = [String]()
         for (code, control) in options {
-            if (control.button.isEnabled) {
+            if (control.button.isSelected) {
                 result.append(code)
             }
         }

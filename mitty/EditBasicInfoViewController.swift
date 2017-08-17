@@ -26,7 +26,7 @@ class EditBasicInfoViewController: MittyViewController {
         s.spacing = 5
         s.addOption(code: "Male", label: "男性")
         s.addOption(code: "Female", label: "女性")
-        s.addOption(code: "Scret", label: "秘密")
+        s.addOption(code: "Secret", label: "秘密")
         return s
     } ()
 
@@ -36,11 +36,10 @@ class EditBasicInfoViewController: MittyViewController {
         s.selectedBackgroundColor = MittyColor.pink
         s.spacing = 5
         
-        s.addOption(code: "underage", label: "未成年")
-        s.addOption(code: "female", label: "青年")
-        s.addOption(code: "male", label: "中年")
-        s.addOption(code: "female", label: "老年")
-        s.setMultiSelect(true)
+        s.addOption(code: "Underage", label: "未成年")
+        s.addOption(code: "Yuang", label: "青年")
+        s.addOption(code: "Middle", label: "中年")
+        s.addOption(code: "Old", label: "老年")
 
         
         return s
@@ -121,7 +120,7 @@ class EditBasicInfoViewController: MittyViewController {
         }
         
         row +++ MQForm.label(name: "namelabel", title: "名前").height(38).width(70)
-        nameLabel.label.text = "黄　永紅"
+        nameLabel.label.text = userInfo.name
         row +++ nameLabel.layout {
             l in
             l.height(38).rightMost(withInset: 10)
@@ -139,13 +138,12 @@ class EditBasicInfoViewController: MittyViewController {
         }
         
         row +++ MQForm.label(name: "mittyId", title: "MittyID").height(38).width(70)
+        idlabel.label.text = String(format: "%010d", userInfo.id)
         row +++ idlabel.layout {
             l in
             l.height(38).rightMost(withInset: 10)
             l.label.textAlignment = .right
         }
-
-        idlabel.label.text = "0000014"
         
         section <<< row
         
@@ -162,6 +160,7 @@ class EditBasicInfoViewController: MittyViewController {
             c in
             c.fillParent()
         }
+        gendle.selected(code: profile.gender)
     
         section <<< row
         
@@ -176,7 +175,8 @@ class EditBasicInfoViewController: MittyViewController {
             c in
             c.fillParent()
         }
-                
+        age.selected(code: profile.ageGroup)
+        
         section <<< row
         
         seperator(section: section, caption: "One word speech")
@@ -184,7 +184,7 @@ class EditBasicInfoViewController: MittyViewController {
             r in
             r.fillHolizon().height(80)
         }
-        
+        speech.textView.text = profile.oneWordSpeech
         row +++ speech.layout {
             s in
             s.fillParent(withInset: 10)
@@ -230,6 +230,8 @@ class EditBasicInfoViewController: MittyViewController {
         }, onError: { err in
             self.showError(err)
         })
+        
+        profile.notify()
     }
 
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Profile {
+class Profile: Observable {
     var id: Int64 = 0
     var mittyId: Int = 0
     var gender: String = ""
@@ -26,4 +26,17 @@ class Profile {
     var hobbyTag3: String = ""
     var hobbyTag4: String = ""
     var hobbyTag5: String = ""
+    
+    func notify() {
+        for o in observers {
+            o(self)
+        }
+    }
+    
+    
+    private var observers : [Observer] = []
+    
+    func addObserver (handler : @escaping Observer) {
+        observers.append(handler)
+    }
 }

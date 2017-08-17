@@ -155,7 +155,7 @@ class MittyViewController: UIViewController {
     func seperator(section: Section, caption: String, _ distribution: LeftRight? = .atIntervals) -> Row {
         let row = Row().layout() {
             r in
-            r.height(23).fillHolizon()
+            r.height(30).fillHolizon()
         }
 
         row.distribution = distribution!

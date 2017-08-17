@@ -103,3 +103,8 @@ protocol Linkable {
     var  underlyObj : Any { get  set }
 }
 
+protocol Observable {
+    
+}
+
+typealias Observer = (_ sender: Observable) -> Void

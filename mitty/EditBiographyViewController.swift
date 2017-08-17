@@ -29,7 +29,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             ("4", "細い"),
         ]
         let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
-        btns.selectedBackgroundColor = MittyColor.pink
+        btns.selectedBackgroundColor = UIColor.orange
         btns.spacing = 5
         for (c, opt) in options {
             btns.addOption(code: c, label: opt)
@@ -40,44 +40,44 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
     let ocupations: SelectButton = {
         let options = [
-            ("1", "IT", false),
-            ("2", "観光", false),
-            ("3", "飲食", false),
-            ("4", "金融", false),
-            ("5", "メディア", true),
-            ("6", "通信", false),
-            ("7", "交通", false),
-            ("8", "航空", false),
-            ("9", "海運", false),
-            ("10", "農業", false),
-            ("11", "製造", false),
-            ("12", "建設", false),
+            ("001", "IT"),
+            ("002", "観光"),
+            ("003", "飲食"),
+            ("004", "金融"),
+            ("005", "メディア"),
+            ("006", "通信"),
+            ("007", "交通"),
+            ("008", "航空"),
+            ("009", "海運"),
+            ("010", "農業"),
+            ("011", "製造"),
+            ("012", "建設"),
         ]
-        let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
+        let btns = SelectButton(name: "industry", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.healthyGreen
         btns.spacing = 5
-        btns.setMultiSelect(true)
-        for (c, opt, selected) in options {
-            btns.addOption(code: c, label: opt, selected)
+        btns.setMax(selectable: 3)
+        for (c, opt) in options {
+            btns.addOption(code: c, label: opt)
         }
         return btns
     } ()
 
     let hobbys: SelectButton = {
         let options = [
-            ("1", "釣り"),
-            ("2", "ゲーム"),
-            ("3", "旅行"),
-            ("4", "日曜大工"),
-            ("5", "読書"),
-            ("6", "音楽"),
-            ("7", "ガーデニング"),
-            ("8", "運動"),
+            ("001", "釣り"),
+            ("002", "ゲーム"),
+            ("003", "旅行"),
+            ("004", "日曜大工"),
+            ("005", "読書"),
+            ("006", "音楽"),
+            ("007", "ガーデニング"),
+            ("008", "運動"),
         ]
-        let btns = SelectButton(name: "appearance", view: UIView.newAutoLayout())
+        let btns = SelectButton(name: "hobby", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.healthyGreen
         btns.spacing = 5
-        btns.setMultiSelect(true)
+        btns.setMax(selectable: 5)
         for (c, opt) in options {
             btns.addOption(code: c, label: opt)
         }
@@ -141,6 +141,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         okButton.bindEvent(.touchUpInside) {
             b in
             self.saveProfile()
+            self.navigationController?.popViewController(animated: true)
         }
     }
 
@@ -163,7 +164,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             r in
             r.width(70)
         }
-
+        constellation.textField.text = profile.constellation
         row +++ constellation.layout {
             c in
             c.rightMost().height(30)
@@ -177,6 +178,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             r.fillHolizon().height(50)
         }
 
+        appearance.selected(code: profile.appearanceTag)
         row +++ appearance.layout {
             b in
             b.fillParent()
@@ -184,25 +186,56 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
         section <<< row
 
-        seperator(section: section, caption: "職業")
+        let sep = seperator(section: section, caption: "職業")
+        // handler
+        ocupations.addObserver(handler: { o in
+            if let l = sep["caption"] {
+                let count = (o as! SelectButton).selectedValues.count
+                if (count == 3) {
+                    l.label.text = "職業(３つまで選択可)"
+                } else {
+                    l.label.text = (count > 0) ? "職業(\(count))" : "職業"
+                }
+            }
+        })
+        
         row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(120)
         }
-
+        ocupations.selected(code: profile.occupationTag1)
+        ocupations.selected(code: profile.occupationTag2)
+        ocupations.selected(code: profile.occupationTag3)
+        
         row +++ ocupations.layout {
             o in
             o.fillParent()
         }
-
+        
         section <<< row
 
-        seperator(section: section, caption: "趣味")
+        let sep2 = seperator(section: section, caption: "趣味")
+        // handler
+        hobbys.addObserver(handler: { o in
+            if let l = sep2["caption"] {
+                let count = (o as! SelectButton).selectedValues.count
+                if (count == 5) {
+                    l.label.text = "趣味(5つまで選択可)"
+                } else {
+                    l.label.text = (count > 0) ? "趣味(\(count))" : "趣味"
+                }
+            }
+        })
+        
         row = Row.Intervaled().layout {
             r in
             r.fillHolizon().height(75)
         }
-
+        hobbys.selected(code: profile.hobbyTag1)
+        hobbys.selected(code: profile.hobbyTag2)
+        hobbys.selected(code: profile.hobbyTag3)
+        hobbys.selected(code: profile.hobbyTag4)
+        hobbys.selected(code: profile.hobbyTag5)
         row +++ hobbys.layout {
             o in
             o.fillParent()
@@ -246,5 +279,51 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     
     func saveProfile () {
         
+        profile.constellation = constellation.textField.text!
+        
+        if appearance.selectedValues.count > 0 {
+            profile.appearanceTag = appearance.selectedValues.first!
+        } else {
+            profile.appearanceTag = ""
+        }
+        
+        let codes = ocupations.selectedValues
+        if codes.count > 0 {
+            profile.occupationTag1 = codes.first!
+        }
+        if codes.count > 1 {
+            profile.occupationTag2 = codes[1]
+        }
+        if codes.count > 2 {
+            profile.occupationTag3 = codes[2]
+        }
+        
+        let codes1 = hobbys.selectedValues
+        if codes1.count > 0 {
+            profile.hobbyTag1 = codes1[0]
+        }
+        
+        if codes1.count > 1 {
+            profile.hobbyTag2 = codes1[1]
+        }
+        
+        if codes1.count > 2 {
+            profile.hobbyTag3 = codes1[2]
+        }
+        
+        if codes1.count > 3 {
+            profile.hobbyTag4 = codes1[3]
+        }
+        
+        if codes1.count > 4 {
+            profile.hobbyTag5 = codes1[4]
+        }
+        
+        ProfileService.instance.saveProfile(profile, onComplete: {
+        }, onError: {
+            err in self.showError(err)
+        })
+        
+        profile.notify()
     }
 }
