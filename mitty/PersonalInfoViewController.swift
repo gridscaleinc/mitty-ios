@@ -506,8 +506,8 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
         // Basic Info
         idLabel.label.text = String(format: "%010d", userInfo.id)
         nameLabel.label.text = userInfo.userName
-        genderLabel.label.text = profile.gender == "" ? "秘密" : profile.gender
-        ageGroupLabel.label.text = profile.ageGroup == "" ? "秘密" : profile.ageGroup
+        genderLabel.label.text = profile.gender == "" ? "秘密" : gendre(of: profile.gender)?.value
+        ageGroupLabel.label.text = profile.ageGroup == "" ? "秘密" : agegroup(of: profile.ageGroup)?.value
         if userInfo.icon != "" {
             picture.button.setMittyImage(url: userInfo.icon)
         }
@@ -516,17 +516,17 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
 
         // Biography
         constellationLabel.label.text = profile.constellation == "" ? "秘密" : profile.constellation
-        appearanceLabel.label.text = profile.appearanceTag == "" ? "秘密" : profile.appearanceTag
+        appearanceLabel.label.text = profile.appearanceTag == "" ? "秘密" : appearance(of:profile.appearanceTag)?.value
 
-        occupationLabel1.label.text = profile.occupationTag1 == "" ? "未設定" : profile.occupationTag1
-        occupationLabel2.label.text = profile.occupationTag2 == "" ? "未設定" : profile.occupationTag2
-        occupationLabel3.label.text = profile.occupationTag3 == "" ? "未設定" : profile.occupationTag3
+        occupationLabel1.label.text = profile.occupationTag1 == "" ? "未設定" : occupation(of: profile.occupationTag1)?.value
+        occupationLabel2.label.text = profile.occupationTag2 == "" ? "未設定" : occupation(of: profile.occupationTag2)?.value
+        occupationLabel3.label.text = profile.occupationTag3 == "" ? "未設定" : occupation(of: profile.occupationTag3)?.value
 
-        hobbyLabel1.label.text = profile.hobbyTag1 == "" ? "未設定" : profile.hobbyTag1
-        hobbyLabel2.label.text = profile.hobbyTag2 == "" ? "未設定" : profile.hobbyTag2
-        hobbyLabel3.label.text = profile.hobbyTag3 == "" ? "未設定" : profile.hobbyTag3
-        hobbyLabel4.label.text = profile.hobbyTag4 == "" ? "未設定" : profile.hobbyTag4
-        hobbyLabel5.label.text = profile.hobbyTag5 == "" ? "未設定" : profile.hobbyTag5
+        hobbyLabel1.label.text = profile.hobbyTag1 == "" ? "未設定" : hobby(of: profile.hobbyTag1)?.value
+        hobbyLabel2.label.text = profile.hobbyTag2 == "" ? "未設定" : hobby(of: profile.hobbyTag2)?.value
+        hobbyLabel3.label.text = profile.hobbyTag3 == "" ? "未設定" : hobby(of: profile.hobbyTag3)?.value
+        hobbyLabel4.label.text = profile.hobbyTag4 == "" ? "未設定" : hobby(of: profile.hobbyTag4)?.value
+        hobbyLabel5.label.text = profile.hobbyTag5 == "" ? "未設定" : hobby(of: profile.hobbyTag5)?.value
 
 
     }

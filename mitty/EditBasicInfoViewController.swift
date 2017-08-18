@@ -21,28 +21,24 @@ class EditBasicInfoViewController: MittyViewController {
     let nameLabel = MQForm.label(name: "name", title: "")
 
     let gendle : SelectButton = {
-        let s = SelectButton(name: "gendle", view: UIView.newAutoLayout())
-        s.selectedBackgroundColor = MittyColor.pink
+        let s = SelectButton(name: "gendre", view: UIView.newAutoLayout())
+        s.selectedBackgroundColor = UIColor.orange
         s.spacing = 5
-        s.addOption(code: "Male", label: "男性")
-        s.addOption(code: "Female", label: "女性")
-        s.addOption(code: "Secret", label: "秘密")
+        for (key, code) in gendres() {
+            s.addOption(code: key, label: code.value)
+        }
         return s
     } ()
 
     let age : SelectButton = {
         let s = SelectButton(name: "age", view: UIView.newAutoLayout())
-        
-        s.selectedBackgroundColor = MittyColor.pink
+        s.selectedBackgroundColor = UIColor.orange
         s.spacing = 5
-        
-        s.addOption(code: "Underage", label: "未成年")
-        s.addOption(code: "Yuang", label: "青年")
-        s.addOption(code: "Middle", label: "中年")
-        s.addOption(code: "Old", label: "老年")
-
-        
+        for (key, code) in agegroups() {
+            s.addOption(code: key, label: code.value)
+        }
         return s
+
     } ()
     
     let speech = MQForm.textView(name: "oneword-speech")
