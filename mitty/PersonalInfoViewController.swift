@@ -482,7 +482,11 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
             i in
             i.rightMost().height(20).width(20)
         }
-
+        row.bindEvent(.touchUpInside) {
+            v in
+            let vc = NameCardViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
         section <<< row
 
         let row1 = Row.LeftAligned()
@@ -515,18 +519,19 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
         speech.textView.text = profile.oneWordSpeech
 
         // Biography
-        constellationLabel.label.text = profile.constellation == "" ? "秘密" : profile.constellation
+        constellationLabel.label.text = profile.constellation == "" ? "秘密" : CONSTELLATION(of:profile.constellation)?.value
+        
         appearanceLabel.label.text = profile.appearanceTag == "" ? "秘密" : appearance(of:profile.appearanceTag)?.value
 
-        occupationLabel1.label.text = profile.occupationTag1 == "" ? "未設定" : occupation(of: profile.occupationTag1)?.value
-        occupationLabel2.label.text = profile.occupationTag2 == "" ? "未設定" : occupation(of: profile.occupationTag2)?.value
-        occupationLabel3.label.text = profile.occupationTag3 == "" ? "未設定" : occupation(of: profile.occupationTag3)?.value
+        occupationLabel1.label.text = profile.occupationTag1 == "" ? LS(key: "not-set") : occupation(of: profile.occupationTag1)?.value
+        occupationLabel2.label.text = profile.occupationTag2 == "" ? LS(key: "not-set") : occupation(of: profile.occupationTag2)?.value
+        occupationLabel3.label.text = profile.occupationTag3 == "" ? LS(key: "not-set") : occupation(of: profile.occupationTag3)?.value
 
-        hobbyLabel1.label.text = profile.hobbyTag1 == "" ? "未設定" : hobby(of: profile.hobbyTag1)?.value
-        hobbyLabel2.label.text = profile.hobbyTag2 == "" ? "未設定" : hobby(of: profile.hobbyTag2)?.value
-        hobbyLabel3.label.text = profile.hobbyTag3 == "" ? "未設定" : hobby(of: profile.hobbyTag3)?.value
-        hobbyLabel4.label.text = profile.hobbyTag4 == "" ? "未設定" : hobby(of: profile.hobbyTag4)?.value
-        hobbyLabel5.label.text = profile.hobbyTag5 == "" ? "未設定" : hobby(of: profile.hobbyTag5)?.value
+        hobbyLabel1.label.text = profile.hobbyTag1 == "" ? LS(key: "not-set") : hobby(of: profile.hobbyTag1)?.value
+        hobbyLabel2.label.text = profile.hobbyTag2 == "" ? LS(key: "not-set") : hobby(of: profile.hobbyTag2)?.value
+        hobbyLabel3.label.text = profile.hobbyTag3 == "" ? LS(key: "not-set") : hobby(of: profile.hobbyTag3)?.value
+        hobbyLabel4.label.text = profile.hobbyTag4 == "" ? LS(key: "not-set") : hobby(of: profile.hobbyTag4)?.value
+        hobbyLabel5.label.text = profile.hobbyTag5 == "" ? LS(key: "not-set") : hobby(of: profile.hobbyTag5)?.value
 
 
     }

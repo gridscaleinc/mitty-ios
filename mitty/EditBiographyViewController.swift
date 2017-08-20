@@ -17,9 +17,12 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     
     var form = MQForm.newAutoLayout()
 
-    let constellations = ["獅子座", "天平座", "蟹座", "牡羊座"
-        , "牡牛座", "乙女座", "蠍座", "射手座",
-        "山羊座", "水瓶座", "魚座", "双子座"]
+    let constellationCode: [(key: String, value: Code)] = {
+        return constellations().sorted() {
+            c1, c2 in
+            return c1.key < c2.key
+        }
+    }()
 
     let appearance: SelectButton = {
 
@@ -38,7 +41,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         
         let btns = SelectButton(name: "Occupations", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.healthyGreen
-        btns.spacing = 5
+        btns.spacing = 8
         btns.setMax(selectable: 3)
         for (key, code) in occupations() {
             btns.addOption(code: key, label: code.value)
@@ -50,7 +53,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
         let btns = SelectButton(name: "hobby", view: UIView.newAutoLayout())
         btns.selectedBackgroundColor = MittyColor.healthyGreen
-        btns.spacing = 5
+        btns.spacing = 8
         btns.setMax(selectable: 5)
         for (key, code) in hobbys() {
             btns.addOption(code: key, label: code.value)
@@ -121,12 +124,36 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
 
     func buildForm () {
+        
+        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+        let anchor = MQForm.label(name: "dummy", title: "").layout {
+            a in
+            a.height(0).leftMost().rightMost()
+        }
+        form +++ anchor
+        
+        // スクロールViewを作る
+        let scroll = UIScrollView.newAutoLayout()
+        scroll.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 900)
+        scroll.isScrollEnabled = true
+        scroll.flashScrollIndicators()
+        scroll.canCancelContentTouches = false
+        self.automaticallyAdjustsScrollViewInsets = false
+        
+        let scrollContainer = Container(name: "Detail-form", view: scroll).layout() { (container) in
+            container.fillParent()
+        }
+        
+        form +++ scrollContainer
+        
         let section = Section(name: "section", view: UIView.newAutoLayout())
-        form +++ section.layout {
+        section.layout {
             s in
             s.fillHolizon().upper()
         }
-
+        
+        scrollContainer +++ section
+        
         seperator(section: section, caption: "")
 
         var row = Row.LeftAligned().layout {
@@ -138,7 +165,9 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
             r in
             r.width(70)
         }
-        constellation.textField.text = profile.constellation
+        
+        self.constellation.textField.text = CONSTELLATION(of: profile.constellation)?.value
+        
         row +++ constellation.layout {
             c in
             c.rightMost().height(30)
@@ -176,7 +205,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(120)
+            r.fillHolizon().height(130)
         }
         ocupations.selected(code: profile.occupationTag1)
         ocupations.selected(code: profile.occupationTag2)
@@ -204,7 +233,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         
         row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(75)
+            r.fillHolizon().height(120)
         }
         hobbyButtons.selected(code: profile.hobbyTag1)
         hobbyButtons.selected(code: profile.hobbyTag2)
@@ -229,6 +258,20 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         row +++ okButton
 
         section <<< row
+        
+        let bottom = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon()
+        }
+        
+        section <<< bottom
+
+        section.layout {
+            f in
+            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
+            f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
+            f.view.backgroundColor = UIColor.white
+        }
 
     }
 
@@ -238,23 +281,23 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     }
 
     func pickerView(_ namePickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return constellations.count
+        return constellationCode.count
     }
 
     //表示する文字列を指定する
     //PickerViewに表示する配列の要素数を設定する
     func pickerView(_ namePickerview: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return constellations[row]
+        return constellationCode[row].value.value
     }
 
     //ラベル表示
     func pickerView(_ picker: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        constellation.textField.text = constellations[row]
+        constellation.textField.text = constellationCode[row].value.value
     }
     
     func saveProfile () {
         
-        profile.constellation = constellation.textField.text!
+        profile.constellation = constellationCode[constellationPicker.selectedRow(inComponent: 0)].key
         
         if appearance.selectedValues.count > 0 {
             profile.appearanceTag = appearance.selectedValues.first!

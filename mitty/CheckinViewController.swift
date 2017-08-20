@@ -22,7 +22,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
     let footmarkForm = FootMarkForm.newAutoLayout()
 
-    let nameCardForm = NameCardForm.newAutoLayout()
+    let nameCardForm = NameCardForm()
 
     let cameraButton = MQForm.button(name: "cameraButton", title: "+写真")
 
@@ -61,7 +61,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
         self.view.addSubview(footmarkForm)
         footmarkForm.load()
 
-        self.view.addSubview(nameCardForm)
+        self.view.addSubview(nameCardForm.view)
         nameCardForm.load()
 
         view.setNeedsUpdateConstraints()
@@ -92,10 +92,10 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
             footmarkForm.configLayout()
 
-            nameCardForm.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-            nameCardForm.autoPinEdge(.top, to: .bottom, of: footmarkForm, withOffset: 30)
-            nameCardForm.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-            nameCardForm.autoSetDimension(.height, toSize: 230)
+            nameCardForm.view.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
+            nameCardForm.view.autoPinEdge(.top, to: .bottom, of: footmarkForm, withOffset: 30)
+            nameCardForm.view.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
+            nameCardForm.view.autoSetDimension(.height, toSize: 230)
             // nameCardForm.clipsToBounds = true
 
             nameCardForm.configLayout()
@@ -161,7 +161,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
         nameCardBUtton.bindEvent(.touchUpInside) { [weak self]
             b in
-            self?.nameCardForm.isHidden = !(self?.nameCardForm.isHidden)!
+            self?.nameCardForm.view.isHidden = !(self?.nameCardForm.view.isHidden)!
         }
     }
 

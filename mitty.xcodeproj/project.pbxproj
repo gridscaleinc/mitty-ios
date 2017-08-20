@@ -26,6 +26,8 @@
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
 		FC004C5E1F43322800230DAA /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5D1F43322800230DAA /* ProfileService.swift */; };
 		FC004C601F45E13200230DAA /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5F1F45E13200230DAA /* Code.swift */; };
+		FC004C661F48F82500230DAA /* SocialIdForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C651F48F82500230DAA /* SocialIdForm.swift */; };
+		FC004C681F48F84D00230DAA /* SocialIdInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
 		FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081861DD3890A00C1F970 /* TalkingCell.swift */; };
 		FC00818D1DD394D300C1F970 /* pengin1.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0081891DD394D300C1F970 /* pengin1.png */; };
@@ -225,6 +227,8 @@
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		FC004C5D1F43322800230DAA /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		FC004C5F1F45E13200230DAA /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
+		FC004C651F48F82500230DAA /* SocialIdForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialIdForm.swift; sourceTree = "<group>"; };
+		FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialIdInputForm.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
 		FC0081861DD3890A00C1F970 /* TalkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingCell.swift; sourceTree = "<group>"; };
 		FC0081891DD394D300C1F970 /* pengin1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin1.png; path = images/pengin1.png; sourceTree = "<group>"; };
@@ -780,6 +784,8 @@
 				FC3482D11EDA8073005E539E /* PresenceForm.swift */,
 				FC3482D31EDA8090005E539E /* FootMarkForm.swift */,
 				FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */,
+				FC004C651F48F82500230DAA /* SocialIdForm.swift */,
+				FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1171,6 +1177,7 @@
 				FCFA847A1F08A8B000E9C6F2 /* SocialId.swift in Sources */,
 				FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */,
 				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
+				FC004C661F48F82500230DAA /* SocialIdForm.swift in Sources */,
 				FC30182F1ED42EC700A5F183 /* MittyImage.swift in Sources */,
 				FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */,
 				FC1FE05C1EC89BE6007AE8A5 /* ActivityCell.swift in Sources */,
@@ -1221,6 +1228,7 @@
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
 				FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */,
 				FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */,
+				FC004C681F48F84D00230DAA /* SocialIdInputForm.swift in Sources */,
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */,
 				FC3C16E21F3EEFFD00E7622B /* NewProposalReq.swift in Sources */,
