@@ -31,14 +31,14 @@ class ContentService: Service {
     /// - Parameters:
     ///   - img: 画像。
     ///   - onCompletion: 正常処理ごに呼び出される処理。
-    func uploadContent(img: UIImage, onCompletion: @escaping(_: Int64) -> Void) {
+    func uploadContent(img: UIImage, asname: String, onCompletion: @escaping(_ id: Int64, _ url: String ) -> Void) {
 
         let imageData: NSData = UIImagePNGRepresentation(img)! as NSData
         let strBase64 = imageData.base64EncodedString()
 
         let parameters = [
             "mime": "image/png",
-            "name": String(format: "icon"),
+            "name": String(format: asname),
             "data": strBase64
         ]
 
@@ -63,7 +63,8 @@ class ContentService: Service {
                     }
 
                     let contentId = json["contentId"].int64Value
-                    onCompletion(contentId)
+                    let url = json["linkUrl"].stringValue
+                    onCompletion(contentId, url)
 
                     return
                 }

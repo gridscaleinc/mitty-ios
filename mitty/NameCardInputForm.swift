@@ -13,6 +13,7 @@ import PureLayout
 class NameCardInputForm: Container {
 
     let myName = MQForm.text(name: "name", placeHolder: "名前入力")
+    let logoButton = MQForm.button(name: "setLogo", title: "Set Logo")
     let businessName = MQForm.text(name: "businessName", placeHolder: "会社・組織名")
     let businessSubName = MQForm.text(name: "businessSubName", placeHolder: "グループ・部署など")
     let addressLine1 = MQForm.text(name: "addressLine1", placeHolder: "住所１")
@@ -36,9 +37,18 @@ class NameCardInputForm: Container {
                 .rightMost(withInset: 30)
         }
         
-        form +++ webpage.layout {
+        
+        form +++ logoButton.layout {
             b in
             b.putUnder(of: self.businessName, withOffset: 5)
+                .leftMost(withInset: 50).height(30)
+                .rightMost(withInset: 50)
+            b.button.backgroundColor = MittyColor.healthyGreen
+        }
+        
+        form +++ webpage.layout {
+            b in
+            b.putUnder(of: self.logoButton, withOffset: 5)
                 .leftMost(withInset: 20).height(30)
                 .rightMost(withInset: 30)
         }

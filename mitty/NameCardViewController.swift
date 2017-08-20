@@ -13,7 +13,7 @@ import AlamofireImage
 import SwiftyJSON
 
 /// <#Description#>
-class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContentPickerDelegate  {
     
     
     let form: MQForm = MQForm.newAutoLayout()
@@ -21,6 +21,7 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
     var nameCard = NameCard()
     var cardform = NameCardForm()
     var inputForm = NameCardInputForm()
+    var content: Content = Content()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +59,16 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
                 c.view.backgroundColor = MittyColor.lightYellow
             }
         }
+        
+        // navi
+        inputForm.logoButton.bindEvent(.touchUpInside) {
+            ic in
+            let vc = ContentPicker()
+            
+            vc.delegate = self
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -69,6 +80,18 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
         super.updateViewConstraints()
         
         form.configLayout()
+    }
+    
+    
+    func pickedContent(content: Content) {
+        self.content = content
+        if (content.linkUrl != "") {
+            cardform.businessLogo.imageView.setMittyImage(url: content.linkUrl!)
+        }
+    }
+    
+    func clearPickedContent() {
+        self.content = Content()
     }
     
     func buildForm() {

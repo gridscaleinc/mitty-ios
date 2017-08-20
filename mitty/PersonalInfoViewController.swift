@@ -12,13 +12,14 @@ import Alamofire
 import AlamofireImage
 import SwiftyJSON
 
-class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, ContentPickerDelegate {
 
     var userInfo = UserInfo()
     var profile = Profile()
     var socialIdList = [SocialId]()
     var nameCardBox = [NameCard]()
-
+    var content : Content? = Content()
+    
     var form = MQForm.newAutoLayout()
 
     let picture: Control = MQForm.button(name: "m2", title: "")
@@ -194,35 +195,23 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, UIIm
     }
 
     func pickImage () {
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
+        let imagePicker = ContentPicker()
+        imagePicker.delegate = self
+        self.navigationController?.pushViewController(imagePicker, animated: true)
+    }
+    
+    func pickedContent(content: Content) {
+        self.content = content
+        if content.linkUrl != "" {
+            DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
+            picture.button.af_setBackgroundImage(for: .normal, url: URL(string: content.linkUrl!)!, placeholderImage: UIImage(named: "downloading"))
         }
-
     }
-
-
-    //MARK: - Delegates
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-
+    
+    func clearPickedContent() {
+        self.content = Content()
     }
-
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
-        NSLog("\(info)")
-        let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        let iconimage = chosenImage.af_imageScaled(to: CGSize(width: 80, height: 80))
-        self.dismiss(animated: false, completion: nil)
-        self.picture.button.setImage(iconimage, for: .normal)
-        // upload
-        ContentService.instance.uploadContent(img: iconimage) {
-            contentId in
-            UserService.instance.setUserIcon(contentId)
-        }
-
-    }
+    
 
     func buildIdentity(_ section: Section) {
 

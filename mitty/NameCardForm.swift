@@ -15,7 +15,7 @@ class NameCardForm: Container {
 
     let myName = MQForm.label(name: "name", title: "黄　永紅")
     let businessName = MQForm.label(name: "businessName", title: "株式会社　ABC")
-    let businessLogo = MQForm.img(name: "businessLogo", url: "")
+    let businessLogo = MQForm.img(name: "businessLogo", url: "timesquare")
     let businessSubName = MQForm.label(name: "businessSubName", title: "システム開発部")
     let addressLine1 = MQForm.label(name: "addressLine1", title: "東京都品川区南品川")
     let addressLine2 = MQForm.label(name: "addressLine2", title: "4-980-1029")
@@ -36,6 +36,13 @@ class NameCardForm: Container {
             b.upper(withInset: 10).leftMost(withInset: 20).height(30)
             b.label.font = UIFont.boldSystemFont(ofSize: 18)
         }
+        
+        form +++ businessLogo.layout {
+            l in
+            l.topAlign(with: self.businessName).rightMost(withInset: 30)
+            l.height(40).width(40)
+        }
+        
         form +++ webpage.layout {
             b in
             b.putUnder(of: self.businessName).leftMost(withInset: 20).height(20)

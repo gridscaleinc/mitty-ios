@@ -47,8 +47,6 @@ class ContentPicker: MittyViewController, UIImagePickerControllerDelegate, UINav
 
         self.automaticallyAdjustsScrollViewInsets = false
 
-        // super.autoCloseKeyboard()
-
         self.view.backgroundColor = .white
         self.view.addSubview(form)
 
@@ -167,17 +165,23 @@ class ContentPicker: MittyViewController, UIImagePickerControllerDelegate, UINav
 
     }
 
-    //MARK: - Delegates
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-
-    }
-
     // image をとったらどうする。
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         NSLog("\(info)")
         let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
         pickedImg.imageView.image = chosenImage
-        picker.dismiss(animated: true)
+        
+        // upload
+        ContentService.instance.uploadContent(img: chosenImage, asname: "content") {
+            contentId, url in
+            UserService.instance.setUserIcon(contentId)
+            self.pickedContent = Content()
+            self.pickedContent?.linkUrl = url
+            self.pickedContent?.id  = contentId
+            self.pickedContent?.title = "content"
+            picker.dismiss(animated: true)
+        }
+
     }
 
 }
