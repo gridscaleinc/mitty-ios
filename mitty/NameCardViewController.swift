@@ -242,6 +242,7 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
         nameCard.phone = inputForm.phone.textField.text!
         nameCard.mobilePhone = inputForm.mobilePhone.textField.text!
         nameCard.fax = inputForm.fax.textField.text!
+        nameCard.businessLogoId = content.id
     }
 }
 
