@@ -66,8 +66,10 @@ class EventService: Service {
                 callback(events)
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
     }
@@ -151,8 +153,10 @@ class EventService: Service {
                 }
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
 

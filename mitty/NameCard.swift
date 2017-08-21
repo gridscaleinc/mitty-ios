@@ -12,14 +12,16 @@ class NameCard: Observable {
     
     var id: Int64 = 0
     var mittyId: Int = 0
+    var name: String = ""
     var businessName: String = ""
+    var businessLogoId : Int64 = 0
     var businessSubName: String = ""
-    var business_title: String = ""
-    var address_line1: String = ""
-    var address_line2: String = ""
+    var businessTitle: String = ""
+    var addressLine1: String = ""
+    var addressLine2: String = ""
     var phone: String = ""
     var fax: String = ""
-    var mobile_phone: String = ""
+    var mobilePhone: String = ""
     var webpage: String = ""
     var email: String = ""
     var created: Date = .nulldate

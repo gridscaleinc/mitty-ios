@@ -158,6 +158,7 @@
 		FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5831E57470A00B861F4 /* timesquare.png */; };
 		FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5851E5896B100B861F4 /* event9.jpeg */; };
 		FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FCFBA5871E594F3200B861F4 /* event10.jpeg */; };
+		FCFBABE51F4ADF8400A957FE /* NameCardService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBABE41F4ADF8400A957FE /* NameCardService.swift */; };
 		FCFBC6791E63C39000AEF869 /* EventInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* EventInputForm.swift */; };
 		FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
@@ -359,6 +360,7 @@
 		FCFBA5831E57470A00B861F4 /* timesquare.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = timesquare.png; path = images/timesquare.png; sourceTree = "<group>"; };
 		FCFBA5851E5896B100B861F4 /* event9.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event9.jpeg; path = images/event9.jpeg; sourceTree = "<group>"; };
 		FCFBA5871E594F3200B861F4 /* event10.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = event10.jpeg; path = images/event10.jpeg; sourceTree = "<group>"; };
+		FCFBABE41F4ADF8400A957FE /* NameCardService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardService.swift; sourceTree = "<group>"; };
 		FCFBC6781E63C39000AEF869 /* EventInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInputForm.swift; sourceTree = "<group>"; };
 		FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionForm.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
@@ -574,6 +576,7 @@
 				FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */,
 				FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */,
 				FC004C5D1F43322800230DAA /* ProfileService.swift */,
+				FCFBABE41F4ADF8400A957FE /* NameCardService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1184,6 +1187,7 @@
 				FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */,
 				FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */,
 				FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */,
+				FCFBABE51F4ADF8400A957FE /* NameCardService.swift in Sources */,
 				FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,

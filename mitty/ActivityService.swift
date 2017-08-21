@@ -76,19 +76,9 @@ class ActivityService: Service {
                 }
 
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
                 print(error)
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-
-                } catch {
-                    onError("応答電文エラー。")
-                }
-
+                print(super.jsonResponse(response))
                 print(response.description)
-
                 LoadingProxy.off()
 
             }
@@ -137,19 +127,9 @@ class ActivityService: Service {
                 }
 
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
                 print(error)
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-
-                } catch {
-                    onError("応答電文エラー。")
-                }
-
+                print(super.jsonResponse(response))
                 print(response.description)
-
                 LoadingProxy.off()
 
             }
@@ -204,21 +184,10 @@ class ActivityService: Service {
                 }
 
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
                 print(error)
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-
-                } catch {
-                    onError("応答電文エラー。")
-                }
-
+                print(super.jsonResponse(response))
                 print(response.description)
-
                 LoadingProxy.off()
-
             }
         }
     }
@@ -279,21 +248,10 @@ class ActivityService: Service {
                 onCompletion(item)
 
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
                 print(error)
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-
-                } catch {
-                    onError("応答電文エラー。")
-                }
-
+                print(super.jsonResponse(response))
                 print(response.description)
-
                 LoadingProxy.off()
-
             }
         }
     }
@@ -337,8 +295,10 @@ class ActivityService: Service {
                 callback(activities)
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
     }
@@ -398,8 +358,10 @@ class ActivityService: Service {
                 callback(activity)
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
 
@@ -443,8 +405,10 @@ class ActivityService: Service {
                 callback(destinations)
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
 

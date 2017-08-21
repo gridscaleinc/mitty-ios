@@ -159,23 +159,10 @@ class IslandService: Service {
 
                 //                self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
-                
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    onError("error occored")
-
-                } catch {
-                    print("Serialize Error")
-                }
-
-                print(response.description)
-
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
 

@@ -19,7 +19,7 @@ class NameCardForm: Container {
     let businessSubName = MQForm.label(name: "businessSubName", title: "システム開発部")
     let addressLine1 = MQForm.label(name: "addressLine1", title: "東京都品川区南品川")
     let addressLine2 = MQForm.label(name: "addressLine2", title: "4-980-1029")
-    let position = MQForm.label(name: "position", title: "代表取締役社長")
+    let businessTitle = MQForm.label(name: "businessTitle", title: "代表取締役社長")
     let phone = MQForm.label(name: "phone", title: "Tel： 030-3765-4683")
     let mobilePhone = MQForm.label(name: "mobilePhone", title: "携帯： 090-5309-0092")
     let fax = MQForm.label(name: "fax", title: "fax: 03-0102-1201")
@@ -27,10 +27,12 @@ class NameCardForm: Container {
     let mailAddress = MQForm.label(name: "mailAddress", title: "abc@localhost.com")
 
     
-    func load () {
+    func load (_ card: NameCard) {
 
         let form = self
-
+        
+        setViews(card)
+        
         form +++ businessName.layout {
             b in
             b.upper(withInset: 10).leftMost(withInset: 20).height(30)
@@ -57,7 +59,7 @@ class NameCardForm: Container {
             b.label.textColor = UIColor(white: 0.5, alpha: 1)
         }
         
-        form +++ position.layout {
+        form +++ businessTitle.layout {
             b in
             b.putUnder(of: self.businessSubName, withOffset: 5).leftMost(withInset: 80).height(20)
             b.label.font = UIFont.boldSystemFont(ofSize: 12)
@@ -66,7 +68,7 @@ class NameCardForm: Container {
 
         form +++ myName.layout {
             b in
-            b.putUnder(of: self.position, withOffset: 2).leftMost(withInset: 80).height(25)
+            b.putUnder(of: self.businessTitle, withOffset: 2).leftMost(withInset: 80).height(25)
             b.label.font = UIFont.boldSystemFont(ofSize: 23)
         }
 
@@ -147,5 +149,21 @@ class NameCardForm: Container {
         form.view.layer.shadowRadius = 1.8
 
 
+    }
+    
+    func setViews(_ data: NameCard) {
+        businessName.label.text = data.businessName
+        businessSubName.label.text = data.businessSubName
+        webpage.label.text = data.webpage
+        businessTitle.label.text = data.businessTitle
+        myName.label.text = data.name
+        addressLine1.label.text = data.addressLine1
+        addressLine2.label.text = data.addressLine2
+        mailAddress.label.text = data.email
+        phone.label.text = data.phone
+        mobilePhone.label.text = data.mobilePhone
+        fax.label.text = data.fax
+        
+        
     }
 }

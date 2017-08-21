@@ -18,14 +18,14 @@ class NameCardInputForm: Container {
     let businessSubName = MQForm.text(name: "businessSubName", placeHolder: "グループ・部署など")
     let addressLine1 = MQForm.text(name: "addressLine1", placeHolder: "住所１")
     let addressLine2 = MQForm.text(name: "addressLine2", placeHolder: "住所２")
-    let position = MQForm.text(name: "position", placeHolder: "タイトル")
+    let businessTitle = MQForm.text(name: "businessTitle", placeHolder: "タイトル")
     let phone = MQForm.text(name: "phone", placeHolder: "電話番号")
     let mobilePhone = MQForm.text(name: "mobilePhone", placeHolder: "携帯:090-33603033")
     let webpage = MQForm.text(name: "webpage", placeHolder: "http://www.abcdefg.com")
     let mailAddress = MQForm.text(name: "mailAddress", placeHolder: "xxx@abcdefg.com")
     let fax = MQForm.text(name: "fax", placeHolder: "FAX：03-092020-11")
 
-    func load () {
+    func load (_ card : NameCard) {
 
         let form = self
 
@@ -60,7 +60,7 @@ class NameCardInputForm: Container {
                 .rightMost(withInset: 30)
         }
 
-        form +++ position.layout {
+        form +++ businessTitle.layout {
             b in
             b.putUnder(of: self.businessSubName, withOffset: 5)
                 .leftMost(withInset: 20).height(30)
@@ -69,7 +69,7 @@ class NameCardInputForm: Container {
 
         form +++ myName.layout {
             b in
-            b.putUnder(of: self.position, withOffset: 5)
+            b.putUnder(of: self.businessTitle, withOffset: 5)
                 .leftMost(withInset: 20).height(30)
                 .rightMost(withInset: 30)
         }
@@ -115,5 +115,21 @@ class NameCardInputForm: Container {
                 .leftMost(withInset: 20).height(30)
                 .rightMost(withInset: 30)
         }
+    }
+    
+    
+    func setViews(_ data: NameCard) {
+        businessName.textField.text = data.businessName
+        businessSubName.textField.text = data.businessSubName
+        webpage.textField.text = data.webpage
+        businessTitle.textField.text = data.businessTitle
+        myName.textField.text = data.name
+        addressLine1.textField.text = data.addressLine1
+        addressLine2.textField.text = data.addressLine2
+        mailAddress.textField.text = data.email
+        phone.textField.text = data.phone
+        mobilePhone.textField.text = data.mobilePhone
+        fax.textField.text = data.fax
+        
     }
 }

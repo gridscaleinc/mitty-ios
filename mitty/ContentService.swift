@@ -73,6 +73,9 @@ class ContentService: Service {
 
             case .failure(let error):
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
     }
@@ -110,6 +113,9 @@ class ContentService: Service {
 
             case .failure(let error):
                 print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
             }
         }
     }

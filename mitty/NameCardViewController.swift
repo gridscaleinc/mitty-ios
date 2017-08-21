@@ -23,6 +23,8 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
     var inputForm = NameCardInputForm()
     var content: Content = Content()
     
+    var okButton = MQForm.button(name: "ok", title: "OK")
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -69,6 +71,12 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
             
             self.navigationController?.pushViewController(vc, animated: true)
         }
+        
+        okButton.bindEvent(.touchUpInside) {
+            b in
+            self.saveNameCard()
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -98,7 +106,7 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
         
         form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
 
-        cardform.load()
+        cardform.load(nameCard)
         cardform.layout {
             c in
             c.fillHolizon().upper().height(220)
@@ -141,7 +149,7 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
         
         detailForm <<< titleRow
         
-        inputForm.load()
+        inputForm.load(nameCard)
         inputForm.view.backgroundColor = .black
         let row = Row.LeftAligned()
         row +++ inputForm.layout {
@@ -153,6 +161,16 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
             r.fillHolizon().topAlign(with: self.inputForm).bottomAlign(with: self.inputForm)
         }
         detailForm <<< row
+        
+        let buttonRow = Row.Intervaled().layout {
+            r in
+            r.fillHolizon().height(50)
+        }
+        buttonRow.spacing = 80
+        
+        buttonRow +++ okButton
+        
+        detailForm <<< buttonRow
         
         let bottom = Row.LeftAligned().layout {
             r in
@@ -168,6 +186,62 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
             f.view.backgroundColor = UIColor.white
         }
         
+    }
+    
+    // Call namecard service to upload data
+    func saveNameCard() {
+        if checkInputForm() {
+            setNameCard()
+            NameCardService.instance.saveNameCard(nameCard, onComplete: {}, onError:{
+                error in
+            })
+        }
+    }
+    
+    func checkInputForm() -> Bool {
+        if inputForm.myName.textField.text == "" {
+            showError("名前が未入力")
+            return false
+        }
+        
+        if inputForm.businessName.textField.text == "" {
+            showError("会社/組織名が未入力")
+            return false
+        }
+        
+        if !isValidEmail(inputForm.mailAddress) {
+            showError("メールアドレスが正しくない。")
+            return false
+        }
+        
+        return true
+    }
+
+    /**
+     */
+    func isValidEmail(_ f: Control) -> Bool {
+        let email = f.textField.text
+        if email != "" {
+            let rexg = try! NSRegularExpression(pattern: "(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]+$)")
+            return rexg.numberOfMatches(in: email!, options: [], range: NSMakeRange(0, (email!.characters.count))) > 0
+        }
+        
+        return true
+    }
+    
+    
+    /// <#Description#>
+    func setNameCard() {
+        nameCard.name = inputForm.myName.textField.text!
+        nameCard.businessName = inputForm.businessName.textField.text!
+        nameCard.businessSubName = inputForm.businessSubName.textField.text!
+        nameCard.webpage = inputForm.webpage.textField.text!
+        nameCard.addressLine1 = inputForm.addressLine1.textField.text!
+        nameCard.addressLine2 = inputForm.addressLine2.textField.text!
+        nameCard.email = inputForm.mailAddress.textField.text!
+        nameCard.phone = inputForm.phone.textField.text!
+        nameCard.mobilePhone = inputForm.mobilePhone.textField.text!
+        nameCard.fax = inputForm.fax.textField.text!
     }
 }
 
