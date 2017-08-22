@@ -18,7 +18,7 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
     
     let form: MQForm = MQForm.newAutoLayout()
     
-    var nameCard = NameCard()
+    var nameCard = NameCardInfo()
     var cardform = NameCardForm()
     var inputForm = NameCardInputForm()
     var content: Content = Content()
@@ -113,7 +113,7 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
         }
         
         form +++ cardform
-        
+        // cardform.view.transform = CGAffineTransform(scaleX: 0.52, y: 0.52);
         // スクロールViewを作る
         let scroll = UIScrollView.newAutoLayout()
         scroll.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 900)
@@ -236,13 +236,16 @@ class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImageP
         nameCard.businessName = inputForm.businessName.textField.text!
         nameCard.businessSubName = inputForm.businessSubName.textField.text!
         nameCard.webpage = inputForm.webpage.textField.text!
+        nameCard.businessTitle = inputForm.businessTitle.textField.text!
         nameCard.addressLine1 = inputForm.addressLine1.textField.text!
         nameCard.addressLine2 = inputForm.addressLine2.textField.text!
         nameCard.email = inputForm.mailAddress.textField.text!
         nameCard.phone = inputForm.phone.textField.text!
         nameCard.mobilePhone = inputForm.mobilePhone.textField.text!
         nameCard.fax = inputForm.fax.textField.text!
-        nameCard.businessLogoId = content.id
+        if ( content.id != 0) {
+            nameCard.businessLogoId = content.id
+        }
     }
 }
 

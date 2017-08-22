@@ -27,7 +27,7 @@ class NameCardForm: Container {
     let mailAddress = MQForm.label(name: "mailAddress", title: "abc@localhost.com")
 
     
-    func load (_ card: NameCard) {
+    func load (_ card: NameCardInfo) {
 
         let form = self
         
@@ -151,7 +151,7 @@ class NameCardForm: Container {
 
     }
     
-    func setViews(_ data: NameCard) {
+    func setViews(_ data: NameCardInfo) {
         businessName.label.text = data.businessName
         businessSubName.label.text = data.businessSubName
         webpage.label.text = data.webpage
@@ -164,6 +164,9 @@ class NameCardForm: Container {
         mobilePhone.label.text = data.mobilePhone
         fax.label.text = data.fax
         
+        if data.businessLogoUrl != "" {
+            businessLogo.imageView.setMittyImage(url: data.businessLogoUrl)
+        }
         
     }
 }

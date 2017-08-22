@@ -28,7 +28,7 @@ class NameCardInputForm: Container {
     func load (_ card : NameCard) {
 
         let form = self
-
+        setViews(card)
         form +++ businessName.layout {
             b in
             b.upper(withInset: 10)

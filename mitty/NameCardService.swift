@@ -15,7 +15,7 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class NameCardService: Service {
-    let apiMyNameCard = MITTY_SERVICE_BASE_URL + "/mynamecard"
+    let apiMyNameCards = MITTY_SERVICE_BASE_URL + "/mynamecards"
     let apiSaveNameCard = MITTY_SERVICE_BASE_URL + "/save/namecard"
     
     static var instance: NameCardService = {
@@ -44,6 +44,7 @@ class NameCardService: Service {
             "mitty_id": ApplicationContext.userSession.userId,
             "name": nameCard.name,
             "business_name": nameCard.businessName,
+            "webpage": nameCard.webpage,
             "business_sub_name": nameCard.businessSubName,
             "business_logo_id": nameCard.businessLogoId,
             "business_title": nameCard.businessTitle,
@@ -87,7 +88,7 @@ class NameCardService: Service {
     /// - Parameters:
     ///   - onComplete: <#onComplete description#>
     ///   - onError: <#onError description#>
-    func myNameCard(onComplete: @escaping (_ NameCard: NameCard) -> Void, onError: @escaping (_ error: String) -> Void) {
+    func myNameCard(onComplete: @escaping (_ cardList: [NameCardInfo]) -> Void, onError: @escaping (_ error: String) -> Void) {
         
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
@@ -95,18 +96,18 @@ class NameCardService: Service {
         
         LoadingProxy.on()
         
-        Alamofire.request(apiMyNameCard, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        Alamofire.request(apiMyNameCards, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             LoadingProxy.off()
             switch response.result {
             case .success:
                 if let jsonObject = response.result.value {
                     let json = JSON(jsonObject)
                     print(json)
-                    if (json == nil || json["NameCard"] == nil) {
+                    if (json == nil || json["namecards"] == nil) {
                         return
                     }
-                    let NameCard = self.bindNameCard(json["NameCard"])
-                    onComplete(NameCard)
+                    let nameCardInfoList = self.bindNameCards(json)
+                    onComplete(nameCardInfoList)
                     return
                 }
                 
@@ -114,15 +115,43 @@ class NameCardService: Service {
                 
             case .failure(let error):
                 print(error)
+                print(super.jsonResponse(response))
                 onError(error.localizedDescription)
             }
         }
     }
     
+    /// <#Description#>
+    ///
+    /// - Parameter json: <#json description#>
+    /// - Returns: <#return value description#>
+    func bindNameCards(_ json: JSON) -> [NameCardInfo] {
+        var results : [NameCardInfo] = []
+        
+        for (_, info) in json["namecards"] {
+            let result = NameCardInfo()
+            result.businessLogoUrl = info["business_logo_url"].stringValue
+            
+            bindItem(result, info)
+            results.append(result)
+        }
+        
+        return results
+        
+    }
     
+    /// <#Description#>
+    ///
+    /// - Parameter json: <#json description#>
+    /// - Returns: <#return value description#>
     func bindNameCard(_ json: JSON) -> NameCard {
         
         let result = NameCard()
+        bindItem(result, json)
+        return result
+    }
+    
+    func bindItem (_ result: NameCard, _ json :JSON) {
         result.id = json["id"].int64Value
         result.mittyId = json["mitty_id"].intValue
         result.name = json["name"].stringValue
@@ -130,14 +159,12 @@ class NameCardService: Service {
         result.businessLogoId = json["business_logo_id"].int64 ?? 0
         result.businessSubName = json["business_sub_name"].stringValue
         result.businessTitle = json["business_title"].stringValue
-        result.webpage = json["email"].stringValue
+        result.webpage = json["webpage"].stringValue
         result.email = json["email"].stringValue
-        result.addressLine1 = json["addressLine1"].stringValue
-        result.addressLine2 = json["addressLine2"].stringValue
+        result.addressLine1 = json["address_line1"].stringValue
+        result.addressLine2 = json["address_line2"].stringValue
         result.phone = json["phone"].stringValue
         result.mobilePhone = json["mobile_phone"].stringValue
         result.fax = json["fax"].stringValue
-        
-        return result
     }
 }

@@ -62,8 +62,8 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
         footmarkForm.load()
 
         self.view.addSubview(nameCardForm.view)
-        nameCardForm.load(NameCard())
-
+        nameCardForm.load(NameCardInfo())
+        // nameCardForm.view.transform = CGAffineTransform(scaleX: 0.52, y: 0.52);
         view.setNeedsUpdateConstraints()
 
     }

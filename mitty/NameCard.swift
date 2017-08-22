@@ -39,3 +39,7 @@ class NameCard: Observable {
         observers.append(handler)
     }
 }
+
+class NameCardInfo : NameCard {
+    var businessLogoUrl : String = ""
+}

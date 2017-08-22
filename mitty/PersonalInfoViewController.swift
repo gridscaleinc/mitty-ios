@@ -17,9 +17,9 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
     var userInfo = UserInfo()
     var profile = Profile()
     var socialIdList = [SocialId]()
-    var nameCardBox = [NameCard]()
-    var content : Content? = Content()
-    
+    var nameCardBox = [NameCardInfo]()
+    var content: Content? = Content()
+
     var form = MQForm.newAutoLayout()
 
     let picture: Control = MQForm.button(name: "m2", title: "")
@@ -51,6 +51,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
     let blank = MQForm.label(name: "blank", title: "")
 
     let nameCardSection = Section(name: "namecard-section")
+    
     let socialIdSection = Section(name: "social-id-section")
 
 
@@ -79,10 +80,19 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
                 ProfileService.instance.myProfile(onComplete: {
                     p in
                     self.profile = p
-                    p.addObserver(handler: { o in
-                        self.setUserProfile()
+                    NameCardService.instance.myNameCard(onComplete: {
+                        cardList in
+                        self.nameCardBox = cardList
+
+                        p.addObserver(handler: { o in
+                            self.setUserProfile()
+                        })
+                        p.notify()
+                        
+                        self.addCardList()
+                    }, onError: { error in
+                        self.showError("名刺取得エラー")
                     })
-                    p.notify()
                 }, onError: { error in
                     self.showError(error)
                 })
@@ -90,6 +100,8 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
                 self.showError("User Not Exists")
             }
         })
+
+
 
     }
 
@@ -199,7 +211,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         imagePicker.delegate = self
         self.navigationController?.pushViewController(imagePicker, animated: true)
     }
-    
+
     func pickedContent(content: Content) {
         self.content = content
         if content.linkUrl != "" {
@@ -207,11 +219,11 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             picture.button.af_setBackgroundImage(for: .normal, url: URL(string: content.linkUrl!)!, placeholderImage: UIImage(named: "downloading"))
         }
     }
-    
+
     func clearPickedContent() {
         self.content = Content()
     }
-    
+
 
     func buildIdentity(_ section: Section) {
 
@@ -481,13 +493,11 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         let row1 = Row.LeftAligned()
         row1.layout {
             r in
-            r.height(30).fillHolizon()
+            r.bottomAlign(with: self.nameCardSection).fillHolizon()
         }
-        row1 +++ MQForm.label(name: "namecard", title: "グリッドスケール株式会社").layout {
-            s in
-            s.fillParent(withInset: 2)
-        }
-
+        
+        row1 +++ nameCardSection
+        
         section <<< row1
 
     }
@@ -508,9 +518,9 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         speech.textView.text = profile.oneWordSpeech
 
         // Biography
-        constellationLabel.label.text = profile.constellation == "" ? "秘密" : CONSTELLATION(of:profile.constellation)?.value
-        
-        appearanceLabel.label.text = profile.appearanceTag == "" ? "秘密" : appearance(of:profile.appearanceTag)?.value
+        constellationLabel.label.text = profile.constellation == "" ? "秘密" : CONSTELLATION(of: profile.constellation)?.value
+
+        appearanceLabel.label.text = profile.appearanceTag == "" ? "秘密" : appearance(of: profile.appearanceTag)?.value
 
         occupationLabel1.label.text = profile.occupationTag1 == "" ? LS(key: "not-set") : occupation(of: profile.occupationTag1)?.value
         occupationLabel2.label.text = profile.occupationTag2 == "" ? LS(key: "not-set") : occupation(of: profile.occupationTag2)?.value
@@ -523,6 +533,46 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         hobbyLabel5.label.text = profile.hobbyTag5 == "" ? LS(key: "not-set") : hobby(of: profile.hobbyTag5)?.value
 
 
+    }
+    
+    func addCardList() {
+        var last : Row? = nil
+        for card in nameCardBox {
+            let row = Row.LeftAligned().layout {
+                r in
+                r.height(30).fillHolizon()
+            }
+            
+            row +++ MQForm.label(name: "namecard", title: card.businessName).layout{
+                l in
+                l.height(30).leftMost(withInset: 10).rightMost(withInset: 40)
+                l.label.textColor = MittyColor.healthyGreen
+            }
+            
+            row +++ MQForm.label(name: "Edit", title: ">").layout{
+                l in
+                l.label.textAlignment = .right
+                l.rightMost(withInset: 10).width(30)
+            }
+            row.bindEvent(.touchUpInside) {
+                v in
+                let vc = NameCardViewController()
+                vc.nameCard = card
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+            last = row
+            nameCardSection <<< row
+        }
+        
+        
+        if (last != nil) {
+            nameCardSection.layout {
+                s in
+                s.bottomAlign(with: last!).fillHolizon()
+            }
+            nameCardSection.configLayout()
+            self.view.setNeedsUpdateConstraints()
+        }
     }
 
 }
