@@ -324,12 +324,17 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 r.fillHolizon().height(35)
             }
 
-            row +++ MQForm.img(name: "icon", url: "").layout {
+            row +++ MQForm.tapableImg(name: "icon", url: "").layout {
                 img in
                 img.imageView.setMittyImage(url: p.proposerIconUrl)
                 img.height(32).width(32)
                 img.margin.left = 10
+            }.bindEvent(.touchUpInside) {
+                r in
+                let vc = ProfileViewController()
+                self.navigationController?.pushViewController(vc, animated: true)
             }
+
 
             row +++ MQForm.label(name: "proposal", title: p.islandName).layout {
                 p in
@@ -346,9 +351,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 l.label.adjustsFontSizeToFitWidth = true
                 l.label.minimumScaleFactor = 0.5
                 l.label.textAlignment = .center
-            }
-
-            row.bindEvent(.touchUpInside) {
+            }.bindEvent(.touchUpInside) {
                 r in
                 let vc = ProposalDetailsViewController()
                 vc.proposalInfo = p
