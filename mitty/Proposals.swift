@@ -40,5 +40,8 @@ class ProposalInfo {
     
     // Propsal table 以外から
     var islandName: String = ""
+    var proposerName: String = ""
+    var proposerIconUrl: String = ""
+    var numberOfLikess: Int = 0
 
 }

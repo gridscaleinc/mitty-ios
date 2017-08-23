@@ -32,6 +32,13 @@ class RequestInfo {
     var ownerId: Int64 = 0
     var created: Date = .nulldate
     var updated: Date = .nulldate
+    
+    var numberOfLikes: Int = 0
+    var numberOfProposals: Int = 0
+    var ownerName: String = ""
+    var ownerIconUrl: String = ""
+    
+    
 
     // 希望期間
     func term() -> String {

@@ -21,6 +21,8 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
     var form = MQForm.newAutoLayout()
 
 
+    var proposals = [ProposalInfo]()
+    var proposalSection = MQForm.section(name: "Proposals")
 
     ///
     ///
@@ -59,7 +61,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         buildform()
         self.view.addSubview(form)
 
-        form.autoPinEdge(toSuperviewEdge: .top)
+        form.autoPin(toTopLayoutGuideOf: self, withInset: 10)
         form.autoPinEdge(toSuperviewEdge: .left)
         form.autoPinEdge(toSuperviewEdge: .right)
         form.autoPinEdge(toSuperviewEdge: .bottom)
@@ -67,6 +69,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         form.configLayout()
         configNavigationBar()
 
+        loadProposals()
 
     }
 
@@ -117,7 +120,19 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             (l.view as! UILabel).numberOfLines = 0
         }
 
-        detailForm +++ titleLabel
+        var row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(35)
+        }
+
+        row +++ titleLabel
+
+        detailForm <<< row
+
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(35)
+        }
 
         let tagLabel = MQForm.label(name: "tag", title: "🏷 " + request.tag).layout {
             l in
@@ -126,8 +141,13 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             (l.view as! UILabel).textColor = .white
             (l.view as! UILabel).numberOfLines = 1
         }
-        detailForm +++ tagLabel
+        row +++ tagLabel
+        detailForm <<< row
 
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(60)
+        }
 
         let actionLabel = MQForm.label(name: "action", title: (request.desc)).layout {
             c in
@@ -142,24 +162,25 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
 
-        detailForm +++ actionLabel
+        row +++ actionLabel
+        detailForm <<< row
 
-        var row = Row.LeftAligned().layout {
+        row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: actionLabel, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
 
-        let likes = MQForm.label(name: "heart", title: "❤️ request.likes").layout { l in
+        let likes = MQForm.label(name: "heart", title: "❤️ \(request.numberOfLikes)").layout { l in
             l.height(35).width(330)
         }
 
         row +++ likes
 
-        detailForm +++ row
+        detailForm <<< row
 
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
 
         row +++ MQForm.label(name: "Term", title: "希望期間").height(35).width(100)
@@ -170,11 +191,11 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         row +++ dates
-        detailForm +++ row
+        detailForm <<< row
 
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
 
         row +++ MQForm.label(name: "Location", title: "希望エリア").height(35).width(100)
@@ -187,11 +208,11 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ location
 
-        detailForm +++ row
+        detailForm <<< row
 
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: location, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
 
         row +++ MQForm.label(name: "Price", title: "希望価格").height(35).width(100)
@@ -204,11 +225,11 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ price
 
-        detailForm +++ row
+        detailForm <<< row
 
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: price, withOffset: 5).height(35)
+            r.fillHolizon().height(35)
         }
 
         row +++ MQForm.label(name: "NumberOfPerson", title: "参加人数").height(35).width(100)
@@ -221,22 +242,36 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ nop
 
-        detailForm +++ row
-
-        row = seperator(section: detailForm, caption: "提案一覧")
         detailForm <<< row
-        
+
         // TODO 提案がないなら、何かを表示。　リクエストした人の場合は、表示内容がちょっと違うでしょう。
-        
+
         // 提案者、　島名、　提案内容
-        
-        
-        let proposol = Control(name: "scbscribe", view: proposolButton).layout {
-            c in
-            c.height(45).holizontalCenter().width(140).putUnder(of: nop, withOffset: 30)
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().bottomAlign(with: self.proposalSection)
         }
 
-        detailForm +++ proposol
+        row +++ proposalSection
+
+        detailForm <<< row
+
+        let proposol = Control(name: "scbscribe", view: proposolButton).layout {
+            c in
+            c.height(40).upMargin(30)
+            c.button.setTitleColor(UIColor.white, for: .normal)
+        }
+
+
+        row = Row.Intervaled().layout {
+            r in
+            r.fillHolizon().height(50)
+        }
+        row.spacing = 100
+
+        row +++ proposol
+
+        detailForm <<< row
 
         proposol.bindEvent(.touchUpInside) {
             b in
@@ -246,10 +281,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let bottom = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: proposol, withOffset: 5)
+            r.fillHolizon()
         }
 
-        detailForm +++ bottom
+        detailForm <<< bottom
 
         detailForm.layout {
             f in
@@ -264,5 +299,70 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         let vc = ProposalViewController()
         vc.relatedRequest = request
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+
+    func loadProposals() {
+        ProposalService.instance.getProposalsOf(reqId: request.id, callback: {
+            proposalList in
+            self.proposals = proposalList
+
+            self.setProposals()
+
+        })
+    }
+
+    func setProposals() {
+
+        if proposals.count > 0 {
+            let row = seperator(section: proposalSection, caption: "提案一覧")
+            row.margin.all(1)
+        }
+
+        for p in proposals {
+            let row = Row.LeftAligned().layout {
+                r in
+                r.fillHolizon().height(35)
+            }
+
+            row +++ MQForm.img(name: "icon", url: "").layout {
+                img in
+                img.imageView.setMittyImage(url: p.proposerIconUrl)
+                img.height(32).width(32)
+                img.margin.left = 10
+            }
+
+            row +++ MQForm.label(name: "proposal", title: p.islandName).layout {
+                p in
+                p.margin.left = 10
+                p.label.textColor = MittyColor.healthyGreen
+                p.label.adjustsFontSizeToFitWidth = true
+                p.label.minimumScaleFactor = 0.5
+                p.rightMost(withInset: 100)
+            }
+
+            row +++ MQForm.label(name: "likes", title: "❤️ \(p.numberOfLikess)").layout {
+                l in
+                l.rightMost(withInset: 5)
+                l.label.adjustsFontSizeToFitWidth = true
+                l.label.minimumScaleFactor = 0.5
+                l.label.textAlignment = .center
+            }
+
+            row.bindEvent(.touchUpInside) {
+                r in
+                let vc = ProposalDetailsViewController()
+                vc.proposalInfo = p
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+
+            proposalSection <<< row
+        }
+        proposalSection.layout {
+            s in
+            s.fillHolizon()
+        }
+        proposalSection.configLayout()
+        proposalSection.view.backgroundColor = MittyColor.lightYellow
+        view.setNeedsUpdateConstraints()
     }
 }

@@ -296,6 +296,14 @@ public struct ControlMargin {
         }
     }
     
+    //
+    mutating func all(_ v: CGFloat) {
+        left = v
+        right = v
+        up = v
+        bottom = v
+    }
+    
     init (l: CGFloat?=0, r: CGFloat?=0 , u: CGFloat?=0, b: CGFloat?=0) {
         _left = l!
         _right = r!

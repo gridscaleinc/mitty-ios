@@ -193,7 +193,11 @@ class RequestService: Service {
         info.meetingId = json["meeting_id"].int64Value
         info.ownerId = json["owner_id"].int64Value
         info.created = json["created"].stringValue.utc2Date()
-        info.updated = json["updated"].stringValue.utc2Date()
+        info.numberOfLikes = json["num_of_likes"].intValue
+        info.numberOfProposals = json["num_of_proposal"].intValue
+        info.ownerName = json["owner_name"].stringValue
+        info.ownerIconUrl = json["owner_icon_url"].stringValue
+        
 
         return info
     }

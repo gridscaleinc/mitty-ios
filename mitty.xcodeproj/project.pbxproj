@@ -96,6 +96,8 @@
 		FC4CB5871E3A06E3008D2796 /* ActivitySelectionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */; };
 		FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */; };
 		FC570FED1F408CFB0064FDC3 /* NameCardInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */; };
+		FC5CBD711F4E2EA5006541E3 /* ProposalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD701F4E2EA5006541E3 /* ProposalDetailsViewController.swift */; };
+		FC5CBD731F4E32C5006541E3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD721F4E32C5006541E3 /* ProfileViewController.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -298,6 +300,8 @@
 		FC4CB5861E3A06E3008D2796 /* ActivitySelectionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionController.swift; sourceTree = "<group>"; };
 		FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditBiographyViewController.swift; sourceTree = "<group>"; };
 		FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardInputForm.swift; sourceTree = "<group>"; };
+		FC5CBD701F4E2EA5006541E3 /* ProposalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalDetailsViewController.swift; sourceTree = "<group>"; };
+		FC5CBD721F4E32C5006541E3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -652,6 +656,7 @@
 				FC4B88681F010E0900458912 /* NameCardViewController.swift */,
 				FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */,
 				FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */,
+				FC5CBD721F4E32C5006541E3 /* ProfileViewController.swift */,
 			);
 			name = center;
 			sourceTree = "<group>";
@@ -801,6 +806,7 @@
 				FC30EB521EA575A700829E52 /* RequestViewController.swift */,
 				FCF73ECB1EA8D16F00AE868A /* EventDetailViewController.swift */,
 				FCFA84831F11184D00E9C6F2 /* RequestDetailViewController.swift */,
+				FC5CBD701F4E2EA5006541E3 /* ProposalDetailsViewController.swift */,
 				FCFA84851F121E1400E9C6F2 /* ProposalViewController.swift */,
 				FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */,
 			);
@@ -1191,6 +1197,7 @@
 				FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
+				FC5CBD711F4E2EA5006541E3 /* ProposalDetailsViewController.swift in Sources */,
 				FC4B88671F010CAF00458912 /* SocialMirrorViewController.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
 				FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */,
@@ -1268,6 +1275,7 @@
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
 				FC3482C81ED9D70A005E539E /* NameCardForm.swift in Sources */,
+				FC5CBD731F4E32C5006541E3 /* ProfileViewController.swift in Sources */,
 				FCFA84881F20E9B900E9C6F2 /* EditItemViewController.swift in Sources */,
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,

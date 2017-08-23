@@ -608,14 +608,14 @@ open class Section: Container {
         for r in contents {
             if (r === first) {
                 if (titleConrol != nil) {
-                    r.putUnder(of: _titleControl!)
+                    r.putUnder(of: _titleControl!, withOffset: _lineSpace + r.margin.up)
                 } else {
-                    r.upper()
+                    r.upper(withInset: r.margin.up)
                 }
             } else {
-                r.putUnder(of: previous!, withOffset: _lineSpace)
+                r.putUnder(of: previous!, withOffset: _lineSpace + r.margin.up)
             }
-            r.leftMost().rightMost()
+            r.leftMost(withInset: r.margin.left).rightMost(withInset: r.margin.right)
             previous = r
         }
 

@@ -59,20 +59,14 @@ class ProposalService: Service {
                 onSuccess()
 
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    onError("error occoured" + (json as AnyObject).description)
-                } catch {
-                    print("Serialize Error")
-                }
-
-                print(response.description)
-
                 print(error)
+                let jsonRes = super.jsonResponse(response)
+                
+                print(jsonRes)
+                LoadingProxy.off()
+                onError("error occoured\(jsonRes)")
             }
+            
         }
 
     }
@@ -131,9 +125,9 @@ class ProposalService: Service {
     /// - Parameters:
     ///   - req: <#req description#>
     ///   - callback: <#callback description#>
-    func getProposalsOf (req: String, callback: @escaping (_ proposals: [ProposalInfo]) -> Void) {
+    func getProposalsOf (reqId: Int64, callback: @escaping (_ proposals: [ProposalInfo]) -> Void) {
         let parmeters: [String: Any] = [
-            "requestId": req,
+            "requestId": reqId,
             ]
         
         let httpHeaders = [
@@ -144,7 +138,7 @@ class ProposalService: Service {
         
         // ダミーコード、本当はサーバーから検索する。
         var proposals = [ProposalInfo]()
-        let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
+        let request = Alamofire.request(proposalsOfUrl, method: .get, parameters: parmeters, headers: httpHeaders)
         request.validate(statusCode: 200..<300).responseJSON { response in
             switch response.result {
             case .success:
@@ -209,6 +203,9 @@ class ProposalService: Service {
         
         // other info
         info.islandName = json["island_name"].stringValue
+        info.proposerName = json["proposer_name"].stringValue
+        info.proposerIconUrl = json["proposer_icon_url"].stringValue
+        info.numberOfLikess = json["num_of_likes"].intValue
 
         return info
     }
