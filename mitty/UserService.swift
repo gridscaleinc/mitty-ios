@@ -57,6 +57,8 @@ class UserService: Service {
 
             case .failure(let error):
                 print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
     }
@@ -97,8 +99,9 @@ class UserService: Service {
                 callback(nil, false)
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
     }

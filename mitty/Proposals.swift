@@ -26,8 +26,19 @@ class ProposalInfo {
     var proposedDatetime1: String = ""
     var proposedDatetime2: String = ""
     var additionalInfo: String = ""
+    var proposerId: Int = 0
     var proposerInfo: String = ""
     var confirmTel: String = ""
     var confirmEmail: String = ""
+    
+    var proposedDatetime : Date = .nulldate
+    var acceptStatus : String  = ""
+    var acceptDatetime : Date = .nulldate
+
+    var approvalStatus: String = ""
+    var approvalDate: Date = .nulldate
+    
+    // Propsal table 以外から
+    var islandName: String = ""
 
 }

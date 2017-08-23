@@ -16,7 +16,6 @@ import SwiftyJSON
 class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
     var request: RequestInfo
-    var images = ["event1", "event6", "event4", "event10.jpeg", "event5", "event9.jpeg"]
 
 
     var form = MQForm.newAutoLayout()
@@ -55,7 +54,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         super.autoCloseKeyboard()
 
-        self.view.backgroundColor = UIColor.white
+        self.view.backgroundColor = MittyColor.healthyGreen
 
         buildform()
         self.view.addSubview(form)
@@ -76,7 +75,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
-        self.navigationController?.navigationBar.tintColor = MittyColor.healthyGreen
+        self.navigationController?.navigationBar.tintColor = UIColor.black
 
         self.navigationController?.view.backgroundColor = .clear
         //        self.navigationController?.navigationBar.isHidden = true
@@ -124,7 +123,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             l in
             l.width(35).height(35).putUnder(of: titleLabel).fillHolizon(10).height(20)
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
-            (l.view as! UILabel).textColor = .gray
+            (l.view as! UILabel).textColor = .white
             (l.view as! UILabel).numberOfLines = 1
         }
         detailForm +++ tagLabel
@@ -139,7 +138,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             l.font = .systemFont(ofSize: 15)
             l.layer.cornerRadius = 2
             l.layer.borderWidth = 0.8
-            l.layer.borderColor = UIColor.gray.cgColor
+            l.layer.borderColor = UIColor.white.cgColor
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
 
@@ -163,11 +162,11 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: likes, withOffset: 5).height(35)
         }
 
-        row +++ MQForm.label(name: "Term", title: "希望期間:").height(35)
-        let dates = MQForm.label(name: "preferedDate", title: request.term()).layout { l in
-            l.height(35).width(250)
+        row +++ MQForm.label(name: "Term", title: "希望期間").height(35).width(100)
+        let dates = MQForm.hilight(label: request.term(), named: "preferedDate").layout { l in
+            l.height(35).width(180)
+            l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
-            l.label.textColor = UIColor(white: 0.33, alpha: 1)
         }
 
         row +++ dates
@@ -178,9 +177,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: dates, withOffset: 5).height(35)
         }
 
-        row +++ MQForm.label(name: "Location", title: "希望エリア:").height(35)
-        let location = MQForm.label(name: "isLand", title: "\(request.startPlace)").layout { l in
-            l.height(35).width(210)
+        row +++ MQForm.label(name: "Location", title: "希望エリア").height(35).width(100)
+        let location = MQForm.hilight(label: "\(request.startPlace)", named: "isLand").layout { l in
+            l.height(35).width(180)
+            l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
         }
@@ -194,9 +194,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: location, withOffset: 5).height(35)
         }
 
-        row +++ MQForm.label(name: "Price", title: "希望価格:").height(35)
-        let price = MQForm.label(name: "price", title: request.price()).layout { l in
-            l.height(35).width(210)
+        row +++ MQForm.label(name: "Price", title: "希望価格").height(35).width(100)
+        let price = MQForm.hilight(label: request.price(), named: "price").layout { l in
+            l.height(35).width(180)
+            l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
         }
@@ -210,9 +211,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().putUnder(of: price, withOffset: 5).height(35)
         }
 
-        row +++ MQForm.label(name: "NumberOfPerson", title: "人数:").height(35)
-        let nop = MQForm.label(name: "NumberOfPerson", title: request.nop()).layout { l in
-            l.height(35).width(210)
+        row +++ MQForm.label(name: "NumberOfPerson", title: "参加人数").height(35).width(100)
+        let nop = MQForm.hilight(label: request.nop(), named: "NumberOfPerson").layout { l in
+            l.height(35).width(180)
+            l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
         }
@@ -221,6 +223,14 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         detailForm +++ row
 
+        row = seperator(section: detailForm, caption: "提案一覧")
+        detailForm <<< row
+        
+        // TODO 提案がないなら、何かを表示。　リクエストした人の場合は、表示内容がちょっと違うでしょう。
+        
+        // 提案者、　島名、　提案内容
+        
+        
         let proposol = Control(name: "scbscribe", view: proposolButton).layout {
             c in
             c.height(45).holizontalCenter().width(140).putUnder(of: nop, withOffset: 30)
@@ -245,7 +255,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             f in
             f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
-            f.view.backgroundColor = UIColor.white
+            f.view.backgroundColor = MittyColor.healthyGreen
         }
     }
 

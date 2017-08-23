@@ -14,7 +14,8 @@ import SwiftyJSON
 class ProposalService: Service {
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myproposal"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/proposal"
-
+    let proposalsOfUrl = MITTY_SERVICE_BASE_URL + "/proposals/of"
+    
     static var instance: ProposalService = {
         let instance = ProposalService()
         return instance
@@ -82,7 +83,7 @@ class ProposalService: Service {
     /// - Parameters:
     ///   - key: フィルタキー。
     ///   - callback: コールバック。
-    func getMyProposals (key: String, callback: @escaping (_ request: [ProposalInfo]) -> Void) {
+    func getMyProposals (key: String, callback: @escaping (_ proposals: [ProposalInfo]) -> Void) {
         let parmeters: [String: Any] = [
             "q": key,
         ]
@@ -116,11 +117,60 @@ class ProposalService: Service {
                 }
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
 
+    }
+    
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - req: <#req description#>
+    ///   - callback: <#callback description#>
+    func getProposalsOf (req: String, callback: @escaping (_ proposals: [ProposalInfo]) -> Void) {
+        let parmeters: [String: Any] = [
+            "requestId": req,
+            ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        // ダミーコード、本当はサーバーから検索する。
+        var proposals = [ProposalInfo]()
+        let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    if (json == nil || json["proposals"] == nil) {
+                        callback([])
+                        return
+                    }
+                    
+                    for (_, jsonReq) in json["proposals"] {
+                        proposals.append(self.bindProposalInfo(jsonReq))
+                    }
+                    callback(proposals)
+                }
+                
+            case .failure(let error):
+                LoadingProxy.off()
+                print(super.jsonResponse(response))
+                print(error)
+            }
+        }
+        
     }
 
     
@@ -146,9 +196,19 @@ class ProposalService: Service {
         info.proposedDatetime1 = json["proposed_datetime1"].stringValue
         info.proposedDatetime2 = json["proposed_datetime2"].stringValue
         info.additionalInfo = json["additional_info"].stringValue
+        info.proposerId = json["proposer_id"].intValue
         info.proposerInfo = json["proposer_info"].stringValue
         info.confirmTel = json["confirm_tel"].stringValue
         info.confirmEmail = json["confirm_email"].stringValue
+        
+        info.acceptStatus = json["accept_status"].stringValue
+        info.acceptDatetime = json["accept_datetime"].stringValue.utc2Date()
+        
+        info.approvalDate = json["approval_date"].stringValue.utc2Date()
+        info.approvalStatus = json["approval_status"].stringValue
+        
+        // other info
+        info.islandName = json["island_name"].stringValue
 
         return info
     }

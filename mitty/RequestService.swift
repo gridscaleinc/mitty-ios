@@ -15,6 +15,7 @@ class RequestService: Service {
     let urlSearch = MITTY_SERVICE_BASE_URL + "/search/request"
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myrequest"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/request"
+    
 
     static var instance: RequestService = {
         let instance = RequestService()
@@ -59,19 +60,9 @@ class RequestService: Service {
                 onSuccess()
 
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    onError("error occoured" + (json as AnyObject).description)
-                } catch {
-                    print("Serialize Error")
-                }
-
-                print(response.description)
-
                 print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
 
@@ -118,8 +109,9 @@ class RequestService: Service {
                 }
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
 
@@ -166,8 +158,9 @@ class RequestService: Service {
                 }
 
             case .failure(let error):
-                LoadingProxy.off()
                 print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
 

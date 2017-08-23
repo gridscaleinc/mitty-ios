@@ -83,6 +83,8 @@ class ProfileService: Service {
             case .failure(let error):
                 print(error)
                 onError(error.localizedDescription)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
     }
@@ -120,6 +122,8 @@ class ProfileService: Service {
             case .failure(let error):
                 print(error)
                 onError(error.localizedDescription)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
     }

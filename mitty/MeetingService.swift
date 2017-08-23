@@ -60,20 +60,9 @@ class MeetingService: Service {
                 callback (conversation)
                 //  self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    onError("error occored")
-                } catch {
-                    print("Serialize Error")
-                }
-
-                print(response.description)
-
-                LoadingProxy.off()
                 print(error)
+                print(self?.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
 
@@ -111,6 +100,7 @@ class MeetingService: Service {
         ]
 
         Alamofire.request(eventMeetingUrl, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+            
             switch response.result {
             case .success:
                 LoadingProxy.off()
@@ -127,20 +117,9 @@ class MeetingService: Service {
                 callback (meetingList)
                 //  self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-                    onError("error occored")
-                } catch {
-                    print("Serialize Error")
-                }
-
-                print(response.description)
-
-                LoadingProxy.off()
                 print(error)
+                print(self?.jsonResponse(response))
+                LoadingProxy.off()
             }
         }
 
