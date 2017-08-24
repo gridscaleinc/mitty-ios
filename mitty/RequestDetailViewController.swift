@@ -324,6 +324,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 r.fillHolizon().height(35)
             }
 
+            
             row +++ MQForm.tapableImg(name: "icon", url: "").layout {
                 img in
                 img.imageView.setMittyImage(url: p.proposerIconUrl)
