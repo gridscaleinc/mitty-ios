@@ -188,16 +188,24 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         }
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameter sender: <#sender description#>
     func onClickSignupButton(_ sender: UIButton) {
+        
         let urlString = MITTY_SERVICE_BASE_URL + "/signup"
         let usernameField = signupForm.quest("[name=userId]").control()?.view as! UITextField
         let passwordField = signupForm.quest("[name=password]").control()?.view as! UITextField
         let mail_address = signupForm.quest("[name=mailAddress]").control()?.view as! UITextField
-
+        
+        if (usernameField.text == "" || passwordField.text == "" || mail_address.text == "") {
+            
+        }
+    
         let parameters: Parameters = [
-            "user_name": usernameField.text!,
-            "password": passwordField.text!,
-            "mail_address": mail_address.text!
+            "user_name": usernameField.text!.trimmingCharacters(in: .whitespaces),
+            "password": passwordField.text!.trimmingCharacters(in: .whitespaces),
+            "mail_address": mail_address.text!.trimmingCharacters(in: .whitespaces)
         ]
 
         Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in

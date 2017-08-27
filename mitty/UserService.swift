@@ -124,4 +124,42 @@ class UserService: Service {
 
         return user
     }
+    
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - userName: <#userName description#>
+    ///   - pwd: <#pwd description#>
+    ///   - onComplete: <#onComplete description#>
+    ///   - onError: <#onError description#>
+    func signin(userName: String, pwd: String, onComplete: @escaping (_ uid: Int, _ token: String) -> Void,
+                onError: @escaping (_ e: String) -> Void) {
+        let urlString = MITTY_SERVICE_BASE_URL + "/signin"
+        
+        
+        let parameters: Parameters = [
+            "user_name": userName,
+            "password": pwd
+        ]
+        
+        LoadingProxy.on()
+        
+        Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    let userid = json["user_id"].intValue
+                    let accessToken = json["access_token"].stringValue
+                    onComplete(userid, accessToken)
+                }
+            case .failure(let _):
+                LoadingProxy.off()
+                onError("ユーザーIDまたはパスワードが正しくない。")
+                print(super.jsonResponse(response))
+            }
+        }
+    }
 }

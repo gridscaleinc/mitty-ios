@@ -211,44 +211,27 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     }
 
     func onClickSigninButton(_ sender: UIButton) {
-        let urlString = MITTY_SERVICE_BASE_URL + "/signin"
 
-        let usernameField = loginForm.quest("[name=userId]").control()?.view as! UITextField
-        let passwordField = loginForm.quest("[name=password]").control()?.view as! UITextField
+        let userName = loginForm.quest("[name=userId]").control()?.view as! UITextField
+        let pwd = loginForm.quest("[name=password]").control()?.view as! UITextField
 
-        let parameters: Parameters = [
-            "user_name": usernameField.text!,
-            "password": passwordField.text!
-        ]
+        UserService.instance.signin(userName: userName.text!.trimmingCharacters(in: .whitespaces), pwd: pwd.text!, onComplete: {
+            uid, accessToken in
+            ApplicationContext.userSession.accessToken = accessToken
+            ApplicationContext.userSession.userId = Int64(uid)
+            ApplicationContext.userSession.userName = userName.text!
+            ApplicationContext.userSession.isLogedIn = true
+            ApplicationContext.saveSession()
 
-        LoadingProxy.on()
-
-        Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    DispatchQueue.main.async {
-                        let accessToken = json["access_token"].stringValue
-
-                        ApplicationContext.userSession.accessToken = accessToken
-                        ApplicationContext.userSession.userId = (json["user_id"].int64) ?? 0
-                        ApplicationContext.userSession.userName = usernameField.text!
-                        ApplicationContext.userSession.isLogedIn = true
-                        ApplicationContext.saveSession()
-
-                        let mainTabBarController: MainTabBarController = MainTabBarController()
-                        self.present(mainTabBarController, animated: true, completion: nil)
-                    }
-                }
-            case .failure(let error):
-                LoadingProxy.off()
-                let errorMessage = self.loginForm.quest("[name=errormessage]").control()?.view as! UILabel
-                errorMessage.text = "ユーザーIDまたはパスワードが正しくない。"
-                print(error)
-            }
+            let mainTabBarController: MainTabBarController = MainTabBarController()
+            self.present(mainTabBarController, animated: true, completion: nil)
+        }, onError : {
+           error in
+           let errorMessage = self.loginForm.quest("[name=errormessage]").control()?.view as! UILabel
+           errorMessage.text = error
+           print(error)
         }
+        )
     }
 
     func onClickLinkButton(_ sender: UILabel) {
