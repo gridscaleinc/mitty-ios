@@ -350,3 +350,26 @@ public func appearance(of key: String, locale: Locale? = Locale.current) -> Code
     let type = "Appearance" + localeStr(locale!)
     return mittyCodes[type]?[key]
 }
+
+/// <#Description#>
+///
+/// - Accepted: <#Accepted description#>
+/// - Refused: <#Refused description#>
+/// - None: <#None description#>
+enum AcceptStatus : String {
+    case Accepted = "ACCPETED"
+    case Refused = "REFUSED"
+    case None = "NONE"
+}
+
+//
+/// <#Description#>
+///
+/// - Approved: <#Approved description#>
+/// - Rejected: <#Rejected description#>
+/// - None: <#None description#>
+enum ApprovalStatus: String {
+    case Approved = "APPROVED"
+    case Rejected = "REJECTED"
+    case None = "NONE"
+}

@@ -39,13 +39,13 @@ class InvitationService: Service {
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "forType": type,
             "idOfType": id,
             "message": message,
         ]
 
-        Alamofire.request(apiSendInvitation, method: .post, parameters: parmeters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        Alamofire.request(apiSendInvitation, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             LoadingProxy.off()
             switch response.result {
             case .success:

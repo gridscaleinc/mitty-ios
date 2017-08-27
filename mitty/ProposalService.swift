@@ -15,6 +15,9 @@ class ProposalService: Service {
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myproposal"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/proposal"
     let proposalsOfUrl = MITTY_SERVICE_BASE_URL + "/proposals/of"
+    let acceptUrl = MITTY_SERVICE_BASE_URL + "/accept/proposal"
+    let approveUrl = MITTY_SERVICE_BASE_URL + "/approve/proposal"
+    
     
     static var instance: ProposalService = {
         let instance = ProposalService()
@@ -71,6 +74,93 @@ class ProposalService: Service {
 
     }
 
+    func accept(_ proposal: ProposalInfo, status: AcceptStatus, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        let parameters: [String: Any] = [
+            "proposal_id": proposal.id,
+            "confirm_tel": proposal.confirmTel,
+            "confirm_email": proposal.confirmEmail,
+            "status": status.rawValue,
+            ]
+        
+        Alamofire.request(acceptUrl, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            
+            LoadingProxy.off()
+            
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    let proposalId = json["id"].stringValue
+                    
+                    print(proposalId)
+                    
+                }
+                onSuccess()
+                
+            case .failure(let error):
+                print(error)
+                let jsonRes = super.jsonResponse(response)
+                
+                print(jsonRes)
+                LoadingProxy.off()
+                onError("error occoured\(jsonRes)")
+            }
+            
+        }
+        
+    }
+    
+    func approve(_ proposal: ProposalInfo, status: ApprovalStatus, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        let parameters: [String: Any] = [
+            "proposal_id": proposal.id,
+            "status": status.rawValue,
+            ]
+        
+        Alamofire.request(acceptUrl, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            
+            LoadingProxy.off()
+            
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    let proposalId = json["id"].stringValue
+                    
+                    print(proposalId)
+                    
+                }
+                onSuccess()
+                
+            case .failure(let error):
+                print(error)
+                let jsonRes = super.jsonResponse(response)
+                
+                print(jsonRes)
+                LoadingProxy.off()
+                onError("error occoured\(jsonRes)")
+            }
+            
+        }
+        
+    }
 
     /// 自分の提案一覧を取得。
     ///
@@ -175,6 +265,7 @@ class ProposalService: Service {
     func bindProposalInfo(_ json: JSON) -> ProposalInfo {
         let info = ProposalInfo()
 
+        info.id = json["id"].int64Value
         info.replyToRequestID = json["reply_to_request_id"].int64Value
         info.contactTel = json["contact_tel"].stringValue
         info.contactEmail = json["contact_email"].stringValue
@@ -187,8 +278,8 @@ class ProposalService: Service {
         info.price2 = json["price2"].int64Value
         info.priceCurrency = json["price_currency"].stringValue
         info.priceInfo = json["price_info"].stringValue
-        info.proposedDatetime1 = json["proposed_datetime1"].stringValue
-        info.proposedDatetime2 = json["proposed_datetime2"].stringValue
+        info.proposedDatetime1 = json["proposed_datetime1"].stringValue.utc2Date()
+        info.proposedDatetime2 = json["proposed_datetime2"].stringValue.utc2Date()
         info.additionalInfo = json["additional_info"].stringValue
         info.proposerId = json["proposer_id"].intValue
         info.proposerInfo = json["proposer_info"].stringValue
@@ -205,9 +296,11 @@ class ProposalService: Service {
         info.islandName = json["island_name"].stringValue
         info.proposerName = json["proposer_name"].stringValue
         info.proposerIconUrl = json["proposer_icon_url"].stringValue
-        info.numberOfLikess = json["num_of_likes"].intValue
+        info.numberOfLikes = json["num_of_likes"].intValue
 
         return info
     }
+    
+    
 
 }

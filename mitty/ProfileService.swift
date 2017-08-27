@@ -17,6 +17,7 @@ import SwiftyJSON
 // シングルトンサービスクラス。
 class ProfileService: Service {
     let apiMyProfile = MITTY_SERVICE_BASE_URL + "/myprofile"
+    let userProfileUrl = MITTY_SERVICE_BASE_URL + "/user/profile"
     let apiSaveProfile = MITTY_SERVICE_BASE_URL + "/save/profile"
 
     static var instance: ProfileService = {
@@ -119,6 +120,44 @@ class ProfileService: Service {
 
                 break
 
+            case .failure(let error):
+                print(error)
+                onError(error.localizedDescription)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
+            }
+        }
+    }
+
+    func profile(of mittyId: Int, onComplete: @escaping (_ profile: Profile) -> Void, onError: @escaping (_ error: String) -> Void) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        let parameters = [
+            "mitty_id": mittyId
+        ]
+        
+        LoadingProxy.on()
+        
+        Alamofire.request(userProfileUrl, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            LoadingProxy.off()
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["profile"] == nil) {
+                        return
+                    }
+                    let profile = self.bindProfile(json["profile"])
+                    onComplete(profile)
+                    return
+                }
+                
+                break
+                
             case .failure(let error):
                 print(error)
                 onError(error.localizedDescription)

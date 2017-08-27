@@ -11,6 +11,7 @@ import Foundation
 // リクエスト情報
 class ProposalInfo {
 
+    var id: Int64 = 0
     var replyToRequestID: Int64 = 0
     var contactTel: String = ""
     var contactEmail: String = ""
@@ -23,8 +24,8 @@ class ProposalInfo {
     var price2: Int64 = 0
     var priceCurrency: String = ""
     var priceInfo: String = ""
-    var proposedDatetime1: String = ""
-    var proposedDatetime2: String = ""
+    var proposedDatetime1: Date = .nulldate
+    var proposedDatetime2: Date = .nulldate
     var additionalInfo: String = ""
     var proposerId: Int = 0
     var proposerInfo: String = ""
@@ -42,6 +43,50 @@ class ProposalInfo {
     var islandName: String = ""
     var proposerName: String = ""
     var proposerIconUrl: String = ""
-    var numberOfLikess: Int = 0
+    var numberOfLikes: Int = 0
+    
+    // 期間
+    func term() -> String {
+        return proposedDatetime1.monthDay + "〜" + proposedDatetime2.monthDay
+    }
+    
+    // 価格
+    func price() -> String {
+        return price1Info() + price2Info()
+    }
 
+    func price1Info() -> String {
+        if (price1 == 0) {
+            return "未提示"
+        } else {
+            return priceName1 + " \(price1)" + priceCurrency
+        }
+        
+    }
+    
+    func price2Info() -> String {
+        if (price2 == 0) {
+            return ""
+        } else {
+            return priceName2 + " \(price2)" + priceCurrency
+        }
+    }
+    
+    var isAcceptable : Bool {
+        get {
+            if acceptStatus == "NONE" && approvalStatus == "NONE" {
+                return true
+            }
+            return false
+        }
+    }
+    
+    var isApprovable : Bool {
+        get {
+            if acceptStatus == "ACCEPTED" && approvalStatus == "NONE" {
+                return true
+            }
+            return false
+        }
+    }
 }

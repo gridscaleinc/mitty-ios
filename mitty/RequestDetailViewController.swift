@@ -333,6 +333,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             }.bindEvent(.touchUpInside) {
                 r in
                 let vc = ProfileViewController()
+                vc.mittyId = p.proposerId
                 self.navigationController?.pushViewController(vc, animated: true)
             }
 
@@ -346,7 +347,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 p.rightMost(withInset: 100)
             }
 
-            row +++ MQForm.label(name: "likes", title: "❤️ \(p.numberOfLikess)").layout {
+            row +++ MQForm.label(name: "likes", title: "❤️ \(p.numberOfLikes)").layout {
                 l in
                 l.rightMost(withInset: 5)
                 l.label.adjustsFontSizeToFitWidth = true
@@ -355,11 +356,20 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             }.bindEvent(.touchUpInside) {
                 r in
                 let vc = ProposalDetailsViewController()
-                vc.proposalInfo = p
+                vc.proposal = p
+                vc.request = self.request
                 self.navigationController?.pushViewController(vc, animated: true)
             }
-
+            
             proposalSection <<< row
+            
+            let infoRow = Row.LeftAligned().height(50)
+            infoRow +++ MQForm.label(name: "info", title: p.proposerInfo).layout{
+                l in
+                l.margin.all(3)
+            }
+            
+            proposalSection <<< infoRow
         }
         proposalSection.layout {
             s in

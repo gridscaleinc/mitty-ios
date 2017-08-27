@@ -52,10 +52,12 @@ class RequestCell: UICollectionViewCell {
             r.fillHolizon().height(30)
         }
 
-        let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
+        let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "")
+
+        publisherIcon.imageView.setMittyImage(url: req.ownerIconUrl)
         row +++ publisherIcon.width(30).height(30)
 
-        let publisher = MQForm.label(name: "publisher", title: "request.publisherName")
+        let publisher = MQForm.label(name: "publisher", title: req.ownerName)
         row +++ publisher.layout {
             pub in
             let l = pub.label
@@ -86,7 +88,7 @@ class RequestCell: UICollectionViewCell {
             c.height(75).width(25)
         }
         col +++ MQForm.label(name: "likes1", title: "🔺").width(25).height(25)
-        col +++ MQForm.label(name: "likes2", title: String(describing: "?")).width(25).height(25).layout {
+        col +++ MQForm.label(name: "likes2", title: String(describing: "\(req.numberOfLikes)")).width(25).height(25).layout {
             l in
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
@@ -96,7 +98,6 @@ class RequestCell: UICollectionViewCell {
         col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
         row +++ col
 
-        row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
         let titleLabel = MQForm.label(name: "titleLabel", title: req.title).layout { t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
