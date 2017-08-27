@@ -289,10 +289,10 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 self?.loadRequestForm(requests: requests)
             }
         }
-        self?.didSetupConstraints = false
-        self?.view.setNeedsUpdateConstraints()
-        self?.view.updateConstraintsIfNeeded()
-        self?.view.layoutIfNeeded()
+        self.didSetupConstraints = false
+        self.view.setNeedsUpdateConstraints()
+        self.view.updateConstraintsIfNeeded()
+        self.view.layoutIfNeeded()
     }
 }
 
