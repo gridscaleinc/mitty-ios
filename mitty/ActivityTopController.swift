@@ -39,8 +39,10 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     }()
 
     // activityList を作成する
-    var form = ActivityListForm.newAutoLayout()
+    var activityform = ActivityListForm.newAutoLayout()
 
+    var reqform = RequestListForm.newAutoLayout()
+    
     //
     // Viewの読み込み。
     //
@@ -49,31 +51,29 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         super.loadView()
         self.navigationItem.title = "活動予定"
         self.view.backgroundColor = UIColor.white
-        self.view.addSubview(form)
+        self.view.addSubview(activityform)
         self.view.addSubview(activityTypes)
-
-        activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
 
         configureNavigationBar()
 
     }
 
-    func loadForm(activities: [ActivityInfo]) {
+    func loadActivityForm(activities: [ActivityInfo]) {
 
-        form.removeFromSuperview()
-        self.form = ActivityListForm.newAutoLayout()
+        activityform.removeFromSuperview()
+        self.activityform = ActivityListForm.newAutoLayout()
 
-        self.view.addSubview(form)
+        self.view.addSubview(activityform)
 
-        form.activityList.removeAll()
-        form.activityList.insert(contentsOf: activities, at: 0)
+        activityform.activityList.removeAll()
+        activityform.activityList.insert(contentsOf: activities, at: 0)
 
         loadActivityList()
 
-        self.form.load()
+        self.activityform.load()
 
 
-        let labels = form.quest("[name=activitylabel]")
+        let labels = activityform.quest("[name=activitylabel]")
         labels.forEach() { c in
             let l = c.view as! UILabel
             l.textColor = MittyColor.healthyGreen
@@ -101,6 +101,50 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
 
     }
 
+    func loadRequestForm(requests: [RequestInfo]) {
+        
+        reqform.removeFromSuperview()
+        self.reqform = RequestListForm.newAutoLayout()
+        
+        self.view.addSubview(reqform)
+        
+        reqform.requestList.removeAll()
+        reqform.requestList.insert(contentsOf: requests, at: 0)
+        
+        loadRequestList()
+        
+        self.reqform.load()
+        
+        
+        let labels = reqform.quest("[name=requestlabel]")
+        labels.forEach() { c in
+            let l = c.view as! UILabel
+            l.textColor = MittyColor.healthyGreen
+            l.font = UIFont(name: "AppleGothic", size: 14)
+        }
+        
+        labels.bindEvent(for: .touchUpInside) { [weak self] label in
+            if !(label is TapableLabel) {
+                return
+            }
+            let a = (label as! TapableLabel).underlyObj
+            
+            if !(a is RequestInfo) {
+                return
+            }
+            
+            let detailViewController = RequestDetailViewController(req: a as! RequestInfo)
+            
+            self?.navigationItem.title = "..."
+            self?.tabBarController?.tabBar.isHidden = true
+            self?.navigationController?.pushViewController(detailViewController, animated: true)
+        }
+        
+        
+        view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+        
+    }
+    
     var didSetupConstraints = false
 
     //
@@ -108,29 +152,43 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     //
     func loadActivityList () {
 
-        form.loadForm()
+        activityform.loadForm()
 
 
     }
 
+    func loadRequestList () {
+        
+        reqform.loadForm()
+    
+    }
+    
     override func updateViewConstraints() {
         if (!didSetupConstraints) {
-
-
-            activityTypes.selectedSegmentIndex = 0
+            
             activityTypes.translatesAutoresizingMaskIntoConstraints = false
             activityTypes.autoPin(toTopLayoutGuideOf: self, withInset: 5)
             activityTypes.autoPinEdge(toSuperviewEdge: .left, withInset: 5)
             activityTypes.autoPinEdge(toSuperviewEdge: .right, withInset: 5)
 
+            if activityTypes.selectedSegmentIndex == 0 {
+                activityform.autoPinEdge(.top, to: .bottom, of: activityTypes, withOffset: 5)
+                
+                activityform.autoPinEdge(toSuperviewEdge: .left)
+                activityform.autoPinEdge(toSuperviewEdge: .right)
+                activityform.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
+                
+                activityform.configLayout()
+            } else if activityTypes.selectedSegmentIndex == 1 {
+                reqform.autoPinEdge(.top, to: .bottom, of: activityTypes, withOffset: 5)
+                
+                reqform.autoPinEdge(toSuperviewEdge: .left)
+                reqform.autoPinEdge(toSuperviewEdge: .right)
+                reqform.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
+                
+                reqform.configLayout()
 
-            form.autoPinEdge(.top, to: .bottom, of: activityTypes, withOffset: 5)
-
-            form.autoPinEdge(toSuperviewEdge: .left)
-            form.autoPinEdge(toSuperviewEdge: .right)
-            form.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
-
-            form.configLayout()
+            }
             didSetupConstraints = true
         }
 
@@ -193,15 +251,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         self.navigationItem.title = "活動予定"
-
-        ActivityService.instance.search(keys: "") { [weak self]
-            activities in
-            self?.loadForm(activities: activities)
-            self?.didSetupConstraints = false
-            self?.view.setNeedsUpdateConstraints()
-            self?.view.updateConstraintsIfNeeded()
-            self?.view.layoutIfNeeded()
-        }
+        
+        changeType(activityTypes)
+        
         super.viewWillAppear(animated)
     }
 
@@ -217,13 +269,30 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     override func viewDidLoad() {
 
         super.autoCloseKeyboard()
+        activityTypes.selectedSegmentIndex = 1
+        activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
 
         LoadingProxy.set(self)
     }
 
     // 選択した種類によて、一覧表示を変える。
     func changeType(_ s: UISegmentedControl) {
-        // query Type を変える。
+        if (activityTypes.selectedSegmentIndex == 0) {
+            ActivityService.instance.search(keys: "") { [weak self]
+                activities in
+                self?.loadActivityForm(activities: activities)
+
+            }
+        } else if activityTypes.selectedSegmentIndex == 1 {
+            RequestService.instance.getMyRequests(key: "") { [weak self]
+                requests in
+                self?.loadRequestForm(requests: requests)
+            }
+        }
+        self?.didSetupConstraints = false
+        self?.view.setNeedsUpdateConstraints()
+        self?.view.updateConstraintsIfNeeded()
+        self?.view.layoutIfNeeded()
     }
 }
 

@@ -199,7 +199,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         let mail_address = signupForm.quest("[name=mailAddress]").control()?.view as! UITextField
         
         if (usernameField.text == "" || passwordField.text == "" || mail_address.text == "") {
-            
+            showError("ユーザー名、password、mail addressを入力してください。")
         }
     
         let parameters: Parameters = [
