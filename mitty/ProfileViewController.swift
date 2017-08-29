@@ -488,6 +488,8 @@ class ProfileViewController: MittyViewController {
             }.bindEvent(.touchUpInside) {
                 b in
                 let vc = NamecardExchangeViewController()
+                vc.contacteeCard = card
+                vc.contacteeUser = self.userInfo
                 self.navigationController?.pushViewController(vc, animated: true)
             }
 

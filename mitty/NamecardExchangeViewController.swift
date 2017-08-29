@@ -18,18 +18,20 @@ class NamecardExchangeViewController: MittyViewController {
     let form: MQForm = MQForm.newAutoLayout()
     var myNamecards = [NameCardInfo]()
     var selectedCard : NameCardInfo?
+    var contacteeCard: ContacteeNamecard!
+    var contacteeUser : UserInfo!
 
     // 上には相手の情報
     //    Mitty User Name, Icon
     //    名刺の見出し情報（ビジネスネームとアイコン）
-    let contactee = MQForm.label(name: "user-name", title: "こう永紅")
+    let contactee = MQForm.label(name: "user-name", title: "")
     let userIcon = MQForm.img(name: "user-icon", url: "pengin4").layout{
         img in
         img.rightMost(withInset:10)
     }
     
-    let contacteeBusiness = MQForm.label(name: "contactee-business", title: "グルッドスケール株式会社")
-    let contacteeBusinesssIcon = MQForm.img(name: "contactee-business-icon", url: "timesquare").layout{
+    let contacteeBusiness = MQForm.label(name: "contactee-business", title: "")
+    let contacteeBusinesssIcon = MQForm.img(name: "contactee-business-icon", url: "").layout{
         img in
         img.rightMost(withInset:10)
     }
@@ -95,28 +97,39 @@ class NamecardExchangeViewController: MittyViewController {
         let nameRow = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(50)
-//            r.view.backgroundColor = UIColor.red
+            r.view.backgroundColor = MittyColor.healthyGreen
         }
         section <<< nameRow
+        
+        contactee.label.text = contacteeUser.userName
+        contactee.label.textColor = UIColor.white
+        contactee.leftMargin(5)
         
         nameRow +++ contactee
         nameRow +++ userIcon.layout {
             i in
-            i.height(40).width(40)
+            i.height(40).width(40).upMargin(5)
+            i.imageView.setMittyImage(url: self.contacteeUser.icon)
         }
 
         
         let contacteeBusinessRow = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(50)
-//            r.view.backgroundColor = UIColor.blue
+            r.view.backgroundColor = MittyColor.healthyGreen
         }
 
         section <<< contacteeBusinessRow
+        
+        contacteeBusiness.label.text = contacteeCard.businessName
+        contacteeBusiness.label.textColor = UIColor.white
+        contacteeBusiness.leftMargin(5)
+        
+        contacteeBusinesssIcon.imageView.setMittyImage(url: contacteeCard.businessLogoUrl)
         contacteeBusinessRow +++ contacteeBusiness
         contacteeBusinessRow +++ contacteeBusinesssIcon.layout {
             i in
-            i.height(40).width(40)
+            i.height(40).width(40).upMargin(5)
         }
         
         // selected card

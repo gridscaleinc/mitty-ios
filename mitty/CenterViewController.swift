@@ -27,7 +27,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     let controlPanel = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
     var timer = Timer()
-
+    var bagua: MarqueeLabel!
+    
     // Autolayout済みフラグ
     var didSetupConstraints = false
 
@@ -116,7 +117,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         }
 
         let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
-        let bagua = MarqueeLabel(frame: rect1)
+        bagua = MarqueeLabel(frame: rect1)
         bagua.numberOfLines = 2
 
         bagua.type = .continuous
@@ -185,6 +186,10 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+        }.bindEvent(.touchUpInside) {
+            b in
+            self.bagua.textColor = UIColor.orange
+            self.bagua.blink(duration: 0.5)
         }
 
         row +++ MQForm.button(name: "destinations", title: "行先").layout {

@@ -115,3 +115,27 @@ extension CGSize {
         return self.height / self.width
     }
 }
+
+extension UIView {
+    func blink(duration: TimeInterval? = 1, delay: TimeInterval? = 0) {
+        var count = 5
+        
+        UIView.animate(withDuration: duration!, //Time duration you want,
+            delay: delay!,
+            options: [.curveEaseOut, .autoreverse, .repeat],
+            animations: { [weak self] in self?.alpha = 0.0 },
+            completion: { [weak self] _ in
+                self?.alpha = 1.0
+                count -= 1
+                if count == 0 {
+                    self?.layer.removeAllAnimations()
+                }
+        })
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            self.layer.removeAllAnimations()
+        }
+    }
+    
+    // TODO REMOVE ANIMATIOS
+}
+
