@@ -172,6 +172,7 @@ class ProfileService: Service {
 
         let result = Profile()
         result.id = json["id"].int64Value
+        result.mittyId = json["mitty_id"].intValue
         result.gender = json["gender"].stringValue
         result.ageGroup = json["age_group"].stringValue
         result.oneWordSpeech = json["one_word_speech"].stringValue

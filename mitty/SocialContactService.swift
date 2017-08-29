@@ -7,6 +7,8 @@
 //
 
 import Foundation
+import Alamofire
+import SwiftyJSON
 
 // シングルトンサービスクラス。
 class SocialContactService: Service {
@@ -44,6 +46,85 @@ class SocialContactService: Service {
         a.imageUrl = imagenames[n]
 
         return a
+    }
+
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - mittyId: <#mittyId description#>
+    ///   - onComplete: <#onComplete description#>
+    ///   - onError: <#onError description#>
+    func contactedNamecards(of mittyId: Int, onComplete: @escaping (_ cardList: [ContacteeNamecard]) -> Void, onError: @escaping (_ error: String) -> Void) {
+        
+        let url = MITTY_SERVICE_BASE_URL + "/contactee/namecards"
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        let parameters = [
+            "mitty_id": mittyId
+        ]
+
+        LoadingProxy.on()
+        
+        Alamofire.request(url, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            LoadingProxy.off()
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["contacteeNamecards"] == nil) {
+                        return
+                    }
+                    let nameCardInfoList = self.bindContacteeNamecards(json)
+                    onComplete(nameCardInfoList)
+                    return
+                }
+                
+                break
+                
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                onError(error.localizedDescription)
+            }
+        }
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter json: <#json description#>
+    /// - Returns: <#return value description#>
+    func bindContacteeNamecards(_ json: JSON) -> [ContacteeNamecard] {
+        
+        var results : [ContacteeNamecard] = []
+        
+        for (_, info) in json["contacteeNamecards"] {
+            let card = ContacteeNamecard()
+            bindItem(card, info)
+            results.append(card)
+        }
+        
+        return results
+        
+    }
+    
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - card: <#card description#>
+    ///   - json: <#json description#>
+    func bindItem (_ card: ContacteeNamecard, _ json :JSON) {
+        card.namecardID = json["name_card_id"].int64Value
+        card.contactID = json["contact_id"].int64Value
+        card.businessName = json["business_name"].stringValue
+        card.businessLogoUrl = json["business_logo_url"].stringValue
+        card.relatedEventID = json["related_event_id"].int64Value
+        card.contctedDate = json["contacted_date"].stringValue.utc2Date()
     }
 
 }

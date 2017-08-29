@@ -99,6 +99,9 @@
 		FC5CBD711F4E2EA5006541E3 /* ProposalDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD701F4E2EA5006541E3 /* ProposalDetailsViewController.swift */; };
 		FC5CBD731F4E32C5006541E3 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD721F4E32C5006541E3 /* ProfileViewController.swift */; };
 		FC5CBD771F52A51E006541E3 /* RequestListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD761F52A51E006541E3 /* RequestListForm.swift */; };
+		FC5CBD791F53914E006541E3 /* ContacteeNamecard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */; };
+		FC5CBD7B1F53FEE9006541E3 /* excard.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5CBD7A1F53FEE9006541E3 /* excard.png */; };
+		FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -304,6 +307,9 @@
 		FC5CBD701F4E2EA5006541E3 /* ProposalDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalDetailsViewController.swift; sourceTree = "<group>"; };
 		FC5CBD721F4E32C5006541E3 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		FC5CBD761F52A51E006541E3 /* RequestListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestListForm.swift; sourceTree = "<group>"; };
+		FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContacteeNamecard.swift; sourceTree = "<group>"; };
+		FC5CBD7A1F53FEE9006541E3 /* excard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = excard.png; path = images/excard.png; sourceTree = "<group>"; };
+		FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardExchangeViewController.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -550,6 +556,7 @@
 				FCFA847F1F0DA6AF00E9C6F2 /* Requests.swift */,
 				FC95F91A1F3EF46800F83766 /* Proposals.swift */,
 				FC004C5F1F45E13200230DAA /* Code.swift */,
+				FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -644,6 +651,7 @@
 				F4BB80231DAE58F300055D48 /* SocialViewController.swift */,
 				FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */,
 				FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */,
+				FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */,
 			);
 			name = social;
 			sourceTree = "<group>";
@@ -696,6 +704,7 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC5CBD7A1F53FEE9006541E3 /* excard.png */,
 				FC3C16DD1F3B196700E7622B /* unchecked.png */,
 				FC3C16DE1F3B196700E7622B /* checked.png */,
 				FC3483161EE060A8005E539E /* broken.png */,
@@ -971,6 +980,7 @@
 				FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */,
 				FCFE67C21DE50FA1007203EF /* bagua_5.png in Resources */,
 				FC427B901DCAFDE1009F43AE /* event3.png in Resources */,
+				FC5CBD7B1F53FEE9006541E3 /* excard.png in Resources */,
 				FC0081931DD39B0300C1F970 /* pengin4.png in Resources */,
 				FC00818E1DD394D300C1F970 /* pengin2.png in Resources */,
 				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
@@ -1233,6 +1243,7 @@
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
 				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
+				FC5CBD791F53914E006541E3 /* ContacteeNamecard.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */,
 				FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */,
@@ -1257,6 +1268,7 @@
 				FC30EB511EA32B7A00829E52 /* QuestViewController.swift in Sources */,
 				FC5ECFFA1EBB170000AA6C13 /* ActivityInfo.swift in Sources */,
 				FCF957601DC6471D00A52125 /* PersonalInfoViewController.swift in Sources */,
+				FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */,
 				FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */,

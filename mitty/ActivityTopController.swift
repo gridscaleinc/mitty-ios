@@ -281,18 +281,22 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
             ActivityService.instance.search(keys: "") { [weak self]
                 activities in
                 self?.loadActivityForm(activities: activities)
+                self?.didSetupConstraints = false
+                self?.view.setNeedsUpdateConstraints()
+                self?.view.updateConstraintsIfNeeded()
+                self?.view.layoutIfNeeded()
 
             }
         } else if activityTypes.selectedSegmentIndex == 1 {
             RequestService.instance.getMyRequests(key: "") { [weak self]
                 requests in
                 self?.loadRequestForm(requests: requests)
+                self?.didSetupConstraints = false
+                self?.view.setNeedsUpdateConstraints()
+                self?.view.updateConstraintsIfNeeded()
+                self?.view.layoutIfNeeded()
             }
         }
-        self.didSetupConstraints = false
-        self.view.setNeedsUpdateConstraints()
-        self.view.updateConstraintsIfNeeded()
-        self.view.layoutIfNeeded()
     }
 }
 

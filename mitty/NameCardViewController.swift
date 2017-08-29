@@ -13,8 +13,7 @@ import AlamofireImage
 import SwiftyJSON
 
 /// <#Description#>
-class NameCardViewController: MittyViewController, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContentPickerDelegate  {
-    
+class NameCardViewController: MittyViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, ContentPickerDelegate  {
     
     let form: MQForm = MQForm.newAutoLayout()
     

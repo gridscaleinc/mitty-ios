@@ -20,7 +20,7 @@ class ProfileViewController: MittyViewController {
     var userInfo = UserInfo()
     var profile = Profile()
     var socialIdList = [SocialId]()
-    var nameCardBox = [NameCardInfo]()
+    var nameCardBox = [ContacteeNamecard]()
     var content: Content? = Content()
 
     var form = MQForm.newAutoLayout()
@@ -74,11 +74,17 @@ class ProfileViewController: MittyViewController {
                     p in
                     self.profile = p
 
-                    p.addObserver(handler: { o in
-                        self.setUserProfile()
+                    SocialContactService.instance.contactedNamecards(of: p.mittyId, onComplete: {
+                        cardlist in
+                        self.nameCardBox = cardlist
+                        p.addObserver(handler: { o in
+                            self.setUserProfile()
+                        })
+                        p.notify()
+                        self.addCardList()
+                    }, onError: { error in
+                        self.showError(error)
                     })
-                    p.notify()
-
                 }, onError: { error in
                     self.showError(error)
                 })
@@ -147,15 +153,15 @@ class ProfileViewController: MittyViewController {
 
         // build Speech
         buildSpeech(detailForm)
+        
+        // build Social Links
+        buildSocialLinks(detailForm)
+        
+        // build name cards
+        buildNameCards(detailForm)
 
         // build biography
         buildBiography(detailForm)
-
-        // build Social Links
-        buildSocialLinks(detailForm)
-
-        // build name cards
-        buildNameCards(detailForm)
 
         let bottom = Row.LeftAligned()
         detailForm <<< bottom
@@ -310,7 +316,7 @@ class ProfileViewController: MittyViewController {
 
         var row = seperator(section: section, caption: "Biography")
 
-        
+
         section <<< row
 
         row = Row.LeftAligned().layout {
@@ -409,7 +415,7 @@ class ProfileViewController: MittyViewController {
 
     func buildNameCards(_ section: Section) {
         let row = seperator(section: section, caption: "名刺")
-        
+
         section <<< row
 
         let row1 = Row.LeftAligned()
@@ -465,23 +471,26 @@ class ProfileViewController: MittyViewController {
                 r.height(30).fillHolizon()
             }
 
+            row +++ MQForm.img(name: "businessLogo", url: "").layout {
+                i in
+                i.imageView.setMittyImage(url: card.businessLogoUrl)
+                i.height(25).width(25).leftMost(withInset: 8)
+            }
             row +++ MQForm.label(name: "namecard", title: card.businessName).layout {
                 l in
-                l.height(30).leftMost(withInset: 10).rightMost(withInset: 40)
-                l.label.textColor = MittyColor.healthyGreen
+                l.height(30).rightMost(withInset: 30).leftMargin(5)
+                l.label.textColor = UIColor.orange
             }
-
-            row +++ MQForm.label(name: "Edit", title: ">").layout {
+            
+            row +++ MQForm.tapableImg(name: "exchange", url: "excard").layout {
                 l in
-                l.label.textAlignment = .right
-                l.rightMost(withInset: 10).width(30)
-            }
-            row.bindEvent(.touchUpInside) {
-                v in
-                let vc = NameCardViewController()
-                vc.nameCard = card
+                l.rightMost(withInset: 8).width(22).height(20)
+            }.bindEvent(.touchUpInside) {
+                b in
+                let vc = NamecardExchangeViewController()
                 self.navigationController?.pushViewController(vc, animated: true)
             }
+
             last = row
             nameCardSection <<< row
         }
