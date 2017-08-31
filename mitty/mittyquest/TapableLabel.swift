@@ -88,6 +88,16 @@ open class MarqueeLabel: UILabel, CAAnimationDelegate {
         case continuousReverse
     }
     
+    override open func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        
+        if self.point(inside: point, with: event) {
+            return self
+        } else {
+            return nil
+        }
+    }
+
+    
     //
     // MARK: - Public properties
     //

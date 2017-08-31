@@ -27,13 +27,14 @@ class MittyColor {
 
     
     
-    static func gradientLayer() -> CAGradientLayer {
+    static func gradientLayer(_ s: UIColor? = UIColor.orange, _ m: UIColor? = UIColor.orange, _ e: UIColor? = UIColor.orange) -> CAGradientLayer {
         
         let gradientLayer = CAGradientLayer()
         
         gradientLayer.colors = [
-            UIColor.orange.cgColor,
-            UIColor.orange.cgColor
+            s!.cgColor,
+            m!.cgColor,
+            e!.cgColor
         ]
         
         gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)

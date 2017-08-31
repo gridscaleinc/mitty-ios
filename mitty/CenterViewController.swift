@@ -21,13 +21,29 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
     //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
     let myLocationManager = CLLocationManager()
-
+    let socialMirror = SocialMirrorForm()
+    
     let myMapView = MKMapView()
 
     let controlPanel = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
     var timer = Timer()
-    var bagua: MarqueeLabel!
+    var bagua: Control = {
+        let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
+        let bagua = MarqueeLabel(frame: rect1)
+        bagua.numberOfLines = 2
+        
+        bagua.type = .continuous
+        bagua.speed = .duration(50)
+        bagua.animationCurve = .linear
+        bagua.fadeLength = 10.0
+        bagua.leadingBuffer = 10.0
+        
+        bagua.font = UIFont.systemFont(ofSize: 16)
+        
+        return Control(name:"bagua", view:bagua)
+        
+    }()
     
     // Autolayout済みフラグ
     var didSetupConstraints = false
@@ -116,26 +132,27 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             self.pictureTaped()
         }
 
-        let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
-        bagua = MarqueeLabel(frame: rect1)
-        bagua.numberOfLines = 2
-
-        bagua.type = .continuous
-        bagua.speed = .duration(50)
-        bagua.animationCurve = .linear
-        bagua.fadeLength = 10.0
-        bagua.leadingBuffer = 10.0
-
-        bagua.font = UIFont.systemFont(ofSize: 16)
-
+        
         let strings = ["招待：１件、　本日の予定：３件、                            　"]
 
-        bagua.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
+        bagua.label.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
 
-        bagua.textColor = swiftColor
+        bagua.label.textColor = swiftColor
 
+        bagua.bindEvent(.touchUpInside) {
+            b in
+            let isHidden = self.socialMirror.view.isHidden
+            self.socialMirror.view.isHidden = !isHidden
+            if !isHidden {
+                self.socialMirror.todaysEventLine.labelItem.view.blink(duration: 0.8)
+                self.socialMirror.todaysEventLine.numberItem.label.text = "10"
+                self.socialMirror.todaysEventLine.labelItem.label.textColor = UIColor.orange
+                self.socialMirror.todaysEventLine.numberItem.view.blink(duration: 0.8)
+            }
+        }
+        
         //self.view.addSubview(bagua)
-        self.navigationItem.titleView = bagua
+        self.navigationItem.titleView = bagua.view
 
         LoadingProxy.set(self)
 
@@ -144,7 +161,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         loadDestinations()
 
-
+        loadSocialMirror()
 
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined {
@@ -181,15 +198,11 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         row.spacing = 60
 
 
-        row +++ MQForm.button(name: "nearby", title: "Near By").layout {
+        row +++ MQForm.button(name: "nearby", title: "S/Mirror").layout {
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }.bindEvent(.touchUpInside) {
-            b in
-            self.bagua.textColor = UIColor.orange
-            self.bagua.blink(duration: 0.5)
         }
 
         row +++ MQForm.button(name: "destinations", title: "行先").layout {
@@ -359,7 +372,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             controlPanel.configLayout()
 
             display.configLayout()
-
+            socialMirror.configLayout()
+            
             didSetupConstraints = true
         }
 
@@ -496,5 +510,10 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         }
         print(" CLAuthorizationStatus: \(statusStr)")
 
+    }
+    
+    func loadSocialMirror() {
+        self.view.addSubview(socialMirror.view)
+        socialMirror.view.isHidden = true
     }
 }

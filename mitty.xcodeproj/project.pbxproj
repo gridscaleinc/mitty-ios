@@ -89,7 +89,6 @@
 		FC427B921DCAFDE1009F43AE /* event5.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8C1DCAFDE1009F43AE /* event5.png */; };
 		FC427B931DCAFDE1009F43AE /* event6.png in Resources */ = {isa = PBXBuildFile; fileRef = FC427B8D1DCAFDE1009F43AE /* event6.png */; };
 		FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC448D3C1DD5EA730032F0D4 /* RightButton.swift */; };
-		FC4B88671F010CAF00458912 /* SocialMirrorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B88661F010CAF00458912 /* SocialMirrorViewController.swift */; };
 		FC4B88691F010E0900458912 /* NameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B88681F010E0900458912 /* NameCardViewController.swift */; };
 		FC4B886B1F01566000458912 /* SpeedMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B886A1F01566000458912 /* SpeedMeter.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
@@ -102,6 +101,7 @@
 		FC5CBD791F53914E006541E3 /* ContacteeNamecard.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */; };
 		FC5CBD7B1F53FEE9006541E3 /* excard.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5CBD7A1F53FEE9006541E3 /* excard.png */; };
 		FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */; };
+		FC5CBD7F1F56CC2D006541E3 /* SocialMirrorForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -297,7 +297,6 @@
 		FC427B8C1DCAFDE1009F43AE /* event5.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event5.png; path = images/event5.png; sourceTree = "<group>"; };
 		FC427B8D1DCAFDE1009F43AE /* event6.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = event6.png; path = images/event6.png; sourceTree = "<group>"; };
 		FC448D3C1DD5EA730032F0D4 /* RightButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RightButton.swift; sourceTree = "<group>"; };
-		FC4B88661F010CAF00458912 /* SocialMirrorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMirrorViewController.swift; sourceTree = "<group>"; };
 		FC4B88681F010E0900458912 /* NameCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardViewController.swift; sourceTree = "<group>"; };
 		FC4B886A1F01566000458912 /* SpeedMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedMeter.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
@@ -310,6 +309,7 @@
 		FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContacteeNamecard.swift; sourceTree = "<group>"; };
 		FC5CBD7A1F53FEE9006541E3 /* excard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = excard.png; path = images/excard.png; sourceTree = "<group>"; };
 		FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardExchangeViewController.swift; sourceTree = "<group>"; };
+		FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMirrorForm.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -662,7 +662,6 @@
 				F4BB80251DAE58FE00055D48 /* CenterViewController.swift */,
 				FCF9575F1DC6471D00A52125 /* PersonalInfoViewController.swift */,
 				FC3482C51ED9BDA8005E539E /* CheckinViewController.swift */,
-				FC4B88661F010CAF00458912 /* SocialMirrorViewController.swift */,
 				FC4B88681F010E0900458912 /* NameCardViewController.swift */,
 				FC3C16D71F375E5600E7622B /* EditBasicInfoViewController.swift */,
 				FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */,
@@ -806,6 +805,7 @@
 				FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */,
 				FC004C651F48F82500230DAA /* SocialIdForm.swift */,
 				FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */,
+				FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1211,7 +1211,6 @@
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
 				FC5CBD711F4E2EA5006541E3 /* ProposalDetailsViewController.swift in Sources */,
-				FC4B88671F010CAF00458912 /* SocialMirrorViewController.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
 				FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */,
 				FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */,
@@ -1249,6 +1248,7 @@
 				FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */,
 				FCFA84861F121E1400E9C6F2 /* ProposalViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
+				FC5CBD7F1F56CC2D006541E3 /* SocialMirrorForm.swift in Sources */,
 				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
 				FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */,
