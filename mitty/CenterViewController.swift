@@ -21,8 +21,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
     //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
     let myLocationManager = CLLocationManager()
-    let socialMirror = SocialMirrorForm()
-    
+    var socialMirror: SocialMirrorForm!
     let myMapView = MKMapView()
 
     let controlPanel = MQForm.newAutoLayout()
@@ -161,6 +160,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         loadDestinations()
 
+        socialMirror = SocialMirrorForm(self.navigationController!)
         loadSocialMirror()
 
         let status = CLLocationManager.authorizationStatus()

@@ -61,15 +61,19 @@ class MittyViewController: UIViewController {
         }
     }
 
-    func autoCloseKeyboard() {
+    func autoCloseKeyboard(view: UIView) {
         let tapGesture: UITapGestureRecognizer = UITapGestureRecognizer(
             target: self,
             action: #selector(self.tap(_:)))
 
-        self.view.addGestureRecognizer(tapGesture)
+        view.addGestureRecognizer(tapGesture)
 
     }
 
+    func autoCloseKeyboard() {
+        autoCloseKeyboard(view: self.view)
+    }
+    
     func tap(_ sender: UITapGestureRecognizer) {
         endEdit(self.view)
     }

@@ -43,20 +43,25 @@ class SocialBar: Row {
 
         labelItem.label.text = text
     }
+    
+    
 }
 
 class SocialMirrorForm: Container {
 
     var eventLine = SocialBar(text: "イベント")
-    var todaysEventLine = SocialBar(text: "本日のイベント予定")
-    var invitationLine = SocialBar(text: "招待")
+    var todaysEventLine = SocialBar(text: "本日の予定")
+    var weeklyEventLine = SocialBar(text: "一週間以内の予定")
+    var invitationLine = SocialBar(text: "イベント招待")
     var namecardOfferLine = SocialBar(text: "名刺交換")
-    var requestLine = SocialBar(text: "リクエスト件数")
-    var proposalLine = SocialBar(text: "リクエスト件数")
+    var requestLine = SocialBar(text: "リクエスト")
+    var proposalLine = SocialBar(text: "提案")
 
-
-    public init() {
-
+    weak var navigator: UINavigationController?
+    
+    public init(_ navi: UINavigationController ) {
+        self.navigator = navi
+        
         let scroll = UIScrollView.newAutoLayout()
         scroll.contentSize = CGSize(width: 280, height: 300)
         scroll.isScrollEnabled = true
@@ -87,6 +92,9 @@ class SocialMirrorForm: Container {
         detailForm <<< namecardOfferLine
         sep(detailForm, under: namecardOfferLine)
         
+        detailForm <<< requestLine
+        sep(detailForm, under: requestLine)
+        
         detailForm <<< proposalLine
         
         let nop = Row.LeftAligned()
@@ -105,6 +113,12 @@ class SocialMirrorForm: Container {
             d in
             self.view.isHidden = true
         }
+        
+        namecardOfferLine.bindEvent(.touchUpInside) {
+            line in
+            let vc = NamecardOffersViewController()
+            self.navigator?.pushViewController(vc, animated: true)
+        }
     }
 
     func sep(_ section: Section, under control: Control) {
@@ -118,5 +132,6 @@ class SocialMirrorForm: Container {
         section +++ seperator
     }
 
+    
 
 }

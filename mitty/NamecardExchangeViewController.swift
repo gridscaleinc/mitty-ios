@@ -49,6 +49,9 @@ class NamecardExchangeViewController: MittyViewController {
         return c
     } ()
     
+    // メッセージ
+    var offerMessage = MQForm.textView(name: "message")
+    
     // 最下部は送信ボタン
     let sendButton = MQForm.button(name: "Send", title: "送信")
     
@@ -96,7 +99,7 @@ class NamecardExchangeViewController: MittyViewController {
         
         let nameRow = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(50)
+            r.fillHolizon().height(30)
             r.view.backgroundColor = MittyColor.healthyGreen
         }
         section <<< nameRow
@@ -108,14 +111,14 @@ class NamecardExchangeViewController: MittyViewController {
         nameRow +++ contactee
         nameRow +++ userIcon.layout {
             i in
-            i.height(40).width(40).upMargin(5)
+            i.height(25).width(25).upMargin(2.5)
             i.imageView.setMittyImage(url: self.contacteeUser.icon)
         }
 
         
         let contacteeBusinessRow = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(50)
+            r.fillHolizon().height(30)
             r.view.backgroundColor = MittyColor.healthyGreen
         }
 
@@ -129,7 +132,7 @@ class NamecardExchangeViewController: MittyViewController {
         contacteeBusinessRow +++ contacteeBusiness
         contacteeBusinessRow +++ contacteeBusinesssIcon.layout {
             i in
-            i.height(40).width(40).upMargin(5)
+            i.height(25).width(25).upMargin(2.5)
         }
         
         // selected card
@@ -138,7 +141,9 @@ class NamecardExchangeViewController: MittyViewController {
             r.fillHolizon().height(140)
             r.view.backgroundColor = UIColor.black
         }
-
+        
+        super.autoCloseKeyboard(view: selectedRow.view)
+        
         selectedRow.spacing = 2
         selectedRow +++ cardForm.layout{
             c in
@@ -154,7 +159,7 @@ class NamecardExchangeViewController: MittyViewController {
         // card table
         let tableRow = Row.LeftAligned().layout{
             table in
-            table.height(180).fillHolizon()
+            table.height(100).fillHolizon()
 //            table.view.backgroundColor = UIColor.green
         }
         tableRow +++ cardTable.layout{
@@ -164,7 +169,20 @@ class NamecardExchangeViewController: MittyViewController {
         }
         section <<< tableRow
         
-        // selecte button
+        // select button
+        
+        // message
+        seperator(section: section, caption: "メッセージ")
+        let messageRow = Row.LeftAligned().layout {
+            r in
+            r.height(60).fillHolizon()
+        }
+        messageRow +++ offerMessage.layout {
+            m in
+            m.fillHolizon().height(60)
+        }
+        section <<< messageRow
+        
         
         let buttonRow = Row.Intervaled()
         buttonRow.spacing = 50
@@ -221,7 +239,7 @@ extension NamecardExchangeViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 55
+        return 40
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
