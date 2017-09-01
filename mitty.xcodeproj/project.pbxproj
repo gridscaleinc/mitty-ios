@@ -104,6 +104,7 @@
 		FC5CBD7F1F56CC2D006541E3 /* SocialMirrorForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */; };
 		FC5CBD851F5961DF006541E3 /* NamecardOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD841F5961DF006541E3 /* NamecardOffer.swift */; };
 		FC5CBD871F5961F9006541E3 /* NamecardOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD861F5961F9006541E3 /* NamecardOffersViewController.swift */; };
+		FC5CBD891F59A887006541E3 /* OffersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD881F59A887006541E3 /* OffersService.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -314,6 +315,7 @@
 		FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMirrorForm.swift; sourceTree = "<group>"; };
 		FC5CBD841F5961DF006541E3 /* NamecardOffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardOffer.swift; sourceTree = "<group>"; };
 		FC5CBD861F5961F9006541E3 /* NamecardOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardOffersViewController.swift; sourceTree = "<group>"; };
+		FC5CBD881F59A887006541E3 /* OffersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersService.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -595,6 +597,7 @@
 				FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */,
 				FC004C5D1F43322800230DAA /* ProfileService.swift */,
 				FCFBABE41F4ADF8400A957FE /* NameCardService.swift */,
+				FC5CBD881F59A887006541E3 /* OffersService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1292,6 +1295,7 @@
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,
 				FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */,
 				FCEB69701E9D0C2800A32C4F /* LoadingProxy.swift in Sources */,
+				FC5CBD891F59A887006541E3 /* OffersService.swift in Sources */,
 				FC30182D1ED00E7400A5F183 /* PriceInfoPicker.swift in Sources */,
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,

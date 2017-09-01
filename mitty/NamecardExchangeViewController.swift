@@ -82,10 +82,14 @@ class NamecardExchangeViewController: MittyViewController {
             cardList in
             self.myNamecards = cardList
             (self.cardTable.view as! UITableView).reloadData()
-            
+            self.sendButton.bindEvent(.touchUpInside) { b in
+                self.sendOffer()
+            }
         }, onError: { error in
             self.showError("名刺取得エラー")
         })
+        
+        
         
     }
     
@@ -207,6 +211,28 @@ class NamecardExchangeViewController: MittyViewController {
                 cardForm.setViews(selectedCard!)
             }
         }
+    }
+    
+    func sendOffer() {
+        if selectedCard == nil {
+            self.showError("名刺を選択してください。")
+            return
+        }
+        if offerMessage.textView.text == "" {
+            self.showError("メッセージを設定ね。")
+            return
+        }
+        
+        let offer = NamecardOffer()
+        offer.toMittyId = contacteeUser.id
+        offer.disiredId = contacteeCard.namecardID
+        offer.offerredId = selectedCard!.id
+        offer.message = offerMessage.textView.text
+        
+        // TODO: Error Check
+        OffersService.instance.sendNameCardOffer(offer)
+        
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
