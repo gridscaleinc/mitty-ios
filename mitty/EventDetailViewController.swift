@@ -133,7 +133,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let topContainer = Container (name: "topContainer", view: UIView.newAutoLayout())
         let img = Control(name: "image", view: imageView).layout {
             i in
-            i.width(UIScreen.main.bounds.size.width).height(UIScreen.main.bounds.size.width)
+            i.width(UIScreen.main.bounds.size.width).height(UIScreen.main.bounds.size.width).upper()
         }
 
         if (event.coverImageUrl != "") {
@@ -149,7 +149,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         topContainer +++ img
         topContainer.layout {
             c in
-            c.fillHolizon()
+            c.fillHolizon().upper()
             c.topAlign(with: img).bottomAlign(with: img)
         }
 
@@ -227,7 +227,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes)").layout { l in
-            l.height(35).width(90)
+            l.height(35).width(90).verticalCenter()
         }
 
         row +++ likes
@@ -238,7 +238,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
-            b.height(30).width(90)
+            b.height(30).width(90).verticalCenter()
             b.view.backgroundColor = .white
             b.view.layer.borderColor = UIColor.orange.cgColor
             b.view.layer.borderWidth = 0.7
@@ -267,7 +267,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         let dates = MQForm.label(name: "sheduledData", title: event.duration()).layout { l in
-            l.height(35).width(250)
+            l.height(35).width(250).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
         }
@@ -279,17 +279,20 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             r in
             r.fillHolizon().putUnder(of: dates, withOffset: 5).height(40)
         }
-        row +++ MQForm.label(name: "geoIcon", title: "📍").height(35).width(30)
+        row +++ MQForm.label(name: "geoIcon", title: "📍").height(35).width(30).layout{
+            l in
+            l.verticalCenter()
+        }
 
         let lacationIcon = MQForm.img(name: "locationIocn", url: "timesquare").layout {
             icon in
-            icon.height(25).width(25)
+            icon.height(25).width(25).verticalCenter()
         }
 
         row +++ lacationIcon
 
         let location = MQForm.label(name: "isLand", title: "\(event.isLandName)").layout { l in
-            l.height(40).width(150)
+            l.height(40).width(150).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
             if self.event.isValidGeoInfo {
@@ -311,7 +314,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         let routeButton = MQForm.button(name: "route", title: "経路").layout { b in
-            b.height(30).width(50)
+            b.height(30).width(50).verticalCenter()
             b.view.backgroundColor = .white
             b.view.layer.borderColor = UIColor.orange.cgColor
             b.view.layer.borderWidth = 0.7
@@ -331,7 +334,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
             c in
-            c.fillHolizon(10)
+            c.fillHolizon(10).verticalCenter()
             let l = c.view as! UILabel
             //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
             l.numberOfLines = 0
@@ -385,15 +388,15 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
             l in
-            l.height(35)
+            l.height(35).verticalCenter()
         }
         infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
             l in
-            l.height(35).rightMost(withInset: 60)
+            l.height(35).rightMost(withInset: 60).verticalCenter()
         }
 
         let contactButton = MQForm.button(name: "contact", title: "問合せ").layout { b in
-            b.height(30).width(50)
+            b.height(30).width(50).verticalCenter()
             b.view.backgroundColor = .white
             b.view.layer.borderColor = UIColor.orange.cgColor
             b.view.layer.borderWidth = 0.7
@@ -411,7 +414,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         url +++ MQForm.label(name: "URL", title: "情報源").layout {
             l in
-            l.height(35)
+            l.height(35).verticalCenter()
         }
 
         let link = UIButton.newAutoLayout()
@@ -419,7 +422,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         link.setTitle(event.sourceName, for: .normal)
         url +++ Control(name: "URL", view: link).layout {
             l in
-            l.height(35)
+            l.height(35).verticalCenter()
         }.bindEvent(.touchUpInside) { [weak self]
             b in
 
@@ -460,7 +463,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let subscribe = Control(name: "subscribe", view: subscribeButton).layout {
             c in
-            c.height(40)
+            c.height(40).verticalCenter()
         }
 
         subscribe.bindEvent(.touchUpInside) {
@@ -470,12 +473,12 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let revert = Control(name: "revert", view: revertButton).layout {
             c in
-            c.height(40)
+            c.height(40).verticalCenter()
         }
 
         let invitation = Control(name: "revert", view: invitationButton).layout {
             c in
-            c.height(40)
+            c.height(40).verticalCenter()
             c.button.backgroundColor = MittyColor.healthyGreen
         }
         invitation.bindEvent(.touchUpInside) {

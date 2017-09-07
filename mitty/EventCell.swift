@@ -57,6 +57,9 @@ class EventCell: UICollectionViewCell {
         // 説明
         layoutDescription(section)
 
+        let bottom = Row.LeftAligned()
+        section <<< bottom
+        
         // layout設定
         form.configLayout()
 
@@ -76,14 +79,14 @@ class EventCell: UICollectionViewCell {
             // imageがある場合、イメージを表示
             let itemImage = MQForm.img(name: "eventImage", url: event.eventLogoUrl).layout {
                 img in
-                img.width(35).height(35).upMargin(5).leftMargin(10)
+                img.width(35).height(35).verticalCenter().leftMargin(10)
                 img.imageView.image = self.event.eventLogo
             }
             row +++ itemImage
         } else {
             row +++ MQForm.img(name: "eventLogo", url: "timesquare").layout {
                 i in
-                i.width(35).height(35).upMargin(5).leftMargin(10)
+                i.width(35).height(35).verticalCenter().leftMargin(10)
             }
         }
         
@@ -91,7 +94,7 @@ class EventCell: UICollectionViewCell {
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
             t.label.adjustsFontSizeToFitWidth = true
-            t.bottomMargin(2).leftMargin(5).rightMost(withInset: 5).upMargin(10)
+            t.verticalCenter().leftMargin(5).rightMost(withInset: 5)
             t.label.textColor = MittyColor.healthyGreen
         }
         
@@ -122,7 +125,7 @@ class EventCell: UICollectionViewCell {
         let duration = event.duration()
         row +++ MQForm.label(name: "duration", title: duration).layout {
             d in
-            d.leftMost(withInset:5).rightMargin(10).bottomMargin(5)
+            d.leftMost(withInset:5).rightMargin(10).verticalCenter()
             d.label.adjustsFontSizeToFitWidth = true
             d.label.textColor = UIColor.gray
         }
@@ -164,7 +167,7 @@ class EventCell: UICollectionViewCell {
         
         row +++ termStatus.layout {
             pub in
-            pub.height(28)
+            pub.height(28).verticalCenter()
             let l = pub.label
             l.textAlignment = .center
             l.adjustsFontSizeToFitWidth = true
@@ -187,7 +190,7 @@ class EventCell: UICollectionViewCell {
             // imageがある場合、イメージを表示
             let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
                 img in
-                img.fillHolizon().height(height)
+                img.fillHolizon().height(height).upper()
                 img.imageView.image = self.event.coverImage
             }
             
@@ -198,14 +201,14 @@ class EventCell: UICollectionViewCell {
             
             let container = Row.LeftAligned().layout {
                 r in
-                r.fillHolizon().height(height)
+                r.fillHolizon().height(height).upper()
             }
             
             container +++ itemImage
             
             let col = Col.UpDownAligned().layout {
                 c in
-                c.upMargin(10).leftMost(withInset: 10).width(60).height(65)
+                c.leftMost(withInset: 10).width(60).height(65).upper(withInset: 10)
                 c.view.backgroundColor = UIColor.orange
                 c.view.layer.cornerRadius = 1
                 c.view.layer.masksToBounds = true
@@ -219,7 +222,7 @@ class EventCell: UICollectionViewCell {
             
             col +++ MQForm.label(name: "day", title: event.startDate.day99).layout {
                 l in
-                l.height(30).fillHolizon()
+                l.height(30).holizontalCenter()
                 l.label.adjustsFontSizeToFitWidth = true
                 l.label.textColor = UIColor.black
                 l.label.textAlignment = .center
@@ -227,7 +230,7 @@ class EventCell: UICollectionViewCell {
             }
             col +++ MQForm.label(name: "monthyear", title: event.startDate.monthYear).layout {
                 l in
-                l.height(18).fillHolizon()
+                l.height(18).holizontalCenter()
                 l.label.adjustsFontSizeToFitWidth = true
                 l.label.textColor = UIColor.white
                 l.label.textAlignment = .center
@@ -235,7 +238,7 @@ class EventCell: UICollectionViewCell {
             }
             col +++ MQForm.label(name: "minute", title: event.startDate.time12).layout {
                 l in
-                l.height(15).fillHolizon()
+                l.height(15).holizontalCenter()
                 l.label.adjustsFontSizeToFitWidth = true
                 l.label.textColor = UIColor.white
                 l.label.textAlignment = .center
@@ -265,11 +268,11 @@ class EventCell: UICollectionViewCell {
         row +++ left
         left +++ MQForm.label(name: "likes1", title: "❤️").layout {
             l in
-            l.width(25).height(25).leftMargin(10)
+            l.width(25).height(25).leftMargin(10).verticalCenter()
         }
         left +++ MQForm.label(name: "likes2", title: "\(event.likes) いいね！").layout {
             l in
-            l.height(25).width(80).leftMargin(5)
+            l.height(25).width(80).leftMargin(5).verticalCenter()
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
             label.textAlignment = .left
@@ -277,7 +280,7 @@ class EventCell: UICollectionViewCell {
         
         let right = Row.LeftAligned().layout {
             r in
-            r.height(30)
+            r.height(30).verticalCenter()
         }
         row +++ right
         
@@ -288,14 +291,14 @@ class EventCell: UICollectionViewCell {
         
         right +++ publisherIcon.width(25).height(25).layout {
             icon in
-            icon.margin.all(2)
+            icon.verticalCenter()
         }
         
         let publisher = MQForm.label(name: "publisher", title: "by " + event.publisherName + " " + event.publishedDays + "Days")
         
         right +++ publisher.layout {
             pub in
-            pub.leftMargin(20).upMargin(5)
+            pub.leftMargin(20).verticalCenter()
             let l = pub.label
             l.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             l.textColor = UIColor.gray
@@ -315,7 +318,7 @@ class EventCell: UICollectionViewCell {
         actionLabel.text = event.action
         let actionCtrl = Control(name: "actionLabel", view: actionLabel).layout {
             l in
-            l.fillHolizon(10).upper(withInset: 3).leftMargin(5)
+            l.fillHolizon(10).upper(withInset: 3).leftMargin(5).taller(than: 40)
             l.label.font = UIFont.systemFont(ofSize: 12)
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
             l.label.numberOfLines = 0

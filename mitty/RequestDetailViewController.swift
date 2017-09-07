@@ -115,7 +115,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let titleLabel = MQForm.label(name: "Title", title: request.title).layout {
             l in
-            l.leftMost(withInset: 25).upper(withInset: 40).fillHolizon(10)
+            l.leftMost(withInset: 25).verticalCenter().fillHolizon(10)
             l.view.backgroundColor = UIColor.white
             l.label.font = UIFont.boldSystemFont(ofSize: 24)
             l.label.textColor = MittyColor.healthyGreen
@@ -139,7 +139,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let tagLabel = MQForm.label(name: "tag", title: "🏷 " + request.tag).layout {
             l in
-            l.width(35).height(35).putUnder(of: titleLabel).fillHolizon(10).height(20)
+            l.width(35).height(35).fillHolizon(10).verticalCenter()
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
             (l.view as! UILabel).textColor = .orange
             (l.view as! UILabel).numberOfLines = 1
@@ -154,7 +154,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let actionLabel = MQForm.label(name: "action", title: (request.desc)).layout {
             c in
-            c.putUnder(of: tagLabel, withOffset: 5).fillHolizon(10).leftMargin(10)
+            c.upper(withInset: 5).fillHolizon(10).leftMargin(10)
             let l = c.view as! UILabel
             l.numberOfLines = 0
             l.textColor = UIColor.darkGray
@@ -176,11 +176,11 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         row +++ left
         left +++ MQForm.label(name: "likes1", title: "❤️").layout {
             l in
-            l.width(25).height(25).leftMargin(10)
+            l.width(25).height(25).leftMargin(10).verticalCenter()
         }
         left +++ MQForm.label(name: "likes2", title: "\(request.numberOfLikes) いいね！").layout {
             l in
-            l.height(25).width(80).leftMargin(5)
+            l.height(25).width(80).leftMargin(5).verticalCenter()
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
             label.textAlignment = .left
@@ -188,7 +188,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let right = Row.LeftAligned().layout {
             r in
-            r.height(30)
+            r.height(30).verticalCenter()
         }
         row +++ right
         
@@ -197,7 +197,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         
         right +++ expiry.layout {
             e in
-            e.rightMargin(10).bottomMargin(3)
+            e.rightMargin(10).verticalCenter()
             e.label.adjustsFontSizeToFitWidth = true
         }
         
@@ -208,9 +208,12 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().height(35).upMargin(10)
         }
 
-        row +++ MQForm.label(name: "Term", title: "希望期間").height(35).width(100)
+        row +++ MQForm.label(name: "Term", title: "希望期間").height(35).width(100).layout {
+            l in
+            l.verticalCenter()
+        }
         let dates = MQForm.hilight(label: request.term(), named: "preferedDate").layout { l in
-            l.height(35).width(180)
+            l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
         }
@@ -223,9 +226,13 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().height(35)
         }
 
-        row +++ MQForm.label(name: "Location", title: "希望エリア").height(35).width(100)
+        row +++ MQForm.label(name: "Location", title: "希望エリア").height(35).width(100).layout {
+            l in
+            l.verticalCenter()
+        }
+
         let location = MQForm.hilight(label: "\(request.startPlace)", named: "isLand").layout { l in
-            l.height(35).width(180)
+            l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
@@ -240,9 +247,13 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().height(35)
         }
 
-        row +++ MQForm.label(name: "Price", title: "希望価格").height(35).width(100)
+        row +++ MQForm.label(name: "Price", title: "希望価格").height(35).width(100).layout {
+            l in
+            l.verticalCenter()
+        }
+
         let price = MQForm.hilight(label: request.price(), named: "price").layout { l in
-            l.height(35).width(180)
+            l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
@@ -257,9 +268,13 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().height(35)
         }
 
-        row +++ MQForm.label(name: "NumberOfPerson", title: "参加人数").height(35).width(100)
+        row +++ MQForm.label(name: "NumberOfPerson", title: "参加人数").height(35).width(100).layout {
+            l in
+            l.verticalCenter()
+        }
+
         let nop = MQForm.hilight(label: request.nop(), named: "NumberOfPerson").layout { l in
-            l.height(35).width(180)
+            l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
@@ -277,13 +292,16 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().bottomAlign(with: self.proposalSection)
         }
 
-        row +++ proposalSection
+        row +++ proposalSection.layout{
+            p in
+            p.upper()
+        }
 
         detailForm <<< row
 
         let proposol = Control(name: "scbscribe", view: proposolButton).layout {
             c in
-            c.height(40).upMargin(30)
+            c.height(40).upMargin(30).verticalCenter()
             c.button.setTitleColor(UIColor.white, for: .normal)
         }
 
@@ -353,7 +371,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             row +++ MQForm.tapableImg(name: "icon", url: "").layout {
                 img in
                 img.imageView.setMittyImage(url: p.proposerIconUrl)
-                img.height(32).width(32)
+                img.height(32).width(32).verticalCenter()
                 img.margin.left = 10
             }.bindEvent(.touchUpInside) {
                 r in
@@ -369,12 +387,12 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 p.label.textColor = MittyColor.healthyGreen
                 p.label.adjustsFontSizeToFitWidth = true
                 p.label.minimumScaleFactor = 0.5
-                p.rightMost(withInset: 100)
+                p.rightMost(withInset: 100).verticalCenter()
             }
 
             row +++ MQForm.label(name: "likes", title: "❤️ \(p.numberOfLikes)").layout {
                 l in
-                l.rightMost(withInset: 5)
+                l.rightMost(withInset: 5).verticalCenter()
                 l.label.adjustsFontSizeToFitWidth = true
                 l.label.minimumScaleFactor = 0.5
                 l.label.textAlignment = .center
@@ -391,7 +409,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             let infoRow = Row.LeftAligned().height(50)
             infoRow +++ MQForm.label(name: "info", title: p.proposerInfo).layout{
                 l in
-                l.margin.all(3)
+                l.verticalCenter()
             }
             
             proposalSection <<< infoRow

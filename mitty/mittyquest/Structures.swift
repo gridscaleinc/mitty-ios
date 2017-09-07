@@ -171,10 +171,10 @@ open class Row: Container {
                 if (c === first) {
                     c.leftMost(withInset: spacing + c.margin.left)
                 } else {
-                    c.righter(than: previous!, withOffset: spacing + c.margin.left)
+                    c.righter(than: previous!, withOffset: previous!.margin.right + spacing + c.margin.left)
                 }
                 previous = c
-                c.upper(withInset: c.margin.up)
+//                c.upper(withInset: c.margin.up)
             }
         case .right:
             let last = children.last
@@ -184,10 +184,10 @@ open class Row: Container {
                 if (c === last) {
                     c.rightMost(withInset: spacing + c.margin.right)
                 } else {
-                    c.lefter(than: previous!, withOffset: spacing + c.margin.right)
+                    c.lefter(than: previous!, withOffset: previous!.margin.left + spacing + c.margin.right)
                 }
                 previous = c
-                c.upper(withInset: c.margin.up)
+//                c.upper(withInset: c.margin.up)
             }
         case .atIntervals:
             let views = self.view.subviews as NSArray
@@ -265,10 +265,10 @@ open class Col: Container {
                 if (c === first) {
                     c.upper(withInset: (c.margin.up))
                 } else {
-                    c.putUnder(of: previous!, withOffset: (c.margin.up))
+                    c.putUnder(of: previous!, withOffset: previous!.margin.bottom + spacing + c.margin.up)
                 }
                 previous = c
-                c.leftMost()
+//                c.leftMost()
             }
         case .bottom:
             let last = children.last
@@ -276,12 +276,12 @@ open class Col: Container {
 
             for c in Array<Control>(children.reversed()) {
                 if (c === last) {
-                    c.down()
+                    c.down(withInset: (c.margin.bottom))
                 } else {
-                    c.putAbove(Of: previous!, withOffset: c.margin.bottom)
+                    c.putAbove(Of: previous!, withOffset: previous!.margin.up + spacing + c.margin.bottom)
                 }
                 previous = c
-                c.leftMost()
+//                c.leftMost()
             }
         case .atIntervals:
             let views = self.view.subviews as NSArray

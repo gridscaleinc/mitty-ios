@@ -77,7 +77,7 @@ class RequestViewController: MittyViewController {
 
         row +++ MQForm.label(name: "Postrequest", title: "Post request").layout {
             c in
-            c.height(40).width(300)
+            c.height(40).width(300).verticalCenter()
             c.leftMost(withInset: 20)
             let l = c.view as! UILabel
             l.textColor = .white
@@ -94,13 +94,13 @@ class RequestViewController: MittyViewController {
 
         row +++ MQForm.label(name: "Title", title: "タイトル").layout {
             c in
-            c.height(height_normal).width(70)
+            c.height(height_normal).width(70).verticalCenter()
             c.leftMost(withInset: 20)
         }
 
         row +++ titleText.width(350).layout {
             t in
-            t.height(height_normal).rightMost()
+            t.height(height_normal).rightMost().verticalCenter()
         }
         inputForm <<< row
 
@@ -112,13 +112,13 @@ class RequestViewController: MittyViewController {
 
         row +++ MQForm.label(name: "TagLabel", title: "Tag").layout {
             c in
-            c.height(height_normal).width(70)
+            c.height(height_normal).width(70).verticalCenter()
             c.leftMost(withInset: 20)
         }
 
         row +++ tag.width(350).layout {
             t in
-            t.height(height_normal).rightMost()
+            t.height(height_normal).rightMost().verticalCenter()
         }
         inputForm <<< row
 
@@ -130,13 +130,13 @@ class RequestViewController: MittyViewController {
 
         row +++ MQForm.label(name: "detail", title: "内容").layout {
             c in
-            c.height(height_middle).width(70)
+            c.height(height_middle).width(70).verticalCenter()
             c.leftMost(withInset: 20)
         }
 
         row +++ descriptionText.width(350).layout {
             t in
-            t.height(height_tall).rightMost()
+            t.height(height_tall).rightMost().verticalCenter()
         }
         inputForm <<< row
 
@@ -148,13 +148,13 @@ class RequestViewController: MittyViewController {
 
         row +++ MQForm.label(name: "lacation", title: "場所").layout {
             c in
-            c.height(height_middle).width(70)
+            c.height(height_middle).width(70).verticalCenter()
             c.leftMost(withInset: 20)
         }
 
         row +++ locationText.width(350).layout {
             t in
-            t.height(height_tall).rightMost()
+            t.height(height_tall).rightMost().verticalCenter()
         }
         inputForm <<< row
 
@@ -165,16 +165,16 @@ class RequestViewController: MittyViewController {
         }
         row +++ MQForm.label(name: "Title", title: "希望日程").layout {
             c in
-            c.height(height_normal).width(65)
+            c.height(height_normal).width(65).verticalCenter()
             c.leftMost(withInset: 20)
         }
         row +++ preferredDatetime1.width(120).layout {
             t in
-            t.height(height_normal)
+            t.height(height_normal).verticalCenter()
         }
         row +++ preferredDatetime2.width(120).layout {
             t in
-            t.height(height_normal)
+            t.height(height_normal).verticalCenter()
         }
 
         let dp1 = UIDatePicker.newAutoLayout()
@@ -196,16 +196,16 @@ class RequestViewController: MittyViewController {
         }
         row +++ MQForm.label(name: "priceTitle", title: "価格範囲").layout {
             c in
-            c.height(height_normal).width(65)
+            c.height(height_normal).width(65).verticalCenter()
             c.leftMost(withInset: 20)
         }
         row +++ startPrice.width(90).layout {
             t in
-            t.height(height_normal)
+            t.height(height_normal).verticalCenter()
         }
         row +++ limitedPrice.width(120).layout {
             t in
-            t.height(height_normal)
+            t.height(height_normal).verticalCenter()
         }
         inputForm <<< row
 
@@ -216,21 +216,21 @@ class RequestViewController: MittyViewController {
         }
         row +++ MQForm.label(name: "title2", title: "人数").layout {
             c in
-            c.height(height_normal).width(65)
+            c.height(height_normal).width(65).verticalCenter()
             c.leftMost(withInset: 20)
         }
 
         row +++ numOfPerson.width(70).layout {
             t in
-            t.height(height_normal)
+            t.height(height_normal).verticalCenter()
         }
         row +++ MQForm.label(name: "title3", title: "締切").layout {
             c in
-            c.height(height_normal).width(40)
+            c.height(height_normal).width(40).verticalCenter()
         }
         row +++ expiryDate.width(120).layout {
             t in
-            t.height(height_normal)
+            t.height(height_normal).verticalCenter()
         }
         let dp3 = UIDatePicker.newAutoLayout()
         dp3.datePickerMode = .date
@@ -245,7 +245,7 @@ class RequestViewController: MittyViewController {
             r.fillHolizon().height(height_middle)
         }
         row +++ postButton.layout { button in
-            button.fillHolizon(60).height(50)
+            button.fillHolizon(60).height(30).verticalCenter()
             let b = button.view as! UIButton
             b.backgroundColor = .orange
         }

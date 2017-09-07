@@ -61,7 +61,7 @@ class RequestCell: UICollectionViewCell {
         let publisher = MQForm.label(name: "publisher", title: req.ownerName)
         row +++ publisher.layout {
             pub in
-            pub.upMargin(5).leftMargin(5)
+            pub.upMargin(5).leftMargin(5).verticalCenter()
             let l = pub.label
             l.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             l.textColor = MittyColor.healthyGreen
@@ -72,7 +72,7 @@ class RequestCell: UICollectionViewCell {
 
         row +++ published.layout {
             pub in
-            pub.leftMargin(5).upMargin(5)
+            pub.leftMargin(5).verticalCenter()
             let l = pub.label
             l.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
             l.textColor = UIColor.black
@@ -90,7 +90,7 @@ class RequestCell: UICollectionViewCell {
         let titleLabel = MQForm.label(name: "titleLabel", title: req.title).layout { t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
-            t.rightMost().height(50)
+            t.rightMost().height(50).verticalCenter()
             t.label.textColor = MittyColor.healthyGreen
         }
         row +++ titleLabel
@@ -102,7 +102,7 @@ class RequestCell: UICollectionViewCell {
         actionLabel.text = req.desc
         let actionCtrl = Control(name: "actionLabel", view: actionLabel).layout {
             l in
-            l.fillHolizon(10)
+            l.fillHolizon(10).upper(withInset: 10)
             l.label.font = UIFont.systemFont(ofSize: 12)
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
             l.label.numberOfLines = 0
@@ -124,11 +124,11 @@ class RequestCell: UICollectionViewCell {
         row +++ left
         left +++ MQForm.label(name: "likes1", title: "❤️").layout {
             l in
-            l.width(25).height(25).leftMargin(10)
+            l.width(25).height(25).leftMargin(10).verticalCenter()
         }
         left +++ MQForm.label(name: "likes2", title: "\(request?.numberOfLikes ?? 0) いいね！").layout {
             l in
-            l.height(25).width(80).leftMargin(5)
+            l.height(25).width(80).leftMargin(5).verticalCenter()
             let label = l.label
             label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
             label.textAlignment = .left
@@ -136,7 +136,7 @@ class RequestCell: UICollectionViewCell {
         
         let right = Row.LeftAligned().layout {
             r in
-            r.height(30)
+            r.height(30).verticalCenter()
         }
         row +++ right
         
@@ -145,7 +145,7 @@ class RequestCell: UICollectionViewCell {
         
         right +++ expiry.layout {
             e in
-            e.rightMargin(10).bottomMargin(3)
+            e.rightMargin(10).bottomMargin(3).verticalCenter()
             e.label.adjustsFontSizeToFitWidth = true
         }
     
