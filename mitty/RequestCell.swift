@@ -50,6 +50,7 @@ class RequestCell: UICollectionViewCell {
         var row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(30)
+            r.view.backgroundColor = MittyColor.lightYellow.withAlphaComponent(0.15)
         }
 
         let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "")
@@ -60,6 +61,7 @@ class RequestCell: UICollectionViewCell {
         let publisher = MQForm.label(name: "publisher", title: req.ownerName)
         row +++ publisher.layout {
             pub in
+            pub.upMargin(5).leftMargin(5)
             let l = pub.label
             l.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             l.textColor = MittyColor.healthyGreen
@@ -70,6 +72,7 @@ class RequestCell: UICollectionViewCell {
 
         row +++ published.layout {
             pub in
+            pub.leftMargin(5).upMargin(5)
             let l = pub.label
             l.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
             l.textColor = UIColor.black
@@ -81,23 +84,9 @@ class RequestCell: UICollectionViewCell {
         // logoがある場合ロゴを表示
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(75)
+            r.fillHolizon().height(50)
         }
-        let col = Col.BottomUpAligned().layout {
-            c in
-            c.height(75).width(25)
-        }
-        col +++ MQForm.label(name: "likes1", title: "🔺").width(25).height(25)
-        col +++ MQForm.label(name: "likes2", title: String(describing: "\(req.numberOfLikes)")).width(25).height(25).layout {
-            l in
-            let label = l.label
-            label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-            label.textAlignment = .center
-        }
-
-        col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
-        row +++ col
-
+        
         let titleLabel = MQForm.label(name: "titleLabel", title: req.title).layout { t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -113,18 +102,55 @@ class RequestCell: UICollectionViewCell {
         actionLabel.text = req.desc
         let actionCtrl = Control(name: "actionLabel", view: actionLabel).layout {
             l in
-            l.fillParent()
+            l.fillHolizon(10)
             l.label.font = UIFont.systemFont(ofSize: 12)
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
             l.label.numberOfLines = 0
         }
         row.layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().bottomAlign(with: actionCtrl)
         }
         row +++ actionCtrl
         section <<< row
 
+        
+        row = Row.Intervaled().layout {
+            r in
+            r.height(40)
+        }
+        
+        let left = Row.LeftAligned().height(30)
+        row +++ left
+        left +++ MQForm.label(name: "likes1", title: "❤️").layout {
+            l in
+            l.width(25).height(25).leftMargin(10)
+        }
+        left +++ MQForm.label(name: "likes2", title: "\(request?.numberOfLikes ?? 0) いいね！").layout {
+            l in
+            l.height(25).width(80).leftMargin(5)
+            let label = l.label
+            label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
+            label.textAlignment = .left
+        }
+        
+        let right = Row.LeftAligned().layout {
+            r in
+            r.height(30)
+        }
+        row +++ right
+        
+        let expiryDays = (request?.expiryDate.timeIntervalSinceNow)! / 84600
+        let expiry = MQForm.hilight(label: "\(Int(-expiryDays)) days before expiry", named: "expiry")
+        
+        right +++ expiry.layout {
+            e in
+            e.rightMargin(10).bottomMargin(3)
+            e.label.adjustsFontSizeToFitWidth = true
+        }
+    
+        section <<< row
+        
         form.configLayout()
 
     }

@@ -17,6 +17,7 @@ import SwiftyJSON
 class NameCardService: Service {
     let apiMyNameCards = MITTY_SERVICE_BASE_URL + "/mynamecards"
     let apiSaveNameCard = MITTY_SERVICE_BASE_URL + "/save/namecard"
+    let apiGetNamecard = MITTY_SERVICE_BASE_URL + "/namecard/of"
     
     static var instance: NameCardService = {
         let instance = NameCardService()
@@ -123,16 +124,56 @@ class NameCardService: Service {
     
     /// <#Description#>
     ///
+    /// - Parameters:
+    ///   - onComplete: <#onComplete description#>
+    ///   - onError: <#onError description#>
+    func getNamecard(of id: Int64, onComplete: @escaping (_ card: NameCardInfo) -> Void, onError: @escaping (_ error: String) -> Void) {
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        let parameters = [
+            "id": id
+        ]
+        
+        LoadingProxy.on()
+        
+        Alamofire.request(apiGetNamecard, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            LoadingProxy.off()
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["namecard"] == nil) {
+                        return
+                    }
+                    let nameCardInfo = self.bindNameCard(json["namecard"])
+                    onComplete(nameCardInfo)
+                    return
+                }
+                
+                break
+                
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                onError(error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    /// <#Description#>
+    ///
     /// - Parameter json: <#json description#>
     /// - Returns: <#return value description#>
     func bindNameCards(_ json: JSON) -> [NameCardInfo] {
         var results : [NameCardInfo] = []
         
         for (_, info) in json["namecards"] {
-            let result = NameCardInfo()
-            result.businessLogoUrl = info["business_logo_url"].stringValue
-            
-            bindItem(result, info)
+            let result = bindNameCard(info)
             results.append(result)
         }
         
@@ -144,13 +185,19 @@ class NameCardService: Service {
     ///
     /// - Parameter json: <#json description#>
     /// - Returns: <#return value description#>
-    func bindNameCard(_ json: JSON) -> NameCard {
+    func bindNameCard(_ json: JSON) -> NameCardInfo {
         
-        let result = NameCard()
+        let result = NameCardInfo()
+        result.businessLogoUrl = json["business_logo_url"].stringValue
         bindItem(result, json)
         return result
     }
     
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - result: <#result description#>
+    ///   - json: <#json description#>
     func bindItem (_ result: NameCard, _ json :JSON) {
         result.id = json["id"].int64Value
         result.mittyId = json["mitty_id"].intValue

@@ -64,6 +64,20 @@ extension Control {
         return self
     }
     
+    // set the height dimension
+    @discardableResult
+    open func taller(than points: CGFloat) -> Self {
+        heightConstraints = self.view.autoSetDimension(.height, toSize: points, relation: .greaterThanOrEqual)
+        return self
+    }
+    
+    // set the height dimension
+    @discardableResult
+    open func lower(than points: CGFloat) -> Self {
+        heightConstraints = self.view.autoSetDimension(.height, toSize: points, relation: .lessThanOrEqual)
+        return self
+    }
+    
     // set the width dimension
     @discardableResult
     open func width(_ width: CGFloat) -> Self {

@@ -195,7 +195,7 @@ open class Row: Container {
             let horizontalLayoutConstraints = NSLayoutConstraint.autoCreateAndInstallConstraints {
 //                views.autoSetViewsDimension(.height, toSize: 40.0)
                 views.autoDistributeViews(along: .horizontal, alignedTo: .horizontal, withFixedSpacing: spacing, insetSpacing: true, matchedSizes: true)
-                first?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: 4)
+                first?.view.autoPinEdge(toSuperviewEdge: .bottom, withInset: first?.margin.bottom ?? 0)
             } as NSArray?
             horizontalLayoutConstraints?.autoInstallConstraints()
         }
@@ -263,7 +263,7 @@ open class Col: Container {
 
             for c in children {
                 if (c === first) {
-                    c.upper()
+                    c.upper(withInset: (c.margin.up))
                 } else {
                     c.putUnder(of: previous!, withOffset: (c.margin.up))
                 }

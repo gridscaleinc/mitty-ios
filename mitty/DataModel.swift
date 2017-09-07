@@ -88,10 +88,4 @@ class Talk {
 
 }
 
-/// 連絡先
-class SocialContactInfo {
-    public var mittyId = ""
-    public var imageUrl = ""
-    public var name = ""
-}
 

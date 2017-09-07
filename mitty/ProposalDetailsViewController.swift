@@ -75,7 +75,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         super.autoCloseKeyboard()
 
-        self.view.backgroundColor = MittyColor.healthyGreen
+        self.view.backgroundColor = UIColor.white
 
         buildForm()
         self.view.addSubview(form)
@@ -92,7 +92,7 @@ class ProposalDetailsViewController: MittyViewController {
     }
 
     func buildForm () {
-        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+//        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
         let anchor = MQForm.label(name: "dummy", title: "").layout {
             a in
             a.height(0).leftMost().rightMost()
@@ -265,7 +265,7 @@ class ProposalDetailsViewController: MittyViewController {
         let accept = Control(name: "accept", view: acceptButton).layout {
             c in
             c.height(40)
-            c.button.setTitleColor(UIColor.white, for: .normal)
+            c.button.setTitleColor(UIColor.orange, for: .normal)
         }.bindEvent(.touchUpInside) {
             b in
             self.pressAccept()
@@ -336,7 +336,7 @@ class ProposalDetailsViewController: MittyViewController {
             f in
             f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
-            f.view.backgroundColor = MittyColor.healthyGreen
+            f.view.backgroundColor = MittyColor.lightYellow.withAlphaComponent(0.2)
         }
     }
 

@@ -56,7 +56,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         super.autoCloseKeyboard()
 
-        self.view.backgroundColor = MittyColor.healthyGreen
+        self.view.backgroundColor = UIColor.white
 
         buildform()
         self.view.addSubview(form)
@@ -70,6 +70,8 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         configNavigationBar()
 
         loadProposals()
+        
+        view.setNeedsUpdateConstraints()
 
     }
 
@@ -86,7 +88,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
     func buildform () {
 
-        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+//        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
         let anchor = MQForm.label(name: "dummy", title: "").layout {
             a in
             a.height(0).leftMost().rightMost()
@@ -114,10 +116,11 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         let titleLabel = MQForm.label(name: "Title", title: request.title).layout {
             l in
             l.leftMost(withInset: 25).upper(withInset: 40).fillHolizon(10)
-            l.view.backgroundColor = MittyColor.healthyGreen
-            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 24)
-            (l.view as! UILabel).textColor = .white
-            (l.view as! UILabel).numberOfLines = 0
+            l.view.backgroundColor = UIColor.white
+            l.label.font = UIFont.boldSystemFont(ofSize: 24)
+            l.label.textColor = MittyColor.healthyGreen
+            l.label.numberOfLines = 0
+            l.label.adjustsFontSizeToFitWidth = true
         }
 
         var row = Row.LeftAligned().layout {
@@ -138,7 +141,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             l in
             l.width(35).height(35).putUnder(of: titleLabel).fillHolizon(10).height(20)
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
-            (l.view as! UILabel).textColor = .white
+            (l.view as! UILabel).textColor = .orange
             (l.view as! UILabel).numberOfLines = 1
         }
         row +++ tagLabel
@@ -151,36 +154,58 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let actionLabel = MQForm.label(name: "action", title: (request.desc)).layout {
             c in
-            c.putUnder(of: tagLabel, withOffset: 5).fillHolizon(10)
+            c.putUnder(of: tagLabel, withOffset: 5).fillHolizon(10).leftMargin(10)
             let l = c.view as! UILabel
             l.numberOfLines = 0
-            l.textColor = .black
+            l.textColor = UIColor.darkGray
             l.font = .systemFont(ofSize: 15)
             l.layer.cornerRadius = 2
             l.layer.borderWidth = 0.8
-            l.layer.borderColor = UIColor.white.cgColor
-            l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
+            l.layer.borderColor = UIColor.gray.cgColor
         }
 
         row +++ actionLabel
         detailForm <<< row
 
-        row = Row.LeftAligned().layout {
+        row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(35)
+            r.height(40).fillHolizon()
         }
-
-        let likes = MQForm.label(name: "heart", title: "❤️ \(request.numberOfLikes)").layout { l in
-            l.height(35).width(330)
+        
+        let left = Row.LeftAligned().height(30)
+        row +++ left
+        left +++ MQForm.label(name: "likes1", title: "❤️").layout {
+            l in
+            l.width(25).height(25).leftMargin(10)
         }
-
-        row +++ likes
-
+        left +++ MQForm.label(name: "likes2", title: "\(request.numberOfLikes) いいね！").layout {
+            l in
+            l.height(25).width(80).leftMargin(5)
+            let label = l.label
+            label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
+            label.textAlignment = .left
+        }
+        
+        let right = Row.LeftAligned().layout {
+            r in
+            r.height(30)
+        }
+        row +++ right
+        
+        let expiryDays = (request.expiryDate.timeIntervalSinceNow) / 84600
+        let expiry = MQForm.hilight(label: "\(Int(-expiryDays)) days before expiry", named: "expiry")
+        
+        right +++ expiry.layout {
+            e in
+            e.rightMargin(10).bottomMargin(3)
+            e.label.adjustsFontSizeToFitWidth = true
+        }
+        
         detailForm <<< row
 
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(35)
+            r.fillHolizon().height(35).upMargin(10)
         }
 
         row +++ MQForm.label(name: "Term", title: "希望期間").height(35).width(100)
@@ -288,9 +313,9 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         detailForm.layout {
             f in
-            f.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
+            f.fillParent().width(UIScreen.main.bounds.width).bottomAlign(with: bottom)
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
-            f.view.backgroundColor = MittyColor.healthyGreen
+            f.view.backgroundColor = UIColor.white
         }
     }
 
@@ -376,7 +401,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             s.fillHolizon()
         }
         proposalSection.configLayout()
-        proposalSection.view.backgroundColor = MittyColor.lightYellow
+        proposalSection.view.backgroundColor = MittyColor.lightYellow.withAlphaComponent(0.30)
         view.setNeedsUpdateConstraints()
     }
 }

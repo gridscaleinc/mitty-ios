@@ -116,16 +116,21 @@ class SocialMirrorForm: Container {
         
         namecardOfferLine.bindEvent(.touchUpInside) {
             line in
-            let vc = NamecardOffersViewController()
+            let vc = OffersViewController()
             self.navigator?.pushViewController(vc, animated: true)
         }
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - section: <#section description#>
+    ///   - control: <#control description#>
     func sep(_ section: Section, under control: Control) {
         let seperator = Row.LeftAligned().layout() {
             r in
             r.height(5).fillHolizon(2).putUnder(of: control, withOffset: 10)
-            let layer = MittyColor.gradientLayer(.black, UIColor(white: 0.80, alpha: 0.9), .black)
+            let layer = MittyColor.gradientLayer(.black, MittyColor.healthyGreen, .black)
             layer.frame = CGRect(x: 0, y: 0, width: 295, height: 1)
             r.view.layer.insertSublayer(layer, at: 0)
         }

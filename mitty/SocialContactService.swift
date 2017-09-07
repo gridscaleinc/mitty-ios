@@ -21,33 +21,46 @@ class SocialContactService: Service {
 
     }
 
-    // サーバーからイベントを検索。
-    func search(keys: [String]) -> [SocialContactInfo] {
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - onComplete: <#onComplete description#>
+    ///   - onError: <#onError description#>
+    func getContacteeList(onComplete: @escaping (_ contacteeList: [Contactee])->Void, onError: @escaping (_ error: String) -> Void) {
+        let url = MITTY_SERVICE_BASE_URL + "/contact/list"
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        LoadingProxy.on()
+        
+        Alamofire.request(url, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            LoadingProxy.off()
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["contacteeList"] == nil) {
+                        return
+                    }
+                    let contacteeList = self.bindContacteeList(json)
+                    onComplete(contacteeList)
+                    return
+                }
+                
+                break
+                
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                onError(error.localizedDescription)
+            }
+        }
 
-        // ダミーコード、本当はサーバーから検索する。
-        var list = [SocialContactInfo]()
-        list.append(buildContact(1))
-        list.append(buildContact(2))
-        list.append(buildContact(3))
-        list.append(buildContact(4))
-
-        return list
-
+        
     }
-
-    // イベントを生成する
-    func buildContact(_ n: Int) -> SocialContactInfo! {
-
-        let imagenames: [String] = ["pengin", "pengin1", "pengin2", "pengin3", "pengin1", "pengin2"]
-        let names: [String] = ["Domanthan", "Dongri", "Yang", "Choii", "Lee", "Jack Ma"]
-
-        let a = SocialContactInfo()
-        a.name = names[n]
-        a.imageUrl = imagenames[n]
-
-        return a
-    }
-
 
     /// <#Description#>
     ///
@@ -125,6 +138,29 @@ class SocialContactService: Service {
         card.businessLogoUrl = json["business_logo_url"].stringValue
         card.relatedEventID = json["related_event_id"].int64Value
         card.contctedDate = json["contacted_date"].stringValue.utc2Date()
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter json: <#json description#>
+    /// - Returns: <#return value description#>
+    func bindContacteeList (_ json: JSON) -> [Contactee] {
+        var result = [Contactee]()
+        
+        let profileService = ProfileService.instance
+        
+        for (_, contactee) in json["contacteeList"] {
+            let contact = Contactee()
+            contact.contactee_name = contactee["contactee_name"].stringValue
+            contact.contactee_icon = contactee["contactee_icon"].stringValue
+            let profile = profileService.bindProfile(contactee)
+            contact.profile = profile
+            
+            result.append(contact)
+        }
+        
+        return result
+        
     }
 
 }

@@ -223,9 +223,9 @@ class NamecardExchangeViewController: MittyViewController {
             return
         }
         
-        let offer = NamecardOffer()
+        let offer = Offer()
         offer.toMittyId = contacteeUser.id
-        offer.disiredId = contacteeCard.namecardID
+        offer.repliedId = contacteeCard.namecardID
         offer.offerredId = selectedCard!.id
         offer.message = offerMessage.textView.text
         

@@ -7,7 +7,7 @@ class SocialViewController: MittyViewController {
     
     
     // MARK: - Properties
-    var contactList: [SocialContactInfo]
+    var contactList: [Contactee]
     
     // MARK: - View Elements
     let topImage: UIImageView
@@ -16,7 +16,7 @@ class SocialViewController: MittyViewController {
     
     // MARK: - Initializers
     init() {
-        contactList = [SocialContactInfo]()
+        contactList = [Contactee]()
         self.topImage = UIImageView.newAutoLayout()
         self.topImage.image = UIImage(named: "connect")
         
@@ -85,18 +85,17 @@ class SocialViewController: MittyViewController {
     
     
     func initalContactList () {
-        let queue = OperationQueue()
-        queue.addOperation() {
-            // 非同期処理
-            let service = SocialContactService.instance
-            let keys = ["nothing"]
+
+        SocialContactService.instance.getContacteeList(onComplete: {
+            list in
+            self.contactList = list
+            self.collectionView.reloadData()
+        }, onError: {
+            error in
             
-            self.contactList = service.search(keys: keys)
-            // 非同期処理のコールバック
-            OperationQueue.main.addOperation() {
-                self.collectionView.reloadData()
-            }
-        }
+        })
+        
+        
     }
     
 }
@@ -106,7 +105,7 @@ extension SocialViewController: UICollectionViewDataSource {
     
     ///
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -128,8 +127,15 @@ extension SocialViewController: UICollectionViewDataSource {
     
     ///
     func cellTapped(handler: UITapGestureRecognizer) {
-        print (handler.view ?? "")
         
+        let contact = ((handler.view) as! ContactInfoCell).contact!
+        
+        handler.view?.isUserInteractionEnabled = false
+        let vc = ProfileViewController()
+        vc.mittyId = contact.profile.mittyId
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+        handler.view?.isUserInteractionEnabled = true
     }
 }
 

@@ -102,9 +102,10 @@
 		FC5CBD7B1F53FEE9006541E3 /* excard.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5CBD7A1F53FEE9006541E3 /* excard.png */; };
 		FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */; };
 		FC5CBD7F1F56CC2D006541E3 /* SocialMirrorForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */; };
-		FC5CBD851F5961DF006541E3 /* NamecardOffer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD841F5961DF006541E3 /* NamecardOffer.swift */; };
-		FC5CBD871F5961F9006541E3 /* NamecardOffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD861F5961F9006541E3 /* NamecardOffersViewController.swift */; };
+		FC5CBD851F5961DF006541E3 /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD841F5961DF006541E3 /* Offer.swift */; };
+		FC5CBD871F5961F9006541E3 /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD861F5961F9006541E3 /* OffersViewController.swift */; };
 		FC5CBD891F59A887006541E3 /* OffersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD881F59A887006541E3 /* OffersService.swift */; };
+		FC5CBD8B1F5B1209006541E3 /* Contactee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8A1F5B1209006541E3 /* Contactee.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -313,9 +314,10 @@
 		FC5CBD7A1F53FEE9006541E3 /* excard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = excard.png; path = images/excard.png; sourceTree = "<group>"; };
 		FC5CBD7C1F540BB3006541E3 /* NamecardExchangeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardExchangeViewController.swift; sourceTree = "<group>"; };
 		FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMirrorForm.swift; sourceTree = "<group>"; };
-		FC5CBD841F5961DF006541E3 /* NamecardOffer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardOffer.swift; sourceTree = "<group>"; };
-		FC5CBD861F5961F9006541E3 /* NamecardOffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardOffersViewController.swift; sourceTree = "<group>"; };
+		FC5CBD841F5961DF006541E3 /* Offer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
+		FC5CBD861F5961F9006541E3 /* OffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
 		FC5CBD881F59A887006541E3 /* OffersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersService.swift; sourceTree = "<group>"; };
+		FC5CBD8A1F5B1209006541E3 /* Contactee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contactee.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -550,7 +552,7 @@
 		FC0AF1DF1DC4F22600C76408 /* model */ = {
 			isa = PBXGroup;
 			children = (
-				FC5CBD841F5961DF006541E3 /* NamecardOffer.swift */,
+				FC5CBD841F5961DF006541E3 /* Offer.swift */,
 				FC0AF1F01DC4F65100C76408 /* DataModel.swift */,
 				FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */,
 				FC5ECFF91EBB170000AA6C13 /* ActivityInfo.swift */,
@@ -564,6 +566,7 @@
 				FC95F91A1F3EF46800F83766 /* Proposals.swift */,
 				FC004C5F1F45E13200230DAA /* Code.swift */,
 				FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */,
+				FC5CBD8A1F5B1209006541E3 /* Contactee.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -656,7 +659,7 @@
 		FC0AF1EA1DC4F56E00C76408 /* social */ = {
 			isa = PBXGroup;
 			children = (
-				FC5CBD861F5961F9006541E3 /* NamecardOffersViewController.swift */,
+				FC5CBD861F5961F9006541E3 /* OffersViewController.swift */,
 				F4BB80231DAE58F300055D48 /* SocialViewController.swift */,
 				FCF8D64A1DD89DD60059B270 /* ContactInfoViewController.swift */,
 				FCF8D64C1DD89E650059B270 /* ContactInfoCell.swift */,
@@ -1220,7 +1223,7 @@
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
 				FC5CBD711F4E2EA5006541E3 /* ProposalDetailsViewController.swift in Sources */,
-				FC5CBD871F5961F9006541E3 /* NamecardOffersViewController.swift in Sources */,
+				FC5CBD871F5961F9006541E3 /* OffersViewController.swift in Sources */,
 				FC31D7CA1E80103F00F79E07 /* TapableLabel.swift in Sources */,
 				FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */,
 				FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */,
@@ -1231,6 +1234,7 @@
 				FCFA84781F08A89D00E9C6F2 /* Profile.swift in Sources */,
 				FC95F91B1F3EF46800F83766 /* Proposals.swift in Sources */,
 				FCF8D64B1DD89DD60059B270 /* ContactInfoViewController.swift in Sources */,
+				FC5CBD8B1F5B1209006541E3 /* Contactee.swift in Sources */,
 				FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */,
@@ -1279,7 +1283,7 @@
 				FC5ECFFA1EBB170000AA6C13 /* ActivityInfo.swift in Sources */,
 				FCF957601DC6471D00A52125 /* PersonalInfoViewController.swift in Sources */,
 				FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */,
-				FC5CBD851F5961DF006541E3 /* NamecardOffer.swift in Sources */,
+				FC5CBD851F5961DF006541E3 /* Offer.swift in Sources */,
 				FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */,

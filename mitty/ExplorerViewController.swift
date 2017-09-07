@@ -40,8 +40,8 @@ class EventViewController: MittyViewController {
 
         super.autoCloseKeyboard()
 
-        view.backgroundColor = UIColor(white: 0.90, alpha: 1)
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor(white: 0.50, alpha: 1)
+//        view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()
         self.searchBar.resignFirstResponder()
         self.searchBar.placeholder = "Fun for life!"
@@ -78,7 +78,7 @@ class EventViewController: MittyViewController {
         collectionView.delegate = self
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: EventCell.id)
 
-        collectionView.backgroundColor = UIColor.white
+//        collectionView.backgroundColor = UIColor.white
     }
 
     private func addConstraints() {
@@ -228,8 +228,8 @@ class RequestExplorerViewController: MittyViewController {
     // MARK: - View Controller Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor(white: 0.90, alpha: 1)
-        view.backgroundColor = UIColor.white
+//        view.backgroundColor = UIColor(white: 0.90, alpha: 1)
+//        view.backgroundColor = UIColor.white
         self.searchBar.becomeFirstResponder()
         self.searchBar.resignFirstResponder()
         self.searchBar.placeholder = "Fun for life!"

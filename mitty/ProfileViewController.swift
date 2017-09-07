@@ -179,10 +179,9 @@ class ProfileViewController: MittyViewController {
         picture.button.contentMode = .scaleAspectFit
         picture.button.backgroundColor = .clear
         if userInfo.icon != "" {
-            DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
-            picture.button.af_setBackgroundImage(for: .normal, url: URL(string: userInfo.icon)!, placeholderImage: UIImage(named: "downloading"))
+            picture.button.setMittyImage(url: userInfo.icon)
         } else {
-            picture.button.setBackgroundImage(UIImage(named: "pengin2"), for: .normal)
+            picture.button.setImage(UIImage(named: "pengin2"), for: .normal)
         }
 
     }
@@ -482,15 +481,32 @@ class ProfileViewController: MittyViewController {
                 l.label.textColor = UIColor.orange
             }
             
-            row +++ MQForm.tapableImg(name: "exchange", url: "excard").layout {
-                l in
-                l.rightMost(withInset: 8).width(22).height(20)
-            }.bindEvent(.touchUpInside) {
-                b in
-                let vc = NamecardExchangeViewController()
-                vc.contacteeCard = card
-                vc.contacteeUser = self.userInfo
-                self.navigationController?.pushViewController(vc, animated: true)
+            if card.contactID == 0 {
+                row +++ MQForm.tapableImg(name: "exchange", url: "excard").layout {
+                    l in
+                    l.rightMost(withInset: 8).width(22).height(20)
+                }.bindEvent(.touchUpInside) {
+                        b in
+                        let vc = NamecardExchangeViewController()
+                        vc.contacteeCard = card
+                        vc.contacteeUser = self.userInfo
+                        self.navigationController?.pushViewController(vc, animated: true)
+                }
+            } else {
+                row +++ MQForm.label(name: "view", title: ">").layout {
+                    l in
+                    l.rightMost().width(40)
+                }.bindEvent(.touchUpInside) { l in
+                    l.isUserInteractionEnabled = false
+                    NameCardService.instance.getNamecard(of: card.namecardID, onComplete: { nc in
+                        let vc = NameCardViewController()
+                        vc.nameCard = nc
+                        self.navigationController?.pushViewController(vc, animated: true)
+                    }, onError: {
+                        error in
+                        self.showError(error)
+                    })
+                }
             }
 
             last = row

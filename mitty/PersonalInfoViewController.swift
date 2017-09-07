@@ -198,10 +198,9 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         picture.button.contentMode = .scaleAspectFit
         picture.button.backgroundColor = .clear
         if userInfo.icon != "" {
-            DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
-            picture.button.af_setBackgroundImage(for: .normal, url: URL(string: userInfo.icon)!, placeholderImage: UIImage(named: "downloading"))
+            picture.button.setMittyImage(url: userInfo.icon)
         } else {
-            picture.button.setBackgroundImage(UIImage(named: "pengin2"), for: .normal)
+            picture.button.setImage(UIImage(named: "pengin2"), for: .normal)
         }
 
     }

@@ -195,21 +195,9 @@ open class MQForm : UIView {
         }
     }
     
-    // 
-    // フォームの主要部を構成するスクロールコンテナーコントロルを作成
-    //
-    func scrollContainer(name: String) -> Container {
-        let scroll = UIScrollView.newAutoLayout()
-        scroll.isScrollEnabled = true
-        scroll.flashScrollIndicators()
-        scroll.canCancelContentTouches = false
-        
-        let container = Container(name: name, view: scroll)
-        
-        return container
-    }
-    
+
     func fillIn(vc: UIViewController , inset : CGFloat = 0) {
+        vc.view.addSubview(self)
         self.autoPin(toTopLayoutGuideOf: vc, withInset: inset)
         self.autoPin(toBottomLayoutGuideOf: vc, withInset: inset)
         self.autoPinEdge(toSuperviewEdge: .left, withInset: inset)

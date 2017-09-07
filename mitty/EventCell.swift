@@ -5,15 +5,12 @@ class EventCell: UICollectionViewCell {
     static let id = "journey-search-result-cell"
 
     // MARK: - View Elements
-    var event: EventInfo?
-    var images = ["event1", "event6", "event4", "event10.jpeg", "event5", "event9.jpeg"]
-
+    var event: EventInfo!
 
     var form = MQForm.newAutoLayout()
 
     // MARK: - Initializers
     override init(frame: CGRect) {
-
         super.init(frame: frame)
     }
 
@@ -21,11 +18,15 @@ class EventCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
+    /// <#Description#>
     private func addConstraints() {
 
 
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameter event: <#event description#>
     func configureView(event: EventInfo) {
 
         self.event = event
@@ -38,156 +39,312 @@ class EventCell: UICollectionViewCell {
             s in
             s.fillParent()
         }
+        
         form +++ section
+        
+        // タイトル行（タイトル、アイコン）
+        layoutTitle(section)
 
-        // 誰かポストしたのか
-        var row = Row.LeftAligned().layout {
+        // いつから、残り何日（カウントダウン）
+        layoutTerm(section)
+ 
+        // 画像
+        layoutImage(section)
+
+        // Likes
+        layoutLikesAndPoster(section)
+        
+        // 説明
+        layoutDescription(section)
+
+        // layout設定
+        form.configLayout()
+
+    }
+
+    
+    /// <#Description#>
+    ///
+    /// - Parameter section: <#section description#>
+    func layoutTitle(_ section: Section) {
+        let row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(30)
+            r.fillHolizon().height(40)
         }
-
-        let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "pengin4")
-        if (event.publisherIcon != nil) {
-            publisherIcon.imageView.image = event.publisherIcon
-        }
-
-        row +++ publisherIcon.width(30).height(30)
-
-        let publisher = MQForm.label(name: "publisher", title: event.publisherName)
-        row +++ publisher.layout {
-            pub in
-            let l = pub.label
-            l.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-            l.textColor = MittyColor.healthyGreen
-        }
-
-        let remainder = event.startDate.timeIntervalSinceNow / 86400
-        var remainDays = String(Int(-remainder)) + "日前."
-        if (remainder >= 0) {
-            remainDays = "開始まであと\(Int(remainder))日. "
-        }
-
-        let published = MQForm.label(name: "days", title: remainDays)
-
-        row +++ published.layout {
-            pub in
-            let l = pub.label
-            l.font = UIFont.boldSystemFont(ofSize: UIFont.systemFontSize)
-            l.textColor = UIColor.black
-        }
-
-        section <<< row
-
-        // タイトルを表示
-        // logoがある場合ロゴを表示
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(75)
-        }
-        let col = Col.BottomUpAligned().layout {
-            c in
-            c.height(75).width(25)
-        }
-        col +++ MQForm.label(name: "likes1", title: "🔺").width(25).height(25)
-        col +++ MQForm.label(name: "likes2", title: String(describing: event.likes)).width(25).height(25).layout {
-            l in
-            let label = l.label
-            label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-            label.textAlignment = .center
-        }
-
-        col +++ MQForm.label(name: "likes3", title: "🔻").width(25).height(25)
-        row +++ col
-
+        
         if event.eventLogo != nil {
             // imageがある場合、イメージを表示
             let itemImage = MQForm.img(name: "eventImage", url: event.eventLogoUrl).layout {
                 img in
-                img.width(50).height(50)
-                img.imageView.image = event.eventLogo
+                img.width(35).height(35).upMargin(5).leftMargin(10)
+                img.imageView.image = self.event.eventLogo
             }
             row +++ itemImage
         } else {
-            row +++ MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
+            row +++ MQForm.img(name: "eventLogo", url: "timesquare").layout {
+                i in
+                i.width(35).height(35).upMargin(5).leftMargin(10)
+            }
         }
-
+        
         let titleLabel = MQForm.label(name: "titleLabel", title: event.title).layout { t in
             t.label.numberOfLines = 2
             t.label.font = UIFont.boldSystemFont(ofSize: 18)
-            t.rightMost().height(50)
+            t.label.adjustsFontSizeToFitWidth = true
+            t.bottomMargin(2).leftMargin(5).rightMost(withInset: 5).upMargin(10)
             t.label.textColor = MittyColor.healthyGreen
         }
+        
         row +++ titleLabel
+        
+        
         section <<< row
 
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter section: <#section description#>
+    func layoutTerm(_ section: Section) {
+        
+        // 日付情報を設定
+        let row = Row.Intervaled().layout {
+            r in
+            r.fillHolizon().height(34)
+        }
+        
+        row.spacing = 10
+        
+        let remainder = event.endDate.timeIntervalSinceNow / 86400
+        let tillStart = event.startDate.timeIntervalSinceNow / 86400
+        
+        var remainDays = ""
+        let duration = event.duration()
+        row +++ MQForm.label(name: "duration", title: duration).layout {
+            d in
+            d.leftMost(withInset:5).rightMargin(10).bottomMargin(5)
+            d.label.adjustsFontSizeToFitWidth = true
+            d.label.textColor = UIColor.gray
+        }
+        // 未開始
+        if (tillStart > 0) {
+            remainDays = "開始まで\(Int(tillStart))日"
+            // 開始まで１日を切った場合
+            if tillStart < 1 {
+                remainDays = "開始まで\(Int(tillStart*24))時間"
+            }
+            
+            // 開始まで1時間を切った場合
+            if tillStart < (1/24) {
+                remainDays = "開始まで\(Int(tillStart*24*60))分"
+            }
+            
+        // 進行中
+        } else if (tillStart <= 0 && remainder > 0) {
+            remainDays = "終了まで\(Int(remainder))日"
+            // 終了まで１日を切った場合
+            if remainder < 1 {
+                remainDays = "終了まで\(Int(remainder*24))時間"
+            }
+            
+            // 開始まで1時間を切った場合
+            if remainder < (1/24) {
+                remainDays = "終了まで\(Int(remainder*24*60))分"
+            }
+            
+        // 完了
+        } else if remainder <= 0 {
+            remainDays = "完了しました"
+        // else はありえない、意味不明
+        } else {
+            remainDays = "日程不明"
+        }
+        
+        let termStatus = MQForm.hilight(label: remainDays, named:"termStatus")
+        
+        row +++ termStatus.layout {
+            pub in
+            pub.height(28)
+            let l = pub.label
+            l.textAlignment = .center
+            l.adjustsFontSizeToFitWidth = true
+            l.font = UIFont.boldSystemFont(ofSize: 12)
+            l.textColor = UIColor.darkGray
+        }
+        
+        section <<< row
+        
+    }
 
+    /// <#Description#>
+    ///
+    /// - Parameter section: <#section description#>
+    func layoutImage(_ section: Section) {
+        
+        
         if event.coverImage != nil {
             let height = (UIScreen.main.bounds.width - 30) * event.coverImage!.size.ratio
             // imageがある場合、イメージを表示
             let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
                 img in
                 img.fillHolizon().height(height)
-                img.imageView.image = event.coverImage
+                img.imageView.image = self.event.coverImage
             }
-
-            row = Row.LeftAligned().layout {
+            
+            let row = Row.LeftAligned().layout {
                 r in
                 r.fillHolizon().height(height)
             }
-
-            row +++ itemImage
+            
+            let container = Row.LeftAligned().layout {
+                r in
+                r.fillHolizon().height(height)
+            }
+            
+            container +++ itemImage
+            
+            let col = Col.UpDownAligned().layout {
+                c in
+                c.upMargin(10).leftMost(withInset: 10).width(60).height(65)
+                c.view.backgroundColor = UIColor.orange
+                c.view.layer.cornerRadius = 1
+                c.view.layer.masksToBounds = true
+                c.view.layer.shadowColor = UIColor.black.cgColor
+                c.view.layer.shadowOpacity = 0.8
+                c.view.layer.shadowOffset = CGSize(width: 1, height: 1)
+                c.view.layer.shadowRadius = 3
+            }
+            
+            container +++ col
+            
+            col +++ MQForm.label(name: "day", title: event.startDate.day99).layout {
+                l in
+                l.height(30).fillHolizon()
+                l.label.adjustsFontSizeToFitWidth = true
+                l.label.textColor = UIColor.black
+                l.label.textAlignment = .center
+                l.label.font = UIFont.systemFont(ofSize: 28)
+            }
+            col +++ MQForm.label(name: "monthyear", title: event.startDate.monthYear).layout {
+                l in
+                l.height(18).fillHolizon()
+                l.label.adjustsFontSizeToFitWidth = true
+                l.label.textColor = UIColor.white
+                l.label.textAlignment = .center
+                l.label.font = UIFont.systemFont(ofSize: 10)
+            }
+            col +++ MQForm.label(name: "minute", title: event.startDate.time12).layout {
+                l in
+                l.height(15).fillHolizon()
+                l.label.adjustsFontSizeToFitWidth = true
+                l.label.textColor = UIColor.white
+                l.label.textAlignment = .center
+                l.label.font = UIFont.systemFont(ofSize: 10)
+            }
+        
+            row +++ container
+            
             section <<< row
-
+            
         }
 
-        // 日付情報を設定
-        row = Row.LeftAligned().layout {
+        
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter section: <#section description#>
+    func layoutLikesAndPoster(_ section: Section) {
+        // logoがある場合ロゴを表示
+        let row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(20)
+            r.height(40)
         }
-        let endTimeLabel = UILabel.newAutoLayout()
-        endTimeLabel.text = event.duration()
-        let timeDuration = Control(name: "duration", view: endTimeLabel).layout {
-            l in
-            l.fillParent()
-            l.label.font = UIFont.systemFont(ofSize: 14)
-        }
-        row +++ timeDuration
-        section <<< row
 
-        // 日付情報を設定
-        row = Row.LeftAligned()
+        let left = Row.LeftAligned().height(30)
+        row +++ left
+        left +++ MQForm.label(name: "likes1", title: "❤️").layout {
+            l in
+            l.width(25).height(25).leftMargin(10)
+        }
+        left +++ MQForm.label(name: "likes2", title: "\(event.likes) いいね！").layout {
+            l in
+            l.height(25).width(80).leftMargin(5)
+            let label = l.label
+            label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
+            label.textAlignment = .left
+        }
+        
+        let right = Row.LeftAligned().layout {
+            r in
+            r.height(30)
+        }
+        row +++ right
+        
+        let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "")
+        if (event.publisherIcon != nil) {
+            publisherIcon.imageView.image = event.publisherIcon
+        }
+        
+        right +++ publisherIcon.width(25).height(25).layout {
+            icon in
+            icon.margin.all(2)
+        }
+        
+        let publisher = MQForm.label(name: "publisher", title: "by " + event.publisherName + " " + event.publishedDays + "Days")
+        
+        right +++ publisher.layout {
+            pub in
+            pub.leftMargin(20).upMargin(5)
+            let l = pub.label
+            l.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            l.textColor = UIColor.gray
+        }
+        
+        section <<< row
+        
+
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter section: <#section description#>
+    func layoutDescription(_ section: Section) {
+        let row = Row.LeftAligned()
         let actionLabel = UILabel.newAutoLayout()
         actionLabel.text = event.action
         let actionCtrl = Control(name: "actionLabel", view: actionLabel).layout {
             l in
-            l.fillParent()
+            l.fillHolizon(10).upper(withInset: 3).leftMargin(5)
             l.label.font = UIFont.systemFont(ofSize: 12)
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
             l.label.numberOfLines = 0
         }
         row.layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().bottomAlign(with: actionCtrl)
+            r.view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+//            r.view.layer.borderColor = UIColor.blue.cgColor
+//            r.view.layer.borderWidth = 1
+
         }
         row +++ actionCtrl
         section <<< row
-
-        form.configLayout()
-
     }
+    
+    /// <#Description#>
     func reloadImages() {
-        if let img = event?.coverImage {
+        if let img = event.coverImage {
             if let iv = form.quest("[name=eventImage]").control()?.imageView {
                 iv.image = img
             }
         }
 
-        if let img = event?.eventLogo {
+        if let img = event.eventLogo {
             form.quest("[name=eventLogo]").control()?.imageView.image = img
         }
 
-        if let img = event?.publisherIcon {
+        if let img = event.publisherIcon {
             form.quest("[name=pushlisherIcon]").control()?.imageView.image = img
         }
     }

@@ -101,8 +101,13 @@ class EventInputForm: MQForm {
             v.upper().height(2)
         }
 
-        let inputContainer = scrollContainer(name: "inputContainer")
-
+        let scroll = UIScrollView.newAutoLayout()
+        scroll.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 900)
+        scroll.isScrollEnabled = true
+        scroll.flashScrollIndicators()
+        scroll.canCancelContentTouches = false
+        
+        let inputContainer = Container(name: "inputContainer", view: scroll)
         self +++ inputContainer
 
         inputContainer.layout() { (main) in
