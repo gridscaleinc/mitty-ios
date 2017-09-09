@@ -75,7 +75,7 @@ class EditItemViewController: MittyViewController {
         }
         row +++ itemTitle.layout {
             t in
-            t.leftMost(withInset: 10).rightMost(withInset: 10).height(50)
+            t.leftMost(withInset: 10).rightMost(withInset: 10).height(50).verticalCenter()
 
         }
 
@@ -89,7 +89,7 @@ class EditItemViewController: MittyViewController {
 
         row +++ itemMemo.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).height(100)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).height(100).verticalCenter()
         }
 
         section <<< row
@@ -104,7 +104,7 @@ class EditItemViewController: MittyViewController {
         row +++ switchButton
         row +++ textNotifyTime.layout { t in
             t.height(30)
-            t.rightMost(withInset: 20)
+            t.rightMost(withInset: 20).verticalCenter()
         }
 
         section <<< row

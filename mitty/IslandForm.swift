@@ -113,7 +113,7 @@ class IslandPickForm: MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegat
         row +++ searchBarControl.layout { [weak self]
             bar in
             self?.setColor(bar.view as! UISearchBar, .white)
-            bar.fillHolizon(20).height(32)
+            bar.fillHolizon(20).height(32).verticalCenter()
         }
 
         section <<< row
@@ -126,12 +126,12 @@ class IslandPickForm: MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegat
 
         row +++ nameControl.layout {
             c in
-            c.leftMost(withInset: 10).height(35).rightMost(withInset: 60)
+            c.leftMost(withInset: 10).height(35).rightMost(withInset: 60).verticalCenter()
         }
 
         row +++ iconControl.layout {
             icon in
-            icon.width(35).height(35).upMargin(5)
+            icon.width(35).height(35).upMargin(5).verticalCenter()
         }
 
         section <<< row
@@ -144,12 +144,12 @@ class IslandPickForm: MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegat
 
         row +++ idControl.layout {
             l in
-            l.leftMost(withInset: 10).height(35).width(100)
+            l.leftMost(withInset: 10).height(35).width(100).verticalCenter()
         }
 
         row +++ nickNameControl.layout {
             n in
-            n.height(30).rightMost(withInset: 10)
+            n.height(30).rightMost(withInset: 10).verticalCenter()
         }
 
         section <<< row
@@ -162,12 +162,12 @@ class IslandPickForm: MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegat
 
         row +++ addressControl.layout {
             l in
-            l.rightMost(withInset: 70).height(30)
+            l.rightMost(withInset: 70).height(30).verticalCenter()
         }
 
         row +++ okButton.layout {
             l in
-            l.rightMost(withInset: 2).height(30)
+            l.rightMost(withInset: 2).height(30).verticalCenter()
             l.view.backgroundColor = .gray
         }
 
@@ -182,7 +182,7 @@ class IslandPickForm: MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegat
 
         row +++ nameTable.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).down().upMargin(10)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).fillVertical()
         }
 
         section <<< row
@@ -196,7 +196,7 @@ class IslandPickForm: MQForm, MKLocalSearchCompleterDelegate, UITableViewDelegat
 
         row +++ mapControl.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).down().upMargin(10)
+            m.leftMost(withInset: 10).rightMost(withInset: 10).fillVertical()
         }
 
         section <<< row

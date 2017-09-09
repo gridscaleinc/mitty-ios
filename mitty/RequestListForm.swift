@@ -70,14 +70,18 @@ class RequestListForm: MQForm {
         row +++ MQForm.label(name: "req-title", title: "リクエスト中").layout {
             l in
             l.label.textColor = .orange
-            l.height(20).fillHolizon()
+            l.height(20).fillHolizon().verticalCenter()
         }
         
         for r in requestList {
             let row = Row.LeftAligned()
             section <<< row
             
-            let l = MQForm.label(name: "requestlabel", title: r.title).width(200).height(30)
+            let l = MQForm.label(name: "requestlabel", title: r.title).width(200).height(30).layout{
+                l in
+                l.verticalCenter()
+            }
+
             row +++ l
             
             // ラベルに紐つくreqを保存
@@ -94,6 +98,7 @@ class RequestListForm: MQForm {
             
             row +++ MQForm.label(name: "req-content", title: "リクエストなし").layout {
                 l in
+                l.verticalCenter()
                 l.label.textColor = .gray
             }
         }

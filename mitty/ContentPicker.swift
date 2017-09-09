@@ -96,7 +96,7 @@ class ContentPicker: MittyViewController, UIImagePickerControllerDelegate, UINav
 
         selectedRow +++ pickedImg.layout {
             i in
-            i.leftMost(withInset: 10).height(120).width(120)
+            i.leftMost(withInset: 10).height(120).width(120).verticalCenter()
         }
 
         form +++ selectedRow

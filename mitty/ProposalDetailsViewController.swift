@@ -128,7 +128,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         row +++ MQForm.label(name: "title-request", title: "リクエスト").layout {
             c in
-            c.height(25)
+            c.height(25).verticalCenter()
             c.leftMost(withInset: 20)
             let l = c.view as! UILabel
             l.textColor = .white
@@ -146,7 +146,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         let titleLabel = MQForm.label(name: "Title", title: request.title).layout {
             l in
-            l.fillHolizon(10).height(25)
+            l.fillHolizon(10).height(25).verticalCenter()
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 20)
             (l.view as! UILabel).textColor = .black
             (l.view as! UILabel).numberOfLines = 0
@@ -163,7 +163,7 @@ class ProposalDetailsViewController: MittyViewController {
         }
         let tagLabel = MQForm.label(name: "tag", title: "🏷 " + request.tag).layout {
             l in
-            l.width(35).height(35).fillHolizon(10)
+            l.width(35).height(35).fillHolizon(10).verticalCenter()
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
             (l.view as! UILabel).textColor = .gray
             (l.view as! UILabel).numberOfLines = 1
@@ -175,7 +175,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         let actionLabel = MQForm.label(name: "action", title: (request.desc)).layout {
             c in
-            c.fillHolizon(10)
+            c.fillHolizon(10).verticalCenter()
             let l = c.view as! UILabel
             l.numberOfLines = 3
             l.textColor = .black
@@ -222,7 +222,7 @@ class ProposalDetailsViewController: MittyViewController {
         }
 
         let likes = MQForm.label(name: "likes", title: "❤️ \(proposal.numberOfLikes)").layout { l in
-            l.height(35).width(330)
+            l.height(35).width(330).verticalCenter()
         }
 
         row +++ likes
@@ -236,7 +236,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         row +++ MQForm.label(name: "Term", title: "期間").height(35).width(100)
         let dates = MQForm.hilight(label: proposal.term(), named: "preferedDate").layout { l in
-            l.height(35).width(180)
+            l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
         }
@@ -249,7 +249,11 @@ class ProposalDetailsViewController: MittyViewController {
             r.fillHolizon().height(35)
         }
 
-        row +++ MQForm.label(name: "Price", title: "価格").height(35).width(100)
+        row +++ MQForm.label(name: "Price", title: "価格").height(35).width(100).layout {
+            l in
+            l.verticalCenter()
+        }
+
         let price = MQForm.hilight(label: proposal.price(), named: "price").layout { l in
             l.height(35).width(180)
             l.margin.left = 20
@@ -264,7 +268,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         let accept = Control(name: "accept", view: acceptButton).layout {
             c in
-            c.height(40)
+            c.height(40).verticalCenter()
             c.button.setTitleColor(UIColor.orange, for: .normal)
         }.bindEvent(.touchUpInside) {
             b in
@@ -273,7 +277,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         let refuse = Control(name: "refuse", view: refuseButton).layout {
             c in
-            c.height(40)
+            c.height(40).verticalCenter()
             c.button.setTitleColor(UIColor.white, for: .normal)
             c.button.backgroundColor = MittyColor.lightYellow
         }.bindEvent(.touchUpInside) {

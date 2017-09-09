@@ -202,7 +202,7 @@ class ProfileViewController: MittyViewController {
         let col1 = Col.UpDownAligned()
         col1.layout {
             c in
-            c.leftMost().height(120).width(120)
+            c.leftMost().height(120).width(120).verticalCenter()
         }
         col1 +++ picture
         picture.layout {
@@ -223,11 +223,14 @@ class ProfileViewController: MittyViewController {
             r.fillHolizon().height(25)
         }
 
-        idRow +++ MQForm.label(name: "id", title: "ID:")
+        idRow +++ MQForm.label(name: "id", title: "ID:").layout {
+            l in
+            l.verticalCenter()
+        }
         idRow +++ idLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25)
+            l.rightMost(withInset: 10).height(25).verticalCenter()
         }
 
 
@@ -239,11 +242,15 @@ class ProfileViewController: MittyViewController {
             r.fillHolizon().height(25)
         }
 
-        nameRow +++ MQForm.label(name: "name", title: "名前")
+        nameRow +++ MQForm.label(name: "name", title: "名前").layout {
+            l in
+            l.verticalCenter()
+        }
+
         nameRow +++ nameLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(120)
+            l.rightMost(withInset: 10).height(25).width(120).verticalCenter()
         }
 
 
@@ -255,11 +262,15 @@ class ProfileViewController: MittyViewController {
             r.fillHolizon().height(30)
         }
 
-        genderRow +++ MQForm.label(name: "gender", title: "性別")
+        genderRow +++ MQForm.label(name: "gender", title: "性別").layout {
+            l in
+            l.verticalCenter()
+        }
+
         genderRow +++ genderLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(120)
+            l.rightMost(withInset: 10).height(25).width(120).verticalCenter()
         }
 
 
@@ -272,11 +283,15 @@ class ProfileViewController: MittyViewController {
             r.fillHolizon().height(30)
         }
 
-        ageGroupRow +++ MQForm.label(name: "age-group", title: "年齢層")
+        ageGroupRow +++ MQForm.label(name: "age-group", title: "年齢層").layout {
+            l in
+            l.verticalCenter()
+        }
+
         ageGroupRow +++ ageGroupLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(120)
+            l.rightMost(withInset: 10).height(25).width(120).verticalCenter()
         }
 
         col2 +++ ageGroupRow
@@ -323,10 +338,13 @@ class ProfileViewController: MittyViewController {
             r.fillHolizon().height(40)
         }
 
-        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(30).width(70)
+        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(30).width(70).layout {
+            l in
+            l.verticalCenter()
+        }
         row +++ constellationLabel.layout {
             l in
-            l.height(30).width(120)
+            l.height(30).width(120).verticalCenter()
             l.margin.left = 80
         }
 
@@ -337,16 +355,24 @@ class ProfileViewController: MittyViewController {
             r.fillHolizon().height(40)
         }
 
-        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(35).width(70)
+        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(35).width(70).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ appearanceLabel.layout {
             l in
-            l.height(30).width(120)
+            l.height(30).width(120).verticalCenter()
             l.margin.left = 80
         }
 
         section <<< row
 
-        row = seperator(section: section, caption: "職業")
+        row = seperator(section: section, caption: "職業").layout {
+            l in
+            l.verticalCenter()
+        }
+
 
         section <<< row
 
@@ -423,7 +449,10 @@ class ProfileViewController: MittyViewController {
             r.bottomAlign(with: self.nameCardSection).fillHolizon()
         }
 
-        row1 +++ nameCardSection
+        row1 +++ nameCardSection.layout {
+            s in
+            s.upper()
+        }
 
         section <<< row1
 
@@ -473,18 +502,18 @@ class ProfileViewController: MittyViewController {
             row +++ MQForm.img(name: "businessLogo", url: "").layout {
                 i in
                 i.imageView.setMittyImage(url: card.businessLogoUrl)
-                i.height(25).width(25).leftMost(withInset: 8)
+                i.height(25).width(25).leftMost(withInset: 8).verticalCenter()
             }
             row +++ MQForm.label(name: "namecard", title: card.businessName).layout {
                 l in
-                l.height(30).rightMost(withInset: 30).leftMargin(5)
+                l.height(30).rightMost(withInset: 30).leftMargin(5).verticalCenter()
                 l.label.textColor = UIColor.orange
             }
             
             if card.contactID == 0 {
                 row +++ MQForm.tapableImg(name: "exchange", url: "excard").layout {
                     l in
-                    l.rightMost(withInset: 8).width(22).height(20)
+                    l.rightMost(withInset: 8).width(22).height(20).verticalCenter()
                 }.bindEvent(.touchUpInside) {
                         b in
                         let vc = NamecardExchangeViewController()
@@ -495,7 +524,7 @@ class ProfileViewController: MittyViewController {
             } else {
                 row +++ MQForm.label(name: "view", title: ">").layout {
                     l in
-                    l.rightMost().width(40)
+                    l.rightMost().width(40).verticalCenter()
                 }.bindEvent(.touchUpInside) { l in
                     l.isUserInteractionEnabled = false
                     NameCardService.instance.getNamecard(of: card.namecardID, onComplete: { nc in

@@ -53,7 +53,11 @@ class RequestCell: UICollectionViewCell {
             r.view.backgroundColor = MittyColor.lightYellow.withAlphaComponent(0.15)
         }
 
-        let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "")
+        let publisherIcon = MQForm.img(name: "pushlisherIcon", url: "").layout {
+            l in
+            l.verticalCenter()
+        }
+
 
         publisherIcon.imageView.setMittyImage(url: req.ownerIconUrl)
         row +++ publisherIcon.width(30).height(30)
@@ -102,7 +106,7 @@ class RequestCell: UICollectionViewCell {
         actionLabel.text = req.desc
         let actionCtrl = Control(name: "actionLabel", view: actionLabel).layout {
             l in
-            l.fillHolizon(10).upper(withInset: 10)
+            l.fillHolizon(10).verticalCenter()
             l.label.font = UIFont.systemFont(ofSize: 12)
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
             l.label.numberOfLines = 0

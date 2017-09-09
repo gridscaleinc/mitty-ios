@@ -163,14 +163,14 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
 
         row +++ MQForm.label(name: "cons", title: "星座").layout {
             r in
-            r.width(70)
+            r.width(70).verticalCenter()
         }
         
         self.constellation.textField.text = CONSTELLATION(of: profile.constellation)?.value
         
         row +++ constellation.layout {
             c in
-            c.rightMost().height(30)
+            c.rightMost().height(30).verticalCenter()
             c.textField.textColor = UIColor.orange
         }
 

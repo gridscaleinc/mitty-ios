@@ -70,13 +70,13 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         var row = Row.LeftAligned()
 
         row +++ MQForm.img(name: "icon", url: "pengin4").layout() { c in
-            c.height(50).width(50).leftMargin(30)
+            c.height(50).width(50).leftMargin(30).verticalCenter()
         }
         row +++ MQForm.label(name: "welcome-message", title: "Mittyへようこそ").layout() {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.boldSystemFont(ofSize: 22)
-            c.width(350).height(50).leftMargin(20)
+            c.width(350).height(50).leftMargin(20).verticalCenter()
         }
 
         row.layout() {
@@ -89,7 +89,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         row = Row.LeftAligned()
         row +++ MQForm.text(name: "userId", placeHolder: "👩 ユーザーID").width(200).layout() {
             c in
-            c.height(50).leftMargin(30)
+            c.height(50).leftMargin(30).verticalCenter()
         }
 
         row.layout() {
@@ -102,7 +102,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         row +++ MQForm.text(name: "password", placeHolder: "🔐 パスワード").width(200).layout() {
             c in
             (c.view as! UITextField).isSecureTextEntry = true
-            c.height(50).leftMargin(30)
+            c.height(50).leftMargin(30).verticalCenter()
         }
 
         row.layout() {
@@ -115,7 +115,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         row = Row.LeftAligned()
         row +++ MQForm.text(name: "mailAddress", placeHolder: "📩 yourmail@yourdomain").width(200).layout() {
             c in
-            c.height(50).leftMargin(30)
+            c.height(50).leftMargin(30).verticalCenter()
         }
 
         row.layout() {
@@ -128,7 +128,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         row = Row.LeftAligned()
         let signupButton = MQForm.button(name: "Signup", title: "Sign up").layout() {
             c in
-            c.height(30).width(140).leftMargin(30)
+            c.height(30).width(140).leftMargin(30).verticalCenter()
         }
         row +++ signupButton
 
@@ -147,7 +147,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
             l.numberOfLines = 0
             l.textColor = UIColor.red
 
-            c.width(250).height(70).leftMargin(35)
+            c.width(250).height(70).leftMargin(35).verticalCenter()
         }
 
         row +++ errorMessage
@@ -167,7 +167,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
             l.textColor = UIColor.brown
             l.textAlignment = .right
 
-            c.width(350).height(50).rightMargin(-35)
+            c.width(350).height(50).rightMargin(-35).verticalCenter()
         }
 
         row +++ instantUse

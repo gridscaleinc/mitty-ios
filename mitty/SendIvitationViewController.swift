@@ -90,14 +90,14 @@ class SendInvitationViewController: MittyViewController {
         
         row +++ MQForm.label(name: "event-title", title: "イベント：").layout{
             l in
-            l.width(120).height(line_height)
+            l.width(120).height(line_height).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
         }
         
         invitationTitle.label.text = event.title
         row +++ invitationTitle.layout {
             m in
-            m.height(line_height).rightMost(withInset: 10)
+            m.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
         
         detailForm <<< row
@@ -109,7 +109,7 @@ class SendInvitationViewController: MittyViewController {
         
         row +++ MQForm.label(name: "title-memo", title: "メッセージ").layout{
             l in
-            l.width(120)
+            l.width(120).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
         }
         
@@ -130,7 +130,7 @@ class SendInvitationViewController: MittyViewController {
         
         row +++ Control(name:"", view: searchBar).layout{
             l in
-            l.fillHolizon().height(40)
+            l.fillHolizon().height(40).verticalCenter()
             
         }
         

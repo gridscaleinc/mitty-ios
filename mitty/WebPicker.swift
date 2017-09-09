@@ -210,7 +210,7 @@ class WebPicker: MittyViewController, UISearchBarDelegate {
 
         row +++ siteTitle.layout {
             l in
-            l.upper().rightMost().height(40)
+            l.rightMost().height(40).verticalCenter()
             l.label.numberOfLines = 2
             l.label.adjustsFontSizeToFitWidth = true
         }

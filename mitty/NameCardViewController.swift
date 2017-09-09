@@ -142,6 +142,7 @@ class NameCardViewController: MittyViewController, UIImagePickerControllerDelega
         
         titleRow +++ MQForm.label(name: "title", title: "名刺データを入力").layout{
             l in
+            l.verticalCenter()
             l.label.textAlignment = .center
             l.label.textColor = MittyColor.lightYellow
         }

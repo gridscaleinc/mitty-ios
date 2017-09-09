@@ -54,14 +54,14 @@ class OffersViewController : MittyViewController {
             }
             let userName = MQForm.label(name: "name", title: "").layout {
                 n in
-                n.width(80).leftMargin(30)
+                n.width(80).leftMargin(30).verticalCenter()
                 n.label.textColor = MittyColor.healthyGreen
             }
             line1 +++ userName
             
             let userIcon = MQForm.img(name: "icon", url: "").layout {
                 i in
-                i.rightMost(withInset: 50).height(30).width(30).upMargin(5)
+                i.rightMost(withInset: 50).height(30).width(30).verticalCenter()
             }
             
             line1 +++ userIcon
@@ -79,7 +79,7 @@ class OffersViewController : MittyViewController {
             let line2 = Row.LeftAligned()
             let message = MQForm.label(name: "message", title: offer.message).layout {
                 n in
-                n.rightMost(withInset: 10)
+                n.rightMost(withInset: 10).verticalCenter()
                 n.label.textColor = MittyColor.lightYellow
                 n.label.numberOfLines = 3
                 n.label.adjustsFontSizeToFitWidth = true

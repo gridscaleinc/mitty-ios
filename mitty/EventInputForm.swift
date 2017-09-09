@@ -127,7 +127,7 @@ class EventInputForm: MQForm {
         row +++ MQForm.label(name: "title-main-event", title: "イベント情報登録").layout {
             c in
             c.height(40)
-            c.leftMost(withInset: 20)
+            c.leftMost(withInset: 20).verticalCenter()
             let l = c.view as! UILabel
             l.textColor = .white
             l.font = .systemFont(ofSize: 16)
@@ -138,7 +138,7 @@ class EventInputForm: MQForm {
 
         row +++ eventTitle.layout {
             l in
-            l.rightMost(withInset: 60).height(line_height)
+            l.rightMost(withInset: 60).height(line_height).verticalCenter()
         }
         row +++ icon.height(50).width(50)
 
@@ -153,7 +153,7 @@ class EventInputForm: MQForm {
 
         row +++ tagList.layout {
             t in
-            t.fillHolizon(10).height(line_height)
+            t.fillHolizon(10).height(line_height).verticalCenter()
         }
         row.layout() {
             r in
@@ -165,7 +165,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ action.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         action.textView.textContainer.maximumNumberOfLines = 3
@@ -207,7 +207,11 @@ class EventInputForm: MQForm {
         seperator(section: inputForm, caption: "日程")
         //終日フラグ
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "alldayFlagTitle", title: "終日").width(60).height(line_height)
+        row +++ MQForm.label(name: "alldayFlagTitle", title: "終日").width(60).height(line_height).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ allDayFlag.layout {
             flag in
             flag.down().width(45)
@@ -219,12 +223,16 @@ class EventInputForm: MQForm {
         inputForm <<< row
 
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-start", title: "開始").height(line_height).width(60)
+        row +++ MQForm.label(name: "label-start", title: "開始").height(line_height).width(60).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ startDate.layout {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "開始日付・時刻を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -235,12 +243,16 @@ class EventInputForm: MQForm {
         inputForm <<< row
 
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-End", title: "終了").height(line_height).width(60)
+        row +++ MQForm.label(name: "label-End", title: "終了").height(line_height).width(60).layout {
+            l in
+            l.verticalCenter()
+        }
+        
         row +++ endDate.layout {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "終了日付・時刻を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -255,7 +267,7 @@ class EventInputForm: MQForm {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "場所名・住所などを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 60)
+            line.height(line_height).rightMost(withInset: 60).verticalCenter()
         }
         row +++ locationIcon.height(line_height).width(line_height)
 
@@ -270,7 +282,7 @@ class EventInputForm: MQForm {
         addressRow = row
         row +++ addressLabel.layout {
             l in
-            l.height(0).width(60)
+            l.height(0).width(60).verticalCenter()
         }
         row +++ address.layout {
             line in
@@ -278,7 +290,7 @@ class EventInputForm: MQForm {
             line.label.isUserInteractionEnabled = false
             line.label.textColor = UIColor.gray
             line.label.numberOfLines = 0
-            line.height(0).rightMost(withInset: 10)
+            line.height(0).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -291,7 +303,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ detailDescription.layout {
             line in
-            line.height(90).rightMost(withInset: 10)
+            line.height(90).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -303,14 +315,18 @@ class EventInputForm: MQForm {
 
         seperator(section: inputForm, caption: "価格")
         row = Row.LeftAligned().height(row_height)
-        row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60)
+        row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ priceInput.layout {
             line in
             line.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
             line.button.backgroundColor = .white
             line.button.layer.borderWidth = 0
 
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         inputForm <<< row
@@ -320,7 +336,7 @@ class EventInputForm: MQForm {
             p in
             p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             p.label.textColor = .gray
-            p.fillHolizon(20)
+            p.fillHolizon(20).verticalCenter()
         }
 
         inputForm <<< price1Row!
@@ -330,7 +346,7 @@ class EventInputForm: MQForm {
             p in
             p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             p.label.textColor = .gray
-            p.fillHolizon(20)
+            p.fillHolizon(20).verticalCenter()
 
         }
 
@@ -341,17 +357,21 @@ class EventInputForm: MQForm {
             p in
             p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             p.label.textColor = .gray
-            p.fillHolizon(20)
+            p.fillHolizon(20).verticalCenter()
         }
 
         inputForm <<< priceDetailRow!
 
         seperator(section: inputForm, caption: "問い合わせ・連絡情報")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70)
+        row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ contactTel.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -361,10 +381,14 @@ class EventInputForm: MQForm {
         inputForm <<< row
 
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Mail", title: "メール").height(line_height).width(60)
+        row +++ MQForm.label(name: "label-Mail", title: "メール").height(line_height).width(60).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ contactEmail.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
 
@@ -376,12 +400,12 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-official-page", title: "+公式ページ").layout {
             c in
-            c.height(line_height).width(100)
+            c.height(line_height).width(100).verticalCenter()
             c.label.textColor = MittyColor.healthyGreen
         }
         row +++ officialUrl.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -394,7 +418,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ infoSource.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
         row.layout() {
             r in
@@ -407,7 +431,7 @@ class EventInputForm: MQForm {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "情報源URLを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
 
         }
 
@@ -421,7 +445,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ organizer.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {

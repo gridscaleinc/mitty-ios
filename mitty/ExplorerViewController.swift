@@ -135,8 +135,9 @@ extension EventViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.id, for: indexPath) as? EventCell
-            {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EventCell.id, for: indexPath) as? EventCell {
+//            cell.layer.shouldRasterize = true
+//            cell.layer.rasterizationScale = UIScreen.main.scale;
             let event = events[indexPath.row]
             if (!event.isDataReady) {
                 event.dataReadyHandler = {

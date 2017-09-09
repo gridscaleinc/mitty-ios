@@ -136,13 +136,13 @@ class ActivityPlanDetailsForm: MQForm {
         title.label.text = activity.info.title
         row +++ title.layout {
             t in
-            t.fillHolizon(20).height(35)
+            t.fillHolizon(20).height(35).verticalCenter()
         }
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
             l.label.font = UIFont.systemFont(ofSize: 20)
-            l.down()
+            l.verticalCenter()
         }
 
         row.bindEvent(.touchUpInside) {
@@ -159,7 +159,7 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ memo.layout {
             t in
-            t.fillHolizon(10)
+            t.fillHolizon(10).verticalCenter()
         }
         row.layout() {
             r in
@@ -197,7 +197,7 @@ class ActivityPlanDetailsForm: MQForm {
 
             row +++ requestButton.layout {
                 b in
-                b.height(40)
+                b.height(40).verticalCenter()
                 b.button.backgroundColor = UIColor.gray
             }
 
@@ -223,11 +223,11 @@ class ActivityPlanDetailsForm: MQForm {
         eventTitle.label.text = activity.mainItem?.eventTitle
         row +++ eventTitle.layout {
             t in
-            t.leftMost(withInset: 10).rightMost(withInset: 50).height(50)
+            t.leftMost(withInset: 10).rightMost(withInset: 50).height(50).verticalCenter()
         }
         row +++ eventLogo.layout {
             logo in
-            logo.height(30).width(30).rightMost(withInset: 10).upMargin(5)
+            logo.height(30).width(30).rightMost(withInset: 10).verticalCenter()
         }
 
         inputForm <<< row
@@ -244,7 +244,7 @@ class ActivityPlanDetailsForm: MQForm {
             t in
             t.label.textColor = UIColor.gray
             t.label.font = UIFont.systemFont(ofSize: 14)
-            t.leftMost(withInset: 10).rightMost(withInset: 10)
+            t.leftMost(withInset: 10).rightMost(withInset: 10).verticalCenter()
         }
         inputForm <<< row
 
@@ -257,12 +257,12 @@ class ActivityPlanDetailsForm: MQForm {
             l in
             l.label.textColor = UIColor.gray
             l.label.font = UIFont.systemFont(ofSize: 14)
-            l.leftMost(withInset: 10).rightMost(withInset: 50).height(35)
+            l.leftMost(withInset: 10).rightMost(withInset: 50).height(35).verticalCenter()
         }
 
         row +++ MQForm.img(name: "icon", url: "timesquare").layout {
             img in
-            img.height(30).width(30).rightMost(withInset: 10)
+            img.height(30).width(30).rightMost(withInset: 10).verticalCenter()
         }
         inputForm <<< row
 
@@ -321,7 +321,7 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ requestButton.layout {
             b in
-            b.height(40).fillHolizon(90)
+            b.height(40).fillHolizon(90).verticalCenter()
         }
         inputForm <<< row
 
@@ -365,12 +365,12 @@ class ActivityPlanDetailsForm: MQForm {
             d in
             d.label.textColor = .orange
             d.label.font = UIFont.boldSystemFont(ofSize: 14)
-            d.width(50).height(30)
+            d.width(50).height(30).verticalCenter()
         }
 
         let l = MQForm.label(name: "activitylabel", title: item.eventTitle).layout {
             l in
-            l.width(200).height(30)
+            l.width(200).height(30).verticalCenter()
             l.label.textColor = MittyColor.healthyGreen
             l.label.font = UIFont.boldSystemFont(ofSize: 14)
         }
@@ -427,7 +427,7 @@ class ActivityPlanDetailsForm: MQForm {
 
         let title = MQForm.label(name: "title", title: item.title).layout {
             l in
-            l.width(200).height(30)
+            l.width(200).height(30).verticalCenter()
             l.label.textColor = UIColor.gray
             l.label.font = UIFont.boldSystemFont(ofSize: 14)
         }
@@ -448,7 +448,7 @@ class ActivityPlanDetailsForm: MQForm {
         let notification = Control(name: "notification", view: labelNoti)
         row +++ notification.layout {
             n in
-            n.rightMost(withInset: 10).height(25)
+            n.rightMost(withInset: 10).height(25).verticalCenter()
         }
 
         itemSection <<< row
@@ -469,14 +469,14 @@ class ActivityPlanDetailsForm: MQForm {
         let labelMemoCtl = Control(name: "labelMemo", view: labelMemo)
         row +++ labelMemoCtl.layout {
             n in
-            n.rightMost(withInset: 20).height(45).leftMost(withInset: 20)
+            n.rightMost(withInset: 20).height(45).leftMost(withInset: 20).verticalCenter()
         }
         row +++ labelMemoCtl
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
             l.label.font = UIFont.systemFont(ofSize: 20)
-            l.down()
+            l.verticalCenter()
         }
 
 

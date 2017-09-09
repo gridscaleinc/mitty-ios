@@ -90,7 +90,10 @@ class ActivityListForm: MQForm {
             let row = Row.LeftAligned()
             section <<< row
 
-            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30)
+            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30).layout{
+                l in
+                l.verticalCenter()
+            }
             row +++ l
 
             // ラベルに紐つくactivityを保存
@@ -107,6 +110,7 @@ class ActivityListForm: MQForm {
 
             row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
                 l in
+                l.verticalCenter()
                 l.label.textColor = .gray
             }
         }
@@ -127,16 +131,24 @@ class ActivityListForm: MQForm {
             row +++ MQForm.label(name: "activityDate", title: t.monthDay).layout {
                 d in
                 d.label.textColor = .orange
-                d.width(50).height(30)
+                d.width(50).height(30).verticalCenter()
             }
 
-            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30)
+            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30).layout{
+                l in
+                l.verticalCenter()
+            }
+
             row +++ l
 
             // ラベルに紐つくactivityを保存
             (l.label as! TapableLabel).underlyObj = t
 
-            row +++ MQForm.img(name: "icon", url: t.logoUrl).width(30).height(20)
+            row +++ MQForm.img(name: "icon", url: t.logoUrl).width(30).height(20).layout{
+                l in
+                l.verticalCenter()
+            }
+
 
             row.layout() { r in
                 let w = UIScreen.main.bounds.size.width - 20
@@ -149,6 +161,7 @@ class ActivityListForm: MQForm {
 
             row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
                 l in
+                l.verticalCenter()
                 l.label.textColor = .gray
             }
         }

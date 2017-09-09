@@ -180,7 +180,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
         row +++ MQForm.label(name: "title-request", title: "リクエスト").layout {
             c in
             c.height(25)
-            c.leftMost(withInset: 20)
+            c.leftMost(withInset: 20).verticalCenter()
             let l = c.view as! UILabel
             l.textColor = .white
             l.font = .systemFont(ofSize: 16)
@@ -197,7 +197,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
 
         let titleLabel = MQForm.label(name: "Title", title: relatedRequest.title).layout {
             l in
-            l.fillHolizon(10).height(25)
+            l.fillHolizon(10).height(25).verticalCenter()
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 20)
             (l.view as! UILabel).textColor = .black
             (l.view as! UILabel).numberOfLines = 0
@@ -214,7 +214,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
         }
         let tagLabel = MQForm.label(name: "tag", title: "🏷 " + relatedRequest.tag).layout {
             l in
-            l.width(35).height(35).fillHolizon(10)
+            l.width(35).height(35).fillHolizon(10).verticalCenter()
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
             (l.view as! UILabel).textColor = .gray
             (l.view as! UILabel).numberOfLines = 1
@@ -226,7 +226,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
 
         let actionLabel = MQForm.label(name: "action", title: (relatedRequest.desc)).layout {
             c in
-            c.fillHolizon(10)
+            c.fillHolizon(10).verticalCenter()
             let l = c.view as! UILabel
             l.numberOfLines = 3
             l.textColor = .black
@@ -253,7 +253,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
 
         row +++ MQForm.label(name: "title-main-proposal", title: "提案情報登録").layout {
             c in
-            c.height(25)
+            c.height(25).verticalCenter()
             c.leftMost(withInset: 20)
             let l = c.view as! UILabel
             l.textColor = .white
@@ -266,14 +266,18 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
 
         seperator(section: detailForm, caption: "価格")
         row = Row.LeftAligned().height(row_height)
-        row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60)
+        row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ priceInput.layout {
             line in
             line.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
             line.button.backgroundColor = .white
             line.button.layer.borderWidth = 0
 
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         priceInput.bindEvent(.touchUpInside) { [weak self]
@@ -288,7 +292,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             p in
             p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             p.label.textColor = .gray
-            p.fillHolizon(20)
+            p.fillHolizon(20).verticalCenter()
         }
 
         detailForm <<< price1Row!
@@ -298,7 +302,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             p in
             p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             p.label.textColor = .gray
-            p.fillHolizon(20)
+            p.fillHolizon(20).verticalCenter()
 
         }
 
@@ -309,19 +313,23 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             p in
             p.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
             p.label.textColor = .gray
-            p.fillHolizon(20)
+            p.fillHolizon(20).verticalCenter()
         }
 
         detailForm <<< priceDetailRow!
 
         seperator(section: detailForm, caption: "日程")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-start", title: "開始").height(line_height).width(60)
+        row +++ MQForm.label(name: "label-start", title: "開始").height(line_height).width(60).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ date1.layout {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "開始日付・時刻を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -337,7 +345,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "終了日付・時刻を入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -353,7 +361,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "場所名・住所などを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 60)
+            line.height(line_height).rightMost(withInset: 60).verticalCenter()
         }
         row +++ locationIcon.height(line_height).width(line_height)
 
@@ -368,7 +376,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
         addressRow = row
         row +++ addressLabel.layout {
             l in
-            l.height(0).width(60)
+            l.height(0).width(60).verticalCenter()
         }
         row +++ address.layout {
             line in
@@ -376,7 +384,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             line.label.isUserInteractionEnabled = false
             line.label.textColor = UIColor.gray
             line.label.numberOfLines = 0
-            line.height(0).rightMost(withInset: 10)
+            line.height(0).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -387,10 +395,14 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
 
         seperator(section: detailForm, caption: "補足")
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70)
+        row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70).layout {
+            l in
+            l.verticalCenter()
+        }
+
         row +++ contactTel.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10)
+            line.height(line_height).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {
@@ -403,7 +415,7 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
         row = Row.LeftAligned()
         row +++ additionalInfo.layout {
             line in
-            line.height(90).rightMost(withInset: 10)
+            line.height(90).rightMost(withInset: 10).verticalCenter()
         }
 
         row.layout() {

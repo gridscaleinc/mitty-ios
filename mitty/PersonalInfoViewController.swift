@@ -175,7 +175,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         row.spacing = 90
         row +++ signOut.layout {
             b in
-            b.height(40)
+            b.height(40).verticalCenter()
         }.bindEvent(.touchUpInside) { _ in
             ApplicationContext.killSession()
         }
@@ -230,7 +230,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
 
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
-            i.rightMost().height(20).width(20)
+            i.rightMost().height(20).width(20).verticalCenter()
         }
 
         row.bindEvent(.touchUpInside) {
@@ -252,7 +252,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         let col1 = Col.UpDownAligned()
         col1.layout {
             c in
-            c.leftMost().height(120).width(120)
+            c.leftMost().height(120).width(120).upper()
         }
         col1 +++ picture
         picture.layout {
@@ -264,7 +264,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         let col2 = Col.UpDownAligned()
         col2.layout {
             c in
-            c.fillVertical().rightMost()
+            c.rightMost().upper()
         }
 
         let idRow = Row.LeftAligned()
@@ -273,11 +273,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             r.fillHolizon().height(25)
         }
 
-        idRow +++ MQForm.label(name: "id", title: "ID:")
+        idRow +++ MQForm.label(name: "id", title: "ID:").layout {
+            i in
+            i.verticalCenter()
+        }
         idRow +++ idLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25)
+            l.rightMost(withInset: 10).height(25).verticalCenter()
         }
 
 
@@ -289,11 +292,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             r.fillHolizon().height(25)
         }
 
-        nameRow +++ MQForm.label(name: "name", title: "名前")
+        nameRow +++ MQForm.label(name: "name", title: "名前").layout {
+            n in
+            n.verticalCenter()
+        }
         nameRow +++ nameLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(120)
+            l.rightMost(withInset: 10).height(25).width(120).verticalCenter()
         }
 
 
@@ -305,11 +311,15 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             r.fillHolizon().height(30)
         }
 
-        genderRow +++ MQForm.label(name: "gender", title: "性別")
+        genderRow +++ MQForm.label(name: "gender", title: "性別").layout {
+            n in
+            n.verticalCenter()
+        }
+
         genderRow +++ genderLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(120)
+            l.rightMost(withInset: 10).height(25).width(120).verticalCenter()
         }
 
 
@@ -322,11 +332,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             r.fillHolizon().height(30)
         }
 
-        ageGroupRow +++ MQForm.label(name: "age-group", title: "年齢層")
+        ageGroupRow +++ MQForm.label(name: "age-group", title: "年齢層").layout {
+            g in
+            g.verticalCenter()
+        }
         ageGroupRow +++ ageGroupLabel.layout {
             l in
             l.label.textAlignment = .center
-            l.rightMost(withInset: 10).height(25).width(120)
+            l.rightMost(withInset: 10).height(25).width(120).verticalCenter()
         }
 
         col2 +++ ageGroupRow
@@ -367,7 +380,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
 
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
-            i.rightMost().height(20).width(20)
+            i.rightMost().height(20).width(20).verticalCenter()
         }
         row.bindEvent(.touchUpInside) {
             r in
@@ -382,10 +395,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             r.fillHolizon().height(40)
         }
 
-        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(30).width(70)
+        row +++ MQForm.label(name: "constellationLabel", title: "星座").height(30).width(70).layout {
+            n in
+            n.verticalCenter()
+        }
+
         row +++ constellationLabel.layout {
             l in
-            l.height(30).width(120)
+            l.height(30).width(120).verticalCenter()
             l.margin.left = 80
         }
 
@@ -396,10 +413,13 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             r.fillHolizon().height(40)
         }
 
-        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(35).width(70)
+        row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(35).width(70).layout {
+            a in
+            a.verticalCenter()
+        }
         row +++ appearanceLabel.layout {
             l in
-            l.height(30).width(120)
+            l.height(30).width(120).verticalCenter()
             l.margin.left = 80
         }
 
@@ -457,7 +477,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
 
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
-            i.rightMost().height(20).width(20)
+            i.rightMost().height(20).width(20).verticalCenter()
         }
 
         section <<< row
@@ -480,7 +500,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         let row = seperator(section: section, caption: "名刺", LeftRight.left)
         row +++ MQForm.img(name: "aaa", url: "editpen").layout {
             i in
-            i.rightMost().height(20).width(20)
+            i.rightMost().height(20).width(20).verticalCenter()
         }
         row.bindEvent(.touchUpInside) {
             v in
@@ -544,14 +564,14 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             
             row +++ MQForm.label(name: "namecard", title: card.businessName).layout{
                 l in
-                l.height(30).leftMost(withInset: 10).rightMost(withInset: 40)
+                l.height(30).leftMost(withInset: 10).rightMost(withInset: 40).verticalCenter()
                 l.label.textColor = MittyColor.healthyGreen
             }
             
             row +++ MQForm.label(name: "Edit", title: ">").layout{
                 l in
                 l.label.textAlignment = .right
-                l.rightMost(withInset: 10).width(30)
+                l.rightMost(withInset: 10).width(30).verticalCenter()
             }
             row.bindEvent(.touchUpInside) {
                 v in
@@ -567,7 +587,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         if (last != nil) {
             nameCardSection.layout {
                 s in
-                s.bottomAlign(with: last!).fillHolizon()
+                s.bottomAlign(with: last!).fillHolizon().verticalCenter()
             }
             nameCardSection.configLayout()
             self.view.setNeedsUpdateConstraints()

@@ -112,10 +112,14 @@ class NamecardExchangeViewController: MittyViewController {
         contactee.label.textColor = UIColor.white
         contactee.leftMargin(5)
         
-        nameRow +++ contactee
+        nameRow +++ contactee.layout {
+            l in
+            l.verticalCenter()
+        }
+
         nameRow +++ userIcon.layout {
             i in
-            i.height(25).width(25).upMargin(2.5)
+            i.height(25).width(25).upMargin(2.5).verticalCenter()
             i.imageView.setMittyImage(url: self.contacteeUser.icon)
         }
 
@@ -136,7 +140,7 @@ class NamecardExchangeViewController: MittyViewController {
         contacteeBusinessRow +++ contacteeBusiness
         contacteeBusinessRow +++ contacteeBusinesssIcon.layout {
             i in
-            i.height(25).width(25).upMargin(2.5)
+            i.height(25).width(25).upMargin(2.5).verticalCenter()
         }
         
         // selected card
@@ -151,7 +155,7 @@ class NamecardExchangeViewController: MittyViewController {
         selectedRow.spacing = 2
         selectedRow +++ cardForm.layout{
             c in
-            c.fillHolizon().height(210).down()
+            c.fillHolizon().height(210).verticalCenter()
         }
         var transform = CGAffineTransform.identity
         transform = transform.translatedBy(x: 0, y: 40)
@@ -183,7 +187,7 @@ class NamecardExchangeViewController: MittyViewController {
         }
         messageRow +++ offerMessage.layout {
             m in
-            m.fillHolizon().height(60)
+            m.fillHolizon().height(60).verticalCenter()
         }
         section <<< messageRow
         
