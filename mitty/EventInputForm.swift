@@ -140,7 +140,10 @@ class EventInputForm: MQForm {
             l in
             l.rightMost(withInset: 60).height(line_height).verticalCenter()
         }
-        row +++ icon.height(50).width(50)
+        row +++ icon.height(50).width(50).layout {
+            i in
+            i.verticalCenter()
+        }
 
         row.layout() {
             r in
@@ -269,7 +272,11 @@ class EventInputForm: MQForm {
             line.textField.attributedPlaceholder = NSAttributedString(string: "場所名・住所などを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
             line.height(line_height).rightMost(withInset: 60).verticalCenter()
         }
-        row +++ locationIcon.height(line_height).width(line_height)
+        row +++ locationIcon.height(line_height).width(line_height).layout {
+            i in
+            i.verticalCenter()
+        }
+
 
 
         row.layout() {

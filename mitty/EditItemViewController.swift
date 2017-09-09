@@ -100,8 +100,16 @@ class EditItemViewController: MittyViewController {
             r.fillHolizon().height(30)
         }
 
-        row +++ labelNoti
-        row +++ switchButton
+        row +++ labelNoti.layout {
+            r in
+            r.verticalCenter()
+        }
+
+        row +++ switchButton.layout {
+            r in
+            r.verticalCenter()
+        }
+
         row +++ textNotifyTime.layout { t in
             t.height(30)
             t.rightMost(withInset: 20).verticalCenter()
