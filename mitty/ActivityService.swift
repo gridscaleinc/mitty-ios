@@ -318,7 +318,7 @@ class ActivityService: Service {
         act.startDateTime = jsAct["startDateTime"].stringValue
         act.logoUrl = jsAct["eventLogoUrl"].stringValue
 
-        act.logoUrl = "timesquare"
+//        act.logoUrl = "timesquare"
 
         return act
     }

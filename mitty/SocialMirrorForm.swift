@@ -23,7 +23,7 @@ class SocialBar: Row {
         super.distribution = .left
         self +++ labelItem.layout {
             l in
-            l.height(40).width(150).leftMargin(5)
+            l.height(40).width(150).leftMargin(5).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
             l.label.textColor = MittyColor.healthyGreen
 
@@ -32,7 +32,7 @@ class SocialBar: Row {
         self +++ numberItem.layout {
             nu in
             nu.label.textAlignment = . right
-            nu.rightMost(withInset: 10).height(40).width(100)
+            nu.rightMost(withInset: 10).height(40).width(100).verticalCenter()
             nu.label.textColor = UIColor.red
         }
 

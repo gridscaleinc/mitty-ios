@@ -145,8 +145,9 @@ class ActivityListForm: MQForm {
             (l.label as! TapableLabel).underlyObj = t
 
             row +++ MQForm.img(name: "icon", url: t.logoUrl).width(30).height(20).layout{
-                l in
-                l.verticalCenter()
+                i in
+                i.imageView.setMittyImage(url: t.logoUrl)
+                i.verticalCenter()
             }
 
 

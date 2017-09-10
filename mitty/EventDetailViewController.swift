@@ -288,7 +288,9 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             icon in
             icon.height(25).width(25).verticalCenter()
         }
-
+        
+        lacationIcon.imageView.setMittyImage(url: self.event.eventLogoUrl)
+        
         row +++ lacationIcon
 
         let location = MQForm.label(name: "isLand", title: "\(event.isLandName)").layout { l in

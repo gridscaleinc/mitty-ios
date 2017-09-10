@@ -55,7 +55,7 @@ class ActivityPlanDetailsForm: MQForm {
     } ()
     var eventLogo: Control = {
         let l = UIImageView.newAutoLayout()
-        l.image = UIImage(named: "timesquare")
+        l.image = UIImage(named: "")
         let c = Control(name: "eventTitle", view: l)
         return c
     } ()
@@ -225,6 +225,7 @@ class ActivityPlanDetailsForm: MQForm {
             t in
             t.leftMost(withInset: 10).rightMost(withInset: 50).height(50).verticalCenter()
         }
+        eventLogo.imageView.setMittyImage(url: activity.info.logoUrl)
         row +++ eventLogo.layout {
             logo in
             logo.height(30).width(30).rightMost(withInset: 10).verticalCenter()
@@ -260,9 +261,11 @@ class ActivityPlanDetailsForm: MQForm {
             l.leftMost(withInset: 10).rightMost(withInset: 50).height(35).verticalCenter()
         }
 
-        row +++ MQForm.img(name: "icon", url: "timesquare").layout {
+        row +++ MQForm.img(name: "icon", url: "").layout {
             img in
             img.height(30).width(30).rightMost(withInset: 10).verticalCenter()
+            img.imageView.setMittyImage(url: activity.info.logoUrl)
+
         }
         inputForm <<< row
 
@@ -386,7 +389,10 @@ class ActivityPlanDetailsForm: MQForm {
         // ラベルに紐つくactivityを保存
         (l.label as! TapableLabel).underlyObj = item
 
-        row +++ MQForm.img(name: "icon", url: "timesquare").width(30).height(20)
+        row +++ MQForm.img(name: "icon", url: "").width(30).height(20).layout {
+            i in
+            i.imageView.setMittyImage(url: item.eventLogoUrl)
+        }
 
         row.layout() { r in
             let w = UIScreen.main.bounds.size.width - 20

@@ -291,6 +291,9 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
 
     func pickedContent(content: Content) {
         logoContent = content
+        if (content.linkUrl != nil) {
+            form.icon.imageView.setMittyImage(url: (content.linkUrl)!)
+        }
     }
 
     func clearPickedContent() {
