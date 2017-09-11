@@ -264,9 +264,9 @@ class ActivityPlanDetailsForm: MQForm {
         row +++ MQForm.img(name: "icon", url: "").layout {
             img in
             img.height(30).width(30).rightMost(withInset: 10).verticalCenter()
-            img.imageView.setMittyImage(url: activity.info.logoUrl)
-
+            img.imageView.setMittyImage(url: activity.mainItem?.islandLogoUrl ?? "")
         }
+        
         inputForm <<< row
 
 

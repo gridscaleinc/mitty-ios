@@ -13,7 +13,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
     var imagePicked = false
     let picture: Control = {
-        let i = MQForm.img(name: "picture", url: "beauty.jpeg")
+        let i = MQForm.img(name: "picture", url: "")
         i.imageView.contentMode = .scaleAspectFit
         return i
     } ()

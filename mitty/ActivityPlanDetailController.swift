@@ -45,8 +45,8 @@ class ActivityPlanDetailsController: MittyViewController {
 
         ActivityService.instance.fetch(id: activityInfo.id) { [weak self]
             activityDetail in
+            activityDetail.info = (self?.activityInfo)!
             self?.form.loadForm(activityDetail)
-            self?.activityInfo = activityDetail.info
 
             self?.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
 
@@ -82,7 +82,8 @@ class ActivityPlanDetailsController: MittyViewController {
 
 
     override func updateViewConstraints() {
-        form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+        form.autoPin(toTopLayoutGuideOf: self, withInset: 20)
+        form.autoPinEdge(toSuperviewEdge: .top)
         form.autoPinEdge(toSuperviewEdge: .left)
         form.autoPinEdge(toSuperviewEdge: .right)
         form.autoPinEdge(toSuperviewEdge: .bottom)

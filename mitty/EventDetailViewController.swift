@@ -110,7 +110,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     func buildform () {
 
-        form.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
+        form.backgroundColor = UIColor(patternImage: UIImage(named: "timesquare")!)
 
         // スクロールViewを作る
         let scroll = UIScrollView.newAutoLayout()
@@ -152,20 +152,33 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             c.fillHolizon().upper()
             c.topAlign(with: img).bottomAlign(with: img)
         }
+        
+        
+        topRow +++ topContainer
+        topRow.layout {
+            r in
+            r.fillHolizon()
+            r.topAlign(with: topContainer).bottomAlign(with: topContainer)
+        }
+        
+        detailForm <<< topRow
 
+        var row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(50)
+        }
 
         let titleLabel = MQForm.label(name: "Title", title: event.title).layout {
             l in
-            l.leftMost(withInset: 25).upper(withInset: 50).height(50)
+            l.leftMargin(15).rightMost(withInset: 55).height(50).verticalCenter()
 
-            (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 24)
-            (l.view as! UILabel).textColor = .white
-            (l.view as! UILabel).shadowColor = UIColor.black
-            (l.view as! UILabel).shadowOffset = CGSize(width: 0, height: 1)
-            (l.view as! UILabel).numberOfLines = 0
+            l.label.font = UIFont.boldSystemFont(ofSize: 20)
+            l.label.textColor = MittyColor.healthyGreen
+            l.label.numberOfLines = 2
+            l.label.adjustsFontSizeToFitWidth = true
         }
 
-        topContainer +++ titleLabel
+        row +++ titleLabel
         let imageIcon: Control = {
             if event.eventLogoUrl != "" {
                 // imageがある場合、イメージを表示
@@ -173,70 +186,36 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
                     img in
                     img.width(35).height(35)
                 }
-                DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
-                itemImage.imageView.af_setImage(withURL: URL(string: event.eventLogoUrl)!, placeholderImage: UIImage(named: "timesquare"), completion: { image in
-                    if (image.result.isSuccess) {
-                        itemImage.imageView.image = image.result.value
-                    }
-                }
-                )
+                itemImage.imageView.setMittyImage(url: event.eventLogoUrl)
                 return itemImage
             } else {
                 return MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
             }
         } ()
 
-        topContainer +++ imageIcon.layout {
+        row +++ imageIcon.layout {
             i in
-            i.width(35).height(35).topAlign(with: titleLabel).rightMost(withInset: 30)
+            i.width(35).height(35).rightMost(withInset: 15).verticalCenter()
         }
-
-
-        topRow +++ topContainer
-        topRow.layout {
-            r in
-            r.fillHolizon()
-            r.topAlign(with: topContainer).bottomAlign(with: topContainer)
-        }
-
-        detailForm <<< topRow
-
-        let actionRow = Row.LeftAligned()
-
-        let actionLabel = MQForm.label(name: "action", title: (event.action)).layout {
-            c in
-            c.putUnder(of: img, withOffset: 5).fillHolizon(10)
-            let l = c.view as! UILabel
-            l.numberOfLines = 0
-            l.font = .boldSystemFont(ofSize: 18)
-            l.layer.borderColor = UIColor.black.cgColor
-        }
-
-        actionRow +++ actionLabel
-        actionRow.layout {
-            r in
-            r.fillHolizon()
-            r.topAlign(with: actionLabel).bottomAlign(with: actionLabel)
-        }
-
-        detailForm <<< actionRow
-
-        var row = Row.LeftAligned().layout {
+        detailForm <<< row
+        
+        
+        row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(35)
         }
-
-        let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes)").layout { l in
-            l.height(35).width(90).verticalCenter()
+        
+        let likes = MQForm.label(name: "heart", title: "❤️ \(event.likes) likes").layout { l in
+            l.height(35).width(90).verticalCenter().leftMargin(15)
         }
-
+        
         row +++ likes
-
+        
         var rightRow = Row.RightAligned().layout {
             r in
-            r.rightMost().fillVertical()
+            r.rightMost(withInset: 15).fillVertical()
         }
-
+        
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
             b.height(30).width(90).verticalCenter()
             b.view.backgroundColor = .white
@@ -244,22 +223,40 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             b.view.layer.borderWidth = 0.7
             b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
-
-
+            
         }
-
+        
         likeButton.bindEvent(.touchUpInside) { b in
             LikesService.instance.sendLike("EVENT", id: Int64(self.event.id)!)
             (b as! UIButton).isEnabled = false
         }
-
+        
         rightRow +++ likeButton
         row +++ rightRow
+        detailForm <<< row
+        
+        row = Row.LeftAligned()
+
+        let actionLabel = MQForm.label(name: "action", title: (event.action)).layout {
+            c in
+            c.fillHolizon(15).verticalCenter().leftMargin(15)
+            c.label.numberOfLines = 0
+            c.label.font = .boldSystemFont(ofSize: 14)
+            c.label.textColor = UIColor.darkGray
+        }
+
+        row +++ actionLabel
+        row.layout {
+            r in
+            r.fillHolizon()
+            r.topAlign(with: actionLabel).bottomAlign(with: actionLabel)
+        }
+
+        detailForm <<< row
+
 
         // TODO : Price Info
         addPriceInfo(detailForm)
-
-        detailForm <<< row
 
         row = Row.LeftAligned().layout {
             r in
@@ -267,7 +264,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         let dates = MQForm.label(name: "sheduledData", title: event.duration()).layout { l in
-            l.height(35).width(250).verticalCenter()
+            l.height(35).width(250).verticalCenter().leftMargin(15)
             l.label.adjustsFontSizeToFitWidth = true
             l.label.textColor = UIColor(white: 0.33, alpha: 1)
         }
@@ -277,7 +274,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().putUnder(of: dates, withOffset: 5).height(40)
+            r.fillHolizon(15).height(40).leftMargin(15)
         }
         row +++ MQForm.label(name: "geoIcon", title: "📍").height(35).width(30).layout{
             l in
@@ -289,12 +286,11 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             icon.height(25).width(25).verticalCenter()
         }
         
-        lacationIcon.imageView.setMittyImage(url: self.event.eventLogoUrl)
-        
+        lacationIcon.imageView.setMittyImage(url: self.event.isLandLogoUrl)
         row +++ lacationIcon
 
         let location = MQForm.label(name: "isLand", title: "\(event.isLandName)").layout { l in
-            l.height(40).width(150).verticalCenter()
+            l.height(40).rightMost(withInset: 65).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
             if self.event.isValidGeoInfo {
@@ -312,7 +308,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         rightRow = Row.RightAligned().layout {
             r in
-            r.rightMost().fillVertical()
+            r.rightMost(withInset: 15).fillVertical()
         }
 
         let routeButton = MQForm.button(name: "route", title: "経路").layout { b in
@@ -336,7 +332,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
             c in
-            c.fillHolizon(10).verticalCenter()
+            c.fillHolizon(10).verticalCenter().leftMargin(10)
             let l = c.view as! UILabel
             //            l.backgroundColor = UIColor(red: 0.9, green: 0.9, blue: 0.9, alpha: 0.9)
             l.numberOfLines = 0
@@ -357,7 +353,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let interval = Row.LeftAligned().layout {
             r in
-            r.fillHolizon()
+            r.fillHolizon().taller(than: 60)
         }
 
         detailForm <<< interval
@@ -390,11 +386,11 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
             l in
-            l.height(35).verticalCenter()
+            l.height(35).verticalCenter().leftMargin(10)
         }
         infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
             l in
-            l.height(35).rightMost(withInset: 60).verticalCenter()
+            l.height(35).rightMost(withInset: 70).verticalCenter()
         }
 
         let contactButton = MQForm.button(name: "contact", title: "問合せ").layout { b in
@@ -416,7 +412,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         url +++ MQForm.label(name: "URL", title: "情報源").layout {
             l in
-            l.height(35).verticalCenter()
+            l.height(35).verticalCenter().leftMargin(10)
+            l.label.adjustsFontSizeToFitWidth = true
         }
 
         let link = UIButton.newAutoLayout()
@@ -424,7 +421,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         link.setTitle(event.sourceName, for: .normal)
         url +++ Control(name: "URL", view: link).layout {
             l in
-            l.height(35).verticalCenter()
+            l.height(35).verticalCenter().rightMost(withInset: 10)
         }.bindEvent(.touchUpInside) { [weak self]
             b in
 
