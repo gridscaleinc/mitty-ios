@@ -380,12 +380,13 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         section <<< row
 
     }
+    
     func loadAction(_ section: Section) {
         
         seperator(section: section, caption: "行い内容")
         
         let row = Row.LeftAligned()
-        row.view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
+//        row.view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
         let actionLabel = MQForm.label(name: "action", title: (event.action)).layout {
             c in
             c.fillHolizon(15).verticalCenter().leftMargin(15)
@@ -447,11 +448,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         row +++ location
         section <<< row
         
-        let buttonRow = Row.Intervaled().layout {
-            r in
-            r.fillHolizon().height(40)
-        }
-        
+        let buttonRow = Row.Intervaled()
         buttonRow.spacing = 40
         
         let routeButton = MQForm.button(name: "route", title: "経路").layout { b in
@@ -463,11 +460,18 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             
         }
         
+        if (event.isValidGeoInfo) {
+            routeButton.bindEvent(.touchUpInside) { _ in
+                self.event.openGoogleMapDirection()
+            }
+        }
+        
         buttonRow +++ routeButton
         
         section <<< buttonRow
         
     }
+    
     // 価格情報をデータに応じて表示。
     //
     func addPriceInfo(_ section: Section) {

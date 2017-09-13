@@ -321,7 +321,7 @@ class Event {
 
     }
 
-    func openGoogleMap() {
+    func openGoogleMapDirection() {
         if !isValidGeoInfo {
             return
         }
@@ -334,6 +334,16 @@ class Event {
             openAppleMap()
         }
 
+    }
+    
+    func openGoogleMap() {
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemapsurl://")!)) {
+            
+            UIApplication.shared.openURL(URL(string:
+                "comgooglemapsurl://?center=\(latitude),\(longitude)&zoom=7&views=traffic&q=\(latitude),\(longitude)")!)
+        } else {
+            openAppleMap()
+        }
     }
 
     var priceShortInfo: String {

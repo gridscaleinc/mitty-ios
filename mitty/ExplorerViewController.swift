@@ -180,19 +180,19 @@ extension EventViewController: UICollectionViewDelegateFlowLayout {
         let screenSize: CGSize = UIScreen.main.bounds.size
 
         if event.coverImage != nil {
-            let width = (screenSize.width - (10 * 3))
+            let width = screenSize.width
             let height = event.coverImage!.size.ratio * width
             let cellSize: CGSize = CGSize(width: width, height: height + 190)
             return cellSize
         }
 
-        let width = (screenSize.width - (10 * 3))
+        let width = screenSize.width
         let cellSize: CGSize = CGSize(width: width, height: 190)
         return cellSize
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        return UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
     }
 }
 
