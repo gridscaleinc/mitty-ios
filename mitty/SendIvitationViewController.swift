@@ -136,7 +136,7 @@ class SendInvitationViewController: MittyViewController {
 
         row +++ message.layout {
             m in
-            m.height(60).rightMost(withInset: 10).verticalCenter()
+            m.height(60).rightMost(withInset: 10).verticalCenter().leftMargin(10)
         }
 
         detailForm <<< row
@@ -185,7 +185,7 @@ class SendInvitationViewController: MittyViewController {
 
         let bottom = Row.LeftAligned().layout {
             b in
-            b.fillHolizon().height(20)
+            b.fillHolizon().height(70)
         }
 
         detailForm <<< bottom
