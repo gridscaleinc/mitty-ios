@@ -106,6 +106,7 @@
 		FC5CBD871F5961F9006541E3 /* OffersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD861F5961F9006541E3 /* OffersViewController.swift */; };
 		FC5CBD891F59A887006541E3 /* OffersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD881F59A887006541E3 /* OffersService.swift */; };
 		FC5CBD8B1F5B1209006541E3 /* Contactee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8A1F5B1209006541E3 /* Contactee.swift */; };
+		FC5CBD8D1F6C9A04006541E3 /* InviteeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -318,6 +319,7 @@
 		FC5CBD861F5961F9006541E3 /* OffersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersViewController.swift; sourceTree = "<group>"; };
 		FC5CBD881F59A887006541E3 /* OffersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersService.swift; sourceTree = "<group>"; };
 		FC5CBD8A1F5B1209006541E3 /* Contactee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contactee.swift; sourceTree = "<group>"; };
+		FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteeCell.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -833,6 +835,7 @@
 				FC5CBD701F4E2EA5006541E3 /* ProposalDetailsViewController.swift */,
 				FCFA84851F121E1400E9C6F2 /* ProposalViewController.swift */,
 				FC3C16D91F388F0200E7622B /* SendIvitationViewController.swift */,
+				FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */,
 			);
 			name = explore;
 			sourceTree = "<group>";
@@ -1262,6 +1265,7 @@
 				FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */,
 				FCFA84861F121E1400E9C6F2 /* ProposalViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,
+				FC5CBD8D1F6C9A04006541E3 /* InviteeCell.swift in Sources */,
 				FC5CBD7F1F56CC2D006541E3 /* SocialMirrorForm.swift in Sources */,
 				FCF2A0CE1E73DCDF00536D32 /* Selection.swift in Sources */,
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,

@@ -33,7 +33,7 @@ class InvitationService: Service {
     ///   - id: 招待対象のID.
     ///   - message: 招待にあったてのメッセージ。
     ///   - userId: 招待を受けるユーザーのID(複数）.
-    func sendInvitation(_ type: String, id: Int64, message: String, userId: [Int]) {
+    func sendInvitation(_ type: String, id: Int64, message: String, invitees: [Int]) {
 
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
@@ -43,9 +43,15 @@ class InvitationService: Service {
             "forType": type,
             "idOfType": id,
             "message": message,
+            "invitees" : invitees,
         ]
 
-        Alamofire.request(apiSendInvitation, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        if let objectData = try? JSONSerialization.data(withJSONObject: parameters, options: JSONSerialization.WritingOptions(rawValue: 0)) {
+            let objectString = String(data: objectData, encoding: .utf8)
+            print(objectString ?? "")
+        }
+        
+        Alamofire.request(apiSendInvitation, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             LoadingProxy.off()
             switch response.result {
             case .success:

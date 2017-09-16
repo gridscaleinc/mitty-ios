@@ -301,14 +301,14 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let proposol = Control(name: "scbscribe", view: proposolButton).layout {
             c in
-            c.height(40).upMargin(30).verticalCenter()
+            c.height(40).verticalCenter()
             c.button.setTitleColor(UIColor.white, for: .normal)
         }
 
 
         row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(50)
+            r.fillHolizon().height(50).upMargin(30)
         }
         row.spacing = 100
 
@@ -358,6 +358,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         if proposals.count > 0 {
             let row = seperator(section: proposalSection, caption: "提案一覧")
+            row["caption"]?.label.backgroundColor = MittyColor.lightYellow
             row.margin.all(1)
         }
 
@@ -388,6 +389,12 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 p.label.adjustsFontSizeToFitWidth = true
                 p.label.minimumScaleFactor = 0.5
                 p.rightMost(withInset: 100).verticalCenter()
+            }.bindEvent(.touchUpInside) {
+                    r in
+                    let vc = ProposalDetailsViewController()
+                    vc.proposal = p
+                    vc.request = self.request
+                    self.navigationController?.pushViewController(vc, animated: true)
             }
 
             row +++ MQForm.label(name: "likes", title: "❤️ \(p.numberOfLikes)").layout {
@@ -396,12 +403,6 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 l.label.adjustsFontSizeToFitWidth = true
                 l.label.minimumScaleFactor = 0.5
                 l.label.textAlignment = .center
-            }.bindEvent(.touchUpInside) {
-                r in
-                let vc = ProposalDetailsViewController()
-                vc.proposal = p
-                vc.request = self.request
-                self.navigationController?.pushViewController(vc, animated: true)
             }
             
             proposalSection <<< row
@@ -419,7 +420,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             s.fillHolizon()
         }
         proposalSection.configLayout()
-        proposalSection.view.backgroundColor = MittyColor.lightYellow.withAlphaComponent(0.30)
+        proposalSection.view.backgroundColor = UIColor.white
         view.setNeedsUpdateConstraints()
     }
 }

@@ -210,6 +210,7 @@ class ProposalDetailsViewController: MittyViewController {
             l.layer.cornerRadius = 2
             l.layer.borderWidth = 0.8
             l.layer.borderColor = UIColor.white.cgColor
+            l.backgroundColor = UIColor.white
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
 
@@ -221,8 +222,8 @@ class ProposalDetailsViewController: MittyViewController {
             r.fillHolizon().height(35)
         }
 
-        let likes = MQForm.label(name: "likes", title: "❤️ \(proposal.numberOfLikes)").layout { l in
-            l.height(35).width(330).verticalCenter()
+        let likes = MQForm.hilight(label: "❤️ \(proposal.numberOfLikes) likes", named:"likes").layout { l in
+            l.height(35).width(100).verticalCenter()
         }
 
         row +++ likes
@@ -234,7 +235,11 @@ class ProposalDetailsViewController: MittyViewController {
             r.fillHolizon().height(35)
         }
 
-        row +++ MQForm.label(name: "Term", title: "期間").height(35).width(100)
+        row +++ MQForm.label(name: "Term", title: "期間").height(35).width(100).layout {
+            l in
+            l.verticalCenter()
+        }
+        
         let dates = MQForm.hilight(label: proposal.term(), named: "preferedDate").layout { l in
             l.height(35).width(180).verticalCenter()
             l.margin.left = 20
@@ -255,7 +260,7 @@ class ProposalDetailsViewController: MittyViewController {
         }
 
         let price = MQForm.hilight(label: proposal.price(), named: "price").layout { l in
-            l.height(35).width(180)
+            l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2

@@ -269,7 +269,7 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     override func viewDidLoad() {
 
         super.autoCloseKeyboard()
-        activityTypes.selectedSegmentIndex = 1
+        activityTypes.selectedSegmentIndex = 0
         activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
 
         LoadingProxy.set(self)
