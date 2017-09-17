@@ -145,11 +145,12 @@ class RequestCell: UICollectionViewCell {
         row +++ right
         
         let expiryDays = (request?.expiryDate.timeIntervalSinceNow)! / 84600
-        let expiry = MQForm.hilight(label: "\(Int(-expiryDays)) days before expiry", named: "expiry")
+        let expiryLabel = expiryDays<0 ? "期限過ぎ" : "締切まで\(Int(expiryDays))日"
+        let expiry = MQForm.hilight(label: expiryLabel, named: "expiry")
         
         right +++ expiry.layout {
             e in
-            e.rightMargin(10).bottomMargin(3).verticalCenter()
+            e.rightMargin(10).bottomMargin(3).verticalCenter().width(140)
             e.label.adjustsFontSizeToFitWidth = true
         }
     

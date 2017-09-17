@@ -115,7 +115,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let titleLabel = MQForm.label(name: "Title", title: request.title).layout {
             l in
-            l.leftMost(withInset: 25).verticalCenter().fillHolizon(10)
+            l.verticalCenter().fillHolizon(10).leftMargin(5)
             l.view.backgroundColor = UIColor.white
             l.label.font = UIFont.boldSystemFont(ofSize: 24)
             l.label.textColor = MittyColor.healthyGreen
@@ -139,7 +139,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let tagLabel = MQForm.label(name: "tag", title: "🏷 " + request.tag).layout {
             l in
-            l.width(35).height(35).fillHolizon(10).verticalCenter()
+            l.width(35).height(35).fillHolizon(10).verticalCenter().leftMargin(5)
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
             (l.view as! UILabel).textColor = .orange
             (l.view as! UILabel).numberOfLines = 1
@@ -178,7 +178,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             l in
             l.width(25).height(25).leftMargin(10).verticalCenter()
         }
-        left +++ MQForm.label(name: "likes2", title: "\(request.numberOfLikes) いいね！").layout {
+        left +++ MQForm.label(name: "likes2", title: "\(request.numberOfLikes) likes！").layout {
             l in
             l.height(25).width(80).leftMargin(5).verticalCenter()
             let label = l.label
@@ -186,18 +186,64 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             label.textAlignment = .left
         }
         
-        let right = Row.LeftAligned().layout {
+        var right = Row.LeftAligned().layout {
             r in
             r.height(30).verticalCenter()
         }
         row +++ right
         
-        let expiryDays = (request.expiryDate.timeIntervalSinceNow) / 84600
-        let expiry = MQForm.hilight(label: "\(Int(-expiryDays)) days before expiry", named: "expiry")
+        let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
+            b.height(30).width(90).verticalCenter()
+            b.view.backgroundColor = .white
+            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderWidth = 0.7
+            b.button.setTitleColor(UIColor.orange, for: .normal)
+            b.button.setTitleColor(.gray, for: UIControlState.disabled)
+            b.button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+            
+        }
+        
+        likeButton.bindEvent(.touchUpInside) { b in
+            LikesService.instance.sendLike("REQUEST", id: Int64(self.request.id))
+            (b as! UIButton).isEnabled = false
+        }
+        
+        right +++ likeButton
+        
+        detailForm <<< row
+        
+        row = Row.Intervaled().layout {
+            r in
+            r.height(40).fillHolizon()
+        }
+        
+        let expiryRow = Row.LeftAligned().height(30)
+        row +++ expiryRow
+        
+        expiryRow +++ MQForm.label(name: "expiryLabel", title: "締切").layout {
+            l in
+            l.verticalCenter().leftMargin(5)
+        }
+        
+        expiryRow +++ MQForm.hilight(label: request.expiryDate.ymd, named: "expiryDate").layout {
+            l in
+            l.verticalCenter().leftMargin(15).height(30).width(100)
+        }
+        
+        right = Row.LeftAligned().layout {
+            r in
+            r.height(30).verticalCenter()
+        }
+        row +++ right
+        
+        
+        let expiryDays = request.expiryDate.timeIntervalSinceNow / 84600
+        let expiryLabel = expiryDays<0 ? "期限過ぎ" : "締切まで\(Int(expiryDays))日"
+        let expiry = MQForm.hilight(label: expiryLabel, named: "expiry")
         
         right +++ expiry.layout {
             e in
-            e.rightMargin(10).verticalCenter()
+            e.rightMargin(10).bottomMargin(3).verticalCenter().width(140)
             e.label.adjustsFontSizeToFitWidth = true
         }
         
@@ -210,7 +256,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ MQForm.label(name: "Term", title: "希望期間").height(35).width(100).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
         let dates = MQForm.hilight(label: request.term(), named: "preferedDate").layout { l in
             l.height(35).width(180).verticalCenter()
@@ -228,7 +274,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ MQForm.label(name: "Location", title: "希望エリア").height(35).width(100).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         let location = MQForm.hilight(label: "\(request.startPlace)", named: "isLand").layout { l in
@@ -249,7 +295,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ MQForm.label(name: "Price", title: "希望価格").height(35).width(100).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         let price = MQForm.hilight(label: request.price(), named: "price").layout { l in
@@ -270,7 +316,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         row +++ MQForm.label(name: "NumberOfPerson", title: "参加人数").height(35).width(100).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         let nop = MQForm.hilight(label: request.nop(), named: "NumberOfPerson").layout { l in

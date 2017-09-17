@@ -21,7 +21,7 @@ class EventInputForm: MQForm {
 
     let eventTitle = MQForm.text(name: "title", placeHolder: "イベントタイトル")
 
-    let tagList = MQForm.text(name: "tag", placeHolder: "tag1 tag2 複数可...")
+    let tagList = MQForm.text(name: "tag", placeHolder: "tag...")
 
     // イベントIcon
     let icon = MQForm.tapableImg(name: "icon", url: "noicon")
@@ -138,7 +138,7 @@ class EventInputForm: MQForm {
 
         row +++ eventTitle.layout {
             l in
-            l.rightMost(withInset: 60).height(line_height).verticalCenter()
+            l.rightMost(withInset: 60).height(line_height).verticalCenter().leftMargin(5)
         }
         row +++ icon.height(50).width(50).layout {
             i in
@@ -156,7 +156,7 @@ class EventInputForm: MQForm {
 
         row +++ tagList.layout {
             t in
-            t.fillHolizon(10).height(line_height).verticalCenter()
+            t.fillHolizon(10).height(line_height).verticalCenter().leftMargin(5)
         }
         row.layout() {
             r in
@@ -168,7 +168,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ action.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10).verticalCenter()
+            line.height(line_height).rightMost(withInset: 10).verticalCenter().leftMargin(5)
         }
 
         action.textView.textContainer.maximumNumberOfLines = 3
@@ -212,7 +212,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "alldayFlagTitle", title: "終日").width(60).height(line_height).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         row +++ allDayFlag.layout {
@@ -228,7 +228,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-start", title: "開始").height(line_height).width(60).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         row +++ startDate.layout {
@@ -248,7 +248,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-End", title: "終了").height(line_height).width(60).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
         
         row +++ endDate.layout {
@@ -270,7 +270,7 @@ class EventInputForm: MQForm {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "場所名・住所などを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 60).verticalCenter()
+            line.height(line_height).rightMost(withInset: 60).verticalCenter().leftMargin(5)
         }
         row +++ locationIcon.height(line_height).width(line_height).layout {
             i in
@@ -310,7 +310,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ detailDescription.layout {
             line in
-            line.height(90).rightMost(withInset: 10).verticalCenter()
+            line.height(90).rightMost(withInset: 10).verticalCenter().leftMargin(5)
         }
 
         row.layout() {
@@ -324,7 +324,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned().height(row_height)
         row +++ MQForm.label(name: "price", title: "価格").height(line_height).width(60).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         row +++ priceInput.layout {
@@ -373,7 +373,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-Tel", title: "連絡先").height(line_height).width(70).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         row +++ contactTel.layout {
@@ -390,7 +390,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-Mail", title: "メール").height(line_height).width(60).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
 
         row +++ contactEmail.layout {
@@ -407,7 +407,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ MQForm.label(name: "label-official-page", title: "+公式ページ").layout {
             c in
-            c.height(line_height).width(100).verticalCenter()
+            c.height(line_height).width(100).verticalCenter().leftMargin(5)
             c.label.textColor = MittyColor.healthyGreen
         }
         row +++ officialUrl.layout {
@@ -425,7 +425,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ infoSource.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10).verticalCenter()
+            line.height(line_height).rightMost(withInset: 10).verticalCenter().leftMargin(5)
         }
         row.layout() {
             r in
@@ -452,7 +452,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ organizer.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10).verticalCenter()
+            line.height(line_height).rightMost(withInset: 10).verticalCenter().leftMargin(5)
         }
 
         row.layout() {

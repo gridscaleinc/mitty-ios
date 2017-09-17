@@ -128,7 +128,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         row +++ MQForm.label(name: "title-request", title: "リクエスト").layout {
             c in
-            c.height(25).verticalCenter()
+            c.height(25).verticalCenter().leftMargin(5)
             c.leftMost(withInset: 20)
             let l = c.view as! UILabel
             l.textColor = .white
@@ -146,7 +146,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         let titleLabel = MQForm.label(name: "Title", title: request.title).layout {
             l in
-            l.fillHolizon(10).height(25).verticalCenter()
+            l.fillHolizon(10).height(25).verticalCenter().leftMargin(5)
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 20)
             (l.view as! UILabel).textColor = .black
             (l.view as! UILabel).numberOfLines = 0
@@ -163,7 +163,7 @@ class ProposalDetailsViewController: MittyViewController {
         }
         let tagLabel = MQForm.label(name: "tag", title: "🏷 " + request.tag).layout {
             l in
-            l.width(35).height(35).fillHolizon(10).verticalCenter()
+            l.width(35).height(35).fillHolizon(10).verticalCenter().leftMargin(5)
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
             (l.view as! UILabel).textColor = .gray
             (l.view as! UILabel).numberOfLines = 1
@@ -175,7 +175,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         let actionLabel = MQForm.label(name: "action", title: (request.desc)).layout {
             c in
-            c.fillHolizon(10).verticalCenter()
+            c.fillHolizon(10).verticalCenter().leftMargin(5)
             let l = c.view as! UILabel
             l.numberOfLines = 3
             l.textColor = .black
@@ -194,50 +194,15 @@ class ProposalDetailsViewController: MittyViewController {
         detailForm <<< row
 
         seperator(section: detailForm, caption: "提案内容")
-
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(60)
-        }
-
-        let infoLabel = MQForm.label(name: "info", title: (proposal.proposerInfo)).layout {
-            c in
-            c.fillParent().margin.all(4)
-            let l = c.view as! UILabel
-            l.numberOfLines = 0
-            l.textColor = .black
-            l.font = .systemFont(ofSize: 15)
-            l.layer.cornerRadius = 2
-            l.layer.borderWidth = 0.8
-            l.layer.borderColor = UIColor.white.cgColor
-            l.backgroundColor = UIColor.white
-            l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
-        }
-
-        row +++ infoLabel
-        detailForm <<< row
-
+        
         row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(35)
         }
-
-        let likes = MQForm.hilight(label: "❤️ \(proposal.numberOfLikes) likes", named:"likes").layout { l in
-            l.height(35).width(100).verticalCenter()
-        }
-
-        row +++ likes
-
-        detailForm <<< row
-
-        row = Row.LeftAligned().layout {
-            r in
-            r.fillHolizon().height(35)
-        }
-
+        
         row +++ MQForm.label(name: "Term", title: "期間").height(35).width(100).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
         
         let dates = MQForm.hilight(label: proposal.term(), named: "preferedDate").layout { l in
@@ -245,31 +210,106 @@ class ProposalDetailsViewController: MittyViewController {
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
         }
-
+        
         row +++ dates
         detailForm <<< row
-
+        
         row = Row.LeftAligned().layout {
             r in
             r.fillHolizon().height(35)
         }
-
+        
         row +++ MQForm.label(name: "Price", title: "価格").height(35).width(100).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(5)
         }
-
+        
         let price = MQForm.hilight(label: proposal.price(), named: "price").layout { l in
             l.height(35).width(180).verticalCenter()
             l.margin.left = 20
             l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
         }
-
+        
         row +++ price
-
+        
         detailForm <<< row
 
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(40)
+        }
+        
+        row +++ MQForm.label(name: "islandNamelabel", title: "場所：").layout {
+            l in
+            l.verticalCenter().leftMargin(5)
+        }
+        
+        row +++ MQForm.label(name: "islandName", title: proposal.islandName).layout {
+            l in
+            l.verticalCenter().leftMargin(5).rightMost(withInset: 5)
+            l.label.numberOfLines = 2
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.font = UIFont.systemFont(ofSize: 15)
+            l.label.textColor = UIColor.gray
+        }
+        
+        detailForm <<< row
+        
+        row = Row.LeftAligned().layout {
+            r in
+            r.fillHolizon().height(60)
+        }
+
+        let infoLabel = MQForm.label(name: "info", title: (proposal.proposerInfo)).layout {
+            c in
+            c.fillParent(withInset: 5).margin.all(4)
+            let l = c.view as! UILabel
+            l.numberOfLines = 0
+            l.textColor = .black
+            l.font = .systemFont(ofSize: 15)
+            l.layer.cornerRadius = 2
+            l.layer.borderWidth = 0.8
+            l.layer.borderColor = UIColor.lightGray.cgColor
+            l.backgroundColor = UIColor.white
+            l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
+        }
+
+        row +++ infoLabel
+        detailForm <<< row
+
+        
+        row = Row.Intervaled().layout {
+            r in
+            r.fillHolizon().height(35)
+        }
+        row.spacing = 30
+
+        let likes = MQForm.hilight(label: "❤️ \(proposal.numberOfLikes) likes", named:"likes").layout { l in
+            l.height(35).width(100).verticalCenter().leftMargin(5)
+        }
+
+        row +++ likes
+
+        
+        let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
+            b.height(30).verticalCenter()
+            b.view.backgroundColor = .white
+            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderWidth = 0.7
+            b.button.setTitleColor(UIColor.orange, for: .normal)
+            b.button.setTitleColor(.gray, for: UIControlState.disabled)
+            b.button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        }
+        
+        likeButton.bindEvent(.touchUpInside) { b in
+            LikesService.instance.sendLike("PROPOSAL", id: Int64(self.proposal.id))
+            (b as! UIButton).isEnabled = false
+        }
+        
+        row +++ likeButton
+        
+        detailForm <<< row
 
         let accept = Control(name: "accept", view: acceptButton).layout {
             c in

@@ -95,7 +95,7 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "Title", title: "タイトル").layout {
             c in
             c.height(height_normal).width(70).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
         }
 
         row +++ titleText.width(350).layout {
@@ -113,7 +113,7 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "TagLabel", title: "Tag").layout {
             c in
             c.height(height_normal).width(70).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
         }
 
         row +++ tag.width(350).layout {
@@ -131,7 +131,7 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "detail", title: "内容").layout {
             c in
             c.height(height_middle).width(70).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
         }
 
         row +++ descriptionText.width(350).layout {
@@ -149,12 +149,12 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "lacation", title: "場所").layout {
             c in
             c.height(height_middle).width(70).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
         }
 
         row +++ locationText.width(350).layout {
             t in
-            t.height(height_tall).rightMost().verticalCenter()
+            t.height(50).rightMost().verticalCenter()
         }
         inputForm <<< row
 
@@ -166,15 +166,16 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "Title", title: "希望日程").layout {
             c in
             c.height(height_normal).width(65).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
+            c.label.adjustsFontSizeToFitWidth = true
         }
-        row +++ preferredDatetime1.width(120).layout {
+        row +++ preferredDatetime1.width(115).layout {
             t in
-            t.height(height_normal).verticalCenter()
+            t.height(height_normal).verticalCenter().leftMargin(5)
         }
-        row +++ preferredDatetime2.width(120).layout {
+        row +++ preferredDatetime2.width(115).layout {
             t in
-            t.height(height_normal).verticalCenter()
+            t.height(height_normal).verticalCenter().leftMargin(5)
         }
 
         let dp1 = UIDatePicker.newAutoLayout()
@@ -197,15 +198,16 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "priceTitle", title: "価格範囲").layout {
             c in
             c.height(height_normal).width(65).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
+            c.label.adjustsFontSizeToFitWidth = true
         }
-        row +++ startPrice.width(90).layout {
+        row +++ startPrice.width(115).layout {
             t in
-            t.height(height_normal).verticalCenter()
+            t.height(height_normal).verticalCenter().leftMargin(5)
         }
-        row +++ limitedPrice.width(120).layout {
+        row +++ limitedPrice.width(115).layout {
             t in
-            t.height(height_normal).verticalCenter()
+            t.height(height_normal).verticalCenter().leftMargin(5)
         }
         inputForm <<< row
 
@@ -217,7 +219,7 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "title2", title: "人数").layout {
             c in
             c.height(height_normal).width(65).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(5)
         }
 
         row +++ numOfPerson.width(70).layout {
@@ -239,13 +241,15 @@ class RequestViewController: MittyViewController {
 
         inputForm <<< row
 
-        row = Row.Intervaled()
+        row = Row.Intervaled().height(50)
+        row.spacing = 60
         row.layout {
             r in
-            r.fillHolizon().height(height_middle)
+            r.fillHolizon().upMargin(20)
         }
+        
         row +++ postButton.layout { button in
-            button.fillHolizon(60).height(30).verticalCenter()
+            button.height(50)
             let b = button.view as! UIButton
             b.backgroundColor = .orange
         }
@@ -258,7 +262,7 @@ class RequestViewController: MittyViewController {
 
         row = Row.LeftAligned().layout() {
             r in
-            r.fillHolizon()
+            r.fillHolizon().upMargin(20)
         }
         inputForm <<< row
 
@@ -322,6 +326,11 @@ class RequestViewController: MittyViewController {
             newRequest.setInt(.preferredPrice2, price)
         }
 
+        if (expiryDate.textField.text != "") {
+            let dp = expiryDate.textField.inputView as! UIDatePicker
+            newRequest.setDate(.expiryDate, dp.date)
+        }
+        
         RequestService.instance.register(newRequest, onSuccess: {
             self.navigationController?.popViewController(animated: false)
         }, onError: {
