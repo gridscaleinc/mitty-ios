@@ -107,6 +107,8 @@
 		FC5CBD891F59A887006541E3 /* OffersService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD881F59A887006541E3 /* OffersService.swift */; };
 		FC5CBD8B1F5B1209006541E3 /* Contactee.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8A1F5B1209006541E3 /* Contactee.swift */; };
 		FC5CBD8D1F6C9A04006541E3 /* InviteeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */; };
+		FC5CBD8F1F6E982A006541E3 /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8E1F6E9829006541E3 /* Gallery.swift */; };
+		FC5CBD911F6E9CF6006541E3 /* GalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -320,6 +322,8 @@
 		FC5CBD881F59A887006541E3 /* OffersService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OffersService.swift; sourceTree = "<group>"; };
 		FC5CBD8A1F5B1209006541E3 /* Contactee.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Contactee.swift; sourceTree = "<group>"; };
 		FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteeCell.swift; sourceTree = "<group>"; };
+		FC5CBD8E1F6E9829006541E3 /* Gallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
+		FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryService.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -569,6 +573,7 @@
 				FC004C5F1F45E13200230DAA /* Code.swift */,
 				FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */,
 				FC5CBD8A1F5B1209006541E3 /* Contactee.swift */,
+				FC5CBD8E1F6E9829006541E3 /* Gallery.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -585,24 +590,25 @@
 			isa = PBXGroup;
 			children = (
 				FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */,
-				FC0AF1EC1DC4F61B00C76408 /* Service.swift */,
+				FCB45ED21F05560D0090B601 /* ContentService.swift */,
 				FC2862AA1DCEAFA6000854D9 /* EventService.swift */,
+				FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */,
+				FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */,
 				FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */,
-				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
+				FCCFAB381F2DB9370075C1A2 /* LikesService.swift */,
+				FCFBABE41F4ADF8400A957FE /* NameCardService.swift */,
 				FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */,
 				FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */,
-				FC34831A1EE412A7005E539E /* MeetingService.swift */,
-				FC7D4B871EEEC1470074C259 /* RequestService.swift */,
-				FC95F9181F3EF33800F83766 /* ProposalService.swift */,
-				FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */,
-				FCB45ECE1F03FEA90090B601 /* UserService.swift */,
-				FCB45ED21F05560D0090B601 /* ContentService.swift */,
-				FCCFAB381F2DB9370075C1A2 /* LikesService.swift */,
-				FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */,
 				FC3C16E11F3EEFFD00E7622B /* NewProposalReq.swift */,
-				FC004C5D1F43322800230DAA /* ProfileService.swift */,
-				FCFBABE41F4ADF8400A957FE /* NameCardService.swift */,
+				FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */,
+				FC34831A1EE412A7005E539E /* MeetingService.swift */,
 				FC5CBD881F59A887006541E3 /* OffersService.swift */,
+				FC004C5D1F43322800230DAA /* ProfileService.swift */,
+				FC95F9181F3EF33800F83766 /* ProposalService.swift */,
+				FC7D4B871EEEC1470074C259 /* RequestService.swift */,
+				FC0AF1EC1DC4F61B00C76408 /* Service.swift */,
+				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
+				FCB45ECE1F03FEA90090B601 /* UserService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -1253,6 +1259,7 @@
 				F4AEAB031DAD3F2C007DEB80 /* AppDelegate.swift in Sources */,
 				FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */,
 				FCF2A0D41E7A85F200536D32 /* ActivityListForm.swift in Sources */,
+				FC5CBD8F1F6E982A006541E3 /* Gallery.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
 				FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */,
 				FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */,
@@ -1262,6 +1269,7 @@
 				FC5CBD791F53914E006541E3 /* ContacteeNamecard.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */,
+				FC5CBD911F6E9CF6006541E3 /* GalleryService.swift in Sources */,
 				FC3C16D81F375E5600E7622B /* EditBasicInfoViewController.swift in Sources */,
 				FCFA84861F121E1400E9C6F2 /* ProposalViewController.swift in Sources */,
 				FCF7F3441DD0D2FA00D78384 /* TutorialViewController.swift in Sources */,

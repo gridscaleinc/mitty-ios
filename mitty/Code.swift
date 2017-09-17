@@ -357,7 +357,7 @@ public func appearance(of key: String, locale: Locale? = Locale.current) -> Code
 /// - Refused: <#Refused description#>
 /// - None: <#None description#>
 enum AcceptStatus : String {
-    case Accepted = "ACCPETED"
+    case Accepted = "ACCEPTED"
     case Refused = "REFUSED"
     case None = "NONE"
 }

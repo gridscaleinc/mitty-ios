@@ -34,7 +34,7 @@ class ProposalService: Service {
     ///   - req: 送信情報オブジェクト。
     ///   - onSuccess: 正常時の呼び出し処理。
     ///   - onError: エラー時の呼び出し処理。
-    func register(_ req: NewProposalReq, onSuccess: @escaping (() -> Void), onError: @escaping ((_ error: String) -> Void)) {
+    func register(_ req: NewProposalReq, onSuccess: @escaping ((_ id: Int64) -> Void), onError: @escaping ((_ error: String) -> Void)) {
 
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
@@ -54,12 +54,12 @@ class ProposalService: Service {
                     let json = JSON(jsonObject)
                     print(json)
 
-                    let proposalId = json["id"].stringValue
-
+                    let proposalId = json["id"].int64Value
+                    onSuccess(proposalId)
+                    
                     print(proposalId)
 
                 }
-                onSuccess()
 
             case .failure(let error):
                 print(error)
@@ -132,7 +132,7 @@ class ProposalService: Service {
             "status": status.rawValue,
             ]
         
-        Alamofire.request(acceptUrl, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        Alamofire.request(approveUrl, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
             
             LoadingProxy.off()
             
@@ -283,6 +283,7 @@ class ProposalService: Service {
         info.additionalInfo = json["additional_info"].stringValue
         info.proposerId = json["proposer_id"].intValue
         info.proposerInfo = json["proposer_info"].stringValue
+        info.additionalInfo = json["additional_info"].stringValue
         info.confirmTel = json["confirm_tel"].stringValue
         info.confirmEmail = json["confirm_email"].stringValue
         

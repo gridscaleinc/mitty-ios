@@ -189,10 +189,10 @@ class EventInputForm: MQForm {
 
         imageContainer +++ image.layout() {
             c in
-            c.height(UIScreen.main.bounds.width).fillHolizon().upper()
+            c.height(70).leftMost().upper()
         }
 
-        imageContainer +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(120).width(90).layout {
+        imageContainer +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(70).width(90).layout {
             l in
             l.label.textColor = MittyColor.healthyGreen
             l.label.textAlignment = .center
@@ -202,7 +202,7 @@ class EventInputForm: MQForm {
 
         row.layout() {
             r in
-            r.height(UIScreen.main.bounds.width).fillHolizon()
+            r.height(70).fillHolizon()
         }
         inputForm <<< row
 

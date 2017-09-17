@@ -20,6 +20,8 @@ class ProposalDetailsViewController: MittyViewController {
 
     let form = MQForm.newAutoLayout()
 
+    var imageRow = Row()
+    
     ///
     ///
     let acceptButton: UIButton = {
@@ -88,7 +90,24 @@ class ProposalDetailsViewController: MittyViewController {
         form.configLayout()
         configNavigationBar()
 
+        GalleryService.instance.galleryContents(of: proposal.galleryID, onCompletion: {
+            list in
+            if let g = list.first {
+                self.setImage(g)
+            }
+        })
 
+    }
+    
+    func setImage(_ gallery: GalleryContent) {
+        
+        let image = MQForm.img(name: "proposalImg", url: "")
+        image.imageView.setMittyImage(url: gallery.linkURL)
+        
+        imageRow +++ image
+        image.height(UIScreen.main.bounds.width).width(UIScreen.main.bounds.width)
+        image.verticalCenter()
+        imageRow.fillHolizon().height(UIScreen.main.bounds.width)
     }
 
     func buildForm () {
@@ -194,6 +213,7 @@ class ProposalDetailsViewController: MittyViewController {
         detailForm <<< row
 
         seperator(section: detailForm, caption: "提案内容")
+        detailForm <<< imageRow
         
         row = Row.LeftAligned().layout {
             r in
@@ -261,7 +281,7 @@ class ProposalDetailsViewController: MittyViewController {
             r.fillHolizon().height(60)
         }
 
-        let infoLabel = MQForm.label(name: "info", title: (proposal.proposerInfo)).layout {
+        let infoLabel = MQForm.label(name: "info", title: (proposal.additionalInfo)).layout {
             c in
             c.fillParent(withInset: 5).margin.all(4)
             let l = c.view as! UILabel
@@ -271,7 +291,7 @@ class ProposalDetailsViewController: MittyViewController {
             l.layer.cornerRadius = 2
             l.layer.borderWidth = 0.8
             l.layer.borderColor = UIColor.lightGray.cgColor
-            l.backgroundColor = UIColor.white
+//            l.backgroundColor = UIColor.white
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
 
@@ -314,7 +334,7 @@ class ProposalDetailsViewController: MittyViewController {
         let accept = Control(name: "accept", view: acceptButton).layout {
             c in
             c.height(40).verticalCenter()
-            c.button.setTitleColor(UIColor.orange, for: .normal)
+//            c.button.setTitleColor(UIColor.orange, for: .normal)
         }.bindEvent(.touchUpInside) {
             b in
             self.pressAccept()
@@ -332,13 +352,15 @@ class ProposalDetailsViewController: MittyViewController {
 
         row = Row.Intervaled().layout {
             r in
-            r.fillHolizon().height(50).upMargin(30)
+            r.fillHolizon().height(40).upMargin(30)
         }
         row.spacing = 30
 
-        // Requesterの場合
+        // Proposerの場合
         if ApplicationContext.userSession.userId == Int64(proposal.proposerId)
             && proposal.isApprovable {
+            showConfirm(detailForm)
+            
             row +++ Control(name: "approve", view: approveButton).layout {
                 c in
                 c.height(40)
@@ -359,12 +381,7 @@ class ProposalDetailsViewController: MittyViewController {
             }
 
         } else if request.ownerId == ApplicationContext.userSession.userId && proposal.isAcceptable {
-            seperator(section: detailForm, caption: "連絡情報（受入の場合必要）")
-            let confirmRow = Row.Intervaled().height(50)
-            confirmRow.spacing = 30
-            confirmRow +++ confirmTel.height(40)
-            confirmRow +++ confirmMail.height(40)
-            detailForm <<< confirmRow
+            showConfirm(detailForm)
 
             row +++ accept
             row +++ refuse
@@ -398,6 +415,20 @@ class ProposalDetailsViewController: MittyViewController {
 
         self.navigationController?.view.backgroundColor = .clear
         //        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    func showConfirm(_ section: Section) {
+
+        seperator(section: section, caption: "確認情報")
+
+        let confirmRow = Row.Intervaled().height(50)
+        confirmRow.spacing = 30
+        confirmTel.textField.text = proposal.confirmTel
+        confirmRow +++ confirmTel.height(40)
+        
+        confirmMail.textField.text = proposal.confirmEmail
+        confirmRow +++ confirmMail.height(40)
+        section <<< confirmRow
     }
 
     func pressAccept () {

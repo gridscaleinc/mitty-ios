@@ -12,7 +12,7 @@ import Alamofire
 import SwiftyJSON
 import MapKit
 
-class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePickerDelegate {
+class ProposalViewController: MittyViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, IslandPickerDelegate, PricePickerDelegate {
 
     var relatedRequest: RequestInfo!
 
@@ -20,6 +20,18 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
 
     var pickedIsland: IslandPick? = nil
     let pricePicker = PricePicker()
+    
+    var imagePicked = false
+    
+    // イメージは最後にオプションとして洗濯させる。
+    let image: Control = {
+        let i = MQForm.img(name: "picture", url: "sunnyGreen")
+        i.imageView.contentMode = .scaleAspectFit
+        return i
+    } ()
+
+    var imageRow = Row()
+    
 
     // 場所
     let location = MQForm.text(name: "location", placeHolder: "場所名を入力")
@@ -261,6 +273,41 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
         }
         detailForm <<< row
 
+        
+        // イメージ
+        row = Row.LeftAligned()
+        imageRow = row
+        let imageContainer = Container(name: "iamgeCont", view: UIView.newAutoLayout())
+        row +++ imageContainer.layout {
+            i in
+            i.topAlign(with: self.image).bottomAlign(with: self.image).fillHolizon()
+        }
+        
+        imageContainer +++ image.layout() {
+            c in
+            c.height(60).width(60).holizontalCenter()
+        }
+        
+        imageContainer +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(60).width(90).layout {
+            l in
+            l.label.textColor = MittyColor.healthyGreen
+            l.label.textAlignment = .center
+            l.label.font = UIFont.boldSystemFont(ofSize: 30)
+            l.fillHolizon().upper()
+        }.bindEvent(.touchUpInside) {
+            _ in
+            
+            self.pickImage()
+        }
+        
+        row.layout() {
+            r in
+            r.topAlign(with: imageContainer).bottomAlign(with: imageContainer).fillHolizon()
+        }
+        
+        detailForm <<< row
+        
+        
         row = Row.LeftAligned()
 
 
@@ -530,8 +577,46 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
             priceDetail.height(0)
         }
 
+        image.heightConstraints?.autoRemove()
+        image.widthConstraints?.autoRemove()
+        
+        if (imagePicked) {
+           image.height(UIScreen.main.bounds.width)
+           image.width(UIScreen.main.bounds.width)
+        } else {
+            image.height(60)
+            image.width(60)
+        }
+        
+    }
+    
+    
+    func pickImage () {
+        
+        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePicker.allowsEditing = true
+            self.present(imagePicker, animated: true, completion: nil)
+        }
+        
+    }
+    
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        NSLog("\(info)")
+        let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
+        image.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
+        self.dismiss(animated: false, completion: nil)
+        imagePicked = true
+        
+        view.setNeedsUpdateConstraints()
+        view.updateConstraintsIfNeeded()
+        
 
     }
+
 
     //
     // 場所選択した際の処理
@@ -618,10 +703,56 @@ class ProposalViewController: MittyViewController, IslandPickerDelegate, PricePi
         // newProposal.setStr(.ProposerInfo, contactTel.textField.text)
 
         ProposalService.instance.register(newProposal, onSuccess: {
-            self.navigationController?.popViewController(animated: true)
+            id in
+            if (self.imagePicked) {
+               self.registerGallery(id)
+            } else {
+                self.navigationController?.popViewController(animated: true)
+            }
         }, onError: {
             error in
             self.showError(error)
         })
+    }
+    
+    func registerGallery (_ proposalId: Int64) {
+        
+        let imageData: NSData = UIImagePNGRepresentation(self.image.imageView.image!)! as NSData
+        let strBase64 = imageData.base64EncodedString()
+        
+        let parameters = [
+            "gallery": [
+                "caption": "提案画像",
+                "briefInfo": "-",
+                "freeText": "-",
+                "proposalId": proposalId
+            ],
+            "content": [
+                "mime": "image/png",
+                "name": String(format: "%02d", "\(proposalId)"),
+                "link_url": "-",
+                "data": strBase64
+            ]
+        ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        let urlString = MITTY_SERVICE_BASE_URL + "/gallery/content"
+        
+        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
+            , headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+                LoadingProxy.off()
+                switch response.result {
+                case .success:
+                    break
+                case .failure(let error):
+                    print(error)
+                    self?.showError("画像登録エラー")
+                    Thread.sleep(forTimeInterval: 4)
+                }
+                self?.navigationController?.popViewController(animated: true)
+        }
     }
 }

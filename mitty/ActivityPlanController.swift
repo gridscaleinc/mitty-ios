@@ -125,8 +125,6 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
             }
             self?.setFromDateTime(picker1)
             self?.setToDateTime(picker2)
-
-
         }
 
         form.quest("[name=contact-Tel]").forEach() { (c) in
@@ -232,11 +230,6 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
 
     }
 
-
-    //MARK: - Delegates
-    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: AnyObject]) {
-
-    }
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         NSLog("\(info)")
