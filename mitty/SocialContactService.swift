@@ -162,5 +162,52 @@ class SocialContactService: Service {
         return result
         
     }
+    
+    func getSocailMirror(onComplete: @escaping (_ mirror: SocialMirror) -> Void, onError: @escaping (_ error: String) -> Void) {
+        
+        let url = MITTY_SERVICE_BASE_URL + "/social/mirror"
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        Alamofire.request(url, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+            LoadingProxy.off()
+            switch response.result {
+            case .success:
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["todaysEvent"] == nil) {
+                        return
+                    }
+                    let mirror = self.bindSocialMirror(json)
+                    onComplete(mirror)
+                    return
+                }
+                
+                break
+                
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                onError(error.localizedDescription)
+            }
+        }
+    }
 
+    func bindSocialMirror( _ json: JSON) -> SocialMirror {
+        let m = SocialMirror()
+        m.event = json["event"].stringValue
+        m.todaysEvent = json["todaysEvent"].stringValue
+        m.eventInvitation = json["eventInvitation"].stringValue
+        m.businesscardOffer = json["businessCardOffer"].stringValue
+        m.request = json["request"].stringValue
+        m.proposal = json["proposal"].stringValue
+
+        return m
+        
+    }
 }

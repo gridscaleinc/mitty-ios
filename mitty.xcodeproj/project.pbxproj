@@ -26,7 +26,6 @@
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
 		FC004C5E1F43322800230DAA /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5D1F43322800230DAA /* ProfileService.swift */; };
 		FC004C601F45E13200230DAA /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5F1F45E13200230DAA /* Code.swift */; };
-		FC004C661F48F82500230DAA /* SocialIdForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C651F48F82500230DAA /* SocialIdForm.swift */; };
 		FC004C681F48F84D00230DAA /* SocialIdInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */; };
 		FC0081831DD37D7F00C1F970 /* TalkListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */; };
 		FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0081861DD3890A00C1F970 /* TalkingCell.swift */; };
@@ -109,6 +108,7 @@
 		FC5CBD8D1F6C9A04006541E3 /* InviteeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */; };
 		FC5CBD8F1F6E982A006541E3 /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8E1F6E9829006541E3 /* Gallery.swift */; };
 		FC5CBD911F6E9CF6006541E3 /* GalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */; };
+		FC5CBD931F71BF58006541E3 /* SocialMirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD921F71BF58006541E3 /* SocialMirror.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
@@ -241,7 +241,6 @@
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
 		FC004C5D1F43322800230DAA /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		FC004C5F1F45E13200230DAA /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
-		FC004C651F48F82500230DAA /* SocialIdForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialIdForm.swift; sourceTree = "<group>"; };
 		FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialIdInputForm.swift; sourceTree = "<group>"; };
 		FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkListViewController.swift; sourceTree = "<group>"; };
 		FC0081861DD3890A00C1F970 /* TalkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TalkingCell.swift; sourceTree = "<group>"; };
@@ -324,6 +323,7 @@
 		FC5CBD8C1F6C99FC006541E3 /* InviteeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InviteeCell.swift; sourceTree = "<group>"; };
 		FC5CBD8E1F6E9829006541E3 /* Gallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 		FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryService.swift; sourceTree = "<group>"; };
+		FC5CBD921F71BF58006541E3 /* SocialMirror.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMirror.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
@@ -574,6 +574,7 @@
 				FC5CBD781F53914E006541E3 /* ContacteeNamecard.swift */,
 				FC5CBD8A1F5B1209006541E3 /* Contactee.swift */,
 				FC5CBD8E1F6E9829006541E3 /* Gallery.swift */,
+				FC5CBD921F71BF58006541E3 /* SocialMirror.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -823,7 +824,6 @@
 				FC3482D11EDA8073005E539E /* PresenceForm.swift */,
 				FC3482D31EDA8090005E539E /* FootMarkForm.swift */,
 				FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */,
-				FC004C651F48F82500230DAA /* SocialIdForm.swift */,
 				FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */,
 				FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */,
 			);
@@ -1220,7 +1220,6 @@
 				FCFA847A1F08A8B000E9C6F2 /* SocialId.swift in Sources */,
 				FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */,
 				FCF8D64D1DD89E650059B270 /* ContactInfoCell.swift in Sources */,
-				FC004C661F48F82500230DAA /* SocialIdForm.swift in Sources */,
 				FC30182F1ED42EC700A5F183 /* MittyImage.swift in Sources */,
 				FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */,
 				FC1FE05C1EC89BE6007AE8A5 /* ActivityCell.swift in Sources */,
@@ -1329,6 +1328,7 @@
 				FCFBC6791E63C39000AEF869 /* EventInputForm.swift in Sources */,
 				FC3482C61ED9BDA8005E539E /* CheckinViewController.swift in Sources */,
 				FC427B821DCACB43009F43AE /* EventCell.swift in Sources */,
+				FC5CBD931F71BF58006541E3 /* SocialMirror.swift in Sources */,
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,
 				FC3482D21EDA8073005E539E /* PresenceForm.swift in Sources */,
 				FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */,

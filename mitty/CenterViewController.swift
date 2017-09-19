@@ -132,7 +132,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         }
 
         
-        let strings = ["招待：１件、　本日の予定：３件、                            　"]
+        let strings = ["Loading .....................                            　"]
 
         bagua.label.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
 
@@ -515,5 +515,13 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     func loadSocialMirror() {
         self.view.addSubview(socialMirror.view)
         socialMirror.view.isHidden = true
+        SocialContactService.instance.getSocailMirror(onComplete: {
+            mirror in
+            self.bagua.label.text = mirror.description
+            self.socialMirror.load(mirror)
+        }, onError: {
+            error in
+            self.bagua.label.text = error
+        })
     }
 }

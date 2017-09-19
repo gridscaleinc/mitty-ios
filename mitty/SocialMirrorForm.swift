@@ -44,7 +44,12 @@ class SocialBar: Row {
         labelItem.label.text = text
     }
     
-    
+    var num : String {
+        get{ return numberItem.label.text ?? ""}
+        set(v) {
+            numberItem.label.text = v
+        }
+    }    
 }
 
 class SocialMirrorForm: Container {
@@ -136,7 +141,17 @@ class SocialMirrorForm: Container {
         }
         section +++ seperator
     }
-
+    
+    
+    func load(_ m: SocialMirror) {
+        eventLine.num = m.event
+        todaysEventLine.num = m.todaysEvent
+        namecardOfferLine.num = m.businesscardOffer
+        invitationLine.num = m.eventInvitation
+        requestLine.num = m.request
+        proposalLine.num = m.proposal
+        
+    }
     
 
 }
