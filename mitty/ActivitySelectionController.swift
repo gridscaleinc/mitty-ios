@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 import PureLayout
 
-class ActivitySelectionViewController: MittyViewController {
+class ActivitySelectionViewController1: MittyViewController {
 
     // activityList を作成する
     let form: ActivitySelectionForm

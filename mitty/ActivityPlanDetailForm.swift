@@ -26,7 +26,7 @@ class ActivityPlanDetailsForm: MQForm {
     //  Memo
     var memo: Control = {
         let t = UILabel.newAutoLayout()
-        t.text = "休みを取ることは忘れなく。引き継ぎ事情もあるかもしれないから、早めにリーダに相談する。航空券、ホテル。。。。"
+        t.text = ""
         t.font = UIFont.systemFont(ofSize: 14)
         t.textColor = UIColor.black
         t.numberOfLines = 0
@@ -53,6 +53,7 @@ class ActivityPlanDetailsForm: MQForm {
         let c = Control(name: "eventTitle", view: t)
         return c
     } ()
+    
     var eventLogo: Control = {
         let l = UIImageView.newAutoLayout()
         l.image = UIImage(named: "")
@@ -100,23 +101,15 @@ class ActivityPlanDetailsForm: MQForm {
     func loadForm(_ activity: Activity) {
         self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
 
-        var page = self as MQForm
-
-        let header = Header()
-        header.title = "Title"
-        page += header
-
-        header.layout() { (v) in
-            v.upper().height(1)
-        }
-
         let scroll = UIScrollView.newAutoLayout()
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
+        scroll.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 900)
 
+        
         let inputContainer = Container(name: "Details-Container", view: scroll)
-
+        
         inputContainer.layout() { (main) in
             main.fillParent()
             main.view.backgroundColor = UIColor.white
@@ -136,7 +129,7 @@ class ActivityPlanDetailsForm: MQForm {
         title.label.text = activity.info.title
         row +++ title.layout {
             t in
-            t.fillHolizon(20).height(35).verticalCenter()
+            t.rightMost(withInset:30).verticalCenter()
         }
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
@@ -159,11 +152,13 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ memo.layout {
             t in
-            t.fillHolizon(10).verticalCenter()
+            t.fillHolizon(10)
+            t.taller(than: 30)
+            t.label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
         }
         row.layout() {
             r in
-            r.fillHolizon(10).topAlign(with: self.memo).bottomAlign(with: self.memo)
+            r.fillHolizon(10).bottomAlign(with: self.memo).topAlign(with: self.memo)
             r.view.backgroundColor = UIColor(white: 0.99, alpha: 0.99)
         }
 
@@ -174,101 +169,81 @@ class ActivityPlanDetailsForm: MQForm {
             }
         }
         inputForm <<< row
-
+        
+        // mainEvetがなければ表示しない内容がある。　TODO
 
         if activity.info.mainEventId == nil || activity.info.mainEventId == "0" {
             row = Row.Intervaled().layout {
                 r in
                 r.height(60).fillHolizon()
             }
-
+            
+            row.spacing = 60
+            
             row +++ mainEventButton.layout {
                 b in
                 b.height(40)
             }
-            row.spacing = 30
-
+            
             inputForm <<< row
-
-            row = Row.Intervaled().layout {
+            
+        } else {
+            
+            // event title
+            row = Row.LeftAligned().layout() {
                 r in
                 r.height(60).fillHolizon()
             }
-
-            row +++ requestButton.layout {
-                b in
-                b.height(40).verticalCenter()
-                b.button.backgroundColor = UIColor.gray
+            
+            eventTitle.label.text = activity.mainItem?.eventTitle
+            row +++ eventTitle.layout {
+                t in
+                t.leftMost(withInset: 10).rightMost(withInset: 50).height(50).verticalCenter()
             }
-
-            row.spacing = 30
-
-            inputForm <<< row
-
-            row = Row.Intervaled()
-            inputForm <<< row
-
-            inputContainer.layout() { (main) in
-                main.fillVertical().width(UIScreen.main.bounds.width - 5).bottomAlign(with: row)
+            eventLogo.imageView.setMittyImage(url: activity.info.logoUrl)
+            row +++ eventLogo.layout {
+                logo in
+                logo.height(30).width(30).rightMost(withInset: 10).verticalCenter()
             }
-            return
+            
+            inputForm <<< row
+            
+            
+            row = Row.LeftAligned().layout() {
+                r in
+                r.height(30).fillHolizon()
+            }
+            
+            eventTime.label.text = activity.mainItem?.start
+            
+            row +++ eventTime.layout {
+                t in
+                t.label.textColor = UIColor.gray
+                t.label.font = UIFont.systemFont(ofSize: 14)
+                t.leftMost(withInset: 10).rightMost(withInset: 10).verticalCenter()
+            }
+            inputForm <<< row
+            
+            row = Row.LeftAligned().layout() {
+                r in
+                r.height(30).fillHolizon()
+            }
+            
+            row +++ MQForm.label(name: "location", title: "📍 \((activity.mainItem?.islandName) ?? "")").layout {
+                l in
+                l.label.textColor = UIColor.gray
+                l.label.font = UIFont.systemFont(ofSize: 14)
+                l.leftMost(withInset: 10).rightMost(withInset: 50).height(35).verticalCenter()
+            }
+            
+            row +++ MQForm.img(name: "icon", url: "").layout {
+                img in
+                img.height(30).width(30).rightMost(withInset: 10).verticalCenter()
+                img.imageView.setMittyImage(url: activity.mainItem?.islandLogoUrl ?? "")
+            }
+            
+            inputForm <<< row
         }
-
-        // event title
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(60).fillHolizon()
-        }
-
-        eventTitle.label.text = activity.mainItem?.eventTitle
-        row +++ eventTitle.layout {
-            t in
-            t.leftMost(withInset: 10).rightMost(withInset: 50).height(50).verticalCenter()
-        }
-        eventLogo.imageView.setMittyImage(url: activity.info.logoUrl)
-        row +++ eventLogo.layout {
-            logo in
-            logo.height(30).width(30).rightMost(withInset: 10).verticalCenter()
-        }
-
-        inputForm <<< row
-
-
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(30).fillHolizon()
-        }
-
-        eventTime.label.text = activity.mainItem?.start
-
-        row +++ eventTime.layout {
-            t in
-            t.label.textColor = UIColor.gray
-            t.label.font = UIFont.systemFont(ofSize: 14)
-            t.leftMost(withInset: 10).rightMost(withInset: 10).verticalCenter()
-        }
-        inputForm <<< row
-
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(30).fillHolizon()
-        }
-
-        row +++ MQForm.label(name: "location", title: "📍 \((activity.mainItem?.islandName) ?? "")").layout {
-            l in
-            l.label.textColor = UIColor.gray
-            l.label.font = UIFont.systemFont(ofSize: 14)
-            l.leftMost(withInset: 10).rightMost(withInset: 50).height(35).verticalCenter()
-        }
-
-        row +++ MQForm.img(name: "icon", url: "").layout {
-            img in
-            img.height(30).width(30).rightMost(withInset: 10).verticalCenter()
-            img.imageView.setMittyImage(url: activity.mainItem?.islandLogoUrl ?? "")
-        }
-        
-        inputForm <<< row
-
 
         row = Row.Intervaled()
         row.layout() {
@@ -350,11 +325,12 @@ class ActivityPlanDetailsForm: MQForm {
 
         inputForm <<< row
 
-        row = Row.Intervaled()
+        row = Row.LeftAligned()
         inputForm <<< row
 
         inputForm.layout() { c in
-            c.fillVertical().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+            c.fillParent().width(UIScreen.main.bounds.width).bottomAlign(with: row)
+            c.taller(than: UIScreen.main.bounds.height + 10)
             c.view.backgroundColor = .white
         }
 
@@ -391,6 +367,7 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ MQForm.img(name: "icon", url: "").width(30).height(20).layout {
             i in
+            i.verticalCenter()
             i.imageView.setMittyImage(url: item.eventLogoUrl)
         }
 

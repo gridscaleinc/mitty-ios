@@ -97,7 +97,7 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         }
 
 
-        view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+        view.setNeedsUpdateConstraints()
 
     }
 

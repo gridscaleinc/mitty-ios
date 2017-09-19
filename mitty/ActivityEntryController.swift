@@ -114,27 +114,20 @@ class ActivityEntryViewController: MittyViewController {
             return
         }
 
-        ActivityService.instance.register(activityTitle.textField.text!, memo.textView.text!
-                                          , "0", onCompletion: {
-                                              act in
-                                              if let info = self.pickedInfo {
-                                                  let vc = ActivityPlanViewController(act)
-                                                  vc.webpicker(nil, info)
-                                                  self.navigationController?.pushViewController(vc, animated: true)
-                                              } else {
-                                                  let vc = ActivityPlanDetailsController(act)
-                                                  vc.status = 1
-                                                  self.navigationController?.pushViewController(vc, animated: true)
-                                              }
-                                          },
-                                          onError: { error in
-
-                                              LoadingProxy.off()
-                                              print(error)
-                                              let count = self.navigationController?.viewControllers.count
-                                              let vc = self.navigationController?.viewControllers[count! - 2]
-                                              self.navigationController?.popToViewController(vc!, animated: true)
-                                          })
+        ActivityService.instance.register(activityTitle.textField.text!, memo.textView.text!, "0", onCompletion: {
+            act in
+            let vc = ActivityPlanViewController(act)
+            if let info = self.pickedInfo {
+                vc.webpicker(nil, info)
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+        },onError: { error in
+            LoadingProxy.off()
+            print(error)
+            let count = self.navigationController?.viewControllers.count
+            let vc = self.navigationController?.viewControllers[count! - 2]
+            self.navigationController?.popToViewController(vc!, animated: true)
+        })
 
     }
 }

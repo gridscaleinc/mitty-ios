@@ -81,15 +81,19 @@ class ActivityPlanDetailsController: MittyViewController {
     }
 
 
+    var constrainsInited = false
     override func updateViewConstraints() {
-        form.autoPin(toTopLayoutGuideOf: self, withInset: 20)
-        form.autoPinEdge(toSuperviewEdge: .top)
-        form.autoPinEdge(toSuperviewEdge: .left)
-        form.autoPinEdge(toSuperviewEdge: .right)
-        form.autoPinEdge(toSuperviewEdge: .bottom)
-
-        form.configLayout()
         super.updateViewConstraints()
+        if (!constrainsInited) {
+            form.autoPin(toTopLayoutGuideOf: self, withInset: 20)
+            form.autoPinEdge(toSuperviewEdge: .top)
+            form.autoPinEdge(toSuperviewEdge: .left)
+            form.autoPinEdge(toSuperviewEdge: .right)
+            form.autoPinEdge(toSuperviewEdge: .bottom)
+            constrainsInited = true
+        }
+        
+        form.configLayout()
 
     }
 
@@ -104,7 +108,7 @@ class ActivityPlanDetailsController: MittyViewController {
         if (activityInfo.mainEventId == nil || activityInfo.mainEventId == "" || activityInfo.mainEventId == "0") {
             form.mainEventButton.bindEvent(.touchUpInside) { [weak self]
                 v in
-                let vc = ActivitySelectionViewController((self?.activityInfo)!)
+                let vc = ActivityPlanViewController((self?.activityInfo)!)
                 self?.navigationController?.pushViewController(vc, animated: true)
                 self?.status = 3
             }
