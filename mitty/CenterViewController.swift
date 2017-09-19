@@ -57,6 +57,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
     let picture: Control = MQForm.button(name: "m2", title: "")
 
+    var nearlyDestinations = [Destination]()
+    
     var targetLocation: Destination? = nil
 
     let targetLocationDisp = MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼")
@@ -294,9 +296,14 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         ActivityService.instance.getDestinationList() {
             destinations in
             let now = Date()
-
+            self.nearlyDestinations = destinations
+            
             self.myMapView.removeAnnotations(self.myMapView.annotations)
 
+            if destinations.count == 0 {
+                self.display.isHidden = true
+            }
+            
             for d in destinations {
 
                 if (d.latitude == 0 && d.longitude == 0) {
