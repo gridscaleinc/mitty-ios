@@ -54,6 +54,8 @@ class QuestViewController: MittyViewController, UIImagePickerControllerDelegate,
         configViews()
 
         LoadingProxy.set(self)
+        
+        super.lockView()
 
     }
 

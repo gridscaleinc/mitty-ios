@@ -49,6 +49,8 @@ class IslandViewController: MittyViewController {
         configureSubviews()
         initalMeetingList()
         
+        super.lockView()
+        
 
     }
     

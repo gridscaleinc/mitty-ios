@@ -18,6 +18,9 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
         return i
     } ()
 
+    var userInfo: UserInfo!
+    var destination: Destination!
+
     let presenceForm = PresenceForm.newAutoLayout()
 
     let footmarkForm = FootMarkForm.newAutoLayout()
@@ -32,7 +35,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
     let form = MQForm.newAutoLayout()
 
-
+    var namecard = NameCardInfo()
 
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
@@ -56,7 +59,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
         self.view.addSubview(presenceForm)
 
-        presenceForm.load()
+        presence()
 
         self.view.addSubview(footmarkForm)
         footmarkForm.load()
@@ -65,6 +68,11 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
         nameCardForm.load(NameCardInfo())
         // nameCardForm.view.transform = CGAffineTransform(scaleX: 0.52, y: 0.52);
         view.setNeedsUpdateConstraints()
+
+        okButton.bindEvent(.touchUpInside) {
+            _ in
+            self.doCheckin()
+        }
 
     }
 
@@ -80,10 +88,11 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
             form.configLayout()
 
-            presenceForm.autoPinEdge(.left, to: .right, of: picture.view, withOffset: 10)
-            presenceForm.autoPinEdge(.top, to: .top, of: picture.view)
-            presenceForm.autoSetDimensions(to: CGSize(width: 100, height: 100))
+            presenceForm.autoPinEdge(.left, to: .right, of: picture.view, withOffset: 20)
+            presenceForm.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
 
+            presenceForm.autoPinEdge(.top, to: .top, of: picture.view)
+            presenceForm.autoSetDimension(.height, toSize: 100)
             presenceForm.configLayout()
 
             footmarkForm.autoPinEdge(.top, to: .bottom, of: picture.view, withOffset: 0)
@@ -93,9 +102,9 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
             footmarkForm.configLayout()
 
             nameCardForm.view.autoPinEdge(toSuperviewEdge: .left, withInset: 10)
-            nameCardForm.view.autoPinEdge(.top, to: .bottom, of: footmarkForm, withOffset: 30)
+            nameCardForm.view.autoPinEdge(.top, to: .bottom, of: footmarkForm, withOffset: 10)
             nameCardForm.view.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
-            nameCardForm.view.autoSetDimension(.height, toSize: 230)
+            nameCardForm.view.autoSetDimension(.height, toSize: 250)
             // nameCardForm.clipsToBounds = true
 
             nameCardForm.configLayout()
@@ -104,7 +113,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
         }
 
         picture.widthConstraints?.autoRemove()
-        picture.width(161 * picture.imageView.image!.size.ratio)
+        picture.width(70 * picture.imageView.image!.size.ratio)
 
         super.updateViewConstraints()
 
@@ -113,9 +122,10 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
     func loadForm () {
         form.backgroundColor = .white
 
+
         form +++ picture.layout {
             p in
-            p.height(100).width(100).leftMost(withInset: 30).upper(withInset: 10)
+            p.height(70).width(70).leftMost(withInset: 30).upper(withInset: 10)
         }
 
         let row = Row.Intervaled().height(50)
@@ -161,7 +171,15 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
         nameCardBUtton.bindEvent(.touchUpInside) { [weak self]
             b in
-            self?.nameCardForm.view.isHidden = !(self?.nameCardForm.view.isHidden)!
+            let picker = NamecardPicker(onSelected: { card in
+                self?.namecard = card
+                self?.nameCardForm.load(card)
+            }, onClear: {
+                self?.namecard = NameCardInfo()
+                self?.nameCardForm.load((self?.namecard)!)
+            })
+
+            self?.navigationController?.pushViewController(picker, animated: true)
         }
     }
 
@@ -170,7 +188,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
         NSLog("\(info)")
         if let chosenImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             let ratio = chosenImage.size.ratio
-            picture.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 100, height: 100 * ratio))
+            picture.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 70, height: 70 * ratio))
             imagePicked = true
             self.view.needsUpdateConstraints()
         }
@@ -179,5 +197,38 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
     override func viewWillLayoutSubviews() {
         print(self.topLayoutGuide)
+    }
+
+    func presence () {
+        let uid = String(ApplicationContext.userSession.userId)
+
+        UserService.instance.getUserInfo(id: uid, callback: {
+            uinfo, exists in
+            if exists {
+                self.userInfo = uinfo!
+                self.presenceForm.id(String(uinfo!.id))
+                self.presenceForm.name(uinfo!.userName)
+                self.presenceForm.load()
+                self.presenceForm.configLayout()
+                self.picture.imageView.setMittyImage(url: uinfo!.icon)
+            }
+        })
+    }
+
+    func footmark(_ destination: Destination) {
+        self.destination = destination
+        footmarkForm.event(destination.eventTitle)
+        footmarkForm.island(destination.islandName)
+    }
+
+    func doCheckin() {
+        PresenceService.instance.checkIn(destination,
+                                         self.namecard.id,
+                                         picId: 0,
+                                         info: self.footmarkForm.addInfo.textField.text,
+                                         onError: { error in
+                                             self.showError("Ccheck in error!")
+                                         })
+        self.navigationController?.popViewController(animated: true)
     }
 }

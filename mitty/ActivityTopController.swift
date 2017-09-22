@@ -43,6 +43,8 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
 
     var reqform = RequestListForm.newAutoLayout()
     
+    var invitationForm = InvitationListForm.newAutoLayout()
+    
     //
     // Viewの読み込み。
     //
@@ -145,6 +147,24 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         
     }
     
+    func loadInvitationForm(invitations: [InvitationInfo]) {
+        
+        invitationForm.removeFromSuperview()
+        self.invitationForm = InvitationListForm.newAutoLayout()
+        
+        self.view.addSubview(invitationForm)
+        
+        invitationForm.invitationList.removeAll()
+        invitationForm.invitationList.insert(contentsOf: invitations, at: 0)
+        
+        loadInvitationList()
+        
+        self.invitationForm.load()
+        
+        view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+        
+    }
+    
     var didSetupConstraints = false
 
     //
@@ -161,6 +181,10 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         
         reqform.loadForm()
     
+    }
+    
+    func loadInvitationList() {
+        invitationForm.loadForm()
     }
     
     override func updateViewConstraints() {
@@ -188,7 +212,18 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 
                 reqform.configLayout()
 
+            } else if activityTypes.selectedSegmentIndex == 2 {
+                invitationForm.autoPinEdge(.top, to: .bottom, of: activityTypes, withOffset: 5)
+                
+                invitationForm.autoPinEdge(toSuperviewEdge: .left)
+                invitationForm.autoPinEdge(toSuperviewEdge: .right)
+                invitationForm.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
+                
+                invitationForm.configLayout()
+                
             }
+            
+            
             didSetupConstraints = true
         }
 
@@ -273,6 +308,7 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
 
         LoadingProxy.set(self)
+        super.lockView()
     }
 
     // 選択した種類によて、一覧表示を変える。
@@ -296,7 +332,17 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 self?.view.updateConstraintsIfNeeded()
                 self?.view.layoutIfNeeded()
             }
+        } else if activityTypes.selectedSegmentIndex == 2 {
+            InvitationService.instance.getMyInvitations() { [weak self]
+                invitations in
+                self?.loadInvitationForm(invitations: invitations)
+                self?.didSetupConstraints = false
+                self?.view.setNeedsUpdateConstraints()
+                self?.view.updateConstraintsIfNeeded()
+                self?.view.layoutIfNeeded()
+            }
         }
+        
     }
 }
 

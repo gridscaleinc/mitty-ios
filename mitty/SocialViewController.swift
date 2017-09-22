@@ -46,6 +46,8 @@ class SocialViewController: MittyViewController {
         configureSubviews()
         initalContactList()
         
+        super.lockView()
+        
     }
     
     // MARK: - View Setup

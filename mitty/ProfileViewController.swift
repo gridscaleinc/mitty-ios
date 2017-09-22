@@ -154,6 +154,9 @@ class ProfileViewController: MittyViewController {
         // build Speech
         buildSpeech(detailForm)
         
+        // build Online status/teleport
+        buildPresence(detailForm)
+        
         // build Social Links
         buildSocialLinks(detailForm)
         
@@ -456,6 +459,44 @@ class ProfileViewController: MittyViewController {
 
         section <<< row1
 
+    }
+    
+    func buildPresence(_ section: Section) {
+        let row = seperator(section: section, caption: "ステータス")
+        
+        section <<< row
+        
+        let row1 = Row.LeftAligned()
+        row1.layout {
+            r in
+            r.fillHolizon().height(40)
+        }
+
+        row1 +++ MQForm.tapableImg(name: "online", url: "online.jpeg").layout {
+            im in
+            im.height(35).width(35).verticalCenter().leftMargin(5)
+        }
+
+        row1 +++ MQForm.label(name: "online-offline", title: "Online").layout {
+            l in
+            l.verticalCenter().leftMargin(10)
+            l.label.textColor = UIColor.gray
+        }
+
+        row1 +++ MQForm.tapableImg(name: "teleport", url: "teleport").layout {
+            im in
+            im.height(35).width(35).verticalCenter().leftMargin(40)
+        }
+        
+        row1 +++ MQForm.label(name: "online-Teleport", title: "Teleport").layout {
+            l in
+            l.verticalCenter().leftMargin(5)
+            l.label.textColor = UIColor.gray
+        }
+        
+        
+        section <<< row1
+        
     }
 
 

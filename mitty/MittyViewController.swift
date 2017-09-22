@@ -177,4 +177,22 @@ class MittyViewController: UIViewController {
 
         return row
     }
+    
+    var lockForm = LockForm()
+    
+    func lockView () {
+        ApplicationContext.startUp()
+        if ApplicationContext.userSession.isLogedIn {
+            return
+        }
+        
+        self.view.addSubview(lockForm)
+        lockForm.load()
+        lockForm.configLayout()
+        lockForm.unlockButton.bindEvent(.touchUpInside) {
+            b in
+            let vc = SigninViewController()
+            self.present(vc, animated: true, completion: {})
+        }
+    }
 }

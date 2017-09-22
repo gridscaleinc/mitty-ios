@@ -173,6 +173,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         // 位置情報の更新を開始
         myLocationManager.startUpdatingLocation()
+        
+        super.lockView()
 
     }
 
@@ -277,6 +279,9 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         checkinButton.bindEvent(.touchUpInside) {
             view in
             let checkinvc = CheckinViewController()
+            if (self.targetLocation != nil) {
+                checkinvc.footmark(self.targetLocation!)
+            }
             self.navigationController?.pushViewController(checkinvc, animated: true)
         }
 

@@ -109,11 +109,18 @@
 		FC5CBD8F1F6E982A006541E3 /* Gallery.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD8E1F6E9829006541E3 /* Gallery.swift */; };
 		FC5CBD911F6E9CF6006541E3 /* GalleryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */; };
 		FC5CBD931F71BF58006541E3 /* SocialMirror.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD921F71BF58006541E3 /* SocialMirror.swift */; };
+		FC5CBD951F727470006541E3 /* NamecardPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD941F727470006541E3 /* NamecardPicker.swift */; };
+		FC5CBD971F72B73B006541E3 /* PresenceService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5CBD961F72B73A006541E3 /* PresenceService.swift */; };
 		FC5ECFF01EB348BB00AA6C13 /* NewEventReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */; };
 		FC5ECFF21EB42FA800AA6C13 /* date.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF11EB42FA800AA6C13 /* date.swift */; };
 		FC5ECFF61EB632C500AA6C13 /* MittyStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */; };
 		FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF71EB830D000AA6C13 /* ActivityEntryController.swift */; };
 		FC5ECFFA1EBB170000AA6C13 /* ActivityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC5ECFF91EBB170000AA6C13 /* ActivityInfo.swift */; };
+		FC7585871F73BDA300680CC9 /* LockForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7585861F73BDA300680CC9 /* LockForm.swift */; };
+		FC7585891F740FB600680CC9 /* teleport.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7585881F740FB600680CC9 /* teleport.png */; };
+		FC75858B1F74149E00680CC9 /* online.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FC75858A1F74149E00680CC9 /* online.jpeg */; };
+		FC75858D1F74727500680CC9 /* InvitationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858C1F74727500680CC9 /* InvitationInfo.swift */; };
+		FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */; };
 		FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B871EEEC1470074C259 /* RequestService.swift */; };
 		FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
@@ -324,11 +331,18 @@
 		FC5CBD8E1F6E9829006541E3 /* Gallery.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gallery.swift; sourceTree = "<group>"; };
 		FC5CBD901F6E9CF6006541E3 /* GalleryService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryService.swift; sourceTree = "<group>"; };
 		FC5CBD921F71BF58006541E3 /* SocialMirror.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialMirror.swift; sourceTree = "<group>"; };
+		FC5CBD941F727470006541E3 /* NamecardPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NamecardPicker.swift; sourceTree = "<group>"; };
+		FC5CBD961F72B73A006541E3 /* PresenceService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PresenceService.swift; sourceTree = "<group>"; };
 		FC5ECFEF1EB348BB00AA6C13 /* NewEventReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewEventReq.swift; sourceTree = "<group>"; };
 		FC5ECFF11EB42FA800AA6C13 /* date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = date.swift; sourceTree = "<group>"; };
 		FC5ECFF51EB632C500AA6C13 /* MittyStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyStyle.swift; sourceTree = "<group>"; };
 		FC5ECFF71EB830D000AA6C13 /* ActivityEntryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityEntryController.swift; sourceTree = "<group>"; };
 		FC5ECFF91EBB170000AA6C13 /* ActivityInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityInfo.swift; sourceTree = "<group>"; };
+		FC7585861F73BDA300680CC9 /* LockForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LockForm.swift; sourceTree = "<group>"; };
+		FC7585881F740FB600680CC9 /* teleport.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = teleport.png; path = images/teleport.png; sourceTree = "<group>"; };
+		FC75858A1F74149E00680CC9 /* online.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = online.jpeg; path = images/online.jpeg; sourceTree = "<group>"; };
+		FC75858C1F74727500680CC9 /* InvitationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationInfo.swift; sourceTree = "<group>"; };
+		FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationListForm.swift; sourceTree = "<group>"; };
 		FC7D4B871EEEC1470074C259 /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestReq.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
@@ -575,6 +589,7 @@
 				FC5CBD8A1F5B1209006541E3 /* Contactee.swift */,
 				FC5CBD8E1F6E9829006541E3 /* Gallery.swift */,
 				FC5CBD921F71BF58006541E3 /* SocialMirror.swift */,
+				FC75858C1F74727500680CC9 /* InvitationInfo.swift */,
 			);
 			name = model;
 			sourceTree = "<group>";
@@ -610,6 +625,7 @@
 				FC0AF1EC1DC4F61B00C76408 /* Service.swift */,
 				FCF8D64E1DD8A0500059B270 /* SocialContactService.swift */,
 				FCB45ECE1F03FEA90090B601 /* UserService.swift */,
+				FC5CBD961F72B73A006541E3 /* PresenceService.swift */,
 			);
 			name = service;
 			sourceTree = "<group>";
@@ -724,6 +740,8 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC75858A1F74149E00680CC9 /* online.jpeg */,
+				FC7585881F740FB600680CC9 /* teleport.png */,
 				FC5CBD7A1F53FEE9006541E3 /* excard.png */,
 				FC3C16DD1F3B196700E7622B /* unchecked.png */,
 				FC3C16DE1F3B196700E7622B /* checked.png */,
@@ -826,6 +844,8 @@
 				FC570FEC1F408CFB0064FDC3 /* NameCardInputForm.swift */,
 				FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */,
 				FC5CBD7E1F56CC2D006541E3 /* SocialMirrorForm.swift */,
+				FC7585861F73BDA300680CC9 /* LockForm.swift */,
+				FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -870,6 +890,7 @@
 				FC3483141EDDC0DB005E539E /* WebPicker.swift */,
 				FC4B886A1F01566000458912 /* SpeedMeter.swift */,
 				FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */,
+				FC5CBD941F727470006541E3 /* NamecardPicker.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1012,6 +1033,7 @@
 				FC00818D1DD394D300C1F970 /* pengin1.png in Resources */,
 				FCD8C7191EA226AC00AAD750 /* applogo.png in Resources */,
 				FC427B8F1DCAFDE1009F43AE /* event2.png in Resources */,
+				FC7585891F740FB600680CC9 /* teleport.png in Resources */,
 				FC427B921DCAFDE1009F43AE /* event5.png in Resources */,
 				FC427B931DCAFDE1009F43AE /* event6.png in Resources */,
 				FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */,
@@ -1044,6 +1066,7 @@
 				FC3482AE1ED87F9C005E539E /* beauty2.jpeg in Resources */,
 				FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */,
 				FC1766491E5C6D52000A4BAE /* event11.png in Resources */,
+				FC75858B1F74149E00680CC9 /* online.jpeg in Resources */,
 				FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1214,6 +1237,7 @@
 				FC004C601F45E13200230DAA /* Code.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
 				FC34831F1EE42F44005E539E /* MeetingCell.swift in Sources */,
+				FC5CBD951F727470006541E3 /* NamecardPicker.swift in Sources */,
 				FCF73ECC1EA8D16F00AE868A /* EventDetailViewController.swift in Sources */,
 				FC30EB531EA575A700829E52 /* RequestViewController.swift in Sources */,
 				FCF8D6411DD762020059B270 /* ImageEdit.swift in Sources */,
@@ -1228,6 +1252,7 @@
 				FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */,
 				FCFBABE51F4ADF8400A957FE /* NameCardService.swift in Sources */,
 				FC570FEB1F40580D0064FDC3 /* EditBiographyViewController.swift in Sources */,
+				FC75858D1F74727500680CC9 /* InvitationInfo.swift in Sources */,
 				FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */,
 				FC5ECFF81EB830D000AA6C13 /* ActivityEntryController.swift in Sources */,
 				FC5CBD711F4E2EA5006541E3 /* ProposalDetailsViewController.swift in Sources */,
@@ -1236,6 +1261,7 @@
 				FC1FE05E1ECAB3C9007AE8A5 /* UserSession.swift in Sources */,
 				FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */,
 				FC34831B1EE412A7005E539E /* MeetingService.swift in Sources */,
+				FC5CBD971F72B73B006541E3 /* PresenceService.swift in Sources */,
 				FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */,
 				FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */,
 				FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */,
@@ -1283,6 +1309,7 @@
 				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */,
 				FC3C16E21F3EEFFD00E7622B /* NewProposalReq.swift in Sources */,
+				FC7585871F73BDA300680CC9 /* LockForm.swift in Sources */,
 				FC0AF1F11DC4F65100C76408 /* DataModel.swift in Sources */,
 				FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */,
 				FCDC70951E8A8F75003034B3 /* ActivityPlanDetailController.swift in Sources */,
@@ -1296,6 +1323,7 @@
 				FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */,
 				FC5CBD851F5961DF006541E3 /* Offer.swift in Sources */,
 				FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */,
+				FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */,
 				FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */,

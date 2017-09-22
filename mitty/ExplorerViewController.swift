@@ -245,6 +245,8 @@ class RequestExplorerViewController: MittyViewController {
         addSubviews()
         addConstraints()
         configureSubviews()
+        
+        super.lockView()
     }
 
 
