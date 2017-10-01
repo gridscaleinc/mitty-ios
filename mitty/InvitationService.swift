@@ -134,6 +134,8 @@ class InvitationService: Service {
             "reply_status" : status
         ]
         
+        print(parameters)
+        
         LoadingProxy.on()
         
         // ダミーコード、本当はサーバーから検索する。
@@ -170,7 +172,7 @@ class InvitationService: Service {
         invitation.id = json["id"].int64Value
         invitation.invitaterID = json["invitater_id"].intValue
         invitation.forType = json["for_type"].stringValue
-        invitation.idOfType = json["to_mitty_id"].int64Value
+        invitation.idOfType = json["id_of_type"].int64Value
         invitation.invitationTitle = json["invitation_title"].stringValue
         invitation.message = json["message"].stringValue
         invitation.timeOfInvitation = json["time_of_invitation"].stringValue.utc2Date()

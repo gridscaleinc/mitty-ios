@@ -154,7 +154,7 @@ class ActivityPlanDetailsForm: MQForm {
             t in
             t.fillHolizon(10)
             t.taller(than: 30)
-            t.label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.4)
+            t.label.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
         }
         row.layout() {
             r in
@@ -246,6 +246,7 @@ class ActivityPlanDetailsForm: MQForm {
         }
 
         row = Row.Intervaled()
+        row.spacing = 20
         row.layout() {
             r in
             r.height(40).fillHolizon(0)
@@ -258,10 +259,12 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ button
 
-        let buttons = ["✈️", "🏩", "🚗", "🍴"]
+        let buttons = ["イベント追加"]
         for b in buttons {
             let button = MQForm.button(name: "addItem", title: b).height(40)
             button.button.backgroundColor = .clear
+            button.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+            
             row +++ button
         }
         inputForm <<< row

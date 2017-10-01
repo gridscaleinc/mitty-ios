@@ -162,6 +162,23 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         self.invitationForm.load()
         
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
+        invitationForm.acceptHandler = {
+            inv in
+            InvitationService.instance.accept(inv, status: "ACCEPT")
+        }
+        
+        invitationForm.rejectHandler = {
+            inv in
+            InvitationService.instance.accept(inv, status: "REJECT")
+        }
+        
+        invitationForm.showHandler = {
+            inv in
+            EventService.instance.fetch(id: String(inv.idOfType), callback: { e in
+                let vc = EventDetailViewController(event: e)
+                self.navigationController?.pushViewController(vc, animated: true)
+            })
+        }
         
     }
     

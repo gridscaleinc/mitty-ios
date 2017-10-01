@@ -144,7 +144,7 @@ class ActivityListForm: MQForm {
             // ラベルに紐つくactivityを保存
             (l.label as! TapableLabel).underlyObj = t
 
-            row +++ MQForm.img(name: "icon", url: t.logoUrl).width(30).height(20).layout{
+            row +++ MQForm.img(name: "icon", url: t.logoUrl).width(20).height(20).layout{
                 i in
                 i.imageView.setMittyImage(url: t.logoUrl)
                 i.verticalCenter()

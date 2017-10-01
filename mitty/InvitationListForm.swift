@@ -133,6 +133,10 @@ class InvitationListForm: MQForm {
                 b in
                 b.height(30).leftMargin(10)
                 b.button.backgroundColor = MittyColor.healthyGreen
+            }.bindEvent(.touchUpInside) {
+                _ in
+                self.acceptHandler?(i)
+                    
             }
             buttonRow +++ accept
 
@@ -146,7 +150,11 @@ class InvitationListForm: MQForm {
                 b in
                 b.height(30).leftMargin(10)
                 b.button.backgroundColor = MittyColor.lightYellow
+            }.bindEvent(.touchUpInside) {
+                _ in
+                self.rejectHandler?(i)
             }
+            
             buttonRow +++ reject
             
             // 招待を受け入れ拒否
@@ -196,4 +204,6 @@ class InvitationListForm: MQForm {
         }
         return row
     }
+    
+    
 }
