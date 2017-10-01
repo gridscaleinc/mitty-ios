@@ -150,6 +150,7 @@ extension EventViewController: UICollectionViewDataSource {
             cell.backgroundColor = .white
             let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(EventViewController.cellTapped(handler:)))
             cell.addGestureRecognizer(tapGestureRecognizer)
+            
             return cell
         }
         return EventCell()

@@ -121,6 +121,7 @@
 		FC75858B1F74149E00680CC9 /* online.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = FC75858A1F74149E00680CC9 /* online.jpeg */; };
 		FC75858D1F74727500680CC9 /* InvitationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858C1F74727500680CC9 /* InvitationInfo.swift */; };
 		FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */; };
+		FC7585911F75586100680CC9 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7585901F75586100680CC9 /* forward.png */; };
 		FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B871EEEC1470074C259 /* RequestService.swift */; };
 		FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
@@ -343,6 +344,7 @@
 		FC75858A1F74149E00680CC9 /* online.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = online.jpeg; path = images/online.jpeg; sourceTree = "<group>"; };
 		FC75858C1F74727500680CC9 /* InvitationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationInfo.swift; sourceTree = "<group>"; };
 		FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationListForm.swift; sourceTree = "<group>"; };
+		FC7585901F75586100680CC9 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forward.png; path = images/forward.png; sourceTree = "<group>"; };
 		FC7D4B871EEEC1470074C259 /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestReq.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
@@ -740,6 +742,7 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC7585901F75586100680CC9 /* forward.png */,
 				FC75858A1F74149E00680CC9 /* online.jpeg */,
 				FC7585881F740FB600680CC9 /* teleport.png */,
 				FC5CBD7A1F53FEE9006541E3 /* excard.png */,
@@ -1068,6 +1071,7 @@
 				FC1766491E5C6D52000A4BAE /* event11.png in Resources */,
 				FC75858B1F74149E00680CC9 /* online.jpeg in Resources */,
 				FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */,
+				FC7585911F75586100680CC9 /* forward.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,6 +27,10 @@ class InvitationListForm: MQForm {
 
     var invitationList: [InvitationInfo] = []
 
+    var showHandler : ((_ inv: InvitationInfo) -> Void)?
+    var acceptHandler : ((_ inv: InvitationInfo) -> Void)?
+    var rejectHandler : ((_ inv: InvitationInfo) -> Void)?
+    
     func loadForm () {
 
         self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
@@ -77,19 +81,31 @@ class InvitationListForm: MQForm {
 
         for i in invitationList {
             let row = Row.LeftAligned()
+            row.layout() { r in
+                r.fillHolizon().height(40)
+            }
+
             section <<< row
 
-            let l = MQForm.label(name: "invitationlabel", title: i.invitationTitle).width(200).height(30).layout {
+            let title = MQForm.label(name: "invitationlabel", title: i.invitationTitle).width(200).height(30).layout {
                 l in
                 l.label.textColor = UIColor.lightGray
-                l.verticalCenter().fillHolizon()
+                l.verticalCenter().fillHolizon().rightMost(withInset: 27)
             }
 
-            row +++ l
-
-            row.layout() { r in
-                r.fillHolizon(20).height(40)
+            row +++ title
+            
+            let forward = MQForm.tapableImg(name: "forward", url: "forward").layout {
+                f in
+                f.rightMost(withInset: 5).width(22).height(25).verticalCenter()
+                
+            }.bindEvent(.touchUpInside) {
+                f in
+                self.showHandler?(i)
             }
+            
+            row +++ forward
+
             
             let messageRow = Row.LeftAligned()
             section <<< messageRow

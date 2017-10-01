@@ -178,6 +178,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
             b.height(40).verticalCenter()
         }.bindEvent(.touchUpInside) { _ in
             ApplicationContext.killSession()
+            self.navigationController?.popViewController(animated: true)
         }
 
         detailForm <<< row

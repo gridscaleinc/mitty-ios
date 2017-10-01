@@ -72,7 +72,7 @@ class ActivityListForm: MQForm {
         row +++ MQForm.label(name: "activity-title", title: "計画中").layout {
             l in
             l.label.textColor = .orange
-            l.height(20).fillHolizon()
+            l.height(20).fillHolizon().verticalCenter()
         }
 
         var outstandingActivity = [ActivityInfo]()

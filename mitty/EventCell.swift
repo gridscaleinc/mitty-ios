@@ -188,7 +188,7 @@ class EventCell: UICollectionViewCell {
         if event.coverImage != nil {
             let height = (UIScreen.main.bounds.width - 30) * event.coverImage!.size.ratio
             // imageがある場合、イメージを表示
-            let itemImage = MQForm.img(name: "eventImage", url: event.coverImageUrl).layout {
+            let itemImage = MQForm.tapableImg(name: "eventImage", url: event.coverImageUrl).layout {
                 img in
                 img.fillHolizon().height(height).upper()
                 img.imageView.image = self.event.coverImage

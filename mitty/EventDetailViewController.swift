@@ -37,7 +37,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("参加", for: .normal)
-        b.setTitleColor(.black, for: .normal)
+        b.setTitleColor(.white, for: .normal)
         b.backgroundColor = .orange
 
         return b
@@ -47,7 +47,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("招待", for: .normal)
-        b.setTitleColor(.black, for: .normal)
+        b.setTitleColor(.white, for: .normal)
         b.backgroundColor = .orange
 
         return b
@@ -57,7 +57,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("脱退", for: .normal)
-        b.setTitleColor(.black, for: .normal)
+        b.setTitleColor(.white, for: .normal)
         b.backgroundColor = .orange
 
         return b
@@ -93,7 +93,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         form.configLayout()
         configNavigationBar()
-
 
     }
 
@@ -237,7 +236,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let titleLabel = MQForm.label(name: "Title", title: event.title).layout {
             l in
-            l.leftMargin(15).rightMost(withInset: 55).height(30).verticalCenter()
+            l.leftMargin(15).rightMost(withInset: 45).height(30).verticalCenter()
             
             l.label.font = UIFont.boldSystemFont(ofSize: 20)
             l.label.textColor = UIColor.white
@@ -249,20 +248,20 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let imageIcon: Control = {
             if event.eventLogoUrl != "" {
                 // imageがある場合、イメージを表示
-                let itemImage = MQForm.img(name: "eventImage", url: event.eventLogoUrl).layout {
+                let itemImage = MQForm.img(name: "eventLogo", url: event.eventLogoUrl).layout {
                     img in
                     img.width(30).height(30)
                 }
                 itemImage.imageView.setMittyImage(url: event.eventLogoUrl)
                 return itemImage
             } else {
-                return MQForm.img(name: "eventLogo", url: "timesquare").width(50).height(50)
+                return MQForm.img(name: "eventLogo", url: "timesquare").width(30).height(30)
             }
         } ()
         
         row +++ imageIcon.layout {
             i in
-            i.width(35).height(35).rightMost(withInset: 15).verticalCenter()
+            i.width(30).height(30).verticalCenter()
         }
         
         section <<< row
@@ -449,10 +448,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         section <<< row
         
         let buttonRow = Row.Intervaled()
-        buttonRow.spacing = 40
+        buttonRow.spacing = 60
         
         let routeButton = MQForm.button(name: "route", title: "経路").layout { b in
-            b.verticalCenter().height(30)
+            b.verticalCenter().height(35)
             b.view.backgroundColor = .white
             b.view.layer.borderColor = UIColor.orange.cgColor
             b.view.layer.borderWidth = 0.7
@@ -502,10 +501,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         section <<< infoSource
         
         let contactRow = Row.Intervaled()
-        contactRow.spacing = 40
+        contactRow.spacing = 60
         
         let contactButton = MQForm.button(name: "contact", title: "問合せ").layout { b in
-            b.height(30).verticalCenter()
+            b.height(35).verticalCenter()
             b.view.backgroundColor = .white
             b.view.layer.borderColor = UIColor.orange.cgColor
             b.view.layer.borderWidth = 0.7
