@@ -17,6 +17,7 @@ class SocialBar: Row {
 
     var labelItem = MQForm.label(name: "title", title: "")
     var numberItem = MQForm.label(name: "number", title: "0")
+    var _num = 0
 
     init(text: String) {
         super.init(name: text, view: UIView.newAutoLayout())
@@ -44,10 +45,12 @@ class SocialBar: Row {
         labelItem.label.text = text
     }
     
-    var num : String {
-        get{ return numberItem.label.text ?? ""}
+    var num : Int {
+        get{
+            return _num
+        }
         set(v) {
-            numberItem.label.text = v
+            numberItem.label.text = String(v)
         }
     }    
 }
@@ -124,7 +127,52 @@ class SocialMirrorForm: Container {
             let vc = OffersViewController()
             self.navigator?.pushViewController(vc, animated: true)
         }
+        
+        eventLine.bindEvent(.touchUpInside) {
+            _ in
+            self.switchToActivity()
+        }
+        
+        todaysEventLine.bindEvent(.touchUpInside) {
+            _ in
+            self.switchToActivity()
+        }
+        
+        requestLine.bindEvent(.touchUpInside) {
+            _ in
+            self.switchToRequest()
+        }
+        
+        invitationLine.bindEvent(.touchUpInside) {
+            _ in
+            self.switchToInvitation()
+        }
     }
+    
+    func switchToActivity() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.mainTabBarController.selectedIndex = 1
+        delegate.mainTabBarController.tab2ActivityController.popToRootViewController(animated: true)
+        let vc = delegate.mainTabBarController.tab2ActivityController.viewControllers[0] as! ActivityTopViewController
+        vc.activityTypes.selectedSegmentIndex = 0
+    }
+    
+    func switchToRequest() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.mainTabBarController.selectedIndex = 1
+        delegate.mainTabBarController.tab2ActivityController.popToRootViewController(animated: true)
+        let vc = delegate.mainTabBarController.tab2ActivityController.viewControllers[0] as! ActivityTopViewController
+        vc.activityTypes.selectedSegmentIndex = 1
+    }
+    
+    func switchToInvitation() {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        delegate.mainTabBarController.selectedIndex = 1
+        delegate.mainTabBarController.tab2ActivityController.popToRootViewController(animated: true)
+        let vc = delegate.mainTabBarController.tab2ActivityController.viewControllers[0] as! ActivityTopViewController
+        vc.activityTypes.selectedSegmentIndex = 2
+    }
+
 
     /// <#Description#>
     ///

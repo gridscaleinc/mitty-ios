@@ -197,15 +197,20 @@ class SocialContactService: Service {
             }
         }
     }
+    
 
+    /// <#Description#>
+    ///
+    /// - Parameter json: <#json description#>
+    /// - Returns: <#return value description#>
     func bindSocialMirror( _ json: JSON) -> SocialMirror {
         let m = SocialMirror()
-        m.event = json["event"].stringValue
-        m.todaysEvent = json["todaysEvent"].stringValue
-        m.eventInvitation = json["eventInvitation"].stringValue
-        m.businesscardOffer = json["businessCardOffer"].stringValue
-        m.request = json["request"].stringValue
-        m.proposal = json["proposal"].stringValue
+        m.event = json["event"].intValue
+        m.todaysEvent = json["todaysEvent"].intValue
+        m.eventInvitation = json["eventInvitation"].intValue
+        m.businesscardOffer = json["businessCardOffer"].intValue
+        m.request = json["request"].intValue
+        m.proposal = json["proposal"].intValue
 
         return m
         

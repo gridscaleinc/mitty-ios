@@ -333,6 +333,10 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         if (activityTypes.selectedSegmentIndex == 0) {
             ActivityService.instance.search(keys: "") { [weak self]
                 activities in
+                
+                if self?.activityTypes.selectedSegmentIndex != 0 {
+                    return
+                }
                 self?.loadActivityForm(activities: activities)
                 self?.didSetupConstraints = false
                 self?.view.setNeedsUpdateConstraints()
@@ -343,6 +347,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         } else if activityTypes.selectedSegmentIndex == 1 {
             RequestService.instance.getMyRequests(key: "") { [weak self]
                 requests in
+                if self?.activityTypes.selectedSegmentIndex != 1 {
+                    return
+                }
                 self?.loadRequestForm(requests: requests)
                 self?.didSetupConstraints = false
                 self?.view.setNeedsUpdateConstraints()
@@ -352,6 +359,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         } else if activityTypes.selectedSegmentIndex == 2 {
             InvitationService.instance.getMyInvitations() { [weak self]
                 invitations in
+                if self?.activityTypes.selectedSegmentIndex != 2 {
+                    return
+                }
                 self?.loadInvitationForm(invitations: invitations)
                 self?.didSetupConstraints = false
                 self?.view.setNeedsUpdateConstraints()
