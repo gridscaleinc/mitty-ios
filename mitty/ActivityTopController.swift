@@ -164,12 +164,12 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
         invitationForm.acceptHandler = {
             inv in
-            InvitationService.instance.accept(inv, status: "ACCEPT")
+            InvitationService.instance.accept(inv, status: "ACCEPTED")
         }
         
         invitationForm.rejectHandler = {
             inv in
-            InvitationService.instance.accept(inv, status: "REJECT")
+            InvitationService.instance.accept(inv, status: "REJECTED")
         }
         
         invitationForm.showHandler = {

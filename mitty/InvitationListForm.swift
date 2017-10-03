@@ -139,20 +139,10 @@ class InvitationListForm: MQForm {
                     
             }
             buttonRow +++ accept
-
-            // 招待を受け入れ
-            accept.bindEvent(.touchUpInside) {_ in 
-                // 承認
-                InvitationService.instance.accept(i, status: "ACCEPTED")
-            }
-            
             let reject = MQForm.button(name: "reject", title: "遠慮").layout {
                 b in
                 b.height(30).leftMargin(10)
                 b.button.backgroundColor = MittyColor.lightYellow
-            }.bindEvent(.touchUpInside) {
-                _ in
-                self.rejectHandler?(i)
             }
             
             buttonRow +++ reject
