@@ -123,10 +123,11 @@ class ProfileViewController: MittyViewController {
         }
 
         form +++ anchor
-
+        
+        
         // スクロールViewを作る
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 900)
+//        scroll.contentSize = CGSize(width: UIScreen.main.bounds.size.width, height: 900)
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
         scroll.canCancelContentTouches = false
@@ -154,8 +155,6 @@ class ProfileViewController: MittyViewController {
         // build Speech
         buildSpeech(detailForm)
         
-        // build Online status/teleport
-        buildPresence(detailForm)
         
         // build Social Links
         buildSocialLinks(detailForm)
@@ -175,6 +174,9 @@ class ProfileViewController: MittyViewController {
             f.view.autoSetDimension(.height, toSize: UIScreen.main.bounds.height + 10, relation: .greaterThanOrEqual)
             f.view.backgroundColor = UIColor.white
         }
+        
+        // build Online status/teleport at the bottom of form
+        buildPresence(form)
     }
 
     func loadPicture() {
@@ -343,11 +345,11 @@ class ProfileViewController: MittyViewController {
 
         row +++ MQForm.label(name: "constellationLabel", title: "星座").height(30).width(70).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(15)
         }
         row +++ constellationLabel.layout {
             l in
-            l.height(30).width(120).verticalCenter()
+            l.height(30).width(120).verticalCenter().leftMargin(15)
             l.margin.left = 80
         }
 
@@ -360,7 +362,7 @@ class ProfileViewController: MittyViewController {
 
         row +++ MQForm.label(name: "appearanceLabel", title: "外見").height(35).width(70).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(15)
         }
 
         row +++ appearanceLabel.layout {
@@ -434,7 +436,7 @@ class ProfileViewController: MittyViewController {
         }
         row1 +++ MQForm.label(name: "Line", title: "LINE").layout {
             s in
-            s.fillParent(withInset: 2)
+            s.verticalCenter().leftMargin(15)
         }
 
         section <<< row1
@@ -461,20 +463,24 @@ class ProfileViewController: MittyViewController {
 
     }
     
-    func buildPresence(_ section: Section) {
-        let row = seperator(section: section, caption: "ステータス")
+    func buildPresence(_ form: MQForm) {
         
-        section <<< row
-        
-        let row1 = Row.LeftAligned()
-        row1.layout {
+        let row = Row.Intervaled()
+        row.layout {
             r in
-            r.fillHolizon().height(40)
+            r.fillHolizon().height(40).down()
+            r.view.backgroundColor = UIColor.white
         }
+        
+        let row1 = Row.LeftAligned().layout{
+            r in
+            r.fillVertical()
+        }
+        row +++ row1
 
         row1 +++ MQForm.tapableImg(name: "online", url: "online.jpeg").layout {
             im in
-            im.height(35).width(35).verticalCenter().leftMargin(5)
+            im.height(35).width(35).verticalCenter().leftMargin(25)
         }
 
         row1 +++ MQForm.label(name: "online-offline", title: "Online").layout {
@@ -482,20 +488,25 @@ class ProfileViewController: MittyViewController {
             l.verticalCenter().leftMargin(10)
             l.label.textColor = UIColor.gray
         }
-
-        row1 +++ MQForm.tapableImg(name: "teleport", url: "teleport").layout {
+        
+        let row2 = Row.LeftAligned().layout {
+            r in
+            r.fillVertical()
+        }
+        row +++ row2
+        row2 +++ MQForm.tapableImg(name: "teleport", url: "teleport").layout {
             im in
-            im.height(35).width(35).verticalCenter().leftMargin(40)
+            im.height(35).width(35).verticalCenter().leftMargin(25)
         }
         
-        row1 +++ MQForm.label(name: "online-Teleport", title: "Teleport").layout {
+        row2 +++ MQForm.button(name: "online-Teleport", title: "Teleport").layout {
             l in
+            l.view.backgroundColor = MittyColor.white
+            l.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
             l.verticalCenter().leftMargin(5)
-            l.label.textColor = UIColor.gray
         }
         
-        
-        section <<< row1
+        form +++ row
         
     }
 
@@ -543,7 +554,7 @@ class ProfileViewController: MittyViewController {
             row +++ MQForm.img(name: "businessLogo", url: "").layout {
                 i in
                 i.imageView.setMittyImage(url: card.businessLogoUrl)
-                i.height(25).width(25).leftMost(withInset: 8).verticalCenter()
+                i.height(25).width(25).verticalCenter().leftMargin(15)
             }
             row +++ MQForm.label(name: "namecard", title: card.businessName).layout {
                 l in

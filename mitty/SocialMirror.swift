@@ -17,6 +17,6 @@ class SocialMirror: Observable {
     var proposal: Int = 0
 
     var description: String {
-        return "イベント: \(event), 本日の予定:\(todaysEvent), 招待:\(eventInvitation), 名刺交換:\(businesscardOffer), リクエスト:\(request), 提案:\(proposal)"
+        return "イベント: \(event),  本日の予定: \(todaysEvent),  招待: \(eventInvitation),  名刺交換: \(businesscardOffer),  リクエスト: \(request),  提案: \(proposal)"
     }
 }

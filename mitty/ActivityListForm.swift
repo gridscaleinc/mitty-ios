@@ -71,8 +71,9 @@ class ActivityListForm: MQForm {
         section <<< row
         row +++ MQForm.label(name: "activity-title", title: "計画中").layout {
             l in
-            l.label.textColor = .orange
-            l.height(20).fillHolizon().verticalCenter()
+            l.label.textColor = MittyColor.orange
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.height(20).verticalCenter().leftMargin(10)
         }
 
         var outstandingActivity = [ActivityInfo]()
@@ -92,7 +93,7 @@ class ActivityListForm: MQForm {
 
             let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30).layout{
                 l in
-                l.verticalCenter()
+                l.verticalCenter().leftMargin(15)
             }
             row +++ l
 
@@ -105,14 +106,21 @@ class ActivityListForm: MQForm {
         }
 
         if outstandingActivity.count == 0 {
-            let row = Row.LeftAligned().height(30)
+            let row = Row.LeftAligned()
             section <<< row
 
             row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
                 l in
-                l.verticalCenter()
+                l.verticalCenter().leftMargin(15)
                 l.label.textColor = .gray
             }
+            
+            row.layout() { r in
+                let w = UIScreen.main.bounds.size.width - 20
+                r.leftMost().rightMost().height(40).width(w)
+            }
+            
+            section <<< HL(UIColor.lightGray).fillHolizon().leftMargin(10).rightMargin(10)
         }
 
         row = newTitleRow()
@@ -120,8 +128,9 @@ class ActivityListForm: MQForm {
         section <<< row
         row +++ MQForm.label(name: "activity-title", title: "活動予定一覧").layout {
             l in
-            l.label.textColor = .orange
-            l.fillParent().height(20)
+            l.label.textColor = MittyColor.orange
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.height(20).leftMargin(10).verticalCenter()
         }
 
         for t in planedActivity {
@@ -130,13 +139,14 @@ class ActivityListForm: MQForm {
 
             row +++ MQForm.label(name: "activityDate", title: t.monthDay).layout {
                 d in
-                d.label.textColor = .orange
-                d.width(50).height(30).verticalCenter()
+                d.label.textColor = MittyColor.black
+                d.width(50).height(30).verticalCenter().leftMargin(15)
             }
 
             let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30).layout{
                 l in
-                l.verticalCenter()
+                l.label.textColor = MittyColor.darkText
+                l.verticalCenter().leftMargin(15)
             }
 
             row +++ l
@@ -150,12 +160,14 @@ class ActivityListForm: MQForm {
                 i.verticalCenter()
             }
 
-
             row.layout() { r in
                 let w = UIScreen.main.bounds.size.width - 20
                 r.leftMost().rightMost().height(40).width(w)
             }
+            
+            section <<< HL(MittyColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
         }
+        
         if planedActivity.count == 0 {
             let row = Row.LeftAligned().height(30)
             section <<< row
@@ -167,7 +179,7 @@ class ActivityListForm: MQForm {
             }
         }
 
-        row = newTitleRow()
+        row = Row.LeftAligned()
 
         section <<< row
         
@@ -194,8 +206,8 @@ class ActivityListForm: MQForm {
     func newTitleRow() -> Row {
         let row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(20)
-            r.view.backgroundColor = UIColor(white: 0.96, alpha: 1)
+            r.leftMost(withInset: 5).rightMost(withInset: 5).height(20).leftMargin(5)
+//            r.view.backgroundColor = UIColor.orange.withAlphaComponent(0.8)
         }
         return row
     }

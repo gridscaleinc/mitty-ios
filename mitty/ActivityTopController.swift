@@ -78,7 +78,6 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         let labels = activityform.quest("[name=activitylabel]")
         labels.forEach() { c in
             let l = c.view as! UILabel
-            l.textColor = MittyColor.healthyGreen
             l.font = UIFont(name: "AppleGothic", size: 14)
         }
 

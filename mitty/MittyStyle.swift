@@ -10,7 +10,7 @@ import Foundation
 import QuartzCore
 import UIKit
 
-class MittyColor {
+class MittyColor : UIColor {
     
     static let background = UIColor.white
     static let title = UIColor(red: 0.2, green: 0.2, blue: 0.2, alpha: 1.0)

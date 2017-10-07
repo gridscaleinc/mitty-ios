@@ -124,6 +124,9 @@ class SocialMirrorForm: Container {
         
         namecardOfferLine.bindEvent(.touchUpInside) {
             line in
+            if self.namecardOfferLine._num == 0 {
+                return
+            }
             let vc = OffersViewController()
             self.navigator?.pushViewController(vc, animated: true)
         }
