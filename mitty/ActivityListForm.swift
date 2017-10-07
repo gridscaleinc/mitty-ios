@@ -75,7 +75,7 @@ class ActivityListForm: MQForm {
             l.label.font = UIFont.boldSystemFont(ofSize: 17)
             l.height(20).down(withInset: 3).leftMargin(10)
         }
-        section <<< HL(UIColor.orange, 1.5).leftMargin(10).rightMargin(10)
+        section <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
 
         var outstandingActivity = [ActivityInfo]()
         var planedActivity = [ActivityInfo]()
@@ -115,7 +115,7 @@ class ActivityListForm: MQForm {
 
             row +++ MQForm.label(name: "activity-content", title: "予定なし").layout {
                 l in
-                l.verticalCenter().leftMargin(15)
+                l.down(withInset: 3).leftMargin(15)
                 l.label.textColor = .gray
             }
             
@@ -135,7 +135,7 @@ class ActivityListForm: MQForm {
             l.label.font = UIFont.boldSystemFont(ofSize: 17)
             l.height(20).leftMargin(10).down(withInset: 3)
         }
-        section <<< HL(UIColor.orange, 1.5).leftMargin(10).rightMargin(10)
+        section <<< HL(UIColor.orange, 1.0).leftMargin(10).rightMargin(10)
 
         for t in planedActivity {
             let row = Row.LeftAligned()
@@ -148,7 +148,7 @@ class ActivityListForm: MQForm {
 
             let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30).layout{
                 l in
-                l.verticalCenter().leftMargin(15)
+                l.down(withInset: 3).leftMargin(15)
             }
 
             row +++ l
