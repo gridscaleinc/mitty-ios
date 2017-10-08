@@ -15,10 +15,9 @@ class ActivityPlanDetailsForm: MQForm {
     //  Title
     var title: Control = {
         let t = UILabel.newAutoLayout()
-        t.text = ".新年の鐘を聞きに行く"
+        t.text = ""
         t.font = UIFont.boldSystemFont(ofSize: 18)
         t.textColor = .orange
-
         let c = Control(name: "title", view: t)
         return c
     } ()
@@ -28,10 +27,7 @@ class ActivityPlanDetailsForm: MQForm {
         let t = UILabel.newAutoLayout()
         t.text = ""
         t.font = UIFont.systemFont(ofSize: 14)
-        t.textColor = UIColor.black
         t.numberOfLines = 0
-//        t.layer.borderColor = UIColor.black.cgColor
-//        t.layer.borderWidth = 0.8
         t.layer.cornerRadius = 3
         let c = Control(name: "memo", view: t)
         return c
@@ -48,7 +44,7 @@ class ActivityPlanDetailsForm: MQForm {
         t.text = ""
         t.font = UIFont.boldSystemFont(ofSize: 18)
         t.numberOfLines = 0
-        t.textColor = MittyColor.healthyGreen
+        t.textColor = MittyColor.black
 
         let c = Control(name: "eventTitle", view: t)
         return c
@@ -65,7 +61,7 @@ class ActivityPlanDetailsForm: MQForm {
     var eventTime: Control = {
         let t = UILabel.newAutoLayout()
         t.text = "⏰  2017/12/31  〜　2018/01/01"
-        t.textColor = UIColor.gray
+        t.textColor = UIColor.darkText
         let c = Control(name: "eventTitle", view: t)
         return c
     } ()
@@ -129,12 +125,13 @@ class ActivityPlanDetailsForm: MQForm {
         title.label.text = activity.info.title
         row +++ title.layout {
             t in
-            t.rightMost(withInset:30).verticalCenter()
+            t.rightMost(withInset:30).verticalCenter().leftMargin(10)
         }
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
             l.label.font = UIFont.systemFont(ofSize: 20)
+            l.label.textColor = UIColor.lightGray
             l.verticalCenter()
         }
 
@@ -152,7 +149,7 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ memo.layout {
             t in
-            t.fillHolizon(10)
+            t.fillHolizon(10).leftMargin(10)
             t.taller(than: 30)
             t.label.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
         }
@@ -189,6 +186,17 @@ class ActivityPlanDetailsForm: MQForm {
             
         } else {
             
+            row = newTitleRow()
+            inputForm <<< row
+            row +++ MQForm.label(name: "main-title", title: "メインイベント").layout {
+                l in
+                l.label.textColor = MittyColor.healthyGreen
+                l.label.font = UIFont.boldSystemFont(ofSize: 17)
+                l.height(20).down(withInset: 3).leftMargin(10)
+            }
+            
+            inputForm <<< HL(UIColor.gray, 1.2).leftMargin(10).rightMargin(10)
+            
             // event title
             row = Row.LeftAligned().layout() {
                 r in
@@ -198,8 +206,9 @@ class ActivityPlanDetailsForm: MQForm {
             eventTitle.label.text = activity.mainItem?.eventTitle
             row +++ eventTitle.layout {
                 t in
-                t.leftMost(withInset: 10).rightMost(withInset: 50).height(50).verticalCenter()
+                t.leftMargin(10).rightMost(withInset: 50).height(50).verticalCenter()
             }
+            
             eventLogo.imageView.setMittyImage(url: activity.info.logoUrl)
             row +++ eventLogo.layout {
                 logo in
@@ -214,13 +223,12 @@ class ActivityPlanDetailsForm: MQForm {
                 r.height(30).fillHolizon()
             }
             
-            eventTime.label.text = activity.mainItem?.start
-            
+            eventTime.label.text = "⏰ \(activity.mainItem?.start ?? "")"
             row +++ eventTime.layout {
                 t in
-                t.label.textColor = UIColor.gray
+                t.label.textColor = UIColor.darkText
                 t.label.font = UIFont.systemFont(ofSize: 14)
-                t.leftMost(withInset: 10).rightMost(withInset: 10).verticalCenter()
+                t.leftMargin(10).rightMost(withInset: 10).verticalCenter()
             }
             inputForm <<< row
             
@@ -233,7 +241,7 @@ class ActivityPlanDetailsForm: MQForm {
                 l in
                 l.label.textColor = UIColor.gray
                 l.label.font = UIFont.systemFont(ofSize: 14)
-                l.leftMost(withInset: 10).rightMost(withInset: 50).height(35).verticalCenter()
+                l.leftMargin(10).rightMost(withInset: 50).height(35).verticalCenter()
             }
             
             row +++ MQForm.img(name: "icon", url: "").layout {
@@ -271,9 +279,8 @@ class ActivityPlanDetailsForm: MQForm {
 
         row = Row.LeftAligned().layout() {
             r in
-
             r.height(3).fillHolizon(10)
-            let layer = MittyColor.gradientLayer()
+            let layer = MittyColor.gradientLayer(UIColor.white, MittyColor.gray, UIColor.white)
             layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 3)
             r.view.layer.insertSublayer(layer, at: 0)
         }
@@ -345,9 +352,8 @@ class ActivityPlanDetailsForm: MQForm {
         var row = Row.LeftAligned()
         row +++ MQForm.label(name: "activityDate", title: item.start).layout {
             d in
-            d.label.textColor = .orange
             d.label.font = UIFont.boldSystemFont(ofSize: 14)
-            d.width(50).height(30).verticalCenter()
+            d.width(50).height(30).verticalCenter().leftMargin(10)
         }
 
         let l = MQForm.label(name: "activitylabel", title: item.eventTitle).layout {
@@ -384,19 +390,21 @@ class ActivityPlanDetailsForm: MQForm {
         // todo func 作成。
         // 1 itemを1 sectionとして処理し、イベントハンドラーを作成。
         // tap するとitem編集VCを開く。
-        let itemRow = Row.LeftAligned().layout() {
-            r in
-            r.fillHolizon().height(120)
-        }
-
+        let itemRow = Row.LeftAligned()
         detail <<< itemRow
 
         let itemSection = Section(name: "itemSection", view: UIView.newAutoLayout())
         itemSection.layout {
             s in
-            s.fillParent()
+            s.fillHolizon()
         }
         itemRow +++ itemSection
+        
+        itemRow.layout() {
+            r in
+            r.fillHolizon().topAlign(with: itemSection).bottomAlign(with: itemSection)
+        }
+
 
         itemSection.bindEvent(.touchUpInside) {
             s in
@@ -413,8 +421,8 @@ class ActivityPlanDetailsForm: MQForm {
 
         let title = MQForm.label(name: "title", title: item.title).layout {
             l in
-            l.width(200).height(30).verticalCenter()
-            l.label.textColor = UIColor.gray
+            l.width(200).height(30).verticalCenter().leftMargin(10)
+            l.label.textColor = UIColor.darkText
             l.label.font = UIFont.boldSystemFont(ofSize: 14)
         }
 
@@ -434,39 +442,44 @@ class ActivityPlanDetailsForm: MQForm {
         let notification = Control(name: "notification", view: labelNoti)
         row +++ notification.layout {
             n in
-            n.rightMost(withInset: 10).height(25).verticalCenter()
+            n.rightMost(withInset: 10).height(25).verticalCenter().leftMargin(10)
         }
 
         itemSection <<< row
 
         row = Row.LeftAligned()
-        row.layout() {
-            r in
-            r.height(50).leftMost(withInset: 5).rightMost(withInset: 5)
-        }
-
-        let labelMemo = UILabel.newAutoLayout()
-        labelMemo.text = item.memo
-        labelMemo.font = UIFont.systemFont(ofSize: 14)
-        labelMemo.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
-
-        labelMemo.textColor = .gray
-
-        let labelMemoCtl = Control(name: "labelMemo", view: labelMemo)
+        let labelMemoCtl = MQForm.label(name: "labelMemo", title: item.memo)
         row +++ labelMemoCtl.layout {
             n in
-            n.rightMost(withInset: 20).height(45).leftMost(withInset: 20).verticalCenter()
+            n.label.numberOfLines = 0
+            n.label.textColor = .darkText
+            n.label.font = UIFont.systemFont(ofSize: 14)
+            n.label.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
+            n.rightMost(withInset: 20).leftMargin(10).taller(than: 30)
         }
         row +++ labelMemoCtl
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
             l.label.font = UIFont.systemFont(ofSize: 20)
+            l.label.textColor = MittyColor.lightGray
             l.verticalCenter()
         }
-
+        row.layout() {
+            r in
+            r.bottomAlign(with: labelMemoCtl).topAlign(with: labelMemoCtl).leftMost(withInset: 5).rightMost(withInset: 5)
+        }
 
         itemSection <<< row
+        itemSection <<< Row.LeftAligned().height(10)
+        itemSection <<< HL(UIColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
 
+    }
+    func newTitleRow() -> Row {
+        let row = Row.LeftAligned().layout {
+            r in
+            r.leftMost(withInset: 5).rightMost(withInset: 5).height(35).leftMargin(5)
+        }
+        return row
     }
 }

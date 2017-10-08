@@ -425,7 +425,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned()
         row +++ infoSource.layout {
             line in
-            line.height(line_height).rightMost(withInset: 10).verticalCenter().leftMargin(5)
+            line.height(line_height).verticalCenter().leftMargin(5)
         }
         row.layout() {
             r in
@@ -438,7 +438,7 @@ class EventInputForm: MQForm {
             line in
             line.textField.textColor = MittyColor.healthyGreen
             line.textField.attributedPlaceholder = NSAttributedString(string: "情報源URLを入力", attributes: [NSForegroundColorAttributeName: MittyColor.healthyGreen])
-            line.height(line_height).rightMost(withInset: 10).verticalCenter()
+            line.height(line_height).rightMost(withInset: 10).verticalCenter().leftMargin(5)
 
         }
 

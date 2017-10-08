@@ -80,9 +80,9 @@ class RequestListForm: MQForm {
             let row = Row.LeftAligned()
             section <<< row
             
-            let l = MQForm.label(name: "requestlabel", title: r.title).width(200).height(30).layout{
+            let l = MQForm.label(name: "requestlabel", title: r.title).height(30).layout{
                 l in
-                l.verticalCenter().leftMargin(10)
+                l.verticalCenter().leftMargin(10).rightMost(withInset:10)
             }
 
             row +++ l
