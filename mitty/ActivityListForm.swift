@@ -88,7 +88,7 @@ class ActivityListForm: MQForm {
             }
         }
 
-        for t in outstandingActivity {
+        for t in outstandingActivity.sorted(by: {(a1,a2) in return a1.title < a2.title}) {
             let row = Row.LeftAligned()
             section <<< row
 
@@ -137,7 +137,7 @@ class ActivityListForm: MQForm {
         }
         section <<< HL(UIColor.orange, 1.0).leftMargin(10).rightMargin(10)
 
-        for t in planedActivity {
+        for t in planedActivity.sorted(by: {(a1,a2) in return a1.startDateTime < a2.startDateTime}) {
             let row = Row.LeftAligned()
             section <<< row
 

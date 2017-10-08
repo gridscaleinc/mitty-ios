@@ -76,10 +76,6 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
 
 
         let labels = activityform.quest("[name=activitylabel]")
-        labels.forEach() { c in
-            let l = c.view as! UILabel
-            l.font = UIFont(name: "AppleGothic", size: 14)
-        }
 
         labels.bindEvent(for: .touchUpInside) { [weak self] label in
             if !(label is TapableLabel) {
@@ -118,11 +114,6 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         
         
         let labels = reqform.quest("[name=requestlabel]")
-        labels.forEach() { c in
-            let l = c.view as! UILabel
-            l.textColor = MittyColor.healthyGreen
-            l.font = UIFont(name: "AppleGothic", size: 14)
-        }
         
         labels.bindEvent(for: .touchUpInside) { [weak self] label in
             if !(label is TapableLabel) {

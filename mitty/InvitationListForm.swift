@@ -74,10 +74,12 @@ class InvitationListForm: MQForm {
         section <<< row
         row +++ MQForm.label(name: "invi-title", title: "招待リスト").layout {
             l in
-            l.label.textColor = .orange
-            l.label.textAlignment = .center
-            l.height(20).fillHolizon().verticalCenter()
+            l.label.textColor = MittyColor.healthyGreen
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.height(20).down(withInset: 3).leftMargin(10)
         }
+        
+        section <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
 
         for i in invitationList {
             let row = Row.LeftAligned()
@@ -89,31 +91,34 @@ class InvitationListForm: MQForm {
 
             let title = MQForm.label(name: "invitationlabel", title: i.invitationTitle).width(200).height(30).layout {
                 l in
-                l.label.textColor = UIColor.lightGray
-                l.verticalCenter().fillHolizon().rightMost(withInset: 27)
+                l.label.textColor = MittyColor.black
+                l.label.font = UIFont.boldSystemFont(ofSize: 15)
+                l.verticalCenter().rightMost(withInset:40).leftMargin(30)
             }
 
             row +++ title
             
-            let forward = MQForm.tapableImg(name: "forward", url: "forward").layout {
+            let forward = MQForm.label(name: "forward", title: ">").layout {
                 f in
-                f.rightMost(withInset: 5).width(22).height(25).verticalCenter()
-                
+                f.label.textColor = MittyColor.lightGray
+                f.rightMost(withInset: 2).width(38).height(30).verticalCenter()
             }.bindEvent(.touchUpInside) {
                 f in
                 self.showHandler?(i)
             }
             
             row +++ forward
-
+            
             
             let messageRow = Row.LeftAligned()
             section <<< messageRow
             
             let msg = MQForm.label(name: "message", title: i.message).layout {
                 m in
-                m.fillHolizon().taller(than: 50).leftMargin(10)
-                m.label.backgroundColor = UIColor.lightGray.withAlphaComponent(0.2)
+                m.label.font = UIFont.systemFont(ofSize: 13)
+                m.label.textColor = MittyColor.darkText
+                m.label.numberOfLines = 0
+                m.taller(than: 50).rightMost(withInset: 10).leftMargin(20)
             }
             
             messageRow.layout{
@@ -125,13 +130,13 @@ class InvitationListForm: MQForm {
 
             let buttonRow = Row.Intervaled().height(40)
             buttonRow.upMargin(5)
-            buttonRow.spacing = 60
-            
+            buttonRow.spacing = 45
+            buttonRow.bottomMargin(5)
             section <<< buttonRow
             
             let accept = MQForm.button(name: "accept", title: "受け入れ").layout {
                 b in
-                b.height(30).leftMargin(10)
+                b.height(30)
                 b.button.backgroundColor = MittyColor.healthyGreen
             }.bindEvent(.touchUpInside) {
                 _ in
@@ -139,10 +144,10 @@ class InvitationListForm: MQForm {
                     
             }
             buttonRow +++ accept
-            let reject = MQForm.button(name: "reject", title: "遠慮").layout {
+            let reject = MQForm.button(name: "reject", title: "遠慮する").layout {
                 b in
-                b.height(30).leftMargin(10)
-                b.button.backgroundColor = MittyColor.lightYellow
+                b.height(30)
+                b.button.backgroundColor = MittyColor.lightGray
             }
             
             buttonRow +++ reject
@@ -152,6 +157,9 @@ class InvitationListForm: MQForm {
                 // 承認
                 InvitationService.instance.accept(i, status: "REJECT")
             }
+            
+            section <<< Row.LeftAligned().height(10)
+            section <<< HL(UIColor.lightGray, 0.5).leftMargin(20).rightMargin(20)
             
         }
 
@@ -189,11 +197,11 @@ class InvitationListForm: MQForm {
     func newTitleRow() -> Row {
         let row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(20)
-            r.view.backgroundColor = UIColor(white: 0.96, alpha: 1)
+            r.leftMost(withInset: 5).rightMost(withInset: 5).height(35).leftMargin(5)
         }
         return row
     }
+
     
     
 }

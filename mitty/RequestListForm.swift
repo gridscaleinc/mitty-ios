@@ -69,9 +69,12 @@ class RequestListForm: MQForm {
         section <<< row
         row +++ MQForm.label(name: "req-title", title: "リクエスト中").layout {
             l in
-            l.label.textColor = .orange
-            l.height(20).fillHolizon().verticalCenter()
+            l.label.textColor = MittyColor.healthyGreen
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.height(20).down(withInset: 3).leftMargin(10)
         }
+        
+        section <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
         
         for r in requestList {
             let row = Row.LeftAligned()
@@ -79,7 +82,7 @@ class RequestListForm: MQForm {
             
             let l = MQForm.label(name: "requestlabel", title: r.title).width(200).height(30).layout{
                 l in
-                l.verticalCenter()
+                l.verticalCenter().leftMargin(10)
             }
 
             row +++ l
@@ -90,6 +93,8 @@ class RequestListForm: MQForm {
             row.layout() { r in
                 r.fillHolizon(20).height(40)
             }
+            
+            section <<< HL(UIColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
         }
         
         if requestList.count == 0 {
@@ -126,8 +131,7 @@ class RequestListForm: MQForm {
     func newTitleRow() -> Row {
         let row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(20)
-            r.view.backgroundColor = UIColor(white: 0.96, alpha: 1)
+            r.leftMost(withInset: 5).rightMost(withInset: 5).height(35).leftMargin(5)
         }
         return row
     }
