@@ -17,10 +17,10 @@ class ActivityPlanDetailsForm: MQForm {
         let t = UILabel.newAutoLayout()
         t.text = ""
         t.font = UIFont.boldSystemFont(ofSize: 18)
-        t.textColor = .orange
+        t.textColor = .black
         let c = Control(name: "title", view: t)
         return c
-    } ()
+    }()
 
     //  Memo
     var memo: Control = {
@@ -179,6 +179,8 @@ class ActivityPlanDetailsForm: MQForm {
             
             row +++ mainEventButton.layout {
                 b in
+                b.button.setTitleColor(.orange, for: .normal)
+                b.button.backgroundColor = .white
                 b.height(40)
             }
             
@@ -253,40 +255,48 @@ class ActivityPlanDetailsForm: MQForm {
             inputForm <<< row
         }
 
-        row = Row.Intervaled()
-        row.spacing = 20
-        row.layout() {
-            r in
-            r.height(40).fillHolizon(0)
-            r.view.backgroundColor = .white
-        }
-
-        let button = MQForm.button(name: "label", title: "＋").height(40)
-        button.button.backgroundColor = .clear
-        button.button.setTitleColor(.black, for: .normal)
-
-        row +++ button
-
-        let buttons = ["イベント追加"]
-        for b in buttons {
-            let button = MQForm.button(name: "addItem", title: b).height(40)
-            button.button.backgroundColor = .clear
-            button.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+        if activity.info.mainEventId != "0" {
             
-            row +++ button
+            row = Row.LeftAligned()
+            row.layout() {
+                r in
+                r.height(40).fillHolizon(0)
+                r.view.backgroundColor = .white
+            }
+            
+            let button = MQForm.button(name: "label", title: "＋").height(40)
+            button.button.backgroundColor = .clear
+            button.button.setTitleColor(.black, for: .normal)
+            
+            row +++ button.layout {
+                b in
+                b.verticalCenter().leftMargin(20)
+            }
+            
+            let buttons = ["イベント追加"]
+            for b in buttons {
+                let button = MQForm.button(name: "addItem", title: b).height(40)
+                button.button.backgroundColor = .clear
+                button.button.setTitleColor(MittyColor.orange, for: .normal)
+                button.layout {
+                    b in
+                    b.verticalCenter().leftMargin(20)
+                }
+                row +++ button
+            }
+            inputForm <<< row
+            
+            row = Row.LeftAligned().layout() {
+                r in
+                r.height(3).fillHolizon(10)
+                let layer = MittyColor.gradientLayer(UIColor.white, MittyColor.gray, UIColor.white)
+                layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 3)
+                r.view.layer.insertSublayer(layer, at: 0)
+            }
+            
+            
+            inputForm <<< row
         }
-        inputForm <<< row
-
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(3).fillHolizon(10)
-            let layer = MittyColor.gradientLayer(UIColor.white, MittyColor.gray, UIColor.white)
-            layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 3)
-            r.view.layer.insertSublayer(layer, at: 0)
-        }
-
-
-        inputForm <<< row
 
         row = Row.LeftAligned().layout() {
             r in
@@ -309,30 +319,10 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ requestButton.layout {
             b in
+            b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
+            b.button.backgroundColor = .white
             b.height(40).fillHolizon(90).verticalCenter()
         }
-        inputForm <<< row
-
-
-        row = Row.Intervaled()
-        row.spacing = 40
-
-        let bt = MQForm.button(name: "delete", title: "活動計画を削除")
-        bt.layout() {
-            c in
-            c.view.backgroundColor = UIColor.red
-            c.view.layer.cornerRadius = 8
-            c.height(28).fillHolizon(60)
-
-        }
-
-        row +++ bt
-
-        row.layout() {
-            r in
-            r.height(90).fillHolizon()
-        }
-
         inputForm <<< row
 
         row = Row.LeftAligned()

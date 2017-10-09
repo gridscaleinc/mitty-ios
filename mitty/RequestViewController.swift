@@ -78,7 +78,7 @@ class RequestViewController: MittyViewController {
         row +++ MQForm.label(name: "Postrequest", title: "Post request").layout {
             c in
             c.height(40).width(300).verticalCenter()
-            c.leftMost(withInset: 20)
+            c.leftMargin(10)
             let l = c.view as! UILabel
             l.textColor = .white
             l.font = .systemFont(ofSize: 18)

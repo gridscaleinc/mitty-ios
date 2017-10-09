@@ -473,5 +473,86 @@ class ActivityService: Service {
         }
         return a
     }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter id: <#id description#>
+    func removeActivity(id : Int64, onComplete : @escaping () ->Void ) {
+        
+        let urlString = MITTY_SERVICE_BASE_URL + "/remove/activity" + "?id=" + String(id)
+        
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        LoadingProxy.on()
+        
+        let request = Alamofire.request(urlString, method: .post, headers: httpHeaders)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["ok"] == nil) {
+                        return
+                    }
+                    onComplete()
+                }
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
+            }
+        }
+        
+    }
+    
+    /// <#Description#>
+    ///
+    /// - Parameter id: <#id description#>
+    func removeItem(id : Int64, of activityId: Int64, onComplete : @escaping () ->Void ) {
+        
+        let urlString = MITTY_SERVICE_BASE_URL + "/remove/activityItem"
+        
+        let parameters = [
+            "itemId" : id,
+            "activityId": activityId
+        ]
+        
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        
+        LoadingProxy.on()
+        
+        let request = Alamofire.request(urlString, method: .post, parameters: parameters, headers: httpHeaders)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    if (json == nil || json["ok"] == nil) {
+                        return
+                    }
+                    onComplete()
+                }
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                print(response.description)
+                LoadingProxy.off()
+            }
+        }
+        
+    }
 
 }

@@ -73,9 +73,10 @@ class EditItemViewController: MittyViewController {
             r in
             r.fillHolizon().height(50)
         }
+        
         row +++ itemTitle.layout {
             t in
-            t.leftMost(withInset: 10).rightMost(withInset: 10).height(50).verticalCenter()
+            t.leftMargin(10).rightMost(withInset: 10).height(50).verticalCenter()
 
         }
 
@@ -84,12 +85,12 @@ class EditItemViewController: MittyViewController {
         // memo line
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(100)
+            r.fillHolizon().height(100).upMargin(3)
         }
 
         row +++ itemMemo.layout {
             m in
-            m.leftMost(withInset: 10).rightMost(withInset: 10).height(100).verticalCenter()
+            m.leftMargin(10).rightMost(withInset: 10).height(100).verticalCenter()
         }
 
         section <<< row
@@ -97,7 +98,7 @@ class EditItemViewController: MittyViewController {
         // notification line
         row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(30)
+            r.leftMargin(10).height(30).rightMost(withInset: 10).upMargin(3)
         }
 
         row +++ labelNoti.layout {
@@ -112,7 +113,7 @@ class EditItemViewController: MittyViewController {
 
         row +++ textNotifyTime.layout { t in
             t.height(30)
-            t.rightMost(withInset: 20).verticalCenter()
+            t.rightMost(withInset: 20).verticalCenter().leftMargin(20)
         }
 
         section <<< row
@@ -127,6 +128,8 @@ class EditItemViewController: MittyViewController {
 
         row +++ updateButton.layout {
             b in
+            b.button.backgroundColor = .white
+            b.button.setTitleColor(.orange, for: .normal)
             b.height(45)
         }
 
@@ -145,6 +148,13 @@ class EditItemViewController: MittyViewController {
             c.view.layer.cornerRadius = 8
             c.height(28).fillHolizon(60)
         }
+        deleteButton.bindEvent(.touchUpInside) {
+            b in
+            ActivityService.instance.removeItem(id: self.activityItem.id, of: self.activityItem.activityId) {
+               self.navigationController?.popViewController(animated: true)
+            }
+        }
+        
         section <<< row
 
         // バネ行

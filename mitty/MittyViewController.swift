@@ -156,7 +156,7 @@ class MittyViewController: UIViewController {
     }
 
     @discardableResult
-    func seperator(section: Section, caption: String, _ distribution: LeftRight? = .atIntervals) -> Row {
+    func seperator(section: Section, caption: String, _ distribution: LeftRight? = .atIntervals, color : UIColor? = MittyColor.healthyGreen) -> Row {
         let row = Row().layout() {
             r in
             r.height(30).fillHolizon()
@@ -168,7 +168,7 @@ class MittyViewController: UIViewController {
             c in
             c.height(30).verticalCenter()
             c.label.backgroundColor = MittyColor.light
-            c.label.textColor = MittyColor.healthyGreen
+            c.label.textColor = color
             c.label.textAlignment = .center
             c.label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
         }

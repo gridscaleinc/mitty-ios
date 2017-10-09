@@ -169,7 +169,7 @@ class InvitationListForm: MQForm {
 
             row +++ MQForm.label(name: "invitation-content", title: "受付処理待ちの招待はありません。").layout {
                 l in
-                l.verticalCenter()
+                l.verticalCenter().leftMargin(10)
                 l.label.textColor = .gray
             }
         }

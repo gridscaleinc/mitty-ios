@@ -56,6 +56,8 @@ class EditViewController: MittyViewController {
         }
 
         form +++ updateButton.layout { [weak self] b in
+            b.button.backgroundColor = .white
+            b.button.setTitleColor(MittyColor.orange, for: .normal)
             b.holizontalCenter().width(130).height(45).putUnder(of: (self?.memo)!, withOffset: 10)
         }
 
@@ -67,8 +69,25 @@ class EditViewController: MittyViewController {
             c.view.layer.cornerRadius = 8
             c.height(28).fillHolizon(60).putUnder(of: self.updateButton, withOffset: 40)
         }
-
-
+        
+        let warningMsg = MQForm.label(name: "alert", title: "◆注意：\r\n 活動計画を削除すると、付随する全ての予定も削除される。")
+        form +++ warningMsg.layout {
+            w in
+            w.label.backgroundColor = UIColor.lightGray
+            w.label.textColor = MittyColor.baseYellow
+            w.label.layer.cornerRadius = 3
+            w.label.layer.masksToBounds = true
+            w.label.numberOfLines = 0
+            w.leftMost(withInset: 20).rightMost(withInset: 20).putUnder(of: deleteButton, withOffset: 30)
+        }
+        
+        deleteButton.bindEvent(.touchUpInside) {
+            b in
+            ActivityService.instance.removeActivity(id: Int64(self.activityInfo.id)!) {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+        }
+        
         view.setNeedsUpdateConstraints() // bootstrap Auto Layout
 
     }
