@@ -367,7 +367,7 @@ class ProposalDetailsViewController: MittyViewController {
         row.spacing = 30
 
         // Proposerの場合
-        if ApplicationContext.userSession.userId == Int64(proposal.proposerId)
+        if ApplicationContext.userSession.userId == proposal.proposerId
             && proposal.isApprovable {
             showConfirm(detailForm)
             

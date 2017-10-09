@@ -191,7 +191,7 @@ class RequestService: Service {
         info.acceptedProposalId = json["accepted_proposal_id"].int64Value
         info.acceptedDate = json["accepted_date"].stringValue.utc2Date()
         info.meetingId = json["meeting_id"].int64Value
-        info.ownerId = json["owner_id"].int64Value
+        info.ownerId = json["owner_id"].intValue
         info.created = json["created"].stringValue.utc2Date()
         info.numberOfLikes = json["num_of_likes"].intValue
         info.numberOfProposals = json["num_of_proposal"].intValue

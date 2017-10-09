@@ -12,10 +12,10 @@ class UserSession {
     static let ID = "USER-SESSION"
     var userDatas: [String: Any] = [:]
 
-    var userId: Int64 {
+    var userId: Int {
         get {
             if let v = userDatas["userId"] as? NSNumber {
-                return v.int64Value
+                return v.intValue
             }
             return 0
         }

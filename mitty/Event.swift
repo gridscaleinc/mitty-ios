@@ -274,6 +274,7 @@ class Event {
 
     //  投稿者情報
     //  投稿者の名前
+    var publisherId: Int = 0
     var publisherName: String = ""
 
     //  投稿者のアイコンのURL

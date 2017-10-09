@@ -283,6 +283,7 @@ class EventService: Service {
 
         //  投稿者情報
         //  投稿者の名前
+        e.publisherId = json["publisherId"].intValue
         e.publisherName = json["publisherName"].stringValue
 
         //  投稿者のアイコンのURL

@@ -472,4 +472,13 @@ class ActivityPlanDetailsForm: MQForm {
         }
         return row
     }
+    
+    func reset() {
+        
+        for c in controls {
+            c.view.removeFromSuperview()
+        }
+        controls = [Control]()
+        
+    }
 }

@@ -29,7 +29,7 @@ class RequestInfo {
     var acceptedProposalId: Int64 = 0
     var acceptedDate: Date = .nulldate
     var meetingId: Int64 = 0
-    var ownerId: Int64 = 0
+    var ownerId: Int = 0
     var created: Date = .nulldate
     var updated: Date = .nulldate
     

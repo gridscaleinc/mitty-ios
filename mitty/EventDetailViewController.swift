@@ -171,6 +171,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         detailForm <<< descriptionRow
 
+        showEditButton(detailForm)
+        
         let interval = Row.LeftAligned().layout {
             r in
             r.fillHolizon().taller(than: 60)
@@ -551,6 +553,33 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     }
 
+    func showEditButton(_ section: Section) {
+        if (ApplicationContext.userSession.isLogedIn) {
+            let session = ApplicationContext.userSession
+            if event.publisherId != session.userId {
+                let row = Row.LeftAligned()
+                row.layout {
+                    r in
+                    r.fillHolizon().height(40).upMargin(40)
+                }
+                
+                row +++ MQForm.label(name: "Edit", title: "編集").layout {
+                    l in
+                    l.label.textColor = MittyColor.orange
+                    l.label.textAlignment = .center
+                    l.label.layer.cornerRadius = 5
+                    l.label.layer.borderColor = MittyColor.healthyGreen.cgColor
+                    l.label.layer.borderWidth = 1
+                    l.label.layer.masksToBounds = true
+                    
+                    l.verticalCenter().rightMost(withInset: 40).leftMargin(40).height(35)
+                }
+                
+                section <<< row
+            }
+        }
+
+    }
     var buttons = Row.Intervaled()
 
     func setButtons() {

@@ -18,7 +18,7 @@ class ActivityPlanDetailsController: MittyViewController {
     var status = 2
 
     var activityInfo: ActivityInfo
-
+    var shouldReloadView = false
     init(_ activity: ActivityInfo) {
         activityInfo = activity
         super.init(nibName: nil, bundle: nil)
@@ -31,17 +31,20 @@ class ActivityPlanDetailsController: MittyViewController {
     var constrainsInited = false
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        if (!constrainsInited) {
+        if !shouldReloadView {
             form.autoPin(toTopLayoutGuideOf: self, withInset: 20)
             form.autoPinEdge(toSuperviewEdge: .top)
             form.autoPinEdge(toSuperviewEdge: .left)
             form.autoPinEdge(toSuperviewEdge: .right)
             form.autoPinEdge(toSuperviewEdge: .bottom)
-            constrainsInited = true
         }
         
-        form.configLayout()
-
+        if (!constrainsInited) {
+            if (activityLoaded) {
+                form.configLayout()
+            }
+            constrainsInited = true
+        }
     }
 
     override func viewDidLoad() {
@@ -59,9 +62,18 @@ class ActivityPlanDetailsController: MittyViewController {
     /// <#Description#>
     ///
     /// - Parameter animated: <#animated description#>
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func loadView() {
+        super.loadView()
+        view.addSubview(form)
         loadActivity()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+   
+        if shouldReloadView {
+            loadActivity()
+        }
         
     }
     
@@ -69,6 +81,7 @@ class ActivityPlanDetailsController: MittyViewController {
     func itemTapped (_ item: ActivityItem) {
         let vc = EditItemViewController(item)
         self.navigationController?.pushViewController(vc, animated: true)
+        shouldReloadView = true
     }
 
     // activity taped
@@ -92,15 +105,7 @@ class ActivityPlanDetailsController: MittyViewController {
     
     var activityLoaded = false
     func loadActivity() {
-        if (activityLoaded) {
-            form.removeFromSuperview()
-            constrainsInited = false
-        }
-        
-        form = ActivityPlanDetailsForm.newAutoLayout()
-        self.view.addSubview(form)
-        activityLoaded = true
-        
+
         ActivityService.instance.fetch(id: activityInfo.id) { [weak self]
             activityDetail in
             let a = (self?.activityInfo)!
@@ -108,11 +113,18 @@ class ActivityPlanDetailsController: MittyViewController {
             activityDetail.info.startDateTime = a.startDateTime
             self?.activityInfo = activityDetail.info
             
-            self?.form.loadForm(activityDetail)
+            if (self?.activityLoaded)! {
+                self?.form.reset()
+            } else {
+                self?.bindEvents()
+            }
             
+            self?.constrainsInited = false
+            self?.form.loadForm(activityDetail)
             self?.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
             
-            self?.bindEvents()
+            self?.activityLoaded = true
+            
         }
     }
     

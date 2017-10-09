@@ -218,7 +218,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         UserService.instance.signin(userName: userName.text!.trimmingCharacters(in: .whitespaces), pwd: pwd.text!, onComplete: {
             uid, accessToken in
             ApplicationContext.userSession.accessToken = accessToken
-            ApplicationContext.userSession.userId = Int64(uid)
+            ApplicationContext.userSession.userId = uid
             ApplicationContext.userSession.userName = userName.text!
             ApplicationContext.userSession.isLogedIn = true
             ApplicationContext.saveSession()
