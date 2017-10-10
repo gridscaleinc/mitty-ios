@@ -67,16 +67,8 @@ class ActivityListForm: MQForm {
         self.section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
         container += section
 
-        var row = newTitleRow()
-        section <<< row
-        row +++ MQForm.label(name: "activity-title", title: "計画中").layout {
-            l in
-            l.label.textColor = MittyColor.healthyGreen
-            l.label.font = UIFont.boldSystemFont(ofSize: 17)
-            l.height(20).down(withInset: 3).leftMargin(10)
-        }
-        section <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
-
+        section <<< MQForm.titleRow(name: "activity-title", caption: "計画中", color: MittyColor.healthyGreen, lineColor: .orange)
+        
         var outstandingActivity = [ActivityInfo]()
         var planedActivity = [ActivityInfo]()
 
@@ -126,16 +118,7 @@ class ActivityListForm: MQForm {
             
         }
 
-        row = newTitleRow()
-
-        section <<< row
-        row +++ MQForm.label(name: "activity-title", title: "活動予定一覧").layout {
-            l in
-            l.label.textColor = MittyColor.healthyGreen
-            l.label.font = UIFont.boldSystemFont(ofSize: 17)
-            l.height(20).leftMargin(10).down(withInset: 3)
-        }
-        section <<< HL(UIColor.orange, 1.0).leftMargin(10).rightMargin(10)
+        section <<< MQForm.titleRow(name: "activity-title", caption: "活動予定一覧", color:MittyColor.healthyGreen, lineColor: .orange)
 
         for t in planedActivity.sorted(by: {(a1,a2) in return a1.startDateTime < a2.startDateTime}) {
             let row = Row.LeftAligned()
@@ -181,7 +164,7 @@ class ActivityListForm: MQForm {
             }
         }
 
-        row = Row.LeftAligned()
+        var row = Row.LeftAligned()
 
         section <<< row
         

@@ -99,6 +99,7 @@ class ActivityPlanDetailsController: MittyViewController {
         EventService.instance.fetch(id: self.activityInfo.mainEventId!) {
             event in
             let c = EventDetailViewController(event: event)
+            c.activity = self.activityInfo
             self.navigationController?.pushViewController(c, animated: true)
         }
     }

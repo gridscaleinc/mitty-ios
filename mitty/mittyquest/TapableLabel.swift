@@ -57,8 +57,30 @@ class TapableLabel : UILabel, Linkable {
         //layer.fillColor = UIColor.red.cgColor
         // self.layer.addSublayer(layer)
         
-        
     }
+    
+    // paddingの値
+    var padding = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    
+    override func drawText(in rect: CGRect) {
+        let newRect = UIEdgeInsetsInsetRect(rect, padding)
+        super.drawText(in: newRect)
+    }
+    
+    override var  intrinsicContentSize : CGSize {
+        var intrinsicContentSize = super.intrinsicContentSize
+        intrinsicContentSize.height += padding.top + padding.bottom
+        intrinsicContentSize.width += padding.left + padding.right
+        return intrinsicContentSize
+    }
+    
+    func pad(with size: CGFloat) {
+        padding.top = size
+        padding.left = size
+        padding.bottom = size
+        padding.right = size
+    }
+    
 }
 
 //

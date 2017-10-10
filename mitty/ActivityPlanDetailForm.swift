@@ -13,25 +13,19 @@ import PureLayout
 class ActivityPlanDetailsForm: MQForm {
 
     //  Title
-    var title: Control = {
-        let t = UILabel.newAutoLayout()
-        t.text = ""
-        t.font = UIFont.boldSystemFont(ofSize: 18)
-        t.textColor = .black
-        let c = Control(name: "title", view: t)
-        return c
-    }()
+    var title = MQForm.label(name: "title", title: "").layout {
+        t in
+        t.label.font = UIFont.boldSystemFont(ofSize: 18)
+        t.label.textColor = .black
+    }
 
     //  Memo
-    var memo: Control = {
-        let t = UILabel.newAutoLayout()
-        t.text = ""
-        t.font = UIFont.systemFont(ofSize: 14)
-        t.numberOfLines = 0
-        t.layer.cornerRadius = 3
-        let c = Control(name: "memo", view: t)
-        return c
-    } ()
+    var memo = MQForm.label(name: "memo", title: "", pad: 5).layout {
+        l in
+        l.label.font = UIFont.systemFont(ofSize: 14)
+        l.label.numberOfLines = 0
+        l.label.layer.cornerRadius = 3
+    }
 
     var mainEventButton = MQForm.button(name: "mainEvent", title: "メインベント登録へ")
 
@@ -39,16 +33,12 @@ class ActivityPlanDetailsForm: MQForm {
 
     //  Main event
     //    Title                         Logo
-    var eventTitle: Control = {
-        let t = TapableLabel.newAutoLayout()
-        t.text = ""
-        t.font = UIFont.boldSystemFont(ofSize: 18)
-        t.numberOfLines = 0
-        t.textColor = MittyColor.black
-
-        let c = Control(name: "eventTitle", view: t)
-        return c
-    } ()
+    var eventTitle = MQForm.label(name: "eventTitle", title: "").layout {
+        t in
+        t.label.font = UIFont.boldSystemFont(ofSize: 18)
+        t.label.numberOfLines = 0
+        t.label.textColor = MittyColor.black
+    }
     
     var eventLogo: Control = {
         let l = UIImageView.newAutoLayout()
@@ -438,7 +428,7 @@ class ActivityPlanDetailsForm: MQForm {
         itemSection <<< row
 
         row = Row.LeftAligned()
-        let labelMemoCtl = MQForm.label(name: "labelMemo", title: item.memo)
+        let labelMemoCtl = MQForm.label(name: "labelMemo", title: item.memo, pad:3)
         row +++ labelMemoCtl.layout {
             n in
             n.label.numberOfLines = 0

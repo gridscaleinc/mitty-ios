@@ -131,6 +131,7 @@
 		FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ECE1F03FEA90090B601 /* UserService.swift */; };
 		FCB45ED11F0400740090B601 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED01F0400740090B601 /* UserInfo.swift */; };
 		FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED21F05560D0090B601 /* ContentService.swift */; };
+		FCB75CAF1F8CCD4400205261 /* ActivityPlanEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB75CAE1F8CCD4400205261 /* ActivityPlanEditController.swift */; };
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
 		FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB381F2DB9370075C1A2 /* LikesService.swift */; };
@@ -354,6 +355,7 @@
 		FCB45ECE1F03FEA90090B601 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FCB45ED01F0400740090B601 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FCB45ED21F05560D0090B601 /* ContentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentService.swift; sourceTree = "<group>"; };
+		FCB75CAE1F8CCD4400205261 /* ActivityPlanEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanEditController.swift; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
 		FCCFAB381F2DB9370075C1A2 /* LikesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
@@ -662,6 +664,7 @@
 				FC5ECFF71EB830D000AA6C13 /* ActivityEntryController.swift */,
 				FCFA84871F20E9B900E9C6F2 /* EditItemViewController.swift */,
 				FCFA84891F20EA0900E9C6F2 /* EditViewController.swift */,
+				FCB75CAE1F8CCD4400205261 /* ActivityPlanEditController.swift */,
 			);
 			name = activity;
 			sourceTree = "<group>";
@@ -1276,6 +1279,7 @@
 				FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */,
+				FCB75CAF1F8CCD4400205261 /* ActivityPlanEditController.swift in Sources */,
 				FCFA848A1F20EA0900E9C6F2 /* EditViewController.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
 				FCEDA2C41E6D7946006FBF20 /* Structures.swift in Sources */,

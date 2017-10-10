@@ -64,12 +64,34 @@ open class MQForm : UIView {
     }
     
     // Label
-    static func  label (name: String, title: String) -> Control {
+    static func  label (name: String, title: String, color:UIColor?=UIColor.darkText, pad: CGFloat? = 0) -> Control {
         let l = TapableLabel.newAutoLayout()
         l.text = title
-        l.textColor = MittyColor.darkText
+        l.textColor = color
         l.baselineAdjustment = .alignBaselines
+        l.pad(with: pad!)
         return Control(name: name, view: l)
+    }
+    
+    // Title
+    static func  titleRow (name: String, caption: String, color: UIColor? = UIColor.black, lineColor: UIColor?=UIColor.darkGray) -> Row {
+        let row = Row.LeftAligned().layout {
+            r in
+            r.leftMost(withInset: 10).height(30).leftMargin(10).rightMargin(10)
+        }
+        
+        row +++ label(name: name, title: caption, color:color).layout{
+            l in
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.down(withInset: 3).rightMost()
+        }
+        
+        row +++ HL(lineColor, 1.2).layout {
+            l in
+            l.down().fillHolizon()
+        }
+        
+        return row
     }
     
     

@@ -14,7 +14,9 @@ import SwiftyJSON
 class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     var event: Event
-
+    var activity : ActivityInfo? = nil
+    var activityItem : ActivityItem? = nil
+    
     var form = MQForm.newAutoLayout()
 
     //
@@ -150,7 +152,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let description = event.description
 
-        let descriptionLabel = MQForm.label(name: "detailDescription", title: description).layout {
+        let descriptionLabel = MQForm.label(name: "detailDescription", title: description, pad: 4).layout {
             c in
             c.fillHolizon(10).verticalCenter().leftMargin(10)
             let l = c.view as! UILabel
@@ -158,9 +160,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             l.numberOfLines = 0
             l.textColor = .black
             l.font = .systemFont(ofSize: 15)
-            l.layer.cornerRadius = 2
-            l.layer.borderWidth = 0.8
-            l.layer.borderColor = UIColor.gray.cgColor
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
         descriptionRow +++ descriptionLabel
@@ -388,7 +387,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let row = Row.LeftAligned()
 //        row.view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.1)
-        let actionLabel = MQForm.label(name: "action", title: (event.action)).layout {
+        let actionLabel = MQForm.label(name: "action", title: (event.action), pad: 4).layout {
             c in
             c.fillHolizon(15).verticalCenter().leftMargin(15)
             c.label.numberOfLines = 0
@@ -554,6 +553,9 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     }
 
     func showEditButton(_ section: Section) {
+        if activity == nil {
+            return
+        }
         if (ApplicationContext.userSession.isLogedIn) {
             let session = ApplicationContext.userSession
             if event.publisherId != session.userId {
@@ -563,19 +565,26 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
                     r.fillHolizon().height(40).upMargin(40)
                 }
                 
-                row +++ MQForm.label(name: "Edit", title: "編集").layout {
+                let editLabel = MQForm.label(name: "Edit", title: "編集").layout {
                     l in
-                    l.label.textColor = MittyColor.orange
+                    l.label.textColor = MittyColor.white
                     l.label.textAlignment = .center
                     l.label.layer.cornerRadius = 5
-                    l.label.layer.borderColor = MittyColor.healthyGreen.cgColor
-                    l.label.layer.borderWidth = 1
+                    l.label.backgroundColor = MittyColor.healthyGreen
                     l.label.layer.masksToBounds = true
                     
                     l.verticalCenter().rightMost(withInset: 40).leftMargin(40).height(35)
                 }
                 
+                row +++ editLabel
+                
                 section <<< row
+                editLabel.bindEvent(.touchUpInside) {
+                    b in
+                    let vc = ActivityPlanEditViewController(self.activity!)
+                    vc.event = self.event
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
             }
         }
 
