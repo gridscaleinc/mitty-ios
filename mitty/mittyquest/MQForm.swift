@@ -77,13 +77,13 @@ open class MQForm : UIView {
     static func  titleRow (name: String, caption: String, color: UIColor? = UIColor.black, lineColor: UIColor?=UIColor.darkGray) -> Row {
         let row = Row.LeftAligned().layout {
             r in
-            r.leftMost(withInset: 10).height(30).leftMargin(10).rightMargin(10)
+            r.leftMost(withInset: 10).height(50).leftMargin(10).rightMargin(7)
         }
         
         row +++ label(name: name, title: caption, color:color).layout{
             l in
             l.label.font = UIFont.boldSystemFont(ofSize: 17)
-            l.down(withInset: 3).rightMost()
+            l.down(withInset: 3).rightMost().leftMargin(10)
         }
         
         row +++ HL(lineColor, 1.2).layout {
@@ -142,7 +142,8 @@ open class MQForm : UIView {
     static func button(name: String, title: String ) -> Control {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
-        button.backgroundColor = .orange
+        button.setTitleColor(.orange, for: .normal)
+        button.backgroundColor = .white
         button.layer.cornerRadius = 3
         return Control(name: name, view:button)
     }

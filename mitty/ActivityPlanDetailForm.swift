@@ -306,7 +306,8 @@ class ActivityPlanDetailsForm: MQForm {
             r in
             r.height(40).fillHolizon()
         }
-
+        inputForm <<< HL(UIColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
+        
         row +++ requestButton.layout {
             b in
             b.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
@@ -314,7 +315,8 @@ class ActivityPlanDetailsForm: MQForm {
             b.height(40).fillHolizon(90).verticalCenter()
         }
         inputForm <<< row
-
+        
+        
         row = Row.LeftAligned()
         inputForm <<< row
 

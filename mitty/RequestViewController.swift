@@ -29,7 +29,7 @@ class RequestViewController: MittyViewController {
     let limitedPrice = MQForm.text(name: "limitedPrice", placeHolder: "ここまで")
     let numOfPerson = MQForm.text(name: "numOfPerson", placeHolder: "人数")
     let expiryDate = MQForm.text(name: "expiryDate", placeHolder: "提案締切日")
-    let postButton = MQForm.button(name: "Post", title: "Post Request")
+    let postButton = MQForm.button(name: "Post", title: "登録する")
     var scrollConstraints: NSLayoutConstraint?
 
     override func viewDidLoad() {
@@ -72,16 +72,16 @@ class RequestViewController: MittyViewController {
         row.layout {
             r in
             r.fillHolizon(0).height(40)
-            r.view.backgroundColor = .red
+            r.view.backgroundColor = .orange
         }
 
-        row +++ MQForm.label(name: "Postrequest", title: "Post request").layout {
+        row +++ MQForm.label(name: "Postrequest", title: "リクエスト情報登録").layout {
             c in
             c.height(40).width(300).verticalCenter()
             c.leftMargin(10)
             let l = c.view as! UILabel
             l.textColor = .white
-            l.font = .systemFont(ofSize: 18)
+            l.font = .boldSystemFont(ofSize: 18)
         }
 
         inputForm <<< row
@@ -250,8 +250,6 @@ class RequestViewController: MittyViewController {
         
         row +++ postButton.layout { button in
             button.height(50)
-            let b = button.view as! UIButton
-            b.backgroundColor = .orange
         }
 
         row["Post"]?.bindEvent(.touchUpInside) { [weak self] btn in

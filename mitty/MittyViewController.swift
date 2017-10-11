@@ -28,6 +28,11 @@ class MittyViewController: UIViewController {
             super.hidesBottomBarWhenPushed = v
         }
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        self.navigationItem.title = "..."
+    }
 
     func showError(_ errorMsg: String) {
         lock.lock()
@@ -156,10 +161,10 @@ class MittyViewController: UIViewController {
     }
 
     @discardableResult
-    func seperator(section: Section, caption: String, _ distribution: LeftRight? = .atIntervals, color : UIColor? = MittyColor.healthyGreen) -> Row {
+    func seperator(section: Section, caption: String, _ distribution: LeftRight? = .atIntervals, color : UIColor? = MittyColor.black) -> Row {
         let row = Row().layout() {
             r in
-            r.height(30).fillHolizon()
+            r.height(35).fillHolizon()
         }
 
         row.distribution = distribution!
@@ -170,7 +175,7 @@ class MittyViewController: UIViewController {
             c.label.backgroundColor = MittyColor.light
             c.label.textColor = color
             c.label.textAlignment = .center
-            c.label.font = UIFont.systemFont(ofSize: UIFont.systemFontSize)
+            c.label.font = UIFont.boldSystemFont(ofSize: 16)
         }
         row +++ c
         section <<< row
