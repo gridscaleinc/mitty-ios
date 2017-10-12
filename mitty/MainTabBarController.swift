@@ -60,11 +60,13 @@ class MainTabBarController: UITabBarController {
         // タブグループ登録
         let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3MyselfController, tab4IslandController!, tab5SocialController!)
         self.setViewControllers(tabs as? [UIViewController], animated: true)
+        
+        self.selectedIndex = 2
     }
 
 
     //
     override func viewDidAppear(_ animated: Bool) {
-        self.selectedIndex = 2
+        //self.selectedIndex = 2
     }
 }
