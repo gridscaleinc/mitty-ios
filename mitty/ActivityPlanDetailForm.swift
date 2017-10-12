@@ -37,7 +37,7 @@ class ActivityPlanDetailsForm: MQForm {
         t in
         t.label.font = UIFont.boldSystemFont(ofSize: 18)
         t.label.numberOfLines = 0
-        t.label.textColor = MittyColor.black
+        t.label.textColor = MittyColor.orange
     }
     
     var eventLogo: Control = {

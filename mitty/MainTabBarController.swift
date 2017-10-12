@@ -61,12 +61,13 @@ class MainTabBarController: UITabBarController {
         let tabs = NSArray(objects: tab1HomeController, tab2ActivityController!, tab3MyselfController, tab4IslandController!, tab5SocialController!)
         self.setViewControllers(tabs as? [UIViewController], animated: true)
         
-        self.selectedIndex = 2
     }
 
-
-    //
+    var isFirstLoad = true
     override func viewDidAppear(_ animated: Bool) {
-        //self.selectedIndex = 2
+        if isFirstLoad {
+            self.selectedIndex = 2
+            isFirstLoad = false
+        }
     }
 }
