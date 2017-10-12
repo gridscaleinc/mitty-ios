@@ -240,7 +240,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         section <<< row
-        section <<< HL(MittyColor.orange, 1 ).leftMargin(10).rightMargin(10)
+        section <<< HL(MittyColor.healthyGreen, 0.55 ).leftMargin(10).rightMargin(10)
     }
     
     func loadLikes (_ section: Section) {
@@ -287,20 +287,43 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         // 日付情報を設定
         let row = Row.LeftAligned().layout {
             r in
-            r.fillHolizon().height(34)
+            r.fillHolizon().height(80)
         }
+        
+        let leftCol = Col.UpDownAligned().layout {
+            c in
+            c.fillVertical().width(80).leftMargin(10).view.backgroundColor = MittyColor.healthyGreen
+        }
+        
+        row +++ leftCol
+        leftCol +++ MQForm.label(name: "time", title: "星期１").layout {
+            l in
+            l.verticalCenter().holizontalCenter()
+            l.label.textColor = UIColor.white
+            l.label.font = UIFont.boldSystemFont(ofSize: 20)
+        }
+        
+        let rightCol = Col.UpDownAligned().layout {
+            c in
+            c.fillVertical().rightMost()
+        }
+        
+        row +++ rightCol
+        
         
         let remainder = event.endDate.timeIntervalSinceNow / 86400
         let tillStart = event.startDate.timeIntervalSinceNow / 86400
         
         var remainDays = ""
         let duration = event.duration()
-        row +++ MQForm.label(name: "duration", title: duration).layout {
+        rightCol +++ MQForm.label(name: "duration", title: duration).layout {
             d in
-            d.rightMargin(10).verticalCenter().leftMargin(10).width(180)
+            d.fillHolizon(10).height(40)
+            d.label.textAlignment = .center
             d.label.adjustsFontSizeToFitWidth = true
-            d.label.textColor = UIColor.gray
+            d.label.font = UIFont.boldSystemFont(ofSize: 18)
         }
+        
         // 未開始
         if (tillStart > 0) {
             remainDays = "開始まで\(Int(tillStart))日"
@@ -337,9 +360,9 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let termStatus = MQForm.hilight(label: remainDays, named:"termStatus")
         
-        row +++ termStatus.layout {
+        rightCol +++ termStatus.layout {
             pub in
-            pub.height(28).verticalCenter().rightMost(withInset: 10)
+            pub.height(40).fillHolizon(30)
             let l = pub.label
             l.textAlignment = .center
             l.adjustsFontSizeToFitWidth = true
@@ -348,7 +371,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         section <<< row
-
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(10)
     }
     
     func loadAction(_ section: Section) {
@@ -440,6 +463,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     func addContactInfo(_ section: Section) {
         
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(40).rightMargin(40).upMargin(10)
+        
         // TODO: Mail address
 
         let infoSource = Row.LeftAligned().layout {
@@ -510,13 +535,17 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         if activity == nil {
             return
         }
+        
+        
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(40).rightMargin(40).upMargin(30)
+        
         if (ApplicationContext.userSession.isLogedIn) {
             let session = ApplicationContext.userSession
             if event.publisherId != session.userId {
                 let row = Row.LeftAligned()
                 row.layout {
                     r in
-                    r.fillHolizon().height(40).upMargin(40)
+                    r.fillHolizon().height(40).upMargin(20)
                 }
                 
                 let editLabel = MQForm.button(name: "Edit", title: "編集する").layout {

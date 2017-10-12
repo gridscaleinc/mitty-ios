@@ -290,9 +290,9 @@ class Event {
     func duration() -> String {
 
         if allDayFlag {
-            return "🕒" + startDate.monthDay + " - " + endDate.monthDay
+            return "⏰" + startDate.monthDay + " - " + endDate.monthDay
         } else {
-            return "🕒" + startDate.dateTime + " - " + endDate.dateTime
+            return "⏰" + startDate.dateTime + " - " + endDate.dateTime
         }
 
     }

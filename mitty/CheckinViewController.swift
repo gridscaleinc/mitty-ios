@@ -192,7 +192,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
             imagePicked = true
             self.view.needsUpdateConstraints()
         }
-        self.dismiss(animated: false, completion: nil)
+        picker.dismiss(animated: false, completion: nil)
     }
 
     override func viewWillLayoutSubviews() {

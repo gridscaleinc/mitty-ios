@@ -235,7 +235,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
         NSLog("\(info)")
         let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
         form.image.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
-        self.dismiss(animated: false, completion: nil)
+        picker.dismiss(animated: false, completion: nil)
         imagePicked = true
     }
 

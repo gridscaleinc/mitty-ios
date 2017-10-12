@@ -596,9 +596,11 @@ class ProposalViewController: MittyViewController, UIImagePickerControllerDelega
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
+            imagePicker.modalPresentationStyle = .overCurrentContext
+            imagePicker.modalTransitionStyle = .flipHorizontal
             imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
             imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
+            imagePicker.present(imagePicker, animated: true, completion: nil)
         }
         
     }
@@ -608,13 +610,23 @@ class ProposalViewController: MittyViewController, UIImagePickerControllerDelega
         NSLog("\(info)")
         let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
         image.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
-        self.dismiss(animated: false, completion: nil)
-        imagePicked = true
+        DispatchQueue.main.async {
+            self.dismiss(animated:true, completion: nil)
+        }
         
+        imagePicked = true
         view.setNeedsUpdateConstraints()
         view.updateConstraintsIfNeeded()
         
 
+    }
+    
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true, completion: nil)
     }
 
 
