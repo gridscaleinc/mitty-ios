@@ -370,9 +370,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let row = Row.LeftAligned()
         let actionLabel = MQForm.label(name: "action", title: (event.action), pad: 4).layout {
             c in
-            c.fillHolizon(15).verticalCenter().leftMargin(10)
+            c.fillHolizon(10).verticalCenter().leftMargin(10)
             c.label.numberOfLines = 0
-            c.label.font = .boldSystemFont(ofSize: 14)
             c.label.textColor = UIColor.darkGray
             c.label.backgroundColor = MittyColor.light
         }
@@ -410,28 +409,25 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let location = MQForm.label(name: "isLand", title: "\(event.isLandName)").layout { l in
             l.height(40).rightMost(withInset: 5).verticalCenter().leftMargin(10)
-            l.label.adjustsFontSizeToFitWidth = true
             l.label.numberOfLines = 2
-            l.label.font = UIFont.systemFont(ofSize: 14)
-            
-            if self.event.isValidGeoInfo {
-                l.label.textColor = MittyColor.orange
-            }
-        }
-        
-        if (event.isValidGeoInfo) {
-            location.bindEvent(.touchUpInside) { _ in
-                self.event.openGoogleMap()
-            }
         }
         
         row +++ location
         section <<< row
         
         let buttonRow = Row.Intervaled()
-        buttonRow.spacing = 60
+        buttonRow.spacing = 30
+        let mapButton = MQForm.button(name: "route", title: "地図").layout { b in
+            b.verticalCenter().height(35)
+        }
         
-        let routeButton = MQForm.button(name: "route", title: "経路を表示する").layout { b in
+        if (event.isValidGeoInfo) {
+            mapButton.bindEvent(.touchUpInside) { _ in
+                self.event.openGoogleMap()
+            }
+        }
+        
+        let routeButton = MQForm.button(name: "route", title: "経路").layout { b in
             b.verticalCenter().height(35)
         }
         
@@ -441,6 +437,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             }
         }
         
+        buttonRow +++ mapButton
         buttonRow +++ routeButton
         
         section <<< buttonRow
@@ -520,6 +517,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         section <<< url
+        
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(30)
 
     }
 
@@ -527,9 +526,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         if activity == nil {
             return
         }
-        
-        
-        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(40).rightMargin(40).upMargin(30)
         
         if (ApplicationContext.userSession.isLogedIn) {
             let session = ApplicationContext.userSession
@@ -554,6 +550,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
                     vc.event = self.event
                     self.navigationController?.pushViewController(vc, animated: true)
                 }
+                
+                section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(50).rightMargin(50).upMargin(10)
             }
         }
 
