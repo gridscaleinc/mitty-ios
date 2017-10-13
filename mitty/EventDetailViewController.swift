@@ -462,26 +462,73 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
 
+        if (event.organizer == "") {
+            event.organizer = "不明"
+        }
         infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
             l in
             l.height(35).verticalCenter().leftMargin(10)
         }
         infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
             l in
-            l.height(35).rightMost(withInset: 70).verticalCenter()
+            l.height(35).rightMost(withInset: 30).verticalCenter()
         }
 
         section <<< infoSource
         
+        if event.contactTel != "" {
+            let telRow = Row.LeftAligned().layout {
+                r in
+                r.fillHolizon().height(35)
+            }
+            
+            
+            telRow +++ MQForm.label(name: "tel", title: "☎️").layout {
+                l in
+                l.height(35).verticalCenter().leftMargin(10)
+            }
+            telRow +++ MQForm.label(name: "tel-value", title: event.contactTel).layout {
+                l in
+                l.height(35).rightMost(withInset: 70).verticalCenter()
+            }
+            
+            
+            section <<< telRow
+        }
+        
+        if event.contactMail != "" {
+            let mailRow = Row.LeftAligned().layout {
+                r in
+                r.fillHolizon().height(35)
+            }
+            mailRow +++ MQForm.label(name: "mail", title: "📩").layout {
+                l in
+                l.height(35).verticalCenter().leftMargin(10)
+            }
+            mailRow +++ MQForm.label(name: "name", title: event.contactMail).layout {
+                l in
+                l.height(35).rightMost(withInset: 70).verticalCenter()
+            }
+            section <<< mailRow
+        }
+        
         let contactRow = Row.Intervaled()
         contactRow.spacing = 60
         
-        let contactButton = MQForm.button(name: "contact", title: "問合せ").layout { b in
+        let contactButton = MQForm.button(name: "tel", title: "電話").layout { b in
             b.height(35).verticalCenter()
         }
         
         contactRow +++ contactButton
+        let mailButton = MQForm.button(name: "mail", title: "メール").layout { b in
+            b.height(35).verticalCenter()
+        }
+        
+        contactRow +++ mailButton
+        
         section <<< contactRow
+        
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(40).rightMargin(40).upMargin(10)
 
         let url = Row.LeftAligned().layout {
             r in
