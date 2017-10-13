@@ -187,7 +187,7 @@ class ActivityPlanDetailsForm: MQForm {
                 l.height(20).down(withInset: 3).leftMargin(10)
             }
             
-            inputForm <<< HL(UIColor.gray, 1.2).leftMargin(10).rightMargin(10)
+            inputForm <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
             
             // event title
             row = Row.LeftAligned().layout() {
@@ -198,7 +198,7 @@ class ActivityPlanDetailsForm: MQForm {
             eventTitle.label.text = activity.mainItem?.eventTitle
             row +++ eventTitle.layout {
                 t in
-                t.leftMargin(10).rightMost(withInset: 50).height(50).verticalCenter()
+                t.leftMargin(10).rightMost(withInset: 40).height(50).verticalCenter()
             }
             
             eventLogo.imageView.setMittyImage(url: activity.info.logoUrl)
@@ -335,14 +335,14 @@ class ActivityPlanDetailsForm: MQForm {
         row +++ MQForm.label(name: "activityDate", title: item.start).layout {
             d in
             d.label.font = UIFont.boldSystemFont(ofSize: 14)
-            d.width(50).height(30).verticalCenter().leftMargin(10)
+            d.width(60).height(30).verticalCenter().leftMargin(10)
         }
 
         let l = MQForm.label(name: "activitylabel", title: item.eventTitle).layout {
             l in
-            l.width(200).height(30).verticalCenter()
-            l.label.textColor = MittyColor.healthyGreen
-            l.label.font = UIFont.boldSystemFont(ofSize: 14)
+            l.leftMargin(10).height(30).verticalCenter().rightMost(withInset: 40)
+            l.label.textColor = MittyColor.orange
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
         }
 
         l.bindEvent(.touchUpInside) { label in
@@ -356,7 +356,7 @@ class ActivityPlanDetailsForm: MQForm {
         // ラベルに紐つくactivityを保存
         (l.label as! TapableLabel).underlyObj = item
 
-        row +++ MQForm.img(name: "icon", url: "").width(30).height(20).layout {
+        row +++ MQForm.img(name: "icon", url: "").width(30).height(30).layout {
             i in
             i.verticalCenter()
             i.imageView.setMittyImage(url: item.eventLogoUrl)
@@ -405,7 +405,7 @@ class ActivityPlanDetailsForm: MQForm {
             l in
             l.width(200).height(30).verticalCenter().leftMargin(10)
             l.label.textColor = UIColor.darkText
-            l.label.font = UIFont.boldSystemFont(ofSize: 14)
+            l.label.font = UIFont.boldSystemFont(ofSize: 17)
         }
 
         row +++ title

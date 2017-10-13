@@ -64,13 +64,13 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         buildform()
         self.view.addSubview(form)
 
-        form.autoPinEdge(toSuperviewEdge: .top)
+        form.autoPin(toTopLayoutGuideOf: self, withInset: 10)
         form.autoPinEdge(toSuperviewEdge: .left)
         form.autoPinEdge(toSuperviewEdge: .right)
         form.autoPinEdge(toSuperviewEdge: .bottom)
 
         form.configLayout()
-        configNavigationBar()
+//        configNavigationBar()
 
     }
 
@@ -108,14 +108,14 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         scrollContainer +++ detailForm
 
-        // Cover Image
-        loadCoverImage(detailForm)
+        loadTerm(detailForm)
         
         loadTitle(detailForm)
         
-        loadLikes(detailForm)
+        // Cover Image
+        loadCoverImage(detailForm)
         
-        loadTerm(detailForm)
+        loadLikes(detailForm)
         
         loadAction(detailForm)
         
@@ -167,10 +167,9 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     func loadCoverImage(_ section: Section) {
         
         let topRow = Row.LeftAligned()
-        let topContainer = Container (name: "topContainer", view: UIView.newAutoLayout())
         let img = Control(name: "image", view: imageView).layout {
             i in
-            i.width(UIScreen.main.bounds.size.width).height(UIScreen.main.bounds.size.width).upper()
+            i.width(UIScreen.main.bounds.size.width - 20 ).height(UIScreen.main.bounds.size.width).upper()
         }
         
         if (event.coverImageUrl != "") {
@@ -178,24 +177,18 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             imageView.af_setImage(withURL: URL(string: event.coverImageUrl)!, placeholderImage: UIImage(named: "downloading"), completion: { image in
                 if (image.result.isSuccess) {
                     self.imageView.image = image.result.value
-                    img.height(UIScreen.main.bounds.size.width * (image.result.value?.size.ratio)!)
+                    img.height((UIScreen.main.bounds.size.width - 20) * (image.result.value?.size.ratio)!)
                 }
             }
             )
         }
-        topContainer +++ img
-        topContainer.layout {
-            c in
-            c.fillHolizon().upper()
-            c.topAlign(with: img).bottomAlign(with: img)
-        }
         
         
-        topRow +++ topContainer
+        topRow +++ img
         topRow.layout {
             r in
-            r.fillHolizon()
-            r.topAlign(with: topContainer).bottomAlign(with: topContainer)
+            r.leftMargin(10).rightMargin(10)
+            r.bottomAlign(with: img)
         }
         
         section <<< topRow
@@ -240,7 +233,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         section <<< row
-        section <<< HL(MittyColor.healthyGreen, 0.55 ).leftMargin(10).rightMargin(10)
+//        section <<< HL(MittyColor.healthyGreen, 0.55 ).leftMargin(10).rightMargin(10)
     }
     
     func loadLikes (_ section: Section) {
@@ -279,7 +272,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         rightRow +++ likeButton
         row +++ rightRow
         section <<< row
-
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(10)
     }
     
     func loadTerm(_ section: Section) {
@@ -371,7 +364,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         
         section <<< row
-        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(10)
     }
     
     func loadAction(_ section: Section) {
@@ -589,6 +581,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
         let subscribe = subscribeButton.layout {
             c in
+            c.button.setTitleColor(MittyColor.healthyGreen, for: .normal)
             c.height(40).verticalCenter()
         }
 
