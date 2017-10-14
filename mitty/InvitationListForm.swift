@@ -115,7 +115,6 @@ class InvitationListForm: MQForm {
             
             let msg = MQForm.label(name: "message", title: i.message).layout {
                 m in
-                m.label.font = UIFont.systemFont(ofSize: 13)
                 m.label.textColor = MittyColor.darkText
                 m.label.numberOfLines = 0
                 m.taller(than: 50).rightMost(withInset: 10).leftMargin(20)

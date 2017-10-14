@@ -200,7 +200,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let row = Row.LeftAligned().layout {
             r in
             r.view.backgroundColor = MittyColor.white
-            r.fillHolizon().height(35)
+            r.fillHolizon().height(50)
         }
         
         let titleLabel = MQForm.label(name: "Title", title: event.title).layout {
@@ -208,7 +208,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             l.leftMargin(10).rightMost(withInset: 45).height(30).verticalCenter()
             
             l.label.font = UIFont.boldSystemFont(ofSize: 20)
-            l.label.textColor = MittyColor.healthyGreen
+            l.label.textColor = MittyColor.black
             l.label.numberOfLines = 2
             l.label.adjustsFontSizeToFitWidth = true
         }
@@ -260,8 +260,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             b.view.layer.borderWidth = 0.7
             b.button.setTitleColor(UIColor.orange, for: .normal)
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
-            b.button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-            
         }
         
         likeButton.bindEvent(.touchUpInside) { b in
@@ -415,6 +413,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         row +++ location
         section <<< row
         
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(10)
         let buttonRow = Row.Intervaled()
         buttonRow.spacing = 30
         let mapButton = MQForm.button(name: "route", title: "地図").layout { b in
@@ -452,7 +451,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     func addContactInfo(_ section: Section) {
         
-        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(40).rightMargin(40).upMargin(10)
         
         // TODO: Mail address
 
@@ -467,7 +465,8 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
         infoSource +++ MQForm.label(name: "sponsor", title: "主催者").layout {
             l in
-            l.height(35).verticalCenter().leftMargin(10)
+            l.label.textAlignment = .left
+            l.height(35).verticalCenter().leftMargin(10).width(90)
         }
         infoSource +++ MQForm.label(name: "name", title: event.organizer).layout {
             l in
@@ -485,11 +484,12 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             
             telRow +++ MQForm.label(name: "tel", title: "☎️").layout {
                 l in
-                l.height(35).verticalCenter().leftMargin(10)
+                l.label.textAlignment = .left
+                l.height(35).verticalCenter().leftMargin(10).width(90)
             }
             telRow +++ MQForm.label(name: "tel-value", title: event.contactTel).layout {
                 l in
-                l.height(35).rightMost(withInset: 70).verticalCenter()
+                l.height(35).rightMost(withInset: 30).verticalCenter()
             }
             
             
@@ -503,14 +503,17 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             }
             mailRow +++ MQForm.label(name: "mail", title: "📩").layout {
                 l in
-                l.height(35).verticalCenter().leftMargin(10)
+                l.label.textAlignment = .left
+                l.height(35).verticalCenter().leftMargin(10).width(90)
             }
-            mailRow +++ MQForm.label(name: "name", title: event.contactMail).layout {
+            mailRow +++ MQForm.label(name: "mailvalue", title: event.contactMail).layout {
                 l in
-                l.height(35).rightMost(withInset: 70).verticalCenter()
+                l.height(35).rightMost(withInset: 30).verticalCenter()
             }
             section <<< mailRow
         }
+        
+        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(10)
         
         let contactRow = Row.Intervaled()
         contactRow.spacing = 60
@@ -528,7 +531,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         section <<< contactRow
         
-        section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(40).rightMargin(40).upMargin(10)
 
         let url = Row.LeftAligned().layout {
             r in
@@ -706,21 +708,18 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
     func pressSubscribe (sender: UIButton) {
         ActivityService.instance.register(event.title, event.description, event.id,
                                           onCompletion: {
-                                              act in
-                                              let detailViewController = ActivityPlanDetailsController(act)
-                                              self.navigationItem.title = "..."
-                                              self.tabBarController?.tabBar.isHidden = true
-                                              self.navigationController?.pushViewController(detailViewController, animated: true)
-                                              self.event.participationStatus = "PARTICIPATING"
-                                              self.setButtons()
-                                              self.buttons.configLayout()
-                                          },
+                                            act in
+                                            let detailViewController = ActivityPlanDetailsController(act)
+                                            self.navigationItem.title = "..."
+                                            self.tabBarController?.tabBar.isHidden = true
+                                            self.navigationController?.pushViewController(detailViewController, animated: true)
+                                            self.event.participationStatus = "PARTICIPATING"
+                                            self.setButtons()
+                                            self.buttons.configLayout()
+        },
                                           onError: {
-                                              error in
-                                              self.showError("活動登録時エラーになりました。")
-                                          })
+                                            error in
+                                            self.showError("活動登録時エラーになりました。")
+        })
     }
-
-
-
 }

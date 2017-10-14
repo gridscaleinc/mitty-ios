@@ -23,7 +23,10 @@ class IslandViewController: MittyViewController {
         
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
-        
+        collectionView.showsVerticalScrollIndicator = true
+        collectionView.isScrollEnabled = true
+        collectionView.bounces = true
+        collectionView.alwaysBounceVertical = true
         super.init(nibName: nil, bundle: nil)
     }
     

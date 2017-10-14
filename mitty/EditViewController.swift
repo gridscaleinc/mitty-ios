@@ -67,6 +67,7 @@ class EditViewController: MittyViewController {
             c in
             c.view.backgroundColor = UIColor.red
             c.view.layer.cornerRadius = 8
+            c.button.setTitleColor(.white, for: .normal)
             c.height(28).fillHolizon(60).putUnder(of: self.updateButton, withOffset: 40)
         }
         

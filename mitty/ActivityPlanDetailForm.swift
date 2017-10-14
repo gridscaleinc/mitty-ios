@@ -22,7 +22,6 @@ class ActivityPlanDetailsForm: MQForm {
     //  Memo
     var memo = MQForm.label(name: "memo", title: "", pad: 5).layout {
         l in
-        l.label.font = UIFont.systemFont(ofSize: 14)
         l.label.numberOfLines = 0
         l.label.layer.cornerRadius = 3
     }
@@ -219,7 +218,6 @@ class ActivityPlanDetailsForm: MQForm {
             row +++ eventTime.layout {
                 t in
                 t.label.textColor = UIColor.darkText
-                t.label.font = UIFont.systemFont(ofSize: 14)
                 t.leftMargin(10).rightMost(withInset: 10).verticalCenter()
             }
             inputForm <<< row
@@ -232,7 +230,6 @@ class ActivityPlanDetailsForm: MQForm {
             row +++ MQForm.label(name: "location", title: "📍 \((activity.mainItem?.islandName) ?? "")").layout {
                 l in
                 l.label.textColor = UIColor.gray
-                l.label.font = UIFont.systemFont(ofSize: 14)
                 l.leftMargin(10).rightMost(withInset: 50).height(35).verticalCenter()
             }
             
@@ -263,14 +260,14 @@ class ActivityPlanDetailsForm: MQForm {
                 b.verticalCenter().leftMargin(20)
             }
             
-            let buttons = ["イベント追加"]
+            let buttons = ["イベント"]
             for b in buttons {
                 let button = MQForm.button(name: "addItem", title: b).height(40)
                 button.button.backgroundColor = .clear
                 button.button.setTitleColor(MittyColor.orange, for: .normal)
                 button.layout {
                     b in
-                    b.verticalCenter().leftMargin(20)
+                    b.verticalCenter().leftMargin(20).width(100)
                 }
                 row +++ button
             }
@@ -334,7 +331,6 @@ class ActivityPlanDetailsForm: MQForm {
         var row = Row.LeftAligned()
         row +++ MQForm.label(name: "activityDate", title: item.start).layout {
             d in
-            d.label.font = UIFont.boldSystemFont(ofSize: 14)
             d.width(60).height(30).verticalCenter().leftMargin(10)
         }
 
@@ -435,7 +431,6 @@ class ActivityPlanDetailsForm: MQForm {
             n in
             n.label.numberOfLines = 0
             n.label.textColor = .darkText
-            n.label.font = UIFont.systemFont(ofSize: 14)
             n.label.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
             n.rightMost(withInset: 20).leftMargin(10).taller(than: 30)
         }

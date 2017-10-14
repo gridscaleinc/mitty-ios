@@ -127,7 +127,6 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         let errorMessage = MQForm.label(name: "errormessage", title: "").layout() {
             c in
             let l = c.view as! UILabel
-            l.font = UIFont.systemFont(ofSize: 12)
             l.textColor = UIColor.red
 
             c.width(350).height(50).leftMargin(35).verticalCenter()

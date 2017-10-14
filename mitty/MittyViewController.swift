@@ -33,6 +33,14 @@ class MittyViewController: UIViewController {
         super.viewWillDisappear(true)
         self.navigationItem.title = "..."
     }
+    
+    override func viewDidLayoutSubviews() {
+        if let v = self.navigationController?.topViewController {
+            print ("viewDidLayoutSubviews")
+            print(v.description)
+            print(v.topLayoutGuide)
+        }
+    }
 
     func showError(_ errorMsg: String) {
         lock.lock()

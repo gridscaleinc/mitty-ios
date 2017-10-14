@@ -111,7 +111,6 @@ open class MQForm : UIView {
         l.label.layer.cornerRadius = 15
         l.label.layer.masksToBounds = true
         l.height(30)
-        l.label.font = UIFont.systemFont(ofSize: 13)
         l.label.textColor = UIColor.orange
         
         return l

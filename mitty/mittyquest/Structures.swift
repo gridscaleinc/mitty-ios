@@ -416,7 +416,6 @@ open class SelectButton: Container, Observable {
         button.layer.borderColor = UIColor.darkGray.cgColor
         button.layer.borderWidth = 0.4
         button.setTitleColor(UIColor.darkGray, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         button.titleLabel?.adjustsFontSizeToFitWidth = true
         let btn = Control(name: name, view: button).height(_buttonHeight)
         btn.bindEvent(.touchUpInside) {

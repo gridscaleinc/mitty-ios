@@ -197,7 +197,6 @@ class ProposalDetailsViewController: MittyViewController {
             let l = c.view as! UILabel
             l.numberOfLines = 3
             l.textColor = .black
-            l.font = .systemFont(ofSize: 15)
             l.autoSetDimension(.height, toSize: 50, relation: .greaterThanOrEqual)
         }
         row.layout {
@@ -284,7 +283,6 @@ class ProposalDetailsViewController: MittyViewController {
             l.verticalCenter().leftMargin(5).rightMost(withInset: 10)
             l.label.numberOfLines = 2
             l.label.adjustsFontSizeToFitWidth = true
-            l.label.font = UIFont.systemFont(ofSize: 15)
             l.label.textColor = UIColor.darkText
         }
         
@@ -329,7 +327,6 @@ class ProposalDetailsViewController: MittyViewController {
             b.view.layer.borderWidth = 0.7
             b.button.setTitleColor(UIColor.orange, for: .normal)
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
-            b.button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         }
         
         likeButton.bindEvent(.touchUpInside) { b in
