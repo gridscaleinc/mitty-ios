@@ -66,7 +66,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
 
         var row = Row.LeftAligned()
 
-        row +++ MQForm.img(name: "icon", url: "pengin4").layout() { c in
+        row +++ MQForm.img(name: "icon", url: "AppIcon").layout() { c in
             c.height(50).width(50).leftMargin(30).verticalCenter()
         }
         row +++ MQForm.label(name: "welcome-message", title: "Mittyへようこそ").layout() {
@@ -141,14 +141,15 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         inputForm <<< row
 
         row = Row.LeftAligned()
-        row +++ MQForm.label(name: "forget-password", title: ".Passwordを忘れた場合").layout() {
+        let resetPassword = MQForm.label(name: "forget-password", title: ".Passwordを忘れた場合").layout() {
             c in
             let l = c.view as! UILabel
-            l.font = UIFont.systemFont(ofSize: 15)
-            l.textColor = UIColor.blue
+            l.font = UIFont.boldSystemFont(ofSize: 15)
+            l.textColor = MittyColor.healthyGreen
 
             c.width(350).height(50).leftMargin(35).verticalCenter()
         }
+        row +++ resetPassword
         row.layout() {
             r in
             r.height(50).fillHolizon(40)
@@ -160,8 +161,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         let signUpLabel = MQForm.label(name: "forget-password", title: ".初めて利用の方へ").layout() {
             c in
             let l = c.view as! UILabel
-            l.font = UIFont.systemFont(ofSize: 15)
-            l.textColor = UIColor.blue
+            l.font = UIFont.boldSystemFont(ofSize: 15)
+            l.textColor = MittyColor.orange
 
             c.width(350).height(40).leftMargin(35).verticalCenter()
         }
@@ -202,7 +203,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             self!.onClickLinkButton(v as! UILabel)
         }
 
-
+        resetPassword.bindEvent(.touchUpInside) { [weak self] v in
+            self!.resetPassword()
+        }
+        
         instantUse.bindEvent(.touchUpInside) { v in
             let mainTabBarController: MainTabBarController = MainTabBarController()
             self.present(mainTabBarController, animated: true, completion: nil)
@@ -241,5 +245,10 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
+    }
+    
+    func resetPassword() {
+        let vc = ResetPasswordViewController()
+        self.present(vc, animated: true, completion: nil)
     }
 }

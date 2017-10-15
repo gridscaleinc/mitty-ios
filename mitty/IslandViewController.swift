@@ -52,6 +52,8 @@ class IslandViewController: MittyViewController {
         configureSubviews()
         initalMeetingList()
         
+        meetingSegments.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
+        
         super.lockView()
         
 
@@ -111,6 +113,34 @@ class IslandViewController: MittyViewController {
                                     error in
                                     self.showError(error as! String)
         })
+    }
+    
+    // 選択した種類によて、一覧表示を変える。
+    func changeType(_ s: UISegmentedControl) {
+        if (s.selectedSegmentIndex == 0) {
+            MeetingService.instance.getEventMeeting(callback: {
+                meetings in
+                self.meetingList = meetings
+                self.collectionView.reloadData()
+            },
+                                                    onError: {
+                                                        error in
+                                                        self.showError(error as! String)
+            })
+        } else if s.selectedSegmentIndex == 1 {
+            MeetingService.instance.getRequestMeeting(callback: {
+                meetings in
+                self.meetingList = meetings
+                self.collectionView.reloadData()
+            },
+             onError: {
+                error in
+                self.showError(error as! String)
+            })
+        } else if s.selectedSegmentIndex == 2 {
+            self.meetingList = [MeetingInfo]()
+            self.collectionView.reloadData()
+        }
     }
 }
 

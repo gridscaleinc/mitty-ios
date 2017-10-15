@@ -118,13 +118,48 @@ class MeetingService: Service {
                 //  self?.navigationController?.popToRootViewController(animated: true)
             case .failure(let error):
                 print(error)
-                print(self?.jsonResponse(response))
+                print(self?.jsonResponse(response) ?? "")
                 LoadingProxy.off()
             }
         }
 
     }
 
+    func getRequestMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
+        let eventMeetingUrl = MITTY_SERVICE_BASE_URL + "/myrequest/meeting"
+        
+        
+        LoadingProxy.on()
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        Alamofire.request(eventMeetingUrl, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+            
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                var meetingList = [MeetingInfo]()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    let meetings = json["requestMeetingList"]
+                    
+                    for (_, jsonMeeting) in meetings {
+                        meetingList.append((self?.bindEventMeeting(jsonMeeting))!)
+                    }
+                }
+                
+                callback (meetingList)
+            //  self?.navigationController?.popToRootViewController(animated: true)
+            case .failure(let error):
+                print(error)
+                print(self?.jsonResponse(response) ?? "")
+                LoadingProxy.off()
+            }
+        }
+        
+    }
     /// 会議情報バインド。
     ///
     /// - Parameter json: JSONオブジェクト。

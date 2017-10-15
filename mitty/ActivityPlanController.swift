@@ -221,10 +221,12 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
 
     func pickImage () {
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.photoLibrary) {
+            
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = UIImagePickerControllerSourceType.photoLibrary
             imagePicker.allowsEditing = true
+            imagePicker.modalPresentationStyle = .formSheet
             self.present(imagePicker, animated: true, completion: nil)
         }
 
@@ -237,6 +239,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
         form.image.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
         picker.dismiss(animated: false, completion: nil)
         imagePicked = true
+        
     }
 
     func setFromDateTime(_ picker: UIDatePicker) {

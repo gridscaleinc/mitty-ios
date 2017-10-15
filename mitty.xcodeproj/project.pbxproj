@@ -134,6 +134,7 @@
 		FCB75CAF1F8CCD4400205261 /* ActivityPlanEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB75CAE1F8CCD4400205261 /* ActivityPlanEditController.swift */; };
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
+		FCCBDCB91F934CFD00094980 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBDCB81F934CFC00094980 /* ResetPasswordViewController.swift */; };
 		FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB381F2DB9370075C1A2 /* LikesService.swift */; };
 		FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */; };
 		FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7141EA1AB9400AAD750 /* noicon.png */; };
@@ -358,6 +359,7 @@
 		FCB75CAE1F8CCD4400205261 /* ActivityPlanEditController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanEditController.swift; sourceTree = "<group>"; };
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
+		FCCBDCB81F934CFC00094980 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
 		FCCFAB381F2DB9370075C1A2 /* LikesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
 		FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationService.swift; sourceTree = "<group>"; };
 		FCD8C7141EA1AB9400AAD750 /* noicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noicon.png; path = images/noicon.png; sourceTree = "<group>"; };
@@ -640,6 +642,7 @@
 				F4BB801D1DAE577300055D48 /* MainTabBarController.swift */,
 				F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */,
 				F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */,
+				FCCBDCB81F934CFC00094980 /* ResetPasswordViewController.swift */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -1351,6 +1354,7 @@
 				FC448D3D1DD5EA730032F0D4 /* RightButton.swift in Sources */,
 				F4BB80221DAE58E000055D48 /* IslandViewController.swift in Sources */,
 				FC570FED1F408CFB0064FDC3 /* NameCardInputForm.swift in Sources */,
+				FCCBDCB91F934CFD00094980 /* ResetPasswordViewController.swift in Sources */,
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
 				FC3482C81ED9D70A005E539E /* NameCardForm.swift in Sources */,

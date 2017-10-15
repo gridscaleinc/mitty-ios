@@ -21,6 +21,7 @@ class LockForm :MQForm {
             b in
             b.down(withInset: 120).holizontalCenter().width(90).height(40)
             b.button.backgroundColor = MittyColor.healthyGreen
+            b.button.setTitleColor(.white, for: .normal)
         }
 //        unlockButton.configLayout()
         self.autoPinEdgesToSuperviewEdges()

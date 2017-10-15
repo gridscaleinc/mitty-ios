@@ -103,7 +103,7 @@ class RequestListForm: MQForm {
             
             row +++ MQForm.label(name: "req-content", title: "リクエストなし").layout {
                 l in
-                l.verticalCenter()
+                l.verticalCenter().leftMargin(10)
                 l.label.textColor = .gray
             }
         }

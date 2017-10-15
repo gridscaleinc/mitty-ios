@@ -20,6 +20,8 @@ class EventViewController: MittyViewController {
 
     let collectionView: UICollectionView
 
+    var notFoundForm = MQForm.newAutoLayout()
+    
     // MARK: - Initializers
     init() {
         events = [EventInfo]()
@@ -77,8 +79,6 @@ class EventViewController: MittyViewController {
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.register(EventCell.self, forCellWithReuseIdentifier: EventCell.id)
-
-//        collectionView.backgroundColor = UIColor.white
     }
 
     private func addConstraints() {
@@ -87,6 +87,24 @@ class EventViewController: MittyViewController {
         collectionView.autoPinEdge(toSuperviewEdge: .left)
         collectionView.autoPinEdge(toSuperviewEdge: .right)
         collectionView.autoPinEdge(toSuperviewEdge: .bottom)
+    }
+    
+    func handleNotFound() {
+        notFoundForm.removeFromSuperview()
+        notFoundForm = MQForm.newAutoLayout()
+        notFoundForm.fillIn(vc: self)
+        notFoundForm.backgroundColor = .white
+        
+        let message = MQForm.label(name: "message", title: "指定していたキーワードでは結果を見つからなかった。キーワードをかええ見て、再度検索してください。", pad: 20)
+        
+        notFoundForm +++ message.layout {
+            m in
+            m.label.backgroundColor = MittyColor.light
+            m.label.numberOfLines = 0
+            m.upper(withInset: 30).leftMost(withInset: 20).rightMost(withInset: 20)
+        }
+        
+        notFoundForm.configLayout()
     }
 }
 
@@ -106,7 +124,12 @@ extension EventViewController: UISearchBarDelegate
             service.search(keys: key!) {
                 events in
                 self.events = events
-                self.collectionView.reloadData()
+                if events.count == 0 {
+                    self.handleNotFound()
+                } else {
+                    self.notFoundForm.removeFromSuperview()
+                    self.collectionView.reloadData()
+                }
             }
         }
     }

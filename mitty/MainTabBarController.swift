@@ -68,6 +68,11 @@ class MainTabBarController: UITabBarController {
         if isFirstLoad {
             self.selectedIndex = 2
             isFirstLoad = false
+        } else {
+            let current = self.selectedIndex
+            self.selectedIndex = 0
+            self.selectedIndex = current
         }
     }
+    
 }

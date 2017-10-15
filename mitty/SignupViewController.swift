@@ -69,7 +69,7 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
 
         var row = Row.LeftAligned()
 
-        row +++ MQForm.img(name: "icon", url: "pengin4").layout() { c in
+        row +++ MQForm.img(name: "icon", url: "AppIcon").layout() { c in
             c.height(50).width(50).leftMargin(30).verticalCenter()
         }
         row +++ MQForm.label(name: "welcome-message", title: "Mittyへようこそ").layout() {

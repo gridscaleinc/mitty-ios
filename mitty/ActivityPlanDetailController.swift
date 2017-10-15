@@ -48,6 +48,7 @@ class ActivityPlanDetailsController: MittyViewController {
 
     override func viewDidLoad() {
 
+        self.automaticallyAdjustsScrollViewInsets = false
         super.autoCloseKeyboard()
 
         self.navigationItem.title = activityTitle
