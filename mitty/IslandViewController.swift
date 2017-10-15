@@ -5,7 +5,7 @@ import PureLayout
 @objc(IsLandViewController)
 class IslandViewController: MittyViewController {
     
-    var meetingSegments : UISegmentedControl = UISegmentedControl(items: ["Public", "Private"])
+    var meetingSegments : UISegmentedControl = UISegmentedControl(items: ["イベン島", "リクエス島","コンタク島"])
     
     // MARK: - Properties
     var meetingList: [MeetingInfo]

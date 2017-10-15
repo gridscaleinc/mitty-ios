@@ -76,8 +76,6 @@ class ProposalViewController: MittyViewController, UIImagePickerControllerDelega
 
         let b = UIButton.newAutoLayout()
         b.setTitle("Done", for: .normal)
-        b.setTitleColor(.black, for: .normal)
-        b.backgroundColor = .orange
 
         return b
     } ()

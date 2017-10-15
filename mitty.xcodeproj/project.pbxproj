@@ -669,7 +669,7 @@
 			name = activity;
 			sourceTree = "<group>";
 		};
-		FC0AF1E91DC4F56400C76408 /* talk */ = {
+		FC0AF1E91DC4F56400C76408 /* island */ = {
 			isa = PBXGroup;
 			children = (
 				F4BB80211DAE58E000055D48 /* IslandViewController.swift */,
@@ -683,7 +683,7 @@
 				FC3482CF1EDA61A9005E539E /* MeetingViewController.swift */,
 				FC34831E1EE42F44005E539E /* MeetingCell.swift */,
 			);
-			name = talk;
+			name = island;
 			sourceTree = "<group>";
 		};
 		FC0AF1EA1DC4F56E00C76408 /* social */ = {
@@ -726,7 +726,7 @@
 				FCF777091DC5649B006D2ECA /* explore */,
 				FC0AF1EB1DC4F57E00C76408 /* center */,
 				FC0AF1EA1DC4F56E00C76408 /* social */,
-				FC0AF1E91DC4F56400C76408 /* talk */,
+				FC0AF1E91DC4F56400C76408 /* island */,
 				FC0AF1E81DC4F55400C76408 /* activity */,
 				FC0AF1E31DC4F2D800C76408 /* tutorial */,
 				FC1FE0591EC85C37007AE8A5 /* MittyViewController.swift */,

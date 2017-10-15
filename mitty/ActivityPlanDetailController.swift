@@ -33,7 +33,6 @@ class ActivityPlanDetailsController: MittyViewController {
         super.updateViewConstraints()
         if !shouldReloadView {
             form.autoPin(toTopLayoutGuideOf: self, withInset: 20)
-            form.autoPinEdge(toSuperviewEdge: .top)
             form.autoPinEdge(toSuperviewEdge: .left)
             form.autoPinEdge(toSuperviewEdge: .right)
             form.autoPinEdge(toSuperviewEdge: .bottom)

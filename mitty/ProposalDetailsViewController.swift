@@ -28,9 +28,6 @@ class ProposalDetailsViewController: MittyViewController {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("受け入れ", for: .normal)
-        b.setTitleColor(.white, for: .normal)
-        b.backgroundColor = .orange
-
         return b
     } ()
 
@@ -42,8 +39,6 @@ class ProposalDetailsViewController: MittyViewController {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("遠慮する", for: .normal)
-        b.setTitleColor(.white, for: .normal)
-        b.backgroundColor = .orange
 
         return b
     } ()
@@ -54,8 +49,6 @@ class ProposalDetailsViewController: MittyViewController {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("確定", for: .normal)
-        b.setTitleColor(.white, for: .normal)
-        b.backgroundColor = .orange
 
         return b
     } ()
@@ -66,8 +59,6 @@ class ProposalDetailsViewController: MittyViewController {
 
         let b = UIButton.newAutoLayout()
         b.setTitle("取り止め", for: .normal)
-        b.setTitleColor(.white, for: .normal)
-        b.backgroundColor = .orange
 
         return b
     } ()

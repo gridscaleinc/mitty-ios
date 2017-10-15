@@ -27,15 +27,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
     ///
     ///
     let proposolButton: UIButton = {
-
         let b = UIButton.newAutoLayout()
         b.setTitle("提案", for: .normal)
-        b.setTitleColor(.black, for: .normal)
-        b.backgroundColor = .orange
-
         return b
     } ()
-
 
     init (req: RequestInfo) {
         self.request = req

@@ -14,53 +14,24 @@ import SwiftyJSON
 @objc(QuestViewController)
 class QuestViewController: MittyViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
-    var queryTargets: UISegmentedControl = UISegmentedControl(items: ["Event", "Request", "Web"])
-    let logo = UIImageView(image: UIImage(named: "applogo"))
-    var searchBar: UISearchBar = UISearchBar.newAutoLayout()
-    var query: String = ""
-
-    let eventSearch = EventViewController()
-    let requestSearch = RequestExplorerViewController()
-
-    let postRequestButton: UIButton = {
-        let b = UIButton.newAutoLayout()
-        b.setTitle(".Post request", for: .normal)
-        b.setTitleColor(.blue, for: .normal)
-        return b
-    } ()
-
-    override func viewDidLoad() {
-
-        super.autoCloseKeyboard()
-
-        self.view.addSubview(queryTargets)
-        self.view.addSubview(logo)
-        self.view.addSubview(searchBar)
-        self.view.addSubview(postRequestButton)
-
-        searchBar.backgroundColor = .white
-        searchBar.layer.borderColor = UIColor.black.cgColor
-        searchBar.layer.borderWidth = 0.5
-        searchBar.layer.cornerRadius = 5
-
-        setColor(searchBar, UIColor.white)
-
-        searchBar.placeholder = "イベント検索!"
-
-        self.navigationItem.title = "検索条件指定"
-
-        searchBar.delegate = self
-
-        configViews()
-
-        LoadingProxy.set(self)
+    var queryTargets : Control = {
+        let c = UISegmentedControl(items: ["Event", "Request", "Web"])
+        c.selectedSegmentIndex = 0
+        c.translatesAutoresizingMaskIntoConstraints = false
+        return Control (name: "queryTargets", view: c)
+    }()
+    
+    let form = MQForm.newAutoLayout()
+    let logo = MQForm.img(name: "Logo", url:"applogo")
+    
+    var searchBar: Control = {
+        let bar = UISearchBar.newAutoLayout()
+        bar.backgroundColor = .white
+        bar.layer.borderColor = UIColor.black.cgColor
+        bar.layer.borderWidth = 0.5
+        bar.layer.cornerRadius = 5
         
-        super.lockView()
-
-    }
-
-    func setColor(_ v: UIView, _ color: UIColor) {
-        for view in v.subviews {
+        for view in bar.subviews {
             for subview in view.subviews {
                 if subview is UITextField {
                     let textField: UITextField = subview as! UITextField
@@ -72,32 +43,85 @@ class QuestViewController: MittyViewController, UIImagePickerControllerDelegate,
                 }
             }
         }
-    }
+        bar.placeholder = "検索キーを入力"
 
+        return Control(name:"searchbar", view: bar)
+    } ()
+    
+    var query: String = ""
+
+    let eventSearch = EventViewController()
+    let requestSearch = RequestExplorerViewController()
+
+    let postRequestButton = MQForm.button(name: "postrequest", title: "リクエスト登録")
+    
+
+    override func viewDidLoad() {
+
+        super.autoCloseKeyboard()
+
+        self.view.addSubview(form)
+        form +++ queryTargets
+        form +++ logo
+        form +++ postRequestButton
+        form +++ searchBar
+        
+        
+        queryTargets.bindEvent(.valueChanged) {
+            v in
+            self.changeQuery(v as! UISegmentedControl)
+        }
+        
+        
+        postRequestButton.bindEvent(.touchUpInside) {
+            p in
+            self.postRequest()
+        }
+        
+        self.navigationItem.title = "検索条件指定"
+
+        (searchBar.view as! UISearchBar).delegate = self
+
+        LoadingProxy.set(self)
+        
+        configViews()
+        
+        super.lockView()
+
+    }
+    
     func configViews() {
         self.view.backgroundColor = .white
-        queryTargets.selectedSegmentIndex = 0
-        queryTargets.translatesAutoresizingMaskIntoConstraints = false
-        queryTargets.autoPin(toTopLayoutGuideOf: self, withInset: 10)
-        queryTargets.autoPinEdge(toSuperviewEdge: .left, withInset: 40)
-        queryTargets.autoPinEdge(toSuperviewEdge: .right, withInset: 40)
 
-        queryTargets.addTarget(self, action: #selector(changeQuery(_:)), for: .valueChanged)
-        logo.autoPinEdge(.top, to: .bottom, of: queryTargets, withOffset: 50)
-        logo.autoAlignAxis(.vertical, toSameAxisOf: self.view)
-        logo.autoSetDimensions(to: CGSize(width: 40, height: 40))
-
-        searchBar.autoPinEdge(.top, to: .bottom, of: logo, withOffset: 10)
-        searchBar.autoPinEdge(toSuperviewEdge: .leading, withInset: 30)
-        searchBar.autoPinEdge(toSuperviewEdge: .trailing, withInset: 30)
-        searchBar.autoSetDimension(.height, toSize: 35)
-
-        postRequestButton.autoPinEdge(toSuperviewEdge: .left, withInset: 50)
-        postRequestButton.autoPinEdge(.top, to: .bottom, of: searchBar, withOffset: 30)
-        postRequestButton.autoSetDimension(.height, toSize: 30)
-        postRequestButton.autoSetDimension(.width, toSize: 200)
-
-        postRequestButton.addTarget(self, action: #selector(postRequest(_:)), for: .touchUpInside)
+        form.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+        form.autoPinEdge(toSuperviewEdge: .left)
+        form.autoPinEdge(toSuperviewEdge: .right)
+        form.autoPinEdge(toSuperviewEdge: .bottom)
+        
+        queryTargets.layout {
+            q in
+            q.upper(withInset: 5).fillHolizon(5).height(32)
+        }
+        
+        logo.layout {
+            l in
+            l.putUnder(of: self.queryTargets, withOffset: 50)
+            l.holizontalCenter().width(40).height(40)
+        }
+        
+        searchBar.layout {
+            s in
+            s.putUnder(of: self.logo, withOffset: 10).leftMost(withInset: 30).rightMost(withInset: 30)
+            s.height(35)
+        }
+        
+        postRequestButton.layout {
+            p in
+            p.putUnder(of: self.searchBar, withOffset: 30).height(30).width(200).holizontalCenter()
+        }
+        
+        
+        form.configLayout()
 
     }
 
@@ -106,13 +130,13 @@ class QuestViewController: MittyViewController, UIImagePickerControllerDelegate,
 //        searchBar.becomeFirstResponder()
     }
 
-    func postRequest(_ b: UILabel) {
+    func postRequest() {
         let vc = RequestViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
     func changeQuery(_ s: UISegmentedControl) {
-        searchBarSearchButtonClicked(searchBar)
+        searchBarSearchButtonClicked(searchBar.view as! UISearchBar)
     }
 }
 
@@ -126,17 +150,18 @@ extension QuestViewController: UISearchBarDelegate, WebPickerDelegate {
         if (searchBar.text == "") {
             return
         }
-
-        if queryTargets.selectedSegmentIndex == 0 {
+        
+        let targets = queryTargets.view as! UISegmentedControl
+        if targets.selectedSegmentIndex == 0 {
             eventSearch.searchBar.text = searchBar.text
             eventSearch.shallWeSearch = true
             self.navigationController?.pushViewController(eventSearch, animated: true)
-        } else if queryTargets.selectedSegmentIndex == 1 {
+        } else if targets.selectedSegmentIndex == 1 {
             requestSearch.searchBar.text = searchBar.text
             requestSearch.shallWeSearch = true
             self.navigationController?.pushViewController(requestSearch, animated: true)
 
-        } else if queryTargets.selectedSegmentIndex == 2 {
+        } else if targets.selectedSegmentIndex == 2 {
             let wb = WebPicker()
             wb.delegate = self
             wb.initKey = searchBar.text!
@@ -149,7 +174,7 @@ extension QuestViewController: UISearchBarDelegate, WebPickerDelegate {
 
         let vc = ActivityEntryViewController()
         vc.pickedInfo = info
-        vc.activityTitle.textField.text = searchBar.text
+        vc.activityTitle.textField.text = (searchBar.view as! UISearchBar).text
 
         self.navigationController?.pushViewController(vc, animated: true)
     }

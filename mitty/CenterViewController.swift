@@ -206,6 +206,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
+            c.button.setTitleColor(.white, for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }
 
@@ -213,6 +214,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             c in
             c.height(30)
             c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
+            c.button.setTitleColor(.white, for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }.bindEvent(.touchUpInside) {
             b in

@@ -85,7 +85,14 @@ class ActivityPlanDetailsForm: MQForm {
 
     func loadForm(_ activity: Activity) {
         self.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
-
+        
+        let anchor = MQForm.label(name: "dummy", title: "").layout {
+            a in
+            a.height(0).leftMost().rightMost()
+        }
+        
+        self +++ anchor
+        
         let scroll = UIScrollView.newAutoLayout()
         scroll.isScrollEnabled = true
         scroll.flashScrollIndicators()
