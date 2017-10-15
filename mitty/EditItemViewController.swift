@@ -145,6 +145,7 @@ class EditItemViewController: MittyViewController {
         row +++ deleteButton.layout() {
             c in
             c.view.backgroundColor = UIColor.red
+            c.button.setTitleColor(.white, for: .normal)
             c.view.layer.cornerRadius = 8
             c.height(28).fillHolizon(60)
         }
@@ -208,6 +209,9 @@ class EditItemViewController: MittyViewController {
         activityItem.memo = itemMemo.textView.text
         activityItem.notification = switchButton.switcher.isOn
         activityItem.notificationTime = timePicker.date
+        if activityItem.notification {
+            self.requestNotification(activityItem)
+        }
         ActivityService.instance.saveItem(activityItem, onCompletion: {
             item in
             if self.onEditItemComplete != nil {
@@ -220,6 +224,11 @@ class EditItemViewController: MittyViewController {
                                           })
     }
 
+    func requestNotification(_ actItem: ActivityItem ) {
+        let identifier = "act:\(actItem.activityId):\(actItem.id)"
+        print(identifier)
+    }
+    
     //
     func setNotifyTime(_ picker: UIDatePicker) {
         let textField = textNotifyTime.textField

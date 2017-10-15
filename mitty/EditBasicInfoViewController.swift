@@ -117,7 +117,7 @@ class EditBasicInfoViewController: MittyViewController {
         
         row +++ MQForm.label(name: "namelabel", title: "名前").height(38).width(70).layout {
             l in
-            l.verticalCenter()
+            l.verticalCenter().leftMargin(10)
         }
         nameLabel.label.text = userInfo.name
         row +++ nameLabel.layout {
@@ -136,7 +136,10 @@ class EditBasicInfoViewController: MittyViewController {
             r.fillHolizon().height(40)
         }
         
-        row +++ MQForm.label(name: "mittyId", title: "MittyID").height(38).width(70)
+        row +++ MQForm.label(name: "mittyId", title: "MittyID").height(38).width(70).layout {
+            l in
+            l.verticalCenter().leftMargin(10)
+        }
         idlabel.label.text = String(format: "%010d", userInfo.id)
         row +++ idlabel.layout {
             l in
@@ -171,7 +174,7 @@ class EditBasicInfoViewController: MittyViewController {
         
         row = Row.LeftAligned().layout{
             r in
-            r.fillHolizon().height(45)
+            r.fillHolizon().height(80)
         }
 
         row +++ age.layout {
