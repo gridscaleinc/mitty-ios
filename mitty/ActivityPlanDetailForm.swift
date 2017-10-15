@@ -147,7 +147,6 @@ class ActivityPlanDetailsForm: MQForm {
             t in
             t.fillHolizon(10).leftMargin(10)
             t.taller(than: 30)
-            t.label.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
         }
         row.layout() {
             r in
@@ -438,7 +437,6 @@ class ActivityPlanDetailsForm: MQForm {
             n in
             n.label.numberOfLines = 0
             n.label.textColor = .darkText
-            n.label.backgroundColor = UIColor(white: 0.93, alpha: 0.7)
             n.rightMost(withInset: 20).leftMargin(10).taller(than: 30)
         }
         row +++ labelMemoCtl

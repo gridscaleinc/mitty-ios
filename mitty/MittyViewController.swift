@@ -180,7 +180,6 @@ class MittyViewController: UIViewController {
         let c = MQForm.label(name: "caption", title: caption).layout {
             c in
             c.height(30).verticalCenter()
-            c.label.backgroundColor = MittyColor.light
             c.label.textColor = color
             c.label.textAlignment = .center
             c.label.font = UIFont.boldSystemFont(ofSize: 16)

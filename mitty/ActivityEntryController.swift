@@ -47,7 +47,6 @@ class ActivityEntryViewController: MittyViewController {
         let caption = MQForm.label(name: "caption", title: "活動・計画メモ").layout {
             c in
             c.height(20).fillHolizon(10)
-            c.label.backgroundColor = MittyColor.light
             c.label.textColor = .gray
             c.label.textAlignment = .center
             c.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)

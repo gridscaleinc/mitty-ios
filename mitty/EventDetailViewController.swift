@@ -134,7 +134,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             c in
             c.fillHolizon(10).verticalCenter().leftMargin(10).taller(than: 50)
             c.label.numberOfLines = 0
-            c.label.backgroundColor = MittyColor.light
         }
         
         descriptionRow +++ descriptionLabel
@@ -371,7 +370,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             c.fillHolizon(10).verticalCenter().leftMargin(10)
             c.label.numberOfLines = 0
             c.label.textColor = UIColor.darkGray
-            c.label.backgroundColor = MittyColor.light
         }
         
         row +++ actionLabel
