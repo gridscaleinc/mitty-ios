@@ -248,8 +248,25 @@ class ActivityPlanDetailsForm: MQForm {
             inputForm <<< row
         }
 
-        if activity.info.mainEventId != "0" {
+        if (activity.items.count > 0) {
+            row = newTitleRow()
+            inputForm <<< row
+            row +++ MQForm.label(name: "main-title", title: "予定一覧").layout {
+                l in
+                l.label.textColor = MittyColor.healthyGreen
+                l.label.font = UIFont.boldSystemFont(ofSize: 17)
+                l.height(20).down(withInset: 3).leftMargin(10)
+            }
             
+            inputForm <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
+            
+            for item in activity.items {
+                
+                loadItem(inputForm, item)
+                
+            }
+            
+                
             row = Row.LeftAligned()
             row.layout() {
                 r in
@@ -278,30 +295,9 @@ class ActivityPlanDetailsForm: MQForm {
                 row +++ button
             }
             inputForm <<< row
-            
-            row = Row.LeftAligned().layout() {
-                r in
-                r.height(3).fillHolizon(10)
-                let layer = MittyColor.gradientLayer(UIColor.white, MittyColor.gray, UIColor.white)
-                layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 3)
-                r.view.layer.insertSublayer(layer, at: 0)
-            }
-            
-            
-            inputForm <<< row
         }
 
-        row = Row.LeftAligned().layout() {
-            r in
-            r.height(20).fillHolizon()
-        }
-
-
-        for item in activity.items {
-
-            loadItem(inputForm, item)
-
-        }
+        
 
         inputForm <<< Row.LeftAligned().height(50)
 
