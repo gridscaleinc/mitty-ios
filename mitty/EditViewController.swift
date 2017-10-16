@@ -49,9 +49,17 @@ class EditViewController: MittyViewController {
 
         }
 
+        let header = MQForm.label(name: "header", title: "<メモ>").layout {
+            t in
+            t.label.textColor = .black
+            t.putUnder(of: self.activityTitle).leftMost(withInset: 10).rightMost(withInset: 10).height(30).upMargin(20)
+        }
+        
+        form +++ header
+        
         form +++ memo.layout {
             m in
-            m.putUnder(of: self.activityTitle, withOffset: 2)
+            m.putUnder(of: header, withOffset: 2)
                 .leftMost(withInset: 10).rightMost(withInset: 10).height(100)
         }
 

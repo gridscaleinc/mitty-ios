@@ -65,9 +65,8 @@ class MeetingCell : UICollectionViewCell {
         self.meetingInfo = meeting
         
         name.numberOfLines = 2
-        name.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         name.text = "#" + (meeting.name )
-        name.textColor = MittyColor.healthyGreen
+        name.textColor = MittyColor.labelColor
         
         if (meeting.logoUrl != "") {
             DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])

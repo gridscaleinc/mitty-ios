@@ -56,9 +56,8 @@ class IslandCell: UICollectionViewCell {
         self.island = island
         
         name.numberOfLines = 2
-        name.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         name.text = "#" + (island.name )
-        name.textColor = MittyColor.healthyGreen
+        name.textColor = MittyColor.labelColor
         
         icon.image = UIImage(named: "timesquare")
         icon.contentMode = .scaleAspectFit

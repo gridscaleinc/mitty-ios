@@ -402,7 +402,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             
             row.layout {
                 r in
-                r.fillHolizon(0).height(25)
+                r.fillHolizon(0).height(50)
             }
             
             row +++ MQForm.label(name: "title-proposals", title: "提案一覧").layout {

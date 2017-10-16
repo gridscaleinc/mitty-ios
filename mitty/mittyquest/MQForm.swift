@@ -82,7 +82,7 @@ open class MQForm : UIView {
         
         row +++ label(name: name, title: caption, color:color).layout{
             l in
-            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.label.font = UIFont.boldSystemFont(ofSize: 20)
             l.down(withInset: 3).rightMost().leftMargin(10)
         }
         

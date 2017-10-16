@@ -82,6 +82,20 @@ class EditItemViewController: MittyViewController {
 
         section <<< row
 
+        let header = MQForm.label(name: "header", title: "<メモ>").layout {
+            t in
+            t.label.textColor = .black
+            t.rightMost(withInset: 10).height(30).down().leftMargin(15)
+        }
+        
+        row = Row.LeftAligned().layout {
+            l in
+            l.height(30).fillHolizon().upMargin(10)
+        }
+        row +++ header
+        
+        section <<< row
+        
         // memo line
         row = Row.LeftAligned().layout {
             r in
