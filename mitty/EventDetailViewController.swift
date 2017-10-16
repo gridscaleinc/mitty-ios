@@ -252,6 +252,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             r.rightMost(withInset: 15).fillVertical()
         }
         
+        
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
             b.height(30).width(90).verticalCenter()
             b.view.backgroundColor = .white
@@ -261,9 +262,23 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
         }
         
+        var liked = false
         likeButton.bindEvent(.touchUpInside) { b in
-            LikesService.instance.sendLike("EVENT", id: Int64(self.event.id)!)
-            (b as! UIButton).isEnabled = false
+            if liked {
+                if self.event.likes > 0 {
+                    self.event.likes -= 1
+                }
+                liked = false
+                likes.label.text = "❤️ \(self.event.likes) likes"
+                LikesService.instance.removeLike("EVENT", id: Int64(self.event.id)!)
+                likeButton.button.setTitleColor(.blue, for: .normal)
+            } else {
+                self.event.likes += 1
+                likes.label.text = "❤️ \(self.event.likes) likes"
+                LikesService.instance.sendLike("EVENT", id: Int64(self.event.id)!)
+                likeButton.button.setTitleColor(.gray, for: .normal)
+                liked = true
+            }
         }
         
         rightRow +++ likeButton

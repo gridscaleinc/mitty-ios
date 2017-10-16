@@ -70,7 +70,7 @@ class EventInfo {
     var accessControl: String = ""
 
     //   いいねの数
-    var likes: String = ""
+    var likes: Int = 0
 
     // 島情報
     // isLandIdに結びつく島名称
@@ -256,7 +256,7 @@ class Event {
     var accessControl: String = ""
 
     //  いいねの数
-    var likes: String = ""
+    var likes: Int = 0
 
     // (M) 言語情報　(Ja_JP, en_US, en_GB) elasticsearchに使用する。
     var language: String = ""

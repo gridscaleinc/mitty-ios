@@ -29,9 +29,9 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
     let cameraButton = MQForm.button(name: "cameraButton", title: "+写真")
 
-    let nameCardBUtton = MQForm.button(name: "cameraButton", title: "+名刺")
+    let nameCardBUtton = MQForm.button(name: "namecard", title: "+名刺")
 
-    let okButton = MQForm.button(name: "cameraButton", title: "Check in")
+    let okButton = MQForm.button(name: "checkin", title: "Check in")
 
     let form = MQForm.newAutoLayout()
 
@@ -135,16 +135,20 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
             c in
             c.height(40)
             c.button.backgroundColor = MittyColor.healthyGreen
+            c.button.setTitleColor(.white, for: .normal)
         }
 
         row +++ nameCardBUtton.layout {
             c in
             c.height(40)
             c.button.backgroundColor = MittyColor.healthyGreen
+            c.button.setTitleColor(.white, for: .normal)
         }
 
         row +++ okButton.layout {
             c in
+            c.button.backgroundColor = MittyColor.orange
+            c.button.setTitleColor(.white, for: .normal)
             c.height(40)
         }
 

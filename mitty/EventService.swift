@@ -106,7 +106,7 @@ class EventService: Service {
         //    INVITATION:招待制、PRIVATE:個人用、他の人は参加不可。
         e.accessControl = jsEvent["accessControl"].stringValue //     イベント情報のアクセス制御：　PUBLIC: 全公開、
         //    PRIVATE: 非公開、 SHARED:関係者のみ
-        e.likes = jsEvent["numberOfLikes"].stringValue //   いいねの数
+        e.likes = jsEvent["numberOfLikes"].intValue //   いいねの数
 
         // 島情報
         e.islandName = jsEvent["islandName"].stringValue // isLandIdに結びつく島名称
@@ -265,7 +265,7 @@ class EventService: Service {
         e.accessControl = json["accessControl"].stringValue
 
         //  いいねの数
-        e.likes = json["numberOfLikes"].stringValue
+        e.likes = json["numberOfLikes"].intValue
 
         // (M) 言語情報　(Ja_JP, en_US, en_GB) elasticsearchに使用する。
         e.language = json["language"].stringValue
