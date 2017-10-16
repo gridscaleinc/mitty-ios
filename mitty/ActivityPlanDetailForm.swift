@@ -34,7 +34,6 @@ class ActivityPlanDetailsForm: MQForm {
     //    Title                         Logo
     var eventTitle = MQForm.label(name: "eventTitle", title: "").layout {
         t in
-        t.label.font = UIFont.boldSystemFont(ofSize: 18)
         t.label.numberOfLines = 0
         t.label.textColor = MittyColor.orange
     }
@@ -126,9 +125,10 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
-            l.label.font = UIFont.systemFont(ofSize: 20)
-            l.label.textColor = UIColor.lightGray
-            l.verticalCenter()
+            l.label.font = UIFont.systemFont(ofSize: 15)
+            l.label.textColor = MittyColor.lightGray
+            l.label.textAlignment = .right
+            l.verticalCenter().rightMost(withInset: 5)
         }
 
         row.bindEvent(.touchUpInside) {
@@ -192,7 +192,7 @@ class ActivityPlanDetailsForm: MQForm {
                 l.height(20).down(withInset: 3).leftMargin(10)
             }
             
-            inputForm <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
+            inputForm <<< HL(UIColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
             
             // event title
             row = Row.LeftAligned().layout() {
@@ -258,7 +258,7 @@ class ActivityPlanDetailsForm: MQForm {
                 l.height(20).down(withInset: 3).leftMargin(10)
             }
             
-            inputForm <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
+            inputForm <<< HL(UIColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
             
             for item in activity.items {
                 
@@ -338,9 +338,9 @@ class ActivityPlanDetailsForm: MQForm {
 
         let l = MQForm.label(name: "activitylabel", title: item.eventTitle).layout {
             l in
-            l.leftMargin(10).height(30).verticalCenter().rightMost(withInset: 40)
+            l.leftMargin(10).verticalCenter().rightMost(withInset: 50)
             l.label.textColor = MittyColor.orange
-            l.label.font = UIFont.boldSystemFont(ofSize: 17)
+            l.label.numberOfLines = 0
         }
 
         l.bindEvent(.touchUpInside) { label in
@@ -359,10 +359,17 @@ class ActivityPlanDetailsForm: MQForm {
             i.verticalCenter()
             i.imageView.setMittyImage(url: item.eventLogoUrl)
         }
-
+        
+        row +++ MQForm.label(name: "anchor", title: ">").layout {
+            l in
+            l.label.font = UIFont.systemFont(ofSize: 15)
+            l.label.textColor = MittyColor.lightGray
+            l.label.textAlignment = .right
+            l.verticalCenter().rightMost(withInset: 5)
+        }
+        
         row.layout() { r in
-            let w = UIScreen.main.bounds.size.width - 20
-            r.leftMost().rightMost().height(40).width(w)
+            r.leftMost().rightMost().taller(than: 50).fillHolizon().bottomAlign(with: l)
         }
 
         detail <<< row
@@ -439,10 +446,12 @@ class ActivityPlanDetailsForm: MQForm {
 
         row +++ MQForm.label(name: "anchor", title: ">").layout {
             l in
-            l.label.font = UIFont.systemFont(ofSize: 20)
+            l.label.font = UIFont.systemFont(ofSize: 15)
             l.label.textColor = MittyColor.lightGray
-            l.verticalCenter()
+            l.label.textAlignment = .right
+            l.verticalCenter().rightMost(withInset: 5)
         }
+        
         row.layout() {
             r in
             r.bottomAlign(with: labelMemoCtl).topAlign(with: labelMemoCtl).leftMost(withInset: 5).rightMost(withInset: 5)

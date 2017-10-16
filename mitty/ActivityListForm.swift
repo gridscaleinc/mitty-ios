@@ -84,18 +84,25 @@ class ActivityListForm: MQForm {
             let row = Row.LeftAligned()
             section <<< row
 
-            let l = MQForm.label(name: "activitylabel", title: t.title).width(200).height(30).layout{
+            let l = MQForm.label(name: "activitylabel", title: t.title).height(30).layout{
                 l in
-                l.label.textColor = MittyColor.darkText
-                l.verticalCenter().leftMargin(15)
+                l.verticalCenter().leftMargin(15).rightMost(withInset: 20)
             }
             row +++ l
+            
+            row +++ MQForm.label(name: "anchor", title: ">").layout {
+                l in
+                l.label.font = UIFont.systemFont(ofSize: 15)
+                l.label.textColor = MittyColor.lightGray
+                l.label.textAlignment = .right
+                l.verticalCenter().rightMost(withInset: 5)
+            }
 
             // ラベルに紐つくactivityを保存
             (l.label as! TapableLabel).underlyObj = t
 
             row.layout() { r in
-                r.fillHolizon(20).height(40)
+                r.fillHolizon().height(50)
             }
             
             section <<< HL(UIColor.lightGray, 0.5).leftMargin(10).rightMargin(10)
@@ -115,7 +122,6 @@ class ActivityListForm: MQForm {
                 let w = UIScreen.main.bounds.size.width - 20
                 r.leftMost().rightMost().height(40).width(w)
             }
-            
         }
 
         section <<< MQForm.titleRow(name: "activity-title", caption: "活動予定一覧", color:MittyColor.healthyGreen, lineColor: .orange)
@@ -131,7 +137,8 @@ class ActivityListForm: MQForm {
 
             let l = MQForm.label(name: "activitylabel", title: t.title).height(30).layout{
                 l in
-                l.down(withInset: 3).leftMargin(15).rightMost(withInset: 40)
+                l.label.numberOfLines = 0
+                l.verticalCenter().leftMargin(15).rightMost(withInset: 50)
             }
 
             row +++ l
@@ -145,9 +152,17 @@ class ActivityListForm: MQForm {
                 i.verticalCenter()
             }
 
+            row +++ MQForm.label(name: "anchor", title: ">").layout {
+                l in
+                l.label.font = UIFont.systemFont(ofSize: 15)
+                l.label.textColor = MittyColor.lightGray
+                l.label.textAlignment = .right
+                l.verticalCenter().rightMost(withInset: 5)
+            }
+
             row.layout() { r in
                 let w = UIScreen.main.bounds.size.width - 20
-                r.leftMost().rightMost().height(40).width(w)
+                r.leftMost().rightMost().height(50).width(w)
             }
             
             section <<< HL(MittyColor.lightGray, 0.5).leftMargin(10).rightMargin(10)

@@ -64,7 +64,7 @@ open class MQForm : UIView {
     }
     
     // Label
-    static func  label (name: String, title: String, color:UIColor?=UIColor.darkText, pad: CGFloat? = 0) -> Control {
+    static func  label (name: String, title: String, color:UIColor? = MittyColor.labelColor, pad: CGFloat? = 0) -> Control {
         let l = TapableLabel.newAutoLayout()
         l.text = title
         l.textColor = color
@@ -86,7 +86,7 @@ open class MQForm : UIView {
             l.down(withInset: 3).rightMost().leftMargin(10)
         }
         
-        row +++ HL(lineColor, 1.2).layout {
+        row +++ HL(lineColor, 0.5).layout {
             l in
             l.down().fillHolizon()
         }
