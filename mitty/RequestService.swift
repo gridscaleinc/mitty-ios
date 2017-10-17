@@ -15,6 +15,7 @@ class RequestService: Service {
     let urlSearch = MITTY_SERVICE_BASE_URL + "/search/request"
     let urlMyrequest = MITTY_SERVICE_BASE_URL + "/myrequest"
     let registerUrl = MITTY_SERVICE_BASE_URL + "/new/request"
+    let requestDetails = MITTY_SERVICE_BASE_URL + "/request/details"
     
 
     static var instance: RequestService = {
@@ -166,6 +167,50 @@ class RequestService: Service {
 
     }
 
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - id: <#id description#>
+    ///   - onComplete: <#onComplete description#>
+    func getRequestDetail(_ id: Int64, onComplete: @escaping ( _ r: RequestInfo ) -> Void ) {
+        let parmeters: [String: Any] = [
+            "id": id,
+            ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        let request = Alamofire.request(requestDetails, method: .get, parameters: parmeters, headers: httpHeaders)
+        request.validate(statusCode: 200..<300).responseJSON { response in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                if let jsonObject = response.result.value {
+                    let json = JSON(jsonObject)
+                    print(json)
+                    
+                    if (json == nil || json["request"] == nil) {
+                        return
+                    }
+                    let requestJson = json["request"]
+                    let req = self.bindRequestInfo(requestJson)
+                    
+                    onComplete(req)
+                    
+                }
+                
+            case .failure(let error):
+                print(error)
+                print(super.jsonResponse(response))
+                LoadingProxy.off()
+            }
+        }
+    }
+
+    
     /// リクエストバインド。
     ///
     /// - Parameter json: JSON.

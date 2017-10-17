@@ -125,11 +125,18 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 return
             }
             
-            let detailViewController = RequestDetailViewController(req: a as! RequestInfo)
+            let req = a as! RequestInfo
             
-            self?.navigationItem.title = "..."
-            self?.tabBarController?.tabBar.isHidden = true
-            self?.navigationController?.pushViewController(detailViewController, animated: true)
+            RequestService.instance.getRequestDetail(req.id) {
+                request in
+                // TODO
+                let detailViewController = RequestDetailViewController(req: request)
+                
+                self?.navigationItem.title = "..."
+                self?.tabBarController?.tabBar.isHidden = true
+                self?.navigationController?.pushViewController(detailViewController, animated: true)
+            }
+            
         }
         
         

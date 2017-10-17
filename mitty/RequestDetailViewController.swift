@@ -168,17 +168,12 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         
         let left = Row.LeftAligned().height(30)
         row +++ left
-        left +++ MQForm.label(name: "likes1", title: "❤️").layout {
+        let likes = MQForm.label(name: "likes1", title: "❤️\(request.numberOfLikes) likes！").layout {
             l in
-            l.width(25).height(25).leftMargin(10).verticalCenter()
+            l.height(25).leftMargin(10).verticalCenter()
         }
-        left +++ MQForm.label(name: "likes2", title: "\(request.numberOfLikes) likes！").layout {
-            l in
-            l.height(25).width(80).leftMargin(5).verticalCenter()
-            let label = l.label
-            label.font = UIFont.boldSystemFont(ofSize: UIFont.smallSystemFontSize)
-            label.textAlignment = .left
-        }
+        
+        left +++ likes
         
         var right = Row.LeftAligned().layout {
             r in
@@ -197,9 +192,23 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             
         }
         
+        var liked = false
         likeButton.bindEvent(.touchUpInside) { b in
-            LikesService.instance.sendLike("REQUEST", id: Int64(self.request.id))
-            (b as! UIButton).isEnabled = false
+            if liked {
+                if self.request.numberOfLikes > 0 {
+                    self.request.numberOfLikes -= 1
+                }
+                liked = false
+                likes.label.text = "❤️ \(self.request.numberOfLikes) likes"
+                LikesService.instance.removeLike("REQUEST", id: Int64(self.request.id))
+                likeButton.button.setTitleColor(.blue, for: .normal)
+            } else {
+                self.request.numberOfLikes += 1
+                likes.label.text = "❤️ \(self.request.numberOfLikes) likes"
+                LikesService.instance.sendLike("REQUEST", id: Int64(self.request.id))
+                likeButton.button.setTitleColor(.gray, for: .normal)
+                liked = true
+            }
         }
         
         right +++ likeButton

@@ -310,7 +310,6 @@ class ProposalDetailsViewController: MittyViewController {
 
         row +++ likes
 
-        
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
             b.height(30).verticalCenter()
             b.view.backgroundColor = .white
@@ -320,9 +319,23 @@ class ProposalDetailsViewController: MittyViewController {
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
         }
         
+        var liked = false
         likeButton.bindEvent(.touchUpInside) { b in
-            LikesService.instance.sendLike("PROPOSAL", id: Int64(self.proposal.id))
-            (b as! UIButton).isEnabled = false
+            if liked {
+                if self.proposal.numberOfLikes > 0 {
+                    self.proposal.numberOfLikes -= 1
+                }
+                liked = false
+                likes.label.text = "❤️ \(self.proposal.numberOfLikes) likes"
+                LikesService.instance.removeLike("PROPOSAL", id: Int64(self.proposal.id))
+                likeButton.button.setTitleColor(.blue, for: .normal)
+            } else {
+                self.proposal.numberOfLikes += 1
+                likes.label.text = "❤️ \(self.proposal.numberOfLikes) likes"
+                LikesService.instance.sendLike("PROPOSAL", id: Int64(self.proposal.id))
+                likeButton.button.setTitleColor(.gray, for: .normal)
+                liked = true
+            }
         }
         
         row +++ likeButton
