@@ -127,7 +127,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         detailForm <<< row
 
-        detailForm <<< HL(MittyColor.orange, 1.2).leftMargin(10).rightMargin(10)
+        detailForm <<< HL(MittyColor.sunshineRed, 1.2).leftMargin(10).rightMargin(10)
         
         row = Row.LeftAligned().layout {
             r in
@@ -138,7 +138,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             l in
             l.width(35).height(35).fillHolizon(10).verticalCenter().leftMargin(10)
             (l.view as! UILabel).font = UIFont.boldSystemFont(ofSize: 15)
-            (l.view as! UILabel).textColor = .orange
+            (l.view as! UILabel).textColor = MittyColor.sunshineRed
             (l.view as! UILabel).numberOfLines = 1
         }
         row +++ tagLabel
@@ -184,9 +184,9 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
             b.height(30).width(90).verticalCenter()
             b.view.backgroundColor = .white
-            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderColor = MittyColor.sunshineRed.cgColor
             b.view.layer.borderWidth = 0.7
-            b.button.setTitleColor(UIColor.orange, for: .normal)
+            b.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
             b.button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
             
@@ -248,7 +248,7 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
             e in
             e.rightMargin(10).bottomMargin(3).verticalCenter().width(140)
             e.label.adjustsFontSizeToFitWidth = true
-            e.label.textColor = MittyColor.orange
+            e.label.textColor = MittyColor.sunshineRed
         }
         
         detailForm <<< row
@@ -419,12 +419,12 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
                 c.height(30).verticalCenter().leftMargin(10)
                 c.leftMost(withInset: 20)
                 let l = c.view as! UILabel
-                l.textColor = MittyColor.orange
+                l.textColor = MittyColor.sunshineRed
                 l.font = .boldSystemFont(ofSize: 18)
             }
             
             proposalSection <<< row
-            proposalSection <<< HL(MittyColor.orange, 1.2).leftMargin(10).rightMargin(10)
+            proposalSection <<< HL(MittyColor.sunshineRed, 1.2).leftMargin(10).rightMargin(10)
             
             proposalSection <<< Row.LeftAligned().height(20)
         }

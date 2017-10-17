@@ -67,7 +67,7 @@ class ActivityListForm: MQForm {
         self.section = Section(name: "section-activity-data", view: UIView.newAutoLayout())
         container += section
 
-        section <<< MQForm.titleRow(name: "activity-title", caption: "計画中", color: MittyColor.healthyGreen, lineColor: .orange)
+        section <<< MQForm.titleRow(name: "activity-title", caption: "計画中", color: MittyColor.healthyGreen, lineColor: MittyColor.sunshineRed)
         
         var outstandingActivity = [ActivityInfo]()
         var planedActivity = [ActivityInfo]()
@@ -124,7 +124,7 @@ class ActivityListForm: MQForm {
             }
         }
 
-        section <<< MQForm.titleRow(name: "activity-title", caption: "活動予定一覧", color:MittyColor.healthyGreen, lineColor: .orange)
+        section <<< MQForm.titleRow(name: "activity-title", caption: "活動予定一覧", color:MittyColor.healthyGreen, lineColor: MittyColor.sunshineRed)
 
         for t in planedActivity.sorted(by: {(a1,a2) in return a1.startDateTime < a2.startDateTime}) {
             let row = Row.LeftAligned()
@@ -132,6 +132,7 @@ class ActivityListForm: MQForm {
 
             row +++ MQForm.label(name: "activityDate", title: t.monthDay).layout {
                 d in
+                d.label.textColor = MittyColor.sunshineRed.withAlphaComponent(0.8)
                 d.width(50).height(30).verticalCenter().leftMargin(15)
             }
 
@@ -207,7 +208,7 @@ class ActivityListForm: MQForm {
         let row = Row.LeftAligned().layout {
             r in
             r.leftMost(withInset: 5).rightMost(withInset: 5).height(35).leftMargin(5)
-//            r.view.backgroundColor = UIColor.orange.withAlphaComponent(0.8)
+//            r.view.backgroundColor = MittyColor.sunshineRed.withAlphaComponent(0.8)
         }
         return row
     }

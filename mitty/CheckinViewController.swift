@@ -147,7 +147,7 @@ class CheckinViewController: MittyViewController, UIImagePickerControllerDelegat
 
         row +++ okButton.layout {
             c in
-            c.button.backgroundColor = MittyColor.orange
+            c.button.backgroundColor = MittyColor.sunshineRed
             c.button.setTitleColor(.white, for: .normal)
             c.height(40)
         }

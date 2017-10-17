@@ -86,7 +86,7 @@ open class MQForm : UIView {
             l.down(withInset: 3).rightMost().leftMargin(10)
         }
         
-        row +++ HL(lineColor, 0.5).layout {
+        row +++ HL(lineColor, 1).layout {
             l in
             l.down().fillHolizon()
         }
@@ -106,12 +106,12 @@ open class MQForm : UIView {
         
         l.label.textAlignment = .center
         l.label.backgroundColor = UIColor.white
-        l.label.layer.borderColor = UIColor.orange.cgColor
+        l.label.layer.borderColor = MittyColor.sunshineRed.cgColor
         l.label.layer.borderWidth = 0.5
         l.label.layer.cornerRadius = 15
         l.label.layer.masksToBounds = true
         l.height(30)
-        l.label.textColor = UIColor.orange
+        l.label.textColor = MittyColor.sunshineRed
         
         return l
     }
@@ -141,7 +141,7 @@ open class MQForm : UIView {
     static func button(name: String, title: String ) -> Control {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
-        button.setTitleColor(.orange, for: .normal)
+        button.setTitleColor(MittyColor.sunshineRed, for: .normal)
         button.backgroundColor = .white
         button.layer.cornerRadius = 3
         return Control(name: name, view:button)

@@ -65,7 +65,7 @@ class EditViewController: MittyViewController {
 
         form +++ updateButton.layout { [weak self] b in
             b.button.backgroundColor = .white
-            b.button.setTitleColor(MittyColor.orange, for: .normal)
+            b.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
             b.holizontalCenter().width(130).height(45).putUnder(of: (self?.memo)!, withOffset: 10)
         }
 

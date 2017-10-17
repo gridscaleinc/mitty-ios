@@ -209,7 +209,7 @@ class EventCell: UICollectionViewCell {
             let col = Col.UpDownAligned().layout {
                 c in
                 c.leftMost(withInset: 10).width(60).height(65).upper(withInset: 10)
-                c.view.backgroundColor = UIColor.orange
+                c.view.backgroundColor = MittyColor.red.withAlphaComponent(0.5)
                 c.view.layer.cornerRadius = 1
                 c.view.layer.masksToBounds = true
                 c.view.layer.shadowColor = UIColor.black.cgColor

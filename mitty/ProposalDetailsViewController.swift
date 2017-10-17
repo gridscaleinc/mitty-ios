@@ -210,12 +210,12 @@ class ProposalDetailsViewController: MittyViewController {
             c.height(25).verticalCenter().leftMargin(10)
             c.leftMost(withInset: 20)
             let l = c.view as! UILabel
-            l.textColor = MittyColor.orange
+            l.textColor = MittyColor.sunshineRed
             l.font = .boldSystemFont(ofSize: 18)
         }
         detailForm <<< row
         
-        detailForm <<< HL(MittyColor.orange, 1.2).leftMargin(10).rightMargin(10)
+        detailForm <<< HL(MittyColor.sunshineRed, 1.2).leftMargin(10).rightMargin(10)
         
         detailForm <<< imageRow
         
@@ -313,9 +313,9 @@ class ProposalDetailsViewController: MittyViewController {
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
             b.height(30).verticalCenter()
             b.view.backgroundColor = .white
-            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderColor = MittyColor.sunshineRed.cgColor
             b.view.layer.borderWidth = 0.7
-            b.button.setTitleColor(UIColor.orange, for: .normal)
+            b.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
         }
         
@@ -345,7 +345,7 @@ class ProposalDetailsViewController: MittyViewController {
         let accept = Control(name: "accept", view: acceptButton).layout {
             c in
             c.height(40).verticalCenter()
-//            c.button.setTitleColor(UIColor.orange, for: .normal)
+//            c.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
         }.bindEvent(.touchUpInside) {
             b in
             self.pressAccept()
@@ -432,7 +432,7 @@ class ProposalDetailsViewController: MittyViewController {
 
         section <<< Row.LeftAligned().height(10)
         
-        seperator(section: section, caption: "確認情報", color: MittyColor.orange)
+        seperator(section: section, caption: "確認情報", color: MittyColor.sunshineRed)
 
         let confirmRow = Row.Intervaled().height(50)
         confirmRow.spacing = 30

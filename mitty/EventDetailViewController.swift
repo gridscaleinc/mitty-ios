@@ -256,9 +256,9 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let likeButton = MQForm.button(name: "likeIt", title: "いいね").layout { b in
             b.height(30).width(90).verticalCenter()
             b.view.backgroundColor = .white
-            b.view.layer.borderColor = UIColor.orange.cgColor
+            b.view.layer.borderColor = MittyColor.sunshineRed.cgColor
             b.view.layer.borderWidth = 0.7
-            b.button.setTitleColor(UIColor.orange, for: .normal)
+            b.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
             b.button.setTitleColor(.gray, for: UIControlState.disabled)
         }
         
@@ -557,7 +557,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
         let link = UIButton.newAutoLayout()
-        link.setTitleColor(MittyColor.orange, for: .normal)
+        link.setTitleColor(MittyColor.sunshineRed, for: .normal)
         link.setTitle(event.sourceName, for: .normal)
         link.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         

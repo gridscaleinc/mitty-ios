@@ -22,7 +22,7 @@ class EditBasicInfoViewController: MittyViewController {
 
     let gendle : SelectButton = {
         let s = SelectButton(name: "gendre", view: UIView.newAutoLayout())
-        s.selectedBackgroundColor = UIColor.orange
+        s.selectedBackgroundColor = MittyColor.sunshineRed
         s.spacing = 5
         for (key, code) in gendres() {
             s.addOption(code: key, label: code.value)
@@ -32,7 +32,7 @@ class EditBasicInfoViewController: MittyViewController {
 
     let age : SelectButton = {
         let s = SelectButton(name: "age", view: UIView.newAutoLayout())
-        s.selectedBackgroundColor = UIColor.orange
+        s.selectedBackgroundColor = MittyColor.sunshineRed
         s.spacing = 5
         for (key, code) in agegroups() {
             s.addOption(code: key, label: code.value)

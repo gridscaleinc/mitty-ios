@@ -69,7 +69,7 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         
         talkInputField = StyledTextField.newAutoLayout()
         talkInputField.placeholder = "input message here"
-        talkInputField.layer.borderColor = UIColor.orange.cgColor
+        talkInputField.layer.borderColor = MittyColor.sunshineRed.cgColor
         
         talkSendButton = UIButton.newAutoLayout()
         talkSendButton.setTitle("送信", for: .normal)

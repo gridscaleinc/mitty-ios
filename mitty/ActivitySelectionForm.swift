@@ -40,7 +40,7 @@ class ActivitySelectionForm: UIView {
     let loadFromCalButton: UIButton = {
         let button = UIButton.newAutoLayout()
         button.setTitle("カレンダーから", for: UIControlState())
-        button.backgroundColor = .orange
+        button.backgroundColor = MittyColor.sunshineRed
 
         return button
     } ()

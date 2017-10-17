@@ -196,7 +196,7 @@ class EventInputForm: MQForm {
 
         imageContainer +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(70).width(90).layout {
             l in
-            l.label.textColor = MittyColor.orange
+            l.label.textColor = MittyColor.sunshineRed
             l.label.textAlignment = .center
             l.fillHolizon().upper()
         }
@@ -327,7 +327,7 @@ class EventInputForm: MQForm {
         row = Row.LeftAligned().height(row_height)
         row +++ priceInput.layout {
             line in
-            line.button.setTitleColor(MittyColor.orange, for: .normal)
+            line.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
             line.button.backgroundColor = .white
             line.button.layer.borderWidth = 0
 
@@ -407,7 +407,7 @@ class EventInputForm: MQForm {
             c in
             c.height(line_height).verticalCenter().leftMargin(10).width(70)
             c.label.textAlignment = .center
-            c.label.textColor = MittyColor.orange
+            c.label.textColor = MittyColor.sunshineRed
         }
         row +++ officialUrl.layout {
             line in
@@ -474,7 +474,7 @@ class EventInputForm: MQForm {
         row +++ registerButton.width(60).height(50).layout() {
             c in
             c.button.backgroundColor = MittyColor.white
-            c.button.setTitleColor(MittyColor.orange, for: .normal)
+            c.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
         }
 
         inputForm <<< row

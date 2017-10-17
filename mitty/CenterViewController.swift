@@ -147,7 +147,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             if !isHidden {
                 self.socialMirror.todaysEventLine.labelItem.view.blink(duration: 0.8)
                 self.socialMirror.todaysEventLine.numberItem.label.text = "10"
-                self.socialMirror.todaysEventLine.labelItem.label.textColor = UIColor.orange
+                self.socialMirror.todaysEventLine.labelItem.label.textColor = MittyColor.sunshineRed
                 self.socialMirror.todaysEventLine.numberItem.view.blink(duration: 0.8)
             }
         }
@@ -205,15 +205,21 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         row +++ MQForm.button(name: "nearby", title: "S/Mirror").layout {
             c in
             c.height(30)
-            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
+            c.button.backgroundColor = MittyColor.sunshineRed.withAlphaComponent(0.9)
             c.button.setTitleColor(.white, for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
+            }.bindEvent(.touchUpInside) {
+                b in
+                self.socialMirror.view.isHidden = !self.socialMirror.view.isHidden
+                if (!self.socialMirror.view.isHidden) {
+                    self.socialMirror.eventLine.view.blink()
+                }
         }
 
         row +++ MQForm.button(name: "destinations", title: "行先").layout {
             c in
             c.height(30)
-            c.button.backgroundColor = UIColor.orange.withAlphaComponent(0.9)
+            c.button.backgroundColor = MittyColor.sunshineRed.withAlphaComponent(0.9)
             c.button.setTitleColor(.white, for: .normal)
             c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
         }.bindEvent(.touchUpInside) {
@@ -266,7 +272,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         
         display +++ targetLocationDisp.layout {
             c in
-//            c.label.backgroundColor = UIColor.orange
+//            c.label.backgroundColor = MittyColor.sunshineRed
             c.label.numberOfLines = 1
             c.label.adjustsFontSizeToFitWidth = true
             c.label.textColor = UIColor.gray.darkerColor(percent: 19)

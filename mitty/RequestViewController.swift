@@ -72,7 +72,7 @@ class RequestViewController: MittyViewController {
         row.layout {
             r in
             r.fillHolizon(0).height(40)
-            r.view.backgroundColor = .orange
+            r.view.backgroundColor = MittyColor.sunshineRed
         }
 
         row +++ MQForm.label(name: "Postrequest", title: "リクエスト情報登録").layout {

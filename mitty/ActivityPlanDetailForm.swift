@@ -35,7 +35,7 @@ class ActivityPlanDetailsForm: MQForm {
     var eventTitle = MQForm.label(name: "eventTitle", title: "").layout {
         t in
         t.label.numberOfLines = 0
-        t.label.textColor = MittyColor.orange
+        t.label.textColor = MittyColor.sunshineRed
     }
     
     var eventLogo: Control = {
@@ -174,7 +174,7 @@ class ActivityPlanDetailsForm: MQForm {
             
             row +++ mainEventButton.layout {
                 b in
-                b.button.setTitleColor(.orange, for: .normal)
+                b.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
                 b.button.backgroundColor = .white
                 b.height(40)
             }
@@ -287,7 +287,7 @@ class ActivityPlanDetailsForm: MQForm {
             for b in buttons {
                 let button = MQForm.button(name: "addItem", title: b).height(40)
                 button.button.backgroundColor = .clear
-                button.button.setTitleColor(MittyColor.orange, for: .normal)
+                button.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
                 button.layout {
                     b in
                     b.verticalCenter().leftMargin(20).width(100)
@@ -339,7 +339,7 @@ class ActivityPlanDetailsForm: MQForm {
         let l = MQForm.label(name: "activitylabel", title: item.eventTitle).layout {
             l in
             l.leftMargin(10).verticalCenter().rightMost(withInset: 50)
-            l.label.textColor = MittyColor.orange
+            l.label.textColor = MittyColor.sunshineRed
             l.label.numberOfLines = 0
         }
 

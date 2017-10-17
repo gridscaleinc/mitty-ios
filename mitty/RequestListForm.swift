@@ -74,7 +74,7 @@ class RequestListForm: MQForm {
             l.height(20).down(withInset: 3).leftMargin(10)
         }
         
-        section <<< HL(UIColor.orange, 1.2).leftMargin(10).rightMargin(10)
+        section <<< HL(MittyColor.sunshineRed, 1.2).leftMargin(10).rightMargin(10)
         
         for r in requestList {
             let row = Row.LeftAligned()

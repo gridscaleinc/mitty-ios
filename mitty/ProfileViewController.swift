@@ -559,7 +559,7 @@ class ProfileViewController: MittyViewController {
             row +++ MQForm.label(name: "namecard", title: card.businessName).layout {
                 l in
                 l.height(30).rightMost(withInset: 30).leftMargin(5).verticalCenter()
-                l.label.textColor = UIColor.orange
+                l.label.textColor = MittyColor.sunshineRed
             }
             
             if card.contactID == 0 {

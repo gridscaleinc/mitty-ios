@@ -162,7 +162,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             c in
             let l = c.view as! UILabel
             l.font = UIFont.boldSystemFont(ofSize: 15)
-            l.textColor = MittyColor.orange
+            l.textColor = MittyColor.sunshineRed
 
             c.width(350).height(40).leftMargin(35).verticalCenter()
         }

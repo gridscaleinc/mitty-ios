@@ -143,7 +143,7 @@ class EditItemViewController: MittyViewController {
         row +++ updateButton.layout {
             b in
             b.button.backgroundColor = .white
-            b.button.setTitleColor(.orange, for: .normal)
+            b.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
             b.height(45)
         }
 

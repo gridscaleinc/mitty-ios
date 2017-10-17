@@ -258,7 +258,7 @@ class ProposalViewController: MittyViewController, UIImagePickerControllerDelega
         row.layout {
             r in
             r.fillHolizon(0).height(25)
-            r.view.backgroundColor = .orange
+            r.view.backgroundColor = MittyColor.sunshineRed
         }
 
         row +++ MQForm.label(name: "title-main-proposal", title: "提案情報登録").layout {

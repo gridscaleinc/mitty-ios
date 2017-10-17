@@ -49,7 +49,7 @@ class NameCardForm: Container {
             b in
             b.putUnder(of: self.businessName).leftMost(withInset: 20).height(20)
             b.label.font = UIFont.boldSystemFont(ofSize: 12)
-            b.label.textColor = UIColor.orange
+            b.label.textColor = MittyColor.sunshineRed
         }
         
         form +++ businessSubName.layout {

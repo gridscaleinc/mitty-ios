@@ -25,10 +25,10 @@ class MittyColor : UIColor {
     static let lightYellow = UIColor(red: 250/255, green: 215/255, blue: 160/255, alpha:1.0)
     static let light = UIColor(white:0.98, alpha:1.0)
     static let labelColor = UIColor(white: 0.35, alpha: 1.0)
+    static let sunshineRed = UIColor(red: 1.0, green: 0x54/255, blue: 0x27/266, alpha:1.0)
     
     
-    
-    static func gradientLayer(_ s: UIColor? = UIColor.orange, _ m: UIColor? = UIColor.orange, _ e: UIColor? = UIColor.orange) -> CAGradientLayer {
+    static func gradientLayer(_ s: UIColor? = MittyColor.sunshineRed, _ m: UIColor? = MittyColor.sunshineRed, _ e: UIColor? = MittyColor.sunshineRed) -> CAGradientLayer {
         
         let gradientLayer = CAGradientLayer()
         

@@ -27,7 +27,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     let appearance: SelectButton = {
 
         let s = SelectButton(name: "appearance", view: UIView.newAutoLayout())
-        s.selectedBackgroundColor = UIColor.orange
+        s.selectedBackgroundColor = MittyColor.sunshineRed
         s.spacing = 5
         for (key, code) in appearances() {
             s.addOption(code: key, label: code.value)
@@ -171,7 +171,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
         row +++ constellation.layout {
             c in
             c.rightMost().height(30).verticalCenter()
-            c.textField.textColor = UIColor.orange
+            c.textField.textColor = MittyColor.sunshineRed
         }
 
         section <<< row
