@@ -176,6 +176,24 @@ class ResetPasswordViewController: MittyViewController, UITextFieldDelegate {
                 print(error)
             }
         }
+
+        call(url: urlString, method: .post, parameters: parameters) { (response) in
+            switch response.result {
+            case .success:
+                LoadingProxy.off()
+                self.dismiss(animated: true, completion: nil)
+            case .failure(let error):
+                LoadingProxy.off()
+                let errorMessage = self.form.quest("[name=errormessage]").control()?.view as! UILabel
+                errorMessage.text = "メールアドレスを確認してください。"
+                print(error)
+            }
+        }
+    }
+    
+    func call(url: String, method: HTTPMethod, parameters: Parameters, callback: @escaping (DataResponse<Any>) -> Void) {
+        Alamofire.request(url, method: method, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
+            callback(response)
+        }
     }
 }
-
