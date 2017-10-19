@@ -133,7 +133,7 @@ class EventService: Service {
         api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
             let jsonObject = data
-            let json = JSON(jsonObject)
+            let json = JSON(jsonObject)["event"]
             let event = self.bindEvent(json)
             callback(event)
         }, fail: {(error: Error?) in
