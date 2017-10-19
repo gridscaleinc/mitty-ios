@@ -31,36 +31,23 @@ class UserService: Service {
     ///
     /// - Parameter contentId: 設定するアイコンのコンテンツID.
     func setUserIcon(_ contentId: Int64) {
-        let urlString = apiSetUserIcon + "?contentId=\(contentId)"
-
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-
-
-        Alamofire.request(urlString, method: .post, encoding: JSONEncoding.default
-                          , headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/update/user/icon" + "?contentId=\(contentId)", method: .post, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
+            return
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
 
@@ -71,39 +58,27 @@ class UserService: Service {
     ///   - id: ユーザーID
     ///   - callback: コールバック。
     func getUserInfo(id: String, callback: @escaping (_ user: UserInfo?, _ ok: Bool) -> Void) {
-        let parmeters = [
+        let parameters = [
             "id": id
         ]
 
         LoadingProxy.on()
-
-
-        let request = Alamofire.request(apiUserInfo, method: .get, parameters: parmeters)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["userInfo"] == nil) {
-                        callback(nil, false)
-                        return
-                    }
-
-                    let user = self.bindUserInfo(json["userInfo"])
-                    callback(user, true)
-                    return
-                }
-
+        
+        let api = APIClient(path: "/user/info", method: .get, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["userInfo"] == nil) {
                 callback(nil, false)
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+                return
             }
-        }
+            let user = self.bindUserInfo(json["userInfo"])
+            callback(user, true)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
 
@@ -135,8 +110,6 @@ class UserService: Service {
     ///   - onError: <#onError description#>
     func signin(userName: String, pwd: String, onComplete: @escaping (_ uid: Int, _ token: String) -> Void,
                 onError: @escaping (_ e: String) -> Void) {
-        let urlString = MITTY_SERVICE_BASE_URL + "/signin"
-        
         
         let parameters: Parameters = [
             "user_name": userName,
@@ -145,21 +118,18 @@ class UserService: Service {
         
         LoadingProxy.on()
         
-        Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    let userid = json["user_id"].intValue
-                    let accessToken = json["access_token"].stringValue
-                    onComplete(userid, accessToken)
-                }
-            case .failure(let _):
-                LoadingProxy.off()
-                onError("ユーザーIDまたはパスワードが正しくない。")
-                print(super.jsonResponse(response))
-            }
-        }
+        let api = APIClient(path: "/signin", method: .post, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let userid = json["user_id"].intValue
+            let accessToken = json["access_token"].stringValue
+            onComplete(userid, accessToken)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            onError("ユーザーIDまたはパスワードが正しくない。")
+            LoadingProxy.off()
+        })
     }
 }

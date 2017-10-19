@@ -136,35 +136,23 @@ class IslandService: Service {
             request.setDouble(.longitude, String(describing: longi))
         }
 
-        print(request.parameters)
-
         LoadingProxy.on()
-
-
-        let urlString = MITTY_SERVICE_BASE_URL + "/new/island"
 
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
-        Alamofire.request(urlString, method: .post, parameters: request.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    let islandId = json["islandId"].intValue
-                    landInfo.id = islandId
-                }
-
-                //                self?.navigationController?.popToRootViewController(animated: true)
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
-            }
-        }
+        let api = APIClient(path: "/new/island", method: .post, parameters: request.parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let islandId = json["islandId"].intValue
+            landInfo.id = islandId
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 
@@ -172,31 +160,25 @@ class IslandService: Service {
     ///
     /// - Returns: なし。
     func fetchIslandInfo(_ name: String, callback: @escaping (_ infoList: [IslandInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
-        let islandInfoUrl = MITTY_SERVICE_BASE_URL + "/island/info"
-        let parameter: [String: Any] = [
+
+        let parameters: [String: Any] = [
             "name": name
         ]
 
         LoadingProxy.on()
-
-        Alamofire.request(islandInfoUrl, method: .get, parameters: parameter).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    let islands = json["islands"]
-                    let islandInfoList = self?.bindIslands(islands)
-                    callback (islandInfoList!)
-                }
-
-                //                self?.navigationController?.popToRootViewController(animated: true)
-            case .failure(let error):
-                print(error)
-                print(self?.jsonResponse(response))
-                LoadingProxy.off()
-            }
-        }
+        
+        let api = APIClient(path: "/island/info", method: .get, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let islands = json["islands"]
+            let islandInfoList = self.bindIslands(islands)
+            callback (islandInfoList)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 

@@ -484,6 +484,24 @@ class ActivityPlanEditViewController : MittyViewController, IslandPickerDelegate
                 print(error)
             }
         }
+        
+        let api = APIClient(path: "/new/event", method: .post, parameters: request.parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            
+            if (self.imagePicked) {
+                let jsonObject = data
+                let json = JSON(jsonObject)
+                let eventId = json["eventId"].stringValue
+                self.registerGallery(eventId)
+            } else {
+                self.navigationController?.popToRootViewController(animated: true)
+            }
+
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     func trim(_ s: String?, _ size: Int) -> String? {
@@ -524,20 +542,15 @@ class ActivityPlanEditViewController : MittyViewController, IslandPickerDelegate
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
         
-        let urlString = MITTY_SERVICE_BASE_URL + "/gallery/content"
-        
-        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
-            , headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-                LoadingProxy.off()
-                switch response.result {
-                case .success:
-                    break
-                case .failure(let error):
-                    print(error)
-                    self?.showError("画像登録エラー")
-                    Thread.sleep(forTimeInterval: 4)
-                }
-                self?.navigationController?.popToRootViewController(animated: true)
-        }
+        let api = APIClient(path: "/gallery/content", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            self.navigationController?.popToRootViewController(animated: true)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            self.showError("画像登録エラー")
+            Thread.sleep(forTimeInterval: 4)
+            self.navigationController?.popToRootViewController(animated: true)
+        })
     }
 }

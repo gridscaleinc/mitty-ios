@@ -13,8 +13,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class GalleryService: Service {
-    let apiGalleryContents = MITTY_SERVICE_BASE_URL + "/gallery/contents"
-    
     static var instance: GalleryService = {
         let instance = GalleryService()
         return instance
@@ -34,32 +32,21 @@ class GalleryService: Service {
             "id": id
         ]
         
-        Alamofire.request(apiGalleryContents, method: .get, parameters: parameters).validate(statusCode: 200..<300).responseJSON { response in
-                LoadingProxy.off()
-                switch response.result {
-                case .success:
-                    if let jsonObject = response.result.value {
-                        let json = JSON(jsonObject)
-                        print(json)
-                        if (json == nil || json["galleryContents"] == nil) {
-                            return
-                        }
-                        
-                        let contents = self.bindContents(json["galleryContents"])
-                        onCompletion(contents)
-                        
-                        return
-                    }
-                    
-                    break
-                    
-                case .failure(let error):
-                    print(error)
-                    print(super.jsonResponse(response))
-                    print(response.description)
-                    LoadingProxy.off()
-                }
-        }
+        let api = APIClient(path: "/gallery/contents", method: .get, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["galleryContents"] == nil) {
+                return
+            }
+            let contents = self.bindContents(json["galleryContents"])
+            onCompletion(contents)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+
     }
     
     /// contents -> [Content]バインド。

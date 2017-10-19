@@ -41,36 +41,18 @@ class ProposalService: Service {
         ]
 
         LoadingProxy.on()
-
-        print(req.parameters)
-
-        Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
-
+        
+        let api = APIClient(path: "/new/proposal", method: .post, parameters: req.parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-
-                    let proposalId = json["id"].int64Value
-                    onSuccess(proposalId)
-                    
-                    print(proposalId)
-
-                }
-
-            case .failure(let error):
-                print(error)
-                let jsonRes = super.jsonResponse(response)
-                
-                print(jsonRes)
-                LoadingProxy.off()
-                onError("error occoured\(jsonRes)")
-            }
-            
-        }
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let proposalId = json["id"].int64Value
+            onSuccess(proposalId)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 
@@ -89,33 +71,17 @@ class ProposalService: Service {
             "status": status.rawValue,
             ]
         
-        Alamofire.request(acceptUrl, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
-            
+        let api = APIClient(path: "/accept/proposal", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    let proposalId = json["id"].stringValue
-                    
-                    print(proposalId)
-                    
-                }
-                onSuccess()
-                
-            case .failure(let error):
-                print(error)
-                let jsonRes = super.jsonResponse(response)
-                
-                print(jsonRes)
-                LoadingProxy.off()
-                onError("error occoured\(jsonRes)")
-            }
-            
-        }
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let proposalId = json["id"].stringValue
+            onSuccess()
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
         
     }
     
@@ -132,33 +98,17 @@ class ProposalService: Service {
             "status": status.rawValue,
             ]
         
-        Alamofire.request(approveUrl, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
-            
+        let api = APIClient(path: "/approve/proposal", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    let proposalId = json["id"].stringValue
-                    
-                    print(proposalId)
-                    
-                }
-                onSuccess()
-                
-            case .failure(let error):
-                print(error)
-                let jsonRes = super.jsonResponse(response)
-                
-                print(jsonRes)
-                LoadingProxy.off()
-                onError("error occoured\(jsonRes)")
-            }
-            
-        }
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let proposalId = json["id"].stringValue
+            onSuccess()
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
         
     }
 
@@ -168,7 +118,7 @@ class ProposalService: Service {
     ///   - key: フィルタキー。
     ///   - callback: コールバック。
     func getMyProposals (key: String, callback: @escaping (_ proposals: [ProposalInfo]) -> Void) {
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "q": key,
         ]
 
@@ -180,32 +130,24 @@ class ProposalService: Service {
 
         // ダミーコード、本当はサーバーから検索する。
         var proposals = [ProposalInfo]()
-        let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-
-                    if (json == nil || json["proposals"] == nil) {
-                        callback([])
-                        return
-                    }
-
-                    for (_, jsonReq) in json["proposals"] {
-                        proposals.append(self.bindProposalInfo(jsonReq))
-                    }
-                    callback(proposals)
-                }
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        let api = APIClient(path: "/myproposal", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["proposals"] == nil) {
+                callback([])
+                return
             }
-        }
+            
+            for (_, jsonReq) in json["proposals"] {
+                proposals.append(self.bindProposalInfo(jsonReq))
+            }
+            callback(proposals)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
     
@@ -216,7 +158,7 @@ class ProposalService: Service {
     ///   - req: <#req description#>
     ///   - callback: <#callback description#>
     func getProposalsOf (reqId: Int64, callback: @escaping (_ proposals: [ProposalInfo]) -> Void) {
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "requestId": reqId,
             ]
         
@@ -228,32 +170,24 @@ class ProposalService: Service {
         
         // ダミーコード、本当はサーバーから検索する。
         var proposals = [ProposalInfo]()
-        let request = Alamofire.request(proposalsOfUrl, method: .get, parameters: parmeters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    if (json == nil || json["proposals"] == nil) {
-                        callback([])
-                        return
-                    }
-                    
-                    for (_, jsonReq) in json["proposals"] {
-                        proposals.append(self.bindProposalInfo(jsonReq))
-                    }
-                    callback(proposals)
-                }
-                
-            case .failure(let error):
-                LoadingProxy.off()
-                print(super.jsonResponse(response))
-                print(error)
+        
+        let api = APIClient(path: "/proposals/of", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["proposals"] == nil) {
+                callback([])
+                return
             }
-        }
+            for (_, jsonReq) in json["proposals"] {
+                proposals.append(self.bindProposalInfo(jsonReq))
+            }
+            callback(proposals)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
         
     }
 

@@ -27,38 +27,26 @@ class SocialContactService: Service {
     ///   - onComplete: <#onComplete description#>
     ///   - onError: <#onError description#>
     func getContacteeList(onComplete: @escaping (_ contacteeList: [Contactee])->Void, onError: @escaping (_ error: String) -> Void) {
-        let url = MITTY_SERVICE_BASE_URL + "/contact/list"
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
         
-        
         LoadingProxy.on()
         
-        Alamofire.request(url, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/contact/list", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["contacteeList"] == nil) {
-                        return
-                    }
-                    let contacteeList = self.bindContacteeList(json)
-                    onComplete(contacteeList)
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                onError(error.localizedDescription)
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["contacteeList"] == nil) {
+                return
             }
-        }
-
+            let contacteeList = self.bindContacteeList(json)
+            onComplete(contacteeList)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
         
     }
 
@@ -70,8 +58,6 @@ class SocialContactService: Service {
     ///   - onError: <#onError description#>
     func contactedNamecards(of mittyId: Int, onComplete: @escaping (_ cardList: [ContacteeNamecard]) -> Void, onError: @escaping (_ error: String) -> Void) {
         
-        let url = MITTY_SERVICE_BASE_URL + "/contactee/namecards"
-        
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
@@ -82,29 +68,20 @@ class SocialContactService: Service {
 
         LoadingProxy.on()
         
-        Alamofire.request(url, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/contactee/namecards", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["contacteeNamecards"] == nil) {
-                        return
-                    }
-                    let nameCardInfoList = self.bindContacteeNamecards(json)
-                    onComplete(nameCardInfoList)
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                onError(error.localizedDescription)
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["contacteeNamecards"] == nil) {
+                return
             }
-        }
+            let nameCardInfoList = self.bindContacteeNamecards(json)
+            onComplete(nameCardInfoList)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     /// <#Description#>
@@ -165,37 +142,26 @@ class SocialContactService: Service {
     
     func getSocailMirror(onComplete: @escaping (_ mirror: SocialMirror) -> Void, onError: @escaping (_ error: String) -> Void) {
         
-        let url = MITTY_SERVICE_BASE_URL + "/social/mirror"
-        
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
         
         LoadingProxy.on()
         
-        Alamofire.request(url, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/social/mirror", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["todaysEvent"] == nil) {
-                        return
-                    }
-                    let mirror = self.bindSocialMirror(json)
-                    onComplete(mirror)
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                onError(error.localizedDescription)
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["todaysEvent"] == nil) {
+                return
             }
-        }
+            let mirror = self.bindSocialMirror(json)
+            onComplete(mirror)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
 

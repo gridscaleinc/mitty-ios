@@ -40,32 +40,18 @@ class RequestService: Service {
         ]
 
         LoadingProxy.on()
-
-        print(req.parameters)
-
-        Alamofire.request(registerUrl, method: .post, parameters: req.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
-
+        
+        let api = APIClient(path: "/new/request", method: .post, parameters: req.parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-
-                    let requestId = json["id"].stringValue
-
-                    print(requestId)
-
-                }
-                onSuccess()
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
-            }
-        }
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let requestId = json["id"].stringValue
+            onSuccess()
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
     
@@ -75,7 +61,7 @@ class RequestService: Service {
     ///   - key: <#key description#>
     ///   - callback: <#callback description#>
     func getMyRequests (key: String, callback: @escaping (_ request: [RequestInfo]) -> Void) {
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "q": key,
         ]
 
@@ -89,32 +75,24 @@ class RequestService: Service {
 
         // ダミーコード、本当はサーバーから検索する。
         var requests = [RequestInfo]()
-        let request = Alamofire.request(urlMyrequest, method: .get, parameters: parmeters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-
-                    if (json == nil || json["requests"] == nil) {
-                        callback([])
-                        return
-                    }
-
-                    for (_, jsonReq) in json["requests"] {
-                        requests.append(self.bindRequestInfo(jsonReq))
-                    }
-                    callback(requests)
-                }
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        
+        let api = APIClient(path: "/myrequest", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["requests"] == nil) {
+                callback([])
+                return
             }
-        }
+            for (_, jsonReq) in json["requests"] {
+                requests.append(self.bindRequestInfo(jsonReq))
+            }
+            callback(requests)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 
@@ -124,7 +102,7 @@ class RequestService: Service {
     ///   - keys: 検索キー
     ///   - callback: コールバック。
     func search (keys: String, callback: @escaping (_ request: [RequestInfo]) -> Void) {
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "q": keys,
             "offset": 0,
             "limit": 30,
@@ -138,32 +116,24 @@ class RequestService: Service {
 
         // ダミーコード、本当はサーバーから検索する。
         var requests = [RequestInfo]()
-        let request = Alamofire.request(urlSearch, method: .get, parameters: parmeters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-
-                    if (json == nil || json["requests"] == nil) {
-                        callback([])
-                        return
-                    }
-
-                    for (_, jsonReq) in json["requests"] {
-                        requests.append(self.bindRequestInfo(jsonReq))
-                    }
-                    callback(requests)
-                }
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        
+        let api = APIClient(path: "/search/request", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["requests"] == nil) {
+                callback([])
+                return
             }
-        }
+            for (_, jsonReq) in json["requests"] {
+                requests.append(self.bindRequestInfo(jsonReq))
+            }
+            callback(requests)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 
@@ -173,7 +143,7 @@ class RequestService: Service {
     ///   - id: <#id description#>
     ///   - onComplete: <#onComplete description#>
     func getRequestDetail(_ id: Int64, onComplete: @escaping ( _ r: RequestInfo ) -> Void ) {
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "id": id,
             ]
         
@@ -183,31 +153,21 @@ class RequestService: Service {
         
         LoadingProxy.on()
         
-        let request = Alamofire.request(requestDetails, method: .get, parameters: parmeters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    if (json == nil || json["request"] == nil) {
-                        return
-                    }
-                    let requestJson = json["request"]
-                    let req = self.bindRequestInfo(requestJson)
-                    
-                    onComplete(req)
-                    
-                }
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        let api = APIClient(path: "/request/details", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["request"] == nil) {
+                return
             }
-        }
+            let requestJson = json["request"]
+            let req = self.bindRequestInfo(requestJson)
+            onComplete(req)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
     
