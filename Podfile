@@ -12,6 +12,7 @@ target 'mitty' do
   pod 'SwiftyJSON', '3.1.1'
   pod 'Starscream', '2.0.3'
   pod 'SlackTextViewController'
+  pod 'SkyFloatingLabelTextField', '~> 3.0'
   
   target 'mittyTests' do
     inherit! :search_paths

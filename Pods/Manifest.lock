@@ -3,6 +3,7 @@ PODS:
   - AlamofireImage (3.1.0):
     - Alamofire (~> 4.0)
   - PureLayout (3.0.2)
+  - SkyFloatingLabelTextField (3.2.1)
   - SlackTextViewController (1.9.5)
   - Starscream (2.0.3)
   - SwiftyJSON (3.1.1)
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - Alamofire (= 4.0.0)
   - AlamofireImage (= 3.1)
   - PureLayout (= 3.0.2)
+  - SkyFloatingLabelTextField (~> 3.0)
   - SlackTextViewController
   - Starscream (= 2.0.3)
   - SwiftyJSON (= 3.1.1)
@@ -19,10 +21,11 @@ SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   AlamofireImage: bb8c8351c51cb1633bb6be69b6dbbaff37ce65b7
   PureLayout: 4d550abe49a94f24c2808b9b95db9131685fe4cd
+  SkyFloatingLabelTextField: 71d28906024e7d7e4460099b342f3ca7036a2e24
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
-PODFILE CHECKSUM: e265fa808f59a8eccb930bdc77aa74d6f6a2ddb6
+PODFILE CHECKSUM: 3d83dac8c4a2c4f25d37d1ae9520a719819f1e28
 
 COCOAPODS: 1.2.0
