@@ -7,6 +7,7 @@ PODS:
   - SlackTextViewController (1.9.5)
   - Starscream (2.0.3)
   - SwiftyJSON (3.1.1)
+  - UICircularProgressRing (1.7.4)
 
 DEPENDENCIES:
   - Alamofire (= 4.0.0)
@@ -16,6 +17,7 @@ DEPENDENCIES:
   - SlackTextViewController
   - Starscream (= 2.0.3)
   - SwiftyJSON (= 3.1.1)
+  - UICircularProgressRing
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
@@ -25,7 +27,8 @@ SPEC CHECKSUMS:
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  UICircularProgressRing: 5aca63423d913dc967661370e94e2af0770dd9cd
 
-PODFILE CHECKSUM: 3d83dac8c4a2c4f25d37d1ae9520a719819f1e28
+PODFILE CHECKSUM: ff6011c1c479a12067d10e1b8795c1a7f5ea59b7
 
 COCOAPODS: 1.2.0

@@ -13,6 +13,7 @@ target 'mitty' do
   pod 'Starscream', '2.0.3'
   pod 'SlackTextViewController'
   pod 'SkyFloatingLabelTextField', '~> 3.0'
+  pod 'UICircularProgressRing'
   
   target 'mittyTests' do
     inherit! :search_paths
