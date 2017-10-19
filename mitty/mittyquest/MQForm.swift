@@ -30,6 +30,7 @@
 import Foundation
 import UIKit
 import PureLayout
+import SkyFloatingLabelTextField
 
 @objc(MQForm)
 open class MQForm : UIView {
@@ -118,8 +119,7 @@ open class MQForm : UIView {
     
     // TextField
     static func text(name: String, placeHolder: String) -> Control {
-        let t = StyledTextField.newAutoLayout()
-        t.hilightedLineColor = UIColor.blue.cgColor
+        let t = SkyFloatingLabelTextField.newAutoLayout()
         t.placeholder = placeHolder
         t.backgroundColor = .white
         let c = Control(name: name, view: t)
