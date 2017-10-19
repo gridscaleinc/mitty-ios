@@ -15,8 +15,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class LikesService: Service {
-    let apiSendLike = MITTY_SERVICE_BASE_URL + "/send/like"
-    let apiRemoveLike = MITTY_SERVICE_BASE_URL + "/remove/like"
 
     static var instance: LikesService = {
         let instance = LikesService()
@@ -38,34 +36,23 @@ class LikesService: Service {
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "type": type,
             "id": id
         ]
-
-        Alamofire.request(apiSendLike, method: .post, parameters: parmeters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/send/like", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
     /// サーバーにいいねを削除。
@@ -84,30 +71,18 @@ class LikesService: Service {
             "type": type,
             "id": id
         ]
-
-        Alamofire.request(apiRemoveLike, method: .post
-                          , parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/remove/like", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 }

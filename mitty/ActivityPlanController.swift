@@ -445,48 +445,27 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
             request.setStr(.asMainEvent, "false")
         }
 
-        let urlString = MITTY_SERVICE_BASE_URL + "/new/event"
-
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
         LoadingProxy.on()
 
-        print(request.parameters)
-        Alamofire.request(urlString, method: .post, parameters: request.parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            switch response.result {
-            case .success:
-                if (self?.imagePicked)! {
-                    if let jsonObject = response.result.value {
-                        let json = JSON(jsonObject)
-                        print(json)
-
-                        let eventId = json["eventId"].stringValue
-                        self?.registerGallery(eventId)
-                    }
-                } else {
-                    self?.navigationController?.popToRootViewController(animated: true)
-                }
-            case .failure(let error):
-                print(response.debugDescription)
-                print(response.data ?? "No Data")
-                do {
-                    let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
-                    print(json)
-
-                    self?.showError("error occored" + (json as AnyObject).description)
-
-                } catch {
-                    print("Serialize Error")
-                }
-
-                print(response.description)
-
-                LoadingProxy.off()
-                print(error)
+        let api = APIClient(path: "/new/event", method: .post, parameters: request.parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            if (self.imagePicked) {
+                let jsonObject = data
+                let json = JSON(jsonObject)
+                let eventId = json["eventId"].stringValue
+                self.registerGallery(eventId)
+            } else {
+                self.navigationController?.popToRootViewController(animated: true)
             }
-        }
+        }, fail: {(error: Error?) in
+            LoadingProxy.off()
+            print(error)
+        })
     }
 
     func trim(_ s: String?, _ size: Int) -> String? {
@@ -526,22 +505,18 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-
-        let urlString = MITTY_SERVICE_BASE_URL + "/gallery/content"
-
-        Alamofire.request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default
-                          , headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { [weak self] response in
+        
+        let api = APIClient(path: "/gallery/content", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                break
-            case .failure(let error):
-                print(error)
-                self?.showError("画像登録エラー")
-                Thread.sleep(forTimeInterval: 4)
-            }
-            self?.navigationController?.popToRootViewController(animated: true)
-        }
+            self.navigationController?.popToRootViewController(animated: true)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+            self.showError("画像登録エラー")
+            Thread.sleep(forTimeInterval: 4)
+            self.navigationController?.popToRootViewController(animated: true)
+        })
     }
 }
 

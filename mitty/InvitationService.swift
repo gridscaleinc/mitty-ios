@@ -15,10 +15,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class InvitationService: Service {
-    let apiSendInvitation = MITTY_SERVICE_BASE_URL + "/send/invitation"
-    let apiGetInvitation = MITTY_SERVICE_BASE_URL + "/myinvitation/status"
-    let apiAcceptInvitation = MITTY_SERVICE_BASE_URL + "/accept/invitation"
-    
     
     static var instance: InvitationService = {
         let instance = InvitationService()
@@ -54,29 +50,18 @@ class InvitationService: Service {
             print(objectString ?? "")
         }
         
-        Alamofire.request(apiSendInvitation, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/send/invitation", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     /// <#Description#>
@@ -92,32 +77,24 @@ class InvitationService: Service {
         
         // ダミーコード、本当はサーバーから検索する。
         var invitations = [InvitationInfo]()
-        let request = Alamofire.request(apiGetInvitation, method: .get, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    if (json == nil || json["invitationStatus"] == nil) {
-                        callback([])
-                        return
-                    }
-                    
-                    for (_, jsonInfo) in json["invitationStatus"] {
-                        invitations.append(self.bindInvitation(jsonInfo))
-                    }
-                    callback(invitations)
-                }
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        let api = APIClient(path: "/myinvitation/status", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["invitationStatus"] == nil) {
+                callback([])
+                return
             }
-        }
+            
+            for (_, jsonInfo) in json["invitationStatus"] {
+                invitations.append(self.bindInvitation(jsonInfo))
+            }
+            callback(invitations)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
         
     }
     
@@ -139,28 +116,18 @@ class InvitationService: Service {
         LoadingProxy.on()
         
         // ダミーコード、本当はサーバーから検索する。
-        
-        let request = Alamofire.request(apiAcceptInvitation, method: .post, parameters: parameters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-                }
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        let api = APIClient(path: "/accept/invitation", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
-        
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     /// <#Description#>

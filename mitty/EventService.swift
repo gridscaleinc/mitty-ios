@@ -15,9 +15,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class EventService: Service {
-    let urlSearch = MITTY_SERVICE_BASE_URL + "/search/event"
-    let urlFetch = MITTY_SERVICE_BASE_URL + "/event/of"
-
     static var instance: EventService = {
         let instance = EventService()
         return instance
@@ -37,7 +34,7 @@ class EventService: Service {
     ///   - keys: 検索キー
     ///   - callback: コールバック。
     func search(keys: String, callback: @escaping (_ events: [EventInfo]) -> Void) {
-        let parmeters = [
+        let parameters = [
             "q": keys
         ]
 
@@ -45,33 +42,25 @@ class EventService: Service {
 
         // ダミーコード、本当はサーバーから検索する。
         var events = [EventInfo]()
-        let request = Alamofire.request(urlSearch, method: .get, parameters: parmeters)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["events"] == nil) {
-                        callback([])
-                        return
-                    }
-
-                    for (_, jsonEvent) in json["events"] {
-                        events.append(self.bindEventInfo(jsonEvent))
-                    }
-                }
-
-                callback(events)
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+        
+        let api = APIClient(path: "/search/event", method: .get, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["events"] == nil) {
+                callback([])
+                return
             }
-        }
+            for (_, jsonEvent) in json["events"] {
+                events.append(self.bindEventInfo(jsonEvent))
+            }
+            callback(events)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+
     }
 
     
@@ -129,7 +118,7 @@ class EventService: Service {
     ///   - id: イベントID
     ///   - callback: コールバック。
     func fetch(id: String, callback: @escaping (Event) -> Void) {
-        let parmeters = [
+        let parameters = [
             "id": id
         ]
 
@@ -140,25 +129,17 @@ class EventService: Service {
         ]
 
         // ダミーコード、本当はサーバーから検索する。
-        let request = Alamofire.request(urlFetch, method: .get, parameters: parmeters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)["event"]
-                    print(json)
-                    let event = self.bindEvent(json)
-                    callback(event)
-                }
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
-            }
-        }
+        let api = APIClient(path: "/event/of", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let event = self.bindEvent(json)
+            callback(event)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 

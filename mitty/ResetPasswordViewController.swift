@@ -152,7 +152,6 @@ class ResetPasswordViewController: MittyViewController, UITextFieldDelegate {
     /// - Parameter sender: <#sender description#>
     func onClickResetButton(_ sender: UIButton) {
         
-        let urlString = MITTY_SERVICE_BASE_URL + "/reset_password/send"
         let mail_address = form.quest("[name=mailAddress]").control()?.view as! UITextField
         
         if (mail_address.text == "") {
@@ -163,37 +162,16 @@ class ResetPasswordViewController: MittyViewController, UITextFieldDelegate {
         let parameters: Parameters = [
             "email": mail_address.text!.trimmingCharacters(in: .whitespaces)
         ]
-        print(parameters)
-        Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                self?.dismiss(animated: true, completion: nil)
-            case .failure(let error):
-                LoadingProxy.off()
-                let errorMessage = self?.form.quest("[name=errormessage]").control()?.view as! UILabel
-                errorMessage.text = "メールアドレスを確認してください。"
-                print(error)
-            }
-        }
 
-        call(url: urlString, method: .post, parameters: parameters) { (response) in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                self.dismiss(animated: true, completion: nil)
-            case .failure(let error):
-                LoadingProxy.off()
-                let errorMessage = self.form.quest("[name=errormessage]").control()?.view as! UILabel
-                errorMessage.text = "メールアドレスを確認してください。"
-                print(error)
-            }
-        }
-    }
-    
-    func call(url: String, method: HTTPMethod, parameters: Parameters, callback: @escaping (DataResponse<Any>) -> Void) {
-        Alamofire.request(url, method: method, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { response in
-            callback(response)
-        }
+        let api = APIClient(path: "/reset_password/send", method: .post, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            self.dismiss(animated: true, completion: nil)
+        }, fail: {(error: Error?) in
+            LoadingProxy.off()
+            let errorMessage = self.form.quest("[name=errormessage]").control()?.view as! UILabel
+            errorMessage.text = "メールアドレスを確認してください。"
+            print(error as Any)
+        })
     }
 }

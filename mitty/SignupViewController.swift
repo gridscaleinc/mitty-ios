@@ -208,21 +208,19 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
             "mail_address": mail_address.text!.trimmingCharacters(in: .whitespaces)
         ]
 
-        Alamofire.request(urlString, method: .post, parameters: parameters, headers: nil).validate(statusCode: 200..<300).responseJSON { [weak self] response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                let vc = SigninViewController()
-                self?.present(vc, animated: true, completion: nil)
-            case .failure(let error):
-                LoadingProxy.off()
-                let errorMessage = self?.signupForm.quest("[name=errormessage]").control()?.view as! UILabel
-                errorMessage.text = "ユーザーIDやパスワード、メールアドレスを確認してください。"
-                let signupButton = self?.signupForm.quest("[name=Signup]").control()?.view as! UIButton
-                signupButton.isEnabled = true
-                print(error)
-            }
-        }
+        let api = APIClient(path: "/signup", method: .post, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let vc = SigninViewController()
+            self.present(vc, animated: true, completion: nil)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+            let errorMessage = self.signupForm.quest("[name=errormessage]").control()?.view as! UILabel
+            errorMessage.text = "ユーザーIDやパスワード、メールアドレスを確認してください。"
+            let signupButton = self.signupForm.quest("[name=Signup]").control()?.view as! UIButton
+            signupButton.isEnabled = true
+        })
     }
 
 }
