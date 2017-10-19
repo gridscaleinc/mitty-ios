@@ -13,7 +13,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class ContentService: Service {
-    let apiUploadContent = MITTY_SERVICE_BASE_URL + "/upload/content"
     let apiContentList = MITTY_SERVICE_BASE_URL + "/mycontents/list"
 
     static var instance: ContentService = {
@@ -46,38 +45,22 @@ class ContentService: Service {
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
-        print(parameters)
-        print(httpHeaders)
-
-
-        Alamofire.request(apiUploadContent, method: .post, parameters: parameters, encoding: JSONEncoding.default
-                          , headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/upload/content", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["contentId"] == nil) {
-                        return
-                    }
-
-                    let contentId = json["contentId"].int64Value
-                    let url = json["linkUrl"].stringValue
-                    onCompletion(contentId, url)
-
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["contentId"] == nil) {
+                return
             }
-        }
+            let contentId = json["contentId"].int64Value
+            let url = json["linkUrl"].stringValue
+            onCompletion(contentId, url)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+
     }
 
     /// サーバーからイベントを検索。
@@ -89,35 +72,22 @@ class ContentService: Service {
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-
-
-        Alamofire.request(apiContentList, method: .get, encoding: JSONEncoding.default
-                          , headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/mycontents/list", method: .get, parameters: [:], headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["contents"] == nil) {
-                        return
-                    }
-
-                    let contents = self.bindContents(json["contents"])
-                    onCompletion(contents)
-
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["contents"] == nil) {
+                return
             }
-        }
+            let contents = self.bindContents(json["contents"])
+            onCompletion(contents)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+
     }
 
     /// contents -> [Content]バインド。

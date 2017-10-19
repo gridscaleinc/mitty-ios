@@ -40,7 +40,7 @@ class OffersService: Service {
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
-        let parmeters: [String: Any] = [
+        let parameters: [String: Any] = [
             "to_mitty_id": offer.toMittyId,
             "type": "NAMECARD",
             "message": offer.message,
@@ -48,28 +48,19 @@ class OffersService: Service {
             "offerred_id": offer.offerredId,
             "replied_id": offer.repliedId
         ]
-
-        Alamofire.request(apiSendOffer, method: .post, parameters: parmeters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/send/offers", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["id"] == nil) {
-                        return
-                    }
-                    return
-                }
-                break
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                print(response.description)
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["id"] == nil) {
+                return
             }
-        }
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
 
@@ -86,32 +77,23 @@ class OffersService: Service {
 
         // ダミーコード、本当はサーバーから検索する。
         var offers = [Offer]()
-        let request = Alamofire.request(apiOfferList, method: .get, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-
-                    if (json == nil || json["offerList"] == nil) {
-                        callback([])
-                        return
-                    }
-
-                    for (_, jsonOffer) in json["offerList"] {
-                        offers.append(self.bindOffers(jsonOffer))
-                    }
-                    callback(offers)
-                }
-
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        let api = APIClient(path: "/myoffers", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["offerList"] == nil) {
+                callback([])
+                return
             }
-        }
+            for (_, jsonOffer) in json["offerList"] {
+                offers.append(self.bindOffers(jsonOffer))
+            }
+            callback(offers)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
 
     }
 
@@ -134,27 +116,18 @@ class OffersService: Service {
         LoadingProxy.on()
         
         // ダミーコード、本当はサーバーから検索する。
-        
-        let request = Alamofire.request(apiAcceptOffer, method: .post, parameters: parameters, headers: httpHeaders)
-        request.validate(statusCode: 200..<300).responseJSON { response in
-            switch response.result {
-            case .success:
-                LoadingProxy.off()
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-                }
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+        let api = APIClient(path: "/accept/offers", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
         
     }
 

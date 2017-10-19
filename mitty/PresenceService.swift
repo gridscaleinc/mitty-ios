@@ -15,7 +15,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class PresenceService: Service {
-    let apiCheckin = MITTY_SERVICE_BASE_URL + "/checkin"
     
     static var instance: PresenceService = {
         let instance = PresenceService()
@@ -48,29 +47,20 @@ class PresenceService: Service {
         ]
         
         LoadingProxy.on()
-        Alamofire.request(apiCheckin, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/checkin", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["ok"] == nil) {
-                        return
-                    }
-
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                onError(error.localizedDescription)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["ok"] == nil) {
+                return
             }
-        }
+            return
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     // heartbeat

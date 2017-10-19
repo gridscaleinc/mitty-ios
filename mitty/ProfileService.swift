@@ -63,31 +63,22 @@ class ProfileService: Service {
         ]
 
         LoadingProxy.on()
-        Alamofire.request(apiSaveProfile, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/save/profile", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["id"] == nil) {
-                        return
-                    }
-                    let id = json["id"].int64Value
-                    profile.id = id
-                    onComplete()
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                onError(error.localizedDescription)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["id"] == nil) {
+                return
             }
-        }
+            let id = json["id"].int64Value
+            profile.id = id
+            onComplete()
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
     /// <#Description#>
@@ -103,30 +94,20 @@ class ProfileService: Service {
 
         LoadingProxy.on()
 
-        Alamofire.request(apiMyProfile, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/myprofile", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["profile"] == nil) {
-                        return
-                    }
-                    let profile = self.bindProfile(json["profile"])
-                    onComplete(profile)
-                    return
-                }
-
-                break
-
-            case .failure(let error):
-                print(error)
-                onError(error.localizedDescription)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["profile"] == nil) {
+                return
             }
-        }
+            let profile = self.bindProfile(json["profile"])
+            onComplete(profile)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
     func profile(of mittyId: Int, onComplete: @escaping (_ profile: Profile) -> Void, onError: @escaping (_ error: String) -> Void) {
@@ -141,30 +122,20 @@ class ProfileService: Service {
         
         LoadingProxy.on()
         
-        Alamofire.request(userProfileUrl, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/user/profile", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["profile"] == nil) {
-                        return
-                    }
-                    let profile = self.bindProfile(json["profile"])
-                    onComplete(profile)
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                onError(error.localizedDescription)
-                print(super.jsonResponse(response))
-                LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["profile"] == nil) {
+                return
             }
-        }
+            let profile = self.bindProfile(json["profile"])
+            onComplete(profile)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
 
 

@@ -15,10 +15,6 @@ import SwiftyJSON
 
 // シングルトンサービスクラス。
 class NameCardService: Service {
-    let apiMyNameCards = MITTY_SERVICE_BASE_URL + "/mynamecards"
-    let apiSaveNameCard = MITTY_SERVICE_BASE_URL + "/save/namecard"
-    let apiGetNamecard = MITTY_SERVICE_BASE_URL + "/namecard/of"
-    
     static var instance: NameCardService = {
         let instance = NameCardService()
         return instance
@@ -58,30 +54,22 @@ class NameCardService: Service {
             ]
         
         LoadingProxy.on()
-        Alamofire.request(apiSaveNameCard, method: .post, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        
+        let api = APIClient(path: "/save/namecard", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["id"] == nil) {
-                        return
-                    }
-                    let id = json["id"].int64Value
-                    nameCard.id = id
-                    onComplete()
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                onError(error.localizedDescription)
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["id"] == nil) {
+                return
             }
-        }
+            let id = json["id"].int64Value
+            nameCard.id = id
+            onComplete()
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     /// <#Description#>
@@ -97,29 +85,20 @@ class NameCardService: Service {
         
         LoadingProxy.on()
         
-        Alamofire.request(apiMyNameCards, method: .get, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/mynamecards", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["namecards"] == nil) {
-                        return
-                    }
-                    let nameCardInfoList = self.bindNameCards(json)
-                    onComplete(nameCardInfoList)
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                onError(error.localizedDescription)
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["namecards"] == nil) {
+                return
             }
-        }
+            let nameCardInfoList = self.bindNameCards(json)
+            onComplete(nameCardInfoList)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     /// <#Description#>
@@ -139,29 +118,20 @@ class NameCardService: Service {
         
         LoadingProxy.on()
         
-        Alamofire.request(apiGetNamecard, method: .get, parameters: parameters, headers: httpHeaders).validate(statusCode: 200..<300).responseJSON { response in
+        let api = APIClient(path: "/namecard/of", method: .get, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            switch response.result {
-            case .success:
-                if let jsonObject = response.result.value {
-                    let json = JSON(jsonObject)
-                    print(json)
-                    if (json == nil || json["namecard"] == nil) {
-                        return
-                    }
-                    let nameCardInfo = self.bindNameCard(json["namecard"])
-                    onComplete(nameCardInfo)
-                    return
-                }
-                
-                break
-                
-            case .failure(let error):
-                print(error)
-                print(super.jsonResponse(response))
-                onError(error.localizedDescription)
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            if (json == nil || json["namecard"] == nil) {
+                return
             }
-        }
+            let nameCardInfo = self.bindNameCard(json["namecard"])
+            onComplete(nameCardInfo)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
     }
     
     
