@@ -25,6 +25,8 @@
 		F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BB80251DAE58FE00055D48 /* CenterViewController.swift */; };
 		F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */; };
 		F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */; };
+		FC00311C1F9B7BB5009EB92D /* downarrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FC00311B1F9B7BB4009EB92D /* downarrow.png */; };
+		FC00311E1F9B8983009EB92D /* Clock.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC00311D1F9B8983009EB92D /* Clock.swift */; };
 		FC004C5E1F43322800230DAA /* ProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5D1F43322800230DAA /* ProfileService.swift */; };
 		FC004C601F45E13200230DAA /* Code.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C5F1F45E13200230DAA /* Code.swift */; };
 		FC004C681F48F84D00230DAA /* SocialIdInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */; };
@@ -252,6 +254,8 @@
 		F4BB80251DAE58FE00055D48 /* CenterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupViewController.swift; sourceTree = "<group>"; };
 		F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SigninViewController.swift; sourceTree = "<group>"; };
+		FC00311B1F9B7BB4009EB92D /* downarrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = downarrow.png; path = images/downarrow.png; sourceTree = "<group>"; };
+		FC00311D1F9B8983009EB92D /* Clock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Clock.swift; sourceTree = "<group>"; };
 		FC004C5D1F43322800230DAA /* ProfileService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileService.swift; sourceTree = "<group>"; };
 		FC004C5F1F45E13200230DAA /* Code.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Code.swift; sourceTree = "<group>"; };
 		FC004C671F48F84D00230DAA /* SocialIdInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocialIdInputForm.swift; sourceTree = "<group>"; };
@@ -753,6 +757,7 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC00311B1F9B7BB4009EB92D /* downarrow.png */,
 				FC7585901F75586100680CC9 /* forward.png */,
 				FC75858A1F74149E00680CC9 /* online.jpeg */,
 				FC7585881F740FB600680CC9 /* teleport.png */,
@@ -906,6 +911,7 @@
 				FC4B886A1F01566000458912 /* SpeedMeter.swift */,
 				FC3C16DB1F3A7A2600E7622B /* ContentPicker.swift */,
 				FC5CBD941F727470006541E3 /* NamecardPicker.swift */,
+				FC00311D1F9B8983009EB92D /* Clock.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1078,6 +1084,7 @@
 				FC0081911DD3955300C1F970 /* pengin.png in Resources */,
 				FCFE67C41DE50FA1007203EF /* bagua_7.png in Resources */,
 				FCFA847E1F0A848E00E9C6F2 /* editpen.png in Resources */,
+				FC00311C1F9B7BB5009EB92D /* downarrow.png in Resources */,
 				FC3482AE1ED87F9C005E539E /* beauty2.jpeg in Resources */,
 				FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */,
 				FC1766491E5C6D52000A4BAE /* event11.png in Resources */,
@@ -1340,6 +1347,7 @@
 				FC5CBD7D1F540BB3006541E3 /* NamecardExchangeViewController.swift in Sources */,
 				FC5CBD851F5961DF006541E3 /* Offer.swift in Sources */,
 				FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */,
+				FC00311E1F9B8983009EB92D /* Clock.swift in Sources */,
 				FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */,

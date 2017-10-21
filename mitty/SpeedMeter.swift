@@ -79,7 +79,11 @@ class SpeedMeter {
         return v(velocity)
 
     }
-
+    
+    var kmh : Double {
+        return velocity * 3.6
+    }
+    
     func v(_ velocity: Double) -> String {
         // Kilometers per Hour
         let kh = velocity / 1000 * 3600

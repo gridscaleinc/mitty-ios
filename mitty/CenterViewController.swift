@@ -12,6 +12,7 @@ import UIKit
 import MapKit
 
 import CoreLocation
+import UICircularProgressRing
 
 //
 // 個人情報を管理するView
@@ -23,7 +24,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     let myLocationManager = CLLocationManager()
     var socialMirror: SocialMirrorForm!
     let myMapView = MKMapView()
-
+    
     let controlPanel = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
     var timer = Timer()
@@ -53,8 +54,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         return ind
     }()
 
-    let speedDisplay = MQForm.label(name: "speed", title: "0.0 M/S")
-
+    let dashboard = DashBoardForm()
+    
     let picture: Control = MQForm.button(name: "m2", title: "")
 
     var nearlyDestinations = [Destination]()
@@ -67,6 +68,17 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     var isStarting = true
     var currentLocationPin = MKPointAnnotation()
 
+    let dashButton = MQForm.button(name: "opendashboard", title: "D/B").layout {
+        b in
+        b.verticalCenter().holizontalCenter().height(60).width(60)
+        b.button.backgroundColor = MittyColor.healthyGreen
+        b.button.setTitleColor(.white, for: .normal)
+        b.button.layer.cornerRadius = 30
+        b.button.layer.shadowColor = UIColor.gray.cgColor
+        b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
+        b.button.layer.shadowRadius = 10
+        b.button.layer.shadowOpacity = 0.9
+    }
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
         self.navigationItem.title = LS(key: "operation_center")
@@ -112,11 +124,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
-
-
-        speedDisplay.label.textColor = UIColor.red
-        speedDisplay.label.font = speedDisplay.label.font.withSize(13)
-        self.view.addSubview(speedDisplay.view)
 
         self.view.addSubview(picture.button)
         picture.button.setImage(UIImage(named: "pengin2")?.af_imageRoundedIntoCircle(), for: .normal)
@@ -187,82 +194,14 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
     func loadForm () {
 
-        let section = Section(name: "control-panel", view: UIView.newAutoLayout()).layout() {
-            s in
-            s.fillParent()
-            s.view.backgroundColor = UIColor(white: 0.15, alpha: 0.15)
-        }
-
-        controlPanel +++ section
-
-        var row = Row.Intervaled().layout() {
-            r in
-            r.fillHolizon().height(45)
-        }
-        row.spacing = 60
-
-
-        row +++ MQForm.button(name: "nearby", title: "S/Mirror").layout {
-            c in
-            c.height(30)
-            c.button.backgroundColor = MittyColor.sunshineRed.withAlphaComponent(0.9)
-            c.button.setTitleColor(.white, for: .normal)
-            c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-            }.bindEvent(.touchUpInside) {
-                b in
-                self.socialMirror.view.isHidden = !self.socialMirror.view.isHidden
-                if (!self.socialMirror.view.isHidden) {
-                    self.socialMirror.eventLine.view.blink()
-                }
-        }
-
-        row +++ MQForm.button(name: "destinations", title: "行先").layout {
-            c in
-            c.height(30)
-            c.button.backgroundColor = MittyColor.sunshineRed.withAlphaComponent(0.9)
-            c.button.setTitleColor(.white, for: .normal)
-            c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }.bindEvent(.touchUpInside) {
-            b in
-            self.loadDestinations()
-        }
-
-        section <<< row
-
-        row = Row.Intervaled().layout() {
-            r in
-            r.fillHolizon().height(40)
-        }
-
-        row.spacing = 60
-
-
-        row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
-            c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
-            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
-            c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }
-
-        let settingsButton = MQForm.button(name: "settings", title: "⚙").layout {
-            c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.colorWithRGB(rgbValue: 0xF8F9F9, alpha: 0.9)
-            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
-            c.button.titleLabel?.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-        }
-        row +++ settingsButton
-
-        settingsButton.bindEvent(.touchUpInside) {
-            b in
-            let pinfoViewController = PersonalInfoViewController()
-            self.navigationController?.pushViewController(pinfoViewController, animated: true)
-        }
-        section <<< row
-
         view.addSubview(controlPanel)
-
+        dashButton.view.isHidden = true // 初期状態は非表示。
+        controlPanel +++ dashButton.bindEvent(.touchUpInside) {
+            b in
+            self.dashboard.view.isHidden = false
+            self.dashButton.view.isHidden = true
+        }
+        
         view.addSubview(display)
 
         display.backgroundColor = UIColor.white
@@ -280,7 +219,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             c.label.shadowOffset = CGSize(width: 0.1, height: 0.1)
             c.height(50).fillHolizon(5).upper()
         }
-
+        
         let checkinButton = MQForm.button(name: "checkin", title: "").layout {
             b in
             b.button.setImage(UIImage(named: "checkin.jpeg")?.af_imageRoundedIntoCircle(), for: .normal)
@@ -306,7 +245,76 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 //            l.label.backgroundColor = UIColor.clear
             l.down(withInset: 5).height(40).width(130).rightMost(withInset: 5)
         }
-
+        
+        view.addSubview(dashboard.view)
+        dashboard.loadForm()
+        dashboard.layout {
+            p in
+            p.height(UIScreen.main.bounds.width / 2 + 40).fillHolizon()
+            p.view.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
+        }
+        
+        let row = Row.Intervaled()
+        row.spacing = 10
+        
+        
+        row +++ MQForm.button(name: "nearby", title: "S/Mirror").layout {
+            c in
+            c.height(30)
+            c.button.backgroundColor = UIColor.clear
+            c.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
+                b in
+                self.socialMirror.view.isHidden = !self.socialMirror.view.isHidden
+                if (!self.socialMirror.view.isHidden) {
+                    self.socialMirror.eventLine.view.blink()
+                }
+        }
+        
+        row +++ MQForm.button(name: "destinations", title: "行先").layout {
+            c in
+            c.height(30)
+            c.button.backgroundColor = UIColor.clear
+            c.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
+                b in
+                self.loadDestinations()
+        }
+        
+        row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
+            c in
+            c.height(30)
+            c.button.backgroundColor = UIColor.clear
+            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
+        }
+        
+        let settingsButton = MQForm.button(name: "settings", title: "⚙").layout {
+            c in
+            c.height(30)
+            c.button.backgroundColor = UIColor.clear
+            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
+        }
+        row +++ settingsButton
+        
+        settingsButton.bindEvent(.touchUpInside) {
+            b in
+            let pinfoViewController = PersonalInfoViewController()
+            self.navigationController?.pushViewController(pinfoViewController, animated: true)
+        }
+        
+        dashboard +++ MQForm.tapableImg(name: "down-arrow", url: "downarrow").layout {
+            arrow in
+            arrow.upper().holizontalCenter().width(40).height(30)
+            }.bindEvent(.touchUpInside) { _ in
+                self.dashboard.view.isHidden = true
+                self.dashButton.view.isHidden = false
+        }
+        
+        dashboard +++ row.layout() {
+            r in
+            r.fillHolizon().height(45).down(withInset: 10)
+        }
+        
     }
 
     func loadDestinations () {
@@ -387,10 +395,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             display.autoSetDimension(.height, toSize: 100)
             display.autoSetDimension(.width, toSize: 180)
 
-            speedDisplay.label.autoPinEdge(.top, to: .bottom, of: indicator, withOffset: 10)
-            speedDisplay.label.autoPinEdge(.left, to: .left, of: indicator)
-            speedDisplay.height(30).width(300)
-
             display.layer.borderWidth = 0.7
             display.layer.borderColor = UIColor.white.cgColor
 
@@ -398,7 +402,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
             display.configLayout()
             socialMirror.configLayout()
-            
+            dashboard.configLayout()
             didSetupConstraints = true
         }
 
@@ -468,12 +472,18 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             timer.fire()
 
         } else {
+            let visible = self.isViewLoaded && (self.view.window
+                != nil)
             speedMeter?.updateLocation(nowLocation: myLocation)
             if let sm = speedMeter {
-                if sm.status == .moving {
-                    speedDisplay.label.text = sm.velocityMeter
-                } else {
-                    speedDisplay.label.text = "停止中"
+                if visible {
+                    if sm.status == .moving {
+                        dashboard.updateAverageSpeed(sm.velocity)
+                        dashboard.updateInstantSpeed(sm.instantVelocity)
+                    } else {
+                        dashboard.updateAverageSpeed(sm.velocity)
+                        dashboard.updateInstantSpeed(0)
+                    }
                 }
             }
         }
@@ -499,7 +509,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         if Date().timeIntervalSince(speedMeter!.previousTime) > 10 {
             speedMeter!.status = .stopping
-            speedDisplay.label.text = "停止中"
+            dashboard.updateInstantSpeed(0)
+            dashboard.updateAverageSpeed(0)
         }
     }
 
