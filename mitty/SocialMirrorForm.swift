@@ -196,11 +196,11 @@ class SocialMirrorForm: Container {
     }
     
     func setBackGround() {
-        let layer = MittyColor.gradientLayer( MittyColor.healthyGreen.withAlphaComponent(0.7),
-                                              MittyColor.healthyGreen.withAlphaComponent(0.5),
+        let layer = MittyColor.gradientLayer( MittyColor.healthyGreen.withAlphaComponent(0.8),
+                                              MittyColor.white.withAlphaComponent(0.9),
                                               MittyColor.healthyGreen.withAlphaComponent(0.7),
                                               CGFloat.pi/2)
-        layer.frame = CGRect(x: 0, y: 0, width: 295, height: 300)
+        layer.frame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
         self.view.layer.insertSublayer(layer, at: 0)
 //        self.view.layer.borderWidth = 0.8
 //        self.view.layer.borderColor = MittyColor.black.cgColor
@@ -216,6 +216,4 @@ class SocialMirrorForm: Container {
         proposalLine.num = m.proposal
         
     }
-    
-
 }
