@@ -26,7 +26,8 @@ class SocialBar: Row {
             l in
             l.height(40).width(150).leftMargin(5).verticalCenter()
             l.label.adjustsFontSizeToFitWidth = true
-            l.label.textColor = MittyColor.healthyGreen
+            l.label.textColor = MittyColor.white
+            l.label.font = UIFont.boldSystemFont(ofSize: 15)
 
         }
 
@@ -72,7 +73,7 @@ class SocialMirrorForm: Container {
         self.navigator = navi
         
         let scroll = UIScrollView.newAutoLayout()
-        scroll.contentSize = CGSize(width: 280, height: 300)
+        scroll.contentSize = CGSize(width: 280, height: 200)
         scroll.isScrollEnabled = true
         scroll.showsVerticalScrollIndicator = false
         scroll.canCancelContentTouches = false
@@ -81,28 +82,29 @@ class SocialMirrorForm: Container {
         super.init(name: "Social-Mirror", view: scroll)
         self.layout {
             m in
-            m.width(300).height(280)
-            m.verticalCenter().holizontalCenter()
+            m.width(300).height(210)
+            m.holizontalCenter().upper(withInset: 80)
         }
 
         let detailForm = Section(name: "Content-Form", view: UIView.newAutoLayout())
         detailForm.lineSpace = 10
         self +++ detailForm
-
+        setBackGround()
+        
         detailForm <<< eventLine
-        sep(detailForm, under: eventLine)
+//        sep(detailForm, under: eventLine)
         
         detailForm <<< todaysEventLine
-        sep(detailForm, under: todaysEventLine)
+//        sep(detailForm, under: todaysEventLine)
         
         detailForm <<< invitationLine
-        sep(detailForm, under: invitationLine)
+//        sep(detailForm, under: invitationLine)
         
         detailForm <<< namecardOfferLine
-        sep(detailForm, under: namecardOfferLine)
+//        sep(detailForm, under: namecardOfferLine)
         
         detailForm <<< requestLine
-        sep(detailForm, under: requestLine)
+//        sep(detailForm, under: requestLine)
         
         detailForm <<< proposalLine
         
@@ -115,7 +117,6 @@ class SocialMirrorForm: Container {
             f in
             f.fillParent(withInset:10).width(300).bottomAlign(with: nop)
             f.view.autoSetDimension(.height, toSize: 300, relation: .greaterThanOrEqual)
-            f.view.backgroundColor = UIColor.black
         }
         
         detailForm.bindEvent(.touchUpInside) {
@@ -194,6 +195,17 @@ class SocialMirrorForm: Container {
         section +++ seperator
     }
     
+    func setBackGround() {
+        let layer = MittyColor.gradientLayer( MittyColor.healthyGreen.withAlphaComponent(0.7),
+                                              MittyColor.healthyGreen.withAlphaComponent(0.5),
+                                              MittyColor.healthyGreen.withAlphaComponent(0.7),
+                                              CGFloat.pi/2)
+        layer.frame = CGRect(x: 0, y: 0, width: 295, height: 300)
+        self.view.layer.insertSublayer(layer, at: 0)
+//        self.view.layer.borderWidth = 0.8
+//        self.view.layer.borderColor = MittyColor.black.cgColor
+        
+    }
     
     func load(_ m: SocialMirror) {
         eventLine.num = m.event

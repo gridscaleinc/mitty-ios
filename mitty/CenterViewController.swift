@@ -297,6 +297,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             arrow.upper().holizontalCenter().width(40).height(30)
             }.bindEvent(.touchUpInside) { _ in
                 self.dashboard.view.isHidden = true
+                self.socialMirror.view.isHidden = true
                 self.dashButton.view.isHidden = false
         }
         

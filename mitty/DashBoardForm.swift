@@ -84,12 +84,11 @@ class DashBoardForm : Container {
             p.endAngle = CGFloat(endAngle)
             p.fullCircle = false
             p.innerCapStyle = .square
-            p.fontColor = .white
-            p.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-//            p.innerRingColor = UIColor.red.withAlphaComponent(0.8)
+            p.fontColor = MittyColor.white
+            p.font = UIFont.boldSystemFont(ofSize: 15)
             p.innerRingWidth = 5
             p.innerRingSpacing = 1
-            p.innerRingColor = MittyColor.red.withAlphaComponent(0.9)
+            p.innerRingColor = MittyColor.red
             p.valueIndicator = "km/h"
             p.setProgress(value: 50, animationDuration: 3)
             p.font = UIFont.systemFont(ofSize: 18)

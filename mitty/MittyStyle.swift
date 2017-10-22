@@ -28,7 +28,7 @@ class MittyColor : UIColor {
     static let sunshineRed = UIColor(red: 1.0, green: 0x54/255, blue: 0x27/266, alpha:1.0)
     
     
-    static func gradientLayer(_ s: UIColor? = MittyColor.sunshineRed, _ m: UIColor? = MittyColor.sunshineRed, _ e: UIColor? = MittyColor.sunshineRed) -> CAGradientLayer {
+    static func gradientLayer(_ s: UIColor? = MittyColor.sunshineRed, _ m: UIColor? = MittyColor.sunshineRed, _ e: UIColor? = MittyColor.sunshineRed, _ rotation: CGFloat? = CGFloat.pi / 2) -> CAGradientLayer {
         
         let gradientLayer = CAGradientLayer()
         
@@ -38,7 +38,7 @@ class MittyColor : UIColor {
             e!.cgColor
         ]
         
-        gradientLayer.transform = CATransform3DMakeRotation(CGFloat.pi / 2, 0, 0, 1)
+        gradientLayer.transform = CATransform3DMakeRotation(rotation!, 0, 0, 1)
         
         return gradientLayer
     }

@@ -136,7 +136,7 @@ class ActivityListForm: MQForm {
                 d.width(50).height(30).verticalCenter().leftMargin(15)
             }
 
-            let l = MQForm.label(name: "activitylabel", title: t.title).height(30).layout{
+            let l = MQForm.label(name: "activitylabel", title: t.title).layout{
                 l in
                 l.label.numberOfLines = 0
                 l.verticalCenter().leftMargin(15).rightMost(withInset: 50)
