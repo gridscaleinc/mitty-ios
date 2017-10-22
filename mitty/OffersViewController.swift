@@ -79,8 +79,7 @@ class OffersViewController : MittyViewController {
             let line2 = Row.LeftAligned()
             let message = MQForm.label(name: "message", title: offer.message).layout {
                 n in
-                n.rightMost(withInset: 10).verticalCenter()
-                n.label.textColor = MittyColor.lightYellow
+                n.rightMost(withInset: 10).verticalCenter().leftMargin(30)
                 n.label.numberOfLines = 3
                 n.label.adjustsFontSizeToFitWidth = true
             }
@@ -101,16 +100,27 @@ class OffersViewController : MittyViewController {
                 b in
                 b.height(30)
                 b.button.backgroundColor = MittyColor.healthyGreen
+                b.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
                 b in
                 self.handleOffer(offer, "REFUESED")
+                (b as! UIButton).isEnabled = false
+                (b as! UIButton).backgroundColor = MittyColor.gray
+                (b as! UIButton).setTitleColor(.lightGray, for: .normal)
             }
-
             
-            line3 +++ MQForm.button(name: "ok", title: "承認").height(30).bindEvent(.touchUpInside) {
+            line3 +++ MQForm.button(name: "ok", title: "承認").layout{
+                b in
+                b.height(30)
+                b.button.backgroundColor = MittyColor.sunshineRed
+                b.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
                 b in
                 self.handleOffer(offer, "ACCEPTED")
                 (b as! UIButton).isEnabled = false
+                
+                (b as! UIButton).backgroundColor = MittyColor.gray
+                (b as! UIButton).setTitleColor(.lightGray, for: .normal)
             }
             
             detailForm <<< line3

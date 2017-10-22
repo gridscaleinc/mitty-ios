@@ -65,7 +65,7 @@ class MeetingCell : UICollectionViewCell {
         self.meetingInfo = meeting
         
         name.numberOfLines = 2
-        name.text = "#" + (meeting.name )
+        name.text = "#" + (meeting.title )
         name.textColor = MittyColor.labelColor
         
         if (meeting.logoUrl != "") {

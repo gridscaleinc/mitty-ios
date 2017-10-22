@@ -150,14 +150,9 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         bagua.bindEvent(.touchUpInside) {
             b in
-            let isHidden = self.socialMirror.view.isHidden
-            self.socialMirror.view.isHidden = !isHidden
-            if !isHidden {
-                self.socialMirror.todaysEventLine.labelItem.view.blink(duration: 0.8)
-                self.socialMirror.todaysEventLine.numberItem.label.text = "10"
-                self.socialMirror.todaysEventLine.labelItem.label.textColor = MittyColor.sunshineRed
-                self.socialMirror.todaysEventLine.numberItem.view.blink(duration: 0.8)
-            }
+            
+            self.showSocialMirror()
+            
         }
         
         //self.view.addSubview(bagua)
@@ -186,6 +181,21 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         didSetupConstraints = false
         self.view.setNeedsUpdateConstraints()
 
+    }
+    
+    func showSocialMirror () {
+        SocialContactService.instance.getSocailMirror(onComplete: {
+            mirror in
+            self.bagua.label.text = mirror.description
+            self.socialMirror.load(mirror)
+            
+            let isHidden = self.socialMirror.view.isHidden
+            self.socialMirror.view.isHidden = !isHidden
+            
+        }, onError: {
+            error in
+            self.bagua.label.text = error
+        })
     }
 
     func pictureTaped() {
@@ -248,10 +258,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             c.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
                 b in
-                self.socialMirror.view.isHidden = !self.socialMirror.view.isHidden
-                if (!self.socialMirror.view.isHidden) {
-                    self.socialMirror.eventLine.view.blink()
-                }
+                self.showSocialMirror()
         }
         
         row +++ MQForm.button(name: "destinations", title: "行先").layout {

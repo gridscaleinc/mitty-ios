@@ -50,6 +50,7 @@ class SocialBar: Row {
             return _num
         }
         set(v) {
+            _num = v
             numberItem.label.text = String(v)
         }
     }    
@@ -57,13 +58,13 @@ class SocialBar: Row {
 
 class SocialMirrorForm: Container {
 
-    var eventLine = SocialBar(text: "イベント")
-    var todaysEventLine = SocialBar(text: "本日の予定")
-    var weeklyEventLine = SocialBar(text: "一週間以内の予定")
-    var invitationLine = SocialBar(text: "イベント招待")
-    var namecardOfferLine = SocialBar(text: "名刺交換")
-    var requestLine = SocialBar(text: "リクエスト")
-    var proposalLine = SocialBar(text: "提案")
+    private var eventLine = SocialBar(text: "イベント")
+    private var todaysEventLine = SocialBar(text: "本日の予定")
+    private var weeklyEventLine = SocialBar(text: "一週間以内の予定")
+    private var invitationLine = SocialBar(text: "イベント招待")
+    private var namecardOfferLine = SocialBar(text: "名刺交換")
+    private var requestLine = SocialBar(text: "リクエスト")
+    private var proposalLine = SocialBar(text: "提案")
 
     weak var navigator: UINavigationController?
     

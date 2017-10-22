@@ -190,7 +190,6 @@
 		FCFBC6791E63C39000AEF869 /* EventInputForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC6781E63C39000AEF869 /* EventInputForm.swift */; };
 		FCFBC67F1E6414F000AEF869 /* CollectionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */; };
 		FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */; };
-		FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */; };
 		FCFC7F821DD2237400CA0045 /* penginland.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFC7F811DD2237400CA0045 /* penginland.png */; };
 		FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */; };
 		FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFE67B61DE50FA1007203EF /* bagua_1.png */; };
@@ -420,7 +419,6 @@
 		FCFBC6781E63C39000AEF869 /* EventInputForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventInputForm.swift; sourceTree = "<group>"; };
 		FCFBC67E1E6414F000AEF869 /* CollectionForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionForm.swift; sourceTree = "<group>"; };
 		FCFC7F7D1DD21A0300CA0045 /* IslandService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandService.swift; sourceTree = "<group>"; };
-		FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandCell.swift; sourceTree = "<group>"; };
 		FCFC7F811DD2237400CA0045 /* penginland.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = penginland.png; path = images/penginland.png; sourceTree = "<group>"; };
 		FCFE67B41DE50F89007203EF /* BaguaIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaguaIndicator.swift; sourceTree = "<group>"; };
 		FCFE67B61DE50FA1007203EF /* bagua_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bagua_1.png; path = images/bagua_1.png; sourceTree = "<group>"; };
@@ -687,7 +685,6 @@
 			isa = PBXGroup;
 			children = (
 				F4BB80211DAE58E000055D48 /* IslandViewController.swift */,
-				FCFC7F7F1DD21D9000CA0045 /* IslandCell.swift */,
 				FC0081821DD37D7F00C1F970 /* TalkListViewController.swift */,
 				FC0081861DD3890A00C1F970 /* TalkingCell.swift */,
 				FC448D3C1DD5EA730032F0D4 /* RightButton.swift */,
@@ -1333,7 +1330,6 @@
 				FC5CBD771F52A51E006541E3 /* RequestListForm.swift in Sources */,
 				FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */,
 				FC004C681F48F84D00230DAA /* SocialIdInputForm.swift in Sources */,
-				FCFC7F801DD21D9000CA0045 /* IslandCell.swift in Sources */,
 				FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */,
 				FC3C16E21F3EEFFD00E7622B /* NewProposalReq.swift in Sources */,
 				FC7585871F73BDA300680CC9 /* LockForm.swift in Sources */,

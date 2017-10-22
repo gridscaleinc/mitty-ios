@@ -122,10 +122,9 @@ class IslandViewController: MittyViewController {
                 meetings in
                 self.meetingList = meetings
                 self.collectionView.reloadData()
-            },
-                                                    onError: {
-                                                        error in
-                                                        self.showError(error as! String)
+            }, onError: {
+                error in
+                self.showError(error as! String)
             })
         } else if s.selectedSegmentIndex == 1 {
             MeetingService.instance.getRequestMeeting(callback: {
@@ -138,8 +137,14 @@ class IslandViewController: MittyViewController {
                 self.showError(error as! String)
             })
         } else if s.selectedSegmentIndex == 2 {
-            self.meetingList = [MeetingInfo]()
-            self.collectionView.reloadData()
+            MeetingService.instance.getContactMeeting(callback: {
+                meetings in
+                self.meetingList = meetings
+                self.collectionView.reloadData()
+            }, onError: {
+                error in
+                self.showError(error as! String)
+            })
         }
     }
 }
@@ -166,7 +171,7 @@ extension IslandViewController: UICollectionViewDataSource {
             
             return cell
         }
-        return IslandCell()
+        return MeetingCell()
     }
     
     ///

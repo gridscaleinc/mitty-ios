@@ -129,6 +129,38 @@ class MeetingService: Service {
         })
         
     }
+    
+    /// <#Description#>
+    ///
+    /// - Returns: <#return value description#>
+    func getContactMeeting(callback: @escaping (_ meetingList: [MeetingInfo]) -> Void, onError: @escaping (_ error: Any) -> Void = { _ in }) {
+        
+        LoadingProxy.on()
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        let api = APIClient(path: "/contact/meeting", method: .get, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let meetings = json["contactMeetingList"]
+            var meetingList = [MeetingInfo]()
+            for (_, jsonMeeting) in meetings {
+                let meeting = self.bindEventMeeting(jsonMeeting)
+                
+                meetingList.append(meeting)
+            }
+            callback(meetingList)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+        
+    }
+    
     /// 会議情報バインド。
     ///
     /// - Parameter json: JSONオブジェクト。
