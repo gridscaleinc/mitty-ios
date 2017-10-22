@@ -62,7 +62,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     
     var targetLocation: Destination? = nil
 
-    let targetLocationDisp = MQForm.label(name: "Taxi", title: " 現在地:東京タワー🗼")
+    let destinationForm = DestinationForm()
+    
     var speedMeter: SpeedMeter? = nil
 
     var isStarting = true
@@ -182,6 +183,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         myLocationManager.startUpdatingLocation()
         
         super.lockView()
+        didSetupConstraints = false
+        self.view.setNeedsUpdateConstraints()
 
     }
 
@@ -209,26 +212,15 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         display.layer.shadowOffset = CGSize(width: 5, height: 5)
         display.layer.shadowOpacity = 0.5
         
-        display +++ targetLocationDisp.layout {
+        display +++ destinationForm.layout {
             c in
-//            c.label.backgroundColor = MittyColor.sunshineRed
-            c.label.numberOfLines = 1
-            c.label.adjustsFontSizeToFitWidth = true
-            c.label.textColor = UIColor.gray.darkerColor(percent: 19)
-            c.label.shadowColor = .white
-            c.label.shadowOffset = CGSize(width: 0.1, height: 0.1)
-            c.height(50).fillHolizon(5).upper()
+            c.fillHolizon().upper()
+//            c.view.layer.borderColor = UIColor.red.cgColor
+//            c.view.layer.borderWidth = 1
         }
-        
-        let checkinButton = MQForm.button(name: "checkin", title: "").layout {
-            b in
-            b.button.setImage(UIImage(named: "checkin.jpeg")?.af_imageRoundedIntoCircle(), for: .normal)
-            b.down(withInset: 5).height(40).width(40).leftMost(withInset: 5)
-//            b.button.backgroundColor = UIColor.clear
-            b.button.layer.borderWidth = 0
-        }
+        destinationForm.build()
 
-        checkinButton.bindEvent(.touchUpInside) {
+        destinationForm.onCheckin = {
             view in
             let checkinvc = CheckinViewController()
             if (self.targetLocation != nil) {
@@ -237,15 +229,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             self.navigationController?.pushViewController(checkinvc, animated: true)
         }
 
-        display +++ checkinButton
-
-
-        display +++ MQForm.label(name: "checkLabel", title: "  チェックイン").layout {
-            l in
-//            l.label.backgroundColor = UIColor.clear
-            l.down(withInset: 5).height(40).width(130).rightMost(withInset: 5)
-        }
-        
         view.addSubview(dashboard.view)
         dashboard.loadForm()
         dashboard.layout {
@@ -366,11 +349,10 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             }
 
             if (self.targetLocation != nil) {
-                self.targetLocationDisp.label.text = self.targetLocation?.islandName
+                self.destinationForm.setDestination(self.targetLocation!.islandName)
             } else {
-                self.targetLocationDisp.label.text = ""
+                self.destinationForm.setDestination("-")
             }
-
 
         }
     }
@@ -392,8 +374,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
-            display.autoSetDimension(.height, toSize: 100)
             display.autoSetDimension(.width, toSize: 180)
+            display.autoPinEdge(.bottom, to: .bottom, of: destinationForm.view)
 
             display.layer.borderWidth = 0.7
             display.layer.borderColor = UIColor.white.cgColor
@@ -467,7 +449,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             isStarting = false
 
 
-            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.update), userInfo: nil, repeats: true)
+            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateSpeed
+                ), userInfo: nil, repeats: true)
 
             timer.fire()
 
@@ -498,7 +481,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     }
 
     @objc
-    func update(tm: Timer) {
+    func updateSpeed(tm: Timer) {
         if speedMeter == nil {
             return
         }
@@ -519,8 +502,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             return
         }
         let dest = CLLocation(latitude: targetLocation!.latitude, longitude: targetLocation!.longitude)
-        let distance = String(format: "%.1f", dest.distance(from: l) / 1000)
-        targetLocationDisp.label.text = targetLocation!.islandName + " \(distance) km"
+        let distanceMeter = dest.distance(from: l)
+        destinationForm.setDistance(inMeter: distanceMeter)
     }
 
     //GPSの取得に失敗したときの処理

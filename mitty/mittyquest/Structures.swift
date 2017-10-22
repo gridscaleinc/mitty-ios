@@ -643,6 +643,14 @@ open class Section: Container {
         r.parent = self
         view.addSubview(r.view)
     }
+    
+    func reset() {
+        for c in contents {
+            c.view.removeFromSuperview()
+        }
+        contents.removeAll()
+        children.removeAll()
+    }
 
 }
 
