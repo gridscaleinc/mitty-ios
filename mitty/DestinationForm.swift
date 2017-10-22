@@ -37,8 +37,14 @@ class DestinationForm : Section {
     func enable(checkin status: Bool) {
         if (checkinEnabled != status) {
             reload()
+            if checkinEnabled {
+                destinationLabel.label.isHighlighted = true
+                distanceLabel.label.isHighlighted = true
+                self.view.blink(duration: 10)
+            }
         }
         checkinEnabled = status
+
     }
     
     func setDestination(_ dest: String) {
@@ -47,9 +53,15 @@ class DestinationForm : Section {
     }
     
     func setDistance (inMeter : Double) {
-        distance = "ここからおよそ\(String(format: "%.1f", inMeter/1000))km"
+        if (inMeter < 1000) {
+            distance = "ここから約\(String(format: "%d", inMeter))m"
+            distanceLabel.label.isHighlighted = true
+        } else {
+           distance = "ここから約\(String(format: "%.1f", inMeter*1.21/1000))km"
+        }
+        
         distanceLabel.label.text = distance
-        enable(checkin: inMeter < 100)
+        enable(checkin: inMeter < 200)
     }
     
     /// Reload
@@ -57,6 +69,7 @@ class DestinationForm : Section {
     func reload() {
         reset()
         build()
+        self.configLayout()
     }
     
     func build () {
@@ -88,6 +101,8 @@ class DestinationForm : Section {
         
         distanceLabel = MQForm.label(name: "distance", title: distance).layout {
             l in
+            l.label.highlightedTextColor = MittyColor.sunshineRed
+            l.label.adjustsFontSizeToFitWidth = true
             l.verticalCenter().leftMargin(10).rightMost(withInset: 10)
         }
         distanceRow +++ distanceLabel
