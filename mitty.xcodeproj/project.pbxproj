@@ -139,6 +139,8 @@
 		FCC9CB9F1DE9B3CB00F2582C /* explorer.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CB9E1DE9B3CB00F2582C /* explorer.png */; };
 		FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC9CBA01DE9B3DA00F2582C /* we.png */; };
 		FCCBDCB91F934CFD00094980 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCBDCB81F934CFC00094980 /* ResetPasswordViewController.swift */; };
+		FCCEB60A1F9D6D1D00FC4EE7 /* TeleportVIewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCEB6091F9D6D1D00FC4EE7 /* TeleportVIewController.swift */; };
+		FCCEB60C1F9DED4900FC4EE7 /* MeetingStatusForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */; };
 		FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB381F2DB9370075C1A2 /* LikesService.swift */; };
 		FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */; };
 		FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7141EA1AB9400AAD750 /* noicon.png */; };
@@ -368,6 +370,8 @@
 		FCC9CB9E1DE9B3CB00F2582C /* explorer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = explorer.png; path = images/explorer.png; sourceTree = "<group>"; };
 		FCC9CBA01DE9B3DA00F2582C /* we.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = we.png; path = images/we.png; sourceTree = "<group>"; };
 		FCCBDCB81F934CFC00094980 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		FCCEB6091F9D6D1D00FC4EE7 /* TeleportVIewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeleportVIewController.swift; sourceTree = "<group>"; };
+		FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStatusForm.swift; sourceTree = "<group>"; };
 		FCCFAB381F2DB9370075C1A2 /* LikesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
 		FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationService.swift; sourceTree = "<group>"; };
 		FCD8C7141EA1AB9400AAD750 /* noicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noicon.png; path = images/noicon.png; sourceTree = "<group>"; };
@@ -693,6 +697,7 @@
 				FCFEBF361E38F4B100DC989B /* IslandConstructViewController.swift */,
 				FC3482CF1EDA61A9005E539E /* MeetingViewController.swift */,
 				FC34831E1EE42F44005E539E /* MeetingCell.swift */,
+				FCCEB6091F9D6D1D00FC4EE7 /* TeleportVIewController.swift */,
 			);
 			name = island;
 			sourceTree = "<group>";
@@ -866,6 +871,7 @@
 				FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */,
 				FCE126B61F98BA59002486FB /* DashBoardForm.swift */,
 				FC2A25991F9C263300D1ACFE /* DestinationForm.swift */,
+				FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1348,6 +1354,7 @@
 				FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */,
 				FC00311E1F9B8983009EB92D /* Clock.swift in Sources */,
 				FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */,
+				FCCEB60C1F9DED4900FC4EE7 /* MeetingStatusForm.swift in Sources */,
 				FCFC7F7E1DD21A0300CA0045 /* IslandService.swift in Sources */,
 				FCEDA2BC1E6D7946006FBF20 /* Controls.swift in Sources */,
 				FC427B831DCACB43009F43AE /* ExplorerViewController.swift in Sources */,
@@ -1357,6 +1364,7 @@
 				FC3483151EDDC0DB005E539E /* WebPicker.swift in Sources */,
 				FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */,
 				FC34831D1EE41389005E539E /* Meeting.swift in Sources */,
+				FCCEB60A1F9D6D1D00FC4EE7 /* TeleportVIewController.swift in Sources */,
 				FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */,
 				FCEDA2C11E6D7946006FBF20 /* MittyQuest.swift in Sources */,
 				FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */,

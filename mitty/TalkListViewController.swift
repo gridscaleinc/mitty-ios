@@ -33,7 +33,7 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         
     } ()
     
-    let topLabel: UILabel
+    let meetingStatusForm = MeetingStatusForm()
     
     let panel : UIView = UIView.newAutoLayout()
     var bottomCons : NSLayoutConstraint? = nil
@@ -61,8 +61,6 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         
         self.meeting = meeting
         
-        self.topLabel = UILabel.newAutoLayout()
-        self.topLabel.text = ""
         self.collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
         
         self.collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -89,7 +87,6 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         super.autoCloseKeyboard()
         
         view.backgroundColor = UIColor.white
-        self.topLabel.backgroundColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 0.9)        
         self.navigationItem.title = "# " + (meeting.name)
         
         talkInputField.layer.borderWidth = 1
@@ -215,7 +212,14 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
     }
     
     private func addSubviews() {
-        view.addSubview(topLabel)
+        meetingStatusForm.loadForm()
+        view.addSubview(meetingStatusForm.view)
+        meetingStatusForm.teleportButton.bindEvent(.touchUpInside){
+            b in
+            let vc = TeleportViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
         view.addSubview(collectionView)
         
         view.addSubview(panel)
@@ -233,13 +237,14 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
     }
     
     private func addConstraints() {
-        topLabel.autoPin(toTopLayoutGuideOf: self, withInset: 0)
-        topLabel.autoPinEdge(toSuperviewEdge: .left)
-        topLabel.autoPinEdge(toSuperviewEdge: .right)
-        topLabel.autoSetDimension(.height, toSize: 2)
-        
-        
-        collectionView.autoPinEdge(.top, to: .bottom, of: topLabel, withOffset: 10)
+        meetingStatusForm.view.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+        meetingStatusForm.layout {
+            m in
+            m.fillHolizon().height(50)
+        }
+        meetingStatusForm.configLayout()
+
+        collectionView.autoPinEdge(.top, to: .bottom, of:meetingStatusForm.view, withOffset: 10)
         
         collectionView.autoPinEdge(toSuperviewEdge: .left)
         collectionView.autoPinEdge(toSuperviewEdge: .right)
