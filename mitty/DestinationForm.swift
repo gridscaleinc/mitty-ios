@@ -36,6 +36,7 @@ class DestinationForm : Section {
 
     func enable(checkin status: Bool) {
         if (checkinEnabled != status) {
+            checkinEnabled = status
             reload()
             if checkinEnabled {
                 destinationLabel.label.isHighlighted = true
@@ -43,6 +44,7 @@ class DestinationForm : Section {
                 self.view.blink(duration: 10)
             }
         }
+        
         checkinEnabled = status
 
     }
@@ -54,7 +56,7 @@ class DestinationForm : Section {
     
     func setDistance (inMeter : Double) {
         if (inMeter < 1000) {
-            distance = "ここから約\(String(format: "%d", inMeter))m"
+            distance = "ここから約\(String(format: "%.1f", inMeter))m"
             distanceLabel.label.isHighlighted = true
         } else {
            distance = "ここから約\(String(format: "%.1f", inMeter*1.21/1000))km"

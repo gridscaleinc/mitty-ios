@@ -9,11 +9,12 @@
 import Foundation
 import UIKit
 import MapKit
-
+import Starscream
 import CoreLocation
 import UICircularProgressRing
+import SwiftyJSON
 
-class TeleportViewController : MittyViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class TeleportViewController : MittyViewController, CLLocationManagerDelegate, WebSocketDelegate {
 
     //地図を表示
     //websocketを引き継ぐ
@@ -29,15 +30,36 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
     //  Copyright © 2016 GridScale Inc. All rights reserved.
     //
     
-
+    var pingPongTimer : Timer? = nil
+    
+    var socket : WebSocket = {
+        let ws = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/abc")!, protocols: ["chat", "superchat"])
+        ws.headers["X-Mitty-AccessToken"] = ApplicationContext.userSession.accessToken
+        return ws
+    } ()
+    
+    var status = MeetingStatus.initializing
+    
+    var disconnected = true
+    
+    
+    var meeting : MeetingInfo!
+    
+    // MARK: - Properties
+    var talkingList = [BubbleMessage]()
+    
+    let panel : UIView = UIView.newAutoLayout()
+    var bottomCons : NSLayoutConstraint? = nil
+    let talkInputField: StyledTextField
+    let talkSendButton: UIButton
     
     //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
     let myLocationManager = CLLocationManager()
     let myMapView = MKMapView()
     
-    
     var isStarting = true
     var currentLocationPin = MKPointAnnotation()
+    var myLocation = CLLocation(latitude: 0, longitude: 0)
     
     var bagua: Control = {
         let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
@@ -56,6 +78,8 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         
     }()
     
+    var userMap = [String : UserInfo]()
+    
     // Autolayout済みフラグ
     var didSetupConstraints = false
     
@@ -65,11 +89,30 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         return ind
     }()
     
+    // MARK: - Initializers
+    init(meeting: MeetingInfo) {
+        
+        self.meeting = meeting
+        
+        talkInputField = StyledTextField.newAutoLayout()
+        talkInputField.placeholder = "input message here"
+        talkInputField.layer.borderColor = MittyColor.sunshineRed.cgColor
+        
+        talkSendButton = UIButton.newAutoLayout()
+        talkSendButton.setTitle("送信", for: .normal)
+        talkSendButton.setTitleColor(UIColor.white, for: UIControlState.normal)
+        talkSendButton.backgroundColor = MittyColor.healthyGreen
+        super.init(nibName: nil, bundle: nil)
+        
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
         self.navigationItem.title = LS(key: "teleport")
-        self.tabBarController?.tabBar.isHidden = false
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         view.setNeedsUpdateConstraints()
@@ -96,7 +139,7 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
-        
+        myMapView.delegate = self
         myMapView.showsUserLocation = true
         myMapView.userTrackingMode = .followWithHeading
         
@@ -109,8 +152,6 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         
         LoadingProxy.set(self)
         
-        
-        
         let status = CLLocationManager.authorizationStatus()
         if status == CLAuthorizationStatus.notDetermined {
             // まだ承認が得られていない場合は、認証ダイアログを表示
@@ -119,6 +160,8 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         
         // 位置情報の更新を開始
         myLocationManager.startUpdatingLocation()
+
+        setupMeeting()
         
         super.lockView()
         didSetupConstraints = false
@@ -126,7 +169,29 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         
     }
     
+    func setupMeeting () {
+        talkInputField.layer.borderWidth = 1
+        let leftPadding = UIView(frame: CGRect(x:0, y:0, width:15, height:40))
+        talkInputField.leftView = leftPadding
+        talkInputField.leftViewMode = UITextFieldViewMode.always
+        
+        configureNavigationBar()
+        addSubviews()
+        addConstraints()
+        
+        talkSendButton.addTarget(self, action: #selector(sendMessage(_:)), for: .touchUpInside)
+        socket.delegate = self
+        
+        
+        manageKeyboard()
+        
+    }
     
+    func loadMessages() {
+        // TODO
+        // 会話内容を表示
+    }
+
     //
     // ビュー整列メソッド。PureLayoutの処理はここで存分に活躍。
     //
@@ -148,7 +213,7 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
     // GPSから値を取得した際に呼び出されるメソッド
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         // 配列から現在座標を取得（配列locationsの中から最新のものを取得する）
-        let myLocation = locations.last! as CLLocation
+        myLocation = locations.last! as CLLocation
         //Pinに表示するためにはCLLocationCoordinate2Dに変換してあげる必要がある
         let currentLocation = myLocation.coordinate
         //ピンの生成と配置
@@ -156,6 +221,7 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         
         if isStarting {
             currentLocationPin.title = "現在地"
+            
             self.myMapView.addAnnotation(currentLocationPin)
             //アプリ起動時の表示領域の設定
             //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
@@ -190,6 +256,184 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, M
         }
         print(" CLAuthorizationStatus: \(statusStr)")
         
+    }
+ 
+    func sendMessage(_ sender: UIButton) {
+        if (talkInputField.text == "") {
+            return
+        }
+        
+        if (disconnected) {
+            socket.connect()
+            return
+        }
+        
+        
+        let message : [String:Any] = [
+            "messageType" : "Conversation",
+            "topic" : "Conversation:(\(meeting.id))",
+            "command" : "teleport",
+            "conversation" : [
+                "meetingId" : NSNumber(value: meeting.id),
+                "speaking" : talkInputField.text ?? "No message",
+                "speakTime" : Date().iso8601UTC,
+            ],
+            "teleportation" : [
+                "latitude" : myLocation.coordinate.latitude,
+                "longtidude" : myLocation.coordinate.longitude,
+            ],
+        ]
+        
+        let js = JSON(message).rawString()
+        socket.write(string: js!)
+        talkInputField.text = ""
+        print(js ?? "")
+        
+    }
+    
+    // MessageType string `json:"messageType"`
+    // Topic string `json:"topic"`
+    // Command string `json:"command"`
+    func subscribe() {
+        let message : [String:Any] = [
+            "messageType" : "Conversation",
+            "topic" : "Conversation:(\(meeting.id))",
+            "command" : "subscribe"
+        ]
+        
+        let js = JSON(message).rawString()
+        
+        socket.write(string: js!)
+        
+    }
+    
+    // MARK: - View Setup
+    private func configureNavigationBar() {
+    }
+    
+    func camera() {
+        
+    }
+    
+    func search() {
+        
+    }
+    
+    private func addSubviews() {
+        
+        view.addSubview(panel)
+        panel.backgroundColor = UIColor.white
+        panel.addSubview(talkInputField)
+        panel.addSubview(talkSendButton)
+        
+    }
+    
+    private func addConstraints() {
+        
+        panel.autoPin(toBottomLayoutGuideOf: self, withInset: 1)
+        panel.autoPinEdge(toSuperviewEdge: .left, withInset: 2)
+        panel.autoPinEdge(toSuperviewEdge: .right, withInset: 2)
+        panel.autoSetDimension(.height, toSize: 40)
+        
+        talkInputField.autoPinEdge(toSuperviewEdge: .left)
+        talkInputField.autoPinEdge(toSuperviewEdge: .top)
+        talkInputField.autoPinEdge(toSuperviewEdge: .bottom)
+        talkInputField.autoPinEdge(toSuperviewEdge: .right, withInset: 80)
+        
+        talkSendButton.autoPinEdge(.left, to: .right, of: talkInputField, withOffset:2)
+        talkSendButton.autoPinEdge(toSuperviewEdge: .top)
+        talkSendButton.autoPinEdge(toSuperviewEdge: .bottom)
+        talkSendButton.autoPinEdge(toSuperviewEdge: .right)
+        
+    }
+    
+    @objc
+    override func onKeyboardShow(_ notification: NSNotification) {
+
+    }
+    
+    
+    @objc
+    override func onKeyboardHide(_ notification: NSNotification) {
+
+        self.view.setNeedsUpdateConstraints()
+    }
+    
+    // MARK: Websocket Delegate Methods.
+    func websocketDidConnect(socket: WebSocket) {
+        print("websocket is connected")
+        subscribe()
+        disconnected = false
+        
+    }
+    
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+        if let e = error {
+            print("websocket is disconnected: \(e.localizedDescription)")
+            pingPongTimer?.invalidate()
+        } else {
+            print("websocket disconnected, auto reconnecting.")
+            socket.connect()
+        }
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+        let js = JSON.parse(text)
+        print(text)
+        print(js)
+        
+        let tk1 = Talk()
+        
+        if js["conversation"] != nil {
+            let conversationJs = js["conversation"]
+            tk1.meetingId = conversationJs["meetingId"].int64!
+            tk1.speakerId = conversationJs["speakerId"].int64!
+            tk1.speakTime = conversationJs["speakTime"].stringValue.utc2Date()
+            tk1.speaking = conversationJs["speaking"].rawString()!
+            
+            let v = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 55))
+            v.backgroundColor = MittyColor.white
+            v.layer.borderColor = MittyColor.sunshineRed.cgColor
+            v.layer.borderWidth = 1
+            v.layer.cornerRadius = 10
+            
+            let msg = BubbleMessage(name:"", view:v)
+            msg.msgLabel.label.text = tk1.speaking
+            
+            self.view.addSubview(msg.view)
+            
+            msg.release(vc: self, msg: tk1.speaking)
+        }
+        
+        if !js["teleportation"].isEmpty {
+            let teleportation = js["teleportation"]
+            var teleport = CLLocationCoordinate2D()
+            teleport.latitude = teleportation["latitude"].doubleValue
+            teleport.longitude = teleportation["longitude"].doubleValue
+        }
+        
+    }
+    
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+        print("Received data: \(data.count)")
+    }
+    
+}
+
+extension TeleportViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation === mapView.userLocation {
+            return mapView.view(for: annotation)
+        } else {
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "UserLocation")
+            annotationView.image = UIImage(named: "pengin1")?.af_imageRoundedIntoCircle()
+            annotationView.layer.shadowColor = UIColor.gray.cgColor
+            annotationView.layer.shadowOffset = CGSize(width: 10, height: 10)
+            annotationView.layer.shadowOpacity = 0.9
+            
+            annotationView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            return annotationView
+        }
     }
 }
 
