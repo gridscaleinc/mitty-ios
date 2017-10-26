@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let guideViewController: GuideViewController = GuideViewController()
     //Tab bar
     
-    let mainTabBarController: MainTabBarController = MainTabBarController()
+    let mittyNavigator = MittyNavigatorViewController()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
@@ -28,7 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.tintColor = MittyColor.healthyGreen;
         if ApplicationContext.skipGuideView  {
             if ApplicationContext.userSession.isLogedIn {
-                 self.window?.rootViewController = mainTabBarController
+                 self.window?.rootViewController = mittyNavigator
             } else {
                 let signinViewController = SigninViewController()
                 self.window?.rootViewController = signinViewController

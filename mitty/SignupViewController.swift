@@ -183,8 +183,8 @@ class SignupViewController: MittyViewController, UITextFieldDelegate {
         }
 
         instantUse.bindEvent(.touchUpInside) { v in
-            let mainTabBarController: MainTabBarController = MainTabBarController()
-            self.present(mainTabBarController, animated: true, completion: nil)
+            let vc = MittyNavigatorViewController()
+            self.present(vc, animated: true, completion: nil)
         }
     }
 

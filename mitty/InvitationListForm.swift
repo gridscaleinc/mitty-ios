@@ -137,6 +137,7 @@ class InvitationListForm: MQForm {
                 b in
                 b.height(30)
                 b.button.backgroundColor = MittyColor.healthyGreen
+                b.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
                 _ in
                 self.acceptHandler?(i)
@@ -147,6 +148,7 @@ class InvitationListForm: MQForm {
                 b in
                 b.height(30)
                 b.button.backgroundColor = MittyColor.lightGray
+                b.button.setTitleColor(.white, for: .normal)
             }
             
             buttonRow +++ reject

@@ -24,24 +24,24 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     let myLocationManager = CLLocationManager()
     var socialMirror: SocialMirrorForm!
     let myMapView = MKMapView()
-    
+    let guide = GuidanceForm()
     let controlPanel = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
     var timer = Timer()
-    var bagua: Control = {
+    var sliderBar: Control = {
         let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
-        let bagua = MarqueeLabel(frame: rect1)
-        bagua.numberOfLines = 2
+        let marquee = MarqueeLabel(frame: rect1)
+        marquee.numberOfLines = 2
         
-        bagua.type = .continuous
-        bagua.speed = .duration(50)
-        bagua.animationCurve = .linear
-        bagua.fadeLength = 10.0
-        bagua.leadingBuffer = 10.0
+        marquee.type = .continuous
+        marquee.speed = .duration(50)
+        marquee.animationCurve = .linear
+        marquee.fadeLength = 10.0
+        marquee.leadingBuffer = 10.0
         
-        bagua.font = UIFont.systemFont(ofSize: 16)
+        marquee.font = UIFont.systemFont(ofSize: 16)
         
-        return Control(name:"bagua", view:bagua)
+        return Control(name:"marquee", view:marquee)
         
     }()
     
@@ -71,15 +71,42 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
     let dashButton = MQForm.button(name: "opendashboard", title: "D/B").layout {
         b in
-        b.verticalCenter().holizontalCenter().height(60).width(60)
+        b.verticalCenter().holizontalCenter().height(50).width(50)
         b.button.backgroundColor = MittyColor.healthyGreen
         b.button.setTitleColor(.white, for: .normal)
-        b.button.layer.cornerRadius = 30
+        b.button.layer.cornerRadius = 20
         b.button.layer.shadowColor = UIColor.gray.cgColor
         b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
         b.button.layer.shadowRadius = 10
         b.button.layer.shadowOpacity = 0.9
     }
+    
+    let activityButton = MQForm.button(name: "activityButton", title: "").layout {
+        b in
+        b.verticalCenter().leftMost(withInset: 20).height(50).width(50)
+        b.button.setImage(UIImage(named:"activity")?.af_imageRoundedIntoCircle(), for: .normal)
+        b.button.imageView?.contentMode = UIViewContentMode.scaleToFill
+        b.button.layer.cornerRadius = 20
+        b.button.layer.shadowColor = UIColor.gray.cgColor
+        b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
+        b.button.layer.shadowRadius = 10
+        b.button.layer.shadowOpacity = 0.9
+    }
+    
+    let islandButton = MQForm.button(name: "islandButton", title: "").layout {
+        b in
+        b.verticalCenter().rightMost(withInset: 20).height(40).width(40)
+        b.button.setImage(UIImage(named:"island")?.af_imageRoundedIntoCircle(), for: .normal)
+        b.button.imageView?.contentMode = UIViewContentMode.scaleToFill
+        b.button.layer.cornerRadius = 20
+        b.button.layer.shadowColor = UIColor.gray.cgColor
+        b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
+        b.button.layer.shadowRadius = 10
+        b.button.layer.shadowOpacity = 0.9
+    }
+    
+    var haveAnyAdvice : (() -> Void)? = nil
+    
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
         self.navigationItem.title = LS(key: "operation_center")
@@ -144,19 +171,18 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         
         let strings = ["Loading .....................                            　"]
 
-        bagua.label.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
+        sliderBar.label.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
 
-        bagua.label.textColor = UIColor.red.withAlphaComponent(0.8)
+        sliderBar.label.textColor = UIColor.red.withAlphaComponent(0.8)
 
-        bagua.bindEvent(.touchUpInside) {
+        sliderBar.bindEvent(.touchUpInside) {
             b in
             
             self.showSocialMirror()
             
         }
         
-        //self.view.addSubview(bagua)
-        self.navigationItem.titleView = bagua.view
+        self.navigationItem.titleView = sliderBar.view
 
         LoadingProxy.set(self)
 
@@ -177,24 +203,35 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         // 位置情報の更新を開始
         myLocationManager.startUpdatingLocation()
         
+        self.dashboard.view.isHidden = true
+        self.socialMirror.view.isHidden = true
+        self.dashButton.view.isHidden = false
+        
         super.lockView()
         didSetupConstraints = false
+        
         self.view.setNeedsUpdateConstraints()
+        
+        guide.searchHandler = {
+            let vc = QuestViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
 
     }
     
     func showSocialMirror () {
         SocialContactService.instance.getSocailMirror(onComplete: {
             mirror in
-            self.bagua.label.text = mirror.description
+            self.sliderBar.label.text = mirror.description
             self.socialMirror.load(mirror)
             
             let isHidden = self.socialMirror.view.isHidden
             self.socialMirror.view.isHidden = !isHidden
+            self.view.bringSubview(toFront: self.socialMirror.view)
             
         }, onError: {
             error in
-            self.bagua.label.text = error
+            self.sliderBar.label.text = "Error........"
         })
     }
 
@@ -215,6 +252,18 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             self.dashButton.view.isHidden = true
         }
         
+        controlPanel +++ activityButton.bindEvent(.touchUpInside) {
+            b in
+            let ac = ActivityTopViewController()
+            self.navigationController?.pushViewController(ac, animated: true)
+        }
+        
+        controlPanel +++ islandButton.bindEvent(.touchUpInside) {
+            b in
+            let ac = IslandViewController()
+            self.navigationController?.pushViewController(ac, animated: true)
+        }
+        
         view.addSubview(display)
 
         display.backgroundColor = UIColor.white
@@ -228,6 +277,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 //            c.view.layer.borderColor = UIColor.red.cgColor
 //            c.view.layer.borderWidth = 1
         }
+        display.isHidden = true
+        
         destinationForm.build()
 
         destinationForm.onCheckin = {
@@ -243,9 +294,10 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         dashboard.loadForm()
         dashboard.layout {
             p in
-            p.height(UIScreen.main.bounds.width / 2 + 40).fillHolizon()
+            p.height(UIScreen.main.bounds.width / 2 + 80).fillHolizon()
             p.view.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
         }
+        
         
         let row = Row.Intervaled()
         row.spacing = 10
@@ -316,10 +368,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             self.nearlyDestinations = destinations
             
             self.myMapView.removeAnnotations(self.myMapView.annotations)
-
-            if destinations.count == 0 {
-                self.display.isHidden = true
-            }
             
             for d in destinations {
 
@@ -357,14 +405,25 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             }
 
             if (self.targetLocation != nil) {
+                self.display.isHidden = false
                 self.destinationForm.setDestination(self.targetLocation!.islandName)
             } else {
                 self.destinationForm.setDestination("-")
+                self.haveAnyAdvice = {
+                    self.showGuidances()
+                }
             }
-
+            self.showGuidances()
         }
     }
 
+    func showGuidances() {
+        guide.removeFromSuperview()
+        self.view.addSubview(guide)
+        guide.load()
+        guide.autoPinEdge(.top, to: .bottom, of: display, withOffset: 30)
+    }
+    
     //
     // ビュー整列メソッド。PureLayoutの処理はここで存分に活躍。
     //
@@ -544,11 +603,11 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         socialMirror.view.isHidden = true
         SocialContactService.instance.getSocailMirror(onComplete: {
             mirror in
-            self.bagua.label.text = mirror.description
+            self.sliderBar.label.text = mirror.description
             self.socialMirror.load(mirror)
         }, onError: {
             error in
-            self.bagua.label.text = error
+            self.sliderBar.label.text = error
         })
     }
 }

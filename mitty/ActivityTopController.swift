@@ -38,6 +38,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         return t
     }()
 
+    // 希望セグメント(0=Activity, 1:Request, 2= Invitation)
+    var pereferredActivityType = 0
+    
     // activityList を作成する
     var activityform = ActivityListForm.newAutoLayout()
 
@@ -300,9 +303,7 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
         self.navigationItem.title = "活動予定"
-        
-        changeType(activityTypes)
-        
+       
         super.viewWillAppear(animated)
     }
 
@@ -311,17 +312,19 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     }
 
     override func viewDidAppear(_ animated: Bool) {
-
-
+        
+        activityTypes.selectedSegmentIndex = pereferredActivityType
+        super.viewDidAppear(animated)
+        changeType(activityTypes)
+        
     }
 
     override func viewDidLoad() {
 
         super.autoCloseKeyboard()
-        activityTypes.selectedSegmentIndex = 0
         activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
-
         LoadingProxy.set(self)
+        
         super.lockView()
     }
 
@@ -339,7 +342,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 self?.view.setNeedsUpdateConstraints()
                 self?.view.updateConstraintsIfNeeded()
                 self?.view.layoutIfNeeded()
-
+                
+                self?.pereferredActivityType = 0
+                
             }
         } else if activityTypes.selectedSegmentIndex == 1 {
             RequestService.instance.getMyRequests(key: "") { [weak self]
@@ -352,6 +357,9 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 self?.view.setNeedsUpdateConstraints()
                 self?.view.updateConstraintsIfNeeded()
                 self?.view.layoutIfNeeded()
+                
+                self?.pereferredActivityType = 1
+                
             }
         } else if activityTypes.selectedSegmentIndex == 2 {
             InvitationService.instance.getMyInvitations() { [weak self]
@@ -364,8 +372,24 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
                 self?.view.setNeedsUpdateConstraints()
                 self?.view.updateConstraintsIfNeeded()
                 self?.view.layoutIfNeeded()
+                
+                self?.pereferredActivityType = 2
             }
         }
+        
+    }
+    
+    func selectActivity() {
+       pereferredActivityType = 0
+    }
+    
+    func selectRequest() {
+        
+        pereferredActivityType = 1
+    }
+    
+    func selectInvitation() {
+        pereferredActivityType = 2
         
     }
 }

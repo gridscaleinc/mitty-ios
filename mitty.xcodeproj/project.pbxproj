@@ -127,6 +127,7 @@
 		FC75858D1F74727500680CC9 /* InvitationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858C1F74727500680CC9 /* InvitationInfo.swift */; };
 		FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */; };
 		FC7585911F75586100680CC9 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7585901F75586100680CC9 /* forward.png */; };
+		FC7660561FA0D13500E754D1 /* GuidanceForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7660551FA0D13500E754D1 /* GuidanceForm.swift */; };
 		FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B871EEEC1470074C259 /* RequestService.swift */; };
 		FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
@@ -173,6 +174,7 @@
 		FCF8D6511DD8B7630059B270 /* connect.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8D6501DD8B7630059B270 /* connect.png */; };
 		FCF9575C1DC6146400A52125 /* ViewControllerFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */; };
 		FCF957601DC6471D00A52125 /* PersonalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9575F1DC6471D00A52125 /* PersonalInfoViewController.swift */; };
+		FCF965A11FA09ACB0067EFCD /* MittyNavigatorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF965A01FA09ACB0067EFCD /* MittyNavigatorViewController.swift */; };
 		FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */; };
 		FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */; };
 		FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCF9E5251EAB399B00F4A265 /* IslandForm.swift */; };
@@ -360,6 +362,7 @@
 		FC75858C1F74727500680CC9 /* InvitationInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationInfo.swift; sourceTree = "<group>"; };
 		FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationListForm.swift; sourceTree = "<group>"; };
 		FC7585901F75586100680CC9 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forward.png; path = images/forward.png; sourceTree = "<group>"; };
+		FC7660551FA0D13500E754D1 /* GuidanceForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidanceForm.swift; sourceTree = "<group>"; };
 		FC7D4B871EEEC1470074C259 /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestReq.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
@@ -406,6 +409,7 @@
 		FCF8D6501DD8B7630059B270 /* connect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = connect.png; path = images/connect.png; sourceTree = "<group>"; };
 		FCF9575B1DC6146400A52125 /* ViewControllerFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerFactory.swift; sourceTree = "<group>"; };
 		FCF9575F1DC6471D00A52125 /* PersonalInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersonalInfoViewController.swift; sourceTree = "<group>"; };
+		FCF965A01FA09ACB0067EFCD /* MittyNavigatorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MittyNavigatorViewController.swift; sourceTree = "<group>"; };
 		FCF9E5211EAB27B500F4A265 /* IslandPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandPicker.swift; sourceTree = "<group>"; };
 		FCF9E5231EAB2D2C00F4A265 /* IslandInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandInfo.swift; sourceTree = "<group>"; };
 		FCF9E5251EAB399B00F4A265 /* IslandForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandForm.swift; sourceTree = "<group>"; };
@@ -660,6 +664,7 @@
 				F4C62EAA1E9CDFF70003C7FC /* SignupViewController.swift */,
 				F4C62EAE1E9CF0880003C7FC /* SigninViewController.swift */,
 				FCCBDCB81F934CFC00094980 /* ResetPasswordViewController.swift */,
+				FCF965A01FA09ACB0067EFCD /* MittyNavigatorViewController.swift */,
 			);
 			name = main;
 			sourceTree = "<group>";
@@ -877,6 +882,7 @@
 				FC2A25991F9C263300D1ACFE /* DestinationForm.swift */,
 				FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */,
 				FCB6FD181F9E1A250082EF6D /* BubbleMessage.swift */,
+				FC7660551FA0D13500E754D1 /* GuidanceForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1307,6 +1313,7 @@
 				FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */,
 				FC2862AB1DCEAFA6000854D9 /* EventService.swift in Sources */,
 				FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */,
+				FCF965A11FA09ACB0067EFCD /* MittyNavigatorViewController.swift in Sources */,
 				FCB75CAF1F8CCD4400205261 /* ActivityPlanEditController.swift in Sources */,
 				FCFA848A1F20EA0900E9C6F2 /* EditViewController.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
@@ -1395,6 +1402,7 @@
 				FCF8D64F1DD8A0500059B270 /* SocialContactService.swift in Sources */,
 				FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */,
 				F4C62EAF1E9CF0880003C7FC /* SigninViewController.swift in Sources */,
+				FC7660561FA0D13500E754D1 /* GuidanceForm.swift in Sources */,
 				FC4B88691F010E0900458912 /* NameCardViewController.swift in Sources */,
 				FC1FE0551EC5B112007AE8A5 /* ActivityService.swift in Sources */,
 				FCFBC6791E63C39000AEF869 /* EventInputForm.swift in Sources */,

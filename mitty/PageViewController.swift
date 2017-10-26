@@ -77,7 +77,7 @@ class PageViewController: MittyViewController {
     }
 
     func start() {
-        let vc = MainTabBarController()
+        let vc = MittyNavigatorViewController()
         vc.modalTransitionStyle = UIModalTransitionStyle.partialCurl
         self.present(vc, animated: true, completion: nil)
     }

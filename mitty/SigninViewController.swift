@@ -208,7 +208,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         }
         
         instantUse.bindEvent(.touchUpInside) { v in
-            let mainTabBarController: MainTabBarController = MainTabBarController()
+            let mainTabBarController: MittyNavigatorViewController = MittyNavigatorViewController()
             self.present(mainTabBarController, animated: true, completion: nil)
         }
     }
@@ -226,7 +226,7 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             ApplicationContext.userSession.isLogedIn = true
             ApplicationContext.saveSession()
 
-            let mainTabBarController: MainTabBarController = MainTabBarController()
+            let mainTabBarController: MittyNavigatorViewController = MittyNavigatorViewController()
             self.present(mainTabBarController, animated: true, completion: nil)
         }, onError : {
            error in

@@ -84,6 +84,9 @@ class SocialMirrorForm: Container {
             m in
             m.width(300).height(210)
             m.holizontalCenter().upper(withInset: 80)
+//            m.view.layer.shadowColor = UIColor.black.cgColor
+//            m.view.layer.shadowOffset = CGSize(width: 10, height: 10)
+//            m.view.layer.shadowOpacity = 0.8
         }
 
         let detailForm = Section(name: "Content-Form", view: UIView.newAutoLayout())
@@ -155,27 +158,24 @@ class SocialMirrorForm: Container {
     }
     
     func switchToActivity() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.mainTabBarController.selectedIndex = 1
-        delegate.mainTabBarController.tab2ActivityController.popToRootViewController(animated: true)
-        let vc = delegate.mainTabBarController.tab2ActivityController.viewControllers[0] as! ActivityTopViewController
-        vc.activityTypes.selectedSegmentIndex = 0
+        let vc = ActivityTopViewController()
+        vc.selectActivity()
+        self.navigator?.pushViewController(vc, animated: true)
+
     }
     
     func switchToRequest() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.mainTabBarController.selectedIndex = 1
-        delegate.mainTabBarController.tab2ActivityController.popToRootViewController(animated: true)
-        let vc = delegate.mainTabBarController.tab2ActivityController.viewControllers[0] as! ActivityTopViewController
-        vc.activityTypes.selectedSegmentIndex = 1
+        let vc = ActivityTopViewController()
+        vc.selectRequest()
+        self.navigator?.pushViewController(vc, animated: true)
+
     }
     
     func switchToInvitation() {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        delegate.mainTabBarController.selectedIndex = 1
-        delegate.mainTabBarController.tab2ActivityController.popToRootViewController(animated: true)
-        let vc = delegate.mainTabBarController.tab2ActivityController.viewControllers[0] as! ActivityTopViewController
-        vc.activityTypes.selectedSegmentIndex = 2
+        let vc = ActivityTopViewController()
+        vc.selectInvitation()
+        self.navigator?.pushViewController(vc, animated: true)
+
     }
 
 
