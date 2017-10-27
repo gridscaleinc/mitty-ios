@@ -429,7 +429,7 @@ extension TeleportViewController: MKMapViewDelegate {
             annotationView.image = UIImage(named: "pengin1")?.af_imageRoundedIntoCircle()
             annotationView.layer.shadowColor = UIColor.gray.cgColor
             annotationView.layer.shadowOffset = CGSize(width: 10, height: 10)
-            annotationView.layer.shadowOpacity = 0.9
+            annotationView.layer.shadowOpacity = 0.4
             
             annotationView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
             return annotationView

@@ -145,7 +145,7 @@ class NameCardForm: Container {
         // form.layer.borderWidth = 0.5
         form.view.layer.shadowColor = UIColor.black.cgColor
         form.view.layer.shadowOffset = CGSize(width: -10, height: 10)
-        form.view.layer.shadowOpacity = 0.8
+        form.view.layer.shadowOpacity = 0.4
         form.view.layer.shadowRadius = 1.8
 
 

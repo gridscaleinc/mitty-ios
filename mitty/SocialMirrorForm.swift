@@ -84,9 +84,7 @@ class SocialMirrorForm: Container {
             m in
             m.width(300).height(210)
             m.holizontalCenter().upper(withInset: 80)
-//            m.view.layer.shadowColor = UIColor.black.cgColor
-//            m.view.layer.shadowOffset = CGSize(width: 10, height: 10)
-//            m.view.layer.shadowOpacity = 0.8
+
         }
 
         let detailForm = Section(name: "Content-Form", view: UIView.newAutoLayout())
@@ -155,6 +153,7 @@ class SocialMirrorForm: Container {
             _ in
             self.switchToInvitation()
         }
+        
     }
     
     func switchToActivity() {
@@ -196,15 +195,17 @@ class SocialMirrorForm: Container {
     }
     
     func setBackGround() {
-        let layer = MittyColor.gradientLayer( MittyColor.healthyGreen.withAlphaComponent(0.8),
-                                              MittyColor.white.withAlphaComponent(0.9),
-                                              MittyColor.healthyGreen.withAlphaComponent(0.7),
-                                              CGFloat.pi/2)
-        layer.frame = CGRect(x: 0, y: 0, width: 1000, height: 1000)
-        self.view.layer.insertSublayer(layer, at: 0)
-//        self.view.layer.borderWidth = 0.8
-//        self.view.layer.borderColor = MittyColor.black.cgColor
         
+        self.view.backgroundColor = UIColor(white: 0.02, alpha: 0.8)
+        let imageLayer = CALayer()
+        let image = UIImage(named:"beauty2.jpeg")!
+        imageLayer.contents = image.cgImage
+        imageLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(image.size.ratio))
+        self.view.layer.insertSublayer(imageLayer, at: 0)
+        let layer = MittyColor.gradientLayer(.black, MittyColor.healthyGreen.withAlphaComponent(0.5), UIColor.black.withAlphaComponent(0.5))
+        layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
+        self.view.layer.insertSublayer(layer, at: 1)
+    
     }
     
     func load(_ m: SocialMirror) {

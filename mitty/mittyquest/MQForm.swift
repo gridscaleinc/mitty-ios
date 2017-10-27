@@ -142,7 +142,7 @@ open class MQForm : UIView {
         let button = UIButton.newAutoLayout()
         button.setTitle(title, for: UIControlState())
         button.setTitleColor(MittyColor.sunshineRed, for: .normal)
-        button.backgroundColor = .white
+//        button.backgroundColor = .white
         button.layer.cornerRadius = 3
         return Control(name: name, view:button)
     }

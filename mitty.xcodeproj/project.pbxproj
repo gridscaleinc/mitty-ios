@@ -48,6 +48,7 @@
 		FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850A1E627CD200CAC38B /* ActivityDatasource.swift */; };
 		FC17850D1E627D8700CAC38B /* ActivitySelectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */; };
 		FC1785111E627F0500CAC38B /* ActivityDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1785101E627F0500CAC38B /* ActivityDelegates.swift */; };
+		FC1915451FA327C500E303F4 /* uparrow.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1915441FA327C300E303F4 /* uparrow.png */; };
 		FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */; };
 		FC1FE0551EC5B112007AE8A5 /* ActivityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */; };
 		FC1FE0571EC69813007AE8A5 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1FE0561EC69813007AE8A5 /* Event.swift */; };
@@ -128,6 +129,10 @@
 		FC75858F1F7475BC00680CC9 /* InvitationListForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */; };
 		FC7585911F75586100680CC9 /* forward.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7585901F75586100680CC9 /* forward.png */; };
 		FC7660561FA0D13500E754D1 /* GuidanceForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7660551FA0D13500E754D1 /* GuidanceForm.swift */; };
+		FC7660581FA1F8F500E754D1 /* ButtonAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7660571FA1F8F500E754D1 /* ButtonAnnotation.swift */; };
+		FC76605A1FA1F94200E754D1 /* DestinationAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7660591FA1F94200E754D1 /* DestinationAnnotation.swift */; };
+		FC76605C1FA1F97B00E754D1 /* UserAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC76605B1FA1F97B00E754D1 /* UserAnnotation.swift */; };
+		FC76605E1FA2159100E754D1 /* ControlPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC76605D1FA2159100E754D1 /* ControlPanel.swift */; };
 		FC7D4B881EEEC1470074C259 /* RequestService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B871EEEC1470074C259 /* RequestService.swift */; };
 		FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */; };
 		FC8D70141DC8D9CD0083E8E4 /* write.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70131DC8D9CD0083E8E4 /* write.png */; };
@@ -283,6 +288,7 @@
 		FC17850A1E627CD200CAC38B /* ActivityDatasource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDatasource.swift; sourceTree = "<group>"; };
 		FC17850C1E627D8700CAC38B /* ActivitySelectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivitySelectionCell.swift; sourceTree = "<group>"; };
 		FC1785101E627F0500CAC38B /* ActivityDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityDelegates.swift; sourceTree = "<group>"; };
+		FC1915441FA327C300E303F4 /* uparrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = uparrow.png; path = images/uparrow.png; sourceTree = "<group>"; };
 		FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIslandReq.swift; sourceTree = "<group>"; };
 		FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		FC1FE0561EC69813007AE8A5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
@@ -363,6 +369,10 @@
 		FC75858E1F7475BC00680CC9 /* InvitationListForm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationListForm.swift; sourceTree = "<group>"; };
 		FC7585901F75586100680CC9 /* forward.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = forward.png; path = images/forward.png; sourceTree = "<group>"; };
 		FC7660551FA0D13500E754D1 /* GuidanceForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuidanceForm.swift; sourceTree = "<group>"; };
+		FC7660571FA1F8F500E754D1 /* ButtonAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonAnnotation.swift; sourceTree = "<group>"; };
+		FC7660591FA1F94200E754D1 /* DestinationAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DestinationAnnotation.swift; sourceTree = "<group>"; };
+		FC76605B1FA1F97B00E754D1 /* UserAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAnnotation.swift; sourceTree = "<group>"; };
+		FC76605D1FA2159100E754D1 /* ControlPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlPanel.swift; sourceTree = "<group>"; };
 		FC7D4B871EEEC1470074C259 /* RequestService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestService.swift; sourceTree = "<group>"; };
 		FC7D4B891EEEC3200074C259 /* NewRequestReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewRequestReq.swift; sourceTree = "<group>"; };
 		FC8D70131DC8D9CD0083E8E4 /* write.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = write.png; sourceTree = "<group>"; };
@@ -770,6 +780,7 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC1915441FA327C300E303F4 /* uparrow.png */,
 				FC00311B1F9B7BB4009EB92D /* downarrow.png */,
 				FC7585901F75586100680CC9 /* forward.png */,
 				FC75858A1F74149E00680CC9 /* online.jpeg */,
@@ -883,6 +894,7 @@
 				FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */,
 				FCB6FD181F9E1A250082EF6D /* BubbleMessage.swift */,
 				FC7660551FA0D13500E754D1 /* GuidanceForm.swift */,
+				FC76605D1FA2159100E754D1 /* ControlPanel.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -930,6 +942,9 @@
 				FC5CBD941F727470006541E3 /* NamecardPicker.swift */,
 				FC00311D1F9B8983009EB92D /* Clock.swift */,
 				FC4936EC1F9F8AFB0041E442 /* UserManager.swift */,
+				FC7660571FA1F8F500E754D1 /* ButtonAnnotation.swift */,
+				FC7660591FA1F94200E754D1 /* DestinationAnnotation.swift */,
+				FC76605B1FA1F97B00E754D1 /* UserAnnotation.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1072,6 +1087,7 @@
 				FC00818D1DD394D300C1F970 /* pengin1.png in Resources */,
 				FCD8C7191EA226AC00AAD750 /* applogo.png in Resources */,
 				FC427B8F1DCAFDE1009F43AE /* event2.png in Resources */,
+				FC1915451FA327C500E303F4 /* uparrow.png in Resources */,
 				FC7585891F740FB600680CC9 /* teleport.png in Resources */,
 				FC427B921DCAFDE1009F43AE /* event5.png in Resources */,
 				FC427B931DCAFDE1009F43AE /* event6.png in Resources */,
@@ -1274,6 +1290,7 @@
 				FCDC70971E8A9011003034B3 /* ActivityPlanDetailForm.swift in Sources */,
 				F4BB80241DAE58F300055D48 /* SocialViewController.swift in Sources */,
 				FCEDA2C21E6D7946006FBF20 /* OperationSet.swift in Sources */,
+				FC76605A1FA1F94200E754D1 /* DestinationAnnotation.swift in Sources */,
 				FC3C16DC1F3A7A2600E7622B /* ContentPicker.swift in Sources */,
 				FC004C601F45E13200230DAA /* Code.swift in Sources */,
 				20E508F41DCD8C5400696E29 /* GuideViewController.swift in Sources */,
@@ -1318,6 +1335,7 @@
 				FCFA848A1F20EA0900E9C6F2 /* EditViewController.swift in Sources */,
 				F42CDE531DCD7525001CAFBE /* Strings.swift in Sources */,
 				FCEDA2C41E6D7946006FBF20 /* Structures.swift in Sources */,
+				FC76605C1FA1F97B00E754D1 /* UserAnnotation.swift in Sources */,
 				FC3C16DA1F388F0200E7622B /* SendIvitationViewController.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */,
 				FC3482D01EDA61A9005E539E /* MeetingViewController.swift in Sources */,
@@ -1335,6 +1353,7 @@
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
 				FCF9E5221EAB27B500F4A265 /* IslandPicker.swift in Sources */,
+				FC76605E1FA2159100E754D1 /* ControlPanel.swift in Sources */,
 				FC5CBD791F53914E006541E3 /* ContacteeNamecard.swift in Sources */,
 				F4BB80201DAE57A300055D48 /* ActivityTopController.swift in Sources */,
 				FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */,
@@ -1412,6 +1431,7 @@
 				FCFB07D91E719C6600E435BE /* Abstracts.swift in Sources */,
 				FC3482D21EDA8073005E539E /* PresenceForm.swift in Sources */,
 				FC7D4B8A1EEEC3200074C259 /* NewRequestReq.swift in Sources */,
+				FC7660581FA1F8F500E754D1 /* ButtonAnnotation.swift in Sources */,
 				FCFA847C1F08A8C000E9C6F2 /* NameCard.swift in Sources */,
 				FC1FE05A1EC85C37007AE8A5 /* MittyViewController.swift in Sources */,
 				FC3482D41EDA8090005E539E /* FootMarkForm.swift in Sources */,

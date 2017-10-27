@@ -55,7 +55,7 @@ class GuidanceForm: MQForm {
         self.autoPinEdge(.bottom, to: .bottom, of: section.view)
         self.layer.shadowColor = UIColor.gray.cgColor
         self.layer.shadowOffset = CGSize(width: 10, height: 10)
-        self.layer.shadowOpacity = 0.8
+        self.layer.shadowOpacity = 0.4
         self.autoSetDimension(.width, toSize: 250)
         self.autoAlignAxis(toSuperviewAxis: .vertical)
         

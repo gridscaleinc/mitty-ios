@@ -40,13 +40,11 @@ class SpeedMeter {
     func updateLocation(nowLocation: CLLocation) {
         let nowtime = nowLocation.timestamp
         let displace = nowLocation.distance(from: previousLocation)
-        let interval = nowtime.timeIntervalSince(previousTime)
         acculatedDistance += displace
-
         let acculatedTime = nowtime.timeIntervalSince(startTime)
 
         velocity = acculatedDistance / acculatedTime
-        instantVelocity = displace / interval
+        instantVelocity = nowLocation.speed
 
         // if displace more than 3 meters, take it as moving
         if instantVelocity > 0.3 {

@@ -25,7 +25,7 @@ class DashBoardForm : Container {
             l.label.textColor = .white
             l.label.textAlignment = .center
             l.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-            l.height(30).width(100).putAbove(Of: self.instandSpeed, withOffset: -45).leftAlign(with: self.instandSpeed)
+            l.height(30).width(100).putAbove(of: self.instandSpeed, withOffset: -45).leftAlign(with: self.instandSpeed)
         }
         
         self +++ averageSpeed.layout {
@@ -37,7 +37,7 @@ class DashBoardForm : Container {
             l.label.textColor = .white
             l.label.textAlignment = .center
             l.label.font = UIFont.systemFont(ofSize: UIFont.smallSystemFontSize)
-            l.height(30).width(130).putAbove(Of: self.averageSpeed, withOffset: -55).leftAlign(with: self.averageSpeed)
+            l.height(30).width(130).putAbove(of: self.averageSpeed, withOffset: -55).leftAlign(with: self.averageSpeed)
         }
         
         let timeView = TimeDisplayView.newAutoLayout()

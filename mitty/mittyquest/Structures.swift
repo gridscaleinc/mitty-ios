@@ -278,7 +278,7 @@ open class Col: Container {
                 if (c === last) {
                     c.down(withInset: (c.margin.bottom))
                 } else {
-                    c.putAbove(Of: previous!, withOffset: previous!.margin.up + spacing + c.margin.bottom)
+                    c.putAbove(of: previous!, withOffset: previous!.margin.up + spacing + c.margin.bottom)
                 }
                 previous = c
 //                c.leftMost()

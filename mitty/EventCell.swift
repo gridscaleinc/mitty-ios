@@ -212,8 +212,8 @@ class EventCell: UICollectionViewCell {
                 c.view.backgroundColor = MittyColor.red.withAlphaComponent(0.5)
                 c.view.layer.cornerRadius = 1
                 c.view.layer.masksToBounds = true
-                c.view.layer.shadowColor = UIColor.black.cgColor
-                c.view.layer.shadowOpacity = 0.8
+                c.view.layer.shadowColor = UIColor.gray.cgColor
+                c.view.layer.shadowOpacity = 0.4
                 c.view.layer.shadowOffset = CGSize(width: 1, height: 1)
                 c.view.layer.shadowRadius = 3
             }

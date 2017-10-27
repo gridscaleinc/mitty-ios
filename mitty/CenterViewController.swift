@@ -18,16 +18,15 @@ import UICircularProgressRing
 // 個人情報を管理するView
 //
 @objc(CenterViewController)
-class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMapViewDelegate {
+class CenterViewController: MittyViewController, CLLocationManagerDelegate {
 
-    //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
     let myLocationManager = CLLocationManager()
     var socialMirror: SocialMirrorForm!
     let myMapView = MKMapView()
     let guide = GuidanceForm()
-    let controlPanel = MQForm.newAutoLayout()
     let display = MQForm.newAutoLayout()
     var timer = Timer()
+    
     var sliderBar: Control = {
         let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
         let marquee = MarqueeLabel(frame: rect1)
@@ -54,7 +53,11 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         return ind
     }()
 
-    let dashboard = DashBoardForm()
+    let commandboard = ControlPanel(h:500)
+    
+    let sep = HL(MittyColor.gray, 1)
+    
+    let navigator = ControlPanel(h:120)
     
     let picture: Control = MQForm.button(name: "m2", title: "")
 
@@ -69,41 +72,32 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
     var isStarting = true
     var currentLocationPin = MKPointAnnotation()
 
-    let dashButton = MQForm.button(name: "opendashboard", title: "D/B").layout {
+    let dashButton = MQForm.button(name: "opencommandboard", title: "D/B").layout {
         b in
-        b.verticalCenter().holizontalCenter().height(50).width(50)
-        b.button.backgroundColor = MittyColor.healthyGreen
+        b.down(withInset: 2).holizontalCenter().height(50).width(50)
+        b.button.setImage(UIImage(named:"uparrow"), for: .normal)
         b.button.setTitleColor(.white, for: .normal)
-        b.button.layer.cornerRadius = 20
+        b.button.layer.cornerRadius = 30
         b.button.layer.shadowColor = UIColor.gray.cgColor
         b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
         b.button.layer.shadowRadius = 10
-        b.button.layer.shadowOpacity = 0.9
+        b.button.layer.shadowOpacity = 0.4
     }
     
-    let activityButton = MQForm.button(name: "activityButton", title: "").layout {
+    let navigatorButton = MQForm.button(name: "opencommandboard", title: "D/B").layout {
         b in
-        b.verticalCenter().leftMost(withInset: 20).height(50).width(50)
-        b.button.setImage(UIImage(named:"activity")?.af_imageRoundedIntoCircle(), for: .normal)
-        b.button.imageView?.contentMode = UIViewContentMode.scaleToFill
-        b.button.layer.cornerRadius = 20
+        b.button.backgroundColor = UIColor.lightGray
+        b.down(withInset: 70).holizontalCenter().height(60).width(60)
+        b.button.setTitleColor(.white, for: .normal)
+        b.button.layer.cornerRadius = 30
         b.button.layer.shadowColor = UIColor.gray.cgColor
         b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
         b.button.layer.shadowRadius = 10
-        b.button.layer.shadowOpacity = 0.9
+        b.button.layer.shadowOpacity = 0.4
     }
     
-    let islandButton = MQForm.button(name: "islandButton", title: "").layout {
-        b in
-        b.verticalCenter().rightMost(withInset: 20).height(40).width(40)
-        b.button.setImage(UIImage(named:"island")?.af_imageRoundedIntoCircle(), for: .normal)
-        b.button.imageView?.contentMode = UIViewContentMode.scaleToFill
-        b.button.layer.cornerRadius = 20
-        b.button.layer.shadowColor = UIColor.gray.cgColor
-        b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
-        b.button.layer.shadowRadius = 10
-        b.button.layer.shadowOpacity = 0.9
-    }
+    let activityButton = MQForm.button(name: "activityButton", title: "活動")
+    let islandButton = MQForm.button(name: "islandButton", title: "島会議")
     
     var haveAnyAdvice : (() -> Void)? = nil
     
@@ -203,7 +197,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         // 位置情報の更新を開始
         myLocationManager.startUpdatingLocation()
         
-        self.dashboard.view.isHidden = true
+        self.commandboard.view.isHidden = true
         self.socialMirror.view.isHidden = true
         self.dashButton.view.isHidden = false
         
@@ -212,10 +206,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         
         self.view.setNeedsUpdateConstraints()
         
-        guide.searchHandler = {
-            let vc = QuestViewController()
-            self.navigationController?.pushViewController(vc, animated: true)
-        }
 
     }
     
@@ -244,24 +234,22 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
     func loadForm () {
 
-        view.addSubview(controlPanel)
-        dashButton.view.isHidden = true // 初期状態は非表示。
-        controlPanel +++ dashButton.bindEvent(.touchUpInside) {
+        self.view.addSubview(dashButton.view)
+        dashButton.bindEvent(.touchUpInside) {
             b in
-            self.dashboard.view.isHidden = false
-            self.dashButton.view.isHidden = true
+            self.commandboard.view.isHidden = false
+            self.dashButton.view.isHidden = !self.dashButton.view.isHidden
         }
-        
-        controlPanel +++ activityButton.bindEvent(.touchUpInside) {
-            b in
-            let ac = ActivityTopViewController()
-            self.navigationController?.pushViewController(ac, animated: true)
+        self.view.addSubview(sep.view)
+        sep.layout {
+            l in
+            l.fillHolizon(40).putUnder(of: self.navigatorButton, withOffset: 6)
         }
-        
-        controlPanel +++ islandButton.bindEvent(.touchUpInside) {
+        self.view.addSubview(navigatorButton.view)
+        navigatorButton.bindEvent(.touchUpInside) {
             b in
-            let ac = IslandViewController()
-            self.navigationController?.pushViewController(ac, animated: true)
+            self.navigator.view.isHidden = !self.navigator.view.isHidden
+            self.dashButton.view.isHidden = false
         }
         
         view.addSubview(display)
@@ -269,7 +257,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         display.backgroundColor = UIColor.white
         display.layer.shadowColor = UIColor.gray.cgColor
         display.layer.shadowOffset = CGSize(width: 5, height: 5)
-        display.layer.shadowOpacity = 0.5
+        display.layer.shadowOpacity = 0.4
         
         display +++ destinationForm.layout {
             c in
@@ -290,23 +278,72 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             self.navigationController?.pushViewController(checkinvc, animated: true)
         }
 
-        view.addSubview(dashboard.view)
-        dashboard.loadForm()
-        dashboard.layout {
+        view.addSubview(navigator.view)
+        navigator.loadForm()
+        navigator.layout {
             p in
-            p.height(UIScreen.main.bounds.width / 2 + 80).fillHolizon()
+            p.fillHolizon().verticalCenter()
+        }
+        navigator.view.isHidden = true
+        
+        let topRow = Row.Intervaled()
+        
+        topRow +++ MQForm.button(name: "search", title: "島たん").layout {
+            b in
+            b.height(40)
+            b.button.setTitleColor(.white, for: .normal)
+        }.bindEvent(.touchUpInside) {
+            b in
+            let vc = QuestViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.navigator.view.isHidden = true
+        }
+        
+        topRow +++ activityButton.layout{
+            b in
+            b.height(40)
+            b.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
+            b in
+            let ac = ActivityTopViewController()
+            self.navigationController?.pushViewController(ac, animated: true)
+            self.navigator.view.isHidden = true
+        }
+        
+        topRow.spacing = 25
+        
+        topRow +++ islandButton.layout{
+            b in
+            b.height(40)
+            b.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
+            b in
+            let ac = IslandViewController()
+            self.navigationController?.pushViewController(ac, animated: true)
+            self.navigator.view.isHidden = true
+        }
+        
+        navigator <<< topRow.layout {
+            top in
+            top.fillHolizon().height(40).upMargin(40)
+        }
+        navigator <<< Row.LeftAligned().height(40)
+        
+        
+        view.addSubview(commandboard.view)
+        commandboard.loadForm()
+        commandboard.layout {
+            p in
+            p.fillHolizon()
             p.view.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
         }
         
-        
         let row = Row.Intervaled()
-        row.spacing = 10
-        
+        row.spacing = 25
         
         row +++ MQForm.button(name: "nearby", title: "S/Mirror").layout {
             c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.clear
+            c.height(40)
             c.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
                 b in
@@ -315,28 +352,39 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         
         row +++ MQForm.button(name: "destinations", title: "行先").layout {
             c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.clear
+            c.height(40)
             c.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
                 b in
                 self.loadDestinations()
         }
         
-        row +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
+        row +++ MQForm.button(name: "dashboard", title: "D/Board").layout {
             c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.clear
-            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
+            c.height(40)
+            c.button.setTitleColor(.white, for: .normal)
+        }
+        
+        commandboard <<< row.layout() {
+            r in
+            r.fillHolizon().height(45).upMargin(40)
+        }
+        
+        let row2 = Row.Intervaled()
+        row2.spacing = 25
+        
+        row2 +++ MQForm.button(name: "Unopen", title: "📌㊙️").layout {
+            c in
+            c.height(40)
+            c.button.setTitleColor(.white, for: .normal)
         }
         
         let settingsButton = MQForm.button(name: "settings", title: "⚙").layout {
             c in
-            c.height(30)
-            c.button.backgroundColor = UIColor.clear
-            c.button.setTitleColor(UIColor.black.lighterColor(percent: 0.7), for: .normal)
+            c.height(40)
+            c.button.setTitleColor(.white, for: .normal)
         }
-        row +++ settingsButton
+        row2 +++ settingsButton
         
         settingsButton.bindEvent(.touchUpInside) {
             b in
@@ -344,18 +392,21 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             self.navigationController?.pushViewController(pinfoViewController, animated: true)
         }
         
-        dashboard +++ MQForm.tapableImg(name: "down-arrow", url: "downarrow").layout {
-            arrow in
-            arrow.upper().holizontalCenter().width(40).height(30)
-            }.bindEvent(.touchUpInside) { _ in
-                self.dashboard.view.isHidden = true
-                self.socialMirror.view.isHidden = true
-                self.dashButton.view.isHidden = false
+        row2 +++ MQForm.button(name: "signout", title: "Sign out").layout {
+            b in
+            b.button.setTitleColor(.white, for: .normal)
         }
         
-        dashboard +++ row.layout() {
+        
+        commandboard <<< row2.layout() {
             r in
-            r.fillHolizon().height(45).down(withInset: 10)
+            r.fillHolizon().height(45)
+        }
+        
+        commandboard <<< Row.LeftAligned().height(40)
+        
+        commandboard.onClosed = {
+            self.dashButton.view.isHidden = false
         }
         
     }
@@ -413,7 +464,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
                     self.showGuidances()
                 }
             }
-            self.showGuidances()
         }
     }
 
@@ -433,11 +483,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         if (!didSetupConstraints) {
             picture.configLayout()
-            controlPanel.autoPin(toBottomLayoutGuideOf: self, withInset: 0)
-            controlPanel.autoPinEdge(toSuperviewEdge: .left)
-            controlPanel.autoPinEdge(toSuperviewEdge: .right)
-            controlPanel.autoSetDimension(.height, toSize: 100)
-            controlPanel.backgroundColor = UIColor(white: 0.9, alpha: 0.0)
 
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
@@ -446,12 +491,15 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
             display.layer.borderWidth = 0.7
             display.layer.borderColor = UIColor.white.cgColor
-
-            controlPanel.configLayout()
-
+            dashButton.configLayout()
+            navigatorButton.configLayout()
+            
             display.configLayout()
             socialMirror.configLayout()
-            dashboard.configLayout()
+            commandboard.configLayout()
+            navigator.configLayout()
+            sep.configLayout()
+            
             didSetupConstraints = true
         }
 
@@ -472,6 +520,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
 
     //長押しした時にピンを置く処理
+    // この場所にイベントを作成することにしたいけど、どう実装する？
     func longPressed(sender: UILongPressGestureRecognizer) {
 
         //この処理を書くことにより、指を離したときだけ反応するようにする（何回も呼び出されないようになる。最後の話したタイミングで呼ばれる）
@@ -487,6 +536,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
         let pin = MKPointAnnotation()
         //ピンを置く場所を指定
         pin.coordinate = tappedPoint
+        
         //ピンのタイトルを設定
         pin.title = "中野区"
         //ピンのサブタイトルの設定
@@ -528,11 +578,11 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             if let sm = speedMeter {
                 if visible {
                     if sm.status == .moving {
-                        dashboard.updateAverageSpeed(sm.velocity)
-                        dashboard.updateInstantSpeed(sm.instantVelocity)
+                        //commandboard.updateAverageSpeed(sm.velocity)
+                        //commandboard.updateInstantSpeed(sm.instantVelocity)
                     } else {
-                        dashboard.updateAverageSpeed(sm.velocity)
-                        dashboard.updateInstantSpeed(0)
+                        //commandboard.updateAverageSpeed(sm.velocity)
+                        //commandboard.updateInstantSpeed(0)
                     }
                 }
             }
@@ -559,8 +609,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
 
         if Date().timeIntervalSince(speedMeter!.previousTime) > 10 {
             speedMeter!.status = .stopping
-            dashboard.updateInstantSpeed(0)
-            dashboard.updateAverageSpeed(0)
+            //commandboard.updateInstantSpeed(0)
+            //commandboard.updateAverageSpeed(0)
         }
     }
 
@@ -609,5 +659,31 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate, MKMa
             error in
             self.sliderBar.label.text = error
         })
+    }
+}
+
+extension CenterViewController : MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        
+    }
+    
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
+        
+    }
+    
+    
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation === mapView.userLocation {
+            return mapView.view(for: annotation)
+        } else {
+            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "UserLocation")
+            annotationView.image = UIImage(named: "pengin1")?.af_imageRoundedIntoCircle()
+            annotationView.layer.shadowColor = UIColor.gray.cgColor
+            annotationView.layer.shadowOffset = CGSize(width: 10, height: 10)
+            annotationView.layer.shadowOpacity = 0.4
+            
+            annotationView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+            return annotationView
+        }
     }
 }

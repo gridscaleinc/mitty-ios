@@ -123,7 +123,7 @@ extension Control {
     
     // put a little bit above
     @discardableResult
-    open func putAbove(Of control: Control, withOffset points: CGFloat? = 0 ) -> Self {
+    open func putAbove(of control: Control, withOffset points: CGFloat? = 0 ) -> Self {
         self.view.autoPinEdge(.bottom, to: .top, of: control.view, withOffset: -points!)
         return self
     }
