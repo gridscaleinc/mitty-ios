@@ -196,15 +196,10 @@ class SocialMirrorForm: Container {
     
     func setBackGround() {
         
-        self.view.backgroundColor = UIColor(white: 0.02, alpha: 0.8)
-        let imageLayer = CALayer()
-        let image = UIImage(named:"beauty2.jpeg")!
-        imageLayer.contents = image.cgImage
-        imageLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(image.size.ratio))
-        self.view.layer.insertSublayer(imageLayer, at: 0)
+        self.view.backgroundColor = UIColor(patternImage: UIImage(named: "beauty2.jpeg")!)
         let layer = MittyColor.gradientLayer(MittyColor.sunshineRed, MittyColor.lightYellow.withAlphaComponent(0.5), UIColor.orange.withAlphaComponent(0.5))
         layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
-        self.view.layer.insertSublayer(layer, at: 1)
+        self.view.layer.insertSublayer(layer, at: 0)
     
     }
     

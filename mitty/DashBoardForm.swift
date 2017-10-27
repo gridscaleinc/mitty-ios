@@ -51,7 +51,7 @@ class DashBoardForm : Container {
         self +++ timeClock
         
         let layer = MittyColor.gradientLayer(.black, MittyColor.healthyGreen.withAlphaComponent(0.5), UIColor.black.withAlphaComponent(0.5))
-        layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
+        layer.frame = CGRect(x: 0, y: 0, width: 400, height: 250)
         self.view.layer.insertSublayer(layer, at: 0)
     }
     

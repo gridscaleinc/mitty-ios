@@ -22,7 +22,7 @@ class ControlPanel : Section {
     
     func loadForm () {
         
-        self.view.backgroundColor = UIColor(white: 0.02, alpha: 0.8)
+        self.view.backgroundColor = MittyColor.greenGrass.withAlphaComponent(0.9)
         
         self +++ MQForm.tapableImg(name: "down-arrow", url: "downarrow").layout {
             arrow in
@@ -32,9 +32,6 @@ class ControlPanel : Section {
                 self.onClosed()
         }
         
-        let layer = MittyColor.gradientLayer(.black, MittyColor.healthyGreen.withAlphaComponent(0.5), UIColor.black.withAlphaComponent(0.5))
-        layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
-        self.view.layer.insertSublayer(layer, at: 0)
     }
     
     var onClosed : ()->Void = {

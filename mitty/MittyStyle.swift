@@ -21,8 +21,10 @@ class MittyColor : UIColor {
     static let baseYellow = UIColor(red: 1.0, green: 1.0, blue: 0.6, alpha: 1.0)
     static let pink = UIColor(red: 1.0, green: 110.0/255, blue: 199/255, alpha: 1.0)
     
-    static let healthyGreen = UIColor.colorWithRGB(rgbValue: 0x1ABC9C)
-    static let lightYellow = UIColor(red: 250/255, green: 215/255, blue: 160/255, alpha:1.0)
+//    static let healthyGreen = UIColor.colorWithRGB(rgbValue: 0x1ABC9C)
+    static let healthyGreen = UIColor(red: 30/255, green: 160/255, blue: 170/255 , alpha: 1.0)
+    static let greenGrass = UIColor(red: 30/255, green: 160/255, blue: 170/255 , alpha: 1.0)
+    static let lightYellow = UIColor(red: 150/255, green: 215/255, blue: 160/255, alpha:1.0)
     static let light = UIColor(white:0.98, alpha:1.0)
     static let labelColor = UIColor(white: 0.35, alpha: 1.0)
     static let sunshineRed = UIColor(red: 1.0, green: 0x54/255, blue: 0x27/266, alpha:1.0)

@@ -55,9 +55,9 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
 
     let commandboard = ControlPanel(h:500)
     
-    let sep = HL(MittyColor.gray, 1)
+    let sep = HL(MittyColor.greenGrass, 2)
     
-    let navigator = ControlPanel(h:120)
+    let navigator = ControlPanel(h: 160)
     
     let picture: Control = MQForm.button(name: "m2", title: "")
 
@@ -68,43 +68,44 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
     let destinationForm = DestinationForm()
     
     var speedMeter: SpeedMeter? = nil
+    var dashboard = DashBoardForm()
 
     var isStarting = true
     var currentLocationPin = MKPointAnnotation()
 
     let dashButton = MQForm.button(name: "opencommandboard", title: "D/B").layout {
         b in
-        b.down(withInset: 2).holizontalCenter().height(50).width(50)
+        b.down(withInset: -2).holizontalCenter().height(50).width(50)
         b.button.setImage(UIImage(named:"uparrow"), for: .normal)
         b.button.setTitleColor(.white, for: .normal)
-        b.button.layer.cornerRadius = 30
-        b.button.layer.shadowColor = UIColor.gray.cgColor
-        b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
-        b.button.layer.shadowRadius = 10
-        b.button.layer.shadowOpacity = 0.4
+        b.button.layer.cornerRadius = 25
+        b.button.layer.shadowColor = MittyColor.greenGrass.cgColor
+        b.button.layer.shadowOffset = CGSize(width: 2, height: 2)
+        b.button.layer.shadowRadius = 25
+        b.button.layer.shadowOpacity = 0.8
     }
     
-    let navigatorButton = MQForm.button(name: "opencommandboard", title: "D/B").layout {
+    let navigatorButton = MQForm.button(name: "opencommandboard", title: "N").layout {
         b in
-        b.button.backgroundColor = UIColor.lightGray
-        b.down(withInset: 70).holizontalCenter().height(60).width(60)
+        b.button.backgroundColor = MittyColor.greenGrass.withAlphaComponent(0.8)
+        b.down(withInset: 60).holizontalCenter().height(50).width(50)
         b.button.setTitleColor(.white, for: .normal)
-        b.button.layer.cornerRadius = 30
+        b.button.layer.cornerRadius = 25
         b.button.layer.shadowColor = UIColor.gray.cgColor
         b.button.layer.shadowOffset = CGSize(width: 10, height: 10)
         b.button.layer.shadowRadius = 10
         b.button.layer.shadowOpacity = 0.4
     }
     
-    let activityButton = MQForm.button(name: "activityButton", title: "活動")
+    let activityButton = MQForm.button(name: "activityButton", title: "予定一覧")
     let islandButton = MQForm.button(name: "islandButton", title: "島会議")
     
     var haveAnyAdvice : (() -> Void)? = nil
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
-        self.navigationItem.title = LS(key: "operation_center")
-        self.tabBarController?.tabBar.isHidden = false
+        navigationItem.title = LS(key: "operation_center")
+
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         view.setNeedsUpdateConstraints()
@@ -114,9 +115,12 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationItem.title = "..."
-        timer.invalidate()
     }
-
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        closeAllPanel()
+    }
     //
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -172,7 +176,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         sliderBar.bindEvent(.touchUpInside) {
             b in
             
-            self.showSocialMirror()
+            self.showSocialMirror(refresh: true)
             
         }
         
@@ -197,10 +201,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         // 位置情報の更新を開始
         myLocationManager.startUpdatingLocation()
         
-        self.commandboard.view.isHidden = true
-        self.socialMirror.view.isHidden = true
-        self.dashButton.view.isHidden = false
-        
         super.lockView()
         didSetupConstraints = false
         
@@ -209,16 +209,28 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
 
     }
     
-    func showSocialMirror () {
+    func loadSocialMirror() {
+        self.view.addSubview(socialMirror.view)
         SocialContactService.instance.getSocailMirror(onComplete: {
             mirror in
             self.sliderBar.label.text = mirror.description
             self.socialMirror.load(mirror)
-            
-            let isHidden = self.socialMirror.view.isHidden
-            self.socialMirror.view.isHidden = !isHidden
-            self.view.bringSubview(toFront: self.socialMirror.view)
-            
+        }, onError: {
+            error in
+            self.sliderBar.label.text = error
+        })
+    }
+    
+    func showSocialMirror (refresh : Bool? = false) {
+        socialMirror.view.isHidden = !socialMirror.view.isHidden
+        dashboard.view.isHidden = true
+        if (!refresh! && socialMirror.view.isHidden) {
+            return
+        }
+        SocialContactService.instance.getSocailMirror(onComplete: {
+            mirror in
+            self.sliderBar.label.text = mirror.description
+            self.socialMirror.load(mirror)
         }, onError: {
             error in
             self.sliderBar.label.text = "Error........"
@@ -237,19 +249,18 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         self.view.addSubview(dashButton.view)
         dashButton.bindEvent(.touchUpInside) {
             b in
+            self.closeAllPanel()
             self.commandboard.view.isHidden = false
-            self.dashButton.view.isHidden = !self.dashButton.view.isHidden
         }
         self.view.addSubview(sep.view)
         sep.layout {
             l in
-            l.fillHolizon(40).putUnder(of: self.navigatorButton, withOffset: 6)
+            l.fillHolizon(40).putUnder(of: self.navigatorButton, withOffset: 15)
         }
         self.view.addSubview(navigatorButton.view)
         navigatorButton.bindEvent(.touchUpInside) {
             b in
-            self.navigator.view.isHidden = !self.navigator.view.isHidden
-            self.dashButton.view.isHidden = false
+            self.toggle(self.navigator)
         }
         
         view.addSubview(display)
@@ -282,15 +293,13 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         navigator.loadForm()
         navigator.layout {
             p in
-            p.fillHolizon().verticalCenter()
+            p.leftMost(withInset: 5).rightMost(withInset: 5).verticalCenter()
         }
-        navigator.view.isHidden = true
-        
         let topRow = Row.Intervaled()
         
         topRow +++ MQForm.button(name: "search", title: "島たん").layout {
             b in
-            b.height(40)
+            b.height(30)
             b.button.setTitleColor(.white, for: .normal)
         }.bindEvent(.touchUpInside) {
             b in
@@ -301,7 +310,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         
         topRow +++ activityButton.layout{
             b in
-            b.height(40)
+            b.height(30)
             b.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
             b in
@@ -312,20 +321,36 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         
         topRow.spacing = 25
         
-        topRow +++ islandButton.layout{
-            b in
-            b.height(40)
-            b.button.setTitleColor(.white, for: .normal)
-            }.bindEvent(.touchUpInside) {
-            b in
-            let ac = IslandViewController()
-            self.navigationController?.pushViewController(ac, animated: true)
-            self.navigator.view.isHidden = true
-        }
-        
         navigator <<< topRow.layout {
             top in
-            top.fillHolizon().height(40).upMargin(40)
+            top.fillHolizon().height(30).upMargin(40)
+        }
+        
+        let secRow = Row.Intervaled()
+        secRow +++ islandButton.layout{
+            b in
+            b.height(30)
+            b.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
+                b in
+                let ac = IslandViewController()
+                self.navigationController?.pushViewController(ac, animated: true)
+                self.toggle(self.navigator)
+        }
+        secRow +++ MQForm.button(name: "social", title: "つながり").layout{
+            b in
+            b.height(30)
+            b.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) {
+                b in
+                let ac = SocialViewController()
+                self.navigationController?.pushViewController(ac, animated: true)
+                self.toggle(self.navigator)
+        }
+        
+        navigator <<< secRow.layout {
+            s in
+            s.fillHolizon().height(30).upMargin(20)
         }
         navigator <<< Row.LeftAligned().height(40)
         
@@ -356,6 +381,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
             c.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) {
                 b in
+                self.closeAllPanel()
                 self.loadDestinations()
         }
         
@@ -363,6 +389,9 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
             c in
             c.height(40)
             c.button.setTitleColor(.white, for: .normal)
+            }.bindEvent(.touchUpInside) { _ in
+                self.socialMirror.view.isHidden = true
+                self.dashboard.view.isHidden = !self.dashboard.view.isHidden
         }
         
         commandboard <<< row.layout() {
@@ -406,9 +435,16 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         commandboard <<< Row.LeftAligned().height(40)
         
         commandboard.onClosed = {
-            self.dashButton.view.isHidden = false
+            self.socialMirror.view.isHidden = true
+            self.dashboard.view.isHidden = true
         }
-        
+        commandboard.view.backgroundColor = commandboard.view.backgroundColor!.withAlphaComponent(1)
+        self.view.addSubview(dashboard.view)
+        dashboard.loadForm()
+        dashboard.layout {
+            b in
+            b.fillHolizon().height(250).view.autoPin(toTopLayoutGuideOf: self, withInset: 0)
+        }
     }
 
     func loadDestinations () {
@@ -499,7 +535,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
             commandboard.configLayout()
             navigator.configLayout()
             sep.configLayout()
-            
+            dashboard.configLayout()
             didSetupConstraints = true
         }
 
@@ -514,7 +550,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
     func editPersonalInfo() {
         let eidtorView = PersonalInfoViewController()
         self.navigationItem.title = "..."
-        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.pushViewController(eidtorView, animated: true)
     }
 
@@ -578,11 +613,11 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
             if let sm = speedMeter {
                 if visible {
                     if sm.status == .moving {
-                        //commandboard.updateAverageSpeed(sm.velocity)
-                        //commandboard.updateInstantSpeed(sm.instantVelocity)
+                        dashboard.updateAverageSpeed(sm.velocity)
+                        dashboard.updateInstantSpeed(sm.instantVelocity)
                     } else {
-                        //commandboard.updateAverageSpeed(sm.velocity)
-                        //commandboard.updateInstantSpeed(0)
+                        dashboard.updateAverageSpeed(sm.velocity)
+                        dashboard.updateInstantSpeed(0)
                     }
                 }
             }
@@ -609,8 +644,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
 
         if Date().timeIntervalSince(speedMeter!.previousTime) > 10 {
             speedMeter!.status = .stopping
-            //commandboard.updateInstantSpeed(0)
-            //commandboard.updateAverageSpeed(0)
+            dashboard.updateInstantSpeed(0)
+            dashboard.updateAverageSpeed(0)
         }
     }
 
@@ -648,17 +683,21 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
 
     }
     
-    func loadSocialMirror() {
-        self.view.addSubview(socialMirror.view)
-        socialMirror.view.isHidden = true
-        SocialContactService.instance.getSocailMirror(onComplete: {
-            mirror in
-            self.sliderBar.label.text = mirror.description
-            self.socialMirror.load(mirror)
-        }, onError: {
-            error in
-            self.sliderBar.label.text = error
-        })
+    
+    
+    func closeAllPanel() {
+        self.commandboard.view.isHidden = true
+        self.navigator.view.isHidden = true
+        self.socialMirror.view.isHidden = true
+        self.dashboard.view.isHidden = true
+    }
+    
+    func toggle(_ c: Control) {
+        
+        let isHidden = c.view.isHidden
+        closeAllPanel()
+        c.view.isHidden = !isHidden
+        
     }
 }
 
