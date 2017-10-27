@@ -202,7 +202,7 @@ class SocialMirrorForm: Container {
         imageLayer.contents = image.cgImage
         imageLayer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width*(image.size.ratio))
         self.view.layer.insertSublayer(imageLayer, at: 0)
-        let layer = MittyColor.gradientLayer(.black, MittyColor.healthyGreen.withAlphaComponent(0.5), UIColor.black.withAlphaComponent(0.5))
+        let layer = MittyColor.gradientLayer(MittyColor.sunshineRed, MittyColor.lightYellow.withAlphaComponent(0.5), UIColor.orange.withAlphaComponent(0.5))
         layer.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 500)
         self.view.layer.insertSublayer(layer, at: 1)
     
