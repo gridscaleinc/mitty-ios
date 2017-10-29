@@ -43,8 +43,6 @@ class ActivitySelectionViewController1: MittyViewController {
         // 線を引いて、対象年のフィルタボタンを設定する
 
         super.viewDidLoad()
-
-        super.viewDidLoad()
         self.navigationItem.title = "活動種類選択"
         self.view.backgroundColor = UIColor.white
 

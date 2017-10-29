@@ -18,9 +18,8 @@ import UICircularProgressRing
 // 個人情報を管理するView
 //
 @objc(CenterViewController)
-class CenterViewController: MittyViewController, CLLocationManagerDelegate {
+class CenterViewController: MittyViewController {
 
-    let myLocationManager = CLLocationManager()
     var socialMirror: SocialMirrorForm!
     let myMapView = MKMapView()
     let guide = GuidanceForm()
@@ -71,6 +70,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
     var dashboard = DashBoardForm()
 
     var isStarting = true
+    var currentLocation : CLLocation!
+    
     var currentLocationPin = MKPointAnnotation()
 
     let dashButton = MQForm.button(name: "opencommandboard", title: "D/B").layout {
@@ -109,6 +110,8 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         view.setNeedsUpdateConstraints()
+        
+        ApplicationContext.locationManager.locationHander = onLocationUpdated(_:)
     }
 
     // ビューが非表示になる直前にタイトルを「...」に変える。
@@ -136,7 +139,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
 
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
-
+        myMapView.delegate = self
         //長押しを探知する機能を追加
         let longTapGesture = UILongPressGestureRecognizer()
         longTapGesture.addTarget(self, action: #selector(longPressed))
@@ -144,8 +147,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         myMapView.showsUserLocation = true
         myMapView.userTrackingMode = .followWithHeading
 
-        //ここからが現在地取得の処理
-        myLocationManager.delegate = self
 
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
@@ -192,15 +193,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         socialMirror = SocialMirrorForm(self.navigationController!)
         loadSocialMirror()
 
-        let status = CLLocationManager.authorizationStatus()
-        if status == CLAuthorizationStatus.notDetermined {
-            // まだ承認が得られていない場合は、認証ダイアログを表示
-            myLocationManager.requestAlwaysAuthorization()
-        }
-
-        // 位置情報の更新を開始
-        myLocationManager.startUpdatingLocation()
-        
         super.lockView()
         didSetupConstraints = false
         
@@ -453,7 +445,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
             destinations in
             let now = Date()
             self.nearlyDestinations = destinations
-            
             self.myMapView.removeAnnotations(self.myMapView.annotations)
             
             for d in destinations {
@@ -471,7 +462,9 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
                 print(point)
 
                 //ピンの生成
-                let pin = MKPointAnnotation()
+                let pin = DestinationAnnotation()
+                pin.destination = d
+                
                 //ピンを置く場所を指定
                 pin.coordinate = point
                 //ピンのタイトルを設定
@@ -580,57 +573,7 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         self.myMapView.addAnnotation(pin)
     }
 
-    // GPSから値を取得した際に呼び出されるメソッド
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // 配列から現在座標を取得（配列locationsの中から最新のものを取得する）
-        let myLocation = locations.last! as CLLocation
-        //Pinに表示するためにはCLLocationCoordinate2Dに変換してあげる必要がある
-        let currentLocation = myLocation.coordinate
-        //ピンの生成と配置
-        currentLocationPin.coordinate = currentLocation
-
-        if isStarting {
-            currentLocationPin.title = "現在地"
-            self.myMapView.addAnnotation(currentLocationPin)
-            //アプリ起動時の表示領域の設定
-            //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
-            let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
-            let myRegion = MKCoordinateRegionMake(currentLocation, mySpan)
-            myMapView.region = myRegion
-            speedMeter = SpeedMeter(start: myLocation)
-            isStarting = false
-
-
-            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateSpeed
-                ), userInfo: nil, repeats: true)
-
-            timer.fire()
-
-        } else {
-            let visible = self.isViewLoaded && (self.view.window
-                != nil)
-            speedMeter?.updateLocation(nowLocation: myLocation)
-            if let sm = speedMeter {
-                if visible {
-                    if sm.status == .moving {
-                        dashboard.updateAverageSpeed(sm.velocity)
-                        dashboard.updateInstantSpeed(sm.instantVelocity)
-                    } else {
-                        dashboard.updateAverageSpeed(sm.velocity)
-                        dashboard.updateInstantSpeed(0)
-                    }
-                }
-            }
-        }
-
-        if myMapView.isUserLocationVisible {
-            self.picture.button.isHidden = true
-        } else {
-            self.picture.button.isHidden = false
-        }
-
-        updateDistance(myLocation)
-    }
+    
 
     @objc
     func updateSpeed(tm: Timer) {
@@ -658,31 +601,6 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         destinationForm.setDistance(inMeter: distanceMeter)
     }
 
-    //GPSの取得に失敗したときの処理
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
-
-    //認証状態が変わったことをハンドリングする。
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        // 認証のステータスをログで表示.
-        var statusStr = ""
-        switch (status) {
-        case .notDetermined:
-            statusStr = "NotDetermined"
-        case .restricted:
-            statusStr = "Restricted"
-        case .denied:
-            statusStr = "Denied"
-        case .authorizedAlways:
-            statusStr = "AuthorizedAlways"
-        case .authorizedWhenInUse:
-            statusStr = "AuthorizedWhenInUse"
-        }
-        print(" CLAuthorizationStatus: \(statusStr)")
-
-    }
-    
     
     
     func closeAllPanel() {
@@ -699,30 +617,107 @@ class CenterViewController: MittyViewController, CLLocationManagerDelegate {
         c.view.isHidden = !isHidden
         
     }
+    
+    func onLocationUpdated(_ location :CLLocation) {
+        //Pinに表示するためにはCLLocationCoordinate2Dに変換してあげる必要がある
+        currentLocation = location
+        //ピンの生成と配置
+        currentLocationPin.coordinate = currentLocation.coordinate
+        
+        if isStarting {
+            currentLocationPin.title = "現在地"
+            self.myMapView.addAnnotation(currentLocationPin)
+            //アプリ起動時の表示領域の設定
+            //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
+            let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
+            let myRegion = MKCoordinateRegionMake(currentLocation.coordinate, mySpan)
+            myMapView.region = myRegion
+            speedMeter = SpeedMeter(start: location)
+            isStarting = false
+            
+            timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(self.updateSpeed
+                ), userInfo: nil, repeats: true)
+            
+            timer.fire()
+            
+        } else {
+            let visible = self.isViewLoaded && (self.view.window != nil)
+            speedMeter?.updateLocation(nowLocation: location)
+            if let sm = speedMeter {
+                if visible {
+                    if sm.status == .moving {
+                        dashboard.updateAverageSpeed(sm.velocity)
+                        dashboard.updateInstantSpeed(sm.instantVelocity)
+                    } else {
+                        dashboard.updateAverageSpeed(sm.velocity)
+                        dashboard.updateInstantSpeed(0)
+                    }
+                }
+            }
+        }
+        
+        if myMapView.isUserLocationVisible {
+            self.picture.button.isHidden = true
+        } else {
+            self.picture.button.isHidden = false
+        }
+        
+        updateDistance(location)
+    }
 }
 
 extension CenterViewController : MKMapViewDelegate {
-    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
-        
-    }
-    
     func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
     }
-    
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation === mapView.userLocation {
             return mapView.view(for: annotation)
         } else {
-            let annotationView = MKAnnotationView(annotation: annotation, reuseIdentifier: "UserLocation")
-            annotationView.image = UIImage(named: "pengin1")?.af_imageRoundedIntoCircle()
-            annotationView.layer.shadowColor = UIColor.gray.cgColor
-            annotationView.layer.shadowOffset = CGSize(width: 10, height: 10)
-            annotationView.layer.shadowOpacity = 0.4
-            
-            annotationView.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-            return annotationView
+            if (annotation.isKind(of: DestinationAnnotation.self)) {
+                
+                let l = (annotation as! DestinationAnnotation).destination.eventTitle
+                let annotationView = AnnotationView(img:"penguingo.jpg", label: l, ann: annotation)
+                annotationView.layer.shadowColor = UIColor.gray.cgColor
+                annotationView.layer.shadowOffset = CGSize(width: 10, height: 10)
+                annotationView.layer.shadowOpacity = 0.4
+                annotationView.canShowCallout = false
+                
+                
+                return annotationView
+            }
+            return nil
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        // 1
+        if view.annotation is MKUserLocation {
+            return
+        }
+        
+        if view.isKind(of: AnnotationView.self){
+            let c = MQForm.button(name: "openevent", title: "イベント開く").height(30).width(120)
+            c.view.backgroundColor = MittyColor.greenGrass
+            c.button.setTitleColor(.white, for: .normal)
+            (view as! AnnotationView).setCaloutPanel(c)
+            c.bindEvent(.touchUpInside) {
+                b in
+                let av = view as! AnnotationView
+                let eventId = (av.annotation as! DestinationAnnotation).destination.eventId
+                EventService.instance.fetch(id: String(eventId)) {
+                    e in
+                    let vc = EventDetailViewController(event: e)
+                    self.navigationController?.pushViewController(vc, animated: true)
+                }
+            }
+        }
+    }
+    
+    func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
+        if view.isKind(of: AnnotationView.self){
+            (view as! AnnotationView).panel.view.removeFromSuperview()
         }
     }
 }

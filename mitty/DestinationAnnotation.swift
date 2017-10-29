@@ -10,5 +10,6 @@ import Foundation
 import MapKit
 
 class DestinationAnnotation : MKPointAnnotation {
+    var destination : Destination!
     
 }

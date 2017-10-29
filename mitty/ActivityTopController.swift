@@ -59,7 +59,6 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         self.view.addSubview(activityform)
         self.view.addSubview(activityTypes)
 
-        configureNavigationBar()
 
     }
 
@@ -250,12 +249,12 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     }
 
     // navigation bar の初期化をする
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
 
         let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(showSearchBox))
         let additionItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.add, target: self, action: #selector(addActivity))
 
-        let rightItems = [additionItem, searchItem]
+        let rightItems = [homeItem(), additionItem, searchItem]
         navigationItem.setRightBarButtonItems(rightItems, animated: true)
 
     }
@@ -273,7 +272,6 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
         // nest function　to serve search event
         func searchIt (_ searchBar: UISearchBar) -> Void {
             naviItem.titleView = titleView
-            configureNavigationBar()
         }
 
         handleSearch = searchIt
@@ -320,7 +318,7 @@ class ActivityTopViewController: MittyViewController, UISearchBarDelegate {
     }
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
         activityTypes.addTarget(self, action: #selector(changeType(_:)), for: .valueChanged)
         LoadingProxy.set(self)

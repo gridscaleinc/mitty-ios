@@ -74,24 +74,27 @@ class BubbleMessage : Container, CAAnimationDelegate {
         }
         
         self.configLayout()
-        falling()
+        rising()
         
     }
     
-    private var fallingDuration: TimeInterval = 5
+    private var fallingDuration: TimeInterval = 4
     private let animationKey = "fallingAnimation"
     
-    func falling(delayDouble: Double = 0.5) {
-        // 回転
-        let rotateAnimation = CABasicAnimation(keyPath: "transform")
-        rotateAnimation.duration = 0.3
-        rotateAnimation.repeatCount = Float.infinity
-        let transform = CATransform3DMakeRotation(CGFloat.pi,  0, 1.0, 0)
-        rotateAnimation.toValue = NSValue(caTransform3D : transform)
+    func rising(delayDouble: Double = 0.5) {
+        // scale
+        let scaleAnimation = CABasicAnimation(keyPath: "transform")
+        scaleAnimation.duration = fallingDuration
+        scaleAnimation.repeatCount = Float.infinity
+        
+        let transform = CATransform3DIdentity
+        let transformScale = CATransform3DScale(transform, 2, 2.5, 1.0);
+
+        scaleAnimation.toValue = NSValue(caTransform3D : transformScale)
         
         // 移動
-        let startPoint = CGPoint(x:UIScreen.main.bounds.width/2, y:0)
-        let endPoint = CGPoint(x:UIScreen.main.bounds.width/2, y:UIScreen.main.bounds.height)
+        let startPoint = CGPoint(x:UIScreen.main.bounds.width/2, y:UIScreen.main.bounds.height)
+        let endPoint = CGPoint(x:UIScreen.main.bounds.width/2, y:0)
         let moveAnimation = CABasicAnimation(keyPath: "position")
         moveAnimation.duration = fallingDuration
         moveAnimation.fromValue = NSValue(cgPoint: startPoint)
@@ -106,7 +109,7 @@ class BubbleMessage : Container, CAAnimationDelegate {
         let animationGroup = CAAnimationGroup()
         animationGroup.duration = fallingDuration
         animationGroup.repeatCount = 1
-        animationGroup.animations = [moveAnimation]
+        animationGroup.animations = [scaleAnimation, moveAnimation]
         animationGroup.delegate = self
         
         self.view.layer.add(animationGroup, forKey: self.animationKey)

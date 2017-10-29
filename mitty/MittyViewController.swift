@@ -33,6 +33,31 @@ class MittyViewController: UIViewController {
         return true
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        configureNavigationBar()
+    }
+    
+    func configureNavigationBar() {
+        if navigationController == nil {
+            return
+        }
+        if navigationController!.viewControllers.count < 3 {
+            return
+        }
+        navigationItem.setRightBarButtonItems([homeItem()], animated: true)
+    }
+    
+    /// build home item
+    func homeItem() -> UIBarButtonItem {
+        let home = UIBarButtonItem(title: "Home", style: UIBarButtonItemStyle.plain, target: self, action: #selector(gotoRootView))
+        return home
+    }
+    
+    func gotoRootView() {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         self.navigationItem.title = "..."

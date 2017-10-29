@@ -84,7 +84,7 @@ class ProposalViewController: MittyViewController, UIImagePickerControllerDelega
 
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
         buildForm()

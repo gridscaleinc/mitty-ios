@@ -47,7 +47,7 @@ class ActivityPlanDetailsController: MittyViewController {
     }
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         self.automaticallyAdjustsScrollViewInsets = false
         super.autoCloseKeyboard()
 

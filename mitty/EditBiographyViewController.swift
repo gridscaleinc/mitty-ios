@@ -104,7 +104,7 @@ class EditBiographyViewController: MittyViewController, UIPickerViewDelegate, UI
     }
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
         self.navigationItem.title = "Biography"

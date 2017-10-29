@@ -60,7 +60,9 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Take picture for check in etc.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string></string>
+	<key>NSLocationWhenInUseUsageDescription</key>
 	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Let users to pick a photo and upload as a content resource</string>

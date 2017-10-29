@@ -94,7 +94,6 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         talkInputField.leftView = leftPadding
         talkInputField.leftViewMode = UITextFieldViewMode.always
         
-        configureNavigationBar()
         addSubviews()
         addConstraints()
         configureSubviews()
@@ -189,7 +188,7 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
     }
     
     // MARK: - View Setup
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
         
         navLabel.autoSetDimension(.height, toSize:15)
         navLabel.autoSetDimension(.width, toSize: 10)
@@ -197,7 +196,7 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         let cameraItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.camera, target:self, action:#selector(camera))
         let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target:self, action:#selector(search))
         
-        let rightItems = [cameraItem, searchItem]
+        let rightItems = [homeItem(), cameraItem, searchItem]
         
         navigationItem.setRightBarButtonItems(rightItems, animated: true)
         

@@ -83,7 +83,7 @@ class EditBasicInfoViewController: MittyViewController {
     }
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
         self.navigationItem.title = "基本情報設定"

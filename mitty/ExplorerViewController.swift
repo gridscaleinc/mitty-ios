@@ -50,7 +50,6 @@ class EventViewController: MittyViewController {
 
         self.navigationItem.title = "島探"
 
-        configureNavigationBar()
         addSubviews()
         addConstraints()
         configureSubviews()
@@ -65,7 +64,8 @@ class EventViewController: MittyViewController {
     }
 
     // MARK: - View Setup
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
+        super.configureNavigationBar()
         self.navigationItem.titleView = searchBar
     }
 
@@ -261,7 +261,6 @@ class RequestExplorerViewController: MittyViewController {
 
         self.navigationItem.title = "島探"
 
-        configureNavigationBar()
         //        let uiimage = UIImageView()
         //        uiimage.image = UIImage(named: "event1")
         //        uiimage.frame = self.view.frame
@@ -282,7 +281,8 @@ class RequestExplorerViewController: MittyViewController {
     }
 
     // MARK: - View Setup
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
+        super.configureNavigationBar()
         self.navigationItem.titleView = searchBar
     }
 

@@ -14,7 +14,7 @@ import CoreLocation
 import UICircularProgressRing
 import SwiftyJSON
 
-class TeleportViewController : MittyViewController, CLLocationManagerDelegate, WebSocketDelegate {
+class TeleportViewController : MittyViewController, WebSocketDelegate {
 
     //地図を表示
     //websocketを引き継ぐ
@@ -53,13 +53,11 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
     let talkInputField: StyledTextField
     let talkSendButton: UIButton
     
-    //LocationManagerの生成（viewDidLoadの外に指定してあげることで、デリゲートメソッドの中でもmyLocationManagerを使用できる）
-    let myLocationManager = CLLocationManager()
     let myMapView = MKMapView()
     
     var isStarting = true
     var currentLocationPin = MKPointAnnotation()
-    var myLocation = CLLocation(latitude: 0, longitude: 0)
+    var currentLocation = CLLocation(latitude: 0, longitude: 0)
     
     var bagua: Control = {
         let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
@@ -116,6 +114,7 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         view.setNeedsUpdateConstraints()
+        ApplicationContext.locationManager.locationHander = onLocationUpdated(_:)
     }
     
     // ビューが非表示になる直前にタイトルを「...」に変える。
@@ -143,23 +142,12 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
         myMapView.showsUserLocation = true
         myMapView.userTrackingMode = .followWithHeading
         
-        //ここからが現在地取得の処理
-        myLocationManager.delegate = self
-        
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
         
         LoadingProxy.set(self)
         
-        let status = CLLocationManager.authorizationStatus()
-        if status == CLAuthorizationStatus.notDetermined {
-            // まだ承認が得られていない場合は、認証ダイアログを表示
-            myLocationManager.requestAlwaysAuthorization()
-        }
-        
-        // 位置情報の更新を開始
-        myLocationManager.startUpdatingLocation()
 
         setupMeeting()
         
@@ -175,7 +163,6 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
         talkInputField.leftView = leftPadding
         talkInputField.leftViewMode = UITextFieldViewMode.always
         
-        configureNavigationBar()
         addSubviews()
         addConstraints()
         
@@ -211,13 +198,11 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
     }
     
     // GPSから値を取得した際に呼び出されるメソッド
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        // 配列から現在座標を取得（配列locationsの中から最新のものを取得する）
-        myLocation = locations.last! as CLLocation
-        //Pinに表示するためにはCLLocationCoordinate2Dに変換してあげる必要がある
-        let currentLocation = myLocation.coordinate
+    func onLocationUpdated(_ location: CLLocation) {
+        
+        currentLocation = location
         //ピンの生成と配置
-        currentLocationPin.coordinate = currentLocation
+        currentLocationPin.coordinate = currentLocation.coordinate
         
         if isStarting {
             currentLocationPin.title = "現在地"
@@ -226,37 +211,12 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
             //アプリ起動時の表示領域の設定
             //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
             let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
-            let myRegion = MKCoordinateRegionMake(currentLocation, mySpan)
+            let myRegion = MKCoordinateRegionMake(currentLocation.coordinate, mySpan)
             myMapView.region = myRegion
             isStarting = false
         }
     }
     
-    
-    //GPSの取得に失敗したときの処理
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        print(error)
-    }
-    
-    //認証状態が変わったことをハンドリングする。
-    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-        // 認証のステータスをログで表示.
-        var statusStr = ""
-        switch (status) {
-        case .notDetermined:
-            statusStr = "NotDetermined"
-        case .restricted:
-            statusStr = "Restricted"
-        case .denied:
-            statusStr = "Denied"
-        case .authorizedAlways:
-            statusStr = "AuthorizedAlways"
-        case .authorizedWhenInUse:
-            statusStr = "AuthorizedWhenInUse"
-        }
-        print(" CLAuthorizationStatus: \(statusStr)")
-        
-    }
  
     func sendMessage(_ sender: UIButton) {
         if (talkInputField.text == "") {
@@ -279,8 +239,8 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
                 "speakTime" : Date().iso8601UTC,
             ],
             "teleportation" : [
-                "latitude" : myLocation.coordinate.latitude,
-                "longtidude" : myLocation.coordinate.longitude,
+                "latitude" : currentLocation.coordinate.latitude,
+                "longtidude" : currentLocation.coordinate.longitude,
             ],
         ]
         
@@ -306,10 +266,7 @@ class TeleportViewController : MittyViewController, CLLocationManagerDelegate, W
         socket.write(string: js!)
         
     }
-    
-    // MARK: - View Setup
-    private func configureNavigationBar() {
-    }
+
     
     func camera() {
         

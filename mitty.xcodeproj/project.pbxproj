@@ -139,6 +139,7 @@
 		FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8D70171DC8F4FF0083E8E4 /* search.png */; };
 		FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC95F9181F3EF33800F83766 /* ProposalService.swift */; };
 		FC95F91B1F3EF46800F83766 /* Proposals.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC95F91A1F3EF46800F83766 /* Proposals.swift */; };
+		FCB1A80E1FA58CE800CF56DD /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB1A80D1FA58CE800CF56DD /* AnnotationView.swift */; };
 		FCB45ECF1F03FEA90090B601 /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ECE1F03FEA90090B601 /* UserService.swift */; };
 		FCB45ED11F0400740090B601 /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED01F0400740090B601 /* UserInfo.swift */; };
 		FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB45ED21F05560D0090B601 /* ContentService.swift */; };
@@ -151,6 +152,7 @@
 		FCCEB60C1F9DED4900FC4EE7 /* MeetingStatusForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */; };
 		FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB381F2DB9370075C1A2 /* LikesService.swift */; };
 		FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */; };
+		FCD3F1501FA4340D000B7AFB /* MittyLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3F14F1FA4340D000B7AFB /* MittyLocationManager.swift */; };
 		FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7141EA1AB9400AAD750 /* noicon.png */; };
 		FCD8C7171EA1AB9400AAD750 /* nolargeimg.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7151EA1AB9400AAD750 /* nolargeimg.png */; };
 		FCD8C7191EA226AC00AAD750 /* applogo.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7181EA226AC00AAD750 /* applogo.png */; };
@@ -214,6 +216,8 @@
 		FCFEBF331E38F36F00DC989B /* BusinessIslandEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF321E38F36F00DC989B /* BusinessIslandEntryViewController.swift */; };
 		FCFEBF351E38F48200DC989B /* IslandDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF341E38F48200DC989B /* IslandDetailViewController.swift */; };
 		FCFEBF371E38F4B100DC989B /* IslandConstructViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCFEBF361E38F4B100DC989B /* IslandConstructViewController.swift */; };
+		FCFEE8511FA59E8500B1D3A3 /* eventIcon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCFEE8501FA59E8500B1D3A3 /* eventIcon.png */; };
+		FCFEE8531FA610B000B1D3A3 /* penguingo.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCFEE8521FA610B000B1D3A3 /* penguingo.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -292,7 +296,7 @@
 		FC1FE0521EC1CDE5007AE8A5 /* NewIslandReq.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIslandReq.swift; sourceTree = "<group>"; };
 		FC1FE0541EC5B112007AE8A5 /* ActivityService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityService.swift; sourceTree = "<group>"; };
 		FC1FE0561EC69813007AE8A5 /* Event.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
-		FC1FE0591EC85C37007AE8A5 /* MittyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyViewController.swift; sourceTree = "<group>"; };
+		FC1FE0591EC85C37007AE8A5 /* MittyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MittyViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		FC1FE05B1EC89BE6007AE8A5 /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
 		FC1FE05D1ECAB3C9007AE8A5 /* UserSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSession.swift; sourceTree = "<group>"; };
 		FC276D991E86B5400089140B /* StyledTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledTextField.swift; sourceTree = "<group>"; };
@@ -379,6 +383,7 @@
 		FC8D70171DC8F4FF0083E8E4 /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		FC95F9181F3EF33800F83766 /* ProposalService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProposalService.swift; sourceTree = "<group>"; };
 		FC95F91A1F3EF46800F83766 /* Proposals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Proposals.swift; sourceTree = "<group>"; };
+		FCB1A80D1FA58CE800CF56DD /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		FCB45ECE1F03FEA90090B601 /* UserService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
 		FCB45ED01F0400740090B601 /* UserInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		FCB45ED21F05560D0090B601 /* ContentService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentService.swift; sourceTree = "<group>"; };
@@ -391,6 +396,7 @@
 		FCCEB60B1F9DED4900FC4EE7 /* MeetingStatusForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeetingStatusForm.swift; sourceTree = "<group>"; };
 		FCCFAB381F2DB9370075C1A2 /* LikesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
 		FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationService.swift; sourceTree = "<group>"; };
+		FCD3F14F1FA4340D000B7AFB /* MittyLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MittyLocationManager.swift; sourceTree = "<group>"; };
 		FCD8C7141EA1AB9400AAD750 /* noicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noicon.png; path = images/noicon.png; sourceTree = "<group>"; };
 		FCD8C7151EA1AB9400AAD750 /* nolargeimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nolargeimg.png; path = images/nolargeimg.png; sourceTree = "<group>"; };
 		FCD8C7181EA226AC00AAD750 /* applogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = applogo.png; path = images/applogo.png; sourceTree = "<group>"; };
@@ -454,6 +460,8 @@
 		FCFEBF321E38F36F00DC989B /* BusinessIslandEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessIslandEntryViewController.swift; sourceTree = "<group>"; };
 		FCFEBF341E38F48200DC989B /* IslandDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandDetailViewController.swift; sourceTree = "<group>"; };
 		FCFEBF361E38F4B100DC989B /* IslandConstructViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IslandConstructViewController.swift; sourceTree = "<group>"; };
+		FCFEE8501FA59E8500B1D3A3 /* eventIcon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = eventIcon.png; path = images/eventIcon.png; sourceTree = "<group>"; };
+		FCFEE8521FA610B000B1D3A3 /* penguingo.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = penguingo.jpg; path = images/penguingo.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -588,6 +596,7 @@
 			children = (
 				F4AEAB021DAD3F2C007DEB80 /* AppDelegate.swift */,
 				FC0AF1E61DC4F3F200C76408 /* ApplicationContext.swift */,
+				FCD3F14F1FA4340D000B7AFB /* MittyLocationManager.swift */,
 			);
 			name = application;
 			sourceTree = "<group>";
@@ -780,6 +789,8 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FCFEE8521FA610B000B1D3A3 /* penguingo.jpg */,
+				FCFEE8501FA59E8500B1D3A3 /* eventIcon.png */,
 				FC1915441FA327C300E303F4 /* uparrow.png */,
 				FC00311B1F9B7BB4009EB92D /* downarrow.png */,
 				FC7585901F75586100680CC9 /* forward.png */,
@@ -945,6 +956,7 @@
 				FC7660571FA1F8F500E754D1 /* ButtonAnnotation.swift */,
 				FC7660591FA1F94200E754D1 /* DestinationAnnotation.swift */,
 				FC76605B1FA1F97B00E754D1 /* UserAnnotation.swift */,
+				FCB1A80D1FA58CE800CF56DD /* AnnotationView.swift */,
 			);
 			name = util;
 			sourceTree = "<group>";
@@ -1079,6 +1091,7 @@
 				FC5CBD7B1F53FEE9006541E3 /* excard.png in Resources */,
 				FC0081931DD39B0300C1F970 /* pengin4.png in Resources */,
 				FC00818E1DD394D300C1F970 /* pengin2.png in Resources */,
+				FCFEE8531FA610B000B1D3A3 /* penguingo.jpg in Resources */,
 				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
 				FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */,
 				FC3483191EE062D1005E539E /* sunnyGreen.png in Resources */,
@@ -1089,6 +1102,7 @@
 				FC427B8F1DCAFDE1009F43AE /* event2.png in Resources */,
 				FC1915451FA327C500E303F4 /* uparrow.png in Resources */,
 				FC7585891F740FB600680CC9 /* teleport.png in Resources */,
+				FCFEE8511FA59E8500B1D3A3 /* eventIcon.png in Resources */,
 				FC427B921DCAFDE1009F43AE /* event5.png in Resources */,
 				FC427B931DCAFDE1009F43AE /* event6.png in Resources */,
 				FCFE67BE1DE50FA1007203EF /* bagua_1.png in Resources */,
@@ -1306,6 +1320,7 @@
 				FCF7F2591E6316B200A5D99B /* ActivitySelectionForm.swift in Sources */,
 				FC1FE05C1EC89BE6007AE8A5 /* ActivityCell.swift in Sources */,
 				FC17850B1E627CD200CAC38B /* ActivityDatasource.swift in Sources */,
+				FCD3F1501FA4340D000B7AFB /* MittyLocationManager.swift in Sources */,
 				FCEDA2C01E6D7946006FBF20 /* Layout.swift in Sources */,
 				FCF9E5241EAB2D2C00F4A265 /* IslandInfo.swift in Sources */,
 				FCFBABE51F4ADF8400A957FE /* NameCardService.swift in Sources */,
@@ -1339,6 +1354,7 @@
 				FC3C16DA1F388F0200E7622B /* SendIvitationViewController.swift in Sources */,
 				F4BB80261DAE58FE00055D48 /* CenterViewController.swift in Sources */,
 				FC3482D01EDA61A9005E539E /* MeetingViewController.swift in Sources */,
+				FCB1A80E1FA58CE800CF56DD /* AnnotationView.swift in Sources */,
 				FCF2A0D21E777C3600536D32 /* MQForm.swift in Sources */,
 				FCFEBF371E38F4B100DC989B /* IslandConstructViewController.swift in Sources */,
 				FC0081871DD3890A00C1F970 /* TalkingCell.swift in Sources */,

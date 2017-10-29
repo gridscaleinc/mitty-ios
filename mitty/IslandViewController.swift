@@ -46,7 +46,6 @@ class IslandViewController: MittyViewController {
         
         self.navigationItem.title = "島会議"
         
-        configureNavigationBar()
         addSubviews()
         addConstraints()
         configureSubviews()
@@ -58,9 +57,6 @@ class IslandViewController: MittyViewController {
         
 
     }
-    
-    // MARK: - View Setup
-    private func configureNavigationBar() {}
     
     private func addSubviews() {
         view.addSubview(meetingSegments)

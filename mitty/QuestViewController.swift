@@ -57,7 +57,7 @@ class QuestViewController: MittyViewController, UIImagePickerControllerDelegate,
     
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
         self.view.addSubview(form)

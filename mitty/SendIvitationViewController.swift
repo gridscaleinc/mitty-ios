@@ -44,7 +44,7 @@ class SendInvitationViewController: MittyViewController {
     }
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
 

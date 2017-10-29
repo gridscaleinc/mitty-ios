@@ -33,7 +33,7 @@ class RequestViewController: MittyViewController {
     var scrollConstraints: NSLayoutConstraint?
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
         buildForm()

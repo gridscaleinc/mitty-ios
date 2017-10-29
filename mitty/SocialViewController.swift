@@ -40,7 +40,6 @@ class SocialViewController: MittyViewController {
         
         self.navigationItem.title = "つながり"
         
-        configureNavigationBar()
         addSubviews()
         addConstraints()
         configureSubviews()
@@ -50,8 +49,6 @@ class SocialViewController: MittyViewController {
         
     }
     
-    // MARK: - View Setup
-    private func configureNavigationBar() {}
     
     private func addSubviews() {
         view.addSubview(topImage)

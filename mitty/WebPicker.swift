@@ -66,7 +66,6 @@ class WebPicker: MittyViewController, UISearchBarDelegate {
             b in
             self.pickTheSite()
         }
-        configureNavigationBar()
 
     }
 
@@ -97,9 +96,8 @@ class WebPicker: MittyViewController, UISearchBarDelegate {
         }
     }
 
-
     // navigation bar の初期化をする
-    private func configureNavigationBar() {
+    override func configureNavigationBar() {
 
         let searchItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.search, target: self, action: #selector(showSearchBox))
 

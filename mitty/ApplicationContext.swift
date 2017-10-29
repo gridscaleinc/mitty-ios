@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import CoreLocation
 
 ///
 /// アプリケーションの各機能間にデータを容易に引き渡すための機構。
@@ -16,6 +17,9 @@ class ApplicationContext {
     static var uiApplication:UIApplication? = nil;
     
     static var userSession = UserSession()
+    
+    static var clLocationManager  = CLLocationManager()
+    static var locationManager = MittyLocationManager()
     
     static var config : UserDefaults = UserDefaults.standard
     
@@ -38,6 +42,8 @@ class ApplicationContext {
             userSession.accessToken = ""
         }
         saveSession()
+        
+        locationManager.start(by: clLocationManager)
         
     }
     

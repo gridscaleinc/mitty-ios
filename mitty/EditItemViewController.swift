@@ -198,7 +198,7 @@ class EditItemViewController: MittyViewController {
     }
 
     override func viewDidLoad() {
-
+        super.viewDidLoad()
         super.autoCloseKeyboard()
 
         self.navigationItem.title = "活動アイテム編集"
