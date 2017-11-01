@@ -25,8 +25,7 @@ class AnnotationView : MKAnnotationView {
             row +++ MQForm.img(name: "pin-image", url: imageName).layout {
                 i in
                 i.imageView.contentMode = .scaleAspectFit
-                i.leftMargin(5).verticalCenter().height(20).width(20)
-                i.imageView.image = i.imageView.image?.af_imageRoundedIntoCircle()
+                i.leftMargin(5).verticalCenter().height(30).width(30)
             }
         }
         

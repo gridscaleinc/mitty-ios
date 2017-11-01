@@ -358,7 +358,7 @@ class ActivityService: Service {
         d.islandLogo = json["islandLogo"].stringValue
         d.eventId = json["eventId"].intValue
         d.eventTitle = json["eventTitle"].stringValue
-
+        d.eventLogo = json["eventLogo"].stringValue
         d.eventTime = json["eventTime"].stringValue.utc2Date()
 
         print(d.longitude)

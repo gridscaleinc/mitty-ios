@@ -678,7 +678,7 @@ extension CenterViewController : MKMapViewDelegate {
             if (annotation.isKind(of: DestinationAnnotation.self)) {
                 
                 let l = (annotation as! DestinationAnnotation).destination.eventTitle
-                let annotationView = AnnotationView(img:"penguingo.jpg", label: l, ann: annotation)
+                let annotationView = AnnotationView(img:"AppIcon", label: l, ann: annotation)
                 annotationView.layer.shadowColor = UIColor.gray.cgColor
                 annotationView.layer.shadowOffset = CGSize(width: 10, height: 10)
                 annotationView.layer.shadowOpacity = 0.4

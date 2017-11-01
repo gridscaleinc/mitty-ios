@@ -44,6 +44,7 @@ class Destination {
     var longitude: Double = 0 // -- island.longitude,
     var islandLogo: String = "" // -- contents.link_url as island_logo,
     var eventId: Int = 0 // -- events.id as event_id,
+    var eventLogo: String = ""
     var eventTitle: String = "" // -- events.title as event_title,
     var eventTime: Date = Date.nulldate // -- events.start_datetime as eventTime
 }
