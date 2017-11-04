@@ -9,8 +9,7 @@
 import Foundation
 import UIKit
 
-class BubbleMessage : Container, CAAnimationDelegate {
-    var count = 15
+class BubbleMessage : Section, CAAnimationDelegate {
     let bornDateTime = Date()
     let msgLabel = MQForm.label(name:"message", title:"")
     var left : CGFloat {
@@ -53,24 +52,31 @@ class BubbleMessage : Container, CAAnimationDelegate {
     ///   - msg: メッセージ
     func release(vc: UIViewController, msg: String) {
         self.vc = vc
+        
+        let row = Row.LeftAligned()
         let img = MQForm.img(name: "aaa", url: "pengin4").layout {
             l in
             l.width(30).height(30).leftMost(withInset: 1).verticalCenter()
         }
-        self +++ img
+        row +++ img
+        self <<< row
         
         msgLabel.label.text = msg
-        self +++ msgLabel.layout{
+        row +++ msgLabel.layout{
             l in
-            l.label.textColor = MittyColor.sunshineRed
-            l.righter(than: img, withOffset: 2).fillVertical(3).rightMost(withInset: 5)
+            l.label.textColor = MittyColor.darkText
+            l.rightMost(withInset: 5).verticalCenter().taller(than: 40).leftMargin(5)
             l.label.numberOfLines = 0
             l.label.adjustsFontSizeToFitWidth = true
         }
         
+        row.layout {
+            s in
+            s.bottomAlign(with: self.msgLabel).fillHolizon().topAlign(with: self.msgLabel)
+        }
         self.layout {
             s in
-            s.bottomAlign(with: self.msgLabel).width(200).taller(than: 50)
+            s.width(200)
         }
         
         self.configLayout()

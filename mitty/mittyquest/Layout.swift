@@ -209,13 +209,13 @@ extension Control {
     
     @discardableResult
     open func holizontalCenter() -> Self {
-        self.view.autoAlignAxis(toSuperviewMarginAxis: .vertical)
+        self.view.autoAlignAxis(toSuperviewAxis: .vertical)
         return self
     }
     
     @discardableResult
     open func verticalCenter() -> Self {
-        self.view.autoAlignAxis(toSuperviewMarginAxis: .horizontal)
+        self.view.autoAlignAxis(toSuperviewAxis: .horizontal)
         return self
     }
     

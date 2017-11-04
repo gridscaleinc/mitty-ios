@@ -129,6 +129,8 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
         myMapView.delegate = self
+        myMapView.isZoomEnabled = false
+        myMapView.isScrollEnabled = false
         myMapView.showsUserLocation = true
         myMapView.userTrackingMode = .followWithHeading
         
@@ -200,7 +202,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
             self.myMapView.addAnnotation(currentLocationPin)
             //アプリ起動時の表示領域の設定
             //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
-            let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
+            let mySpan = MKCoordinateSpan(latitudeDelta: 180/16384, longitudeDelta: 360/16834)
             let myRegion = MKCoordinateRegionMake(currentLocation.coordinate, mySpan)
             myMapView.region = myRegion
             isStarting = false
