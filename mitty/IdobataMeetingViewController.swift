@@ -1,4 +1,12 @@
 //
+//  IdobataMeeting.swift
+//  mitty
+//
+//  Created by gridscale on 2017/11/04.
+//  Copyright © 2017年 GridScale Inc. All rights reserved.
+//
+
+//
 //  TeleportVIewController.swift
 //  mitty
 //
@@ -14,8 +22,8 @@ import CoreLocation
 import UICircularProgressRing
 import SwiftyJSON
 
-class TeleportViewController : MittyViewController, WebSocketDelegate {
-
+class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
+    
     //地図を表示
     //websocketを引き継ぐ
     
@@ -41,7 +49,6 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
     var status = MeetingStatus.initializing
     
     var disconnected = true
-    
     
     var meeting : MeetingInfo!
     
@@ -71,7 +78,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
     }()
     
     // MARK: - Initializers
-    init(meeting: MeetingInfo) {
+    init(_ meeting: MeetingInfo) {
         
         self.meeting = meeting
         
@@ -93,7 +100,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
     
     // ビューが表に戻ったらタイトルを設定。
     override func viewDidAppear(_ animated: Bool) {
-        self.navigationItem.title = LS(key: "teleport")
+        self.navigationItem.title = LS(key: "井戸端会議")
         // ここでビューの整列をする。
         // 各サブビューのupdateViewConstraintsを再帰的に呼び出す。
         view.setNeedsUpdateConstraints()
@@ -131,7 +138,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
         
         LoadingProxy.set(self)
         
-
+        
         setupMeeting()
         
         super.lockView()
@@ -161,7 +168,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
         // TODO
         // 会話内容を表示
     }
-
+    
     //
     // ビュー整列メソッド。PureLayoutの処理はここで存分に活躍。
     //
@@ -200,7 +207,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
         }
     }
     
- 
+    
     func sendMessage(_ sender: UIButton) {
         if (talkInputField.text == "") {
             return
@@ -225,7 +232,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
                 "latitude" : currentLocation.coordinate.latitude,
                 "longtidude" : currentLocation.coordinate.longitude,
             ],
-        ]
+            ]
         
         let js = JSON(message).rawString()
         socket.write(string: js!)
@@ -249,7 +256,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
         socket.write(string: js!)
         
     }
-
+    
     
     func camera() {
         
@@ -289,13 +296,13 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
     
     @objc
     override func onKeyboardShow(_ notification: NSNotification) {
-
+        
     }
     
     
     @objc
     override func onKeyboardHide(_ notification: NSNotification) {
-
+        
         self.view.setNeedsUpdateConstraints()
     }
     
@@ -360,7 +367,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
     
 }
 
-extension TeleportViewController: MKMapViewDelegate {
+extension IdobataMeetingViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation === mapView.userLocation {
             return mapView.view(for: annotation)
@@ -376,4 +383,5 @@ extension TeleportViewController: MKMapViewDelegate {
         }
     }
 }
+
 

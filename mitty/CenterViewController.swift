@@ -59,6 +59,7 @@ class CenterViewController: MittyViewController {
     let navigator = ControlPanel(h: 160)
     
     let picture: Control = MQForm.button(name: "m2", title: "")
+    let idobata: Control = MQForm.button(name:"idobata", title:"")
 
     var nearlyDestinations = [Destination]()
     
@@ -167,6 +168,20 @@ class CenterViewController: MittyViewController {
             self.pictureTaped()
         }
 
+        self.view.addSubview(idobata.button)
+        idobata.button.setImage(UIImage(named: "idobata"), for: .normal)
+        idobata.layout {
+            p in
+            p.button.autoPinEdge(.left, to: .left, of: self.indicator)
+            p.button.autoPinEdge(.top, to: .bottom, of: self.picture.view, withOffset: 20)
+            p.height(45).width(45)
+            p.button.isHidden = false
+            p.button.backgroundColor = .clear
+        }
+        
+        idobata.bindEvent(.touchUpInside) { _ in
+            self.idobataMeeting()
+        }
         
         let strings = ["Loading .....................                            　"]
 
@@ -236,6 +251,15 @@ class CenterViewController: MittyViewController {
         picture.button.isHidden = true
     }
 
+    func idobataMeeting() {
+        let meeting = MeetingInfo()
+        meeting.id = 10999999
+        meeting.name = "井戸端会議"
+        
+        let vc = IdobataMeetingViewController(meeting)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func loadForm () {
 
         self.view.addSubview(dashButton.view)
@@ -512,7 +536,8 @@ class CenterViewController: MittyViewController {
 
         if (!didSetupConstraints) {
             picture.configLayout()
-
+            idobata.configLayout()
+            
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
             display.autoSetDimension(.width, toSize: 180)

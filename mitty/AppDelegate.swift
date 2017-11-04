@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         ApplicationContext.startUp()
         
+        for i in 10 ... 19 {
+           print (QuadTree.GEN_HASH_ID(35, 33, i))
+        }
+        
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.tintColor = MittyColor.healthyGreen;
         if ApplicationContext.skipGuideView  {
