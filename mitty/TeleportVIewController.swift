@@ -214,7 +214,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
         
         let message : [String:Any] = [
             "messageType" : "Conversation",
-            "topic" : "Conversation:(\(meeting.id))",
+            "topic" : "TP:(\(meeting.id))",
             "command" : "teleport",
             "conversation" : [
                 "meetingId" : NSNumber(value: meeting.id),
@@ -239,8 +239,8 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
     // Command string `json:"command"`
     func subscribe() {
         let message : [String:Any] = [
-            "messageType" : "Conversation",
-            "topic" : "Conversation:(\(meeting.id))",
+            "messageType" : "Teleport",
+            "topic" : "TP:(\(meeting.id))",
             "command" : "subscribe"
         ]
         
@@ -331,18 +331,12 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
             tk1.speakTime = conversationJs["speakTime"].stringValue.utc2Date()
             tk1.speaking = conversationJs["speaking"].rawString()!
             
-            let v = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 55))
-            v.backgroundColor = MittyColor.white
-            v.layer.borderColor = MittyColor.sunshineRed.cgColor
-            v.layer.borderWidth = 1
-            v.layer.cornerRadius = 10
-            
-            let msg = BubbleMessage(name:"", view:v)
-            msg.msgLabel.label.text = tk1.speaking
-            
-            self.view.addSubview(msg.view)
-            
-            msg.release(vc: self, msg: tk1.speaking)
+        }
+        
+        if js["sender"] != nil {
+            let sender = js["sender"]
+            tk1.speakerIcon = sender["userIcon"].stringValue
+            tk1.speakerName = sender["userName"].stringValue
         }
         
         if !js["teleportation"].isEmpty {
@@ -350,6 +344,25 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
             var teleport = CLLocationCoordinate2D()
             teleport.latitude = teleportation["latitude"].doubleValue
             teleport.longitude = teleportation["longitude"].doubleValue
+        }
+        
+        handleMessage(tk1)
+        
+    }
+    
+    func handleMessage(_ talk: Talk) {
+    
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 55))
+        v.backgroundColor = MittyColor.white
+        v.layer.borderColor = MittyColor.sunshineRed.cgColor
+        v.layer.borderWidth = 1
+        v.layer.cornerRadius = 10
+        
+        let msg = BubbleMessage(name:"", view:v)
+        msg.msgLabel.label.text = talk.speaking
+        msg.img.imageView.setMittyImage(url: talk.speakerIcon, true) {
+            self.view.addSubview(msg.view)
+            msg.release(vc: self, msg: talk.speaking)
         }
         
     }

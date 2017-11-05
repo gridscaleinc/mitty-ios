@@ -291,18 +291,19 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             r.fillHolizon().height(80)
         }
         
-        let leftCol = Col.UpDownAligned().layout {
+        let leftCol = EventDay(event).layout {
             c in
-            c.fillVertical().width(80).leftMargin(10).view.backgroundColor = MittyColor.healthyGreen
+            c.width(60).height(65).upper(withInset: 10).leftMargin(10)
+            c.view.backgroundColor = MittyColor.healthyGreen.withAlphaComponent(0.8)
+            c.view.layer.cornerRadius = 1
+            c.view.layer.masksToBounds = true
+            c.view.layer.shadowColor = UIColor.gray.cgColor
+            c.view.layer.shadowOpacity = 0.4
+            c.view.layer.shadowOffset = CGSize(width: 1, height: 1)
+            c.view.layer.shadowRadius = 3
         }
         
         row +++ leftCol
-        leftCol +++ MQForm.label(name: "time", title: "星期１").layout {
-            l in
-            l.verticalCenter().holizontalCenter()
-            l.label.textColor = UIColor.white
-            l.label.font = UIFont.boldSystemFont(ofSize: 20)
-        }
         
         let rightCol = Col.UpDownAligned().layout {
             c in

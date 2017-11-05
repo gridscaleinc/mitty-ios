@@ -195,6 +195,13 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         currentLocation = location
         //ピンの生成と配置
         currentLocationPin.coordinate = currentLocation.coordinate
+        let newMeetingId = QuadTree.GEN_HASH_ID(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, 14)
+        if (newMeetingId != meeting.id) {
+            showError("井戸端会議、エリアが変わりました。 \(meeting.id) to \(newMeetingId)")
+            unsubscribe()
+            meeting.id = newMeetingId
+            subscribe()
+        }
         
         if isStarting {
             currentLocationPin.title = "現在地"
@@ -223,7 +230,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         
         let message : [String:Any] = [
             "messageType" : "Conversation",
-            "topic" : "Conversation:(\(meeting.id))",
+            "topic" : "IM:(\(meeting.id))",
             "command" : "teleport",
             "conversation" : [
                 "meetingId" : NSNumber(value: meeting.id),
@@ -248,9 +255,25 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
     // Command string `json:"command"`
     func subscribe() {
         let message : [String:Any] = [
-            "messageType" : "Conversation",
-            "topic" : "Conversation:(\(meeting.id))",
+            "messageType" : "itobata",
+            "topic" : "IM:(\(meeting.id))",
             "command" : "subscribe"
+        ]
+        
+        let js = JSON(message).rawString()
+        
+        socket.write(string: js!)
+        
+    }
+    
+    // MessageType string `json:"messageType"`
+    // Topic string `json:"topic"`
+    // Command string `json:"command"`
+    func unsubscribe() {
+        let message : [String:Any] = [
+            "messageType" : "itobata",
+            "topic" : "IM:(\(meeting.id))",
+            "command" : "unsubscribe"
         ]
         
         let js = JSON(message).rawString()
@@ -339,19 +362,13 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
             tk1.speakerId = conversationJs["speakerId"].int64!
             tk1.speakTime = conversationJs["speakTime"].stringValue.utc2Date()
             tk1.speaking = conversationJs["speaking"].rawString()!
-            
-            let v = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 55))
-            v.backgroundColor = MittyColor.white
-            v.layer.borderColor = MittyColor.sunshineRed.cgColor
-            v.layer.borderWidth = 1
-            v.layer.cornerRadius = 10
-            
-            let msg = BubbleMessage(name:"", view:v)
-            msg.msgLabel.label.text = tk1.speaking
-            
-            self.view.addSubview(msg.view)
-            
-            msg.release(vc: self, msg: tk1.speaking)
+
+        }
+        
+        if js["sender"] != nil {
+            let sender = js["sender"]
+            tk1.speakerIcon = sender["userIcon"].stringValue
+            tk1.speakerName = sender["userName"].stringValue
         }
         
         if !js["teleportation"].isEmpty {
@@ -361,11 +378,31 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
             teleport.longitude = teleportation["longitude"].doubleValue
         }
         
+        handleMessage(tk1)
+    }
+    
+    func handleMessage(_ talk: Talk) {
+        
+        
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: 200, height: 55))
+        v.backgroundColor = MittyColor.white
+        v.layer.borderColor = MittyColor.sunshineRed.cgColor
+        v.layer.borderWidth = 1
+        v.layer.cornerRadius = 10
+        
+        let msg = BubbleMessage(name:"", view:v)
+        msg.msgLabel.label.text = talk.speaking
+        msg.img.imageView.setMittyImage(url: talk.speakerIcon, true) {
+            self.view.addSubview(msg.view)
+            msg.release(vc: self, msg: talk.speaking)
+        }
+        
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: Data) {
         print("Received data: \(data.count)")
     }
+    
     
 }
 

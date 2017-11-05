@@ -206,43 +206,16 @@ class EventCell: UICollectionViewCell {
             
             container +++ itemImage
             
-            let col = Col.UpDownAligned().layout {
+            container +++ EventDay(event).layout {
                 c in
                 c.leftMost(withInset: 10).width(60).height(65).upper(withInset: 10)
-                c.view.backgroundColor = MittyColor.red.withAlphaComponent(0.5)
+                c.view.backgroundColor = MittyColor.sunshineRed.withAlphaComponent(0.8)
                 c.view.layer.cornerRadius = 1
                 c.view.layer.masksToBounds = true
                 c.view.layer.shadowColor = UIColor.gray.cgColor
                 c.view.layer.shadowOpacity = 0.4
                 c.view.layer.shadowOffset = CGSize(width: 1, height: 1)
                 c.view.layer.shadowRadius = 3
-            }
-            
-            container +++ col
-            
-            col +++ MQForm.label(name: "day", title: event.startDate.day99).layout {
-                l in
-                l.height(30).holizontalCenter()
-                l.label.adjustsFontSizeToFitWidth = true
-                l.label.textColor = UIColor.black
-                l.label.textAlignment = .center
-                l.label.font = UIFont.systemFont(ofSize: 28)
-            }
-            col +++ MQForm.label(name: "monthyear", title: event.startDate.monthYear).layout {
-                l in
-                l.height(18).holizontalCenter()
-                l.label.adjustsFontSizeToFitWidth = true
-                l.label.textColor = UIColor.white
-                l.label.textAlignment = .center
-                l.label.font = UIFont.systemFont(ofSize: 10)
-            }
-            col +++ MQForm.label(name: "minute", title: event.startDate.time12).layout {
-                l in
-                l.height(15).holizontalCenter()
-                l.label.adjustsFontSizeToFitWidth = true
-                l.label.textColor = UIColor.white
-                l.label.textAlignment = .center
-                l.label.font = UIFont.systemFont(ofSize: 10)
             }
         
             row +++ container
@@ -358,5 +331,39 @@ class EventCell: UICollectionViewCell {
             v.removeFromSuperview()
         }
         form.removeFromSuperview()
+    }
+}
+
+class EventDay : Col {
+    
+    init (_ event: Event) {
+        super.init(name: "event-date", view: UIView.newAutoLayout())
+        self.distribution = .up
+
+        self +++ MQForm.label(name: "day", title: event.startDate.day99).layout {
+            l in
+            l.height(30).holizontalCenter()
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.textColor = UIColor.black
+            l.label.textAlignment = .center
+            l.label.font = UIFont.systemFont(ofSize: 28)
+        }
+        
+        self +++ MQForm.label(name: "monthyear", title: event.startDate.monthYear).layout {
+            l in
+            l.height(18).holizontalCenter()
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.textColor = UIColor.white
+            l.label.textAlignment = .center
+            l.label.font = UIFont.systemFont(ofSize: 10)
+        }
+        self +++ MQForm.label(name: "minute", title: event.startDate.time12).layout {
+            l in
+            l.height(15).holizontalCenter()
+            l.label.adjustsFontSizeToFitWidth = true
+            l.label.textColor = UIColor.white
+            l.label.textAlignment = .center
+            l.label.font = UIFont.systemFont(ofSize: 10)
+        }
     }
 }

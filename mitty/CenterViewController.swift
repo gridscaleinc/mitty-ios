@@ -253,7 +253,12 @@ class CenterViewController: MittyViewController {
 
     func idobataMeeting() {
         let meeting = MeetingInfo()
-        meeting.id = 10999999
+        if currentLocation == nil {
+            return
+        }
+        
+        meeting.id = QuadTree.GEN_HASH_ID(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, 14)
+        
         meeting.name = "井戸端会議"
         
         let vc = IdobataMeetingViewController(meeting)

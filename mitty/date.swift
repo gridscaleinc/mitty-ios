@@ -119,10 +119,16 @@ extension Date {
         return String(format: "%4d", year)
     }
     
+    var month99: String {
+        let calendar = Calendar.current
+        let m = calendar.component(.month, from: self)
+        return String(format: "%2d", m)
+    }
+    
     /// Return Month and year,
-    /// ex. May,2018
+    /// ex. 2017.10
     var monthYear : String {
-        return monthMedium + "," + year9999
+        return year9999 + "." + month99
     }
 
     var monthMedium: String {

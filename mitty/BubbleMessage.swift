@@ -12,6 +12,8 @@ import UIKit
 class BubbleMessage : Section, CAAnimationDelegate {
     let bornDateTime = Date()
     let msgLabel = MQForm.label(name:"message", title:"")
+    let img = MQForm.img(name: "aaa", url: "pengin4")
+    
     var left : CGFloat {
         if vc == nil {
             return 0
@@ -54,11 +56,11 @@ class BubbleMessage : Section, CAAnimationDelegate {
         self.vc = vc
         
         let row = Row.LeftAligned()
-        let img = MQForm.img(name: "aaa", url: "pengin4").layout {
+        row +++ img.layout {
             l in
-            l.width(30).height(30).leftMost(withInset: 1).verticalCenter()
+            l.width(25).height(25).leftMost(withInset: 5).verticalCenter().leftMargin(10)
         }
-        row +++ img
+        
         self <<< row
         
         msgLabel.label.text = msg

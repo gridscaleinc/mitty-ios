@@ -80,6 +80,8 @@ class Talk {
 
     var meetingId: Int64 = 0
     var speakerId: Int64 = 0
+    var speakerIcon : String = ""
+    var speakerName : String = ""
     var speaking = ""
     var speakTime = Date.nulldate
 
