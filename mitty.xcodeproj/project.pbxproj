@@ -99,6 +99,13 @@
 		FC4B080C1FAEDBB200541C01 /* starspark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC4B080B1FAEDBB200541C01 /* starspark.jpg */; };
 		FC4B08131FAF0DF500541C01 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08111FAF0DF500541C01 /* MyParticle.sks */; };
 		FC4B08141FAF0DF500541C01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08121FAF0DF500541C01 /* Assets.xcassets */; };
+		FC4B08161FAF3F0700541C01 /* Rain.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08151FAF3F0700541C01 /* Rain.sks */; };
+		FC4B08181FAF3FCD00541C01 /* bokeh.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08171FAF3FCD00541C01 /* bokeh.sks */; };
+		FC4B081A1FAF401600541C01 /* fire.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08191FAF401600541C01 /* fire.sks */; };
+		FC4B081C1FAF406300541C01 /* smoke.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B081B1FAF406300541C01 /* smoke.sks */; };
+		FC4B081E1FAF40A700541C01 /* fireflies.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B081D1FAF40A700541C01 /* fireflies.sks */; };
+		FC4B08201FAF40E200541C01 /* magic.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B081F1FAF40E200541C01 /* magic.sks */; };
+		FC4B08221FAFD13400541C01 /* EventEditForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B08211FAFD13400541C01 /* EventEditForm.swift */; };
 		FC4B88691F010E0900458912 /* NameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B88681F010E0900458912 /* NameCardViewController.swift */; };
 		FC4B886B1F01566000458912 /* SpeedMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B886A1F01566000458912 /* SpeedMeter.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
@@ -349,6 +356,13 @@
 		FC4B080B1FAEDBB200541C01 /* starspark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = starspark.jpg; path = images/starspark.jpg; sourceTree = "<group>"; };
 		FC4B08111FAF0DF500541C01 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
 		FC4B08121FAF0DF500541C01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		FC4B08151FAF3F0700541C01 /* Rain.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = Rain.sks; sourceTree = "<group>"; };
+		FC4B08171FAF3FCD00541C01 /* bokeh.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = bokeh.sks; sourceTree = "<group>"; };
+		FC4B08191FAF401600541C01 /* fire.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fire.sks; sourceTree = "<group>"; };
+		FC4B081B1FAF406300541C01 /* smoke.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = smoke.sks; sourceTree = "<group>"; };
+		FC4B081D1FAF40A700541C01 /* fireflies.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = fireflies.sks; sourceTree = "<group>"; };
+		FC4B081F1FAF40E200541C01 /* magic.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = magic.sks; sourceTree = "<group>"; };
+		FC4B08211FAFD13400541C01 /* EventEditForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditForm.swift; sourceTree = "<group>"; };
 		FC4B88681F010E0900458912 /* NameCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardViewController.swift; sourceTree = "<group>"; };
 		FC4B886A1F01566000458912 /* SpeedMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedMeter.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
@@ -549,7 +563,13 @@
 		F4AEAAF61DAD3F2C007DEB80 = {
 			isa = PBXGroup;
 			children = (
+				FC4B081F1FAF40E200541C01 /* magic.sks */,
+				FC4B081D1FAF40A700541C01 /* fireflies.sks */,
+				FC4B081B1FAF406300541C01 /* smoke.sks */,
+				FC4B08191FAF401600541C01 /* fire.sks */,
 				FC4B08111FAF0DF500541C01 /* MyParticle.sks */,
+				FC4B08151FAF3F0700541C01 /* Rain.sks */,
+				FC4B08171FAF3FCD00541C01 /* bokeh.sks */,
 				FC4B08121FAF0DF500541C01 /* Assets.xcassets */,
 				F4AEAB011DAD3F2C007DEB80 /* mitty */,
 				F4AEAB161DAD3F2D007DEB80 /* mittyTests */,
@@ -924,6 +944,7 @@
 				FCB6FD181F9E1A250082EF6D /* BubbleMessage.swift */,
 				FC7660551FA0D13500E754D1 /* GuidanceForm.swift */,
 				FC76605D1FA2159100E754D1 /* ControlPanel.swift */,
+				FC4B08211FAFD13400541C01 /* EventEditForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1120,6 +1141,8 @@
 				FC00818E1DD394D300C1F970 /* pengin2.png in Resources */,
 				FCFEE8531FA610B000B1D3A3 /* penguingo.jpg in Resources */,
 				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
+				FC4B08201FAF40E200541C01 /* magic.sks in Resources */,
+				FC4B081C1FAF406300541C01 /* smoke.sks in Resources */,
 				FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */,
 				FC4B08131FAF0DF500541C01 /* MyParticle.sks in Resources */,
 				FC3483191EE062D1005E539E /* sunnyGreen.png in Resources */,
@@ -1140,6 +1163,7 @@
 				FC4B08141FAF0DF500541C01 /* Assets.xcassets in Resources */,
 				FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */,
 				FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */,
+				FC4B08181FAF3FCD00541C01 /* bokeh.sks in Resources */,
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,
 				FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */,
 				FC3C16E01F3B196700E7622B /* checked.png in Resources */,
@@ -1147,15 +1171,18 @@
 				FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
 				F42CDE4E1DCD74A8001CAFBE /* Localizable.strings in Resources */,
+				FC4B081E1FAF40A700541C01 /* fireflies.sks in Resources */,
 				FCFE67BF1DE50FA1007203EF /* bagua_2.png in Resources */,
 				F4AEAB0A1DAD3F2C007DEB80 /* Assets.xcassets in Resources */,
 				FCFBA5881E594F3200B861F4 /* event10.jpeg in Resources */,
 				FC3482D61EDB1EE1005E539E /* downloading.png in Resources */,
 				FC4B08061FADA7E300541C01 /* idobata.png in Resources */,
+				FC4B08161FAF3F0700541C01 /* Rain.sks in Resources */,
 				FCD8C7171EA1AB9400AAD750 /* nolargeimg.png in Resources */,
 				FCFE67C11DE50FA1007203EF /* bagua_4.png in Resources */,
 				FCFBA5861E5896B100B861F4 /* event9.jpeg in Resources */,
 				FC3C16DF1F3B196700E7622B /* unchecked.png in Resources */,
+				FC4B081A1FAF401600541C01 /* fire.sks in Resources */,
 				FCF8D6511DD8B7630059B270 /* connect.png in Resources */,
 				FC3482AC1ED87E96005E539E /* beauty.jpeg in Resources */,
 				FCFE67C01DE50FA1007203EF /* bagua_3.png in Resources */,
@@ -1463,6 +1490,7 @@
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 				FC4B08081FADA96A00541C01 /* IdobataMeetingViewController.swift in Sources */,
 				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
+				FC4B08221FAFD13400541C01 /* EventEditForm.swift in Sources */,
 				FC3482C81ED9D70A005E539E /* NameCardForm.swift in Sources */,
 				FC5CBD731F4E32C5006541E3 /* ProfileViewController.swift in Sources */,
 				FCFA84881F20E9B900E9C6F2 /* EditItemViewController.swift in Sources */,
