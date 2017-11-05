@@ -96,6 +96,9 @@
 		FC4936ED1F9F8AFC0041E442 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4936EC1F9F8AFB0041E442 /* UserManager.swift */; };
 		FC4B08061FADA7E300541C01 /* idobata.png in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08051FADA7E200541C01 /* idobata.png */; };
 		FC4B08081FADA96A00541C01 /* IdobataMeetingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B08071FADA96A00541C01 /* IdobataMeetingViewController.swift */; };
+		FC4B080C1FAEDBB200541C01 /* starspark.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FC4B080B1FAEDBB200541C01 /* starspark.jpg */; };
+		FC4B08131FAF0DF500541C01 /* MyParticle.sks in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08111FAF0DF500541C01 /* MyParticle.sks */; };
+		FC4B08141FAF0DF500541C01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FC4B08121FAF0DF500541C01 /* Assets.xcassets */; };
 		FC4B88691F010E0900458912 /* NameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B88681F010E0900458912 /* NameCardViewController.swift */; };
 		FC4B886B1F01566000458912 /* SpeedMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B886A1F01566000458912 /* SpeedMeter.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
@@ -343,6 +346,9 @@
 		FC4936EC1F9F8AFB0041E442 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		FC4B08051FADA7E200541C01 /* idobata.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = idobata.png; path = images/idobata.png; sourceTree = "<group>"; };
 		FC4B08071FADA96A00541C01 /* IdobataMeetingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IdobataMeetingViewController.swift; sourceTree = "<group>"; };
+		FC4B080B1FAEDBB200541C01 /* starspark.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = starspark.jpg; path = images/starspark.jpg; sourceTree = "<group>"; };
+		FC4B08111FAF0DF500541C01 /* MyParticle.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = MyParticle.sks; sourceTree = "<group>"; };
+		FC4B08121FAF0DF500541C01 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FC4B88681F010E0900458912 /* NameCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardViewController.swift; sourceTree = "<group>"; };
 		FC4B886A1F01566000458912 /* SpeedMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedMeter.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
@@ -524,6 +530,7 @@
 		F41D4E381DAE7FD1003A96AA /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FC4B080B1FAEDBB200541C01 /* starspark.jpg */,
 				FC4CB5831E3A00D2008D2796 /* materials */,
 				FC4CB5821E3A0052008D2796 /* samples */,
 				FC4CB5811E3A0041008D2796 /* icons */,
@@ -542,6 +549,8 @@
 		F4AEAAF61DAD3F2C007DEB80 = {
 			isa = PBXGroup;
 			children = (
+				FC4B08111FAF0DF500541C01 /* MyParticle.sks */,
+				FC4B08121FAF0DF500541C01 /* Assets.xcassets */,
 				F4AEAB011DAD3F2C007DEB80 /* mitty */,
 				F4AEAB161DAD3F2D007DEB80 /* mittyTests */,
 				F4AEAB211DAD3F2D007DEB80 /* mittyUITests */,
@@ -1106,11 +1115,13 @@
 				FCFE67C21DE50FA1007203EF /* bagua_5.png in Resources */,
 				FC427B901DCAFDE1009F43AE /* event3.png in Resources */,
 				FC5CBD7B1F53FEE9006541E3 /* excard.png in Resources */,
+				FC4B080C1FAEDBB200541C01 /* starspark.jpg in Resources */,
 				FC0081931DD39B0300C1F970 /* pengin4.png in Resources */,
 				FC00818E1DD394D300C1F970 /* pengin2.png in Resources */,
 				FCFEE8531FA610B000B1D3A3 /* penguingo.jpg in Resources */,
 				FCFC7F821DD2237400CA0045 /* penginland.png in Resources */,
 				FC427B8E1DCAFDE1009F43AE /* event1.png in Resources */,
+				FC4B08131FAF0DF500541C01 /* MyParticle.sks in Resources */,
 				FC3483191EE062D1005E539E /* sunnyGreen.png in Resources */,
 				FC3482C41ED9B5EA005E539E /* checkin.jpeg in Resources */,
 				FC427B911DCAFDE1009F43AE /* event4.png in Resources */,
@@ -1126,6 +1137,7 @@
 				FC0AF1FD1DC5088400C76408 /* activity.png in Resources */,
 				FCFE67C31DE50FA1007203EF /* bagua_6.png in Resources */,
 				FC3483171EE060A8005E539E /* broken.png in Resources */,
+				FC4B08141FAF0DF500541C01 /* Assets.xcassets in Resources */,
 				FC8D70181DC8F4FF0083E8E4 /* search.png in Resources */,
 				FCFE67C51DE50FA1007203EF /* bagua_8.png in Resources */,
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,

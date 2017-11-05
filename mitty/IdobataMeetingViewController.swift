@@ -21,6 +21,7 @@ import Starscream
 import CoreLocation
 import UICircularProgressRing
 import SwiftyJSON
+import SpriteKit
 
 class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
     
@@ -37,7 +38,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
     //  Created by Dongri Jin on 2016/10/12.
     //  Copyright © 2016 GridScale Inc. All rights reserved.
     //
-    
+    var skView: SKView?
     var pingPongTimer : Timer? = nil
     
     var socket : WebSocket = {
@@ -298,6 +299,12 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         panel.addSubview(talkInputField)
         panel.addSubview(talkSendButton)
         
+        // SKView作成
+        createSKView()
+        
+        // Sceneを追加
+        setupParticle()
+        
     }
     
     private func addConstraints() {
@@ -403,6 +410,25 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         print("Received data: \(data.count)")
     }
     
+    func createSKView() {
+        self.skView = SKView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - 50))
+        self.skView!.allowsTransparency = true
+    }
+    
+    func setupParticle() {
+        let scene = SKScene(size: self.view.frame.size)
+        scene.backgroundColor = UIColor.clear
+        
+        let path = Bundle.main.path(forResource: "MyParticle", ofType: "sks")
+        let particle = NSKeyedUnarchiver.unarchiveObject(withFile: path!) as! SKEmitterNode
+        particle.name = "MyParticle"
+        particle.position = CGPoint(x: self.view.frame.width / 2, y: self.view.frame.height)
+        
+        scene.addChild(particle)
+        
+        self.skView!.presentScene(scene)
+        self.view.addSubview(self.skView!)
+    }
     
 }
 
