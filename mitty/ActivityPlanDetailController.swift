@@ -133,7 +133,7 @@ class ActivityPlanDetailsController: MittyViewController {
         if (activityInfo.mainEventId == nil || activityInfo.mainEventId == "" || activityInfo.mainEventId == "0") {
             form.mainEventButton.bindEvent(.touchUpInside) { [weak self]
                 v in
-                let vc = ActivityPlanViewController((self?.activityInfo)!)
+                let vc = EventInputViewController((self?.activityInfo)!)
                 self?.navigationController?.pushViewController(vc, animated: true)
                 self?.status = 3
             }
@@ -158,7 +158,7 @@ class ActivityPlanDetailsController: MittyViewController {
         
         form.quest("[name=addItem]").bindEvent(for: .touchUpInside) { [weak self]
             c in
-            let vc = ActivityPlanViewController((self?.activityInfo)!)
+            let vc = EventInputViewController((self?.activityInfo)!)
             let t = (c as! UIButton).titleLabel?.text
             if t == "✈️" {
                 vc.activityTitle = "航空券計画"

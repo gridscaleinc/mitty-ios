@@ -588,7 +588,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         if (ApplicationContext.userSession.isLogedIn) {
             let session = ApplicationContext.userSession
-            if event.publisherId != session.userId {
+            if event.publisherId == session.userId {
                 let row = Row.LeftAligned()
                 row.layout {
                     r in
