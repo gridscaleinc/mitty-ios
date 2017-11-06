@@ -115,7 +115,7 @@ class ActivityEntryViewController: MittyViewController {
 
         ActivityService.instance.register(activityTitle.textField.text!, memo.textView.text!, "0", onCompletion: {
             act in
-            let vc = ActivityPlanViewController(act)
+            let vc = EventInputViewController(act)
             if let info = self.pickedInfo {
                 vc.webpicker(nil, info)
             }

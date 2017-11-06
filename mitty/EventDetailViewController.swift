@@ -605,7 +605,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
                 section <<< row
                 editLabel.bindEvent(.touchUpInside) {
                     b in
-                    let vc = ActivityPlanEditViewController(self.activity!)
+                    let vc = EventModifyViewController(self.activity!)
                     vc.event = self.event
                     self.navigationController?.pushViewController(vc, animated: true)
                 }

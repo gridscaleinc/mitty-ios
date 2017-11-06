@@ -53,7 +53,7 @@ class ActivitySelectionViewController1: MittyViewController {
         // Closure を利用して、イベント処理をする。
         dataSource?.onCellTapped () { [weak self] (cell) in
             print(cell.activity?.label ?? "")
-            let vc = ActivityPlanViewController((self?.activityInfo)!)
+            let vc = EventInputViewController((self?.activityInfo)!)
             vc.activityTitle = (cell.activity?.label)!
             vc.type = (cell.activity?.type)!
 
