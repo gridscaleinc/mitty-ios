@@ -213,7 +213,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
         form.infoUrl.textField.text = info.siteUrl
         form.infoSource.textView.text = info.siteTitle
         if (info.siteImage != nil) {
-            form.image.imageView.image = info.siteImage
+            form.setImage(info.siteImage!)
             imagePicked = true
         }
     }
@@ -235,7 +235,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         NSLog("\(info)")
         let chosenImage = info[UIImagePickerControllerEditedImage] as! UIImage
-        form.image.imageView.image = chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8))
+        form.setImage(chosenImage.af_imageScaled(to: CGSize(width: 161.8, height: 161.8)))
         picker.dismiss(animated: false, completion: nil)
         imagePicked = true
         
@@ -339,8 +339,12 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
     }
 
     func registerGallery (_ eventId: String) {
-
-        let imageData: NSData = UIImagePNGRepresentation(self.form.image.imageView.image!)! as NSData
+        if (self.form.image == nil) {
+            showError("画像未設定")
+            return
+        }
+        
+        let imageData: NSData = UIImagePNGRepresentation(self.form.image!.imageView.image!)! as NSData
         let strBase64 = imageData.base64EncodedString()
 
         let parameters = [

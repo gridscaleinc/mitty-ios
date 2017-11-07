@@ -10,6 +10,7 @@ import Foundation
 
 import UIKit
 import PureLayout
+import AlamofireImage
 
 //
 //
@@ -71,11 +72,7 @@ class EventEditForm: MQForm {
     let organizer = MQForm.text(name: "organizer", placeHolder: "主催者名称")
     
     // イメージは最後にオプションとして洗濯させる。
-    let image: Control = {
-        let i = MQForm.img(name: "picture", url: "sunnyGreen")
-        i.imageView.contentMode = .scaleAspectFit
-        return i
-    } ()
+    let imageSection = Section()
     
     //　項目単位の小さいロジックはForm中で実装して良い。
     
@@ -179,33 +176,33 @@ class EventEditForm: MQForm {
         inputForm <<< row
         
         row = Row.LeftAligned()
-        let imageContainer = Container(name: "iamgeCont", view: UIView.newAutoLayout())
-        row +++ imageContainer.layout {
-            i in
-            i.fillParent()
+        row +++ imageSection.layout{
+            s in
+            s.fillHolizon()
         }
         
-        imageContainer +++ image.layout() {
-            c in
-            c.height(70).leftMost().upper()
+        row.layout() {
+            r in
+            r.fillHolizon().bottomAlign(with: self.imageSection).topAlign(with: self.imageSection)
         }
         
-        imageContainer +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(70).width(90).layout {
+        inputForm <<< row
+        
+        row = Row.LeftAligned().layout{
+            l in
+            l.fillHolizon().height(40)
+        }
+        row +++ MQForm.label(name: "addImageLabel", title: "＋画像").height(70).width(90).layout {
             l in
             l.label.textColor = MittyColor.sunshineRed
             l.label.textAlignment = .center
             l.fillHolizon().upper()
         }
         
-        row.layout() {
-            r in
-            r.height(70).fillHolizon()
-        }
         inputForm <<< row
         
         
         inputForm <<< MQForm.titleRow(name: "dateing", caption: "日程",color: MittyColor.healthyGreen, lineColor: MittyColor.healthyGreen)
-        
         
         
         //終日フラグ
@@ -524,6 +521,39 @@ class EventEditForm: MQForm {
         }
         
         
+    }
+    
+    func setImage(_ img: UIImage) {
+        imageSection.reset()
+        let row = Row.LeftAligned().layout {
+            l in
+            l.fillHolizon().height(img.size.ratio * UIScreen.main.bounds.width)
+        }
+        let image = MQForm.img(name: "coverimage", url: "").layout {
+            i in
+            i.width(UIScreen.main.bounds.width).height(img.size.ratio * UIScreen.main.bounds.width).verticalCenter().leftMost()
+        }
+        
+        image.imageView.image = img
+        
+        row +++ image
+        imageSection <<< row
+        imageSection.configLayout()
+        
+    }
+    
+    func setImageUrl(_ img: String) {
+        imageSection.reset()
+        let iv = UIImageView()
+        iv.setMittyImage(url: img) {
+            if (iv.image != nil) {
+                self.setImage(iv.image!)
+            }
+        }
+    }
+    
+    var image : Control? {
+        return imageSection["coverimage"]
     }
     
     func setButtons(_ form: Section ) {

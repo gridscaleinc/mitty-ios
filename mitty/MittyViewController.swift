@@ -158,7 +158,7 @@ class MittyViewController: UIViewController {
             for island in islands {
                 if self.isSameInfo(island, pickedIsland) {
                     // TODO int64 -> int
-                    pickedIsland.id = Int(island.id)
+                    pickedIsland.id = Int64(island.id)
                     return
                 }
             }

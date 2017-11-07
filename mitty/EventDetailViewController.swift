@@ -11,6 +11,7 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 
+//
 class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     var event: Event
@@ -615,6 +616,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         }
 
     }
+    
     var buttons = Row.Intervaled()
 
     func setButtons() {
@@ -679,6 +681,7 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     }
 
+    
     func invite (sender: UIButton) {
 
         let vc = SendInvitationViewController()

@@ -147,7 +147,7 @@ class IslandService: Service {
             LoadingProxy.off()
             let jsonObject = data
             let json = JSON(jsonObject)
-            let islandId = json["islandId"].intValue
+            let islandId = json["islandId"].int64Value
             landInfo.id = islandId
         }, fail: {(error: Error?) in
             print(error as Any)

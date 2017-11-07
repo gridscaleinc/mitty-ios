@@ -133,7 +133,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         myMapView.isZoomEnabled = false
         myMapView.isScrollEnabled = false
         myMapView.showsUserLocation = true
-        myMapView.userTrackingMode = .followWithHeading
+        myMapView.userTrackingMode = .follow
         
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)

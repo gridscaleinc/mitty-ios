@@ -11,7 +11,7 @@ import MapKit
 
 class IslandPick {
 
-    var id: Int = 0
+    var id: Int64 = 0
     var iconUrl: String?
     var name: String?
     var nickName: String?
