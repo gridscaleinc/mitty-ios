@@ -22,8 +22,8 @@ class MittyLocationManager : NSObject, CLLocationManagerDelegate {
     
     func start( by manager: CLLocationManager ) {
         manager.delegate = self
-        let status = CLLocationManager.authorizationStatus()
-        if status == CLAuthorizationStatus.notDetermined {
+        locationStatus = CLLocationManager.authorizationStatus()
+        if locationStatus == CLAuthorizationStatus.notDetermined || locationStatus == CLAuthorizationStatus.denied {
             manager.requestAlwaysAuthorization()
         }
         
