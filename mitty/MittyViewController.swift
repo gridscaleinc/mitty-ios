@@ -81,16 +81,18 @@ class MittyViewController: UIViewController {
         let message = UILabel.newAutoLayout()
         message.backgroundColor = .yellow
         message.text = errorMsg
+        message.numberOfLines = 0
         message.textAlignment = .center
         self.view.addSubview(message)
 
         error = Control(name: "error", view: message).layout {
             e in
-            e.upper(withInset: 80).fillHolizon().height(40)
+            e.upper(withInset: 80).fillHolizon(10)
         }
+        
         error?.configLayout()
 
-        Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(clearMessage), userInfo: nil, repeats: true)
+        Timer.scheduledTimer(timeInterval: 4, target: self, selector: #selector(clearMessage), userInfo: nil, repeats: true)
     }
 
     func clearMessage() {

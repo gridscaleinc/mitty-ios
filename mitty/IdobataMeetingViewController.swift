@@ -44,6 +44,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
     var socket : WebSocket = {
         let ws = WebSocket(url: URL(string: "ws://dev.mitty.co/ws/abc")!, protocols: ["chat", "superchat"])
         ws.headers["X-Mitty-AccessToken"] = ApplicationContext.userSession.accessToken
+        ws.connect()
         return ws
     } ()
     
