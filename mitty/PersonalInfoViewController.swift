@@ -216,7 +216,7 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
         self.content = content
         if content.linkUrl != "" {
             DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
-            picture.button.af_setBackgroundImage(for: .normal, url: URL(string: content.linkUrl!)!, placeholderImage: UIImage(named: "downloading"))
+            picture.button.af_setImage(for: .normal, url: URL(string: content.linkUrl!)!, placeholderImage: UIImage(named: "downloading"))
         }
     }
 
