@@ -73,7 +73,7 @@ class EventEditForm: MQForm {
     
     // イメージは最後にオプションとして洗濯させる。
     let imageSection = Section()
-    
+    var coverImage : Control? = nil
     //　項目単位の小さいロジックはForm中で実装して良い。
     
     func loadForm() {
@@ -529,14 +529,15 @@ class EventEditForm: MQForm {
             l in
             l.fillHolizon().height(img.size.ratio * UIScreen.main.bounds.width)
         }
-        let image = MQForm.img(name: "coverimage", url: "").layout {
+        
+        coverImage = MQForm.img(name: "coverimage", url: "").layout {
             i in
             i.width(UIScreen.main.bounds.width).height(img.size.ratio * UIScreen.main.bounds.width).verticalCenter().leftMost()
         }
         
-        image.imageView.image = img
+        coverImage!.imageView.image = img
         
-        row +++ image
+        row +++ coverImage!
         imageSection <<< row
         imageSection.configLayout()
         
@@ -550,10 +551,6 @@ class EventEditForm: MQForm {
                 self.setImage(iv.image!)
             }
         }
-    }
-    
-    var image : Control? {
-        return imageSection["coverimage"]
     }
     
     func setButtons(_ form: Section ) {

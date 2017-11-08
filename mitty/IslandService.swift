@@ -129,11 +129,15 @@ class IslandService: Service {
         //latitude           : double      --(O)  地理位置の緯度
         if let lat = landInfo.placeMark?.location?.coordinate.latitude {
             request.setDouble(.latitude, String(describing: lat))
+        } else {
+            request.setDouble(.latitude, "999") // 不可能な値を設定する。NULL扱い
         }
 
         //longitude          : double      --(O)  地理位置の経度
         if let longi = landInfo.placeMark?.location?.coordinate.longitude {
             request.setDouble(.longitude, String(describing: longi))
+        } else {
+            request.setDouble(.longitude, "999") // 不可能な値を設定する。NULL扱い。
         }
 
         LoadingProxy.on()

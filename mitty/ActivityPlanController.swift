@@ -339,12 +339,12 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
     }
 
     func registerGallery (_ eventId: String) {
-        if (self.form.image == nil) {
+        if (self.form.coverImage == nil) {
             showError("画像未設定")
             return
         }
         
-        let imageData: NSData = UIImagePNGRepresentation(self.form.image!.imageView.image!)! as NSData
+        let imageData: NSData = UIImagePNGRepresentation(self.form.coverImage!.imageView.image!)! as NSData
         let strBase64 = imageData.base64EncodedString()
 
         let parameters = [
@@ -369,13 +369,11 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
         let api = APIClient(path: "/gallery/content", method: .post, parameters: parameters, headers: httpHeaders)
         api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
-            self.navigationController?.popToRootViewController(animated: true)
+            self.navigationController?.popViewController(animated: true)
         }, fail: {(error: Error?) in
             print(error as Any)
             LoadingProxy.off()
             self.showError("画像登録エラー")
-            Thread.sleep(forTimeInterval: 4)
-            self.navigationController?.popToRootViewController(animated: true)
         })
     }
 }

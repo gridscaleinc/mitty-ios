@@ -277,6 +277,37 @@ class ActivityService: Service {
     /// Description
     ///
     /// - Parameters:
+    ///   - id: event Id
+    ///   - callback: removal result, Ok/Ng
+    func removeEventItem(id: String, _ callback: @escaping(_ resut: Bool) -> Void) {
+        
+        let parameters = [
+            "id": id
+        ]
+        
+        let httpHeaders = [
+            "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
+        ]
+        
+        LoadingProxy.on()
+        
+        let api = APIClient(path: "/remove/eventItem", method: .post, parameters: parameters, headers: httpHeaders)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+            let result = json["result"].boolValue
+            callback(result)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+        
+    }
+    
+    /// Description
+    ///
+    /// - Parameters:
     ///   - id: <#id description#>
     ///   - callback: <#callback description#>
     func fetch(id: String, _ callback: @escaping(_ act: Activity) -> Void) {
