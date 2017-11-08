@@ -50,7 +50,7 @@ class InvitationService: Service {
             print(objectString ?? "")
         }
         
-        let api = APIClient(path: "/send/invitation", method: .post, parameters: parameters, headers: httpHeaders)
+        let api = APIClient(path: "/send/invitation", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeaders)
         api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
             let jsonObject = data

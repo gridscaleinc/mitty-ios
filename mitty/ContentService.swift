@@ -45,7 +45,7 @@ class ContentService: Service {
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
 
-        let api = APIClient(path: "/upload/content", method: .post, parameters: parameters, headers: httpHeaders)
+        let api = APIClient(path: "/upload/content", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeaders)
         api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
             let jsonObject = data
