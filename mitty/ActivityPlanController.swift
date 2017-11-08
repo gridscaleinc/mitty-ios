@@ -365,8 +365,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
         let httpHeaders = [
             "X-Mitty-AccessToken": ApplicationContext.userSession.accessToken
         ]
-        
-        let api = APIClient(path: "/gallery/content", method: .post, parameters: parameters, headers: httpHeaders)
+        let api = APIClient(path: "/gallery/content", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: httpHeaders)
         api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
             self.navigationController?.popViewController(animated: true)

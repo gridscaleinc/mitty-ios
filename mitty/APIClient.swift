@@ -15,11 +15,13 @@ struct APIClient {
     let method: HTTPMethod
     let parameters: Parameters
     let headers: HTTPHeaders
-    
-    init(path: String, method: HTTPMethod = .get, parameters: Parameters = [:], headers: HTTPHeaders = [:]) {
+    let encoding: ParameterEncoding
+
+    init(path: String, method: HTTPMethod = .get, parameters: Parameters = [:], encoding: ParameterEncoding = URLEncoding.default, headers: HTTPHeaders = [:]) {
         url = host + path
         self.method = method
         self.parameters = parameters
+        self.encoding = encoding
 
         var headers = headers
         headers["X-Mitty-APIKEY"] = "pdXQWU2EpNMFPoCr6UAdMNUevAzuuG"
@@ -28,7 +30,7 @@ struct APIClient {
     }
     
     func request(success: @escaping (_ data: Dictionary<String, Any>)-> Void, fail: @escaping (_ error: Error?)-> Void) {
-        Alamofire.request(url, method: method, parameters: parameters, headers: headers).responseJSON { response in
+        Alamofire.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
             if response.result.isSuccess {
                 success(response.result.value as! Dictionary)
             }else{
