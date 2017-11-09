@@ -33,9 +33,21 @@ struct APIClient {
         Alamofire.request(url, method: method, parameters: parameters, encoding: encoding, headers: headers).responseJSON { response in
             if response.result.isSuccess {
                 success(response.result.value as! Dictionary)
-            }else{
+            } else {
+                print(response.result.error ?? "")
+                print(self.jsonResponse(response))
+                print(response.description)
                 fail(response.result.error)
             }
+        }
+    }
+    
+    func jsonResponse (_ response: DataResponse<Any>) -> Any {
+        do {
+            let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
+            return json
+        } catch {
+            return ("Not Serializable Error")
         }
     }
 }

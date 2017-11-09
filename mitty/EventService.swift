@@ -187,6 +187,7 @@ class EventService: Service {
 
 
         //  該当イベントのLogoIdが指すContentsのLinkUrl
+        e.eventLogoId = json["logoId"].int64Value
         e.eventLogoUrl = json["eventLogoUrl"].stringValue
 
         //  Gallery Id

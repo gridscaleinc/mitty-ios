@@ -214,6 +214,10 @@ class PersonalInfoViewController: MittyViewController, UITextFieldDelegate, Cont
 
     func pickedContent(content: Content) {
         self.content = content
+        if (content.id != 0) {
+            UserService.instance.setUserIcon(content.id)
+        }
+        
         if content.linkUrl != "" {
             DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
             picture.button.af_setImage(for: .normal, url: URL(string: content.linkUrl!)!, placeholderImage: UIImage(named: "downloading"))

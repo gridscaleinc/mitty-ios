@@ -13,7 +13,9 @@ class NewEventReq: JSONRequest {
 
     //
     enum KeyNames: String {
-
+        // (O)イベントIDの種類
+        case id = "id"
+        
         // (M)イベントの種類
         case type = "type"
         

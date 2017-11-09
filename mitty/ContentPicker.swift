@@ -174,7 +174,6 @@ class ContentPicker: MittyViewController, UIImagePickerControllerDelegate, UINav
         // upload
         ContentService.instance.uploadContent(img: chosenImage, asname: "content") {
             contentId, url in
-            UserService.instance.setUserIcon(contentId)
             self.pickedContent = Content()
             self.pickedContent?.linkUrl = url
             self.pickedContent?.id  = contentId

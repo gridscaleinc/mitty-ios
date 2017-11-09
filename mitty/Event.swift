@@ -102,6 +102,7 @@ class Event {
     var coverImageUrl: String = ""
 
     //  該当イベントのLogoIdが指すContentsのLinkUrl
+    var eventLogoId: Int64 = 0
     var eventLogoUrl: String = ""
 
     //  Gallery Id

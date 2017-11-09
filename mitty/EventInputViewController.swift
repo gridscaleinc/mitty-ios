@@ -91,13 +91,11 @@ class EventInputViewController : ActivityPlanViewController {
         // priceName1: string,    (O)      -- 価格名称１
         request.setStr(.priceName1, pricePicker.priceName1.textField.text)
         
-        // TODO
         // price1: Double ,       (O)      -- 価格額１
         let price = pricePicker.price1.textField.text
         if (price != nil && price != "") {
             request.setDouble(.price1, price!)
         }
-        
         
         // priceName2,            (O)      -- 価格名称2
         request.setStr(.priceName2, pricePicker.priceName2.textField.text)
