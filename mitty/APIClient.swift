@@ -37,6 +37,9 @@ struct APIClient {
                 print(response.result.error ?? "")
                 print(self.jsonResponse(response))
                 print(response.description)
+                print(response.response?.statusCode ?? "")
+                print(response.response?.allHeaderFields ?? "")
+                print(response.response?.debugDescription ?? "")
                 fail(response.result.error)
             }
         }
@@ -47,7 +50,8 @@ struct APIClient {
             let json = try JSONSerialization.jsonObject(with: response.data!, options: JSONSerialization.ReadingOptions.allowFragments)
             return json
         } catch {
-            return ("Not Serializable Error")
+            return response.debugDescription
+//            return ("Not Serializable Error")
         }
     }
 }

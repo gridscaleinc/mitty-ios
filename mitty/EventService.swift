@@ -83,6 +83,8 @@ class EventService: Service {
         // イベント終了日時　ISO8601-YYYY-MM-DDTHH:mm:ssZ
         e.allDayFlag = jsEvent["allDayFlag"].boolValue // 時刻非表示フラグ。
         e.eventLogoUrl = jsEvent["eventLogoUrl"].stringValue // 該当イベントのLogoIdが指すContentsのLinkUrl
+        
+        e.galleryId = jsEvent["galleryId"].stringValue
         e.coverImageUrl = jsEvent["coverImageUrl"].stringValue // galleryId<>Nullの場合、該当GalleryId, Seq=1のコンテンツ
         // のLinkUrl
         e.priceName1 = jsEvent["priceName1"].stringValue // 価格名称１
@@ -98,6 +100,7 @@ class EventService: Service {
         e.likes = jsEvent["numberOfLikes"].intValue //   いいねの数
 
         // 島情報
+        e.islandId = jsEvent["islandId"].stringValue
         e.islandName = jsEvent["islandName"].stringValue // isLandIdに結びつく島名称
         e.islandLogoUrl = jsEvent["islandLogoUrl"].stringValue // 該当island（島）のlogo_idが指すContentsのLinkURL
 
@@ -254,6 +257,7 @@ class EventService: Service {
 
         //  島情報
         //  isLandIdに結びつく島名称
+        e.islandId = json["islandId"].stringValue
         e.isLandName = json["isLandName"].stringValue
 
         //  該当island（島）のlogo_idが指すContentsのLinkURL

@@ -338,7 +338,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
 
     }
 
-    func registerGallery (_ eventId: String) {
+    func registerGallery (_ eventId: String, _ galleryId: String = "0") {
         if (self.form.coverImage == nil) {
             showError("画像未設定")
             return
@@ -349,6 +349,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
 
         let parameters = [
             "gallery": [
+                "id": galleryId,
                 "caption": "イベント画像",
                 "briefInfo": "-",
                 "freeText": "-",
@@ -375,6 +376,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
             self.showError("画像登録エラー")
         })
     }
+    
 }
 
 

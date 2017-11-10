@@ -47,6 +47,8 @@ class EventModifyViewController : ActivityPlanViewController {
         form.tagList.textField.text = event.tag
         form.action.textView.text = event.action
         
+        form.icon.imageView.setMittyImage(url: event.eventLogoUrl)
+        
         let islandPick = IslandPick()
         islandPick.id = Int64(event.islandId) ?? 0
         islandPick.name = event.isLandName
@@ -65,6 +67,8 @@ class EventModifyViewController : ActivityPlanViewController {
             picker2.date = event.endDate
             setToDateTime(picker2)
         }
+        
+        // TODO: Price Info not set yet
         
         form.setImageUrl(event.coverImageUrl)
         
@@ -91,7 +95,7 @@ class EventModifyViewController : ActivityPlanViewController {
         request.setStr(.id, event.id)
         
         // type: string,          (M)      -- イベントの種類
-        request.setStr(.type, type)
+        request.setStr(.type, event.type)
         
         // tag:  string,          (M)      -- イベントについて利用者が入力したデータの分類識別。
         if (form.tagList.textField.text == "") {
@@ -209,16 +213,15 @@ class EventModifyViewController : ActivityPlanViewController {
         
         LoadingProxy.on()
         
+        print(request.parameters)
+        
         let api = APIClient(path: "/update/event", method: .post, parameters: request.parameters, headers: httpHeaders)
         api.request(success: { (data: Dictionary) in
             LoadingProxy.off()
             
             // TODO全開のGalleryはどうする?
             if (self.imagePicked) {
-                let jsonObject = data
-                let json = JSON(jsonObject)
-                let eventId = json["eventId"].stringValue
-                self.registerGallery(eventId)
+                self.registerGallery(self.event.id, self.event.galleryId)
             } else {
                 self.navigationController?.popViewController(animated: true)
             }
