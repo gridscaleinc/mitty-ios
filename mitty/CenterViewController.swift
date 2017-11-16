@@ -61,6 +61,8 @@ class CenterViewController: MittyViewController {
     let picture: Control = MQForm.button(name: "m2", title: "")
     let idobata: Control = MQForm.button(name:"idobata", title:"")
 
+    let nearby: Control = MQForm.button(name:"nearby", title:"")
+    
     var nearlyDestinations = [Destination]()
     
     var targetLocation: Destination? = nil
@@ -181,6 +183,21 @@ class CenterViewController: MittyViewController {
         
         idobata.bindEvent(.touchUpInside) { _ in
             self.idobataMeeting()
+        }
+        
+        self.view.addSubview(nearby.button)
+        nearby.button.setImage(UIImage(named: "nearbyrada")?.af_imageRoundedIntoCircle(), for: .normal)
+        nearby.layout {
+            p in
+            p.button.autoPinEdge(.left, to: .left, of: self.indicator)
+            p.button.autoPinEdge(.top, to: .bottom, of: self.idobata.view, withOffset: 20)
+            p.height(40).width(40)
+            p.button.isHidden = false
+            p.button.backgroundColor = .clear
+        }
+        
+        nearby.bindEvent(.touchUpInside) { _ in
+            self.loadNearby()
         }
         
         let strings = ["Loading .....................                            　"]
@@ -468,6 +485,45 @@ class CenterViewController: MittyViewController {
         }
     }
 
+    func loadNearby () {
+        EventService.instance.findEventByGeohash(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude) {
+            events in
+            self.myMapView.removeAnnotations(self.myMapView.annotations)
+            
+            for e in events {
+                
+                if (e.latitude == 0 && e.longitude == 0) {
+                    continue
+                }
+                
+                
+                let point = CLLocationCoordinate2D (latitude: e.latitude, longitude: e.longitude)
+        
+                
+                //ピンの生成
+                let pin = DestinationAnnotation()
+                let des = Destination()
+                des.eventId = Int(e.id) ?? 0
+                des.eventLogo = e.eventLogoUrl
+                des.eventTitle = e.title
+                des.islandName = e.islandName
+                des.islandLogo = e.islandLogoUrl
+                pin.destination = des
+                
+                //ピンを置く場所を指定
+                pin.coordinate = point
+                //ピンのタイトルを設定
+                pin.title = e.islandName
+                //ピンのサブタイトルの設定
+                pin.subtitle = "\(e.title)"
+                //ピンをMapViewの上に置く
+                self.myMapView.addAnnotation(pin)
+                self.myMapView.showAnnotations(self.myMapView.annotations, animated: true)
+            }
+            
+        }
+    }
+    
     func loadDestinations () {
 
         ActivityService.instance.getDestinationList() {
@@ -522,12 +578,19 @@ class CenterViewController: MittyViewController {
                     self.showGuidances()
                 }
             }
+            
+            self.haveAnyAdvice?()
         }
     }
 
     func showGuidances() {
         guide.removeFromSuperview()
         self.view.addSubview(guide)
+        guide.searchHandler = {
+            let vc = QuestViewController()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        guide.isHidden = false
         guide.load()
         guide.autoPinEdge(.top, to: .bottom, of: display, withOffset: 30)
     }
@@ -542,6 +605,7 @@ class CenterViewController: MittyViewController {
         if (!didSetupConstraints) {
             picture.configLayout()
             idobata.configLayout()
+            nearby.configLayout()
             
             display.autoPinEdge(toSuperviewEdge: .right, withInset: 10)
             display.autoPinEdge(.top, to: .top, of: indicator, withOffset: 0)
@@ -638,6 +702,7 @@ class CenterViewController: MittyViewController {
         self.navigator.view.isHidden = true
         self.socialMirror.view.isHidden = true
         self.dashboard.view.isHidden = true
+        self.guide.isHidden = true
     }
     
     func toggle(_ c: Control) {

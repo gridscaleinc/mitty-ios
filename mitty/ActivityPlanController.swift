@@ -349,7 +349,7 @@ class ActivityPlanViewController: MittyViewController, IslandPickerDelegate, Pri
 
         let parameters = [
             "gallery": [
-                "id": galleryId,
+                "id": NSNumber(value: Int(galleryId)!),
                 "caption": "イベント画像",
                 "briefInfo": "-",
                 "freeText": "-",

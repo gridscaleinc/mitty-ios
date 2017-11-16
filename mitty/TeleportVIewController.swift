@@ -358,7 +358,7 @@ class TeleportViewController : MittyViewController, WebSocketDelegate {
         v.layer.borderWidth = 1
         v.layer.cornerRadius = 10
         
-        let msg = BubbleMessage(name:"", view:v)
+        let msg = BubbleMessage()
         msg.msgLabel.label.text = talk.speaking
         msg.img.imageView.setMittyImage(url: talk.speakerIcon, true) {
             self.view.addSubview(msg.view)

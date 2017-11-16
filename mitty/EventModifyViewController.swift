@@ -81,6 +81,25 @@ class EventModifyViewController : ActivityPlanViewController {
         form.officialUrl.textField.text = event.officialUrl
         form.organizer.textField.text = event.organizer
         
+        
+        // priceName1: string,    (O)      -- 価格名称１
+        pricePicker.priceName1.textField.text = event.priceName1
+        // price1: Double ,       (O)      -- 価格額１
+        pricePicker.price1.textField.text = event.price1
+        
+        // priceName2,            (O)      -- 価格名称2
+        pricePicker.priceName2.textField.text = event.priceName2
+        // price2: Double ,       (O)      -- 価格額２
+        pricePicker.price2.textField.text = event.price2
+        
+        // currency: string 　　　（O)      -- 通貨　(USD,JPY,などISO通貨３桁表記)
+        pricePicker.currency.textField.text = event.currency
+        // priceInfo: string      (O)      -- 価格について一般的な記述
+        pricePicker.priceInfo.textView.text = event.priceInfo
+        
+        pickedPrice(pricePicker)
+
+        form.updateLayout()
     }
     
     override func setForm() {

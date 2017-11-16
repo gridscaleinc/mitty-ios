@@ -61,7 +61,7 @@ class GuidanceForm: MQForm {
         
     }
     
-    var searchHandler : (()->Void)!
+    var searchHandler : (()->Void) = {}
     
     
 }

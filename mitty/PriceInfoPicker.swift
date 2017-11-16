@@ -12,7 +12,7 @@ import UIKit
 
 
 protocol PricePickerDelegate: class {
-    func pickedPrice(_ pricker: PricePicker)
+    func pickedPrice(_ picker: PricePicker)
     func clearPickedPriceInfo()
 }
 

@@ -25,7 +25,12 @@ class EventService: Service {
     private override init() {
 
     }
-
+    
+    enum Range {
+        case near
+        case middle
+        case wide
+    }
     // サーバーからイベントを検索。
     /// Google検索のように、キーワードよりイベント一覧を検索。
     /// TODO: Paging未対応。
@@ -63,6 +68,45 @@ class EventService: Service {
 
     }
 
+    
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - lat: <#lat description#>
+    ///   - lon: <#lon description#>
+    ///   - range: <#range description#>
+    ///   - callback: <#callback description#>
+    func findEventByGeohash(_ lat: Double, _ lon: Double, _ range: Range = .near , callback: @escaping (_ result: [EventInfo]) -> Void) {
+        let parameters : [String : Any] = [
+            "range": "near",
+            "latitude" : lat,
+            "longitude" : lon,
+        ]
+        
+        LoadingProxy.on()
+        
+        // ダミーコード、本当はサーバーから検索する。
+        var events = [EventInfo]()
+        
+        let api = APIClient(path: "/find/events/bygeohash", method: .get, parameters: parameters)
+        api.request(success: { (data: Dictionary) in
+            LoadingProxy.off()
+            let jsonObject = data
+            let json = JSON(jsonObject)
+    
+            if (json == nil || json["events"] == nil) {
+                callback([])
+                return
+            }
+            for (_, jsonEvent) in json["events"] {
+                events.append(self.bindEventInfo(jsonEvent))
+            }
+            callback(events)
+        }, fail: {(error: Error?) in
+            print(error as Any)
+            LoadingProxy.off()
+        })
+    }
     
     /// イベント情報バインド。
     ///

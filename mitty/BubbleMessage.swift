@@ -9,10 +9,28 @@
 import Foundation
 import UIKit
 
+class BubbleView : UIView {
+    override class var layerClass : AnyClass  {
+        return EllipseLayer.self
+    }
+    
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        self.backgroundColor = .clear
+    }
+    
+}
+
 class BubbleMessage : Section, CAAnimationDelegate {
     let bornDateTime = Date()
     let msgLabel = MQForm.label(name:"message", title:"")
     let img = MQForm.img(name: "aaa", url: "pengin4")
+    
+    init() {
+        let v = BubbleView.newAutoLayout()
+        v.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
+        super.init(view: v)
+    }
     
     var left : CGFloat {
         if vc == nil {

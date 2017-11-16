@@ -37,6 +37,7 @@
 		FC00818F1DD394D300C1F970 /* pengin3.png in Resources */ = {isa = PBXBuildFile; fileRef = FC00818B1DD394D300C1F970 /* pengin3.png */; };
 		FC0081911DD3955300C1F970 /* pengin.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0081901DD3955300C1F970 /* pengin.png */; };
 		FC0081931DD39B0300C1F970 /* pengin4.png in Resources */ = {isa = PBXBuildFile; fileRef = FC0081921DD39B0300C1F970 /* pengin4.png */; };
+		FC021E4B1FBC34DE00436EC6 /* nearbyrada.png in Resources */ = {isa = PBXBuildFile; fileRef = FC021E4A1FBC34DC00436EC6 /* nearbyrada.png */; };
 		FC0AF1E71DC4F3F200C76408 /* ApplicationContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1E61DC4F3F200C76408 /* ApplicationContext.swift */; };
 		FC0AF1ED1DC4F61B00C76408 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1EC1DC4F61B00C76408 /* Service.swift */; };
 		FC0AF1EF1DC4F63300C76408 /* Datastore.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0AF1EE1DC4F63300C76408 /* Datastore.swift */; };
@@ -108,6 +109,7 @@
 		FC4B08221FAFD13400541C01 /* EventEditForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B08211FAFD13400541C01 /* EventEditForm.swift */; };
 		FC4B08241FAFD3F900541C01 /* EventModifyForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B08231FAFD3F900541C01 /* EventModifyForm.swift */; };
 		FC4B08261FAFD54600541C01 /* EventInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B08251FAFD54600541C01 /* EventInputViewController.swift */; };
+		FC4B08481FB885F500541C01 /* EllipseBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B08471FB885F500541C01 /* EllipseBubbleView.swift */; };
 		FC4B88691F010E0900458912 /* NameCardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B88681F010E0900458912 /* NameCardViewController.swift */; };
 		FC4B886B1F01566000458912 /* SpeedMeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4B886A1F01566000458912 /* SpeedMeter.swift */; };
 		FC4CB5851E3A0607008D2796 /* ActivityPlanController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */; };
@@ -296,6 +298,7 @@
 		FC00818B1DD394D300C1F970 /* pengin3.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin3.png; path = images/pengin3.png; sourceTree = "<group>"; };
 		FC0081901DD3955300C1F970 /* pengin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin.png; path = images/pengin.png; sourceTree = "<group>"; };
 		FC0081921DD39B0300C1F970 /* pengin4.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = pengin4.png; path = images/pengin4.png; sourceTree = "<group>"; };
+		FC021E4A1FBC34DC00436EC6 /* nearbyrada.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nearbyrada.png; path = images/nearbyrada.png; sourceTree = "<group>"; };
 		FC0AF1E61DC4F3F200C76408 /* ApplicationContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApplicationContext.swift; sourceTree = "<group>"; };
 		FC0AF1EC1DC4F61B00C76408 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		FC0AF1EE1DC4F63300C76408 /* Datastore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Datastore.swift; sourceTree = "<group>"; };
@@ -367,6 +370,7 @@
 		FC4B08211FAFD13400541C01 /* EventEditForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventEditForm.swift; sourceTree = "<group>"; };
 		FC4B08231FAFD3F900541C01 /* EventModifyForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventModifyForm.swift; sourceTree = "<group>"; };
 		FC4B08251FAFD54600541C01 /* EventInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventInputViewController.swift; sourceTree = "<group>"; };
+		FC4B08471FB885F500541C01 /* EllipseBubbleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EllipseBubbleView.swift; sourceTree = "<group>"; };
 		FC4B88681F010E0900458912 /* NameCardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NameCardViewController.swift; sourceTree = "<group>"; };
 		FC4B886A1F01566000458912 /* SpeedMeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeedMeter.swift; sourceTree = "<group>"; };
 		FC4CB5841E3A0607008D2796 /* ActivityPlanController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityPlanController.swift; sourceTree = "<group>"; };
@@ -831,6 +835,7 @@
 		FC4CB5811E3A0041008D2796 /* icons */ = {
 			isa = PBXGroup;
 			children = (
+				FC021E4A1FBC34DC00436EC6 /* nearbyrada.png */,
 				FC4B08051FADA7E200541C01 /* idobata.png */,
 				FCFEE8521FA610B000B1D3A3 /* penguingo.jpg */,
 				FCFEE8501FA59E8500B1D3A3 /* eventIcon.png */,
@@ -951,6 +956,7 @@
 				FC76605D1FA2159100E754D1 /* ControlPanel.swift */,
 				FC4B08211FAFD13400541C01 /* EventEditForm.swift */,
 				FC4B08231FAFD3F900541C01 /* EventModifyForm.swift */,
+				FC4B08471FB885F500541C01 /* EllipseBubbleView.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1173,6 +1179,7 @@
 				FC00818F1DD394D300C1F970 /* pengin3.png in Resources */,
 				FCFBA5841E57470A00B861F4 /* timesquare.png in Resources */,
 				FC3C16E01F3B196700E7622B /* checked.png in Resources */,
+				FC021E4B1FBC34DE00436EC6 /* nearbyrada.png in Resources */,
 				FC0AF2011DC508A700C76408 /* myself.png in Resources */,
 				FCC9CBA11DE9B3DA00F2582C /* we.png in Resources */,
 				FC0AF1FF1DC5089C00C76408 /* island.png in Resources */,
@@ -1497,6 +1504,7 @@
 				F4BB801E1DAE577300055D48 /* MainTabBarController.swift in Sources */,
 				FC4B08081FADA96A00541C01 /* IdobataMeetingViewController.swift in Sources */,
 				FC276D9A1E86B5400089140B /* StyledTextField.swift in Sources */,
+				FC4B08481FB885F500541C01 /* EllipseBubbleView.swift in Sources */,
 				FC4B08221FAFD13400541C01 /* EventEditForm.swift in Sources */,
 				FC3482C81ED9D70A005E539E /* NameCardForm.swift in Sources */,
 				FC5CBD731F4E32C5006541E3 /* ProfileViewController.swift in Sources */,
