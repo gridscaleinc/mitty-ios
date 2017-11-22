@@ -568,6 +568,10 @@ class ProfileViewController: MittyViewController {
                     l.rightMost(withInset: 8).width(22).height(20).verticalCenter()
                 }.bindEvent(.touchUpInside) {
                         b in
+                    if super.notLogedIn {
+                        super.requestForLogin()
+                        return
+                    }
                         let vc = NamecardExchangeViewController()
                         vc.contacteeCard = card
                         vc.contacteeUser = self.userInfo

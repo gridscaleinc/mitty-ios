@@ -215,6 +215,10 @@ class TalkListViewController: MittyViewController ,WebSocketDelegate {
         view.addSubview(meetingStatusForm.view)
         meetingStatusForm.teleportButton.bindEvent(.touchUpInside){
             b in
+            if ApplicationContext.locationManager.locationStatus == .denied {
+                ApplicationContext.locationManager.requestForLocationService(viewController: self, callback: {_ in })
+                return
+            }
             let vc = TeleportViewController(meeting: self.meeting)
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)

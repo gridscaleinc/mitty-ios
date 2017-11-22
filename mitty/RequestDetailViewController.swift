@@ -194,6 +194,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
         
         var liked = false
         likeButton.bindEvent(.touchUpInside) { b in
+            if super.notLogedIn {
+                super.requestForLogin()
+                return
+            }
             if liked {
                 if self.request.numberOfLikes > 0 {
                     self.request.numberOfLikes -= 1
@@ -368,6 +372,10 @@ class RequestDetailViewController: MittyViewController, UITextFieldDelegate {
 
         proposol.bindEvent(.touchUpInside) {
             b in
+            if super.notLogedIn {
+                super.requestForLogin()
+                return
+            }
             let button = b as! UIButton
             self.pressProposol(sender: button)
         }

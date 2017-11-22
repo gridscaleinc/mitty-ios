@@ -208,8 +208,12 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
         }
         
         instantUse.bindEvent(.touchUpInside) { v in
-            let mainTabBarController: MittyNavigatorViewController = MittyNavigatorViewController()
-            self.present(mainTabBarController, animated: true, completion: nil)
+            if let navigator = self.navigationController {
+                navigator.popViewController(animated: true)
+            } else {
+                let mittyNavigator = MittyNavigatorViewController()
+                self.present(mittyNavigator, animated: true, completion: nil)
+            }
         }
     }
 
@@ -225,9 +229,12 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
             ApplicationContext.userSession.userName = userName.text!
             ApplicationContext.userSession.isLogedIn = true
             ApplicationContext.saveSession()
-
-            let mainTabBarController: MittyNavigatorViewController = MittyNavigatorViewController()
-            self.present(mainTabBarController, animated: true, completion: nil)
+            if let navigator = self.navigationController {
+                navigator.popViewController(animated: true)
+            } else {
+                let mainTabBarController: MittyNavigatorViewController = MittyNavigatorViewController()
+                self.present(mainTabBarController, animated: true, completion: nil)
+            }
         }, onError : {
            error in
            let errorMessage = self.loginForm.quest("[name=errormessage]").control()?.view as! UILabel

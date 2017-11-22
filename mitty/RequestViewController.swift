@@ -43,6 +43,8 @@ class RequestViewController: MittyViewController {
         form.autoPinEdgesToSuperviewEdges()
         form.configLayout()
         manageKeyboard()
+        
+        super.lockView()
 
     }
 

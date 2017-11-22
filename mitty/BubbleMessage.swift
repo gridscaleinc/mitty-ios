@@ -14,10 +14,10 @@ class BubbleView : UIView {
         return EllipseLayer.self
     }
     
-    override func draw(_ rect: CGRect) {
-        super.draw(rect)
-        self.backgroundColor = .clear
-    }
+//    override func draw(_ rect: CGRect) {
+//        super.draw(rect)
+//        self.backgroundColor = .clear
+//    }
     
 }
 
@@ -25,12 +25,6 @@ class BubbleMessage : Section, CAAnimationDelegate {
     let bornDateTime = Date()
     let msgLabel = MQForm.label(name:"message", title:"")
     let img = MQForm.img(name: "aaa", url: "pengin4")
-    
-    init() {
-        let v = BubbleView.newAutoLayout()
-        v.frame = CGRect(x: 0, y: 0, width: 300, height: 200)
-        super.init(view: v)
-    }
     
     var left : CGFloat {
         if vc == nil {
@@ -76,6 +70,8 @@ class BubbleMessage : Section, CAAnimationDelegate {
         let row = Row.LeftAligned()
         row +++ img.layout {
             l in
+            l.imageView.layer.cornerRadius = 12.5
+            l.imageView.layer.masksToBounds = true
             l.width(25).height(25).leftMost(withInset: 5).verticalCenter().leftMargin(10)
         }
         

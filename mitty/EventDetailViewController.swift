@@ -261,6 +261,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         var liked = false
         likeButton.bindEvent(.touchUpInside) { b in
+            if super.notLogedIn {
+                super.requestForLogin()
+                return
+            }
             if liked {
                 if self.event.likes > 0 {
                     self.event.likes -= 1
@@ -683,7 +687,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     
     func invite (sender: UIButton) {
-
+        if notLogedIn {
+            super.requestForLogin()
+            return
+        }
         let vc = SendInvitationViewController()
         vc.event = self.event
         self.navigationController?.pushViewController(vc, animated: true)
@@ -719,6 +726,10 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     // 参加
     func pressSubscribe (sender: UIButton) {
+        if notLogedIn {
+            super.requestForLogin()
+            return
+        }
         ActivityService.instance.register(event.title, event.description, event.id,
                                           onCompletion: {
                                             act in

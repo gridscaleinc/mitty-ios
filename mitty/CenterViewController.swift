@@ -73,7 +73,7 @@ class CenterViewController: MittyViewController {
     var dashboard = DashBoardForm()
 
     var isStarting = true
-    var currentLocation : CLLocation!
+    var currentLocation : CLLocation?
     
     var currentLocationPin = MKPointAnnotation()
 
@@ -200,21 +200,23 @@ class CenterViewController: MittyViewController {
             self.loadNearby()
         }
         
-        let strings = ["Loading .....................                            　"]
-
-        sliderBar.label.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
-
-        sliderBar.label.textColor = UIColor.red.withAlphaComponent(0.8)
-
-        sliderBar.bindEvent(.touchUpInside) {
-            b in
+        if (ApplicationContext.userSession.isLogedIn) {
+            let strings = ["Loading .....................                            　"]
             
-            self.showSocialMirror(refresh: true)
+            sliderBar.label.text = strings[Int(arc4random_uniform(UInt32(strings.count)))]
             
+            sliderBar.label.textColor = UIColor.red.withAlphaComponent(0.8)
+            
+            sliderBar.bindEvent(.touchUpInside) {
+                b in
+                
+                self.showSocialMirror(refresh: true)
+                
+            }
+            
+            self.navigationItem.titleView = sliderBar.view
         }
         
-        self.navigationItem.titleView = sliderBar.view
-
         LoadingProxy.set(self)
 
 
@@ -225,7 +227,6 @@ class CenterViewController: MittyViewController {
         socialMirror = SocialMirrorForm(self.navigationController!)
         loadSocialMirror()
 
-        super.lockView()
         didSetupConstraints = false
         
         self.view.setNeedsUpdateConstraints()
@@ -246,6 +247,11 @@ class CenterViewController: MittyViewController {
     }
     
     func showSocialMirror (refresh : Bool? = false) {
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
+        
         socialMirror.view.isHidden = !socialMirror.view.isHidden
         dashboard.view.isHidden = true
         if (!refresh! && socialMirror.view.isHidden) {
@@ -262,6 +268,10 @@ class CenterViewController: MittyViewController {
     }
 
     func pictureTaped() {
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
         let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
         let myRegion = MKCoordinateRegionMake(self.currentLocationPin.coordinate, mySpan)
         self.myMapView.region = myRegion
@@ -269,12 +279,23 @@ class CenterViewController: MittyViewController {
     }
 
     func idobataMeeting() {
-        let meeting = MeetingInfo()
+    
         if currentLocation == nil {
+            if ApplicationContext.locationManager.locationStatus == .denied {
+                ApplicationContext.locationManager.requestForLocationService(viewController: self) {
+                    opened in
+                    if opened {
+                    }
+                }
+            } else {
+                ApplicationContext.clLocationManager.startUpdatingLocation()
+            }
             return
         }
         
-        meeting.id = QuadTree.GEN_HASH_ID(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude, 14)
+        let meeting = MeetingInfo()
+        
+        meeting.id = QuadTree.GEN_HASH_ID(currentLocation!.coordinate.latitude, currentLocation!.coordinate.longitude, 14)
         
         meeting.name = "井戸端会議"
         
@@ -287,6 +308,7 @@ class CenterViewController: MittyViewController {
         self.view.addSubview(dashButton.view)
         dashButton.bindEvent(.touchUpInside) {
             b in
+            
             self.closeAllPanel()
             self.commandboard.view.isHidden = false
         }
@@ -428,6 +450,13 @@ class CenterViewController: MittyViewController {
             c.height(40)
             c.button.setTitleColor(.white, for: .normal)
             }.bindEvent(.touchUpInside) { _ in
+                if ApplicationContext.locationManager.locationStatus == .denied {
+                    ApplicationContext.locationManager.requestForLocationService(viewController: self, callback: {_ in})
+                    return
+                }
+                if self.currentLocation == nil {
+                    ApplicationContext.clLocationManager.startUpdatingLocation()
+                }
                 self.socialMirror.view.isHidden = true
                 self.dashboard.view.isHidden = !self.dashboard.view.isHidden
         }
@@ -455,8 +484,7 @@ class CenterViewController: MittyViewController {
         
         settingsButton.bindEvent(.touchUpInside) {
             b in
-            let pinfoViewController = PersonalInfoViewController()
-            self.navigationController?.pushViewController(pinfoViewController, animated: true)
+            self.editPersonalInfo()
         }
         
         row2 +++ MQForm.button(name: "signout", title: "Sign out").layout {
@@ -486,7 +514,20 @@ class CenterViewController: MittyViewController {
     }
 
     func loadNearby () {
-        EventService.instance.findEventByGeohash(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude) {
+        if currentLocation == nil {
+            if ApplicationContext.locationManager.locationStatus == .denied {
+                ApplicationContext.locationManager.requestForLocationService(viewController: self) {
+                    opened in
+                    if opened {
+                    }
+                }
+            } else {
+                ApplicationContext.clLocationManager.startUpdatingLocation()
+            }
+            return
+        }
+        
+        EventService.instance.findEventByGeohash(currentLocation!.coordinate.latitude, currentLocation!.coordinate.longitude) {
             events in
             self.myMapView.removeAnnotations(self.myMapView.annotations)
             
@@ -525,7 +566,10 @@ class CenterViewController: MittyViewController {
     }
     
     func loadDestinations () {
-
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
         ActivityService.instance.getDestinationList() {
             destinations in
             let now = Date()
@@ -635,6 +679,10 @@ class CenterViewController: MittyViewController {
 
     //
     func editPersonalInfo() {
+        if notLogedIn {
+            super.requestForLogin()
+            return
+        }
         let eidtorView = PersonalInfoViewController()
         self.navigationItem.title = "..."
         self.navigationController?.pushViewController(eidtorView, animated: true)
@@ -717,7 +765,7 @@ class CenterViewController: MittyViewController {
         //Pinに表示するためにはCLLocationCoordinate2Dに変換してあげる必要がある
         currentLocation = location
         //ピンの生成と配置
-        currentLocationPin.coordinate = currentLocation.coordinate
+        currentLocationPin.coordinate = currentLocation!.coordinate
         
         if isStarting {
             currentLocationPin.title = "現在地"
@@ -725,7 +773,7 @@ class CenterViewController: MittyViewController {
             //アプリ起動時の表示領域の設定
             //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
             let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
-            let myRegion = MKCoordinateRegionMake(currentLocation.coordinate, mySpan)
+            let myRegion = MKCoordinateRegionMake(currentLocation!.coordinate, mySpan)
             myMapView.region = myRegion
             speedMeter = SpeedMeter(start: location)
             isStarting = false

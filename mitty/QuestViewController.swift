@@ -15,7 +15,11 @@ import SwiftyJSON
 class QuestViewController: MittyViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     var queryTargets : Control = {
-        let c = UISegmentedControl(items: ["Event", "Request", "Web"])
+        var c = UISegmentedControl(items: ["Event", "Web"])
+        if (ApplicationContext.userSession.isLogedIn) {
+            c = UISegmentedControl(items: ["Event", "Request", "Web"])
+        }
+        
         c.selectedSegmentIndex = 0
         c.translatesAutoresizingMaskIntoConstraints = false
         return Control (name: "queryTargets", view: c)
@@ -75,6 +79,10 @@ class QuestViewController: MittyViewController, UIImagePickerControllerDelegate,
         
         postRequestButton.bindEvent(.touchUpInside) {
             p in
+            if super.notLogedIn {
+                super.requestForLogin()
+                return
+            }
             self.postRequest()
         }
         
@@ -86,8 +94,6 @@ class QuestViewController: MittyViewController, UIImagePickerControllerDelegate,
         
         configViews()
         
-        super.lockView()
-
     }
     
     func configViews() {

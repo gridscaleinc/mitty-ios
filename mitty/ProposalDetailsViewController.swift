@@ -321,6 +321,10 @@ class ProposalDetailsViewController: MittyViewController {
         
         var liked = false
         likeButton.bindEvent(.touchUpInside) { b in
+            if super.notLogedIn {
+                super.requestForLogin()
+                return
+            }
             if liked {
                 if self.proposal.numberOfLikes > 0 {
                     self.proposal.numberOfLikes -= 1
@@ -445,6 +449,10 @@ class ProposalDetailsViewController: MittyViewController {
     }
 
     func pressAccept () {
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
         if confirmMail.textField.text == "" && confirmTel.textField.text == "" {
             self.showError("連絡情報を入力してください。")
             return
@@ -463,6 +471,10 @@ class ProposalDetailsViewController: MittyViewController {
     }
 
     func pressRefuse () {
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
         ProposalService.instance.accept(proposal, status: .Refused, onSuccess: {
             self.showError("拒否しました")
         }, onError: {
@@ -472,6 +484,10 @@ class ProposalDetailsViewController: MittyViewController {
     }
 
     func pressApprove () {
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
         ProposalService.instance.approve(proposal, status: .Approved, onSuccess: {
             self.showError("承認しました")
         }, onError: {
@@ -481,6 +497,10 @@ class ProposalDetailsViewController: MittyViewController {
     }
 
     func pressReject () {
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
         ProposalService.instance.approve(proposal, status: .Rejected, onSuccess: {
             self.showError("否認しました")
         }, onError: {

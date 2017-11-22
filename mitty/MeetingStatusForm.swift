@@ -23,11 +23,12 @@ class MeetingStatusForm : Section {
     
     var teleportButton = MQForm.button(name: "teleport", title: "Teleport")
     func loadForm () {
-        self.view.backgroundColor = UIColor(white: 0.92, alpha: 0.8)
+        self.view.backgroundColor = .white
         
         self +++ statusRow
         statusRow +++ teleportButton.layout {
             b in
+            b.button.setImage(UIImage(named: "teleport")?.af_imageScaled(to: CGSize(width: 20, height: 20)), for: .normal)
             b.verticalCenter().rightMost(withInset: 10).width(120)
         }
         self <<< statusRow

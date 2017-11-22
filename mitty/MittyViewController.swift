@@ -15,6 +15,19 @@ class MittyViewController: UIViewController {
     var error: Control?
     var lock = NSLock()
 
+    var notLogedIn : Bool {
+        return !ApplicationContext.userSession.isLogedIn
+    }
+    
+    func requestForLogin() {
+        let vc = SigninViewController()
+        if let navigator = self.navigationController {
+            navigator.pushViewController(vc, animated: true)
+        } else {
+            self.present(vc, animated: true, completion: {})
+        }
+    }
+    
     override var hidesBottomBarWhenPushed: Bool {
         get {
             if let c = self.navigationController {
