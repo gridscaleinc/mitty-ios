@@ -145,7 +145,6 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         
         setupMeeting()
         
-        super.lockView()
         didSetupConstraints = false
         self.view.setNeedsUpdateConstraints()
         
