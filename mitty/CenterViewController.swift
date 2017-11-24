@@ -442,6 +442,10 @@ class CenterViewController: MittyViewController {
             }.bindEvent(.touchUpInside) {
                 b in
                 self.closeAllPanel()
+                if super.notLogedIn {
+                    super.requestForLogin()
+                    return
+                }
                 self.loadDestinations()
         }
         
@@ -566,10 +570,6 @@ class CenterViewController: MittyViewController {
     }
     
     func loadDestinations () {
-        if super.notLogedIn {
-            super.requestForLogin()
-            return
-        }
         ActivityService.instance.getDestinationList() {
             destinations in
             let now = Date()

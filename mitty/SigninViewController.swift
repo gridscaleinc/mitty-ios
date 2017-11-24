@@ -215,6 +215,8 @@ class SigninViewController: UIViewController, UITextFieldDelegate {
                 self.present(mittyNavigator, animated: true, completion: nil)
             }
         }
+        
+        inputForm <<< Row.LeftAligned()
     }
 
     func onClickSigninButton(_ sender: UIButton) {
