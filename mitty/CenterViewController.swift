@@ -293,6 +293,11 @@ class CenterViewController: MittyViewController {
             return
         }
         
+        if super.notLogedIn {
+            super.requestForLogin()
+            return
+        }
+        
         let meeting = MeetingInfo()
         
         meeting.id = QuadTree.GEN_HASH_ID(currentLocation!.coordinate.latitude, currentLocation!.coordinate.longitude, 14)
