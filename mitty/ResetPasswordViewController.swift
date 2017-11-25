@@ -106,12 +106,20 @@ class ResetPasswordViewController: MittyViewController, UITextFieldDelegate {
         inputForm <<< row
         
         
-        row = Row.LeftAligned()
+        row = Row.Intervaled()
         let resetButton = MQForm.button(name: "send", title: "確定").layout() {
             c in
-            c.height(30).width(140).leftMargin(30).verticalCenter()
+            c.height(30).verticalCenter()
         }
+        
         row +++ resetButton
+        
+        let cancelButton = MQForm.button(name: "cancel", title: "Cancel").layout() {
+            c in
+            c.height(30).verticalCenter()
+        }
+        row +++ cancelButton
+        
         
         row.layout() {
             r in
@@ -141,6 +149,9 @@ class ResetPasswordViewController: MittyViewController, UITextFieldDelegate {
         
         resetButton.bindEvent(.touchUpInside) { [weak self] b in
             self!.onClickResetButton(b as! UIButton)
+        }
+        cancelButton.bindEvent(.touchUpInside) { [weak self] b in
+            self?.dismiss(animated: true)
         }
         
         inputForm <<< Row.LeftAligned()
