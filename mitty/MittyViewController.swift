@@ -9,8 +9,9 @@
 import Foundation
 import UIKit
 import MapKit
+import MessageUI
 
-class MittyViewController: UIViewController {
+class MittyViewController: UIViewController , MFMailComposeViewControllerDelegate {
 
     var error: Control?
     var lock = NSLock()
@@ -250,5 +251,37 @@ class MittyViewController: UIViewController {
             let vc = SigninViewController()
             self.present(vc, animated: true, completion: {})
         }
+    }
+    
+    //
+    func callNumber(phoneNumber:String) {
+        
+        if let phoneCallURL = URL(string: "tel://\(phoneNumber)") {
+            let application:UIApplication = UIApplication.shared
+            if (application.canOpenURL(phoneCallURL)) {
+                if #available(iOS 10.0, *) {
+                    application.open(phoneCallURL, options: [:], completionHandler: nil)
+                } else {
+                    UIApplication.shared.openURL(phoneCallURL)
+                }
+            }
+        }
+    }
+    
+    //
+    func sendEmail(sender: AnyObject, recipients: [String]) {
+        
+        if !MFMailComposeViewController.canSendMail() {
+            showError("Mail services are not available")
+            return
+        }
+        
+        let mailVC = MFMailComposeViewController()
+        mailVC.mailComposeDelegate = self
+        mailVC.setToRecipients([])
+        mailVC.setSubject("Subject for email")
+        mailVC.setMessageBody("Email message string", isHTML: false)
+        
+        present(mailVC, animated: true, completion: nil)
     }
 }

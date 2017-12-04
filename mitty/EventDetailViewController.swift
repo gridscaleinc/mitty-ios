@@ -40,8 +40,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
 
     let invitationButton = MQForm.button(name:"subscirbe", title:"招待する")
 
-    let revertButton = MQForm.button(name:"subscirbe", title:"脱退する")
-
     init (event: Event) {
         self.event = event
         super.init(nibName: nil, bundle: nil)
@@ -653,12 +651,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
             self.pressSubscribe(sender: b as! UIButton)
         }
 
-        let revert = revertButton.layout {
-            c in
-            c.height(40).verticalCenter()
-            c.button.setTitleColor(MittyColor.gray, for: .normal)
-        }
-
         let invitation = invitationButton.layout {
             c in
             c.height(40).verticalCenter()
@@ -676,8 +668,6 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         if event.accessControl == "public" {
             if !event.participated() {
                 buttons +++ subscribe
-            } else {
-                buttons +++ revert
             }
         }
 
