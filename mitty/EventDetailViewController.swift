@@ -534,10 +534,19 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         let contactButton = MQForm.button(name: "tel", title: "電話").layout { b in
             b.height(35).verticalCenter()
         }
+        contactButton.bindEvent(.touchUpInside) {
+            b in
+            super.callNumber(phoneNumber: self.event.contactTel)
+        }
         
         contactRow +++ contactButton
         let mailButton = MQForm.button(name: "mail", title: "メール").layout { b in
             b.height(35).verticalCenter()
+        }
+        
+        mailButton.bindEvent(.touchUpInside) {
+            b in
+            super.sendEmail(sender: self, recipients: [self.event.contactMail])
         }
         
         contactRow +++ mailButton
