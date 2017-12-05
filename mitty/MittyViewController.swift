@@ -278,10 +278,21 @@ class MittyViewController: UIViewController , MFMailComposeViewControllerDelegat
         
         let mailVC = MFMailComposeViewController()
         mailVC.mailComposeDelegate = self
-        mailVC.setToRecipients([])
+        mailVC.setToRecipients(recipients)
         mailVC.setSubject("Subject for email")
         mailVC.setMessageBody("Email message string", isHTML: false)
         
         present(mailVC, animated: true, completion: nil)
+    }
+    
+
+    /// <#Description#>
+    ///
+    /// - Parameters:
+    ///   - controller: <#controller description#>
+    ///   - result: <#result description#>
+    ///   - error: <#error description#>
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: {})
     }
 }
