@@ -197,6 +197,8 @@ class EventService: Service {
     func bindEvent(_ json: JSON) -> Event {
         let e = Event()
 
+        print(json)
+        
         e.id = json["id"].stringValue
 
         //  イベントの種類
@@ -330,6 +332,8 @@ class EventService: Service {
 
         return e
     }
+    
+    
 
     func loadImages (_ e: EventInfo) {
         DataRequest.addAcceptableImageContentTypes(["binary/octet-stream"])
