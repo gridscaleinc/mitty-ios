@@ -435,9 +435,9 @@ class ActivityService: Service {
         return a
     }
     
-    /// <#Description#>
+    /// Activityを削除。
     ///
-    /// - Parameter id: <#id description#>
+    /// - Parameter id: activityId
     func removeActivity(id : Int64, onComplete : @escaping () ->Void ) {
         
         let httpHeaders = [
@@ -461,9 +461,10 @@ class ActivityService: Service {
         })
     }
     
-    /// <#Description#>
+    /// ActivityItemを削除。
     ///
-    /// - Parameter id: <#id description#>
+    /// - Parameter id: itemId.
+    /// - Parameter activityId: Acivity ID.
     func removeItem(id : Int64, of activityId: Int64, onComplete : @escaping () ->Void ) {
         
         let parameters = [

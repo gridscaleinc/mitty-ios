@@ -143,10 +143,7 @@ class CenterViewController: MittyViewController {
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
         myMapView.delegate = self
-        //長押しを探知する機能を追加
-        let longTapGesture = UILongPressGestureRecognizer()
-        longTapGesture.addTarget(self, action: #selector(longPressed))
-        myMapView.addGestureRecognizer(longTapGesture)
+        
         myMapView.showsUserLocation = true
         myMapView.userTrackingMode = .followWithHeading
 
@@ -694,34 +691,7 @@ class CenterViewController: MittyViewController {
     }
 
 
-    //長押しした時にピンを置く処理
-    // この場所にイベントを作成することにしたいけど、どう実装する？
-    func longPressed(sender: UILongPressGestureRecognizer) {
-
-        //この処理を書くことにより、指を離したときだけ反応するようにする（何回も呼び出されないようになる。最後の話したタイミングで呼ばれる）
-        if sender.state != UIGestureRecognizerState.began {
-            return
-        }
-
-        //senderから長押しした地図上の座標を取得
-        let tappedLocation = sender.location(in: myMapView)
-        let tappedPoint = myMapView.convert(tappedLocation, toCoordinateFrom: myMapView)
-
-        //ピンの生成
-        let pin = MKPointAnnotation()
-        //ピンを置く場所を指定
-        pin.coordinate = tappedPoint
-        
-        //ピンのタイトルを設定
-        pin.title = "中野区"
-        //ピンのサブタイトルの設定
-        pin.subtitle = "区役所付近"
-        //ピンをMapViewの上に置く
-        self.myMapView.addAnnotation(pin)
-    }
-
     
-
     @objc
     func updateSpeed(tm: Timer) {
         if speedMeter == nil {
@@ -777,7 +747,7 @@ class CenterViewController: MittyViewController {
             self.myMapView.addAnnotation(currentLocationPin)
             //アプリ起動時の表示領域の設定
             //delta数字を大きくすると表示領域も広がる。数字を小さくするとより詳細な地図が得られる。
-            let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
+            let mySpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
             let myRegion = MKCoordinateRegionMake(currentLocation!.coordinate, mySpan)
             myMapView.region = myRegion
             speedMeter = SpeedMeter(start: location)
