@@ -116,12 +116,11 @@ class ActivityPlanDetailsController: MittyViewController {
             
             if (self?.activityLoaded)! {
                 self?.form.reset()
-            } else {
-                self?.bindEvents()
             }
             
             self?.constrainsInited = false
             self?.form.loadForm(activityDetail)
+            self?.bindEvents()
             self?.view.setNeedsUpdateConstraints() // bootstrap Auto Layout
             
             self?.activityLoaded = true
@@ -156,28 +155,11 @@ class ActivityPlanDetailsController: MittyViewController {
         form.activityTapped = self.activityTapped
         form.openEventHandler = openEvent
         
-        form.quest("[name=addItem]").bindEvent(for: .touchUpInside) { [weak self]
+        form.quest("[name=addEvent]").bindEvent(for: .touchUpInside) { [weak self]
             c in
             let vc = EventInputViewController((self?.activityInfo)!)
-            let t = (c as! UIButton).titleLabel?.text
-            if t == "✈️" {
-                vc.activityTitle = "航空券計画"
-                vc.type = "FLIGHT"
-            } else if t == "🏩" {
-                vc.activityTitle = "ホテル"
-                vc.type = "HOTEL"
-            } else if t == "🚗" {
-                vc.activityTitle = "電車・車の移動"
-                vc.type = "MOVING"
-            } else if t == "🍴" {
-                vc.activityTitle = "食事・休憩"
-                vc.type = "FOOD"
-            } else {
-                vc.activityTitle = "任意"
-                vc.type = "ANY"
-                
-            }
-            
+            vc.activityTitle = "任意"
+            vc.type = "ANY"
             self?.navigationController?.pushViewController(vc, animated: true)
         }
 

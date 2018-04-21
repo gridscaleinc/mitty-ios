@@ -122,7 +122,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         
         super.autoCloseKeyboard()
         
-        self.navigationItem.title = LS(key: "teleport")
+        self.navigationItem.title = LS(key: "井戸端会議")
         
         // 色のビュルド仕方
         let swiftColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1)
@@ -300,10 +300,10 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         panel.addSubview(talkSendButton)
         
         // SKView作成
-        createSKView()
+//        createSKView()
         
         // Sceneを追加
-        setupParticle()
+//        setupParticle()
         
     }
     

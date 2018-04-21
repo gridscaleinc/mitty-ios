@@ -269,7 +269,7 @@ class CenterViewController: MittyViewController {
             super.requestForLogin()
             return
         }
-        let mySpan = MKCoordinateSpan(latitudeDelta: 0.0005, longitudeDelta: 0.0005)
+        let mySpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let myRegion = MKCoordinateRegionMake(self.currentLocationPin.coordinate, mySpan)
         self.myMapView.region = myRegion
         picture.button.isHidden = true

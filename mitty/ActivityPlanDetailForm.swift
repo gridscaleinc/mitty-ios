@@ -283,17 +283,17 @@ class ActivityPlanDetailsForm: MQForm {
                 b.verticalCenter().leftMargin(20)
             }
             
-            let buttons = ["イベント"]
-            for b in buttons {
-                let button = MQForm.button(name: "addItem", title: b).height(40)
-                button.button.backgroundColor = .clear
-                button.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
-                button.layout {
-                    b in
-                    b.verticalCenter().leftMargin(20).width(100)
-                }
-                row +++ button
+            let addEventTitle = "イベント"
+
+            let addEventButton = MQForm.button(name: "addEvent", title: addEventTitle).height(40)
+            addEventButton.button.backgroundColor = .clear
+            addEventButton.button.setTitleColor(MittyColor.sunshineRed, for: .normal)
+            addEventButton.layout {
+                b in
+                b.verticalCenter().leftMargin(20).width(100)
             }
+            row +++ addEventButton
+            
             inputForm <<< row
         }
 

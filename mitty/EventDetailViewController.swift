@@ -528,31 +528,34 @@ class EventDetailViewController: MittyViewController, UITextFieldDelegate {
         
         section <<< HL(MittyColor.healthyGreen, 0.5 ).leftMargin(10).rightMargin(10).upMargin(10)
         
-        let contactRow = Row.Intervaled()
-        contactRow.spacing = 60
-        
-        let contactButton = MQForm.button(name: "tel", title: "電話").layout { b in
-            b.height(35).verticalCenter()
+        if event.contactTel != "" || event.contactMail != "" {
+            let contactRow = Row.Intervaled()
+                contactRow.spacing = 60
+            
+            if event.contactTel != "" {
+                let contactButton = MQForm.button(name: "tel", title: "電話").layout { b in
+                    b.height(35).verticalCenter()
+                }
+                contactButton.bindEvent(.touchUpInside) {
+                    b in
+                    super.callNumber(phoneNumber: self.event.contactTel)
+                }
+                
+                contactRow +++ contactButton
+            }
+            
+            if event.contactMail != "" {
+                let mailButton = MQForm.button(name: "mail", title: "メール").layout { b in
+                    b.height(35).verticalCenter()
+                }
+                mailButton.bindEvent(.touchUpInside) {
+                    b in
+                    super.sendEmail(sender: self, recipients: [self.event.contactMail])
+                }
+                contactRow +++ mailButton
+            }
+            section <<< contactRow
         }
-        contactButton.bindEvent(.touchUpInside) {
-            b in
-            super.callNumber(phoneNumber: self.event.contactTel)
-        }
-        
-        contactRow +++ contactButton
-        let mailButton = MQForm.button(name: "mail", title: "メール").layout { b in
-            b.height(35).verticalCenter()
-        }
-        
-        mailButton.bindEvent(.touchUpInside) {
-            b in
-            super.sendEmail(sender: self, recipients: [self.event.contactMail])
-        }
-        
-        contactRow +++ mailButton
-        
-        section <<< contactRow
-        
 
         let url = Row.LeftAligned().layout {
             r in
