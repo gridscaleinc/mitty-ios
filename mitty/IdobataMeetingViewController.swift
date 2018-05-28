@@ -89,7 +89,7 @@ class IdobataMeetingViewController : MittyViewController, WebSocketDelegate {
         talkInputField.layer.borderColor = MittyColor.sunshineRed.cgColor
         
         talkSendButton = UIButton.newAutoLayout()
-        talkSendButton.setTitle("送信", for: .normal)
+        talkSendButton.setTitle("喋る", for: .normal)
         talkSendButton.setTitleColor(UIColor.white, for: UIControlState.normal)
         talkSendButton.backgroundColor = MittyColor.healthyGreen
         super.init(nibName: nil, bundle: nil)

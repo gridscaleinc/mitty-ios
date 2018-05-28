@@ -169,6 +169,8 @@
 		FCCFAB391F2DB9370075C1A2 /* LikesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB381F2DB9370075C1A2 /* LikesService.swift */; };
 		FCCFAB3B1F2DD6CC0075C1A2 /* InvitationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */; };
 		FCD3F1501FA4340D000B7AFB /* MittyLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD3F14F1FA4340D000B7AFB /* MittyLocationManager.swift */; };
+		FCD880DB208F6461001DFE93 /* JustNowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD880DA208F6461001DFE93 /* JustNowViewController.swift */; };
+		FCD880DD208F7226001DFE93 /* ToolBarForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD880DC208F7226001DFE93 /* ToolBarForm.swift */; };
 		FCD8C7161EA1AB9400AAD750 /* noicon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7141EA1AB9400AAD750 /* noicon.png */; };
 		FCD8C7171EA1AB9400AAD750 /* nolargeimg.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7151EA1AB9400AAD750 /* nolargeimg.png */; };
 		FCD8C7191EA226AC00AAD750 /* applogo.png in Resources */ = {isa = PBXBuildFile; fileRef = FCD8C7181EA226AC00AAD750 /* applogo.png */; };
@@ -430,6 +432,8 @@
 		FCCFAB381F2DB9370075C1A2 /* LikesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LikesService.swift; sourceTree = "<group>"; };
 		FCCFAB3A1F2DD6CC0075C1A2 /* InvitationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InvitationService.swift; sourceTree = "<group>"; };
 		FCD3F14F1FA4340D000B7AFB /* MittyLocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MittyLocationManager.swift; sourceTree = "<group>"; };
+		FCD880DA208F6461001DFE93 /* JustNowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JustNowViewController.swift; sourceTree = "<group>"; };
+		FCD880DC208F7226001DFE93 /* ToolBarForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToolBarForm.swift; sourceTree = "<group>"; };
 		FCD8C7141EA1AB9400AAD750 /* noicon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = noicon.png; path = images/noicon.png; sourceTree = "<group>"; };
 		FCD8C7151EA1AB9400AAD750 /* nolargeimg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = nolargeimg.png; path = images/nolargeimg.png; sourceTree = "<group>"; };
 		FCD8C7181EA226AC00AAD750 /* applogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = applogo.png; path = images/applogo.png; sourceTree = "<group>"; };
@@ -601,6 +605,7 @@
 		F4AEAB011DAD3F2C007DEB80 /* mitty */ = {
 			isa = PBXGroup;
 			children = (
+				FCD880D9208F6088001DFE93 /* manager */,
 				FCFEE8541FAA254100B1D3A3 /* geo */,
 				FCEDA2B01E6D7946006FBF20 /* mittyquest */,
 				FCF957591DC613A100A52125 /* util */,
@@ -798,6 +803,7 @@
 				FC570FEA1F40580D0064FDC3 /* EditBiographyViewController.swift */,
 				FC5CBD721F4E32C5006541E3 /* ProfileViewController.swift */,
 				FC4B08071FADA96A00541C01 /* IdobataMeetingViewController.swift */,
+				FCD880DA208F6461001DFE93 /* JustNowViewController.swift */,
 			);
 			name = center;
 			sourceTree = "<group>";
@@ -907,6 +913,13 @@
 			name = materials;
 			sourceTree = "<group>";
 		};
+		FCD880D9208F6088001DFE93 /* manager */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = manager;
+			sourceTree = "<group>";
+		};
 		FCEDA2B01E6D7946006FBF20 /* mittyquest */ = {
 			isa = PBXGroup;
 			children = (
@@ -957,6 +970,7 @@
 				FC4B08211FAFD13400541C01 /* EventEditForm.swift */,
 				FC4B08231FAFD3F900541C01 /* EventModifyForm.swift */,
 				FC4B08471FB885F500541C01 /* EllipseBubbleView.swift */,
+				FCD880DC208F7226001DFE93 /* ToolBarForm.swift */,
 			);
 			name = form;
 			sourceTree = "<group>";
@@ -1435,6 +1449,7 @@
 				FC5CBD8F1F6E982A006541E3 /* Gallery.swift in Sources */,
 				FCFE67B51DE50F89007203EF /* BaguaIndicator.swift in Sources */,
 				FCB45ED31F05560D0090B601 /* ContentService.swift in Sources */,
+				FCD880DB208F6461001DFE93 /* JustNowViewController.swift in Sources */,
 				FCF9E5261EAB399B00F4A265 /* IslandForm.swift in Sources */,
 				F4C62EAB1E9CDFF70003C7FC /* SignupViewController.swift in Sources */,
 				FCEDA2BE1E6D7946006FBF20 /* EventDispatcher.swift in Sources */,
@@ -1453,6 +1468,7 @@
 				FCF7F3461DD0D3BD00D78384 /* PageViewController.swift in Sources */,
 				FCFA84841F11184D00E9C6F2 /* RequestDetailViewController.swift in Sources */,
 				FC5CBD771F52A51E006541E3 /* RequestListForm.swift in Sources */,
+				FCD880DD208F7226001DFE93 /* ToolBarForm.swift in Sources */,
 				FC1FE0531EC1CDE5007AE8A5 /* NewIslandReq.swift in Sources */,
 				FC004C681F48F84D00230DAA /* SocialIdInputForm.swift in Sources */,
 				FC95F9191F3EF33800F83766 /* ProposalService.swift in Sources */,

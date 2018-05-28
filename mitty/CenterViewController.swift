@@ -20,12 +20,22 @@ import UICircularProgressRing
 @objc(CenterViewController)
 class CenterViewController: MittyViewController {
 
+    // ソーシャルミラー
     var socialMirror: SocialMirrorForm!
+    
+    // MapView
     let myMapView = MKMapView()
+    
+    // オペレーションガイダンス
     let guide = GuidanceForm()
+    
+    // 行き先パネル
     let display = MQForm.newAutoLayout()
+    
+    // タイマー
     var timer = Timer()
     
+    // Top Slider bar
     var sliderBar: Control = {
         let rect1 = CGRect(x: 3, y: 3, width: 220, height: 150)
         let marquee = MarqueeLabel(frame: rect1)
@@ -46,37 +56,54 @@ class CenterViewController: MittyViewController {
     // Autolayout済みフラグ
     var didSetupConstraints = false
 
+    // 八卦インディケーター
     let indicator: BaguaIndicator = {
         let rect = CGRect(x: 0, y: 0, width: 40, height: 40 / 1.414)
         let ind = BaguaIndicator(frame: rect)
         return ind
     }()
 
+    // 命令バー
     let commandboard = ControlPanel(h:500)
     
     let sep = HL(MittyColor.greenGrass, 2)
     
+    // ナビゲーターパネル
     let navigator = ControlPanel(h: 160)
     
-    let picture: Control = MQForm.button(name: "m2", title: "")
+    // icon画像
+    let youareheareButton: Control = MQForm.button(name: "m2", title: "")
+    
+    // 井戸端会議アイコン
     let idobata: Control = MQForm.button(name:"idobata", title:"")
 
+    // 近所のイベントアイコン
     let nearby: Control = MQForm.button(name:"nearby", title:"")
     
+    // 行き先一覧
     var nearlyDestinations = [Destination]()
     
+    // 直近の行き先ロケーション
     var targetLocation: Destination? = nil
 
+    // 行き先フォーム
     let destinationForm = DestinationForm()
     
+    // スピードメーター
     var speedMeter: SpeedMeter? = nil
+    // ダッシュボード
     var dashboard = DashBoardForm()
 
+    // 開始フラグ
     var isStarting = true
+    
+    // 現在地
     var currentLocation : CLLocation?
     
+    // 現在地ピン
     var currentLocationPin = MKPointAnnotation()
 
+    // ダッシュボードボタン
     let dashButton = MQForm.button(name: "opencommandboard", title: "D/B").layout {
         b in
         b.down(withInset: -2).holizontalCenter().height(50).width(50)
@@ -89,10 +116,11 @@ class CenterViewController: MittyViewController {
         b.button.layer.shadowOpacity = 0.8
     }
     
-    let navigatorButton = MQForm.button(name: "opencommandboard", title: "N").layout {
+    // ナビゲーションボタン
+    let navigatorButton = MQForm.button(name: "opencommandboard", title: "...").layout {
         b in
         b.button.backgroundColor = MittyColor.greenGrass.withAlphaComponent(0.8)
-        b.down(withInset: 60).holizontalCenter().height(50).width(50)
+        b.down(withInset: 60).leftMost(withInset: 10).height(50).width(50)
         b.button.setTitleColor(.white, for: .normal)
         b.button.layer.cornerRadius = 25
         b.button.layer.shadowColor = UIColor.gray.cgColor
@@ -101,9 +129,13 @@ class CenterViewController: MittyViewController {
         b.button.layer.shadowOpacity = 0.4
     }
     
+    // 予定一覧ボタン
     let activityButton = MQForm.button(name: "activityButton", title: "予定一覧")
+    
+    // 島会議
     let islandButton = MQForm.button(name: "islandButton", title: "島会議")
     
+    //
     var haveAnyAdvice : (() -> Void)? = nil
     
     // ビューが表に戻ったらタイトルを設定。
@@ -123,14 +155,15 @@ class CenterViewController: MittyViewController {
         self.navigationItem.title = "..."
     }
     
+    //
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         closeAllPanel()
     }
+    
     //
     override func viewDidLoad() {
         super.viewDidLoad()
-
 
         super.autoCloseKeyboard()
 
@@ -140,6 +173,7 @@ class CenterViewController: MittyViewController {
         let swiftColor = UIColor(red: 0.3, green: 0.5, blue: 0.6, alpha: 1)
         self.view.backgroundColor = swiftColor
 
+        // 地図View設定
         myMapView.frame = self.view.frame
         self.view.addSubview(myMapView)
         myMapView.delegate = self
@@ -147,14 +181,15 @@ class CenterViewController: MittyViewController {
         myMapView.showsUserLocation = true
         myMapView.userTrackingMode = .followWithHeading
 
-
+        // indicator設定
         indicator.center = CGPoint(x: 30, y: 90)
         self.view.addSubview(indicator)
         indicator.startAnimating()
 
-        self.view.addSubview(picture.button)
-        picture.button.setImage(UIImage(named: "pengin2")?.af_imageRoundedIntoCircle(), for: .normal)
-        picture.layout {
+        // 現在地
+        self.view.addSubview(youareheareButton.button)
+        youareheareButton.button.setImage(UIImage(named: "pengin2")?.af_imageRoundedIntoCircle(), for: .normal)
+        youareheareButton.layout {
             p in
             p.button.autoPinEdge(.left, to: .left, of: self.indicator)
             p.button.autoPinEdge(.top, to: .bottom, of: self.indicator, withOffset: 180)
@@ -163,16 +198,17 @@ class CenterViewController: MittyViewController {
             p.button.backgroundColor = .clear
         }
 
-        picture.bindEvent(.touchUpInside) { _ in
-            self.pictureTaped()
+        youareheareButton.bindEvent(.touchUpInside) { _ in
+            self.youareheare()
         }
-
+        
+        // 井戸端会議ボタン
         self.view.addSubview(idobata.button)
         idobata.button.setImage(UIImage(named: "idobata"), for: .normal)
         idobata.layout {
             p in
             p.button.autoPinEdge(.left, to: .left, of: self.indicator)
-            p.button.autoPinEdge(.top, to: .bottom, of: self.picture.view, withOffset: 20)
+            p.button.autoPinEdge(.top, to: .bottom, of: self.youareheareButton.view, withOffset: 20)
             p.height(45).width(45)
             p.button.isHidden = false
             p.button.backgroundColor = .clear
@@ -182,6 +218,7 @@ class CenterViewController: MittyViewController {
             self.idobataMeeting()
         }
         
+        // 近所のイベント一覧
         self.view.addSubview(nearby.button)
         nearby.button.setImage(UIImage(named: "nearbyrada")?.af_imageRoundedIntoCircle(), for: .normal)
         nearby.layout {
@@ -197,6 +234,7 @@ class CenterViewController: MittyViewController {
             self.loadNearby()
         }
         
+        // Slider初期化
         if (ApplicationContext.userSession.isLogedIn) {
             let strings = ["Loading .....................                            　"]
             
@@ -216,21 +254,22 @@ class CenterViewController: MittyViewController {
         
         LoadingProxy.set(self)
 
-
         loadForm()
 
+        // 当日の予定
         loadDestinations()
 
+        // ソーシャルミラー
         socialMirror = SocialMirrorForm(self.navigationController!)
         loadSocialMirror()
 
         didSetupConstraints = false
-        
         self.view.setNeedsUpdateConstraints()
         
 
     }
     
+    // ソーシャルミラー読み込み
     func loadSocialMirror() {
         self.view.addSubview(socialMirror.view)
         SocialContactService.instance.getSocailMirror(onComplete: {
@@ -243,6 +282,7 @@ class CenterViewController: MittyViewController {
         })
     }
     
+    // ソーシャルミラー表示
     func showSocialMirror (refresh : Bool? = false) {
         if super.notLogedIn {
             super.requestForLogin()
@@ -264,7 +304,8 @@ class CenterViewController: MittyViewController {
         })
     }
 
-    func pictureTaped() {
+    // 現在地表示
+    func youareheare() {
         if super.notLogedIn {
             super.requestForLogin()
             return
@@ -272,9 +313,10 @@ class CenterViewController: MittyViewController {
         let mySpan = MKCoordinateSpan(latitudeDelta: 0.005, longitudeDelta: 0.005)
         let myRegion = MKCoordinateRegionMake(self.currentLocationPin.coordinate, mySpan)
         self.myMapView.region = myRegion
-        picture.button.isHidden = true
+        youareheareButton.button.isHidden = true
     }
 
+    // 井戸端会議画面
     func idobataMeeting() {
     
         if currentLocation == nil {
@@ -305,6 +347,7 @@ class CenterViewController: MittyViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    // フォーム初期化
     func loadForm () {
 
         self.view.addSubview(dashButton.view)
@@ -335,11 +378,9 @@ class CenterViewController: MittyViewController {
         display +++ destinationForm.layout {
             c in
             c.fillHolizon().upper()
-//            c.view.layer.borderColor = UIColor.red.cgColor
-//            c.view.layer.borderWidth = 1
         }
-        display.isHidden = true
         
+        display.isHidden = true
         destinationForm.build()
 
         destinationForm.onCheckin = {
@@ -649,7 +690,7 @@ class CenterViewController: MittyViewController {
         super.updateViewConstraints()
 
         if (!didSetupConstraints) {
-            picture.configLayout()
+            youareheareButton.configLayout()
             idobata.configLayout()
             nearby.configLayout()
             
@@ -719,7 +760,6 @@ class CenterViewController: MittyViewController {
     }
 
     
-    
     func closeAllPanel() {
         self.commandboard.view.isHidden = true
         self.navigator.view.isHidden = true
@@ -775,9 +815,9 @@ class CenterViewController: MittyViewController {
         }
         
         if myMapView.isUserLocationVisible {
-            self.picture.button.isHidden = true
+            self.youareheareButton.button.isHidden = true
         } else {
-            self.picture.button.isHidden = false
+            self.youareheareButton.button.isHidden = false
         }
         
         updateDistance(location)
